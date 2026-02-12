@@ -1,0 +1,20 @@
+/*
+ * Do.Qix ROI Calculator — Admin Settings Styles
+ * Loaded only on the Settings > ROI Calculator page.
+ */
+
+.doqix-roi-admin .form-table label {
+	margin-right: 16px;
+}
+
+.doqix-roi-admin .form-table .small-text {
+	width: 80px;
+}
+
+.doqix-roi-admin .form-table .doqix-roi-tier-name {
+	width: 160px;
+}
+
+.doqix-roi-admin .form-table .doqix-roi-tier-price {
+	width: 100px;
+}
