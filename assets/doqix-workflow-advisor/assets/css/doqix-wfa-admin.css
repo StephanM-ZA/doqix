@@ -1,0 +1,229 @@
+/*
+ * Do.Qix Workflow Advisor — Admin Settings Styles
+ * Loaded only on the Workflow Advisor settings page.
+ */
+
+/* ── General admin layout ── */
+.doqix-wfa-admin h2 {
+	margin-top: 32px;
+	padding-top: 16px;
+	border-top: 1px solid #ddd;
+}
+
+.doqix-wfa-admin h2:first-of-type {
+	margin-top: 16px;
+	border-top: none;
+}
+
+/* ── Repeater table (categories + services) ── */
+.doqix-wfa-admin .doqix-repeater {
+	max-width: 700px;
+	margin-top: 12px;
+}
+
+.doqix-wfa-admin .doqix-repeater th {
+	text-align: left;
+	font-weight: 600;
+	padding: 8px 12px;
+}
+
+.doqix-wfa-admin .doqix-repeater td {
+	padding: 8px 12px;
+}
+
+.doqix-wfa-admin .doqix-repeater .small-text {
+	width: 100px;
+}
+
+.doqix-wfa-admin .doqix-col-action {
+	width: 80px;
+	text-align: center;
+}
+
+.doqix-wfa-admin .doqix-repeater-row {
+	background: #fff;
+}
+
+.doqix-wfa-admin .doqix-repeater-row:nth-child(even) {
+	background: #f9f9f9;
+}
+
+.doqix-wfa-admin .doqix-remove-row,
+.doqix-wfa-admin .doqix-remove-step {
+	color: #b32d2e;
+	border-color: #b32d2e;
+}
+
+.doqix-wfa-admin .doqix-remove-row:hover,
+.doqix-wfa-admin .doqix-remove-step:hover {
+	background: #b32d2e;
+	color: #fff;
+	border-color: #b32d2e;
+}
+
+.doqix-wfa-admin .doqix-remove-row:disabled,
+.doqix-wfa-admin .doqix-remove-step:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+	background: transparent;
+	color: #b32d2e;
+}
+
+/* ── Category key field (readonly) ── */
+.doqix-wfa-admin .doqix-cat-key,
+.doqix-wfa-admin .doqix-svc-key {
+	background: #f5f5f5;
+	color: #666;
+}
+
+/* ── Service category dropdown ── */
+.doqix-wfa-admin .doqix-svc-category {
+	min-width: 180px;
+}
+
+/* ── Workflow cards ── */
+.doqix-wfa-admin .doqix-workflow-card {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-bottom: 12px;
+	max-width: 900px;
+}
+
+.doqix-wfa-admin .doqix-workflow-card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 16px;
+	background: #f1f1f1;
+	border-bottom: 1px solid #ddd;
+	border-radius: 4px 4px 0 0;
+	cursor: pointer;
+}
+
+.doqix-wfa-admin .doqix-workflow-card-title {
+	font-size: 14px;
+}
+
+.doqix-wfa-admin .doqix-workflow-card-body {
+	padding: 16px;
+}
+
+.doqix-wfa-admin .doqix-field-grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr;
+	gap: 12px;
+	align-items: end;
+}
+
+.doqix-wfa-admin .doqix-field-grid label {
+	display: flex;
+	flex-direction: column;
+	font-size: 12px;
+	font-weight: 600;
+	gap: 4px;
+}
+
+.doqix-wfa-admin .doqix-field-grid input,
+.doqix-wfa-admin .doqix-field-grid select {
+	width: 100%;
+}
+
+.doqix-wfa-admin .doqix-field-grid .small-text {
+	width: 100%;
+}
+
+/* ── Description row ── */
+.doqix-wfa-admin .doqix-desc-row {
+	margin-top: 12px;
+}
+
+.doqix-wfa-admin .doqix-desc-row label {
+	display: flex;
+	flex-direction: column;
+	font-size: 12px;
+	font-weight: 600;
+	gap: 4px;
+}
+
+/* ── Categories checkbox row ── */
+.doqix-wfa-admin .doqix-cats-row {
+	margin-top: 12px;
+}
+
+.doqix-wfa-admin .doqix-label {
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	margin-bottom: 6px;
+}
+
+.doqix-wfa-admin .doqix-checkbox-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+}
+
+.doqix-wfa-admin .doqix-checkbox-group label {
+	font-size: 13px;
+	font-weight: 400;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	cursor: pointer;
+}
+
+/* ── Steps sub-repeater ── */
+.doqix-wfa-admin .doqix-steps-row {
+	margin-top: 12px;
+}
+
+.doqix-wfa-admin .doqix-steps-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 8px;
+}
+
+.doqix-wfa-admin .doqix-steps-table th {
+	text-align: left;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 4px 8px;
+	border-bottom: 1px solid #ddd;
+}
+
+.doqix-wfa-admin .doqix-steps-table td {
+	padding: 4px 8px;
+}
+
+.doqix-wfa-admin .doqix-steps-table input {
+	width: 100%;
+}
+
+.doqix-wfa-admin .doqix-steps-table select {
+	min-width: 90px;
+}
+
+.doqix-wfa-admin .doqix-step-row:nth-child(even) {
+	background: #f9f9f9;
+}
+
+.doqix-wfa-admin .doqix-add-step {
+	font-size: 12px;
+}
+
+/* ── Color picker fields ── */
+.doqix-wfa-admin .doqix-color-field {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.doqix-wfa-admin .doqix-color-field input[type="color"] {
+	width: 50px;
+	height: 34px;
+	padding: 2px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+}

@@ -1,0 +1,823 @@
+/*
+ * Do.Qix Workflow Advisor — Frontend Styles
+ * Version: 1.1.0
+ *
+ * Theme-compatible: inherits fonts and colors from WordPress theme.
+ * Only structural layout and advisor-specific components are styled here.
+ * ID-prefixed selectors (#workflow-advisor) intentionally beat Themify Ultra's
+ * aggressive input/link/button styles.
+ *
+ * --wfa-accent and --wfa-action are set inline from admin color picker settings.
+ * Fallback values are defined below.
+ */
+
+/* ── Variables ── */
+.doqix-wfa {
+  --wfa-accent: #0886B5;
+  --wfa-action: #0886B5;
+  --wfa-line: rgba(13,32,40,0.12);
+  --wfa-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --wfa-radius: 8px;
+  --wfa-card-bg: #fff;
+  --wfa-easy: #22c55e;
+  --wfa-medium: #f59e0b;
+  --wfa-hard: #ef4444;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+/* Box-sizing for advisor children */
+.doqix-wfa *,
+.doqix-wfa *::before,
+.doqix-wfa *::after {
+  box-sizing: border-box;
+}
+
+/* ── Section intro ── */
+.doqix-wfa .wfa-intro {
+  opacity: 0.65;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+
+/* ── Filter Tabs ── */
+.doqix-wfa .wfa-filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+#workflow-advisor button.wfa-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;
+  background: var(--wfa-card-bg);
+  border: 1px solid var(--wfa-line);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+#workflow-advisor button.wfa-tab:hover {
+  border-color: var(--wfa-accent);
+  color: var(--wfa-accent);
+}
+
+#workflow-advisor button.wfa-tab.wfa-tab-active {
+  background: var(--wfa-accent);
+  border-color: var(--wfa-accent);
+  color: #fff;
+}
+
+/* Tab count badge */
+.doqix-wfa .wfa-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  background: var(--wfa-accent);
+  color: #fff;
+}
+
+#workflow-advisor button.wfa-tab.wfa-tab-active .wfa-tab-badge {
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+/* ── Selected Tools Chip Bar ── */
+.doqix-wfa .wfa-selected-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background: color-mix(in srgb, var(--wfa-accent) 5%, var(--wfa-card-bg));
+  border: 1px solid color-mix(in srgb, var(--wfa-accent) 20%, transparent);
+  border-radius: var(--wfa-radius);
+}
+
+.doqix-wfa .wfa-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px 4px 12px;
+  background: var(--wfa-card-bg);
+  border: 1px solid color-mix(in srgb, var(--wfa-accent) 30%, transparent);
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wfa-accent);
+  line-height: 1.3;
+}
+
+#workflow-advisor .wfa-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.5;
+  transition: opacity 0.15s, background 0.15s;
+  box-shadow: none;
+  font-size: 0;
+}
+
+#workflow-advisor .wfa-chip-remove:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--wfa-accent) 12%, transparent);
+}
+
+#workflow-advisor .wfa-chip-remove svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ── Service Cards Grid ── */
+.doqix-wfa .wfa-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+#workflow-advisor button.wfa-service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  font-family: inherit;
+  background: var(--wfa-card-bg);
+  border: 2px solid var(--wfa-line);
+  border-radius: var(--wfa-radius);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+#workflow-advisor button.wfa-service-card:hover {
+  border-color: var(--wfa-accent);
+  box-shadow: var(--wfa-shadow);
+}
+
+#workflow-advisor button.wfa-service-card.wfa-selected {
+  border-color: var(--wfa-accent);
+  background: color-mix(in srgb, var(--wfa-accent) 8%, var(--wfa-card-bg));
+  box-shadow: 0 0 0 1px var(--wfa-accent);
+}
+
+#workflow-advisor button.wfa-service-card.wfa-hidden {
+  display: none;
+}
+
+.doqix-wfa .wfa-service-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--wfa-accent) 12%, transparent);
+  color: var(--wfa-accent);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.doqix-wfa .wfa-service-name {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+  color: inherit;
+}
+
+/* ── Footer Bar ── */
+.doqix-wfa .wfa-footer-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--wfa-card-bg);
+  border: 1px solid var(--wfa-line);
+  border-radius: var(--wfa-radius);
+  box-shadow: var(--wfa-shadow);
+}
+
+.doqix-wfa .wfa-selected-count {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+#workflow-advisor button.wfa-show-btn {
+  padding: 10px 24px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--wfa-action);
+  border: none;
+  border-radius: var(--wfa-radius);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+#workflow-advisor button.wfa-show-btn:hover {
+  opacity: 0.9;
+}
+
+#workflow-advisor button.wfa-show-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Results Section ── */
+.doqix-wfa .wfa-step-results {
+  margin-top: 48px;
+}
+
+.doqix-wfa .wfa-results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* ── Workflow Card ── */
+.doqix-wfa .wfa-workflow-card {
+  background: var(--wfa-card-bg);
+  border: 1px solid var(--wfa-line);
+  border-radius: var(--wfa-radius);
+  padding: 24px;
+  box-shadow: var(--wfa-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.doqix-wfa .wfa-workflow-partial {
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+.doqix-wfa .wfa-wf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.doqix-wfa .wfa-wf-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.doqix-wfa .wfa-wf-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.doqix-wfa .wfa-wf-badge-easy {
+  background: color-mix(in srgb, var(--wfa-easy) 15%, transparent);
+  color: var(--wfa-easy);
+}
+
+.doqix-wfa .wfa-wf-badge-medium {
+  background: color-mix(in srgb, var(--wfa-medium) 15%, transparent);
+  color: var(--wfa-medium);
+}
+
+.doqix-wfa .wfa-wf-badge-hard {
+  background: color-mix(in srgb, var(--wfa-hard) 15%, transparent);
+  color: var(--wfa-hard);
+}
+
+.doqix-wfa .wfa-wf-desc {
+  font-size: 14px;
+  opacity: 0.7;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Connected Tools ── */
+.doqix-wfa .wfa-connected {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doqix-wfa .wfa-connected-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.5;
+}
+
+.doqix-wfa .wfa-connected-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.doqix-wfa .wfa-tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: color-mix(in srgb, var(--wfa-accent) 8%, var(--wfa-card-bg));
+  border: 1px solid color-mix(in srgb, var(--wfa-accent) 25%, transparent);
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wfa-accent);
+  line-height: 1.3;
+}
+
+.doqix-wfa .wfa-tool-chip svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Benefits List ── */
+.doqix-wfa .wfa-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.doqix-wfa .wfa-benefits li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
+.doqix-wfa .wfa-benefits li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wfa-accent);
+  opacity: 0.5;
+}
+
+/* ── Flow Diagram ── */
+.doqix-wfa .wfa-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  padding: 8px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.doqix-wfa .wfa-flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.doqix-wfa .wfa-flow-node {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.doqix-wfa .wfa-flow-trigger {
+  background: var(--wfa-accent);
+  color: #fff;
+}
+
+.doqix-wfa .wfa-flow-action {
+  background: color-mix(in srgb, var(--wfa-accent) 10%, var(--wfa-card-bg));
+  border: 1px solid color-mix(in srgb, var(--wfa-accent) 30%, transparent);
+  color: inherit;
+}
+
+/* Inactive flow step — user has no tool for this category */
+.doqix-wfa .wfa-flow-node.wfa-flow-inactive {
+  background: rgba(0,0,0,0.03);
+  border: 1px dashed rgba(0,0,0,0.2);
+  color: rgba(0,0,0,0.35);
+}
+
+/* Step sub-label (tool name or missing category) */
+.doqix-wfa .wfa-flow-step-label {
+  font-size: 10px;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: 110px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doqix-wfa .wfa-flow-label-active {
+  color: var(--wfa-accent);
+  font-weight: 600;
+}
+
+.doqix-wfa .wfa-flow-label-missing {
+  color: var(--wfa-medium);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.doqix-wfa .wfa-flow-arrow {
+  display: flex;
+  align-items: center;
+  padding: 6px 4px 0;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.doqix-wfa .wfa-flow-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Hours Saved Badge ── */
+.doqix-wfa .wfa-hours-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: color-mix(in srgb, var(--wfa-accent) 8%, transparent);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--wfa-accent);
+  align-self: flex-start;
+}
+
+.doqix-wfa .wfa-hours-badge svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Partial Match Note ── */
+.doqix-wfa .wfa-partial-note {
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.6;
+  padding: 8px 12px;
+  background: color-mix(in srgb, var(--wfa-medium) 8%, transparent);
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+/* ── No Results ── */
+.doqix-wfa .wfa-no-results {
+  text-align: center;
+  padding: 32px;
+  opacity: 0.6;
+  font-size: 15px;
+}
+
+/* ── CTA Section ── */
+.doqix-wfa .wfa-step-cta {
+  margin-top: 32px;
+  text-align: center;
+}
+
+#workflow-advisor a.wfa-cta,
+#workflow-advisor a.wfa-cta:link,
+#workflow-advisor a.wfa-cta:visited,
+#workflow-advisor a.wfa-cta:focus,
+#workflow-advisor a.wfa-cta:active {
+  display: inline-block;
+  padding: 16px 40px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  background: var(--wfa-action);
+  border: none;
+  border-radius: var(--wfa-radius);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: none;
+  outline: none;
+  transition: opacity 0.2s;
+}
+
+#workflow-advisor a.wfa-cta:hover {
+  opacity: 0.9;
+  color: #fff;
+  text-decoration: none;
+}
+
+.doqix-wfa .wfa-cta-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 2px;
+  color: #fff;
+}
+
+/* ── Lead Form ── */
+.doqix-wfa .wfa-lead-form {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.doqix-wfa .wfa-lead-form h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.doqix-wfa .wfa-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+#workflow-advisor input.wfa-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  border: 1px solid var(--wfa-line);
+  border-radius: var(--wfa-radius);
+  background: var(--wfa-card-bg);
+  color: inherit;
+  transition: border-color 0.15s;
+  box-shadow: none;
+}
+
+#workflow-advisor input.wfa-input:focus {
+  border-color: var(--wfa-accent);
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--wfa-accent) 20%, transparent);
+}
+
+/* ── Disclaimer ── */
+.doqix-wfa .wfa-disclaimer {
+  font-size: 11px;
+  opacity: 0.45;
+  text-align: center;
+  margin-top: 16px;
+  font-style: italic;
+}
+
+/* ── Responsive: Tablet (<=768px) ── */
+@media (max-width: 768px) {
+  .doqix-wfa {
+    padding: 32px 16px;
+  }
+
+  .doqix-wfa .wfa-results-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .doqix-wfa .wfa-services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .doqix-wfa .wfa-footer-bar {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  #workflow-advisor button.wfa-show-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .doqix-wfa .wfa-filter-tabs {
+    gap: 6px;
+  }
+
+  #workflow-advisor button.wfa-tab {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+
+  .doqix-wfa .wfa-workflow-card {
+    padding: 20px;
+  }
+
+  .doqix-wfa .wfa-wf-title {
+    font-size: 16px;
+  }
+
+  #workflow-advisor a.wfa-cta,
+  #workflow-advisor a.wfa-cta:link,
+  #workflow-advisor a.wfa-cta:visited {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 14px 24px;
+  }
+
+  .doqix-wfa .wfa-selected-bar {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+}
+
+/* ── Responsive: Small phones (<=480px) ── */
+@media (max-width: 480px) {
+  .doqix-wfa {
+    padding: 24px 12px;
+  }
+
+  .doqix-wfa .wfa-intro {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .doqix-wfa .wfa-services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+
+  #workflow-advisor button.wfa-service-card {
+    padding: 12px 6px;
+  }
+
+  .doqix-wfa .wfa-service-initial {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .doqix-wfa .wfa-service-name {
+    font-size: 11px;
+  }
+
+  .doqix-wfa .wfa-footer-bar {
+    padding: 12px 16px;
+  }
+
+  .doqix-wfa .wfa-workflow-card {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .doqix-wfa .wfa-wf-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .doqix-wfa .wfa-wf-title {
+    font-size: 15px;
+  }
+
+  .doqix-wfa .wfa-flow-node {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .doqix-wfa .wfa-flow-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .doqix-wfa .wfa-lead-form h3 {
+    font-size: 17px;
+  }
+
+  #workflow-advisor input.wfa-input {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .doqix-wfa .wfa-benefits li {
+    font-size: 12px;
+    padding-left: 16px;
+  }
+
+  .doqix-wfa .wfa-benefits li::before {
+    width: 6px;
+    height: 6px;
+    top: 6px;
+  }
+
+  .doqix-wfa .wfa-tool-chip {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .doqix-wfa .wfa-chip {
+    font-size: 11px;
+    padding: 3px 6px 3px 10px;
+  }
+
+  .doqix-wfa .wfa-selected-bar {
+    padding: 8px 10px;
+    gap: 4px;
+  }
+}
+
+/* ── Responsive: Very small phones (<=360px) ── */
+@media (max-width: 360px) {
+  .doqix-wfa {
+    padding: 20px 10px;
+  }
+
+  .doqix-wfa .wfa-services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 6px;
+  }
+
+  #workflow-advisor button.wfa-service-card {
+    padding: 10px 4px;
+    gap: 6px;
+  }
+
+  .doqix-wfa .wfa-service-initial {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .doqix-wfa .wfa-service-name {
+    font-size: 10px;
+  }
+
+  .doqix-wfa .wfa-filter-tabs {
+    gap: 4px;
+  }
+
+  #workflow-advisor button.wfa-tab {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+
+  .doqix-wfa .wfa-tab-badge {
+    min-width: 16px;
+    height: 16px;
+    font-size: 10px;
+    padding: 0 4px;
+  }
+
+  .doqix-wfa .wfa-wf-desc {
+    font-size: 13px;
+  }
+
+  .doqix-wfa .wfa-hours-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}

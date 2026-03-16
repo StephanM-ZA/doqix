@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do.Qix Workflow Advisor — Test</title>
+<style>
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  color: #1a1a1a;
+  background: #f5f5f5;
+  line-height: 1.5;
+}
+h2 { font-size: 28px; margin-bottom: 8px; }
+h3 { font-size: 18px; }
+p { margin: 0; }
+
+/* ── Variables ── */
+.doqix-wfa {
+  --wfa-accent: #0886B5;
+  --wfa-action: #0886B5;
+  --wfa-line: rgba(13,32,40,0.12);
+  --wfa-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --wfa-radius: 8px;
+  --wfa-card-bg: #fff;
+  --wfa-easy: #22c55e;
+  --wfa-medium: #f59e0b;
+  --wfa-hard: #ef4444;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.doqix-wfa *,
+.doqix-wfa *::before,
+.doqix-wfa *::after {
+  box-sizing: border-box;
+}
+
+/* ── Section intro ── */
+.doqix-wfa .wfa-intro {
+  opacity: 0.65;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+
+/* ── Filter Tabs ── */
+.doqix-wfa .wfa-filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+#workflow-advisor button.wfa-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: inherit;
+  background: var(--wfa-card-bg);
+  border: 1px solid var(--wfa-line);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+#workflow-advisor button.wfa-tab:hover {
+  border-color: var(--wfa-accent);
+  color: var(--wfa-accent);
+}
+
+#workflow-advisor button.wfa-tab.wfa-tab-active {
+  background: var(--wfa-accent);
+  border-color: var(--wfa-accent);
+  color: #fff;
+}
+
+/* Tab count badge */
+.doqix-wfa .wfa-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  background: var(--wfa-accent);
+  color: #fff;
+}
+
+#workflow-advisor button.wfa-tab.wfa-tab-active .wfa-tab-badge {
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+/* ── Selected Tools Chip Bar ── */
+.doqix-wfa .wfa-selected-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background: color-mix(in srgb, var(--wfa-accent) 5%, var(--wfa-card-bg));
+  border: 1px solid color-mix(in srgb, var(--wfa-accent) 20%, transparent);
+  border-radius: var(--wfa-radius);
+}
+
+.doqix-wfa .wfa-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px 4px 12px;
+  background: var(--wfa-card-bg);
+  border: 1px solid color-mix(in srgb, var(--wfa-accent) 30%, transparent);
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wfa-accent);
+  line-height: 1.3;
+}
+
+#workflow-advisor .wfa-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.5;
+  transition: opacity 0.15s, background 0.15s;
+  box-shadow: none;
+  font-size: 0;
+}
+
+#workflow-advisor .wfa-chip-remove:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--wfa-accent) 12%, transparent);
+}
+
+#workflow-advisor .wfa-chip-remove svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ── Service Cards Grid ── */
+.doqix-wfa .wfa-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+#workflow-advisor button.wfa-service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  font-family: inherit;
+  background: var(--wfa-card-bg);
+  border: 2px solid var(--wfa-line);
+  border-radius: var(--wfa-radius);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+#workflow-advisor button.wfa-service-card:hover {
+  border-color: var(--wfa-accent);
+  box-shadow: var(--wfa-shadow);
+}
+
+#workflow-advisor button.wfa-service-card.wfa-selected {
+  border-color: var(--wfa-accent);
+  background: color-mix(in srgb, var(--wfa-accent) 8%, var(--wfa-card-bg));
+  box-shadow: 0 0 0 1px var(--wfa-accent);
+}
+
+#workflow-advisor button.wfa-service-card.wfa-hidden {
+  display: none;
+}
+
+.doqix-wfa .wfa-service-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--wfa-accent) 12%, transparent);
+  color: var(--wfa-accent);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.doqix-wfa .wfa-service-name {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+  color: inherit;
+}
+
+/* ── Footer Bar ── */
+.doqix-wfa .wfa-footer-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--wfa-card-bg);
+  border: 1px solid var(--wfa-line);
+  border-radius: var(--wfa-radius);
+  box-shadow: var(--wfa-shadow);
+}
+
+.doqix-wfa .wfa-selected-count {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+#workflow-advisor button.wfa-show-btn {
+  padding: 10px 24px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--wfa-action);
+  border: none;
+  border-radius: var(--wfa-radius);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+#workflow-advisor button.wfa-show-btn:hover {
+  opacity: 0.9;
+}
+
+#workflow-advisor button.wfa-show-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Results Section ── */
+.doqix-wfa .wfa-step-results {
+  margin-top: 48px;
+}
+
+.doqix-wfa .wfa-results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* ── Workflow Card ── */
+.doqix-wfa .wfa-workflow-card {
+  background: var(--wfa-card-bg);
+  border: 1px solid var(--wfa-line);
+  border-radius: var(--wfa-radius);
+  padding: 24px;
+  box-shadow: var(--wfa-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.doqix-wfa .wfa-workflow-partial {
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+.doqix-wfa .wfa-wf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.doqix-wfa .wfa-wf-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.doqix-wfa .wfa-wf-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.doqix-wfa .wfa-wf-badge-easy {
+  background: color-mix(in srgb, var(--wfa-easy) 15%, transparent);
+  color: var(--wfa-easy);
+}
+
+.doqix-wfa .wfa-wf-badge-medium {
+  background: color-mix(in srgb, var(--wfa-medium) 15%, transparent);
+  color: var(--wfa-medium);
+}
+
+.doqix-wfa .wfa-wf-badge-hard {
+  background: color-mix(in srgb, var(--wfa-hard) 15%, transparent);
+  color: var(--wfa-hard);
+}
+
+.doqix-wfa .wfa-wf-desc {
+  font-size: 14px;
+  opacity: 0.7;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Connected Tools ── */
+.doqix-wfa .wfa-connected {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doqix-wfa .wfa-connected-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.5;
+}
+
+.doqix-wfa .wfa-connected-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.doqix-wfa .wfa-tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: color-mix(in srgb, var(--wfa-accent) 8%, var(--wfa-card-bg));
+  border: 1px solid color-mix(in srgb, var(--wfa-accent) 25%, transparent);
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wfa-accent);
+  line-height: 1.3;
+}
+
+.doqix-wfa .wfa-tool-chip svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Benefits List ── */
+.doqix-wfa .wfa-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.doqix-wfa .wfa-benefits li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
+.doqix-wfa .wfa-benefits li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wfa-accent);
+  opacity: 0.5;
+}
+
+/* ── Flow Diagram ── */
+.doqix-wfa .wfa-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  padding: 8px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.doqix-wfa .wfa-flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.doqix-wfa .wfa-flow-node {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.doqix-wfa .wfa-flow-trigger {
+  background: var(--wfa-accent);
+  color: #fff;
+}
+
+.doqix-wfa .wfa-flow-action {
+  background: color-mix(in srgb, var(--wfa-accent) 10%, var(--wfa-card-bg));
+  border: 1px solid color-mix(in srgb, var(--wfa-accent) 30%, transparent);
+  color: inherit;
+}
+
+/* Inactive flow step — user has no tool for this category */
+.doqix-wfa .wfa-flow-node.wfa-flow-inactive {
+  background: rgba(0,0,0,0.03);
+  border: 1px dashed rgba(0,0,0,0.2);
+  color: rgba(0,0,0,0.35);
+}
+
+/* Step sub-label (tool name or missing category) */
+.doqix-wfa .wfa-flow-step-label {
+  font-size: 10px;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: 110px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doqix-wfa .wfa-flow-label-active {
+  color: var(--wfa-accent);
+  font-weight: 600;
+}
+
+.doqix-wfa .wfa-flow-label-missing {
+  color: var(--wfa-medium);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.doqix-wfa .wfa-flow-arrow {
+  display: flex;
+  align-items: center;
+  padding: 6px 4px 0;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.doqix-wfa .wfa-flow-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Hours Saved Badge ── */
+.doqix-wfa .wfa-hours-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: color-mix(in srgb, var(--wfa-accent) 8%, transparent);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--wfa-accent);
+  align-self: flex-start;
+}
+
+.doqix-wfa .wfa-hours-badge svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Partial Match Note ── */
+.doqix-wfa .wfa-partial-note {
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.6;
+  padding: 8px 12px;
+  background: color-mix(in srgb, var(--wfa-medium) 8%, transparent);
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+/* ── No Results ── */
+.doqix-wfa .wfa-no-results {
+  text-align: center;
+  padding: 32px;
+  opacity: 0.6;
+  font-size: 15px;
+}
+
+/* ── CTA Section ── */
+.doqix-wfa .wfa-step-cta {
+  margin-top: 32px;
+  text-align: center;
+}
+
+#workflow-advisor a.wfa-cta,
+#workflow-advisor a.wfa-cta:link,
+#workflow-advisor a.wfa-cta:visited,
+#workflow-advisor a.wfa-cta:focus,
+#workflow-advisor a.wfa-cta:active {
+  display: inline-block;
+  padding: 16px 40px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  background: var(--wfa-action);
+  border: none;
+  border-radius: var(--wfa-radius);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: none;
+  outline: none;
+  transition: opacity 0.2s;
+}
+
+#workflow-advisor a.wfa-cta:hover {
+  opacity: 0.9;
+  color: #fff;
+  text-decoration: none;
+}
+
+.doqix-wfa .wfa-cta-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 2px;
+  color: #fff;
+}
+
+/* ── Disclaimer ── */
+.doqix-wfa .wfa-disclaimer {
+  font-size: 11px;
+  opacity: 0.45;
+  text-align: center;
+  margin-top: 16px;
+  font-style: italic;
+}
+
+/* ── Responsive: Tablet (<=768px) ── */
+@media (max-width: 768px) {
+  .doqix-wfa { padding: 32px 16px; }
+  .doqix-wfa .wfa-results-grid { grid-template-columns: 1fr; gap: 16px; }
+  .doqix-wfa .wfa-services-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+  .doqix-wfa .wfa-footer-bar { flex-direction: column; gap: 12px; text-align: center; }
+  #workflow-advisor button.wfa-show-btn { width: 100%; min-height: 44px; }
+  .doqix-wfa .wfa-filter-tabs { gap: 6px; }
+  #workflow-advisor button.wfa-tab { padding: 5px 12px; font-size: 12px; }
+  .doqix-wfa .wfa-workflow-card { padding: 20px; }
+  .doqix-wfa .wfa-wf-title { font-size: 16px; }
+  #workflow-advisor a.wfa-cta,
+  #workflow-advisor a.wfa-cta:link,
+  #workflow-advisor a.wfa-cta:visited { display: block; width: 100%; min-height: 44px; padding: 14px 24px; }
+  .doqix-wfa .wfa-selected-bar { padding: 10px 12px; gap: 6px; }
+}
+
+/* ── Responsive: Small phones (<=480px) ── */
+@media (max-width: 480px) {
+  .doqix-wfa { padding: 24px 12px; }
+  .doqix-wfa .wfa-intro { font-size: 14px; margin-bottom: 16px; }
+  .doqix-wfa .wfa-services-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
+  #workflow-advisor button.wfa-service-card { padding: 12px 6px; }
+  .doqix-wfa .wfa-service-initial { width: 34px; height: 34px; font-size: 15px; }
+  .doqix-wfa .wfa-service-name { font-size: 11px; }
+  .doqix-wfa .wfa-footer-bar { padding: 12px 16px; }
+  .doqix-wfa .wfa-workflow-card { padding: 16px; gap: 12px; }
+  .doqix-wfa .wfa-wf-header { flex-direction: column; gap: 8px; }
+  .doqix-wfa .wfa-wf-title { font-size: 15px; }
+  .doqix-wfa .wfa-flow-node { padding: 6px 10px; font-size: 11px; }
+  .doqix-wfa .wfa-flow-arrow svg { width: 16px; height: 16px; }
+  .doqix-wfa .wfa-benefits li { font-size: 12px; padding-left: 16px; }
+  .doqix-wfa .wfa-benefits li::before { width: 6px; height: 6px; top: 6px; }
+  .doqix-wfa .wfa-tool-chip { font-size: 11px; padding: 3px 8px; }
+  .doqix-wfa .wfa-chip { font-size: 11px; padding: 3px 6px 3px 10px; }
+  .doqix-wfa .wfa-selected-bar { padding: 8px 10px; gap: 4px; }
+}
+
+/* ── Responsive: Very small phones (<=360px) ── */
+@media (max-width: 360px) {
+  .doqix-wfa { padding: 20px 10px; }
+  .doqix-wfa .wfa-services-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 6px; }
+  #workflow-advisor button.wfa-service-card { padding: 10px 4px; gap: 6px; }
+  .doqix-wfa .wfa-service-initial { width: 30px; height: 30px; font-size: 14px; }
+  .doqix-wfa .wfa-service-name { font-size: 10px; }
+  .doqix-wfa .wfa-filter-tabs { gap: 4px; }
+  #workflow-advisor button.wfa-tab { padding: 4px 10px; font-size: 11px; }
+  .doqix-wfa .wfa-tab-badge { min-width: 16px; height: 16px; font-size: 10px; padding: 0 4px; }
+  .doqix-wfa .wfa-wf-desc { font-size: 13px; }
+  .doqix-wfa .wfa-hours-badge { font-size: 12px; padding: 4px 10px; }
+}
+</style>
+</head>
+<body>
+
+<section class="doqix-wfa" id="workflow-advisor">
+
+  <!-- Step 1: Service Selection -->
+  <div class="wfa-step wfa-step-select" id="wfa-step-select">
+    <h2>Select Your Business Tools</h2>
+    <p class="wfa-intro">Choose the tools you already use and we'll show you which workflows can be automated.</p>
+
+    <!-- Category filter tabs (built by JS) -->
+    <div class="wfa-filter-tabs" id="wfa-filter-tabs">
+      <button type="button" class="wfa-tab wfa-tab-active" data-category="all">All</button>
+    </div>
+
+    <!-- Selected tools chip bar -->
+    <div class="wfa-selected-bar" id="wfa-selected-bar" style="display:none;"></div>
+
+    <!-- Service cards grid (built by JS) -->
+    <div class="wfa-services-grid" id="wfa-services-grid"></div>
+
+    <!-- Footer bar -->
+    <div class="wfa-footer-bar" id="wfa-footer-bar">
+      <span class="wfa-selected-count" id="wfa-selected-count">0 tools selected</span>
+      <button type="button" class="wfa-show-btn" id="wfa-show-btn" disabled>Show My Workflows</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Results (hidden until button click) -->
+  <div class="wfa-step wfa-step-results" id="wfa-step-results" style="display:none;">
+    <h2>Your Top Workflow Matches</h2>
+    <div class="wfa-results-grid" id="wfa-results-grid"></div>
+    <div class="wfa-no-results" id="wfa-no-results" style="display:none;">
+      <p>No matching workflows found. Try selecting more tools above.</p>
+    </div>
+  </div>
+
+  <!-- Step 3: CTA -->
+  <div class="wfa-step wfa-step-cta" id="wfa-step-cta" style="display:none;">
+    <a href="/contact" class="wfa-cta" id="wfa-cta-link">
+      Let&#x2019;s Build Your First Workflow
+      <span class="wfa-cta-sub">Book a free 15-minute workflow mapping call.</span>
+    </a>
+  </div>
+
+  <!-- Step 4: Disclaimer -->
+  <p class="wfa-disclaimer" id="wfa-disclaimer" style="display:none;">Time estimates are based on typical SA business automation projects.</p>
+
+</section>
+
+<script>
+/* ── Config (normally injected by wp_localize_script) ── */
+window.doqixWfaConfig = {
+  categories: [
+    { key: 'accounting',    name: 'Accounting & Finance' },
+    { key: 'crm',           name: 'CRM & Sales' },
+    { key: 'communication', name: 'Email & Communication' },
+    { key: 'project',       name: 'Project Management' },
+    { key: 'ecommerce',     name: 'eCommerce & Payments' },
+    { key: 'marketing',     name: 'Marketing & Email Marketing' },
+    { key: 'support',       name: 'Customer Support' },
+    { key: 'hr',            name: 'HR & Payroll' },
+    { key: 'scheduling',    name: 'Scheduling & Booking' },
+    { key: 'storage',       name: 'Document Storage' }
+  ],
+  services: [
+    { key: 'xero',              name: 'Xero',                     category: 'accounting' },
+    { key: 'sage',              name: 'Sage',                     category: 'accounting' },
+    { key: 'quickbooks',        name: 'QuickBooks',               category: 'accounting' },
+    { key: 'zoho-books',        name: 'Zoho Books',               category: 'accounting' },
+    { key: 'wave',              name: 'Wave',                     category: 'accounting' },
+    { key: 'hubspot-crm',       name: 'HubSpot',                  category: 'crm' },
+    { key: 'zoho-crm',          name: 'Zoho CRM',                 category: 'crm' },
+    { key: 'pipedrive',         name: 'Pipedrive',                category: 'crm' },
+    { key: 'salesforce',        name: 'Salesforce',               category: 'crm' },
+    { key: 'google-workspace',  name: 'Gmail / Google Workspace', category: 'communication' },
+    { key: 'microsoft-365',     name: 'Microsoft 365 / Outlook',  category: 'communication' },
+    { key: 'whatsapp-business', name: 'WhatsApp Business',        category: 'communication' },
+    { key: 'slack',             name: 'Slack',                    category: 'communication' },
+    { key: 'monday',            name: 'Monday.com',               category: 'project' },
+    { key: 'asana',             name: 'Asana',                    category: 'project' },
+    { key: 'trello',            name: 'Trello',                   category: 'project' },
+    { key: 'shopify',           name: 'Shopify',                  category: 'ecommerce' },
+    { key: 'woocommerce',       name: 'WooCommerce',              category: 'ecommerce' },
+    { key: 'yoco',              name: 'Yoco',                     category: 'ecommerce' },
+    { key: 'shopstar',          name: 'Shopstar',                 category: 'ecommerce' },
+    { key: 'mailchimp',         name: 'Mailchimp',                category: 'marketing' },
+    { key: 'hubspot-marketing', name: 'HubSpot Marketing',        category: 'marketing' },
+    { key: 'activecampaign',    name: 'ActiveCampaign',           category: 'marketing' },
+    { key: 'freshdesk',         name: 'Freshdesk',                category: 'support' },
+    { key: 'zendesk',           name: 'Zendesk',                  category: 'support' },
+    { key: 'intercom',          name: 'Intercom',                 category: 'support' },
+    { key: 'simplepay',         name: 'SimplePay',                category: 'hr' },
+    { key: 'sage-hr',           name: 'Sage HR',                  category: 'hr' },
+    { key: 'calendly',          name: 'Calendly',                 category: 'scheduling' },
+    { key: 'ms-bookings',       name: 'Microsoft Bookings',       category: 'scheduling' },
+    { key: 'google-drive',      name: 'Google Drive',             category: 'storage' }
+  ],
+  workflows: [
+    {
+      title: 'Order-to-Invoice Automation',
+      description: 'Automatically generate and send invoices when new orders come in.',
+      categories: ['ecommerce', 'accounting'],
+      steps: [
+        { label: 'New Order',        type: 'trigger', category: 'ecommerce' },
+        { label: 'Create Invoice',   type: 'action', category: 'accounting' },
+        { label: 'Send to Customer', type: 'action', category: 'accounting' },
+        { label: 'Log Payment',      type: 'action', category: 'accounting' }
+      ],
+      benefits: [
+        'Eliminates manual invoice creation for every order',
+        'Customers receive invoices instantly \u2014 reduces payment delays',
+        'Every transaction auto-logged in your accounting system'
+      ],
+      hours_saved: 12,
+      difficulty: 'easy'
+    },
+    {
+      title: 'Lead Capture to CRM Pipeline',
+      description: 'Route new enquiries from email or web forms directly into your CRM pipeline with status tracking.',
+      categories: ['crm', 'communication'],
+      steps: [
+        { label: 'New Enquiry',       type: 'trigger', category: 'communication' },
+        { label: 'Create CRM Deal',   type: 'action', category: 'crm' },
+        { label: 'Assign Owner',      type: 'action', category: 'crm' },
+        { label: 'Send Welcome Mail', type: 'action', category: 'communication' }
+      ],
+      benefits: [
+        'No leads slip through the cracks \u2014 every enquiry tracked',
+        'Auto-creates CRM contacts from emails and form submissions',
+        'Welcome email sent within seconds of enquiry'
+      ],
+      hours_saved: 8,
+      difficulty: 'easy'
+    },
+    {
+      title: 'Support Ticket Routing',
+      description: 'Automatically route incoming support requests to the right team member based on topic or priority.',
+      categories: ['support', 'communication'],
+      steps: [
+        { label: 'New Ticket',              type: 'trigger', category: 'support' },
+        { label: 'Classify Topic',          type: 'action', category: 'support' },
+        { label: 'Assign Agent',            type: 'action', category: 'support' },
+        { label: 'Notify via Slack/Email',  type: 'action', category: 'communication' }
+      ],
+      benefits: [
+        'Tickets reach the right person instantly \u2014 no manual triage',
+        'Priority issues escalated automatically',
+        'Average first-response time drops significantly'
+      ],
+      hours_saved: 10,
+      difficulty: 'medium'
+    },
+    {
+      title: 'Invoice Payment Reconciliation',
+      description: 'Match incoming payments to outstanding invoices and update your books automatically.',
+      categories: ['ecommerce', 'accounting'],
+      steps: [
+        { label: 'Payment Received', type: 'trigger', category: 'ecommerce' },
+        { label: 'Match Invoice',    type: 'action', category: 'accounting' },
+        { label: 'Mark as Paid',     type: 'action', category: 'accounting' },
+        { label: 'Send Receipt',     type: 'action', category: 'accounting' }
+      ],
+      benefits: [
+        'Payments matched to invoices automatically \u2014 no spreadsheet reconciliation',
+        'Overdue accounts flagged immediately',
+        'Saves hours of manual bank-statement matching each month'
+      ],
+      hours_saved: 15,
+      difficulty: 'medium'
+    },
+    {
+      title: 'New Customer Onboarding',
+      description: 'Trigger a complete onboarding sequence when a new client is added \u2014 schedule a call, create a project, and send a welcome pack.',
+      categories: ['crm', 'project', 'communication', 'scheduling'],
+      steps: [
+        { label: 'New Client Added',  type: 'trigger', category: 'crm' },
+        { label: 'Create Project',    type: 'action', category: 'project' },
+        { label: 'Schedule Kickoff',  type: 'action', category: 'scheduling' },
+        { label: 'Send Welcome Pack', type: 'action', category: 'communication' }
+      ],
+      benefits: [
+        'New clients get a professional welcome within minutes',
+        'Onboarding tasks created in your project board automatically',
+        'Kickoff call scheduled without the back-and-forth emails'
+      ],
+      hours_saved: 10,
+      difficulty: 'medium'
+    },
+    {
+      title: 'Marketing Lead Nurture',
+      description: 'Automatically add new leads to an email nurture sequence and update their CRM status as they engage.',
+      categories: ['marketing', 'crm', 'communication'],
+      steps: [
+        { label: 'New Lead',             type: 'trigger', category: 'crm' },
+        { label: 'Add to Nurture List',  type: 'action', category: 'marketing' },
+        { label: 'Send Drip Email',      type: 'action', category: 'communication' },
+        { label: 'Update CRM Stage',     type: 'action', category: 'crm' }
+      ],
+      benefits: [
+        'Warm leads receive follow-up sequences automatically',
+        'CRM pipeline status updates as leads engage with content',
+        'Marketing segments stay synced in real time'
+      ],
+      hours_saved: 8,
+      difficulty: 'easy'
+    },
+    {
+      title: 'Payroll Notification & Filing',
+      description: 'Process payroll, update your accounting records, and file payslips into document storage automatically each pay cycle.',
+      categories: ['hr', 'storage', 'accounting'],
+      steps: [
+        { label: 'Payroll Run',        type: 'trigger', category: 'hr' },
+        { label: 'Generate Payslips',  type: 'action', category: 'hr' },
+        { label: 'Update Accounts',    type: 'action', category: 'accounting' },
+        { label: 'File to Drive',      type: 'action', category: 'storage' }
+      ],
+      benefits: [
+        'Payslips generated and filed automatically for compliance',
+        'Accounting records synced the moment payroll completes',
+        'Every pay run archived in your document storage'
+      ],
+      hours_saved: 6,
+      difficulty: 'medium'
+    },
+    {
+      title: 'Stock Level Alerts',
+      description: 'Get notified when product stock drops below a threshold so you can reorder before running out.',
+      categories: ['ecommerce', 'communication'],
+      steps: [
+        { label: 'Stock Below Threshold', type: 'trigger', category: 'ecommerce' },
+        { label: 'Check Reorder Point',   type: 'action', category: 'ecommerce' },
+        { label: 'Send Alert',            type: 'action', category: 'communication' }
+      ],
+      benefits: [
+        'Never run out of stock \u2014 alerts before it happens',
+        'Team notified via email or chat to action reorders',
+        'Prevents lost sales from out-of-stock products'
+      ],
+      hours_saved: 5,
+      difficulty: 'easy'
+    },
+    {
+      title: 'Quote-to-Invoice Pipeline',
+      description: 'When a quote is accepted in your CRM, automatically create the invoice, update the project, and notify the team.',
+      categories: ['crm', 'accounting', 'project'],
+      steps: [
+        { label: 'Quote Accepted',      type: 'trigger', category: 'crm' },
+        { label: 'Create Invoice',      type: 'action', category: 'accounting' },
+        { label: 'Create Project Task', type: 'action', category: 'project' },
+        { label: 'Notify Team',         type: 'action', category: 'crm' }
+      ],
+      benefits: [
+        'Accepted quotes convert to invoices with zero re-typing',
+        'Project tasks created the moment a deal closes',
+        'Full audit trail from quote to payment'
+      ],
+      hours_saved: 10,
+      difficulty: 'medium'
+    },
+    {
+      title: 'Meeting Follow-Up Automation',
+      description: 'After a scheduled meeting ends, automatically send a follow-up email and update the CRM record.',
+      categories: ['scheduling', 'crm', 'communication'],
+      steps: [
+        { label: 'Meeting Ended',        type: 'trigger', category: 'scheduling' },
+        { label: 'Update CRM Record',    type: 'action', category: 'crm' },
+        { label: 'Send Follow-Up Email', type: 'action', category: 'communication' }
+      ],
+      benefits: [
+        'Follow-up email sent automatically after every meeting',
+        'CRM record updated with meeting notes and next steps',
+        'Nothing falls through the cracks between calls'
+      ],
+      hours_saved: 6,
+      difficulty: 'easy'
+    },
+    {
+      title: 'Customer Feedback Loop',
+      description: 'After a support ticket is resolved, send a satisfaction survey, log results in the CRM, and trigger re-engagement if the score is low.',
+      categories: ['support', 'crm', 'marketing'],
+      steps: [
+        { label: 'Ticket Resolved',    type: 'trigger', category: 'support' },
+        { label: 'Send Survey',        type: 'action', category: 'marketing' },
+        { label: 'Log Score in CRM',   type: 'action', category: 'crm' },
+        { label: 'Trigger Re-Engage',  type: 'action', category: 'marketing' }
+      ],
+      benefits: [
+        'Post-resolution surveys sent automatically',
+        'Customer satisfaction data feeds directly into your CRM',
+        'Low scores trigger re-engagement campaigns'
+      ],
+      hours_saved: 5,
+      difficulty: 'medium'
+    },
+    {
+      title: 'Full Order-to-Cash',
+      description: 'End-to-end automation from new order to payment confirmation \u2014 invoice, track payment, send receipt, and notify your team.',
+      categories: ['ecommerce', 'accounting', 'communication'],
+      steps: [
+        { label: 'New Order',      type: 'trigger', category: 'ecommerce' },
+        { label: 'Create Invoice', type: 'action', category: 'accounting' },
+        { label: 'Track Payment',  type: 'action', category: 'accounting' },
+        { label: 'Send Receipt',   type: 'action', category: 'communication' },
+        { label: 'Notify Team',    type: 'action', category: 'communication' }
+      ],
+      benefits: [
+        'Complete order-to-cash cycle without touching a spreadsheet',
+        'Customers notified at every stage \u2014 order, invoice, receipt',
+        'Accounting entries created automatically on each transaction'
+      ],
+      hours_saved: 20,
+      difficulty: 'hard'
+    },
+    {
+      title: 'Document-Backed Project Kickoff',
+      description: 'When a new project is created, automatically generate a folder structure in your document storage with templates.',
+      categories: ['project', 'storage'],
+      steps: [
+        { label: 'New Project',    type: 'trigger', category: 'project' },
+        { label: 'Create Folder',  type: 'action', category: 'storage' },
+        { label: 'Copy Templates', type: 'action', category: 'storage' }
+      ],
+      benefits: [
+        'Template folders created for every new project automatically',
+        'Briefs and documents auto-linked to project tasks',
+        'Team starts with everything in one place \u2014 no setup time'
+      ],
+      hours_saved: 4,
+      difficulty: 'easy'
+    },
+    {
+      title: 'Sales Pipeline Reporting',
+      description: 'Automatically compile a weekly pipeline summary from your CRM and email it to stakeholders.',
+      categories: ['crm', 'communication'],
+      steps: [
+        { label: 'Weekly Schedule',    type: 'trigger', category: 'crm' },
+        { label: 'Pull CRM Data',      type: 'action', category: 'crm' },
+        { label: 'Generate Report',    type: 'action', category: 'crm' },
+        { label: 'Email Stakeholders', type: 'action', category: 'communication' }
+      ],
+      benefits: [
+        'Weekly pipeline summary delivered to your inbox automatically',
+        'Deal stage changes tracked without manual updates',
+        'Revenue forecasts always up to date for stakeholders'
+      ],
+      hours_saved: 6,
+      difficulty: 'easy'
+    },
+    {
+      title: 'Multi-Channel Campaign Sync',
+      description: 'Keep your marketing lists, CRM segments, and project tasks in sync across platforms when a new campaign launches.',
+      categories: ['marketing', 'crm', 'project'],
+      steps: [
+        { label: 'Campaign Created',     type: 'trigger', category: 'marketing' },
+        { label: 'Sync Audience List',   type: 'action', category: 'marketing' },
+        { label: 'Create Project Tasks', type: 'action', category: 'project' },
+        { label: 'Update CRM Tags',     type: 'action', category: 'crm' }
+      ],
+      benefits: [
+        'Campaign tasks auto-created in your project board',
+        'Audience lists sync across marketing and CRM platforms',
+        'Campaign results tracked in one place'
+      ],
+      hours_saved: 8,
+      difficulty: 'medium'
+    }
+  ]
+};
+
+/* ── Build HTML for category tabs + service cards ── */
+(function() {
+  var cfg = window.doqixWfaConfig;
+  var tabsEl = document.getElementById('wfa-filter-tabs');
+  var gridEl = document.getElementById('wfa-services-grid');
+
+  /* Category tabs */
+  cfg.categories.forEach(function(cat) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'wfa-tab';
+    btn.setAttribute('data-category', cat.key);
+    btn.textContent = cat.name;
+    tabsEl.appendChild(btn);
+  });
+
+  /* Service cards */
+  cfg.services.forEach(function(svc) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'wfa-service-card';
+    btn.setAttribute('data-service', svc.key);
+    btn.setAttribute('data-category', svc.category);
+    var initial = svc.name.charAt(0).toUpperCase();
+    btn.innerHTML = '<span class="wfa-service-initial">' + initial + '</span>' +
+      '<span class="wfa-service-name">' + svc.name + '</span>';
+    gridEl.appendChild(btn);
+  });
+})();
+
+/* ── Frontend JS (same as plugin) ── */
+(function() {
+  'use strict';
+
+  var config = window.doqixWfaConfig || {};
+  var container = document.getElementById('workflow-advisor');
+  if (!container) return;
+
+  var categories = config.categories || [];
+  var services   = config.services || [];
+  var workflows  = config.workflows || [];
+
+  var catMap = {};
+  for (var ci = 0; ci < categories.length; ci++) {
+    catMap[categories[ci].key] = categories[ci].name;
+  }
+
+  var svcCatMap = {};
+  var svcNameMap = {};
+  for (var si = 0; si < services.length; si++) {
+    svcCatMap[services[si].key] = services[si].category;
+    svcNameMap[services[si].key] = services[si].name;
+  }
+
+  /* Brand data: colors + SVG paths */
+  var brandData = {
+    'xero':              { color: '#13B5EA', svg: 'M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.585 14.655c-1.485 0-2.69-1.206-2.69-2.689 0-1.485 1.207-2.691 2.69-2.691 1.485 0 2.69 1.207 2.69 2.691s-1.207 2.689-2.69 2.689zM7.53 14.644a.37.37 0 01-.267-.116l-2.043-2.04-2.052 2.047a.37.37 0 01-.258.108c-.202 0-.368-.166-.368-.368 0-.099.04-.191.111-.263l2.04-2.05-2.038-2.047a.37.37 0 01-.113-.261c0-.203.166-.366.368-.366.098 0 .188.037.258.105l2.055 2.048 2.048-2.045a.37.37 0 01.26-.108c.211 0 .375.165.375.366 0 .098-.029.188-.104.258l-2.056 2.055 2.055 2.051c.068.069.104.16.104.258 0 .202-.165.368-.365.368h-.01zm8.017-4.591c-.796.101-.882.476-.882 1.404v2.787c0 .202-.165.366-.366.366-.203 0-.367-.165-.368-.366v-4.53c0-.204.16-.366.362-.366.166 0 .316.125.346.289.27-.209.6-.317.93-.317h.105c.195 0 .359.165.359.368 0 .201-.164.352-.375.359 0 0-.09 0-.164.008l.053-.002zm-3.091 2.205H8.625a1.1 1.1 0 00.089.367c.194.531.765 1.275 1.829 1.29.33-.003.631-.086.9-.229.21-.12.391-.271.525-.428.045-.058.09-.112.12-.168.18-.229.405-.186.54-.083.164.135.18.391.045.57l-.016.016c-.21.27-.435.495-.689.66s-.525.284-.811.345c-.33.09-.645.104-.975.06-1.095-.135-2.01-.93-2.28-2.01a2.5 2.5 0 01-.09-.645c0-.855.421-1.695 1.125-2.205.885-.615 2.085-.66 3-.075.63.405 1.035 1.021 1.185 1.771.075.419-.21.794-.734.81l.068-.046zm6.129-2.223c-1.064 0-1.931.865-1.931 1.931s.866 1.931 1.931 1.931 1.931-.867 1.931-1.931-.866-1.933-1.931-1.933v.002zm0 2.595a.666.666 0 11.001-1.331.666.666 0 01-.001 1.331zm-8.04-2.603c-.91 0-1.672.623-1.886 1.466v.03h3.776c-.203-.855-.973-1.494-1.891-1.494v-.002z' },
+    'sage':              { color: '#00D639', svg: 'M2.702 5.316C1.167 5.316 0 6.48 0 7.972c0 1.635 1.167 2.267 2.46 2.655 1.224.387 1.804.818 1.804 1.666 0 .86-.64 1.465-1.477 1.465-.84 0-1.566-.604-1.566-1.535 0-.516.242-.647.242-.934 0-.33-.227-.574-.599-.574-.423 0-.864.647-.864 1.566 0 1.48 1.266 2.57 2.787 2.57 1.535 0 2.701-1.163 2.701-2.656 0-1.623-1.166-2.267-2.472-2.655-1.209-.372-1.792-.818-1.792-1.666 0-.845.626-1.45 1.463-1.45.867 0 1.565.617 1.577 1.465.016.388.285.617.599.617a.592.592 0 00.61-.647c-.027-1.48-1.263-2.543-2.771-2.543z' },
+    'quickbooks':        { color: '#2CA01C', svg: 'M12 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0zm.642 4.134c.955 0 1.73.776 1.73 1.733v9.067h1.6c1.614 0 2.927-1.316 2.927-2.933s-1.314-2.933-2.928-2.933h-.665V7.333h.665c2.573 0 4.658 2.09 4.658 4.667s-2.085 4.667-4.658 4.667H12.642zM7.984 7.333h3.329v12.533c-.956 0-1.73-.776-1.73-1.733V9.066H7.984c-1.615 0-2.928 1.316-2.928 2.934s1.313 2.933 2.928 2.933h.665v1.733h-.665c-2.573 0-4.658-2.089-4.658-4.666s2.085-4.667 4.658-4.667z' },
+    'zoho-books':        { color: '#C8202B' },
+    'wave':              { color: '#003D79' },
+    'hubspot-crm':       { color: '#FF7A59', svg: 'M18.164 7.93V5.084a2.198 2.198 0 001.267-1.978v-.067A2.2 2.2 0 0017.238.845h-.067a2.2 2.2 0 00-2.193 2.193v.067c0 .832.47 1.564 1.265 1.979v2.852a6.22 6.22 0 00-2.969 1.31l-7.828-6.095A2.497 2.497 0 104.3 4.656l7.697 5.991a6.176 6.176 0 00-1.038 3.446c0 1.343.425 2.588 1.147 3.607l-2.342 2.343a1.968 1.968 0 00-.58-.095 2.033 2.033 0 102.033 2.033 1.978 1.978 0 00-.1-.595l2.317-2.317a6.247 6.247 0 104.782-11.134l-.036-.005zm-.964 9.378a3.206 3.206 0 113.215-3.207 3.206 3.206 0 01-3.207 3.207z' },
+    'zoho-crm':          { color: '#C8202B' },
+    'pipedrive':         { color: '#017737' },
+    'salesforce':        { color: '#00A1E0', svg: 'M10.006 5.415a4.195 4.195 0 013.045-1.306c1.56 0 2.954.9 3.69 2.205.63-.3 1.35-.45 2.1-.45 2.85 0 5.159 2.34 5.159 5.22s-2.31 5.22-5.176 5.22c-.345 0-.69-.044-1.02-.104a3.75 3.75 0 01-3.3 1.95c-.6 0-1.155-.15-1.65-.375A4.314 4.314 0 018.88 20.4a4.302 4.302 0 01-4.05-2.82c-.27.062-.54.076-.825.076-2.204 0-4.005-1.8-4.005-4.05 0-1.5.811-2.805 2.01-3.51-.255-.57-.39-1.2-.39-1.846 0-2.58 2.1-4.65 4.65-4.65 1.53 0 2.85.705 3.72 1.8' },
+    'google-workspace':  { color: '#4285F4', svg: 'M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z' },
+    'microsoft-365':     { color: '#0078D4', svg: 'M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z' },
+    'whatsapp-business': { color: '#25D366', svg: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z' },
+    'slack':             { color: '#4A154B', svg: 'M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.528 2.528 0 012.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521H2.522A2.528 2.528 0 010 8.834a2.528 2.528 0 012.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 012.522-2.521A2.528 2.528 0 0124 8.834a2.528 2.528 0 01-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 01-2.523 2.521 2.527 2.527 0 01-2.52-2.521V2.522A2.527 2.527 0 0115.165 0a2.528 2.528 0 012.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 012.523 2.522A2.528 2.528 0 0115.165 24a2.527 2.527 0 01-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 01-2.52-2.523 2.526 2.526 0 012.52-2.52h6.313A2.527 2.527 0 0124 15.165a2.528 2.528 0 01-2.522 2.523h-6.313z' },
+    'monday':            { color: '#FF3D57' },
+    'asana':             { color: '#F06A6A', svg: 'M18.78 12.653c-2.882 0-5.22 2.336-5.22 5.22s2.338 5.22 5.22 5.22 5.22-2.34 5.22-5.22-2.336-5.22-5.22-5.22zm-13.56 0c-2.88 0-5.22 2.337-5.22 5.22s2.338 5.22 5.22 5.22 5.22-2.338 5.22-5.22-2.336-5.22-5.22-5.22zm12-6.525c0 2.883-2.337 5.22-5.22 5.22-2.882 0-5.22-2.337-5.22-5.22 0-2.88 2.338-5.22 5.22-5.22 2.883 0 5.22 2.34 5.22 5.22z' },
+    'trello':            { color: '#0052CC', svg: 'M21.147 0H2.853A2.86 2.86 0 000 2.853v18.294A2.86 2.86 0 002.853 24h18.294A2.86 2.86 0 0024 21.147V2.853A2.86 2.86 0 0021.147 0zM10.34 17.287a.953.953 0 01-.953.953h-4a.954.954 0 01-.954-.953V5.38a.953.953 0 01.954-.953h4a.954.954 0 01.953.953zm9.233-5.467a.944.944 0 01-.953.947h-4a.947.947 0 01-.953-.947V5.38a.953.953 0 01.953-.953h4a.954.954 0 01.953.953z' },
+    'shopify':           { color: '#7AB55C', svg: 'M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01z' },
+    'woocommerce':       { color: '#96588A', svg: 'M.754 9.58a.754.754 0 00-.754.758v2.525c0 .42.339.758.758.758h3.135l1.431.799-.326-.799h2.373a.757.757 0 00.758-.758v-2.525a.757.757 0 00-.758-.758H.754zm2.709.445h.03c.065.001.124.023.179.067a.26.26 0 01.103.19.29.29 0 01-.033.16c-.13.239-.236.64-.322 1.199-.083.541-.114.965-.094 1.267a.392.392 0 01-.039.219.213.213 0 01-.176.12c-.086.006-.177-.034-.263-.124-.31-.316-.555-.788-.735-1.416-.216.425-.375.744-.478.957-.196.376-.363.568-.502.578-.09.007-.166-.069-.233-.228-.17-.436-.352-1.277-.548-2.524a.297.297 0 01.054-.222c.047-.064.116-.095.21-.102.169-.013.265.065.288.238.103.695.217 1.284.336 1.766l.727-1.387c.066-.126.15-.192.25-.199.146-.01.237.083.273.28.083.441.188.817.315 1.136.086-.844.233-1.453.44-1.828a.255.255 0 01.218-.147z' },
+    'yoco':              { color: '#00B4E6' },
+    'shopstar':          { color: '#FF6B00' },
+    'mailchimp':         { color: '#FFE01B', svg: 'M11.267 0C6.791-.015-1.82 10.246 1.397 12.964l.79.669a3.88 3.88 0 00-.22 1.792c.084.84.518 1.644 1.22 2.266.666.59 1.542.964 2.392.964 1.406 3.24 4.62 5.228 8.386 5.34 4.04.12 7.433-1.776 8.854-5.182.093-.24.488-1.316.488-2.267 0-.956-.54-1.352-.885-1.352-.01-.037-.078-.286-.172-.586s-.19-.51-.19-.51c.375-.563.382-1.065.332-1.35-.053-.353-.2-.653-.496-.964-.296-.311-.902-.63-1.753-.868l-.446-.124c-.002-.019-.024-1.053-.043-1.497-.014-.32-.042-.822-.197-1.315-.186-.668-.508-1.253-.911-1.627 1.112-1.152 1.806-2.422 1.804-3.511-.003-2.095-2.576-2.729-5.746-1.416l-.672.285A678.22 678.22 0 0012.7.504C12.304.159 11.817.002 11.267 0z' },
+    'hubspot-marketing': { color: '#FF7A59', svg: 'M18.164 7.93V5.084a2.198 2.198 0 001.267-1.978v-.067A2.2 2.2 0 0017.238.845h-.067a2.2 2.2 0 00-2.193 2.193v.067c0 .832.47 1.564 1.265 1.979v2.852a6.22 6.22 0 00-2.969 1.31l-7.828-6.095A2.497 2.497 0 104.3 4.656l7.697 5.991a6.176 6.176 0 00-1.038 3.446c0 1.343.425 2.588 1.147 3.607l-2.342 2.343a1.968 1.968 0 00-.58-.095 2.033 2.033 0 102.033 2.033 1.978 1.978 0 00-.1-.595l2.317-2.317a6.247 6.247 0 104.782-11.134l-.036-.005zm-.964 9.378a3.206 3.206 0 113.215-3.207 3.206 3.206 0 01-3.207 3.207z' },
+    'activecampaign':    { color: '#356AE6' },
+    'freshdesk':         { color: '#00B67A' },
+    'zendesk':           { color: '#03363D', svg: 'M12.914 2.904V16.29L24 2.905H12.914zM0 2.906C0 5.966 2.483 8.45 5.543 8.45s5.542-2.484 5.543-5.544H0zm11.086 4.807L0 21.096h11.086V7.713zm7.37 7.84c-3.063 0-5.542 2.48-5.542 5.543H24c0-3.06-2.48-5.543-5.543-5.543z' },
+    'intercom':          { color: '#6AFDEF', svg: 'M21 0H3C1.343 0 0 1.343 0 3v18c0 1.658 1.343 3 3 3h18c1.658 0 3-1.342 3-3V3c0-1.657-1.342-3-3-3zm-5.801 4.399a.802.802 0 011.602 0v10.688a.802.802 0 01-1.602 0V4.399zM11.2 3.994a.8.8 0 011.6 0v11.602a.8.8 0 01-1.6 0V3.994zm-4 .405a.8.8 0 011.601 0v10.688a.8.8 0 01-1.601 0V4.399zM3.199 6a.8.8 0 011.601 0v7.195a.8.8 0 01-1.601 0V6zm17.321 12.202c-.123.105-3.086 2.593-8.52 2.593-5.433 0-8.397-2.486-8.521-2.593a.802.802 0 011.039-1.218c.047.041 2.693 2.211 7.481 2.211 4.848 0 7.456-2.186 7.479-2.207a.801.801 0 011.042 1.214zm.281-5.007a.8.8 0 01-1.602 0V6a.8.8 0 011.602 0v7.195z' },
+    'simplepay':         { color: '#3AA3E3' },
+    'sage-hr':           { color: '#00D639', svg: 'M2.702 5.316C1.167 5.316 0 6.48 0 7.972c0 1.635 1.167 2.267 2.46 2.655 1.224.387 1.804.818 1.804 1.666 0 .86-.64 1.465-1.477 1.465-.84 0-1.566-.604-1.566-1.535 0-.516.242-.647.242-.934 0-.33-.227-.574-.599-.574-.423 0-.864.647-.864 1.566 0 1.48 1.266 2.57 2.787 2.57 1.535 0 2.701-1.163 2.701-2.656 0-1.623-1.166-2.267-2.472-2.655-1.209-.372-1.792-.818-1.792-1.666 0-.845.626-1.45 1.463-1.45.867 0 1.565.617 1.577 1.465.016.388.285.617.599.617a.592.592 0 00.61-.647c-.027-1.48-1.263-2.543-2.771-2.543z' },
+    'calendly':          { color: '#006BFF', svg: 'M19.655 14.262c.281 0 .557.023.828.064 0 .005-.005.01-.005.014-.105.267-.234.534-.381.786l-1.219 2.106c-1.112 1.936-3.177 3.127-5.411 3.127h-2.432c-2.23 0-4.294-1.191-5.412-3.127l-1.218-2.106a6.251 6.251 0 010-6.252l1.218-2.106C6.736 4.832 8.8 3.641 11.035 3.641h2.432c2.23 0 4.294 1.191 5.411 3.127l1.219 2.106c.147.252.271.519.381.786 0 .004.005.009.005.014-.267.041-.543.064-.828.064-1.816 0-2.501-.607-3.291-1.306-.764-.676-1.711-1.517-3.44-1.517h-1.029c-1.251 0-2.387.455-3.2 1.278-.796.805-1.233 1.904-1.233 3.099v1.411c0 1.196.437 2.295 1.233 3.099.813.823 1.949 1.278 3.2 1.278h1.034c1.729 0 2.676-.841 3.439-1.517.791-.703 1.471-1.306 3.287-1.301z' },
+    'ms-bookings':       { color: '#0078D4', svg: 'M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z' },
+    'google-drive':      { color: '#4285F4', svg: 'M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574zm-4.76 1.73a789.828 789.861 0 00-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214zm2.259 12.653l-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 01-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167h-7.249z' }
+  };
+
+  function upgradeServiceCards() {
+    if (!servicesGrid) return;
+    var cards = servicesGrid.querySelectorAll('.wfa-service-card');
+    for (var i = 0; i < cards.length; i++) {
+      var key = cards[i].getAttribute('data-service');
+      var brand = brandData[key];
+      if (!brand) continue;
+      var el = cards[i].querySelector('.wfa-service-initial');
+      if (!el) continue;
+      el.style.background = brand.color + '18';
+      el.style.color = brand.color;
+      if (brand.svg) {
+        el.innerHTML = '<svg viewBox="0 0 24 24" fill="' + brand.color + '" style="width:22px;height:22px;"><path d="' + brand.svg + '"/></svg>';
+      }
+    }
+  }
+
+  var filterTabs     = document.getElementById('wfa-filter-tabs');
+  var servicesGrid   = document.getElementById('wfa-services-grid');
+  var selectedCount  = document.getElementById('wfa-selected-count');
+  var selectedBar    = document.getElementById('wfa-selected-bar');
+  var showBtn        = document.getElementById('wfa-show-btn');
+  var stepResults    = document.getElementById('wfa-step-results');
+  var resultsGrid    = document.getElementById('wfa-results-grid');
+  var noResults      = document.getElementById('wfa-no-results');
+  var stepCta        = document.getElementById('wfa-step-cta');
+  var disclaimer     = document.getElementById('wfa-disclaimer');
+
+  var arrowSvg = '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>';
+  var clockSvg = '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>';
+  var checkSvg = '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>';
+  var closeSvg = '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
+
+  var selectedServices = {};
+  var activeFilter = 'all';
+
+  /* Category tab filtering */
+  if (filterTabs) {
+    filterTabs.addEventListener('click', function(e) {
+      var tab = e.target.closest('.wfa-tab');
+      if (!tab) return;
+      var allTabs = filterTabs.querySelectorAll('.wfa-tab');
+      for (var t = 0; t < allTabs.length; t++) {
+        allTabs[t].classList.remove('wfa-tab-active');
+      }
+      tab.classList.add('wfa-tab-active');
+      activeFilter = tab.getAttribute('data-category');
+      filterServices();
+    });
+  }
+
+  function filterServices() {
+    var cards = servicesGrid.querySelectorAll('.wfa-service-card');
+    for (var i = 0; i < cards.length; i++) {
+      var cat = cards[i].getAttribute('data-category');
+      if (activeFilter === 'all' || cat === activeFilter) {
+        cards[i].classList.remove('wfa-hidden');
+      } else {
+        cards[i].classList.add('wfa-hidden');
+      }
+    }
+  }
+
+  /* Service card selection */
+  if (servicesGrid) {
+    servicesGrid.addEventListener('click', function(e) {
+      var card = e.target.closest('.wfa-service-card');
+      if (!card) return;
+      var key = card.getAttribute('data-service');
+      if (selectedServices[key]) {
+        delete selectedServices[key];
+        card.classList.remove('wfa-selected');
+      } else {
+        selectedServices[key] = true;
+        card.classList.add('wfa-selected');
+      }
+      updateFooter();
+      updateSelectedBar();
+      updateTabBadges();
+      refreshIfVisible();
+    });
+  }
+
+  /* Selected tools chip bar */
+  function updateSelectedBar() {
+    if (!selectedBar) return;
+    var keys = Object.keys(selectedServices);
+    if (keys.length === 0) {
+      selectedBar.style.display = 'none';
+      selectedBar.innerHTML = '';
+      return;
+    }
+    selectedBar.style.display = '';
+    var html = '';
+    for (var i = 0; i < keys.length; i++) {
+      var name = svcNameMap[keys[i]] || keys[i];
+      html += '<span class="wfa-chip" data-service="' + escAttr(keys[i]) + '">' +
+        escHtml(name) +
+        '<button type="button" class="wfa-chip-remove" aria-label="Remove">' + closeSvg + '</button>' +
+      '</span>';
+    }
+    selectedBar.innerHTML = html;
+  }
+
+  /* Chip remove click */
+  if (selectedBar) {
+    selectedBar.addEventListener('click', function(e) {
+      var btn = e.target.closest('.wfa-chip-remove');
+      if (!btn) return;
+      var chip = btn.closest('.wfa-chip');
+      if (!chip) return;
+      var key = chip.getAttribute('data-service');
+      if (key && selectedServices[key]) {
+        delete selectedServices[key];
+        var card = servicesGrid.querySelector('[data-service="' + key + '"]');
+        if (card) card.classList.remove('wfa-selected');
+        updateFooter();
+        updateSelectedBar();
+        updateTabBadges();
+        refreshIfVisible();
+      }
+    });
+  }
+
+  /* Category tab badges */
+  function updateTabBadges() {
+    if (!filterTabs) return;
+    var catCounts = {};
+    var keys = Object.keys(selectedServices);
+    for (var i = 0; i < keys.length; i++) {
+      var cat = svcCatMap[keys[i]];
+      if (cat) catCounts[cat] = (catCounts[cat] || 0) + 1;
+    }
+    var total = keys.length;
+    var tabs = filterTabs.querySelectorAll('.wfa-tab');
+    for (var t = 0; t < tabs.length; t++) {
+      var tabCat = tabs[t].getAttribute('data-category');
+      var badge = tabs[t].querySelector('.wfa-tab-badge');
+      var count = tabCat === 'all' ? total : (catCounts[tabCat] || 0);
+      if (count > 0) {
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'wfa-tab-badge';
+          tabs[t].appendChild(badge);
+        }
+        badge.textContent = count;
+      } else {
+        if (badge) badge.remove();
+      }
+    }
+  }
+
+  function refreshIfVisible() {
+    if (stepResults && stepResults.style.display !== 'none') {
+      var matches = findMatches();
+      renderResults(matches);
+    }
+  }
+
+  function updateFooter() {
+    var count = Object.keys(selectedServices).length;
+    if (selectedCount) {
+      selectedCount.textContent = count + (count === 1 ? ' tool selected' : ' tools selected');
+    }
+    if (showBtn) {
+      showBtn.disabled = count < 1;
+    }
+  }
+
+  /* Show My Workflows button */
+  if (showBtn) {
+    showBtn.addEventListener('click', function() {
+      var matches = findMatches();
+      renderResults(matches);
+      if (stepResults) stepResults.style.display = '';
+      if (stepCta) stepCta.style.display = '';
+      if (disclaimer) disclaimer.style.display = '';
+      if (stepResults) {
+        stepResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  /* Matching algorithm */
+  function findMatches() {
+    var userCategories = {};
+    var keys = Object.keys(selectedServices);
+    for (var i = 0; i < keys.length; i++) {
+      var cat = svcCatMap[keys[i]];
+      if (cat) userCategories[cat] = true;
+    }
+
+    var scored = [];
+    for (var wi = 0; wi < workflows.length; wi++) {
+      var wf = workflows[wi];
+      var reqCats = wf.categories || [];
+      if (reqCats.length === 0) continue;
+
+      var matched = 0;
+      var missing = [];
+      for (var rc = 0; rc < reqCats.length; rc++) {
+        if (userCategories[reqCats[rc]]) {
+          matched++;
+        } else {
+          missing.push(reqCats[rc]);
+        }
+      }
+
+      if (matched === 0) continue;
+
+      scored.push({
+        workflow: wf,
+        ratio: matched / reqCats.length,
+        perfect: missing.length === 0,
+        missing: missing,
+        hours: wf.hours_saved || 0
+      });
+    }
+
+    scored.sort(function(a, b) {
+      if (a.perfect !== b.perfect) return a.perfect ? -1 : 1;
+      if (a.ratio !== b.ratio) return b.ratio - a.ratio;
+      return b.hours - a.hours;
+    });
+
+    return scored;
+  }
+
+  /* Get user's connected tools for a workflow */
+  function getConnectedTools(wfCategories) {
+    var tools = [];
+    var keys = Object.keys(selectedServices);
+    for (var i = 0; i < keys.length; i++) {
+      var svcCat = svcCatMap[keys[i]];
+      if (svcCat && wfCategories.indexOf(svcCat) !== -1) {
+        tools.push(svcNameMap[keys[i]] || keys[i]);
+      }
+    }
+    return tools;
+  }
+
+  /* Get user's tool name for a category */
+  function getUserToolForCategory(cat) {
+    var keys = Object.keys(selectedServices);
+    for (var i = 0; i < keys.length; i++) {
+      if (svcCatMap[keys[i]] === cat) {
+        return svcNameMap[keys[i]] || keys[i];
+      }
+    }
+    return '';
+  }
+
+  /* Render results */
+  function renderResults(matches) {
+    /* Build user categories for flow step rendering */
+    var userCategories = {};
+    var selKeys = Object.keys(selectedServices);
+    for (var sk = 0; sk < selKeys.length; sk++) {
+      var sc = svcCatMap[selKeys[sk]];
+      if (sc) userCategories[sc] = true;
+    }
+
+    resultsGrid.innerHTML = '';
+    if (matches.length === 0) {
+      if (noResults) noResults.style.display = '';
+      return;
+    }
+    if (noResults) noResults.style.display = 'none';
+
+    for (var i = 0; i < matches.length; i++) {
+      var m = matches[i];
+      var wf = m.workflow;
+      var card = document.createElement('div');
+      card.className = 'wfa-workflow-card' + (m.perfect ? '' : ' wfa-workflow-partial');
+
+      var badgeClass = 'wfa-wf-badge wfa-wf-badge-' + wf.difficulty;
+      var badgeText = wf.difficulty.charAt(0).toUpperCase() + wf.difficulty.slice(1);
+
+      var html = '<div class="wfa-wf-header">' +
+        '<h3 class="wfa-wf-title">' + escHtml(wf.title) + '</h3>' +
+        '<span class="' + badgeClass + '">' + badgeText + '</span>' +
+      '</div>';
+
+      html += '<p class="wfa-wf-desc">' + escHtml(wf.description) + '</p>';
+
+      /* Connected tools */
+      var connectedTools = getConnectedTools(wf.categories || []);
+      if (connectedTools.length > 0) {
+        html += '<div class="wfa-connected">';
+        html += '<span class="wfa-connected-label">Your tools in this workflow:</span>';
+        html += '<div class="wfa-connected-tools">';
+        for (var ct = 0; ct < connectedTools.length; ct++) {
+          html += '<span class="wfa-tool-chip">' + checkSvg + ' ' + escHtml(connectedTools[ct]) + '</span>';
+        }
+        html += '</div></div>';
+      }
+
+      /* Flow diagram */
+      html += renderFlow(wf.steps || [], userCategories);
+
+      /* Benefits */
+      var benefits = wf.benefits || [];
+      if (benefits.length > 0) {
+        html += '<ul class="wfa-benefits">';
+        for (var bi = 0; bi < benefits.length; bi++) {
+          html += '<li>' + escHtml(benefits[bi]) + '</li>';
+        }
+        html += '</ul>';
+      }
+
+      /* Hours saved */
+      html += '<div class="wfa-hours-badge">' + clockSvg +
+        '<span>~' + wf.hours_saved + ' hrs saved per month</span></div>';
+
+      /* Partial match note */
+      if (m.missing.length > 0) {
+        var missingNames = [];
+        for (var mi = 0; mi < m.missing.length; mi++) {
+          missingNames.push(catMap[m.missing[mi]] || m.missing[mi]);
+        }
+        html += '<div class="wfa-partial-note">You\u2019d also need a tool from: ' +
+          escHtml(missingNames.join(', ')) + '</div>';
+      }
+
+      card.innerHTML = html;
+      resultsGrid.appendChild(card);
+    }
+  }
+
+  function renderFlow(steps, userCategories) {
+    if (steps.length === 0) return '';
+    var html = '<div class="wfa-flow">';
+    for (var i = 0; i < steps.length; i++) {
+      var step = steps[i];
+      var stepCat = step.category || '';
+      var hasTools = stepCat && userCategories && userCategories[stepCat];
+      var nodeClass = step.type === 'trigger' ? 'wfa-flow-trigger' : 'wfa-flow-action';
+      if (!hasTools && stepCat) nodeClass += ' wfa-flow-inactive';
+
+      html += '<div class="wfa-flow-step">';
+      html += '<div class="wfa-flow-node ' + nodeClass + '">' + escHtml(step.label) + '</div>';
+
+      if (hasTools) {
+        var toolName = getUserToolForCategory(stepCat);
+        if (toolName) {
+          html += '<div class="wfa-flow-step-label wfa-flow-label-active">' + escHtml(toolName) + '</div>';
+        }
+      } else if (stepCat) {
+        html += '<div class="wfa-flow-step-label wfa-flow-label-missing">' + escHtml(catMap[stepCat] || stepCat) + '</div>';
+      }
+
+      html += '</div>';
+      if (i < steps.length - 1) {
+        html += '<div class="wfa-flow-arrow">' + arrowSvg + '</div>';
+      }
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function escHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function escAttr(str) {
+    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  updateFooter();
+  upgradeServiceCards();
+})();
+</script>
+
+</body>
+</html>
