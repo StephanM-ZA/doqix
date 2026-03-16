@@ -9,9 +9,21 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+### Added
+- ROI Calculator V1 — WordPress plugin with admin settings, Themify integration (`assets/doqix-roi-calculator/`)
+- ROI Calculator V2 — Enhanced WordPress plugin with same fixes (`assets/doqix-roi-calculator-v2/`)
+- Workflow Advisor v1.2 — WordPress plugin with 10 categories, 31 services, 15 workflows (`assets/doqix-workflow-advisor/`)
+  - Step-level tool category matching (active/inactive step visualization)
+  - Live refresh, tab badges, chip bar, brand logos (22 SVG + 9 colored initials)
+- Standalone Workflow Advisor test HTML (`assets/doqix-workflow-advisor-test.html`)
+- ROI Calculator V1 deployment zip (`assets/doqix-roi-calculator.zip`)
+
+### Fixed
+- Themify `get_theme_accent_color()` across all plugins
+- Centered heading/intro, 11px footnote, smaller mobile slider thumbs (ROI plugins)
+
 ### Planned
 - Figma design prototypes
-- WordPress implementation
 - Live deployment configuration
 - Contact form integration
 - Analytics setup

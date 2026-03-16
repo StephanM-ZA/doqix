@@ -71,15 +71,17 @@ class Doqix_ROI_Frontend {
 		);
 
 		wp_localize_script( 'doqix-roi-calculator', 'doqixRoiConfig', array(
-			'tier_1_name'  => $settings['tier_1_name'],
-			'tier_1_price' => $settings['tier_1_price'],
-			'tier_2_name'  => $settings['tier_2_name'],
-			'tier_2_price' => $settings['tier_2_price'],
-			'tier_3_name'  => $settings['tier_3_name'],
-			'tier_3_price' => $settings['tier_3_price'],
-			'tier_4_name'  => $settings['tier_4_name'],
-			'tier_4_price' => $settings['tier_4_price'],
-			'share_url'    => $settings['share_url'],
+			'tier_1_name'   => $settings['tier_1_name'],
+			'tier_1_price'  => $settings['tier_1_price'],
+			'tier_2_name'   => $settings['tier_2_name'],
+			'tier_2_price'  => $settings['tier_2_price'],
+			'tier_3_name'   => $settings['tier_3_name'],
+			'tier_3_price'  => $settings['tier_3_price'],
+			'tier_4_name'   => $settings['tier_4_name'],
+			'tier_4_price'  => $settings['tier_4_price'],
+			'share_url'     => $settings['share_url'],
+			'color_accent'  => $settings['color_accent'],
+			'color_cta'     => $settings['color_cta'],
 		) );
 	}
 
@@ -112,15 +114,17 @@ class Doqix_ROI_Frontend {
 			);
 
 			wp_localize_script( 'doqix-roi-calculator', 'doqixRoiConfig', array(
-				'tier_1_name'  => $settings['tier_1_name'],
-				'tier_1_price' => $settings['tier_1_price'],
-				'tier_2_name'  => $settings['tier_2_name'],
-				'tier_2_price' => $settings['tier_2_price'],
-				'tier_3_name'  => $settings['tier_3_name'],
-				'tier_3_price' => $settings['tier_3_price'],
-				'tier_4_name'  => $settings['tier_4_name'],
-				'tier_4_price' => $settings['tier_4_price'],
-				'share_url'    => $settings['share_url'],
+				'tier_1_name'   => $settings['tier_1_name'],
+				'tier_1_price'  => $settings['tier_1_price'],
+				'tier_2_name'   => $settings['tier_2_name'],
+				'tier_2_price'  => $settings['tier_2_price'],
+				'tier_3_name'   => $settings['tier_3_name'],
+				'tier_3_price'  => $settings['tier_3_price'],
+				'tier_4_name'   => $settings['tier_4_name'],
+				'tier_4_price'  => $settings['tier_4_price'],
+				'share_url'     => $settings['share_url'],
+				'color_accent'  => $settings['color_accent'],
+				'color_cta'     => $settings['color_cta'],
 			) );
 
 			$this->enqueue = true;
@@ -131,12 +135,29 @@ class Doqix_ROI_Frontend {
 			doqix_roi_get_defaults()
 		);
 
+		/* Resolve colors: admin override → theme color → CSS fallback */
+		$theme_color   = self::get_theme_accent_color();
+		$accent        = ! empty( $s['color_accent'] ) ? $s['color_accent'] : $theme_color;
+		$cta           = ! empty( $s['color_cta'] )    ? $s['color_cta']    : $theme_color;
+
+		$inline_vars = '';
+		if ( $accent ) {
+			$inline_vars .= '--roi-accent:' . esc_attr( $accent ) . ';';
+		}
+		if ( $cta ) {
+			$inline_vars .= '--roi-action:' . esc_attr( $cta ) . ';';
+		}
+
 		ob_start();
 		?>
-<section class="doqix-roi" id="roi-calculator">
+<section class="doqix-roi" id="roi-calculator"<?php if ( $inline_vars ) echo ' style="' . $inline_vars . '"'; ?>>
 
-	<h2><?php esc_html_e( 'See What You Could Save', 'doqix-roi-calculator' ); ?></h2>
-	<p class="section-intro"><?php esc_html_e( 'SA businesses waste 20–30 hours per week on tasks that could run themselves. Drag the sliders to see what automation would mean for yours.', 'doqix-roi-calculator' ); ?></p>
+	<?php if ( ! empty( $s['heading_text'] ) ) : ?>
+	<h2><?php echo esc_html( $s['heading_text'] ); ?></h2>
+	<?php endif; ?>
+	<?php if ( ! empty( $s['intro_text'] ) ) : ?>
+	<p class="section-intro"><?php echo esc_html( $s['intro_text'] ); ?></p>
+	<?php endif; ?>
 
 	<div class="roi-grid">
 
@@ -238,14 +259,52 @@ class Doqix_ROI_Frontend {
 			<button type="button" class="share-btn" id="btn-share"><?php esc_html_e( 'Share Your Results', 'doqix-roi-calculator' ); ?></button>
 			<?php endif; ?>
 
-			<?php if ( ! empty( $s['popia_note'] ) ) : ?>
-			<p class="popia-note"><?php echo esc_html( $s['popia_note'] ); ?></p>
-			<?php endif; ?>
 		</div>
 
 	</div>
+
+	<?php if ( ! empty( $s['footnote_text'] ) ) : ?>
+	<p class="roi-footnote"><?php echo esc_html( $s['footnote_text'] ); ?></p>
+	<?php endif; ?>
 </section>
 		<?php
 		return ob_get_clean();
+	}
+
+	/* ────────────────────────────────────────────
+	 * Detect active theme's accent/link color
+	 * ──────────────────────────────────────────── */
+
+	private static function get_theme_accent_color() {
+		/* Themify themes: accent stored in themify_setting option */
+		$themify = get_option( 'themify_setting', array() );
+		if ( is_array( $themify ) ) {
+			foreach ( array( 'styling-link_color', 'styling-accent_color' ) as $tf_key ) {
+				if ( ! empty( $themify[ $tf_key ] ) ) {
+					$color = $themify[ $tf_key ];
+					if ( strpos( $color, '#' ) !== 0 ) {
+						$color = '#' . $color;
+					}
+					$color = sanitize_hex_color( $color );
+					if ( $color ) {
+						return $color;
+					}
+				}
+			}
+		}
+
+		/* Standard WP theme mods */
+		foreach ( array( 'link_color', 'accent_color', 'primary_color' ) as $mod_key ) {
+			$color = get_theme_mod( $mod_key, '' );
+			if ( $color ) {
+				$color = sanitize_hex_color( $color );
+				if ( $color ) {
+					return $color;
+				}
+			}
+		}
+
+		/* Fallback: no theme color detected → let CSS handle it */
+		return '';
 	}
 }

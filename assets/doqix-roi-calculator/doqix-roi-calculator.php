@@ -69,6 +69,14 @@ function doqix_roi_get_defaults() {
 		'error_max'     => 50000,
 		'error_step'    => 500,
 
+		/* Heading + intro */
+		'heading_text' => 'See What You Could Save',
+		'intro_text'   => 'SA businesses waste 20–30 hours per week on tasks that could run themselves. Drag the sliders to see what automation would mean for yours.',
+
+		/* Colors — empty = use theme defaults from CSS */
+		'color_accent' => '',
+		'color_cta'    => '',
+
 		/* Call to action */
 		'cta_url'     => '/contact',
 		'cta_text'    => 'Ready to turn these savings into reality?',
@@ -79,7 +87,7 @@ function doqix_roi_get_defaults() {
 		'share_url'     => 'https://doqix.co.za',
 
 		/* Display */
-		'popia_note' => 'Self-hosted. No middleman pricing.',
+		'footnote_text' => 'Self-hosted. No middleman pricing. *For estimate purposes only.',
 	);
 }
 

@@ -18,3 +18,26 @@
 .doqix-roi-admin .form-table .doqix-roi-tier-price {
 	width: 100px;
 }
+
+/* ── Color picker fields ── */
+.doqix-roi-admin .doqix-color-field {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.doqix-roi-admin .doqix-color-field input[type="color"] {
+	width: 50px;
+	height: 34px;
+	padding: 2px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.doqix-roi-admin .doqix-color-field code {
+	font-size: 13px;
+	padding: 2px 6px;
+	background: #f5f5f5;
+	border-radius: 3px;
+}

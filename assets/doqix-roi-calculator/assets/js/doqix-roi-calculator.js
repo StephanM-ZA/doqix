@@ -55,11 +55,13 @@
     return n.toLocaleString('en-ZA');
   }
 
-  /* ── Read accent color from CSS variable (falls back to hardcoded) ── */
-  var accentColor = '#ff8000';
+  /* ── Accent color (admin-configurable, falls back to CSS variable) ── */
+  var accentColor = config.color_accent || '#0886B5';
   try {
-    var computed = getComputedStyle(container).getPropertyValue('--roi-accent').trim();
-    if (computed) accentColor = computed;
+    if (!config.color_accent) {
+      var computed = getComputedStyle(container).getPropertyValue('--roi-accent').trim();
+      if (computed) accentColor = computed;
+    }
   } catch(e) {}
 
   /* ── Slider track fill (accent colour up to thumb) ── */

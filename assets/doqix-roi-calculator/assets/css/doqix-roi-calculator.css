@@ -10,7 +10,7 @@
 
 /* ── Calculator variables (interactive/brand elements only) ── */
 .doqix-roi {
-  --roi-accent: #ff8000;
+  --roi-accent: #0886B5;
   --roi-action: #0886B5;
   --roi-line: rgba(13,32,40,0.12);
   --roi-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -28,11 +28,18 @@
   box-sizing: border-box;
 }
 
-/* ── Section intro ── */
+/* ── Heading + intro (centred) ── */
+.doqix-roi h2 {
+  text-align: center;
+}
+
 .doqix-roi .section-intro {
   opacity: 0.65;
   margin-bottom: 40px;
   max-width: 600px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── Layout ── */
@@ -353,12 +360,12 @@
   pointer-events: none;
 }
 
-/* ── POPIA Note ── */
-.doqix-roi .popia-note {
-  font-size: 12px;
+/* ── Footnote ── */
+.doqix-roi .roi-footnote {
+  font-size: 11px;
   opacity: 0.5;
   text-align: center;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 /* ── Responsive: Tablet (<=768px) ── */
@@ -384,23 +391,15 @@
     font-size: 20px;
   }
 
-  /* Slider touch targets: 36px thumb, thicker track */
-  #roi-calculator input[type="range"] {
-    height: 8px;
-    padding: 12px 0;
-    margin: -12px 0;
-  }
-
+  /* Slider touch targets */
   #roi-calculator input[type="range"]::-webkit-slider-thumb {
-    width: 36px;
-    height: 36px;
-    border-width: 4px;
+    width: 28px;
+    height: 28px;
   }
 
   #roi-calculator input[type="range"]::-moz-range-thumb {
-    width: 36px;
-    height: 36px;
-    border-width: 4px;
+    width: 28px;
+    height: 28px;
   }
 
   .doqix-roi .slider-header {
@@ -479,13 +478,13 @@
   }
 
   #roi-calculator input[type="range"]::-webkit-slider-thumb {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
   }
 
   #roi-calculator input[type="range"]::-moz-range-thumb {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
   }
 
   #roi-calculator a.roi-cta,
@@ -579,7 +578,7 @@
     padding: 6px 10px;
   }
 
-  .doqix-roi .popia-note {
+  .doqix-roi .roi-footnote {
     font-size: 11px;
   }
 }

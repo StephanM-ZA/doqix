@@ -24,12 +24,14 @@ class Doqix_ROI_Admin {
 	 * ──────────────────────────────────────────── */
 
 	public function add_settings_page() {
-		$this->hook = add_options_page(
+		$this->hook = add_menu_page(
 			__( 'ROI Calculator', 'doqix-roi-calculator' ),
 			__( 'ROI Calculator', 'doqix-roi-calculator' ),
 			'manage_options',
 			'doqix-roi-calculator',
-			array( $this, 'render_settings_page' )
+			array( $this, 'render_settings_page' ),
+			'dashicons-calculator',
+			80
 		);
 	}
 
@@ -111,7 +113,63 @@ class Doqix_ROI_Admin {
 			);
 		}
 
-		/* ── Section 3: Call to Action ── */
+		/* ── Section 3: Content ── */
+		add_settings_section(
+			'doqix_roi_content',
+			__( 'Content', 'doqix-roi-calculator' ),
+			function () {
+				echo '<p>' . esc_html__( 'Configure the heading and intro text shown above the calculator.', 'doqix-roi-calculator' ) . '</p>';
+			},
+			'doqix-roi-calculator'
+		);
+
+		add_settings_field(
+			'heading_text',
+			__( 'Heading', 'doqix-roi-calculator' ),
+			array( $this, 'render_text_field' ),
+			'doqix-roi-calculator',
+			'doqix_roi_content',
+			array( 'field' => 'heading_text' )
+		);
+
+		add_settings_field(
+			'intro_text',
+			__( 'Intro Text', 'doqix-roi-calculator' ),
+			array( $this, 'render_textarea_field' ),
+			'doqix-roi-calculator',
+			'doqix_roi_content',
+			array( 'field' => 'intro_text' )
+		);
+
+		/* ── Section 4: Colors ── */
+		add_settings_section(
+			'doqix_roi_colors',
+			__( 'Colors', 'doqix-roi-calculator' ),
+			function () {
+				echo '<p>' . esc_html__( 'Customize the slider accent and CTA button colors to match your theme.', 'doqix-roi-calculator' ) . '</p>';
+			},
+			'doqix-roi-calculator'
+		);
+
+		add_settings_field(
+			'color_accent',
+			__( 'Slider Accent Color', 'doqix-roi-calculator' ),
+			array( $this, 'render_color_field' ),
+			'doqix-roi-calculator',
+			'doqix_roi_colors',
+			array( 'field' => 'color_accent', 'description' => __( 'Used for slider thumbs, track fill, value display, and ROI multiplier text.', 'doqix-roi-calculator' ) )
+		);
+
+		add_settings_field(
+			'color_cta',
+			__( 'CTA Button Color', 'doqix-roi-calculator' ),
+			array( $this, 'render_color_field' ),
+			'doqix-roi-calculator',
+			'doqix_roi_colors',
+			array( 'field' => 'color_cta', 'description' => __( 'Used for the CTA button background and share button outline.', 'doqix-roi-calculator' ) )
+		);
+
+		/* ── Section 4: Call to Action ── */
 		add_settings_section(
 			'doqix_roi_cta',
 			__( 'Call to Action', 'doqix-roi-calculator' ),
@@ -144,7 +202,7 @@ class Doqix_ROI_Admin {
 			'doqix_roi_display',
 			__( 'Display Options', 'doqix-roi-calculator' ),
 			function () {
-				echo '<p>' . esc_html__( 'Toggle display elements and set the POPIA note text.', 'doqix-roi-calculator' ) . '</p>';
+				echo '<p>' . esc_html__( 'Toggle display elements and set the footnote text shown below the calculator.', 'doqix-roi-calculator' ) . '</p>';
 			},
 			'doqix-roi-calculator'
 		);
@@ -159,12 +217,12 @@ class Doqix_ROI_Admin {
 		);
 
 		add_settings_field(
-			'popia_note',
-			__( 'POPIA Note', 'doqix-roi-calculator' ),
+			'footnote_text',
+			__( 'Footnote Text', 'doqix-roi-calculator' ),
 			array( $this, 'render_text_field' ),
 			'doqix-roi-calculator',
 			'doqix_roi_display',
-			array( 'field' => 'popia_note' )
+			array( 'field' => 'footnote_text' )
 		);
 	}
 
@@ -250,6 +308,41 @@ class Doqix_ROI_Admin {
 		<?php
 	}
 
+	public function render_textarea_field( $args ) {
+		$key = $args['field'];
+		$s   = $this->get_settings();
+		?>
+		<textarea
+			name="<?php echo esc_attr( DOQIX_ROI_OPTION_KEY . '[' . $key . ']' ); ?>"
+			class="large-text" rows="3"><?php echo esc_textarea( $s[ $key ] ); ?></textarea>
+		<?php
+	}
+
+	public function render_color_field( $args ) {
+		$key       = $args['field'];
+		$s         = $this->get_settings();
+		$value     = $s[ $key ];
+		$has_value = ! empty( $value );
+		$display   = $has_value ? $value : '#0886B5';
+		?>
+		<span class="doqix-color-field">
+			<input type="color"
+				name="<?php echo esc_attr( DOQIX_ROI_OPTION_KEY . '[' . $key . ']' ); ?>"
+				value="<?php echo esc_attr( $display ); ?>"
+				<?php if ( ! $has_value ) echo 'data-is-default="1"'; ?>>
+			<?php if ( $has_value ) : ?>
+			<code><?php echo esc_html( $value ); ?></code>
+			<button type="button" class="button-link doqix-reset-color" onclick="this.parentElement.querySelector('input[type=color]').value='#0886B5';this.parentElement.querySelector('input[type=color]').name='';this.parentElement.querySelector('code').textContent='Theme default';this.style.display='none';"><?php esc_html_e( 'Reset to theme default', 'doqix-roi-calculator' ); ?></button>
+			<?php else : ?>
+			<code><?php esc_html_e( 'Theme default', 'doqix-roi-calculator' ); ?></code>
+			<?php endif; ?>
+		</span>
+		<?php if ( ! empty( $args['description'] ) ) : ?>
+		<p class="description"><?php echo esc_html( $args['description'] ); ?></p>
+		<?php endif; ?>
+		<?php
+	}
+
 	/* ────────────────────────────────────────────
 	 * Sanitize
 	 * ──────────────────────────────────────────── */
@@ -292,6 +385,14 @@ class Doqix_ROI_Admin {
 			}
 		}
 
+		/* Content */
+		$sanitized['heading_text'] = sanitize_text_field( $input['heading_text'] ?? $defaults['heading_text'] );
+		$sanitized['intro_text']   = sanitize_textarea_field( $input['intro_text'] ?? $defaults['intro_text'] );
+
+		/* Colors — empty = use theme default */
+		$sanitized['color_accent'] = isset( $input['color_accent'] ) && '' !== $input['color_accent'] ? sanitize_hex_color( $input['color_accent'] ) : '';
+		$sanitized['color_cta']    = isset( $input['color_cta'] ) && '' !== $input['color_cta'] ? sanitize_hex_color( $input['color_cta'] ) : '';
+
 		/* CTA */
 		$sanitized['cta_url']     = esc_url_raw( $input['cta_url'] ?? $defaults['cta_url'] );
 		$sanitized['cta_text']    = sanitize_text_field( $input['cta_text'] ?? $defaults['cta_text'] );
@@ -300,7 +401,7 @@ class Doqix_ROI_Admin {
 
 		/* Display */
 		$sanitized['share_enabled'] = ! empty( $input['share_enabled'] ) ? 1 : 0;
-		$sanitized['popia_note']    = sanitize_text_field( $input['popia_note'] ?? $defaults['popia_note'] );
+		$sanitized['footnote_text'] = sanitize_text_field( $input['footnote_text'] ?? $defaults['footnote_text'] );
 
 		return $sanitized;
 	}

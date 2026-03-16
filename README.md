@@ -2,7 +2,7 @@
 
 > Documentation and planning repository for the Do.Qix automation services website.
 
-**Repository:** Local (no remote)
+**Repository:** Git (no remote configured)
 **Version:** v0.1.0
 **License:** Proprietary
 **Visibility:** Private
@@ -22,12 +22,13 @@ Do.Qix is a South African automation services company helping businesses streaml
 | Feature | Description | Added |
 |---------|-------------|-------|
 | Project Documentation | Complete website planning and architecture docs | v0.1.0 |
-| ROI Calculator | Interactive HTML widget for calculating automation ROI | v0.1.0 |
+| ROI Calculator V1 | WordPress plugin for calculating automation ROI | v0.1.0 |
+| ROI Calculator V2 | Enhanced WordPress ROI calculator plugin | v0.1.0 |
+| Workflow Advisor | WordPress plugin matching tools to automation workflows | v0.1.0 |
 | Security Recommendations | Comprehensive n8n security and POPIA compliance guide | v0.1.0 |
 
 ### Planned Features
 
-- [ ] WordPress implementation
 - [ ] Figma design prototypes
 - [ ] Live deployment configuration
 - [ ] Contact form integration
@@ -47,28 +48,32 @@ Do.Qix is a South African automation services company helping businesses streaml
 
 ```
 doqix_website/
-├── docs/                           # All project documentation
-│   ├── DoQix_Architecture.md      # Technical architecture and stack decisions
-│   ├── DoQix_SiteMap.md           # Site navigation structure
-│   ├── DoQix_Structure.md         # Page layout and component structure
-│   ├── DoQix_Wireframe.md         # Detailed wireframes for all pages
-│   ├── Pricing_Strategy.md        # Pricing model and tiers
-│   ├── SA_Competitor_List.md      # South African competitor analysis
-│   ├── SEO_Strategy.md            # Search optimization strategy
-│   ├── Social_Media_Plan.md       # Social media marketing plan
-│   ├── Terms_and_Conditions.md    # Legal terms (SA law, POPIA, CPA)
-│   ├── Website_Copy.md            # All website content and copy
-│   ├── Security_Implementation_Guide.md  # General security practices
-│   └── n8n_Security_Recommendations.md   # n8n-specific security hardening
+├── docs/                                   # All project documentation
+│   ├── DoQix_Architecture.md              # Technical architecture and stack decisions
+│   ├── DoQix_SiteMap.md                   # Site navigation structure
+│   ├── DoQix_Structure.md                 # Page layout and component structure
+│   ├── DoQix_Wireframe.md                 # Detailed wireframes for all pages
+│   ├── Pricing_Strategy.md                # Pricing model and tiers
+│   ├── SA_Competitor_List.md              # South African competitor analysis
+│   ├── SEO_Strategy.md                    # Search optimization strategy
+│   ├── Social_Media_Plan.md               # Social media marketing plan
+│   ├── Terms_and_Conditions.md            # Legal terms (SA law, POPIA, CPA)
+│   ├── Website_Copy.md                    # All website content and copy
+│   ├── Security_Implementation_Guide.md   # General security practices
+│   └── n8n_Security_Recommendations.md    # n8n-specific security hardening
 ├── assets/
-│   └── roi_calculator/
-│       └── roi-calculator.html    # Interactive ROI calculator widget
-├── planning/                      # Historical planning artifacts
-├── remotion-video/                # Video content materials
-├── CHECKPOINT.md                  # Session state tracking
-├── CHANGELOG.md                   # Version history
-├── README.md                      # This file
-└── .gitignore                     # Git exclusion patterns
+│   ├── doqix-roi-calculator/              # ROI Calculator V1 (WordPress plugin)
+│   ├── doqix-roi-calculator-v2/           # ROI Calculator V2 (WordPress plugin)
+│   ├── doqix-roi-calculator.zip           # V1 plugin zip for deployment
+│   ├── doqix-workflow-advisor/            # Workflow Advisor plugin (WordPress)
+│   ├── doqix-workflow-advisor-test.html   # Standalone test file for Workflow Advisor
+│   └── roi_calculator/                    # Original standalone ROI calculator HTML
+├── planning/                              # Historical planning artifacts
+├── remotion-video/                        # Video content materials
+├── CHECKPOINT.md                          # Session state tracking
+├── CHANGELOG.md                           # Version history
+├── README.md                              # This file
+└── .gitignore                             # Git exclusion patterns
 ```
 
 ---
@@ -89,18 +94,31 @@ doqix_website/
 
 ## Key Components
 
-### ROI Calculator
+### ROI Calculator (WordPress Plugins)
 
-Interactive HTML widget located at `/assets/roi_calculator/roi-calculator.html`
+Two versions available as WordPress plugins:
+- **V1:** `assets/doqix-roi-calculator/` (zipped at `assets/doqix-roi-calculator.zip`)
+- **V2:** `assets/doqix-roi-calculator-v2/`
+- **Standalone HTML:** `assets/roi_calculator/roi-calculator.html`
 
 **Features:**
 - Three-tier calculation (People, Hours Saved, Hourly Rate)
 - Visual tier progress bars with abbreviations (5k, 10k, 25k, etc.)
 - Smart validation and 600% ROI warning
 - Responsive design for mobile/desktop
-- Ready for WordPress integration
+- Themify accent color detection
+- WordPress admin settings panel
 
-**Testing:** Open `roi-calculator.html` directly in browser
+### Workflow Advisor (WordPress Plugin)
+
+Located at `assets/doqix-workflow-advisor/` with standalone test at `assets/doqix-workflow-advisor-test.html`
+
+**Features:**
+- 10 tool categories, 31 services, 15 curated workflows
+- Step-level category matching (active/inactive step visualization)
+- Live refresh, tab badges, chip bar filtering
+- Brand logos (22 SVG + 9 colored initials)
+- Themify accent color detection
 
 ### Security Documentation
 
@@ -157,4 +175,4 @@ Proprietary - Do.Qix Digital Operations
 ---
 
 > **Maintained by:** Digital Operations Team
-> **Last Updated:** 2026-02-12
+> **Last Updated:** 2026-02-16
