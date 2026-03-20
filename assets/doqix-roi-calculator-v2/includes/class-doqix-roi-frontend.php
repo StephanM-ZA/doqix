@@ -1,20 +1,20 @@
 <?php
 /**
  * Frontend: shortcode rendering and conditional asset enqueue.
- * V2: loop-based slider rendering from structured config.
+ * V2: loop-based slider rendering from structured config + named presets.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Doqix_ROI_Frontend {
+class Doqix_ROI_V2_Frontend {
 
 	/** @var bool Whether the shortcode was found on the current page. */
 	private $enqueue = false;
 
 	public function __construct() {
-		add_shortcode( 'doqix_roi_calculator', array( $this, 'render_shortcode' ) );
+		add_shortcode( 'doqix_roi_calculator_v2', array( $this, 'render_shortcode' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_assets' ) );
 	}
 
@@ -31,13 +31,13 @@ class Doqix_ROI_Frontend {
 			return;
 		}
 
-		$found = has_shortcode( $post->post_content, 'doqix_roi_calculator' );
+		$found = has_shortcode( $post->post_content, 'doqix_roi_calculator_v2' );
 
 		/* Themify Builder fallback: builder modules are stored in post meta,
 		   not in post_content, so has_shortcode() misses them. */
 		if ( ! $found ) {
 			$builder_meta = get_post_meta( $post->ID, '_themify_builder_settings_json', true );
-			if ( $builder_meta && is_string( $builder_meta ) && strpos( $builder_meta, 'doqix_roi_calculator' ) !== false ) {
+			if ( $builder_meta && is_string( $builder_meta ) && strpos( $builder_meta, 'doqix_roi_calculator_v2' ) !== false ) {
 				$found = true;
 			}
 		}
@@ -52,59 +52,71 @@ class Doqix_ROI_Frontend {
 	/**
 	 * Build the config array passed to JS. Single source of truth.
 	 */
-	private function build_config() {
-		$s = $this->get_settings();
-
+	private function build_config( $preset = array(), $all = array() ) {
 		return array(
-			'tiers'        => $s['tiers'],
-			'sliders'      => $s['sliders'],
-			'thresholds'   => $s['thresholds'],
-			'share_url'    => $s['share_url'],
-			'color_accent' => $s['color_accent'],
-			'color_cta'    => $s['color_cta'],
+			'tiers'        => $all['tiers'],
+			'sliders'      => $all['sliders'],
+			'thresholds'   => $all['thresholds'],
+			'share_url'    => $preset['share_url'],
+			'color_accent' => $preset['color_accent'],
+			'color_cta'    => $preset['color_cta'],
 		);
 	}
 
 	/**
 	 * Enqueue assets and localize config.
 	 */
-	private function do_enqueue() {
+	private function do_enqueue( $preset = null, $all = null ) {
 		if ( $this->enqueue ) {
 			return;
 		}
 
 		$this->enqueue = true;
 
+		if ( null === $all ) {
+			$all = $this->get_settings();
+		}
+		if ( null === $preset ) {
+			$presets = isset( $all['presets'] ) && is_array( $all['presets'] ) ? $all['presets'] : array();
+			$preset = isset( $presets['default'] ) ? $presets['default'] : doqix_roi_v2_get_preset_defaults();
+		}
+
 		wp_enqueue_style(
-			'doqix-roi-calculator',
-			DOQIX_ROI_PLUGIN_URL . 'assets/css/doqix-roi-calculator.css',
+			'doqix-roi-calculator-v2',
+			DOQIX_ROI_V2_PLUGIN_URL . 'assets/css/doqix-roi-calculator.css',
 			array(),
-			DOQIX_ROI_VERSION
+			DOQIX_ROI_V2_VERSION
 		);
 
 		wp_enqueue_script(
-			'doqix-roi-calculator',
-			DOQIX_ROI_PLUGIN_URL . 'assets/js/doqix-roi-calculator.js',
+			'doqix-roi-calculator-v2',
+			DOQIX_ROI_V2_PLUGIN_URL . 'assets/js/doqix-roi-calculator.js',
 			array(),
-			DOQIX_ROI_VERSION,
+			DOQIX_ROI_V2_VERSION,
 			true
 		);
 
-		wp_localize_script( 'doqix-roi-calculator', 'doqixRoiConfig', $this->build_config() );
+		wp_localize_script( 'doqix-roi-calculator-v2', 'doqixRoiConfig', $this->build_config( $preset, $all ) );
 	}
 
 	/**
-	 * Render [doqix_roi_calculator] shortcode.
+	 * Render [doqix_roi_calculator_v2] shortcode.
 	 *
 	 * @return string HTML output.
 	 */
 	public function render_shortcode( $atts ) {
+		$atts = shortcode_atts( array( 'preset' => 'default' ), $atts, 'doqix_roi_calculator_v2' );
+
+		$all     = $this->get_settings();
+		$presets = isset( $all['presets'] ) && is_array( $all['presets'] ) ? $all['presets'] : array();
+		$preset  = isset( $presets[ $atts['preset'] ] ) ? $presets[ $atts['preset'] ] : ( isset( $presets['default'] ) ? $presets['default'] : doqix_roi_v2_get_preset_defaults() );
+		$preset  = wp_parse_args( $preset, doqix_roi_v2_get_preset_defaults() );
+
 		/* If assets weren't enqueued via the hook (e.g. Themify late-render),
 		   enqueue them now so they still appear on the page. */
-		$this->do_enqueue();
+		$this->do_enqueue( $preset, $all );
 
-		$s       = $this->get_settings();
-		$sliders = $s['sliders'];
+		$sliders = $all['sliders'];
 
 		/* Check for special display conditions */
 		$has_people_and_hours = false;
@@ -130,10 +142,10 @@ class Doqix_ROI_Frontend {
 			$has_people_and_hours = true;
 		}
 
-		/* Resolve colors: admin override → theme color → CSS fallback */
+		/* Resolve colors: preset override -> theme color -> CSS fallback */
 		$theme_color   = self::get_theme_accent_color();
-		$accent        = ! empty( $s['color_accent'] ) ? $s['color_accent'] : $theme_color;
-		$cta           = ! empty( $s['color_cta'] )    ? $s['color_cta']    : $theme_color;
+		$accent        = ! empty( $preset['color_accent'] ) ? $preset['color_accent'] : $theme_color;
+		$cta           = ! empty( $preset['color_cta'] )    ? $preset['color_cta']    : $theme_color;
 
 		$inline_vars = '';
 		if ( $accent ) {
@@ -147,11 +159,11 @@ class Doqix_ROI_Frontend {
 		?>
 <section class="doqix-roi" id="roi-calculator"<?php if ( $inline_vars ) echo ' style="' . $inline_vars . '"'; ?>>
 
-	<?php if ( ! empty( $s['heading_text'] ) ) : ?>
-	<h2><?php echo esc_html( $s['heading_text'] ); ?></h2>
+	<?php if ( ! empty( $preset['heading_text'] ) ) : ?>
+	<h2><?php echo wp_kses_post( $preset['heading_text'] ); ?></h2>
 	<?php endif; ?>
-	<?php if ( ! empty( $s['intro_text'] ) ) : ?>
-	<p class="section-intro"><?php echo esc_html( $s['intro_text'] ); ?></p>
+	<?php if ( ! empty( $preset['intro_text'] ) ) : ?>
+	<p class="section-intro"><?php echo wp_kses_post( $preset['intro_text'] ); ?></p>
 	<?php endif; ?>
 
 	<div class="roi-grid">
@@ -249,12 +261,14 @@ class Doqix_ROI_Frontend {
 
 			<div class="benchmark" id="out-benchmark"></div>
 
-			<a href="<?php echo esc_url( $s['cta_url'] ); ?>" class="roi-cta">
-				<?php echo esc_html( $s['cta_text'] ); ?>
-				<span class="cta-sub"><?php echo esc_html( $s['cta_subtext'] ); ?></span>
+			<?php if ( ! isset( $preset['cta_enabled'] ) || ! empty( $preset['cta_enabled'] ) ) : ?>
+			<a href="<?php echo esc_url( $preset['cta_url'] ); ?>" class="roi-cta">
+				<?php echo esc_html( $preset['cta_text'] ); ?>
+				<span class="cta-sub"><?php echo esc_html( $preset['cta_subtext'] ); ?></span>
 			</a>
+			<?php endif; ?>
 
-			<?php if ( ! empty( $s['share_enabled'] ) ) : ?>
+			<?php if ( ! empty( $preset['share_enabled'] ) ) : ?>
 			<button type="button" class="share-btn" id="btn-share"><?php esc_html_e( 'Share Your Results', 'doqix-roi-calculator' ); ?></button>
 			<?php endif; ?>
 
@@ -262,8 +276,8 @@ class Doqix_ROI_Frontend {
 
 	</div>
 
-	<?php if ( ! empty( $s['footnote_text'] ) ) : ?>
-	<p class="roi-footnote"><?php echo esc_html( $s['footnote_text'] ); ?></p>
+	<?php if ( ! empty( $preset['footnote_text'] ) ) : ?>
+	<p class="roi-footnote"><?php echo wp_kses_post( $preset['footnote_text'] ); ?></p>
 	<?php endif; ?>
 </section>
 		<?php
@@ -276,8 +290,8 @@ class Doqix_ROI_Frontend {
 
 	private function get_settings() {
 		return $this->deep_parse_args(
-			get_option( DOQIX_ROI_OPTION_KEY, array() ),
-			doqix_roi_get_defaults()
+			get_option( DOQIX_ROI_V2_OPTION_KEY, array() ),
+			doqix_roi_v2_get_defaults()
 		);
 	}
 
@@ -298,6 +312,15 @@ class Doqix_ROI_Frontend {
 					}
 				} else {
 					$result[ $key ] = $args[ $key ];
+				}
+			}
+		}
+
+		/* For presets: include saved presets that are not in defaults */
+		if ( isset( $args['presets'] ) && is_array( $args['presets'] ) ) {
+			foreach ( $args['presets'] as $slug => $saved_preset ) {
+				if ( ! isset( $result['presets'][ $slug ] ) ) {
+					$result['presets'][ $slug ] = wp_parse_args( $saved_preset, doqix_roi_v2_get_preset_defaults() );
 				}
 			}
 		}
@@ -338,7 +361,7 @@ class Doqix_ROI_Frontend {
 			}
 		}
 
-		/* Fallback: no theme color detected → let CSS handle it */
+		/* Fallback: no theme color detected -> let CSS handle it */
 		return '';
 	}
 }

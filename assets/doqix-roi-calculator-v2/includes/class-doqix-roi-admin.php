@@ -1,14 +1,14 @@
 <?php
 /**
  * Admin: Settings page for the ROI Calculator V2.
- * Dynamic repeater UI for tiers and sliders.
+ * Tabbed UI: Global (tiers, sliders, thresholds) + per-preset tabs (content, colors, CTA, display).
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Doqix_ROI_Admin {
+class Doqix_ROI_V2_Admin {
 
 	/** @var string Settings page hook suffix. */
 	private $hook = '';
@@ -16,6 +16,7 @@ class Doqix_ROI_Admin {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
+		add_action( 'admin_init', array( $this, 'handle_preset_actions' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 	}
 
@@ -25,13 +26,13 @@ class Doqix_ROI_Admin {
 
 	public function add_settings_page() {
 		$this->hook = add_menu_page(
-			__( 'ROI Calculator', 'doqix-roi-calculator' ),
-			__( 'ROI Calculator', 'doqix-roi-calculator' ),
+			__( 'ROI Calculator V2', 'doqix-roi-calculator' ),
+			__( 'ROI Calculator V2', 'doqix-roi-calculator' ),
 			'manage_options',
-			'doqix-roi-calculator',
+			'doqix-roi-calculator-v2',
 			array( $this, 'render_settings_page' ),
 			'dashicons-calculator',
-			80
+			81
 		);
 	}
 
@@ -44,16 +45,16 @@ class Doqix_ROI_Admin {
 			return;
 		}
 		wp_enqueue_style(
-			'doqix-roi-admin',
-			DOQIX_ROI_PLUGIN_URL . 'assets/css/doqix-roi-admin.css',
+			'doqix-roi-v2-admin',
+			DOQIX_ROI_V2_PLUGIN_URL . 'assets/css/doqix-roi-admin.css',
 			array(),
-			DOQIX_ROI_VERSION
+			DOQIX_ROI_V2_VERSION
 		);
 		wp_enqueue_script(
-			'doqix-roi-admin',
-			DOQIX_ROI_PLUGIN_URL . 'assets/js/doqix-roi-admin.js',
+			'doqix-roi-v2-admin',
+			DOQIX_ROI_V2_PLUGIN_URL . 'assets/js/doqix-roi-admin.js',
 			array(),
-			DOQIX_ROI_VERSION,
+			DOQIX_ROI_V2_VERSION,
 			true
 		);
 	}
@@ -65,9 +66,72 @@ class Doqix_ROI_Admin {
 	public function register_settings() {
 		register_setting(
 			'doqix_roi_v2_settings_group',
-			DOQIX_ROI_OPTION_KEY,
+			DOQIX_ROI_V2_OPTION_KEY,
 			array( $this, 'sanitize_settings' )
 		);
+	}
+
+	/* ────────────────────────────────────────────
+	 * Preset actions (add / delete) — via admin_init
+	 * ──────────────────────────────────────────── */
+
+	public function handle_preset_actions() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		/* Add preset */
+		if ( isset( $_POST['doqix_roi_v2_add_preset'] ) && ! empty( $_POST['doqix_roi_v2_new_preset_name'] ) ) {
+			check_admin_referer( 'doqix_roi_v2_preset_action', 'doqix_roi_v2_preset_nonce' );
+
+			$label = sanitize_text_field( wp_unslash( $_POST['doqix_roi_v2_new_preset_name'] ) );
+			$slug  = sanitize_key( str_replace( ' ', '-', strtolower( $label ) ) );
+
+			if ( '' === $slug ) {
+				return;
+			}
+
+			$s = get_option( DOQIX_ROI_V2_OPTION_KEY, doqix_roi_v2_get_defaults() );
+			if ( ! isset( $s['presets'] ) ) {
+				$s['presets'] = array();
+			}
+
+			if ( ! isset( $s['presets'][ $slug ] ) ) {
+				$new_preset          = doqix_roi_v2_get_preset_defaults();
+				$new_preset['label'] = $label;
+				$s['presets'][ $slug ] = $new_preset;
+				update_option( DOQIX_ROI_V2_OPTION_KEY, $s );
+			}
+
+			wp_safe_redirect( add_query_arg( array(
+				'page' => 'doqix-roi-calculator-v2',
+				'tab'  => 'preset-' . $slug,
+			), admin_url( 'admin.php' ) ) );
+			exit;
+		}
+
+		/* Delete preset */
+		if ( isset( $_GET['doqix_roi_v2_delete_preset'] ) && ! empty( $_GET['doqix_roi_v2_delete_preset'] ) ) {
+			check_admin_referer( 'doqix_roi_v2_delete_preset', '_wpnonce' );
+
+			$slug = sanitize_key( wp_unslash( $_GET['doqix_roi_v2_delete_preset'] ) );
+
+			if ( 'default' === $slug ) {
+				return; // cannot delete default preset
+			}
+
+			$s = get_option( DOQIX_ROI_V2_OPTION_KEY, doqix_roi_v2_get_defaults() );
+			if ( isset( $s['presets'][ $slug ] ) ) {
+				unset( $s['presets'][ $slug ] );
+				update_option( DOQIX_ROI_V2_OPTION_KEY, $s );
+			}
+
+			wp_safe_redirect( add_query_arg( array(
+				'page' => 'doqix-roi-calculator-v2',
+				'tab'  => 'global',
+			), admin_url( 'admin.php' ) ) );
+			exit;
+		}
 	}
 
 	/* ────────────────────────────────────────────
@@ -75,7 +139,7 @@ class Doqix_ROI_Admin {
 	 * ──────────────────────────────────────────── */
 
 	public function sanitize_settings( $input ) {
-		$defaults  = doqix_roi_get_defaults();
+		$defaults  = doqix_roi_v2_get_defaults();
 		$sanitized = array();
 
 		/* ── Tiers ── */
@@ -162,29 +226,56 @@ class Doqix_ROI_Admin {
 			'roi_cap_display'      => max( 1, absint( $input['thresholds']['roi_cap_display'] ?? $defaults['thresholds']['roi_cap_display'] ) ),
 		);
 
-		/* ── Content ── */
-		$sanitized['heading_text'] = sanitize_text_field( $input['heading_text'] ?? $defaults['heading_text'] );
-		$sanitized['intro_text']   = sanitize_textarea_field( $input['intro_text'] ?? $defaults['intro_text'] );
+		/* ── Presets ── */
+		$existing  = get_option( DOQIX_ROI_V2_OPTION_KEY, array() );
+		$existing_presets = isset( $existing['presets'] ) && is_array( $existing['presets'] ) ? $existing['presets'] : array();
+		$preset_defaults  = doqix_roi_v2_get_preset_defaults();
 
-		/* ── Colors — empty = use theme default ── */
-		$sanitized['color_accent'] = isset( $input['color_accent'] ) && '' !== $input['color_accent'] ? sanitize_hex_color( $input['color_accent'] ) : '';
-		$sanitized['color_cta']    = isset( $input['color_cta'] ) && '' !== $input['color_cta'] ? sanitize_hex_color( $input['color_cta'] ) : '';
+		$sanitized['presets'] = array();
 
-		/* ── CTA ── */
-		$sanitized['cta_url']     = esc_url_raw( $input['cta_url'] ?? $defaults['cta_url'] );
-		$sanitized['cta_text']    = sanitize_text_field( $input['cta_text'] ?? $defaults['cta_text'] );
-		$sanitized['cta_subtext'] = sanitize_text_field( $input['cta_subtext'] ?? $defaults['cta_subtext'] );
-		$sanitized['share_url']   = esc_url_raw( $input['share_url'] ?? $defaults['share_url'] );
+		if ( ! empty( $input['presets'] ) && is_array( $input['presets'] ) ) {
+			foreach ( $input['presets'] as $slug => $preset_input ) {
+				$slug = sanitize_key( $slug );
+				if ( '' === $slug ) {
+					continue;
+				}
 
-		/* ── Display ── */
-		$sanitized['share_enabled']    = ! empty( $input['share_enabled'] ) ? 1 : 0;
-		$sanitized['footnote_text'] = sanitize_text_field( $input['footnote_text'] ?? $defaults['footnote_text'] );
+				$base = isset( $existing_presets[ $slug ] ) ? $existing_presets[ $slug ] : $preset_defaults;
+
+				$sanitized['presets'][ $slug ] = array(
+					'label'         => sanitize_text_field( $preset_input['label'] ?? $base['label'] ),
+					'heading_text'  => wp_kses_post( $preset_input['heading_text'] ?? $base['heading_text'] ),
+					'intro_text'    => wp_kses_post( $preset_input['intro_text'] ?? $base['intro_text'] ),
+					'footnote_text' => wp_kses_post( $preset_input['footnote_text'] ?? $base['footnote_text'] ),
+					'color_accent'  => isset( $preset_input['color_accent'] ) && '' !== $preset_input['color_accent'] ? sanitize_hex_color( $preset_input['color_accent'] ) : '',
+					'color_cta'     => isset( $preset_input['color_cta'] ) && '' !== $preset_input['color_cta'] ? sanitize_hex_color( $preset_input['color_cta'] ) : '',
+					'cta_enabled'   => ! empty( $preset_input['cta_enabled'] ) ? 1 : 0,
+					'cta_url'       => sanitize_text_field( $preset_input['cta_url'] ?? $base['cta_url'] ),
+					'cta_text'      => sanitize_text_field( $preset_input['cta_text'] ?? $base['cta_text'] ),
+					'cta_subtext'   => sanitize_text_field( $preset_input['cta_subtext'] ?? $base['cta_subtext'] ),
+					'share_url'     => esc_url_raw( $preset_input['share_url'] ?? $base['share_url'] ),
+					'share_enabled' => ! empty( $preset_input['share_enabled'] ) ? 1 : 0,
+				);
+			}
+		}
+
+		/* Preserve any presets that were not submitted (they are on other tabs) */
+		foreach ( $existing_presets as $slug => $existing_preset ) {
+			if ( ! isset( $sanitized['presets'][ $slug ] ) ) {
+				$sanitized['presets'][ $slug ] = $existing_preset;
+			}
+		}
+
+		/* Ensure default preset always exists */
+		if ( ! isset( $sanitized['presets']['default'] ) ) {
+			$sanitized['presets']['default'] = $preset_defaults;
+		}
 
 		return $sanitized;
 	}
 
 	/* ────────────────────────────────────────────
-	 * Render page
+	 * Render page — tabbed UI
 	 * ──────────────────────────────────────────── */
 
 	public function render_settings_page() {
@@ -192,306 +283,472 @@ class Doqix_ROI_Admin {
 			return;
 		}
 
-		$s = $this->get_settings();
-		$opt = DOQIX_ROI_OPTION_KEY;
+		$s       = $this->get_settings();
+		$opt     = DOQIX_ROI_V2_OPTION_KEY;
+		$presets = isset( $s['presets'] ) && is_array( $s['presets'] ) ? $s['presets'] : array( 'default' => doqix_roi_v2_get_preset_defaults() );
+		$active  = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'global';
 		?>
 		<div class="wrap doqix-roi-admin">
-			<h1><?php esc_html_e( 'Do.Qix ROI Calculator Settings', 'doqix-roi-calculator' ); ?></h1>
-			<p><?php esc_html_e( 'Use the shortcode [doqix_roi_calculator] to display the calculator on any page or post.', 'doqix-roi-calculator' ); ?></p>
+			<h1><?php esc_html_e( 'Do.Qix ROI Calculator V2 Settings', 'doqix-roi-calculator' ); ?></h1>
+			<p><?php esc_html_e( 'Use [doqix_roi_calculator_v2] to display the calculator, or [doqix_roi_calculator_v2 preset="name"] for a specific preset.', 'doqix-roi-calculator' ); ?></p>
 
-			<form method="post" action="options.php">
-				<?php settings_fields( 'doqix_roi_v2_settings_group' ); ?>
+			<!-- Tab navigation -->
+			<h2 class="nav-tab-wrapper">
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'doqix-roi-calculator-v2', 'tab' => 'global' ), admin_url( 'admin.php' ) ) ); ?>"
+				   class="nav-tab <?php echo 'global' === $active ? 'nav-tab-active' : ''; ?>">
+					<?php esc_html_e( 'Global', 'doqix-roi-calculator' ); ?>
+				</a>
+				<?php foreach ( $presets as $slug => $preset ) : ?>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'doqix-roi-calculator-v2', 'tab' => 'preset-' . $slug ), admin_url( 'admin.php' ) ) ); ?>"
+				   class="nav-tab <?php echo ( 'preset-' . $slug ) === $active ? 'nav-tab-active' : ''; ?>">
+					<?php echo esc_html( $preset['label'] ?? ucfirst( $slug ) ); ?>
+				</a>
+				<?php endforeach; ?>
+			</h2>
 
-				<!-- ═══════════════ TIERS ═══════════════ -->
-				<h2><?php esc_html_e( 'Pricing Tiers', 'doqix-roi-calculator' ); ?></h2>
-				<p class="description"><?php esc_html_e( 'Configure pricing tiers. Set price to 0 for custom/enterprise pricing. Tiers are matched by monthly savings threshold.', 'doqix-roi-calculator' ); ?></p>
+			<?php if ( 'global' === $active ) : ?>
+				<?php $this->render_global_tab( $s, $opt ); ?>
+			<?php else :
+				$preset_slug = str_replace( 'preset-', '', $active );
+				if ( isset( $presets[ $preset_slug ] ) ) {
+					$this->render_preset_tab( $preset_slug, $presets[ $preset_slug ], $opt );
+				}
+			endif; ?>
 
-				<table class="widefat doqix-repeater" id="doqix-tiers-table">
-					<thead>
-						<tr>
-							<th><?php esc_html_e( 'Name', 'doqix-roi-calculator' ); ?></th>
-							<th><?php esc_html_e( 'Price (R/mo)', 'doqix-roi-calculator' ); ?></th>
-							<th><?php esc_html_e( 'Threshold (R/mo savings)', 'doqix-roi-calculator' ); ?></th>
-							<th class="doqix-col-action"></th>
-						</tr>
-					</thead>
-					<tbody id="doqix-tiers-body">
-						<?php foreach ( $s['tiers'] as $i => $tier ) : ?>
-						<tr class="doqix-repeater-row" data-index="<?php echo esc_attr( $i ); ?>">
-							<td>
-								<input type="text" name="<?php echo esc_attr( "{$opt}[tiers][{$i}][name]" ); ?>"
-									value="<?php echo esc_attr( $tier['name'] ); ?>" class="regular-text" required>
-							</td>
-							<td>
-								<input type="number" name="<?php echo esc_attr( "{$opt}[tiers][{$i}][price]" ); ?>"
-									value="<?php echo esc_attr( $tier['price'] ); ?>" min="0" step="1" class="small-text">
-							</td>
-							<td>
-								<input type="number" name="<?php echo esc_attr( "{$opt}[tiers][{$i}][threshold]" ); ?>"
-									value="<?php echo esc_attr( $tier['threshold'] ); ?>" min="0" step="1" class="small-text">
-							</td>
-							<td class="doqix-col-action">
-								<button type="button" class="button doqix-remove-row"><?php esc_html_e( 'Remove', 'doqix-roi-calculator' ); ?></button>
-							</td>
-						</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
-				<p><button type="button" class="button doqix-add-tier" id="doqix-add-tier"><?php esc_html_e( '+ Add Tier', 'doqix-roi-calculator' ); ?></button></p>
-
-				<!-- ═══════════════ SLIDERS ═══════════════ -->
-				<h2><?php esc_html_e( 'Slider Configuration', 'doqix-roi-calculator' ); ?></h2>
-				<p class="description"><?php esc_html_e( 'Configure input sliders. Each slider has a role that determines how it plugs into the savings formula.', 'doqix-roi-calculator' ); ?></p>
-
-				<div id="doqix-sliders-container">
-					<?php foreach ( $s['sliders'] as $i => $slider ) : ?>
-					<div class="doqix-slider-card doqix-repeater-row" data-index="<?php echo esc_attr( $i ); ?>">
-						<div class="doqix-slider-card-header">
-							<strong class="doqix-slider-card-title"><?php echo esc_html( $slider['label'] ?: __( 'New Slider', 'doqix-roi-calculator' ) ); ?></strong>
-							<button type="button" class="button doqix-remove-row"><?php esc_html_e( 'Remove', 'doqix-roi-calculator' ); ?></button>
-						</div>
-						<div class="doqix-slider-card-body">
-							<div class="doqix-field-grid">
-								<label>
-									<?php esc_html_e( 'Key', 'doqix-roi-calculator' ); ?>
-									<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][key]" ); ?>"
-										value="<?php echo esc_attr( $slider['key'] ); ?>" class="regular-text doqix-slider-key" readonly>
-								</label>
-								<label>
-									<?php esc_html_e( 'Label', 'doqix-roi-calculator' ); ?>
-									<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][label]" ); ?>"
-										value="<?php echo esc_attr( $slider['label'] ); ?>" class="regular-text doqix-slider-label" required>
-								</label>
-								<label>
-									<?php esc_html_e( 'Role', 'doqix-roi-calculator' ); ?>
-									<select name="<?php echo esc_attr( "{$opt}[sliders][{$i}][role]" ); ?>">
-										<option value="multiplier" <?php selected( $slider['role'], 'multiplier' ); ?>><?php esc_html_e( 'Multiplier', 'doqix-roi-calculator' ); ?></option>
-										<option value="rate" <?php selected( $slider['role'], 'rate' ); ?>><?php esc_html_e( 'Hourly rate', 'doqix-roi-calculator' ); ?></option>
-										<option value="efficiency" <?php selected( $slider['role'], 'efficiency' ); ?>><?php esc_html_e( 'Efficiency (%)', 'doqix-roi-calculator' ); ?></option>
-										<option value="flat_monthly" <?php selected( $slider['role'], 'flat_monthly' ); ?>><?php esc_html_e( 'Monthly flat amount', 'doqix-roi-calculator' ); ?></option>
-									</select>
-								</label>
-								<label>
-									<?php esc_html_e( 'Format', 'doqix-roi-calculator' ); ?>
-									<select name="<?php echo esc_attr( "{$opt}[sliders][{$i}][format]" ); ?>">
-										<option value="number" <?php selected( $slider['format'], 'number' ); ?>><?php esc_html_e( 'Number', 'doqix-roi-calculator' ); ?></option>
-										<option value="currency" <?php selected( $slider['format'], 'currency' ); ?>><?php esc_html_e( 'Currency (R)', 'doqix-roi-calculator' ); ?></option>
-										<option value="percentage" <?php selected( $slider['format'], 'percentage' ); ?>><?php esc_html_e( 'Percentage (%)', 'doqix-roi-calculator' ); ?></option>
-									</select>
-								</label>
-								<label>
-									<?php esc_html_e( 'Default', 'doqix-roi-calculator' ); ?>
-									<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][default]" ); ?>"
-										value="<?php echo esc_attr( $slider['default'] ); ?>" class="small-text">
-								</label>
-								<label>
-									<?php esc_html_e( 'Min', 'doqix-roi-calculator' ); ?>
-									<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][min]" ); ?>"
-										value="<?php echo esc_attr( $slider['min'] ); ?>" class="small-text">
-								</label>
-								<label>
-									<?php esc_html_e( 'Max', 'doqix-roi-calculator' ); ?>
-									<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][max]" ); ?>"
-										value="<?php echo esc_attr( $slider['max'] ); ?>" class="small-text">
-								</label>
-								<label>
-									<?php esc_html_e( 'Step', 'doqix-roi-calculator' ); ?>
-									<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][step]" ); ?>"
-										value="<?php echo esc_attr( $slider['step'] ); ?>" min="1" class="small-text">
-								</label>
-								<label>
-									<?php esc_html_e( 'Prefix', 'doqix-roi-calculator' ); ?>
-									<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][prefix]" ); ?>"
-										value="<?php echo esc_attr( $slider['prefix'] ); ?>" class="small-text" style="width:60px">
-								</label>
-								<label>
-									<?php esc_html_e( 'Suffix', 'doqix-roi-calculator' ); ?>
-									<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][suffix]" ); ?>"
-										value="<?php echo esc_attr( $slider['suffix'] ); ?>" class="small-text" style="width:60px">
-								</label>
-							</div>
-							<div class="doqix-tooltip-row">
-								<label>
-									<?php esc_html_e( 'Tooltip', 'doqix-roi-calculator' ); ?>
-									<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][tooltip]" ); ?>"
-										value="<?php echo esc_attr( $slider['tooltip'] ); ?>" class="large-text">
-								</label>
-							</div>
-						</div>
-					</div>
-					<?php endforeach; ?>
-				</div>
-				<p><button type="button" class="button doqix-add-slider" id="doqix-add-slider"><?php esc_html_e( '+ Add Slider', 'doqix-roi-calculator' ); ?></button></p>
-
-				<!-- ═══════════════ THRESHOLDS ═══════════════ -->
-				<h2><?php esc_html_e( 'Tier Thresholds', 'doqix-roi-calculator' ); ?></h2>
-				<p class="description"><?php esc_html_e( 'Fine-tune how the calculator recommends pricing tiers.', 'doqix-roi-calculator' ); ?></p>
-
-				<table class="form-table">
-					<tr>
-						<th scope="row"><label for="th-roi-bump"><?php esc_html_e( 'ROI bump %', 'doqix-roi-calculator' ); ?></label></th>
-						<td>
-							<input type="number" id="th-roi-bump"
-								name="<?php echo esc_attr( "{$opt}[thresholds][roi_bump_pct]" ); ?>"
-								value="<?php echo esc_attr( $s['thresholds']['roi_bump_pct'] ); ?>"
-								min="0" step="1" class="small-text">
-							<p class="description"><?php esc_html_e( 'Bump to next tier when ROI exceeds this percentage.', 'doqix-roi-calculator' ); ?></p>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="th-eff-bump"><?php esc_html_e( 'Efficiency bump %', 'doqix-roi-calculator' ); ?></label></th>
-						<td>
-							<input type="number" id="th-eff-bump"
-								name="<?php echo esc_attr( "{$opt}[thresholds][efficiency_bump_pct]" ); ?>"
-								value="<?php echo esc_attr( $s['thresholds']['efficiency_bump_pct'] ); ?>"
-								min="0" max="100" step="1" class="small-text">
-							<p class="description"><?php esc_html_e( 'Bump tier when efficiency slider value >= this percentage.', 'doqix-roi-calculator' ); ?></p>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="th-next-mult"><?php esc_html_e( 'Next tier multiplier', 'doqix-roi-calculator' ); ?></label></th>
-						<td>
-							<input type="number" id="th-next-mult"
-								name="<?php echo esc_attr( "{$opt}[thresholds][next_tier_multiplier]" ); ?>"
-								value="<?php echo esc_attr( $s['thresholds']['next_tier_multiplier'] ); ?>"
-								min="1" step="1" class="small-text">
-							<p class="description"><?php esc_html_e( 'Only bump if savings >= next tier price x this multiplier.', 'doqix-roi-calculator' ); ?></p>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="th-roi-cap"><?php esc_html_e( 'ROI display cap', 'doqix-roi-calculator' ); ?></label></th>
-						<td>
-							<input type="number" id="th-roi-cap"
-								name="<?php echo esc_attr( "{$opt}[thresholds][roi_cap_display]" ); ?>"
-								value="<?php echo esc_attr( $s['thresholds']['roi_cap_display'] ); ?>"
-								min="1" step="1" class="small-text">
-							<p class="description"><?php esc_html_e( 'Show "Nx+" when ROI multiplier exceeds this value.', 'doqix-roi-calculator' ); ?></p>
-						</td>
-					</tr>
-				</table>
-
-				<!-- ═══════════════ CONTENT ═══════════════ -->
-				<h2><?php esc_html_e( 'Content', 'doqix-roi-calculator' ); ?></h2>
-				<p class="description"><?php esc_html_e( 'Configure the heading and intro text shown above the calculator.', 'doqix-roi-calculator' ); ?></p>
-
-				<table class="form-table">
-					<tr>
-						<th scope="row"><label for="heading-text"><?php esc_html_e( 'Heading', 'doqix-roi-calculator' ); ?></label></th>
-						<td><input type="text" id="heading-text" name="<?php echo esc_attr( "{$opt}[heading_text]" ); ?>" value="<?php echo esc_attr( $s['heading_text'] ); ?>" class="regular-text"></td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="intro-text"><?php esc_html_e( 'Intro Text', 'doqix-roi-calculator' ); ?></label></th>
-						<td><textarea id="intro-text" name="<?php echo esc_attr( "{$opt}[intro_text]" ); ?>" class="large-text" rows="3"><?php echo esc_textarea( $s['intro_text'] ); ?></textarea></td>
-					</tr>
-				</table>
-
-				<!-- ═══════════════ COLORS ═══════════════ -->
-				<h2><?php esc_html_e( 'Colors', 'doqix-roi-calculator' ); ?></h2>
-				<p class="description"><?php esc_html_e( 'Customize the slider accent and CTA button colors to match your theme.', 'doqix-roi-calculator' ); ?></p>
-
-				<?php
-				$accent_val = $s['color_accent'];
-				$cta_val    = $s['color_cta'];
-				$accent_display = ! empty( $accent_val ) ? $accent_val : '#0886B5';
-				$cta_display    = ! empty( $cta_val )    ? $cta_val    : '#0886B5';
-				?>
-				<table class="form-table">
-					<tr>
-						<th scope="row"><label for="color-accent"><?php esc_html_e( 'Slider Accent Color', 'doqix-roi-calculator' ); ?></label></th>
-						<td>
-							<span class="doqix-color-field">
-								<input type="color" id="color-accent"
-									name="<?php echo esc_attr( "{$opt}[color_accent]" ); ?>"
-									value="<?php echo esc_attr( $accent_display ); ?>"
-									<?php if ( empty( $accent_val ) ) echo 'data-is-default="1"'; ?>>
-								<?php if ( ! empty( $accent_val ) ) : ?>
-								<code><?php echo esc_html( $accent_val ); ?></code>
-								<button type="button" class="button-link doqix-reset-color" data-target="color-accent"><?php esc_html_e( 'Reset to theme default', 'doqix-roi-calculator' ); ?></button>
-								<?php else : ?>
-								<code><?php esc_html_e( 'Theme default', 'doqix-roi-calculator' ); ?></code>
-								<?php endif; ?>
-							</span>
-							<p class="description"><?php esc_html_e( 'Used for slider thumbs, track fill, value display, and ROI multiplier text.', 'doqix-roi-calculator' ); ?></p>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="color-cta"><?php esc_html_e( 'CTA Button Color', 'doqix-roi-calculator' ); ?></label></th>
-						<td>
-							<span class="doqix-color-field">
-								<input type="color" id="color-cta"
-									name="<?php echo esc_attr( "{$opt}[color_cta]" ); ?>"
-									value="<?php echo esc_attr( $cta_display ); ?>"
-									<?php if ( empty( $cta_val ) ) echo 'data-is-default="1"'; ?>>
-								<?php if ( ! empty( $cta_val ) ) : ?>
-								<code><?php echo esc_html( $cta_val ); ?></code>
-								<button type="button" class="button-link doqix-reset-color" data-target="color-cta"><?php esc_html_e( 'Reset to theme default', 'doqix-roi-calculator' ); ?></button>
-								<?php else : ?>
-								<code><?php esc_html_e( 'Theme default', 'doqix-roi-calculator' ); ?></code>
-								<?php endif; ?>
-							</span>
-							<p class="description"><?php esc_html_e( 'Used for the CTA button background and share button outline.', 'doqix-roi-calculator' ); ?></p>
-						</td>
-					</tr>
-				</table>
-
-				<!-- ═══════════════ CTA ═══════════════ -->
-				<h2><?php esc_html_e( 'Call to Action', 'doqix-roi-calculator' ); ?></h2>
-
-				<table class="form-table">
-					<tr>
-						<th scope="row"><label for="cta-url"><?php esc_html_e( 'CTA URL', 'doqix-roi-calculator' ); ?></label></th>
-						<td><input type="url" id="cta-url" name="<?php echo esc_attr( "{$opt}[cta_url]" ); ?>" value="<?php echo esc_attr( $s['cta_url'] ); ?>" class="regular-text"></td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="cta-text"><?php esc_html_e( 'CTA Text', 'doqix-roi-calculator' ); ?></label></th>
-						<td><input type="text" id="cta-text" name="<?php echo esc_attr( "{$opt}[cta_text]" ); ?>" value="<?php echo esc_attr( $s['cta_text'] ); ?>" class="regular-text"></td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="cta-subtext"><?php esc_html_e( 'CTA Subtext', 'doqix-roi-calculator' ); ?></label></th>
-						<td><input type="text" id="cta-subtext" name="<?php echo esc_attr( "{$opt}[cta_subtext]" ); ?>" value="<?php echo esc_attr( $s['cta_subtext'] ); ?>" class="regular-text"></td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="share-url"><?php esc_html_e( 'Share URL', 'doqix-roi-calculator' ); ?></label></th>
-						<td><input type="url" id="share-url" name="<?php echo esc_attr( "{$opt}[share_url]" ); ?>" value="<?php echo esc_attr( $s['share_url'] ); ?>" class="regular-text"></td>
-					</tr>
-				</table>
-
-				<!-- ═══════════════ DISPLAY ═══════════════ -->
-				<h2><?php esc_html_e( 'Display Options', 'doqix-roi-calculator' ); ?></h2>
-
-				<table class="form-table">
-					<tr>
-						<th scope="row"><?php esc_html_e( 'Show Share Button', 'doqix-roi-calculator' ); ?></th>
-						<td>
-							<label>
-								<input type="checkbox" name="<?php echo esc_attr( "{$opt}[share_enabled]" ); ?>" value="1" <?php checked( ! empty( $s['share_enabled'] ) ); ?>>
-								<?php esc_html_e( 'Enabled', 'doqix-roi-calculator' ); ?>
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="footnote-text"><?php esc_html_e( 'Footnote Text', 'doqix-roi-calculator' ); ?></label></th>
-						<td>
-							<input type="text" id="footnote-text" name="<?php echo esc_attr( "{$opt}[footnote_text]" ); ?>" value="<?php echo esc_attr( $s['footnote_text'] ); ?>" class="large-text">
-							<p class="description"><?php esc_html_e( 'Shown centred at the bottom of the calculator. Leave empty to hide.', 'doqix-roi-calculator' ); ?></p>
-						</td>
-					</tr>
-				</table>
-
-				<?php submit_button(); ?>
-			</form>
+			<!-- Add preset form -->
+			<div style="margin-top:20px;padding:15px;background:#f9f9f9;border:1px solid #ccd0d4;">
+				<h3 style="margin-top:0;"><?php esc_html_e( 'Add New Preset', 'doqix-roi-calculator' ); ?></h3>
+				<form method="post" action="">
+					<?php wp_nonce_field( 'doqix_roi_v2_preset_action', 'doqix_roi_v2_preset_nonce' ); ?>
+					<label>
+						<?php esc_html_e( 'Preset Name:', 'doqix-roi-calculator' ); ?>
+						<input type="text" name="doqix_roi_v2_new_preset_name" value="" class="regular-text" required>
+					</label>
+					<?php submit_button( __( 'Add Preset', 'doqix-roi-calculator' ), 'secondary', 'doqix_roi_v2_add_preset', false ); ?>
+				</form>
+			</div>
 		</div>
 		<?php
 	}
 
 	/* ────────────────────────────────────────────
-	 * Helper
+	 * Global tab: tiers, sliders, thresholds
+	 * ──────────────────────────────────────────── */
+
+	private function render_global_tab( $s, $opt ) {
+		?>
+		<form method="post" action="options.php">
+			<?php settings_fields( 'doqix_roi_v2_settings_group' ); ?>
+
+			<!-- ═══════════════ TIERS ═══════════════ -->
+			<h2><?php esc_html_e( 'Pricing Tiers', 'doqix-roi-calculator' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Configure pricing tiers. Set price to 0 for custom/enterprise pricing. Tiers are matched by monthly savings threshold.', 'doqix-roi-calculator' ); ?></p>
+
+			<table class="widefat doqix-repeater" id="doqix-tiers-table">
+				<thead>
+					<tr>
+						<th><?php esc_html_e( 'Name', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'Price (R/mo)', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'Threshold (R/mo savings)', 'doqix-roi-calculator' ); ?></th>
+						<th class="doqix-col-action"></th>
+					</tr>
+				</thead>
+				<tbody id="doqix-tiers-body">
+					<?php foreach ( $s['tiers'] as $i => $tier ) : ?>
+					<tr class="doqix-repeater-row" data-index="<?php echo esc_attr( $i ); ?>">
+						<td>
+							<input type="text" name="<?php echo esc_attr( "{$opt}[tiers][{$i}][name]" ); ?>"
+								value="<?php echo esc_attr( $tier['name'] ); ?>" class="regular-text" required>
+						</td>
+						<td>
+							<input type="number" name="<?php echo esc_attr( "{$opt}[tiers][{$i}][price]" ); ?>"
+								value="<?php echo esc_attr( $tier['price'] ); ?>" min="0" step="1" class="small-text">
+						</td>
+						<td>
+							<input type="number" name="<?php echo esc_attr( "{$opt}[tiers][{$i}][threshold]" ); ?>"
+								value="<?php echo esc_attr( $tier['threshold'] ); ?>" min="0" step="1" class="small-text">
+						</td>
+						<td class="doqix-col-action">
+							<button type="button" class="button doqix-remove-row"><?php esc_html_e( 'Remove', 'doqix-roi-calculator' ); ?></button>
+						</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			<p><button type="button" class="button doqix-add-tier" id="doqix-add-tier"><?php esc_html_e( '+ Add Tier', 'doqix-roi-calculator' ); ?></button></p>
+
+			<!-- ═══════════════ SLIDERS ═══════════════ -->
+			<h2><?php esc_html_e( 'Slider Configuration', 'doqix-roi-calculator' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Configure input sliders. Each slider has a role that determines how it plugs into the savings formula.', 'doqix-roi-calculator' ); ?></p>
+
+			<div id="doqix-sliders-container">
+				<?php foreach ( $s['sliders'] as $i => $slider ) : ?>
+				<div class="doqix-slider-card doqix-repeater-row" data-index="<?php echo esc_attr( $i ); ?>">
+					<div class="doqix-slider-card-header">
+						<strong class="doqix-slider-card-title"><?php echo esc_html( $slider['label'] ?: __( 'New Slider', 'doqix-roi-calculator' ) ); ?></strong>
+						<button type="button" class="button doqix-remove-row"><?php esc_html_e( 'Remove', 'doqix-roi-calculator' ); ?></button>
+					</div>
+					<div class="doqix-slider-card-body">
+						<div class="doqix-field-grid">
+							<label>
+								<?php esc_html_e( 'Key', 'doqix-roi-calculator' ); ?>
+								<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][key]" ); ?>"
+									value="<?php echo esc_attr( $slider['key'] ); ?>" class="regular-text doqix-slider-key" readonly>
+							</label>
+							<label>
+								<?php esc_html_e( 'Label', 'doqix-roi-calculator' ); ?>
+								<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][label]" ); ?>"
+									value="<?php echo esc_attr( $slider['label'] ); ?>" class="regular-text doqix-slider-label" required>
+							</label>
+							<label>
+								<?php esc_html_e( 'Role', 'doqix-roi-calculator' ); ?>
+								<select name="<?php echo esc_attr( "{$opt}[sliders][{$i}][role]" ); ?>">
+									<option value="multiplier" <?php selected( $slider['role'], 'multiplier' ); ?>><?php esc_html_e( 'Multiplier', 'doqix-roi-calculator' ); ?></option>
+									<option value="rate" <?php selected( $slider['role'], 'rate' ); ?>><?php esc_html_e( 'Hourly rate', 'doqix-roi-calculator' ); ?></option>
+									<option value="efficiency" <?php selected( $slider['role'], 'efficiency' ); ?>><?php esc_html_e( 'Efficiency (%)', 'doqix-roi-calculator' ); ?></option>
+									<option value="flat_monthly" <?php selected( $slider['role'], 'flat_monthly' ); ?>><?php esc_html_e( 'Monthly flat amount', 'doqix-roi-calculator' ); ?></option>
+								</select>
+							</label>
+							<label>
+								<?php esc_html_e( 'Format', 'doqix-roi-calculator' ); ?>
+								<select name="<?php echo esc_attr( "{$opt}[sliders][{$i}][format]" ); ?>">
+									<option value="number" <?php selected( $slider['format'], 'number' ); ?>><?php esc_html_e( 'Number', 'doqix-roi-calculator' ); ?></option>
+									<option value="currency" <?php selected( $slider['format'], 'currency' ); ?>><?php esc_html_e( 'Currency (R)', 'doqix-roi-calculator' ); ?></option>
+									<option value="percentage" <?php selected( $slider['format'], 'percentage' ); ?>><?php esc_html_e( 'Percentage (%)', 'doqix-roi-calculator' ); ?></option>
+								</select>
+							</label>
+							<label>
+								<?php esc_html_e( 'Default', 'doqix-roi-calculator' ); ?>
+								<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][default]" ); ?>"
+									value="<?php echo esc_attr( $slider['default'] ); ?>" class="small-text">
+							</label>
+							<label>
+								<?php esc_html_e( 'Min', 'doqix-roi-calculator' ); ?>
+								<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][min]" ); ?>"
+									value="<?php echo esc_attr( $slider['min'] ); ?>" class="small-text">
+							</label>
+							<label>
+								<?php esc_html_e( 'Max', 'doqix-roi-calculator' ); ?>
+								<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][max]" ); ?>"
+									value="<?php echo esc_attr( $slider['max'] ); ?>" class="small-text">
+							</label>
+							<label>
+								<?php esc_html_e( 'Step', 'doqix-roi-calculator' ); ?>
+								<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][step]" ); ?>"
+									value="<?php echo esc_attr( $slider['step'] ); ?>" min="1" class="small-text">
+							</label>
+							<label>
+								<?php esc_html_e( 'Prefix', 'doqix-roi-calculator' ); ?>
+								<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][prefix]" ); ?>"
+									value="<?php echo esc_attr( $slider['prefix'] ); ?>" class="small-text" style="width:60px">
+							</label>
+							<label>
+								<?php esc_html_e( 'Suffix', 'doqix-roi-calculator' ); ?>
+								<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][suffix]" ); ?>"
+									value="<?php echo esc_attr( $slider['suffix'] ); ?>" class="small-text" style="width:60px">
+							</label>
+						</div>
+						<div class="doqix-tooltip-row">
+							<label>
+								<?php esc_html_e( 'Tooltip', 'doqix-roi-calculator' ); ?>
+								<input type="text" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][tooltip]" ); ?>"
+									value="<?php echo esc_attr( $slider['tooltip'] ); ?>" class="large-text">
+							</label>
+						</div>
+					</div>
+				</div>
+				<?php endforeach; ?>
+			</div>
+			<p><button type="button" class="button doqix-add-slider" id="doqix-add-slider"><?php esc_html_e( '+ Add Slider', 'doqix-roi-calculator' ); ?></button></p>
+
+			<!-- ═══════════════ THRESHOLDS ═══════════════ -->
+			<h2><?php esc_html_e( 'Tier Thresholds', 'doqix-roi-calculator' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Fine-tune how the calculator recommends pricing tiers.', 'doqix-roi-calculator' ); ?></p>
+
+			<table class="form-table">
+				<tr>
+					<th scope="row"><label for="th-roi-bump"><?php esc_html_e( 'ROI bump %', 'doqix-roi-calculator' ); ?></label></th>
+					<td>
+						<input type="number" id="th-roi-bump"
+							name="<?php echo esc_attr( "{$opt}[thresholds][roi_bump_pct]" ); ?>"
+							value="<?php echo esc_attr( $s['thresholds']['roi_bump_pct'] ); ?>"
+							min="0" step="1" class="small-text">
+						<p class="description"><?php esc_html_e( 'Bump to next tier when ROI exceeds this percentage.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="th-eff-bump"><?php esc_html_e( 'Efficiency bump %', 'doqix-roi-calculator' ); ?></label></th>
+					<td>
+						<input type="number" id="th-eff-bump"
+							name="<?php echo esc_attr( "{$opt}[thresholds][efficiency_bump_pct]" ); ?>"
+							value="<?php echo esc_attr( $s['thresholds']['efficiency_bump_pct'] ); ?>"
+							min="0" max="100" step="1" class="small-text">
+						<p class="description"><?php esc_html_e( 'Bump tier when efficiency slider value >= this percentage.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="th-next-mult"><?php esc_html_e( 'Next tier multiplier', 'doqix-roi-calculator' ); ?></label></th>
+					<td>
+						<input type="number" id="th-next-mult"
+							name="<?php echo esc_attr( "{$opt}[thresholds][next_tier_multiplier]" ); ?>"
+							value="<?php echo esc_attr( $s['thresholds']['next_tier_multiplier'] ); ?>"
+							min="1" step="1" class="small-text">
+						<p class="description"><?php esc_html_e( 'Only bump if savings >= next tier price x this multiplier.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="th-roi-cap"><?php esc_html_e( 'ROI display cap', 'doqix-roi-calculator' ); ?></label></th>
+					<td>
+						<input type="number" id="th-roi-cap"
+							name="<?php echo esc_attr( "{$opt}[thresholds][roi_cap_display]" ); ?>"
+							value="<?php echo esc_attr( $s['thresholds']['roi_cap_display'] ); ?>"
+							min="1" step="1" class="small-text">
+						<p class="description"><?php esc_html_e( 'Show "Nx+" when ROI multiplier exceeds this value.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+			</table>
+
+			<?php
+			/* Pass through existing presets as hidden fields so they are not lost on global-tab save */
+			$all = $this->get_settings();
+			if ( isset( $all['presets'] ) && is_array( $all['presets'] ) ) {
+				foreach ( $all['presets'] as $slug => $preset ) {
+					foreach ( $preset as $pk => $pv ) {
+						echo '<input type="hidden" name="' . esc_attr( "{$opt}[presets][{$slug}][{$pk}]" ) . '" value="' . esc_attr( $pv ) . '">';
+					}
+				}
+			}
+			?>
+
+			<?php submit_button(); ?>
+		</form>
+		<?php
+	}
+
+	/* ────────────────────────────────────────────
+	 * Preset tab: content, colors, CTA, display
+	 * ──────────────────────────────────────────── */
+
+	private function render_preset_tab( $slug, $preset, $opt ) {
+		$preset_defaults = doqix_roi_v2_get_preset_defaults();
+		$p = wp_parse_args( $preset, $preset_defaults );
+
+		/* Delete link (not for default) */
+		if ( 'default' !== $slug ) {
+			$delete_url = wp_nonce_url(
+				add_query_arg( array(
+					'page' => 'doqix-roi-calculator-v2',
+					'doqix_roi_v2_delete_preset' => $slug,
+				), admin_url( 'admin.php' ) ),
+				'doqix_roi_v2_delete_preset'
+			);
+			echo '<p><a href="' . esc_url( $delete_url ) . '" class="button" onclick="return confirm(\'' . esc_js( __( 'Delete this preset?', 'doqix-roi-calculator' ) ) . '\');">'
+				. esc_html__( 'Delete this preset', 'doqix-roi-calculator' ) . '</a>'
+				. ' &nbsp; <code>[doqix_roi_calculator_v2 preset="' . esc_html( $slug ) . '"]</code></p>';
+		} else {
+			echo '<p><code>[doqix_roi_calculator_v2]</code> ' . esc_html__( 'or', 'doqix-roi-calculator' ) . ' <code>[doqix_roi_calculator_v2 preset="default"]</code></p>';
+		}
+		?>
+		<form method="post" action="options.php">
+			<?php settings_fields( 'doqix_roi_v2_settings_group' ); ?>
+
+			<?php
+			/* Pass through global settings as hidden fields */
+			$all = $this->get_settings();
+			foreach ( array( 'tiers', 'sliders' ) as $global_key ) {
+				if ( isset( $all[ $global_key ] ) && is_array( $all[ $global_key ] ) ) {
+					foreach ( $all[ $global_key ] as $gi => $row ) {
+						foreach ( $row as $rk => $rv ) {
+							echo '<input type="hidden" name="' . esc_attr( "{$opt}[{$global_key}][{$gi}][{$rk}]" ) . '" value="' . esc_attr( $rv ) . '">';
+						}
+					}
+				}
+			}
+			if ( isset( $all['thresholds'] ) && is_array( $all['thresholds'] ) ) {
+				foreach ( $all['thresholds'] as $tk => $tv ) {
+					echo '<input type="hidden" name="' . esc_attr( "{$opt}[thresholds][{$tk}]" ) . '" value="' . esc_attr( $tv ) . '">';
+				}
+			}
+
+			/* Pass through OTHER presets as hidden fields */
+			if ( isset( $all['presets'] ) && is_array( $all['presets'] ) ) {
+				foreach ( $all['presets'] as $other_slug => $other_preset ) {
+					if ( $other_slug === $slug ) {
+						continue;
+					}
+					foreach ( $other_preset as $pk => $pv ) {
+						echo '<input type="hidden" name="' . esc_attr( "{$opt}[presets][{$other_slug}][{$pk}]" ) . '" value="' . esc_attr( $pv ) . '">';
+					}
+				}
+			}
+			?>
+
+			<!-- Preset label (hidden for default) -->
+			<?php if ( 'default' !== $slug ) : ?>
+			<table class="form-table">
+				<tr>
+					<th scope="row"><label><?php esc_html_e( 'Preset Label', 'doqix-roi-calculator' ); ?></label></th>
+					<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label]" ); ?>" value="<?php echo esc_attr( $p['label'] ); ?>" class="regular-text"></td>
+				</tr>
+			</table>
+			<?php else : ?>
+			<input type="hidden" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label]" ); ?>" value="<?php echo esc_attr( $p['label'] ); ?>">
+			<?php endif; ?>
+
+			<!-- ═══════════════ CONTENT ═══════════════ -->
+			<h2><?php esc_html_e( 'Content', 'doqix-roi-calculator' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Configure the heading and intro text shown above the calculator.', 'doqix-roi-calculator' ); ?></p>
+
+			<table class="form-table">
+				<tr>
+					<th scope="row"><label><?php esc_html_e( 'Heading', 'doqix-roi-calculator' ); ?></label></th>
+					<td><?php wp_editor( $p['heading_text'], 'doqix_roi_v2_heading_' . $slug, array(
+						'textarea_name' => "{$opt}[presets][{$slug}][heading_text]",
+						'teeny'         => false,
+						'media_buttons' => false,
+						'textarea_rows' => 3,
+					) ); ?></td>
+				</tr>
+				<tr>
+					<th scope="row"><label><?php esc_html_e( 'Intro Text', 'doqix-roi-calculator' ); ?></label></th>
+					<td><?php wp_editor( $p['intro_text'], 'doqix_roi_v2_intro_' . $slug, array(
+						'textarea_name' => "{$opt}[presets][{$slug}][intro_text]",
+						'teeny'         => false,
+						'media_buttons' => false,
+						'textarea_rows' => 5,
+					) ); ?></td>
+				</tr>
+			</table>
+
+			<!-- ═══════════════ COLORS ═══════════════ -->
+			<h2><?php esc_html_e( 'Colors', 'doqix-roi-calculator' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Customize the slider accent and CTA button colors to match your theme.', 'doqix-roi-calculator' ); ?></p>
+
+			<?php
+			$accent_val     = $p['color_accent'];
+			$cta_val        = $p['color_cta'];
+			$accent_display = ! empty( $accent_val ) ? $accent_val : '#0886B5';
+			$cta_display    = ! empty( $cta_val )    ? $cta_val    : '#0886B5';
+			?>
+			<table class="form-table">
+				<tr>
+					<th scope="row"><label for="color-accent-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Slider Accent Color', 'doqix-roi-calculator' ); ?></label></th>
+					<td>
+						<span class="doqix-color-field">
+							<input type="color" id="color-accent-<?php echo esc_attr( $slug ); ?>"
+								name="<?php echo esc_attr( "{$opt}[presets][{$slug}][color_accent]" ); ?>"
+								value="<?php echo esc_attr( $accent_display ); ?>"
+								<?php if ( empty( $accent_val ) ) echo 'data-is-default="1"'; ?>>
+							<?php if ( ! empty( $accent_val ) ) : ?>
+							<code><?php echo esc_html( $accent_val ); ?></code>
+							<button type="button" class="button-link doqix-reset-color" data-target="color-accent-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Reset to theme default', 'doqix-roi-calculator' ); ?></button>
+							<?php else : ?>
+							<code><?php esc_html_e( 'Theme default', 'doqix-roi-calculator' ); ?></code>
+							<?php endif; ?>
+						</span>
+						<p class="description"><?php esc_html_e( 'Used for slider thumbs, track fill, value display, and ROI multiplier text.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="color-cta-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'CTA Button Color', 'doqix-roi-calculator' ); ?></label></th>
+					<td>
+						<span class="doqix-color-field">
+							<input type="color" id="color-cta-<?php echo esc_attr( $slug ); ?>"
+								name="<?php echo esc_attr( "{$opt}[presets][{$slug}][color_cta]" ); ?>"
+								value="<?php echo esc_attr( $cta_display ); ?>"
+								<?php if ( empty( $cta_val ) ) echo 'data-is-default="1"'; ?>>
+							<?php if ( ! empty( $cta_val ) ) : ?>
+							<code><?php echo esc_html( $cta_val ); ?></code>
+							<button type="button" class="button-link doqix-reset-color" data-target="color-cta-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Reset to theme default', 'doqix-roi-calculator' ); ?></button>
+							<?php else : ?>
+							<code><?php esc_html_e( 'Theme default', 'doqix-roi-calculator' ); ?></code>
+							<?php endif; ?>
+						</span>
+						<p class="description"><?php esc_html_e( 'Used for the CTA button background and share button outline.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+			</table>
+
+			<!-- ═══════════════ CTA ═══════════════ -->
+			<h2><?php esc_html_e( 'Call to Action', 'doqix-roi-calculator' ); ?></h2>
+			<?php $cta_on = ! isset( $p['cta_enabled'] ) || ! empty( $p['cta_enabled'] ); ?>
+			<table class="form-table">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Show CTA Button', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<label>
+							<input type="checkbox"
+								name="<?php echo esc_attr( "{$opt}[presets][{$slug}][cta_enabled]" ); ?>"
+								value="1"
+								<?php checked( $cta_on ); ?>
+								id="doqix-cta-enabled-<?php echo esc_attr( $slug ); ?>"
+								onchange="document.getElementById('doqix-cta-fields-<?php echo esc_attr( $slug ); ?>').style.opacity=this.checked?'1':'0.4';document.getElementById('doqix-cta-fields-<?php echo esc_attr( $slug ); ?>').style.pointerEvents=this.checked?'auto':'none';">
+							<?php esc_html_e( 'Enabled — uncheck to hide the CTA button on the frontend', 'doqix-roi-calculator' ); ?>
+						</label>
+					</td>
+				</tr>
+			</table>
+			<div id="doqix-cta-fields-<?php echo esc_attr( $slug ); ?>" style="<?php echo $cta_on ? '' : 'opacity:0.4;pointer-events:none;'; ?>">
+			<table class="form-table">
+				<tr>
+					<th scope="row"><label for="cta-url-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'CTA URL', 'doqix-roi-calculator' ); ?></label></th>
+					<td><input type="text" id="cta-url-<?php echo esc_attr( $slug ); ?>" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][cta_url]" ); ?>" value="<?php echo esc_attr( $p['cta_url'] ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cta-text-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'CTA Text', 'doqix-roi-calculator' ); ?></label></th>
+					<td><input type="text" id="cta-text-<?php echo esc_attr( $slug ); ?>" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][cta_text]" ); ?>" value="<?php echo esc_attr( $p['cta_text'] ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cta-subtext-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'CTA Subtext', 'doqix-roi-calculator' ); ?></label></th>
+					<td><input type="text" id="cta-subtext-<?php echo esc_attr( $slug ); ?>" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][cta_subtext]" ); ?>" value="<?php echo esc_attr( $p['cta_subtext'] ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="share-url-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Share URL', 'doqix-roi-calculator' ); ?></label></th>
+					<td><input type="url" id="share-url-<?php echo esc_attr( $slug ); ?>" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][share_url]" ); ?>" value="<?php echo esc_attr( $p['share_url'] ); ?>" class="regular-text"></td>
+				</tr>
+			</table>
+			</div>
+
+			<!-- ═══════════════ DISPLAY ═══════════════ -->
+			<h2><?php esc_html_e( 'Display Options', 'doqix-roi-calculator' ); ?></h2>
+
+			<table class="form-table">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Show Share Button', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<label>
+							<input type="checkbox" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][share_enabled]" ); ?>" value="1" <?php checked( ! empty( $p['share_enabled'] ) ); ?>>
+							<?php esc_html_e( 'Enabled', 'doqix-roi-calculator' ); ?>
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label><?php esc_html_e( 'Footnote Text', 'doqix-roi-calculator' ); ?></label></th>
+					<td>
+						<?php wp_editor( $p['footnote_text'], 'doqix_roi_v2_footnote_' . $slug, array(
+							'textarea_name' => "{$opt}[presets][{$slug}][footnote_text]",
+							'teeny'         => false,
+							'media_buttons' => false,
+							'textarea_rows' => 3,
+						) ); ?>
+						<p class="description"><?php esc_html_e( 'Shown centred at the bottom of the calculator. Leave empty to hide.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+			</table>
+
+			<?php submit_button(); ?>
+		</form>
+		<?php
+	}
+
+	/* ────────────────────────────────────────────
+	 * Helpers
 	 * ──────────────────────────────────────────── */
 
 	private function get_settings() {
 		return $this->deep_parse_args(
-			get_option( DOQIX_ROI_OPTION_KEY, array() ),
-			doqix_roi_get_defaults()
+			get_option( DOQIX_ROI_V2_OPTION_KEY, array() ),
+			doqix_roi_v2_get_defaults()
 		);
 	}
 
@@ -512,11 +769,20 @@ class Doqix_ROI_Admin {
 					if ( isset( $default_value[0] ) ) {
 						$result[ $key ] = $args[ $key ];
 					} else {
-						// For associative arrays (thresholds), merge
+						// For associative arrays (thresholds, presets), merge
 						$result[ $key ] = $this->deep_parse_args( $args[ $key ], $default_value );
 					}
 				} else {
 					$result[ $key ] = $args[ $key ];
+				}
+			}
+		}
+
+		/* For presets: include saved presets that are not in defaults */
+		if ( isset( $args['presets'] ) && is_array( $args['presets'] ) ) {
+			foreach ( $args['presets'] as $slug => $saved_preset ) {
+				if ( ! isset( $result['presets'][ $slug ] ) ) {
+					$result['presets'][ $slug ] = wp_parse_args( $saved_preset, doqix_roi_v2_get_preset_defaults() );
 				}
 			}
 		}
