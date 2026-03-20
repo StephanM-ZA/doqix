@@ -14,7 +14,7 @@
 │  HEADER (sticky)                                            │
 │  [Logo: Do.Qix - Efficiency, Engineered]                   │
 │  [Nav: Home | Services | Contact]                           │
-│  [CTA Button: Get Your Free Automation Plan (--action)]     │
+│  [CTA Button: Start Free (--action)]     │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
@@ -27,7 +27,7 @@
 │  entry, the inbox treadmill. You won't touch a line of      │
 │  code. We do all of it.                                     │
 │                                                             │
-│  [CTA Button: Get Your Free Automation Plan]                │
+│  [CTA Button: Start Free]                │
 │                                                             │
 │  Proof: 100+ workflows for SA businesses | 24hr response    │
 │         | Priced in rands                                   │
@@ -85,7 +85,7 @@
 │  │ [text]  │    │ [text]  │    │ [text]  │                  │
 │  └─────────┘    └─────────┘    └─────────┘                 │
 │                                                             │
-│  [CTA: Get Your Free Automation Plan]                       │
+│  [CTA: Start Free]                       │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
@@ -149,7 +149,7 @@
 │                                                             │
 │  H2: Ready to Get Your Time Back?                           │
 │  "15 minutes. No commitment. No sales pitch."               │
-│  [CTA Button: Get Your Free Automation Plan]                │
+│  [CTA Button: Start Free]                │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
@@ -265,7 +265,7 @@
 │  └─────────────────────────┘  └────────────────────────┘    │
 │                                                             │
 │  Benchmark: dynamic message based on savings range          │
-│  [CTA: Get Your Free Automation Plan]                       │
+│  [CTA: Start Free]                       │
 │  [Share Your Results — clipboard]                           │
 │  POPIA note                                                 │
 │                                                             │
@@ -335,7 +335,7 @@
 ┌─────────────────────────────────────────────────────────────┐
 │  BOTTOM CTA (full-width)                                    │
 │  H2: Ready to See What's Possible?                          │
-│  [CTA Button: Get Your Free Automation Plan]                │
+│  [CTA Button: Start Free]                │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐

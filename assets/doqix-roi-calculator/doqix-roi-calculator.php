@@ -23,6 +23,28 @@ define( 'DOQIX_ROI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_ROI_OPTION_KEY', 'doqix_roi_settings' );
 
 /**
+ * Default values for a single preset.
+ *
+ * @return array
+ */
+function doqix_roi_get_preset_defaults() {
+	return array(
+		'label'          => 'Default',
+		'heading_text'   => 'See What You Could Save',
+		'intro_text'     => 'SA businesses waste 20–30 hours per week on tasks that could run themselves. Drag the sliders to see what automation would mean for yours.',
+		'footnote_text'  => 'Self-hosted. No middleman pricing. *For estimate purposes only.',
+		'color_accent'   => '',
+		'color_cta'      => '',
+		'cta_enabled'    => 1,
+		'cta_url'        => '/contact',
+		'cta_text'       => 'Ready to turn these savings into reality?',
+		'cta_subtext'    => "We'll walk you through exactly where to start.",
+		'share_url'      => 'https://doqix.co.za',
+		'share_enabled'  => 1,
+	);
+}
+
+/**
  * Single source of truth for all default settings.
  *
  * @return array
@@ -69,25 +91,8 @@ function doqix_roi_get_defaults() {
 		'error_max'     => 50000,
 		'error_step'    => 500,
 
-		/* Heading + intro */
-		'heading_text' => 'See What You Could Save',
-		'intro_text'   => 'SA businesses waste 20–30 hours per week on tasks that could run themselves. Drag the sliders to see what automation would mean for yours.',
-
-		/* Colors — empty = use theme defaults from CSS */
-		'color_accent' => '',
-		'color_cta'    => '',
-
-		/* Call to action */
-		'cta_url'     => '/contact',
-		'cta_text'    => 'Ready to turn these savings into reality?',
-		'cta_subtext' => "We'll walk you through exactly where to start.",
-
-		/* Share */
-		'share_enabled' => 1,
-		'share_url'     => 'https://doqix.co.za',
-
-		/* Display */
-		'footnote_text' => 'Self-hosted. No middleman pricing. *For estimate purposes only.',
+		/* Presets */
+		'presets' => array( 'default' => doqix_roi_get_preset_defaults() ),
 	);
 }
 
@@ -100,6 +105,26 @@ if ( is_admin() ) {
 	new Doqix_ROI_Admin();
 }
 new Doqix_ROI_Frontend();
+
+/* ── Migration: move legacy per-field content/display settings into presets ── */
+function doqix_roi_maybe_migrate() {
+	$s = get_option( DOQIX_ROI_OPTION_KEY, array() );
+	if ( empty( $s ) || isset( $s['presets'] ) ) {
+		return;
+	}
+
+	$preset_keys   = array( 'heading_text', 'intro_text', 'footnote_text', 'color_accent', 'color_cta', 'cta_enabled', 'cta_url', 'cta_text', 'cta_subtext', 'share_url', 'share_enabled' );
+	$default_preset = doqix_roi_get_preset_defaults();
+	foreach ( $preset_keys as $k ) {
+		if ( isset( $s[ $k ] ) ) {
+			$default_preset[ $k ] = $s[ $k ];
+			unset( $s[ $k ] );
+		}
+	}
+	$s['presets'] = array( 'default' => $default_preset );
+	update_option( DOQIX_ROI_OPTION_KEY, $s );
+}
+add_action( 'admin_init', 'doqix_roi_maybe_migrate' );
 
 /* ── Activation: seed defaults (preserves existing on re-activation) ── */
 register_activation_hook( __FILE__, function () {

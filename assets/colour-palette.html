@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do.Qix Colour Palette</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap');
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f5f5f5;
+    padding: 40px;
+    margin: 0;
+  }
+
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    color: #0D2028;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    color: rgba(13, 32, 40, 0.60);
+    margin-bottom: 40px;
+  }
+
+  .palette {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .swatch {
+    width: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: #fff;
+  }
+
+  .swatch-colour {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+  }
+
+  .swatch-info {
+    padding: 14px;
+  }
+
+  .swatch-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #0D2028;
+    margin-bottom: 4px;
+  }
+
+  .swatch-value {
+    font-size: 13px;
+    color: rgba(13, 32, 40, 0.60);
+    margin-bottom: 2px;
+  }
+
+  .swatch-use {
+    font-size: 12px;
+    color: rgba(13, 32, 40, 0.45);
+    font-style: italic;
+  }
+
+  /* Preview section */
+  .preview {
+    background: #fff;
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 800px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 48px;
+  }
+
+  .preview h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: #0D2028;
+    margin-bottom: 16px;
+  }
+
+  .preview p {
+    font-size: 16px;
+    color: #0D2028;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .preview .muted {
+    font-size: 14px;
+    color: rgba(13, 32, 40, 0.60);
+  }
+
+  .preview .btn-action {
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: #0886B5;
+    padding: 12px 24px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 16px;
+    margin-right: 12px;
+  }
+
+  .preview .btn-action:hover {
+    background-color: #066a91;
+  }
+
+  .preview .accent-text {
+    color: #ff8000;
+    font-weight: 600;
+  }
+
+  .preview a {
+    color: #0886B5;
+    text-decoration: none;
+  }
+
+  /* CTA banner preview */
+  .cta-banner {
+    background-color: #0886B5;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 48px 40px;
+    border-radius: 8px;
+    max-width: 800px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .cta-banner h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+  }
+
+  .cta-banner p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 20px;
+  }
+
+  .cta-banner .btn-white {
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0886B5;
+    background-color: #FFFFFF;
+    padding: 12px 24px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid rgba(13, 32, 40, 0.12);
+    margin: 24px 0;
+  }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(13, 32, 40, 0.40);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Do.Qix Colour Palette</h1>
+<p class="subtitle">Brand colours, typography, and component preview</p>
+
+<!-- Colour Swatches -->
+<div class="section-label">Colours</div>
+<div class="palette">
+  <div class="swatch">
+    <div class="swatch-colour" style="background-color: #0D2028;">
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">Ink</div>
+      <div class="swatch-value">#0D2028</div>
+      <div class="swatch-use">Headings, logo</div>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-colour" style="background-color: #ff8000;">
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">Accent</div>
+      <div class="swatch-value">#ff8000</div>
+      <div class="swatch-use">Icons, highlights, hover</div>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-colour" style="background-color: #0886B5;">
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">Action</div>
+      <div class="swatch-value">#0886B5</div>
+      <div class="swatch-use">CTA buttons, active links</div>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-colour" style="background-color: #0D2028;">
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">Text</div>
+      <div class="swatch-value">#0D2028</div>
+      <div class="swatch-use">Body text</div>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-colour" style="background-color: #FFFFFF; border: 1px solid rgba(13,32,40,0.12);">
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">Background</div>
+      <div class="swatch-value">#FFFFFF</div>
+      <div class="swatch-use">Page background</div>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-colour" style="background-color: rgba(13, 32, 40, 0.60);">
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">Muted</div>
+      <div class="swatch-value">rgba(13,32,40,0.60)</div>
+      <div class="swatch-use">Secondary text, captions</div>
+    </div>
+  </div>
+
+  <div class="swatch">
+    <div class="swatch-colour" style="background-color: rgba(13, 32, 40, 0.12);">
+    </div>
+    <div class="swatch-info">
+      <div class="swatch-name">Line</div>
+      <div class="swatch-value">rgba(13,32,40,0.12)</div>
+      <div class="swatch-use">Borders, dividers</div>
+    </div>
+  </div>
+</div>
+
+<!-- Typography Preview -->
+<div class="section-label">Typography Preview</div>
+<div class="preview">
+  <h1 style="font-family: 'Montserrat', sans-serif; font-size: 40px; font-weight: 700; color: #0D2028; margin-bottom: 8px;">H1: Stop the Busywork. Start What Matters.</h1>
+  <h2>H2: Why SA Businesses Choose Us</h2>
+  <h3 style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 600; color: #0D2028;">H3: Plain English. No Jargon.</h3>
+  <hr>
+  <p>Body text: We build automations that handle the work your team shouldn't be doing — the copy-pasting, the data entry, the inbox treadmill.</p>
+  <p class="muted">Secondary text: 100+ workflows running for SA businesses</p>
+  <p>Links look like <a href="#">this inline link</a> and accents look <span class="accent-text">like this highlight</span>.</p>
+  <hr>
+  <a href="#" class="btn-action">Get Your Free Automation Plan</a>
+</div>
+
+<!-- CTA Banner Preview -->
+<div class="section-label">CTA Section Preview</div>
+<div class="cta-banner">
+  <h2>Ready to Get Your Time Back?</h2>
+  <p>15 minutes. No commitment. No sales pitch.</p>
+  <a href="#" class="btn-white">Get Your Free Automation Plan</a>
+</div>
+
+</body>
+</html>

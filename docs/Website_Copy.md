@@ -14,7 +14,7 @@
 ## Global Elements
 
 **Nav:** Home | Services | Products | Contact
-**Header CTA:** Get Your Free Automation Plan
+**Header CTA:** Start Free
 **Tagline (logo lockup):** Efficiency, Engineered
 
 **Footer:**
@@ -39,7 +39,7 @@ LinkedIn | X
 
 **Subhead:** We build automations that handle the work your team shouldn't be doing — the copy-pasting, the data entry, the inbox treadmill. You won't touch a line of code. You won't learn new software. We do all of it.
 
-**CTA:** Get Your Free Automation Plan
+**CTA:** Start Free
 
 **Proof line (below CTA):** 100+ workflows running for SA businesses | Response within 24 hours | Priced in rands
 
@@ -107,7 +107,7 @@ We map your process, find the bottlenecks, and build workflows that connect your
 **3. You get your time back.**
 Your automations go live. Data flows where it needs to go. Emails send themselves. Reports update on their own. We monitor everything and keep it running — you focus on what matters.
 
-**CTA:** Get Your Free Automation Plan
+**CTA:** Start Free
 
 ---
 
@@ -182,7 +182,7 @@ A Durban consultancy had staff entering the same client data into four different
 
 Every day your team spends on repetitive tasks is a day they're not spending on work that grows the business.
 
-**CTA:** Get Your Free Automation Plan
+**CTA:** Start Free
 
 15 minutes. No commitment. No sales pitch. Just a clear picture of where you're losing time — and how to get it back.
 
@@ -355,7 +355,7 @@ That's **R20,000/month** in preventable rework.
 
 Now add those up. Across every repetitive task in your company. The ROI is real, it's fast, and it compounds.
 
-**CTA:** Want us to calculate yours? Get Your Free Automation Plan.
+**CTA:** Want us to calculate yours? Start Free.
 
 ---
 
@@ -386,7 +386,7 @@ No hidden fees. No confusing credit systems. No per-task charges that punish you
 | **Support** | Email (48hr) | Priority + WhatsApp (24hr) | Dedicated + monthly strategy call | Dedicated account manager |
 | **Training** | R1,500/session | R1,500/session | Included | Included |
 | **You'll save** | ~R3,000-R8,000/mo | ~R8,000-R20,000/mo | ~R20,000-R50,000/mo | R50,000+/mo |
-| | Get Your Free Automation Plan | Get Your Free Automation Plan | Get Your Free Automation Plan | Show Me What's Possible |
+| | Start Free | Start Free | Start Free | Show Me What's Possible |
 
 **Every plan includes:** Hosting, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.
 
@@ -409,7 +409,7 @@ Your competitors on Zapier are watching their bills climb in dollars every month
 
 **Not sure which plan?** That's what the free call is for. We'll map your processes, show you where the time is going, and recommend the right fit.
 
-**CTA:** Get Your Free Automation Plan
+**CTA:** Start Free
 
 ---
 
@@ -435,7 +435,7 @@ We build on n8n — a powerful open-source automation platform we manage and sel
 
 15-minute call. We'll show you where your time is going and how to get it back.
 
-**CTA:** Get Your Free Automation Plan
+**CTA:** Start Free
 
 ---
 ---
@@ -538,7 +538,7 @@ Not sure which product fits? Want to know if it works with your setup? Just ask 
 - **What's your biggest time-waster?** *Placeholder: "The task that drives you crazy. The one you wish would just... do itself."*
 - **How did you hear about us?** *(optional):* Google / LinkedIn / Referral / Social Media / Other
 
-**Button:** Get My Free Automation Plan
+**Button:** Get My Free Plan
 **Micro-copy:** We'll be in touch within 24 hours. Usually sooner.
 
 **Right Column:**
@@ -616,7 +616,7 @@ Anytime. No lock-in contracts. We keep your business because we deliver results.
 
 **Body:** 30% of the average work week goes to tasks a machine could handle. We'll show you exactly where — for free.
 
-**CTA:** Get Your Free Automation Plan
+**CTA:** Start Free
 **Dismiss:** I'll keep doing it manually
 
 ---
@@ -685,7 +685,7 @@ We use cookies to improve your experience. Nothing shady. [Accept] [Learn More]
 - **Home:** Do.Qix | Stop the Busywork. Start What Matters | Workflow Automation South Africa
 - **Services:** What We Automate | Business Process Automation for SA SMEs | Do.Qix
 - **Products:** Our Products | SaaS Tools for SA Businesses | Do.Qix
-- **Contact:** Get Your Free Automation Plan | Do.Qix South Africa
+- **Contact:** Start Free | Do.Qix South Africa
 
 ---
 ---

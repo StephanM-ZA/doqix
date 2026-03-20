@@ -64,24 +64,29 @@ class Doqix_ROI_Frontend {
 			true
 		);
 
-		/* Pass tier config + share URL to JS */
-		$settings = wp_parse_args(
+		/* Pass tier config to JS — preset-specific colors are set per shortcode instance */
+		$all = wp_parse_args(
 			get_option( DOQIX_ROI_OPTION_KEY, array() ),
 			doqix_roi_get_defaults()
 		);
 
+		/* Use default preset for the early-enqueue localize (shortcode render may override) */
+		$presets = isset( $all['presets'] ) ? $all['presets'] : array();
+		$preset  = isset( $presets['default'] ) ? $presets['default'] : doqix_roi_get_preset_defaults();
+		$preset  = wp_parse_args( $preset, doqix_roi_get_preset_defaults() );
+
 		wp_localize_script( 'doqix-roi-calculator', 'doqixRoiConfig', array(
-			'tier_1_name'   => $settings['tier_1_name'],
-			'tier_1_price'  => $settings['tier_1_price'],
-			'tier_2_name'   => $settings['tier_2_name'],
-			'tier_2_price'  => $settings['tier_2_price'],
-			'tier_3_name'   => $settings['tier_3_name'],
-			'tier_3_price'  => $settings['tier_3_price'],
-			'tier_4_name'   => $settings['tier_4_name'],
-			'tier_4_price'  => $settings['tier_4_price'],
-			'share_url'     => $settings['share_url'],
-			'color_accent'  => $settings['color_accent'],
-			'color_cta'     => $settings['color_cta'],
+			'tier_1_name'   => $all['tier_1_name'],
+			'tier_1_price'  => $all['tier_1_price'],
+			'tier_2_name'   => $all['tier_2_name'],
+			'tier_2_price'  => $all['tier_2_price'],
+			'tier_3_name'   => $all['tier_3_name'],
+			'tier_3_price'  => $all['tier_3_price'],
+			'tier_4_name'   => $all['tier_4_name'],
+			'tier_4_price'  => $all['tier_4_price'],
+			'share_url'     => $preset['share_url'],
+			'color_accent'  => $preset['color_accent'],
+			'color_cta'     => $preset['color_cta'],
 		) );
 	}
 
@@ -91,6 +96,18 @@ class Doqix_ROI_Frontend {
 	 * @return string HTML output.
 	 */
 	public function render_shortcode( $atts ) {
+		$atts = shortcode_atts( array( 'preset' => 'default' ), $atts, 'doqix_roi_calculator' );
+		$preset_slug = sanitize_key( $atts['preset'] );
+
+		/* Load all settings and resolve the requested preset */
+		$all = wp_parse_args(
+			get_option( DOQIX_ROI_OPTION_KEY, array() ),
+			doqix_roi_get_defaults()
+		);
+		$presets = isset( $all['presets'] ) ? $all['presets'] : array();
+		$preset  = isset( $presets[ $preset_slug ] ) ? $presets[ $preset_slug ] : ( isset( $presets['default'] ) ? $presets['default'] : doqix_roi_get_preset_defaults() );
+		$preset  = wp_parse_args( $preset, doqix_roi_get_preset_defaults() );
+
 		/* If assets weren't enqueued via the hook (e.g. Themify late-render),
 		   enqueue them now so they still appear on the page. */
 		if ( ! $this->enqueue ) {
@@ -108,37 +125,27 @@ class Doqix_ROI_Frontend {
 				true
 			);
 
-			$settings = wp_parse_args(
-				get_option( DOQIX_ROI_OPTION_KEY, array() ),
-				doqix_roi_get_defaults()
-			);
-
 			wp_localize_script( 'doqix-roi-calculator', 'doqixRoiConfig', array(
-				'tier_1_name'   => $settings['tier_1_name'],
-				'tier_1_price'  => $settings['tier_1_price'],
-				'tier_2_name'   => $settings['tier_2_name'],
-				'tier_2_price'  => $settings['tier_2_price'],
-				'tier_3_name'   => $settings['tier_3_name'],
-				'tier_3_price'  => $settings['tier_3_price'],
-				'tier_4_name'   => $settings['tier_4_name'],
-				'tier_4_price'  => $settings['tier_4_price'],
-				'share_url'     => $settings['share_url'],
-				'color_accent'  => $settings['color_accent'],
-				'color_cta'     => $settings['color_cta'],
+				'tier_1_name'   => $all['tier_1_name'],
+				'tier_1_price'  => $all['tier_1_price'],
+				'tier_2_name'   => $all['tier_2_name'],
+				'tier_2_price'  => $all['tier_2_price'],
+				'tier_3_name'   => $all['tier_3_name'],
+				'tier_3_price'  => $all['tier_3_price'],
+				'tier_4_name'   => $all['tier_4_name'],
+				'tier_4_price'  => $all['tier_4_price'],
+				'share_url'     => $preset['share_url'],
+				'color_accent'  => $preset['color_accent'],
+				'color_cta'     => $preset['color_cta'],
 			) );
 
 			$this->enqueue = true;
 		}
 
-		$s = wp_parse_args(
-			get_option( DOQIX_ROI_OPTION_KEY, array() ),
-			doqix_roi_get_defaults()
-		);
-
-		/* Resolve colors: admin override → theme color → CSS fallback */
+		/* Resolve colors: preset override → theme color → CSS fallback */
 		$theme_color   = self::get_theme_accent_color();
-		$accent        = ! empty( $s['color_accent'] ) ? $s['color_accent'] : $theme_color;
-		$cta           = ! empty( $s['color_cta'] )    ? $s['color_cta']    : $theme_color;
+		$accent        = ! empty( $preset['color_accent'] ) ? $preset['color_accent'] : $theme_color;
+		$cta           = ! empty( $preset['color_cta'] )    ? $preset['color_cta']    : $theme_color;
 
 		$inline_vars = '';
 		if ( $accent ) {
@@ -152,11 +159,11 @@ class Doqix_ROI_Frontend {
 		?>
 <section class="doqix-roi" id="roi-calculator"<?php if ( $inline_vars ) echo ' style="' . $inline_vars . '"'; ?>>
 
-	<?php if ( ! empty( $s['heading_text'] ) ) : ?>
-	<h2><?php echo esc_html( $s['heading_text'] ); ?></h2>
+	<?php if ( ! empty( $preset['heading_text'] ) ) : ?>
+	<h2><?php echo wp_kses_post( $preset['heading_text'] ); ?></h2>
 	<?php endif; ?>
-	<?php if ( ! empty( $s['intro_text'] ) ) : ?>
-	<p class="section-intro"><?php echo esc_html( $s['intro_text'] ); ?></p>
+	<?php if ( ! empty( $preset['intro_text'] ) ) : ?>
+	<p class="section-intro"><?php echo wp_kses_post( $preset['intro_text'] ); ?></p>
 	<?php endif; ?>
 
 	<div class="roi-grid">
@@ -169,41 +176,41 @@ class Doqix_ROI_Frontend {
 			<div class="slider-group">
 				<div class="slider-header">
 					<span class="slider-label"><?php esc_html_e( 'People doing repetitive tasks', 'doqix-roi-calculator' ); ?><span class="tooltip"><?php esc_html_e( 'How many staff spend time on repetitive, rule-based work?', 'doqix-roi-calculator' ); ?></span></span>
-					<span class="slider-value" id="val-people"><?php echo esc_html( $s['people_default'] ); ?></span>
+					<span class="slider-value" id="val-people"><?php echo esc_html( $all['people_default'] ); ?></span>
 				</div>
-				<input type="range" id="slider-people" min="<?php echo esc_attr( $s['people_min'] ); ?>" max="<?php echo esc_attr( $s['people_max'] ); ?>" value="<?php echo esc_attr( $s['people_default'] ); ?>" step="<?php echo esc_attr( $s['people_step'] ); ?>">
-				<div class="slider-range-labels"><span><?php echo esc_html( $s['people_min'] ); ?></span><span><?php echo esc_html( $s['people_max'] ); ?></span></div>
+				<input type="range" id="slider-people" min="<?php echo esc_attr( $all['people_min'] ); ?>" max="<?php echo esc_attr( $all['people_max'] ); ?>" value="<?php echo esc_attr( $all['people_default'] ); ?>" step="<?php echo esc_attr( $all['people_step'] ); ?>">
+				<div class="slider-range-labels"><span><?php echo esc_html( $all['people_min'] ); ?></span><span><?php echo esc_html( $all['people_max'] ); ?></span></div>
 			</div>
 
 			<!-- Hours -->
 			<div class="slider-group">
 				<div class="slider-header">
 					<span class="slider-label"><?php esc_html_e( 'Hours per person per week', 'doqix-roi-calculator' ); ?><span class="tooltip"><?php esc_html_e( 'How many hours does each person spend on repetitive tasks every week? Think data entry, copy-pasting, manual emails, reporting.', 'doqix-roi-calculator' ); ?></span></span>
-					<span class="slider-value" id="val-hours"><?php echo esc_html( $s['hours_default'] ); ?></span>
+					<span class="slider-value" id="val-hours"><?php echo esc_html( $all['hours_default'] ); ?></span>
 				</div>
-				<input type="range" id="slider-hours" min="<?php echo esc_attr( $s['hours_min'] ); ?>" max="<?php echo esc_attr( $s['hours_max'] ); ?>" value="<?php echo esc_attr( $s['hours_default'] ); ?>" step="<?php echo esc_attr( $s['hours_step'] ); ?>">
-				<div class="slider-range-labels"><span><?php echo esc_html( $s['hours_min'] ); ?> hr</span><span><?php echo esc_html( $s['hours_max'] ); ?> hrs</span></div>
-				<div class="total-hours" id="out-total-hours">= <?php echo esc_html( $s['people_default'] * $s['hours_default'] ); ?> hrs/week across your team</div>
+				<input type="range" id="slider-hours" min="<?php echo esc_attr( $all['hours_min'] ); ?>" max="<?php echo esc_attr( $all['hours_max'] ); ?>" value="<?php echo esc_attr( $all['hours_default'] ); ?>" step="<?php echo esc_attr( $all['hours_step'] ); ?>">
+				<div class="slider-range-labels"><span><?php echo esc_html( $all['hours_min'] ); ?> hr</span><span><?php echo esc_html( $all['hours_max'] ); ?> hrs</span></div>
+				<div class="total-hours" id="out-total-hours">= <?php echo esc_html( $all['people_default'] * $all['hours_default'] ); ?> hrs/week across your team</div>
 			</div>
 
 			<!-- Rate -->
 			<div class="slider-group">
 				<div class="slider-header">
 					<span class="slider-label"><?php esc_html_e( 'Average hourly cost', 'doqix-roi-calculator' ); ?><span class="tooltip"><?php esc_html_e( 'What you pay per hour per person — include salary, benefits, and overheads.', 'doqix-roi-calculator' ); ?></span></span>
-					<span class="slider-value" id="val-rate">R<?php echo esc_html( $s['rate_default'] ); ?></span>
+					<span class="slider-value" id="val-rate">R<?php echo esc_html( $all['rate_default'] ); ?></span>
 				</div>
-				<input type="range" id="slider-rate" min="<?php echo esc_attr( $s['rate_min'] ); ?>" max="<?php echo esc_attr( $s['rate_max'] ); ?>" value="<?php echo esc_attr( $s['rate_default'] ); ?>" step="<?php echo esc_attr( $s['rate_step'] ); ?>">
-				<div class="slider-range-labels"><span>R<?php echo esc_html( number_format( $s['rate_min'] ) ); ?></span><span>R<?php echo esc_html( number_format( $s['rate_max'] ) ); ?></span></div>
+				<input type="range" id="slider-rate" min="<?php echo esc_attr( $all['rate_min'] ); ?>" max="<?php echo esc_attr( $all['rate_max'] ); ?>" value="<?php echo esc_attr( $all['rate_default'] ); ?>" step="<?php echo esc_attr( $all['rate_step'] ); ?>">
+				<div class="slider-range-labels"><span>R<?php echo esc_html( number_format( $all['rate_min'] ) ); ?></span><span>R<?php echo esc_html( number_format( $all['rate_max'] ) ); ?></span></div>
 			</div>
 
 			<!-- Efficiency -->
 			<div class="slider-group">
 				<div class="slider-header">
 					<span class="slider-label"><?php esc_html_e( 'Automation efficiency', 'doqix-roi-calculator' ); ?><span class="tooltip"><?php esc_html_e( 'What percentage of those manual hours can realistically be automated. 70% is a conservative starting point.', 'doqix-roi-calculator' ); ?></span></span>
-					<span class="slider-value" id="val-efficiency"><?php echo esc_html( $s['efficiency_default'] ); ?>%</span>
+					<span class="slider-value" id="val-efficiency"><?php echo esc_html( $all['efficiency_default'] ); ?>%</span>
 				</div>
-				<input type="range" id="slider-efficiency" min="<?php echo esc_attr( $s['efficiency_min'] ); ?>" max="<?php echo esc_attr( $s['efficiency_max'] ); ?>" value="<?php echo esc_attr( $s['efficiency_default'] ); ?>" step="<?php echo esc_attr( $s['efficiency_step'] ); ?>">
-				<div class="slider-range-labels"><span><?php echo esc_html( $s['efficiency_min'] ); ?>%</span><span><?php echo esc_html( $s['efficiency_max'] ); ?>%</span></div>
+				<input type="range" id="slider-efficiency" min="<?php echo esc_attr( $all['efficiency_min'] ); ?>" max="<?php echo esc_attr( $all['efficiency_max'] ); ?>" value="<?php echo esc_attr( $all['efficiency_default'] ); ?>" step="<?php echo esc_attr( $all['efficiency_step'] ); ?>">
+				<div class="slider-range-labels"><span><?php echo esc_html( $all['efficiency_min'] ); ?>%</span><span><?php echo esc_html( $all['efficiency_max'] ); ?>%</span></div>
 				<div class="efficiency-note" id="out-efficiency-note" style="display:none;"></div>
 			</div>
 
@@ -211,10 +218,10 @@ class Doqix_ROI_Frontend {
 			<div class="slider-group">
 				<div class="slider-header">
 					<span class="slider-label"><?php esc_html_e( 'Monthly error cost', 'doqix-roi-calculator' ); ?><span class="tooltip"><?php esc_html_e( 'What do manual mistakes cost you each month? Think re-work, wrong invoices, missed follow-ups.', 'doqix-roi-calculator' ); ?></span></span>
-					<span class="slider-value" id="val-error">R<?php echo esc_html( number_format( $s['error_default'] ) ); ?></span>
+					<span class="slider-value" id="val-error">R<?php echo esc_html( number_format( $all['error_default'] ) ); ?></span>
 				</div>
-				<input type="range" id="slider-error" min="<?php echo esc_attr( $s['error_min'] ); ?>" max="<?php echo esc_attr( $s['error_max'] ); ?>" value="<?php echo esc_attr( $s['error_default'] ); ?>" step="<?php echo esc_attr( $s['error_step'] ); ?>">
-				<div class="slider-range-labels"><span>R<?php echo esc_html( number_format( $s['error_min'] ) ); ?></span><span>R<?php echo esc_html( number_format( $s['error_max'] ) ); ?></span></div>
+				<input type="range" id="slider-error" min="<?php echo esc_attr( $all['error_min'] ); ?>" max="<?php echo esc_attr( $all['error_max'] ); ?>" value="<?php echo esc_attr( $all['error_default'] ); ?>" step="<?php echo esc_attr( $all['error_step'] ); ?>">
+				<div class="slider-range-labels"><span>R<?php echo esc_html( number_format( $all['error_min'] ) ); ?></span><span>R<?php echo esc_html( number_format( $all['error_max'] ) ); ?></span></div>
 			</div>
 		</div>
 
@@ -250,12 +257,14 @@ class Doqix_ROI_Frontend {
 
 			<div class="benchmark" id="out-benchmark"></div>
 
-			<a href="<?php echo esc_url( $s['cta_url'] ); ?>" class="roi-cta">
-				<?php echo esc_html( $s['cta_text'] ); ?>
-				<span class="cta-sub"><?php echo esc_html( $s['cta_subtext'] ); ?></span>
+			<?php if ( ! isset( $preset['cta_enabled'] ) || ! empty( $preset['cta_enabled'] ) ) : ?>
+			<a href="<?php echo esc_url( $preset['cta_url'] ); ?>" class="roi-cta">
+				<?php echo esc_html( $preset['cta_text'] ); ?>
+				<span class="cta-sub"><?php echo esc_html( $preset['cta_subtext'] ); ?></span>
 			</a>
+			<?php endif; ?>
 
-			<?php if ( ! empty( $s['share_enabled'] ) ) : ?>
+			<?php if ( ! empty( $preset['share_enabled'] ) ) : ?>
 			<button type="button" class="share-btn" id="btn-share"><?php esc_html_e( 'Share Your Results', 'doqix-roi-calculator' ); ?></button>
 			<?php endif; ?>
 
@@ -263,8 +272,8 @@ class Doqix_ROI_Frontend {
 
 	</div>
 
-	<?php if ( ! empty( $s['footnote_text'] ) ) : ?>
-	<p class="roi-footnote"><?php echo esc_html( $s['footnote_text'] ); ?></p>
+	<?php if ( ! empty( $preset['footnote_text'] ) ) : ?>
+	<p class="roi-footnote"><?php echo wp_kses_post( $preset['footnote_text'] ); ?></p>
 	<?php endif; ?>
 </section>
 		<?php

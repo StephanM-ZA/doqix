@@ -58,7 +58,7 @@ The v1.0 pricing strategy proposed R3,500-R5,000 per workflow as a build fee. Th
 | **Extra workflows** | +R750/mo each | +R650/mo each | +R500/mo each | Included in scope |
 | **Commitment** | Month-to-month | Month-to-month | Month-to-month | Month-to-month |
 | **Typical savings** | R3,000-R8,000/mo | R8,000-R20,000/mo | R20,000-R50,000/mo | R50,000+/mo |
-| **CTA** | Get Your Free Automation Plan | Get Your Free Automation Plan | Get Your Free Automation Plan | Show Me What's Possible |
+| **CTA** | Start Free | Start Free | Start Free | Show Me What's Possible |
 
 ### 4.2. Tier Design Logic
 
@@ -255,7 +255,7 @@ No hidden fees. No confusing credit systems. No per-task charges that punish you
 | **Support** | Email (48hr) | Priority + WhatsApp (24hr) | Dedicated + monthly strategy call | Dedicated account manager |
 | **Training** | R1,500/session | R1,500/session | Included | Included |
 | **You'll save** | ~R3,000-R8,000/mo | ~R8,000-R20,000/mo | ~R20,000-R50,000/mo | R50,000+/mo |
-| | Get Your Free Automation Plan | Get Your Free Automation Plan | Get Your Free Automation Plan | Show Me What's Possible |
+| | Start Free | Start Free | Start Free | Show Me What's Possible |
 
 **Every plan includes:** Hosting, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.
 
@@ -268,7 +268,7 @@ No hidden fees. No confusing credit systems. No per-task charges that punish you
 
 **Not sure which plan?** That's what the free call is for. We'll map your processes, show you where the time is going, and recommend the right fit.
 
-**CTA:** Get Your Free Automation Plan
+**CTA:** Start Free
 
 ---
 

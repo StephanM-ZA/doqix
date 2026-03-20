@@ -31,12 +31,12 @@
 
 | Category | Plugin | Purpose |
 |----------|--------|---------|
-| **Forms** | Gravity Forms or Contact Form 7 | Contact form with webhook/email integration |
+| **Forms** | Quform | Contact form with webhook/email integration (licensed) |
 | **SEO** | Yoast SEO | Meta titles, descriptions, schema markup |
-| **Performance** | WP Rocket | Caching, minification, lazy-loading |
+| **Performance** | WP Super Cache | Caching, minification, lazy-loading (free) |
 | **Images** | ShortPixel or Smush | Image compression, WebP conversion |
 | **Analytics** | Google Analytics 4 (via Google Site Kit) | Traffic, conversions, UTM tracking |
-| **Security** | Wordfence or Sucuri | Firewall, login protection, malware scan |
+| **Security** | All-In-One Security (AIOS) | Firewall, login protection, malware scan (free) |
 | **POPIA** | Complianz or CookieYes | Cookie consent banner, privacy policy generator |
 | **Backup** | UpdraftPlus | Automated backups |
 
@@ -59,12 +59,12 @@
   --action: #0886B5;
   --text: #0D2028;
   --bg: #FFFFFF;
-  --muted: rgba(13, 32, 40, 0.60);
+  --muted: #6B7980;
   --line: rgba(13, 32, 40, 0.12);
 
   /* Typography */
-  --font-body: 'Open Sans', sans-serif;
-  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Inter', sans-serif;
 
   /* Spacing */
   --section-padding: 80px 0;
@@ -80,12 +80,12 @@
 ### Typography Scale
 | Element | Font | Weight | Size (desktop) | Size (mobile) | Color |
 |---------|------|--------|----------------|---------------|-------|
-| H1 | Montserrat | 700 | 40px | 28px | --ink |
-| H2 | Montserrat | 700 | 32px | 24px | --ink |
-| H3 | Montserrat | 600 | 24px | 20px | --ink |
-| Body | Open Sans | 400 | 16px | 16px | --text |
-| Secondary | Open Sans | 400 | 14px | 14px | --muted |
-| CTA Button | Open Sans | 600 | 16px | 16px | #FFFFFF on --action |
+| H1 | Inter | 700 | 40px | 28px | --ink |
+| H2 | Inter | 700 | 32px | 24px | --ink |
+| H3 | Inter | 600 | 24px | 20px | --ink |
+| Body | Inter | 400 | 16px | 16px | --text |
+| Secondary | Inter | 400 | 14px | 14px | --muted |
+| CTA Button | Inter | 600 | 16px | 16px | #FFFFFF on --action |
 
 ---
 
@@ -124,7 +124,7 @@ Based on Do.Qix Plans (February 2026):
 | **Support** | Email (48hr) | Priority + WhatsApp (24hr) | Dedicated + monthly strategy call | Dedicated account manager |
 | **Training** | R1,500/session | R1,500/session | Included | Included |
 | **You'll save** | ~R3,000-R8,000/mo | ~R8,000-R20,000/mo | ~R20,000-R50,000/mo | R50,000+/mo |
-| **CTA** | Get Your Free Automation Plan | Get Your Free Automation Plan | Get Your Free Automation Plan | Show Me What's Possible |
+| **CTA** | Start Free | Start Free | Start Free | Show Me What's Possible |
 
 ### Display approach
 - Show as 4-column pricing cards on Services page (stack 2x2 on mobile)
@@ -141,7 +141,7 @@ Based on Do.Qix Plans (February 2026):
 
 ### Contact Form
 - **Fields:** Name*, Email*, Company (optional), Company Size* (dropdown), Biggest time-waster* (textarea), How did you hear? (optional dropdown)
-- **Submit:** "Get My Free Automation Plan"
+- **Submit:** "Get My Free Plan"
 - **Micro-copy:** "We'll be in touch within 24 hours. Usually sooner."
 - **Action on submit:** Redirect to `/thank-you`, send notification email, optionally webhook to CRM/n8n
 
@@ -153,7 +153,7 @@ Based on Do.Qix Plans (February 2026):
 
 ### Mobile Sticky CTA Bar
 - Fixed bottom bar on mobile viewports
-- "Get Your Free Automation Plan" button
+- "Start Free" button
 - Background: --action, text: white
 - Appears after scrolling past hero
 
@@ -184,9 +184,9 @@ Based on Do.Qix Plans (February 2026):
 | Google PageSpeed (desktop) | 95+ |
 
 ### How to hit targets
-- WP Rocket caching + minification
+- WP Super Cache caching + minification
 - Images: WebP format, lazy-loaded, compressed
-- Fonts: Self-host Open Sans + Montserrat (no Google Fonts CDN call)
+- Fonts: Inter via Google Fonts CDN
 - Workflow grid image: Compress heavily, consider progressive JPEG
 - Video: Lazy-load embed, don't autoplay on mobile
 - No render-blocking JS above the fold
@@ -201,7 +201,7 @@ Based on Do.Qix Plans (February 2026):
 | **SSL** | Free via hosting (Let's Encrypt) or Cloudflare |
 | **POPIA** | Cookie consent banner (Complianz), Privacy Policy page, minimal data collection, SA-hosted data |
 | **Form security** | Honeypot + reCAPTCHA v3 on contact form |
-| **Login security** | Wordfence: limit login attempts, 2FA for admin |
+| **Login security** | AIOS: limit login attempts, 2FA for admin |
 | **Updates** | WordPress core, theme, plugins: auto-update minor, manual major |
 | **Backups** | Daily automated (UpdraftPlus) to off-site storage |
 
@@ -216,7 +216,7 @@ Based on Do.Qix Plans (February 2026):
 5. **Pricing:** Build 4-column pricing cards on Services page (Solo/Team/Business/Enterprise). Team highlighted as "Most popular."
 6. **Forms:** Configure contact form with webhook/email actions. Build exit-intent popup. Add mobile sticky CTA.
 7. **SEO:** Configure Yoast: titles, descriptions, schema markup for each page.
-8. **Performance:** Install WP Rocket, compress images, self-host fonts, test PageSpeed.
+8. **Performance:** Install WP Super Cache, compress images, self-host fonts, test PageSpeed.
 9. **Compliance:** Install Complianz, create Privacy Policy, add cookie banner.
 10. **Test:** Mobile responsiveness (iPhone, Android), form submissions, load times, all links, exit-intent, CTA visibility.
 11. **Launch:** Point domain, verify SSL, submit to Google Search Console, create Google Business Profile.

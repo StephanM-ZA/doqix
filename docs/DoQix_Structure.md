@@ -10,9 +10,9 @@
 ## Global Elements
 
 ### Header (Sticky — all pages)
-- **Logo:** "Do.Qix" + "Efficiency, Engineered" (Montserrat, 24px, --ink)
-- **Nav:** Home | Services | Products | Contact (Open Sans, 16px, --text, hover --accent)
-- **CTA Button:** "Get Your Free Automation Plan" (--action bg, #FFF text, 12px 24px padding, 4px radius)
+- **Logo:** "Do.Qix" + "Efficiency, Engineered" (Inter, 24px, --ink)
+- **Nav:** Home | Services | Products | Contact (Inter, 16px, --text, hover --accent)
+- **CTA Button:** "Start Free" (--action bg, #FFF text, 12px 24px padding, 4px radius)
 - **Behaviour:** Fixed on scroll. Mobile: hamburger with same 3 links + CTA.
 
 ### Footer (All pages)
@@ -31,17 +31,17 @@
 | --action | #0886B5 | CTA buttons, active links |
 | --text | #0D2028 | Body text |
 | --bg | #FFFFFF | Page background |
-| --muted | rgba(13,32,40,0.60) | Secondary text, captions |
+| --muted | #6B7980 | Secondary text, captions |
 | --line | rgba(13,32,40,0.12) | Borders, dividers |
 
 ### Typography
 | Element | Font | Size | Color |
 |---------|------|------|-------|
-| Body | Open Sans | 16px, 1.5 line-height | --text |
-| H1 | Montserrat Bold | 32px | --ink |
-| H2 | Montserrat Bold | 24px | --ink |
-| H3 | Montserrat Bold | 18px | --ink |
-| Secondary | Open Sans | 14px | --muted |
+| Body | Inter | 16px, 1.5 line-height | --text |
+| H1 | Inter Bold | 32px | --ink |
+| H2 | Inter Bold | 24px | --ink |
+| H3 | Inter Bold | 18px | --ink |
+| Secondary | Inter | 14px | --muted |
 
 ### Tone
 Friendly SA expert. Warm, direct, no jargon. A little playful. Every section answers "What's in it for me?" Anti-buzzword principle: we lead with understanding, not technology. See Tone Guide in Website_Copy.md v7.0.
@@ -117,7 +117,7 @@ Authentic and relatable. Real people, South African businesses. Video and animat
 | # | Section | Content Summary | Visual Element |
 |---|---------|----------------|----------------|
 | 1 | **Hero** | H1: "Let's Get Your Time Back." Subhead: Tell us, we'll fix it, no pressure. | Clean, minimal |
-| 2 | **Form (2-column)** | Left: Name, Email, Company (optional), Size (dropdown), "Biggest time-waster?" (textarea), "How did you hear?" (optional). Button: "Get My Free Automation Plan." Right: Email, phone, WhatsApp, hours, "We'll tell you straight." | 2-column layout |
+| 2 | **Form (2-column)** | Left: Name, Email, Company (optional), Size (dropdown), "Biggest time-waster?" (textarea), "How did you hear?" (optional). Button: "Get My Free Plan." Right: Email, phone, WhatsApp, hours, "We'll tell you straight." | 2-column layout |
 | 3 | **What Happens Next** | 5 numbered steps: respond fast, listen, no pitch, clear plan, you decide. | Numbered list |
 | 4 | **FAQs** | 7 questions: timelines, tech knowledge, apps, existing systems, data safety, cost, cancellation. | Accordion or list |
 | 5 | **Trust Signals** | Near form: 100+ workflows, data in your hands, POPIA, no lock-in, no hidden fees. | Badge row |
@@ -135,14 +135,14 @@ Authentic and relatable. Real people, South African businesses. Video and animat
 
 | Strategy | Implementation |
 |----------|---------------|
-| **One CTA everywhere** | "Get Your Free Automation Plan" on every page, in header, and in at least 2 section CTAs per page |
+| **One CTA everywhere** | "Start Free" on every page, in header, and in at least 2 section CTAs per page |
 | **Exit-intent popup** | Fires on all pages when mouse moves to close. "Your team is losing a full day every week." CTA. Dismiss: "I'll keep doing it manually." |
 | **Social proof near CTAs** | Trust badges (100+ workflows, POPIA, no lock-in) placed near every CTA button |
 | **Cross-linking** | Every section links forward. No dead ends. |
 | **Low-commitment offer** | "Free Automation Plan" = no cost, no obligation. 15-minute call. |
 | **Specificity** | Rand amounts (R11,000, R30,000), named apps (Xero, Shopify, HubSpot), SA cities (Joburg, Cape Town, Durban) |
 | **Fear addressed** | "We're not replacing anyone" on Home page. |
-| **Mobile CTA bar** | Sticky bottom bar on mobile: "Get Your Free Automation Plan" button always visible |
+| **Mobile CTA bar** | Sticky bottom bar on mobile: "Start Free" button always visible |
 
 ---
 

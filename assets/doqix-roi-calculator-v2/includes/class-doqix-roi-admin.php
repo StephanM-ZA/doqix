@@ -542,11 +542,21 @@ class Doqix_ROI_V2_Admin {
 				), admin_url( 'admin.php' ) ),
 				'doqix_roi_v2_delete_preset'
 			);
-			echo '<p><a href="' . esc_url( $delete_url ) . '" class="button" onclick="return confirm(\'' . esc_js( __( 'Delete this preset?', 'doqix-roi-calculator' ) ) . '\');">'
-				. esc_html__( 'Delete this preset', 'doqix-roi-calculator' ) . '</a>'
-				. ' &nbsp; <code>[doqix_roi_calculator_v2 preset="' . esc_html( $slug ) . '"]</code></p>';
+			$sc = '[doqix_roi_calculator_v2 preset="' . esc_attr( $slug ) . '"]';
+			echo '<div style="background:#f0f0f1;padding:12px 16px;margin:16px 0;border-radius:4px;display:flex;align-items:center;gap:10px;">'
+				. '<strong>' . esc_html__( 'Shortcode:', 'doqix-roi-calculator' ) . '</strong> '
+				. '<code id="doqix-v2-shortcode-text">' . $sc . '</code>'
+				. '<button type="button" class="button button-small" id="doqix-v2-copy-shortcode" onclick="navigator.clipboard.writeText(document.getElementById(\'doqix-v2-shortcode-text\').textContent).then(function(){var b=document.getElementById(\'doqix-v2-copy-shortcode\');b.textContent=\'Copied!\';setTimeout(function(){b.textContent=\'Copy\';},1500);});">Copy</button>'
+				. '</div>';
+			echo '<p><a href="' . esc_url( $delete_url ) . '" class="button button-link-delete" onclick="return confirm(\'' . esc_js( __( 'Delete this preset?', 'doqix-roi-calculator' ) ) . '\');">'
+				. esc_html__( 'Delete this preset', 'doqix-roi-calculator' ) . '</a></p>';
 		} else {
-			echo '<p><code>[doqix_roi_calculator_v2]</code> ' . esc_html__( 'or', 'doqix-roi-calculator' ) . ' <code>[doqix_roi_calculator_v2 preset="default"]</code></p>';
+			$sc = '[doqix_roi_calculator_v2]';
+			echo '<div style="background:#f0f0f1;padding:12px 16px;margin:16px 0;border-radius:4px;display:flex;align-items:center;gap:10px;">'
+				. '<strong>' . esc_html__( 'Shortcode:', 'doqix-roi-calculator' ) . '</strong> '
+				. '<code id="doqix-v2-shortcode-text">' . $sc . '</code>'
+				. '<button type="button" class="button button-small" id="doqix-v2-copy-shortcode" onclick="navigator.clipboard.writeText(document.getElementById(\'doqix-v2-shortcode-text\').textContent).then(function(){var b=document.getElementById(\'doqix-v2-copy-shortcode\');b.textContent=\'Copied!\';setTimeout(function(){b.textContent=\'Copy\';},1500);});">Copy</button>'
+				. '</div>';
 		}
 		?>
 		<form method="post" action="options.php">

@@ -16,6 +16,7 @@ class Doqix_ROI_Admin {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
+		add_action( 'admin_init', array( $this, 'handle_preset_actions' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_css' ) );
 	}
 
@@ -52,7 +53,7 @@ class Doqix_ROI_Admin {
 	}
 
 	/* ────────────────────────────────────────────
-	 * Register settings (Settings API)
+	 * Register settings (Settings API) — Global tab only
 	 * ──────────────────────────────────────────── */
 
 	public function register_settings() {
@@ -112,118 +113,47 @@ class Doqix_ROI_Admin {
 				array( 'slider' => $key )
 			);
 		}
+	}
 
-		/* ── Section 3: Content ── */
-		add_settings_section(
-			'doqix_roi_content',
-			__( 'Content', 'doqix-roi-calculator' ),
-			function () {
-				echo '<p>' . esc_html__( 'Configure the heading and intro text shown above the calculator.', 'doqix-roi-calculator' ) . '</p>';
-			},
-			'doqix-roi-calculator'
-		);
+	/* ────────────────────────────────────────────
+	 * Preset add / delete actions
+	 * ──────────────────────────────────────────── */
 
-		add_settings_field(
-			'heading_text',
-			__( 'Heading', 'doqix-roi-calculator' ),
-			array( $this, 'render_text_field' ),
-			'doqix-roi-calculator',
-			'doqix_roi_content',
-			array( 'field' => 'heading_text' )
-		);
-
-		add_settings_field(
-			'intro_text',
-			__( 'Intro Text', 'doqix-roi-calculator' ),
-			array( $this, 'render_textarea_field' ),
-			'doqix-roi-calculator',
-			'doqix_roi_content',
-			array( 'field' => 'intro_text' )
-		);
-
-		/* ── Section 4: Colors ── */
-		add_settings_section(
-			'doqix_roi_colors',
-			__( 'Colors', 'doqix-roi-calculator' ),
-			function () {
-				echo '<p>' . esc_html__( 'Customize the slider accent and CTA button colors to match your theme.', 'doqix-roi-calculator' ) . '</p>';
-			},
-			'doqix-roi-calculator'
-		);
-
-		add_settings_field(
-			'color_accent',
-			__( 'Slider Accent Color', 'doqix-roi-calculator' ),
-			array( $this, 'render_color_field' ),
-			'doqix-roi-calculator',
-			'doqix_roi_colors',
-			array( 'field' => 'color_accent', 'description' => __( 'Used for slider thumbs, track fill, value display, and ROI multiplier text.', 'doqix-roi-calculator' ) )
-		);
-
-		add_settings_field(
-			'color_cta',
-			__( 'CTA Button Color', 'doqix-roi-calculator' ),
-			array( $this, 'render_color_field' ),
-			'doqix-roi-calculator',
-			'doqix_roi_colors',
-			array( 'field' => 'color_cta', 'description' => __( 'Used for the CTA button background and share button outline.', 'doqix-roi-calculator' ) )
-		);
-
-		/* ── Section 4: Call to Action ── */
-		add_settings_section(
-			'doqix_roi_cta',
-			__( 'Call to Action', 'doqix-roi-calculator' ),
-			function () {
-				echo '<p>' . esc_html__( 'Configure the CTA button and share functionality.', 'doqix-roi-calculator' ) . '</p>';
-			},
-			'doqix-roi-calculator'
-		);
-
-		$cta_fields = array(
-			'cta_url'     => __( 'CTA URL', 'doqix-roi-calculator' ),
-			'cta_text'    => __( 'CTA Text', 'doqix-roi-calculator' ),
-			'cta_subtext' => __( 'CTA Subtext', 'doqix-roi-calculator' ),
-			'share_url'   => __( 'Share URL', 'doqix-roi-calculator' ),
-		);
-
-		foreach ( $cta_fields as $key => $label ) {
-			add_settings_field(
-				$key,
-				$label,
-				array( $this, 'render_text_field' ),
-				'doqix-roi-calculator',
-				'doqix_roi_cta',
-				array( 'field' => $key )
-			);
+	public function handle_preset_actions() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['doqix_roi_preset_nonce'] ) || ! wp_verify_nonce( $_POST['doqix_roi_preset_nonce'], 'doqix_roi_preset_action' ) ) {
+			return;
 		}
 
-		/* ── Section 4: Display Options ── */
-		add_settings_section(
-			'doqix_roi_display',
-			__( 'Display Options', 'doqix-roi-calculator' ),
-			function () {
-				echo '<p>' . esc_html__( 'Toggle display elements and set the footnote text shown below the calculator.', 'doqix-roi-calculator' ) . '</p>';
-			},
-			'doqix-roi-calculator'
-		);
+		$s = $this->get_settings();
+		if ( ! isset( $s['presets'] ) ) {
+			$s['presets'] = array( 'default' => doqix_roi_get_preset_defaults() );
+		}
 
-		add_settings_field(
-			'share_enabled',
-			__( 'Show Share Button', 'doqix-roi-calculator' ),
-			array( $this, 'render_checkbox_field' ),
-			'doqix-roi-calculator',
-			'doqix_roi_display',
-			array( 'field' => 'share_enabled' )
-		);
+		if ( isset( $_POST['doqix_add_preset'] ) && ! empty( $_POST['new_preset_name'] ) ) {
+			$name = sanitize_text_field( $_POST['new_preset_name'] );
+			$slug = sanitize_key( str_replace( ' ', '-', strtolower( $name ) ) );
+			if ( $slug && ! isset( $s['presets'][ $slug ] ) ) {
+				$p = doqix_roi_get_preset_defaults();
+				$p['label'] = $name;
+				$s['presets'][ $slug ] = $p;
+				update_option( DOQIX_ROI_OPTION_KEY, $s );
+				wp_safe_redirect( admin_url( 'admin.php?page=doqix-roi-calculator&tab=preset-' . $slug ) );
+				exit;
+			}
+		}
 
-		add_settings_field(
-			'footnote_text',
-			__( 'Footnote Text', 'doqix-roi-calculator' ),
-			array( $this, 'render_text_field' ),
-			'doqix-roi-calculator',
-			'doqix_roi_display',
-			array( 'field' => 'footnote_text' )
-		);
+		if ( isset( $_POST['doqix_delete_preset'] ) && ! empty( $_POST['delete_preset_slug'] ) ) {
+			$slug = sanitize_key( $_POST['delete_preset_slug'] );
+			if ( $slug !== 'default' && isset( $s['presets'][ $slug ] ) ) {
+				unset( $s['presets'][ $slug ] );
+				update_option( DOQIX_ROI_OPTION_KEY, $s );
+				wp_safe_redirect( admin_url( 'admin.php?page=doqix-roi-calculator&tab=global' ) );
+				exit;
+			}
+		}
 	}
 
 	/* ────────────────────────────────────────────
@@ -286,11 +216,12 @@ class Doqix_ROI_Admin {
 		$key = $args['field'];
 		$s   = $this->get_settings();
 		$type = ( strpos( $key, 'url' ) !== false ) ? 'url' : 'text';
+		$extra_class = ! empty( $args['class'] ) ? ' ' . esc_attr( $args['class'] ) : '';
 		?>
 		<input type="<?php echo esc_attr( $type ); ?>"
 			name="<?php echo esc_attr( DOQIX_ROI_OPTION_KEY . '[' . $key . ']' ); ?>"
 			value="<?php echo esc_attr( $s[ $key ] ); ?>"
-			class="regular-text">
+			class="regular-text<?php echo $extra_class; ?>">
 		<?php
 	}
 
@@ -308,6 +239,28 @@ class Doqix_ROI_Admin {
 		<?php
 	}
 
+	public function render_cta_toggle_field() {
+		$s = $this->get_settings();
+		$enabled = ! isset( $s['cta_enabled'] ) || ! empty( $s['cta_enabled'] );
+		?>
+		<label>
+			<input type="checkbox"
+				name="<?php echo esc_attr( DOQIX_ROI_OPTION_KEY . '[cta_enabled]' ); ?>"
+				value="1"
+				<?php checked( $enabled ); ?>
+				id="doqix-cta-enabled"
+				onchange="var els=document.querySelectorAll('.doqix-cta-field');for(var i=0;i<els.length;i++){els[i].closest('tr').style.opacity=this.checked?'1':'0.4';els[i].closest('tr').style.pointerEvents=this.checked?'auto':'none';}">
+			<?php esc_html_e( 'Enabled — uncheck to hide the CTA button on the frontend', 'doqix-roi-calculator' ); ?>
+		</label>
+		<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			var cb=document.getElementById('doqix-cta-enabled');
+			if(cb&&!cb.checked){var els=document.querySelectorAll('.doqix-cta-field');for(var i=0;i<els.length;i++){els[i].closest('tr').style.opacity='0.4';els[i].closest('tr').style.pointerEvents='none';}}
+		});
+		</script>
+		<?php
+	}
+
 	public function render_textarea_field( $args ) {
 		$key = $args['field'];
 		$s   = $this->get_settings();
@@ -316,6 +269,18 @@ class Doqix_ROI_Admin {
 			name="<?php echo esc_attr( DOQIX_ROI_OPTION_KEY . '[' . $key . ']' ); ?>"
 			class="large-text" rows="3"><?php echo esc_textarea( $s[ $key ] ); ?></textarea>
 		<?php
+	}
+
+	public function render_editor_field( $args ) {
+		$key  = $args['field'];
+		$s    = $this->get_settings();
+		$rows = isset( $args['rows'] ) ? $args['rows'] : 5;
+		wp_editor( $s[ $key ], 'doqix_roi_' . $key, array(
+			'textarea_name' => DOQIX_ROI_OPTION_KEY . '[' . $key . ']',
+			'teeny'         => false,
+			'media_buttons' => false,
+			'textarea_rows' => $rows,
+		) );
 	}
 
 	public function render_color_field( $args ) {
@@ -385,46 +350,161 @@ class Doqix_ROI_Admin {
 			}
 		}
 
-		/* Content */
-		$sanitized['heading_text'] = sanitize_text_field( $input['heading_text'] ?? $defaults['heading_text'] );
-		$sanitized['intro_text']   = sanitize_textarea_field( $input['intro_text'] ?? $defaults['intro_text'] );
+		/* Presets — merge with existing (don't wipe presets not being edited) */
+		$existing = wp_parse_args( get_option( DOQIX_ROI_OPTION_KEY, array() ), $defaults );
+		$sanitized['presets'] = isset( $existing['presets'] ) ? $existing['presets'] : array( 'default' => doqix_roi_get_preset_defaults() );
 
-		/* Colors — empty = use theme default */
-		$sanitized['color_accent'] = isset( $input['color_accent'] ) && '' !== $input['color_accent'] ? sanitize_hex_color( $input['color_accent'] ) : '';
-		$sanitized['color_cta']    = isset( $input['color_cta'] ) && '' !== $input['color_cta'] ? sanitize_hex_color( $input['color_cta'] ) : '';
-
-		/* CTA */
-		$sanitized['cta_url']     = esc_url_raw( $input['cta_url'] ?? $defaults['cta_url'] );
-		$sanitized['cta_text']    = sanitize_text_field( $input['cta_text'] ?? $defaults['cta_text'] );
-		$sanitized['cta_subtext'] = sanitize_text_field( $input['cta_subtext'] ?? $defaults['cta_subtext'] );
-		$sanitized['share_url']   = esc_url_raw( $input['share_url'] ?? $defaults['share_url'] );
-
-		/* Display */
-		$sanitized['share_enabled'] = ! empty( $input['share_enabled'] ) ? 1 : 0;
-		$sanitized['footnote_text'] = sanitize_text_field( $input['footnote_text'] ?? $defaults['footnote_text'] );
+		if ( ! empty( $input['presets'] ) && is_array( $input['presets'] ) ) {
+			foreach ( $input['presets'] as $slug => $pi ) {
+				$slug = sanitize_key( $slug );
+				$pd   = doqix_roi_get_preset_defaults();
+				$sanitized['presets'][ $slug ] = array(
+					'label'          => sanitize_text_field( $pi['label'] ?? $pd['label'] ),
+					'heading_text'   => wp_kses_post( $pi['heading_text'] ?? $pd['heading_text'] ),
+					'intro_text'     => wp_kses_post( $pi['intro_text'] ?? $pd['intro_text'] ),
+					'footnote_text'  => wp_kses_post( $pi['footnote_text'] ?? $pd['footnote_text'] ),
+					'color_accent'   => isset( $pi['color_accent'] ) && '' !== $pi['color_accent'] ? sanitize_hex_color( $pi['color_accent'] ) : '',
+					'color_cta'      => isset( $pi['color_cta'] ) && '' !== $pi['color_cta'] ? sanitize_hex_color( $pi['color_cta'] ) : '',
+					'cta_enabled'    => ! empty( $pi['cta_enabled'] ) ? 1 : 0,
+					'cta_url'        => sanitize_text_field( $pi['cta_url'] ?? $pd['cta_url'] ),
+					'cta_text'       => sanitize_text_field( $pi['cta_text'] ?? $pd['cta_text'] ),
+					'cta_subtext'    => sanitize_text_field( $pi['cta_subtext'] ?? $pd['cta_subtext'] ),
+					'share_url'      => sanitize_text_field( $pi['share_url'] ?? $pd['share_url'] ),
+					'share_enabled'  => ! empty( $pi['share_enabled'] ) ? 1 : 0,
+				);
+			}
+		}
 
 		return $sanitized;
 	}
 
 	/* ────────────────────────────────────────────
-	 * Render page
+	 * Render page — tabbed: Global + per-preset
 	 * ──────────────────────────────────────────── */
 
 	public function render_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
+
+		$s       = $this->get_settings();
+		$opt     = DOQIX_ROI_OPTION_KEY;
+		$presets = isset( $s['presets'] ) ? $s['presets'] : array( 'default' => doqix_roi_get_preset_defaults() );
+		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'global';
 		?>
 		<div class="wrap doqix-roi-admin">
 			<h1><?php esc_html_e( 'Do.Qix ROI Calculator Settings', 'doqix-roi-calculator' ); ?></h1>
-			<p><?php esc_html_e( 'Use the shortcode [doqix_roi_calculator] to display the calculator on any page or post.', 'doqix-roi-calculator' ); ?></p>
-			<form method="post" action="options.php">
-				<?php
-				settings_fields( 'doqix_roi_settings_group' );
-				do_settings_sections( 'doqix-roi-calculator' );
-				submit_button();
-				?>
+
+			<h2 class="nav-tab-wrapper">
+				<a href="?page=doqix-roi-calculator&tab=global" class="nav-tab <?php echo $current_tab === 'global' ? 'nav-tab-active' : ''; ?>">Global Settings</a>
+				<?php foreach ( $presets as $slug => $preset ) : ?>
+				<a href="?page=doqix-roi-calculator&tab=preset-<?php echo esc_attr( $slug ); ?>" class="nav-tab <?php echo $current_tab === 'preset-' . $slug ? 'nav-tab-active' : ''; ?>"><?php echo esc_html( $preset['label'] ?? ucfirst( $slug ) ); ?></a>
+				<?php endforeach; ?>
+			</h2>
+
+			<form method="post" style="margin:10px 0;">
+				<?php wp_nonce_field( 'doqix_roi_preset_action', 'doqix_roi_preset_nonce' ); ?>
+				<input type="text" name="new_preset_name" placeholder="New preset name" style="width:200px">
+				<input type="submit" name="doqix_add_preset" class="button" value="+ Add Preset">
 			</form>
+
+			<?php if ( $current_tab === 'global' ) : ?>
+				<p>These settings are shared across all presets.</p>
+				<form method="post" action="options.php">
+					<?php
+					settings_fields( 'doqix_roi_settings_group' );
+					do_settings_sections( 'doqix-roi-calculator' );
+					submit_button();
+					?>
+				</form>
+			<?php else :
+				$preset_slug = str_replace( 'preset-', '', $current_tab );
+				if ( ! isset( $presets[ $preset_slug ] ) ) {
+					echo '<p>Preset not found.</p></div>';
+					return;
+				}
+				$preset = wp_parse_args( $presets[ $preset_slug ], doqix_roi_get_preset_defaults() );
+				?>
+
+				<?php $shortcode_text = $preset_slug === 'default' ? '[doqix_roi_calculator]' : '[doqix_roi_calculator preset="' . esc_attr( $preset_slug ) . '"]'; ?>
+				<div style="background:#f0f0f1;padding:12px 16px;margin:16px 0;border-radius:4px;display:flex;align-items:center;gap:10px;">
+					<strong>Shortcode:</strong>
+					<code id="doqix-shortcode-text"><?php echo $shortcode_text; ?></code>
+					<button type="button" class="button button-small" id="doqix-copy-shortcode" onclick="navigator.clipboard.writeText(document.getElementById('doqix-shortcode-text').textContent).then(function(){var b=document.getElementById('doqix-copy-shortcode');b.textContent='Copied!';setTimeout(function(){b.textContent='Copy';},1500);});">Copy</button>
+				</div>
+
+				<form method="post" action="options.php">
+					<?php settings_fields( 'doqix_roi_settings_group' ); ?>
+
+					<h2>Preset Settings</h2>
+					<table class="form-table">
+						<tr>
+							<th>Preset Name</th>
+							<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][label]" ); ?>" value="<?php echo esc_attr( $preset['label'] ); ?>" class="regular-text" <?php echo $preset_slug === 'default' ? 'readonly' : ''; ?>></td>
+						</tr>
+					</table>
+
+					<h2>Content</h2>
+					<table class="form-table">
+						<tr>
+							<th>Heading</th>
+							<td><?php wp_editor( $preset['heading_text'], 'doqix_roi_heading_' . $preset_slug, array( 'textarea_name' => "{$opt}[presets][{$preset_slug}][heading_text]", 'teeny' => false, 'media_buttons' => false, 'textarea_rows' => 3 ) ); ?></td>
+						</tr>
+						<tr>
+							<th>Description</th>
+							<td><?php wp_editor( $preset['intro_text'], 'doqix_roi_intro_' . $preset_slug, array( 'textarea_name' => "{$opt}[presets][{$preset_slug}][intro_text]", 'teeny' => false, 'media_buttons' => false, 'textarea_rows' => 5 ) ); ?></td>
+						</tr>
+						<tr>
+							<th>Footnote / Disclaimer</th>
+							<td><?php wp_editor( $preset['footnote_text'], 'doqix_roi_footnote_' . $preset_slug, array( 'textarea_name' => "{$opt}[presets][{$preset_slug}][footnote_text]", 'teeny' => false, 'media_buttons' => false, 'textarea_rows' => 3 ) ); ?></td>
+						</tr>
+					</table>
+
+					<h2>Colors</h2>
+					<table class="form-table">
+						<tr>
+							<th>Slider Accent Color</th>
+							<td><input type="color" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][color_accent]" ); ?>" value="<?php echo esc_attr( ! empty( $preset['color_accent'] ) ? $preset['color_accent'] : '#0886B5' ); ?>"><p class="description">Used for slider thumbs, track fill, value display.</p></td>
+						</tr>
+						<tr>
+							<th>CTA Button Color</th>
+							<td><input type="color" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][color_cta]" ); ?>" value="<?php echo esc_attr( ! empty( $preset['color_cta'] ) ? $preset['color_cta'] : '#0886B5' ); ?>"><p class="description">Used for CTA button background and share button outline.</p></td>
+						</tr>
+					</table>
+
+					<h2>Call to Action</h2>
+					<?php $cta_on = ! isset( $preset['cta_enabled'] ) || ! empty( $preset['cta_enabled'] ); ?>
+					<table class="form-table">
+						<tr>
+							<th>Show CTA Button</th>
+							<td><label><input type="checkbox" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][cta_enabled]" ); ?>" value="1" <?php checked( $cta_on ); ?> id="doqix-cta-enabled" onchange="document.getElementById('doqix-cta-fields').style.opacity=this.checked?'1':'0.4';document.getElementById('doqix-cta-fields').style.pointerEvents=this.checked?'auto':'none';"> Enabled</label></td>
+						</tr>
+					</table>
+					<div id="doqix-cta-fields" style="<?php echo $cta_on ? '' : 'opacity:0.4;pointer-events:none;'; ?>">
+					<table class="form-table">
+						<tr><th>CTA URL</th><td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][cta_url]" ); ?>" value="<?php echo esc_attr( $preset['cta_url'] ); ?>" class="regular-text" placeholder="/contact"></td></tr>
+						<tr><th>CTA Text</th><td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][cta_text]" ); ?>" value="<?php echo esc_attr( $preset['cta_text'] ); ?>" class="regular-text"></td></tr>
+						<tr><th>CTA Subtext</th><td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][cta_subtext]" ); ?>" value="<?php echo esc_attr( $preset['cta_subtext'] ); ?>" class="regular-text"></td></tr>
+						<tr><th>Share URL</th><td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][share_url]" ); ?>" value="<?php echo esc_attr( $preset['share_url'] ); ?>" class="regular-text"></td></tr>
+					</table>
+					</div>
+
+					<h2>Display Options</h2>
+					<table class="form-table">
+						<tr><th>Show Share Button</th><td><label><input type="checkbox" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][share_enabled]" ); ?>" value="1" <?php checked( ! empty( $preset['share_enabled'] ) ); ?>> Enabled</label></td></tr>
+					</table>
+
+					<?php submit_button(); ?>
+				</form>
+
+				<?php if ( $preset_slug !== 'default' ) : ?>
+				<form method="post" style="margin-top:20px;">
+					<?php wp_nonce_field( 'doqix_roi_preset_action', 'doqix_roi_preset_nonce' ); ?>
+					<input type="hidden" name="delete_preset_slug" value="<?php echo esc_attr( $preset_slug ); ?>">
+					<input type="submit" name="doqix_delete_preset" class="button button-link-delete" value="Delete this preset" onclick="return confirm('Delete this preset?');">
+				</form>
+				<?php endif; ?>
+			<?php endif; ?>
 		</div>
 		<?php
 	}

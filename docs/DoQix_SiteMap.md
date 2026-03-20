@@ -35,7 +35,7 @@ Three pages. Flat hierarchy. No sub-menus.
 - No sub-menus. No dropdowns. No hamburger menus on desktop.
 - Mobile: Hamburger with the same 3 links + CTA button.
 
-**CTA button (always visible in header):** "Get Your Free Automation Plan"
+**CTA button (always visible in header):** "Start Free"
 - Background: --action (#0886B5)
 - Text: #FFFFFF
 - Links to: `/contact`
@@ -54,7 +54,7 @@ HOME (Aha!) → SERVICES (How?) → CONTACT (Yes!)
 ```
 
 **Every page has:**
-1. One primary CTA: "Get Your Free Automation Plan" → links to `/contact`
+1. One primary CTA: "Start Free" → links to `/contact`
 2. Cross-links to the next logical page
 3. No dead ends — every section leads somewhere
 
@@ -74,7 +74,7 @@ HOME (Aha!) → SERVICES (How?) → CONTACT (Yes!)
 **Page titles:**
 - Home: `Do.Qix | Stop the Busywork. Start What Matters | Workflow Automation South Africa`
 - Services: `What We Automate | Business Process Automation for SA SMEs | Do.Qix`
-- Contact: `Get Your Free Automation Plan | Do.Qix South Africa`
+- Contact: `Start Free | Do.Qix South Africa`
 
 **Meta descriptions:**
 - Home: `Do.Qix automates repetitive business tasks for South African SMEs. Simple, affordable, done-for-you workflow automation. Get a free automation plan today.`
