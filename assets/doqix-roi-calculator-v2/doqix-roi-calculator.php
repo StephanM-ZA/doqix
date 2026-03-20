@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_ROI_V2_VERSION',    '2.0.0' );
+define( 'DOQIX_ROI_V2_VERSION',    '2.1.0' );
 define( 'DOQIX_ROI_V2_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_ROI_V2_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_ROI_V2_OPTION_KEY', 'doqix_roi_v2_settings' );

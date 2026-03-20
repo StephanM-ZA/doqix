@@ -415,16 +415,16 @@
       var annualSavings   = monthlySavings * 12;
 
       var shareText =
-        'I just calculated my automation savings:\n' +
+        '\uD83D\uDCA1 Ever wondered what repetitive work actually costs? I just found out:\n' +
         '\n' +
-        'Monthly: ' + formatZAR(monthlySavings) + '\n' +
-        'Annual: ' + formatZAR(annualSavings) + '\n' +
-        'Hours saved: ' + formatHours(hoursSavedMonth) + '/month\n' +
+        '\uD83D\uDCB0 Monthly: *' + formatZAR(monthlySavings) + '*\n' +
+        '\uD83D\uDCCA Annual: *' + formatZAR(annualSavings) + '*\n' +
+        '\u23F1\uFE0F Hours saved: *' + formatHours(hoursSavedMonth) + '/month*\n' +
         '\n' +
-        'Calculate yours:';
+        '\uD83D\uDC49 Go to https://doqix.co.za to find out more.';
 
       var shareUrl   = config.share_url || 'https://doqix.co.za';
-      var shareTitle = 'My Automation Savings \u2014 Do.Qix Calculator';
+      var shareTitle = 'My Automation Savings \u2014 DoQix - Efficiency Engineered';
 
       if (navigator.share) {
         navigator.share({
@@ -435,7 +435,7 @@
         return;
       }
 
-      var clipText = shareText + ' ' + shareUrl;
+      var clipText = shareText;
 
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(clipText).then(showCopied, fallbackCopy);

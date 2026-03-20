@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_ROI_VERSION',    '1.0.0' );
+define( 'DOQIX_ROI_VERSION',    '1.1.0' );
 define( 'DOQIX_ROI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_ROI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_ROI_OPTION_KEY', 'doqix_roi_settings' );
