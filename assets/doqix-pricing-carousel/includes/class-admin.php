@@ -286,10 +286,6 @@ class Doqix_Pricing_Admin {
 				$card['price_annual'] = (string) round( (float) $card['price'] * ( 1 - $discount / 100 ) );
 			}
 
-			// If billing is off and annual price wasn't submitted (disabled field), preserve existing
-			if ( empty( $preset['billing_toggle'] ) && isset( $existing_cards[ $card['sort_order'] ]['price_annual'] ) ) {
-				$card['price_annual'] = $existing_cards[ $card['sort_order'] ]['price_annual'];
-			}
 
 			// Rich text fields
 			$rich_keys = array( 'features', 'description', 'excludes' );
@@ -585,9 +581,7 @@ class Doqix_Pricing_Admin {
 						$this->render_text_field( $base . '[price]', __( 'Price', 'doqix-pricing-carousel' ), $card['price'] );
 						$this->render_text_field( $base . '[price_suffix]', __( 'Price Suffix', 'doqix-pricing-carousel' ), $card['price_suffix'] );
 
-						$billing_on = ! empty( $preset['billing_toggle'] );
 						$discount   = isset( $preset['annual_discount'] ) ? (int) $preset['annual_discount'] : 15;
-						$disabled_attr = $billing_on ? '' : ' disabled';
 						$calc_price = is_numeric( $card['price'] ) ? round( (float) $card['price'] * ( 1 - $discount / 100 ) ) : '';
 						$display_val = ! empty( $card['price_annual'] ) ? $card['price_annual'] : '';
 						?>
@@ -598,14 +592,9 @@ class Doqix_Pricing_Admin {
 								value="<?php echo esc_attr( $display_val ); ?>"
 								placeholder="<?php echo esc_attr( $calc_price ); ?>"
 								class="doqix-annual-price"
-								data-discount="<?php echo esc_attr( $discount ); ?>"
-								<?php echo $disabled_attr; ?>>
+								data-discount="<?php echo esc_attr( $discount ); ?>">
 							<span class="doqix-hint">
-								<?php if ( $billing_on ) : ?>
-									<?php printf( esc_html__( 'Auto-calculated: %s%% off monthly. Override by typing a value.', 'doqix-pricing-carousel' ), $discount ); ?>
-								<?php else : ?>
-									<?php esc_html_e( 'Enable billing toggle to use annual pricing.', 'doqix-pricing-carousel' ); ?>
-								<?php endif; ?>
+								<?php printf( esc_html__( 'Auto: %s%% off monthly price. Leave empty to use calculated value, or type to override.', 'doqix-pricing-carousel' ), $discount ); ?>
 							</span>
 						</div>
 						<?php

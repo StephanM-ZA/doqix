@@ -773,16 +773,12 @@
 	border-bottom: none;
 }
 
-.doqix-preview-feat::before {
-	content: "\2713 ";
-	color: var(--pricing-feat-check, #0886B5);
-	font-weight: 700;
-}
+/* Checkmarks are inline in HTML, no ::before needed */
 
 .doqix-preview-excludes {
 	margin-top: 14px;
 	padding-top: 12px;
-	border-top: 2px solid #f0f0f0;
+	border-top: 1px solid #e8eff2;
 	font-size: 11px;
 	color: var(--pricing-exc-text, #999);
 }
