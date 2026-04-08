@@ -159,7 +159,7 @@
         }
       } else {
         cards[i].style.transform = 'scale(' + inactiveScale + ')';
-        cards[i].style.opacity = '0.6';
+        cards[i].style.opacity = String(config.inactiveOpacity || 0.6);
         cards[i].style.filter = 'blur(0.5px)';
         cards[i].classList.remove('doqix-active');
         if (cta) {

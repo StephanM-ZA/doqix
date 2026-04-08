@@ -297,8 +297,8 @@
 
 /* ── Excludes ── */
 .doqix-pricing-excludes {
-  margin-top: 16px;
-  padding-top: 14px;
+  margin-top: 8px;
+  padding-top: 8px;
   border-top: 2px solid #f0f0f0;
   color: var(--pricing-exc-text, #999);
   font-size: 11px;
@@ -327,10 +327,10 @@
 /* ── CTA Button ── */
 .doqix-pricing-cta {
   display: block;
-  margin: 18px 20px 20px;
+  margin: 16px 20px 20px;
   background: var(--pricing-cta-bg, #0886B5);
   color: var(--pricing-cta-text, #fff);
-  padding: 13px;
+  padding: 11px 16px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;

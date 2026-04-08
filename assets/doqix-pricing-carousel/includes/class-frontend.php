@@ -136,6 +136,7 @@ class Doqix_Pricing_Frontend {
 			'breakpoint'     => intval( $preset['mobile_breakpoint'] ),
 			'navStyle'       => $preset['nav_style'],
 			'activeScale'    => floatval( $preset['active_scale'] ),
+			'inactiveOpacity' => floatval( $preset['inactive_opacity'] ?? 0.6 ),
 			'autoplay'       => intval( $preset['autoplay'] ),
 			'autoplaySpeed'  => intval( $preset['autoplay_speed'] ),
 			'loop'           => intval( $preset['loop'] ?? 0 ),

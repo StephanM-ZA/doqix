@@ -363,6 +363,12 @@ class Doqix_Pricing_Admin {
 			$preset['active_scale'] = max( 1.0, min( 1.5, $scale ) );
 		}
 
+		// Inactive opacity: clamp 0.1-1.0
+		if ( isset( $input['inactive_opacity'] ) ) {
+			$opacity = floatval( $input['inactive_opacity'] );
+			$preset['inactive_opacity'] = max( 0.1, min( 1.0, $opacity ) );
+		}
+
 		// Autoplay
 		$preset['autoplay'] = ! empty( $input['autoplay'] ) ? 1 : 0;
 
@@ -808,6 +814,20 @@ class Doqix_Pricing_Admin {
 						   step="0.05" min="1" max="1.5"
 						   class="small-text">
 					<p class="description"><?php esc_html_e( '1.0 = same size, 1.15 = 15% larger', 'doqix-pricing-carousel' ); ?></p>
+				</div>
+
+				<!-- Inactive card opacity -->
+				<div class="doqix-field">
+					<label for="<?php echo esc_attr( $base . '[inactive_opacity]' ); ?>">
+						<?php esc_html_e( 'Inactive Card Opacity', 'doqix-pricing-carousel' ); ?>
+					</label>
+					<input type="number"
+						   id="<?php echo esc_attr( $base . '[inactive_opacity]' ); ?>"
+						   name="<?php echo esc_attr( $base . '[inactive_opacity]' ); ?>"
+						   value="<?php echo esc_attr( $preset['inactive_opacity'] ?? 0.6 ); ?>"
+						   step="0.05" min="0.1" max="1"
+						   class="small-text">
+					<p class="description"><?php esc_html_e( '0.1 = nearly invisible, 1.0 = fully visible', 'doqix-pricing-carousel' ); ?></p>
 				</div>
 
 				<!-- Autoplay toggle + speed -->
