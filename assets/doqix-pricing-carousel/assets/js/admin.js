@@ -297,9 +297,9 @@
     colorInput.value = visualDefault;
     colorInput.setAttribute('data-is-set', '0');
 
-    // Show "Theme default" text
+    // Show the default hex value
     var codeEl = field.querySelector('code');
-    if (codeEl) codeEl.textContent = 'Theme default';
+    if (codeEl) codeEl.textContent = visualDefault;
 
     // Trigger input event to update preview
     var evt = new Event('input', { bubbles: true });
