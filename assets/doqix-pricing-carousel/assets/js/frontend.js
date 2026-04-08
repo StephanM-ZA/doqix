@@ -159,6 +159,14 @@
   }
 
   function goTo(index) {
+    if (parseInt(config.loop, 10) === 1) {
+      /* Wrap around */
+      if (index < 0) {
+        index = cards.length - 1;
+      } else if (index >= cards.length) {
+        index = 0;
+      }
+    }
     currentIndex = clamp(index, 0, cards.length - 1);
     positionCards();
     resetAutoplay();

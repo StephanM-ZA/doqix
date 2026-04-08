@@ -371,6 +371,9 @@ class Doqix_Pricing_Admin {
 			$speed = absint( $input['autoplay_speed'] );
 			$preset['autoplay_speed'] = max( 1000, $speed );
 		}
+
+		// Loop
+		$preset['loop'] = ! empty( $input['loop'] ) ? 1 : 0;
 	}
 
 	/**
@@ -777,6 +780,16 @@ class Doqix_Pricing_Admin {
 
 			<p class="doqix-note"><?php esc_html_e( 'Navigation controls are hidden when grid mode is active on that screen size.', 'doqix-pricing-carousel' ); ?></p>
 
+			<!-- Arrow Colours (only visible for arrow nav style) -->
+			<h3><?php esc_html_e( 'Arrow Colours', 'doqix-pricing-carousel' ); ?></h3>
+			<div class="doqix-color-grid">
+				<?php
+				$this->render_color_field( $base . '[color_arrow_bg]', __( 'Arrow Background', 'doqix-pricing-carousel' ), $preset['color_arrow_bg'] ?? '', '--pricing-arrow-bg', '#ffffff' );
+				$this->render_color_field( $base . '[color_arrow_color]', __( 'Arrow Colour', 'doqix-pricing-carousel' ), $preset['color_arrow_color'] ?? '', '--pricing-arrow-color', '#555555' );
+				$this->render_color_field( $base . '[color_arrow_hover_bg]', __( 'Arrow Hover BG', 'doqix-pricing-carousel' ), $preset['color_arrow_hover_bg'] ?? '', '--pricing-arrow-hover-bg', '#ffffff' );
+				?>
+			</div>
+
 			<hr>
 
 			<!-- Carousel Options -->
@@ -820,6 +833,21 @@ class Doqix_Pricing_Admin {
 						   value="<?php echo esc_attr( $preset['autoplay_speed'] ?? 5000 ); ?>"
 						   min="1000" step="500"
 						   class="small-text">
+				</div>
+
+				<!-- Loop toggle -->
+				<div class="doqix-field">
+					<label>
+						<?php esc_html_e( 'Loop', 'doqix-pricing-carousel' ); ?>
+					</label>
+					<input type="hidden" name="<?php echo esc_attr( $base . '[loop]' ); ?>" value="0">
+					<label class="doqix-toggle-label">
+						<input type="checkbox"
+							   name="<?php echo esc_attr( $base . '[loop]' ); ?>"
+							   value="1"
+							   <?php checked( $preset['loop'] ?? 0, 1 ); ?>>
+						<?php esc_html_e( 'Loop carousel continuously (wraps from last to first and vice versa)', 'doqix-pricing-carousel' ); ?>
+					</label>
 				</div>
 			</div>
 
