@@ -394,20 +394,40 @@
     var thisPanel = inp.closest('.doqix-card-panel');
 
     if (inp.checked) {
-      // Uncheck all other featured toggles
+      // Find the badge text from whichever card currently has it
+      var existingBadgeText = '';
       var allChecks = container.querySelectorAll('input[type="checkbox"][name*="[featured]"]');
       for (var i = 0; i < allChecks.length; i++) {
         if (allChecks[i] !== inp) {
-          allChecks[i].checked = false;
-          // Remove star from other panels
           var otherPanel = allChecks[i].closest('.doqix-card-panel');
+          if (otherPanel && allChecks[i].checked) {
+            // Grab badge text from the old featured card
+            var otherBadgeInput = otherPanel.querySelector('input[name*="[badge]"]');
+            if (otherBadgeInput && otherBadgeInput.value) {
+              existingBadgeText = otherBadgeInput.value;
+              otherBadgeInput.value = '';
+            }
+          }
+          // Uncheck and remove star + badge pill from other panels
+          allChecks[i].checked = false;
           if (otherPanel) {
             var otherStar = otherPanel.querySelector('.doqix-featured-star');
             if (otherStar) otherStar.remove();
+            var otherBadge = otherPanel.querySelector('.doqix-badge-preview');
+            if (otherBadge) otherBadge.remove();
           }
         }
       }
-      // Add star to this panel header if not present
+
+      // Move badge text to this card's badge field
+      if (existingBadgeText && thisPanel) {
+        var thisBadgeInput = thisPanel.querySelector('input[name*="[badge]"]');
+        if (thisBadgeInput && !thisBadgeInput.value) {
+          thisBadgeInput.value = existingBadgeText;
+        }
+      }
+
+      // Add star to this panel header
       if (thisPanel && !thisPanel.querySelector('.doqix-featured-star')) {
         var header = thisPanel.querySelector('.doqix-card-header');
         var removeBtn = header.querySelector('.doqix-remove-card');
@@ -416,11 +436,28 @@
         star.textContent = '\u2605';
         header.insertBefore(star, removeBtn);
       }
+
+      // Add badge pill to this panel header if badge text exists
+      if (thisPanel) {
+        var thisBadgeInput2 = thisPanel.querySelector('input[name*="[badge]"]');
+        var badgeVal = thisBadgeInput2 ? thisBadgeInput2.value : '';
+        var existingPill = thisPanel.querySelector('.doqix-badge-preview');
+        if (badgeVal && !existingPill) {
+          var header2 = thisPanel.querySelector('.doqix-card-header');
+          var star2 = header2.querySelector('.doqix-featured-star');
+          var pill = document.createElement('span');
+          pill.className = 'doqix-badge-preview';
+          pill.textContent = badgeVal;
+          header2.insertBefore(pill, star2);
+        }
+      }
     } else {
-      // Remove star from this panel
+      // Remove star and badge pill from this panel
       if (thisPanel) {
         var star = thisPanel.querySelector('.doqix-featured-star');
         if (star) star.remove();
+        var badge = thisPanel.querySelector('.doqix-badge-preview');
+        if (badge) badge.remove();
       }
     }
   });
