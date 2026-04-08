@@ -336,9 +336,129 @@ class Doqix_Pricing_Admin {
 	 * ──────────────────────────────────────────── */
 
 	private function render_cards_tab( $preset_slug, $preset ) {
-		echo '<div class="doqix-tab-content doqix-tab-cards">';
-		echo '<p>' . esc_html__( 'Cards tab — full implementation in a later task.', 'doqix-pricing-carousel' ) . '</p>';
-		echo '</div>';
+		$cards   = isset( $preset['cards'] ) && is_array( $preset['cards'] ) ? $preset['cards'] : array();
+		$opt     = DOQIX_PRICING_OPTION_KEY . '[presets][' . esc_attr( $preset_slug ) . '][cards]';
+		?>
+		<div class="doqix-tab-content doqix-tab-cards" id="doqix-cards-container">
+		<?php foreach ( $cards as $i => $raw_card ) :
+			$card = wp_parse_args( $raw_card, doqix_pricing_get_card_defaults() );
+			$base = $opt . '[' . $i . ']';
+		?>
+			<div class="doqix-card-panel doqix-repeater-row" data-index="<?php echo esc_attr( $i ); ?>">
+
+				<!-- Panel header -->
+				<div class="doqix-card-header" onclick="doqixPricingToggleCard(this)">
+					<span class="doqix-drag-handle" title="<?php esc_attr_e( 'Drag to reorder', 'doqix-pricing-carousel' ); ?>">&#8942;&#8942;</span>
+					<span class="doqix-card-title"><?php echo esc_html( $card['name'] ?: __( 'Untitled Card', 'doqix-pricing-carousel' ) ); ?></span>
+					<?php if ( '' !== $card['badge'] ) : ?>
+						<span class="doqix-badge-preview"><?php echo esc_html( $card['badge'] ); ?></span>
+					<?php endif; ?>
+					<?php if ( ! empty( $card['featured'] ) ) : ?>
+						<span class="doqix-featured-star" title="<?php esc_attr_e( 'Featured', 'doqix-pricing-carousel' ); ?>">&#9733;</span>
+					<?php endif; ?>
+					<button type="button" class="button button-small doqix-remove-card"
+							onclick="event.stopPropagation(); doqixPricingRemoveCard(this);"
+							title="<?php esc_attr_e( 'Remove card', 'doqix-pricing-carousel' ); ?>">&times;</button>
+					<span class="doqix-collapse-arrow">&#9654;</span>
+				</div>
+
+				<!-- Panel body -->
+				<div class="doqix-card-body">
+
+					<!-- 2-column field grid -->
+					<div class="doqix-field-grid">
+						<?php
+						$this->render_text_field( $base . '[name]', __( 'Name', 'doqix-pricing-carousel' ), $card['name'] );
+						$this->render_text_field( $base . '[subtitle]', __( 'Subtitle', 'doqix-pricing-carousel' ), $card['subtitle'] );
+						$this->render_text_field( $base . '[price]', __( 'Price', 'doqix-pricing-carousel' ), $card['price'] );
+						$this->render_text_field( $base . '[price_suffix]', __( 'Price Suffix', 'doqix-pricing-carousel' ), $card['price_suffix'] );
+						$this->render_text_field( $base . '[price_annual]', __( 'Annual Price', 'doqix-pricing-carousel' ), $card['price_annual'], __( 'Used when billing toggle on', 'doqix-pricing-carousel' ) );
+						$this->render_text_field( $base . '[setup_fee]', __( 'Setup Fee', 'doqix-pricing-carousel' ), $card['setup_fee'] );
+						$this->render_text_field( $base . '[savings]', __( 'Savings Line', 'doqix-pricing-carousel' ), $card['savings'] );
+						$this->render_text_field( $base . '[cta_label]', __( 'CTA Label', 'doqix-pricing-carousel' ), $card['cta_label'] );
+						$this->render_text_field( $base . '[cta_url]', __( 'CTA URL', 'doqix-pricing-carousel' ), $card['cta_url'] );
+						$this->render_text_field( $base . '[badge]', __( 'Badge Text', 'doqix-pricing-carousel' ), $card['badge'], __( 'Empty = no badge', 'doqix-pricing-carousel' ) );
+						?>
+
+						<!-- Featured toggle -->
+						<div class="doqix-field">
+							<label>
+								<?php esc_html_e( 'Featured', 'doqix-pricing-carousel' ); ?>
+							</label>
+							<input type="hidden" name="<?php echo esc_attr( $base . '[featured]' ); ?>" value="0">
+							<label class="doqix-toggle-label">
+								<input type="checkbox"
+									   name="<?php echo esc_attr( $base . '[featured]' ); ?>"
+									   value="1"
+									   <?php checked( $card['featured'], 1 ); ?>>
+								<?php esc_html_e( 'Highlight this card', 'doqix-pricing-carousel' ); ?>
+							</label>
+						</div>
+
+						<!-- Icon type select -->
+						<div class="doqix-field">
+							<label for="<?php echo esc_attr( $base . '[icon_type]' ); ?>">
+								<?php esc_html_e( 'Icon Type', 'doqix-pricing-carousel' ); ?>
+							</label>
+							<select id="<?php echo esc_attr( $base . '[icon_type]' ); ?>"
+									name="<?php echo esc_attr( $base . '[icon_type]' ); ?>"
+									class="regular-text">
+								<option value="none" <?php selected( $card['icon_type'], 'none' ); ?>><?php esc_html_e( 'None', 'doqix-pricing-carousel' ); ?></option>
+								<option value="dashicon" <?php selected( $card['icon_type'], 'dashicon' ); ?>><?php esc_html_e( 'Dashicon', 'doqix-pricing-carousel' ); ?></option>
+								<option value="image" <?php selected( $card['icon_type'], 'image' ); ?>><?php esc_html_e( 'Image URL', 'doqix-pricing-carousel' ); ?></option>
+							</select>
+						</div>
+
+						<!-- Icon value (shown conditionally via CSS/JS) -->
+						<?php $this->render_text_field( $base . '[icon_value]', __( 'Icon Value', 'doqix-pricing-carousel' ), $card['icon_value'] ); ?>
+
+						<!-- Hidden sort_order -->
+						<input type="hidden" name="<?php echo esc_attr( $base . '[sort_order]' ); ?>" value="<?php echo esc_attr( $i ); ?>">
+					</div>
+
+					<!-- Full-width mini editors -->
+					<?php
+					$this->render_mini_editor( $base . '[features]', __( 'Features', 'doqix-pricing-carousel' ), $card['features'] );
+					$this->render_mini_editor( $base . '[description]', __( 'Description', 'doqix-pricing-carousel' ), $card['description'], true );
+					$this->render_mini_editor( $base . '[excludes]', __( 'Excludes', 'doqix-pricing-carousel' ), $card['excludes'] );
+					?>
+
+					<!-- Collapsible colour overrides -->
+					<div class="doqix-color-overrides-section">
+						<a href="#" class="doqix-color-overrides-toggle" onclick="event.preventDefault(); var g=this.nextElementSibling; g.style.display=g.style.display==='none'?'block':'none';">
+							<?php esc_html_e( 'Colour Overrides (empty = inherit from preset)', 'doqix-pricing-carousel' ); ?>
+						</a>
+						<div class="doqix-color-overrides" style="display:none;">
+							<div class="doqix-field-grid">
+								<?php
+								$this->render_color_field( $base . '[color_header_bg]', __( 'Header BG', 'doqix-pricing-carousel' ), $card['color_header_bg'] );
+								$this->render_color_field( $base . '[color_header_text]', __( 'Header Text', 'doqix-pricing-carousel' ), $card['color_header_text'] );
+								$this->render_color_field( $base . '[color_cta_bg]', __( 'CTA BG', 'doqix-pricing-carousel' ), $card['color_cta_bg'] );
+								$this->render_color_field( $base . '[color_cta_text]', __( 'CTA Text', 'doqix-pricing-carousel' ), $card['color_cta_text'] );
+								$this->render_color_field( $base . '[color_badge_bg]', __( 'Badge BG', 'doqix-pricing-carousel' ), $card['color_badge_bg'] );
+								$this->render_color_field( $base . '[color_badge_text]', __( 'Badge Text', 'doqix-pricing-carousel' ), $card['color_badge_text'] );
+								$this->render_color_field( $base . '[color_card_bg]', __( 'Card BG', 'doqix-pricing-carousel' ), $card['color_card_bg'] );
+								$this->render_color_field( $base . '[color_feat_text]', __( 'Features Text', 'doqix-pricing-carousel' ), $card['color_feat_text'] );
+								$this->render_color_field( $base . '[color_feat_check]', __( 'Features Check', 'doqix-pricing-carousel' ), $card['color_feat_check'] );
+								$this->render_color_field( $base . '[color_exc_text]', __( 'Excludes Text', 'doqix-pricing-carousel' ), $card['color_exc_text'] );
+								?>
+							</div>
+						</div>
+					</div>
+
+				</div><!-- .doqix-card-body -->
+
+			</div><!-- .doqix-card-panel -->
+		<?php endforeach; ?>
+
+			<p>
+				<button type="button" class="button button-secondary" id="doqix-add-card">
+					<?php esc_html_e( '+ Add Card', 'doqix-pricing-carousel' ); ?>
+				</button>
+			</p>
+
+		</div><!-- .doqix-tab-cards -->
+		<?php
 	}
 
 	private function render_carousel_tab( $preset_slug, $preset ) {
