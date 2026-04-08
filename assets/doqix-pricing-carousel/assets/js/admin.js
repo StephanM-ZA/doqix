@@ -203,11 +203,19 @@
   var form = document.querySelector('.doqix-pricing-form');
   if (form) {
     form.addEventListener('submit', function() {
+      // Sync mini editors
       var editors = document.querySelectorAll('.doqix-mini-editor');
       for (var i = 0; i < editors.length; i++) {
         var hiddenInput = editors[i].parentElement.querySelector('.doqix-mini-editor-input');
         if (hiddenInput) {
           hiddenInput.value = editors[i].innerHTML;
+        }
+      }
+      // Clear colour values that are still at "theme default" (not user-set)
+      var colorInputs = form.querySelectorAll('.doqix-color-input');
+      for (var j = 0; j < colorInputs.length; j++) {
+        if (colorInputs[j].getAttribute('data-is-set') === '0') {
+          colorInputs[j].value = '';
         }
       }
     });
@@ -252,7 +260,8 @@
     var field = e.target.closest('.doqix-color-field');
     if (!field) return;
 
-    // Update hex code display
+    // Mark as user-set and update hex code display
+    e.target.setAttribute('data-is-set', '1');
     var codeEl = field.querySelector('code');
     if (codeEl) codeEl.textContent = e.target.value;
 
@@ -284,15 +293,13 @@
     var colorInput = field.querySelector('input[type="color"]');
     if (!colorInput) return;
 
-    var defaultVal = e.target.getAttribute('data-default') || '#000000';
-    colorInput.value = defaultVal;
+    var visualDefault = colorInput.getAttribute('data-visual-default') || '#0886B5';
+    colorInput.value = visualDefault;
+    colorInput.setAttribute('data-is-set', '0');
 
-    // Update hex code display
+    // Show "Theme default" text
     var codeEl = field.querySelector('code');
-    if (codeEl) codeEl.textContent = defaultVal === '#000000' ? '' : defaultVal;
-
-    // Clear the name so empty value is submitted (= theme default)
-    colorInput.value = defaultVal;
+    if (codeEl) codeEl.textContent = 'Theme default';
 
     // Trigger input event to update preview
     var evt = new Event('input', { bubbles: true });

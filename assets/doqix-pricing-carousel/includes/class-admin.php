@@ -842,18 +842,18 @@ class Doqix_Pricing_Admin {
 		$base = DOQIX_PRICING_OPTION_KEY . '[presets][' . esc_attr( $preset_slug ) . ']';
 
 		$colour_fields = array(
-			'color_header_bg'   => __( 'Header Background', 'doqix-pricing-carousel' ),
-			'color_header_text' => __( 'Header Text', 'doqix-pricing-carousel' ),
-			'color_accent'      => __( 'Accent Colour', 'doqix-pricing-carousel' ),
-			'color_card_bg'     => __( 'Card Background', 'doqix-pricing-carousel' ),
-			'color_cta_bg'      => __( 'CTA Background', 'doqix-pricing-carousel' ),
-			'color_cta_text'    => __( 'CTA Text', 'doqix-pricing-carousel' ),
-			'color_badge_bg'    => __( 'Badge Background', 'doqix-pricing-carousel' ),
-			'color_badge_text'  => __( 'Badge Text', 'doqix-pricing-carousel' ),
-			'color_feat_text'   => __( 'Features Text', 'doqix-pricing-carousel' ),
-			'color_feat_check'  => __( 'Features Checkmark', 'doqix-pricing-carousel' ),
-			'color_exc_text'    => __( 'Excludes Text', 'doqix-pricing-carousel' ),
-			'color_exc_title'   => __( 'Excludes Title', 'doqix-pricing-carousel' ),
+			'color_header_bg'   => array( __( 'Header Background', 'doqix-pricing-carousel' ), '#0886B5' ),
+			'color_header_text' => array( __( 'Header Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+			'color_accent'      => array( __( 'Accent Colour', 'doqix-pricing-carousel' ), '#0886B5' ),
+			'color_card_bg'     => array( __( 'Card Background', 'doqix-pricing-carousel' ), '#f9fcfd' ),
+			'color_cta_bg'      => array( __( 'CTA Background', 'doqix-pricing-carousel' ), '#0886B5' ),
+			'color_cta_text'    => array( __( 'CTA Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+			'color_badge_bg'    => array( __( 'Badge Background', 'doqix-pricing-carousel' ), '#ff9500' ),
+			'color_badge_text'  => array( __( 'Badge Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+			'color_feat_text'   => array( __( 'Features Text', 'doqix-pricing-carousel' ), '#1d2327' ),
+			'color_feat_check'  => array( __( 'Features Checkmark', 'doqix-pricing-carousel' ), '#0886B5' ),
+			'color_exc_text'    => array( __( 'Excludes Text', 'doqix-pricing-carousel' ), '#999999' ),
+			'color_exc_title'   => array( __( 'Excludes Title', 'doqix-pricing-carousel' ), '#666666' ),
 		);
 		?>
 		<div class="doqix-tab-content doqix-tab-colours">
@@ -865,15 +865,17 @@ class Doqix_Pricing_Admin {
 				<!-- Left column: colour pickers -->
 				<div class="doqix-colours-pickers">
 					<div class="doqix-color-grid">
-						<?php foreach ( $colour_fields as $key => $label ) :
-							// Build data-var: color_header_bg → --pricing-header-bg
-							$var_suffix = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
-							$data_var   = '--pricing-' . $var_suffix;
+						<?php foreach ( $colour_fields as $key => $meta ) :
+							$label          = $meta[0];
+							$visual_default = $meta[1];
+							$var_suffix     = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
+							$data_var       = '--pricing-' . $var_suffix;
 							$this->render_color_field(
 								$base . '[' . $key . ']',
 								$label,
 								$preset[ $key ] ?? '',
-								$data_var
+								$data_var,
+								$visual_default
 							);
 						endforeach; ?>
 					</div>
@@ -883,14 +885,13 @@ class Doqix_Pricing_Admin {
 				<div class="doqix-preview-area" style="position:sticky;top:40px;align-self:start;">
 					<span class="doqix-preview-label"><?php esc_html_e( 'LIVE PREVIEW', 'doqix-pricing-carousel' ); ?></span>
 					<?php
-					// Build initial CSS custom property values from preset
+					// Build initial CSS custom property values from preset (use visual defaults for preview)
 					$style_vars = '';
-					foreach ( $colour_fields as $key => $label ) {
-						$var_suffix = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
-						$val        = $preset[ $key ] ?? '';
-						if ( '' !== $val ) {
-							$style_vars .= '--pricing-' . $var_suffix . ':' . esc_attr( $val ) . ';';
-						}
+					foreach ( $colour_fields as $key => $meta ) {
+						$var_suffix     = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
+						$val            = $preset[ $key ] ?? '';
+						$visual_default = $meta[1];
+						$style_vars .= '--pricing-' . $var_suffix . ':' . esc_attr( $val ?: $visual_default ) . ';';
 					}
 					?>
 					<div id="doqix-preview-card" class="doqix-preview-card" style="<?php echo $style_vars; ?>">
@@ -1021,7 +1022,17 @@ class Doqix_Pricing_Admin {
 	 * @param string $label Field label.
 	 * @param string $value Current hex value (or empty).
 	 */
-	public function render_color_field( $name, $label, $value, $data_var = '' ) {
+	/**
+	 * @param string $name     Field name.
+	 * @param string $label    Display label.
+	 * @param string $value    Saved value (empty = theme default).
+	 * @param string $data_var CSS variable name for live preview (optional).
+	 * @param string $visual_default Fallback colour shown in picker when value is empty.
+	 */
+	public function render_color_field( $name, $label, $value, $data_var = '', $visual_default = '#0886B5' ) {
+		$is_set      = ! empty( $value );
+		$picker_val  = $is_set ? $value : $visual_default;
+		$display_hex = $is_set ? $value : __( 'Theme default', 'doqix-pricing-carousel' );
 		?>
 		<div class="doqix-field doqix-color-field">
 			<label for="<?php echo esc_attr( $name ); ?>">
@@ -1030,12 +1041,14 @@ class Doqix_Pricing_Admin {
 			<input type="color"
 				   id="<?php echo esc_attr( $name ); ?>"
 				   name="<?php echo esc_attr( $name ); ?>"
-				   value="<?php echo esc_attr( $value ?: '#000000' ); ?>"
+				   value="<?php echo esc_attr( $picker_val ); ?>"
 				   class="doqix-color-input"
+				   data-is-set="<?php echo $is_set ? '1' : '0'; ?>"
+				   data-visual-default="<?php echo esc_attr( $visual_default ); ?>"
 				   <?php if ( $data_var ) : ?>data-var="<?php echo esc_attr( $data_var ); ?>"<?php endif; ?>>
-			<code class="doqix-color-hex"><?php echo esc_html( $value ?: '' ); ?></code>
+			<code class="doqix-color-hex"><?php echo esc_html( $display_hex ); ?></code>
 			<button type="button" class="button button-small doqix-color-reset"
-					data-default=""
+					data-default="<?php echo esc_attr( $visual_default ); ?>"
 					title="<?php esc_attr_e( 'Reset to theme default', 'doqix-pricing-carousel' ); ?>">
 				<?php esc_html_e( 'Reset', 'doqix-pricing-carousel' ); ?>
 			</button>
