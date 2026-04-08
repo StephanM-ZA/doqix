@@ -25,6 +25,9 @@ class Doqix_Updater {
     /** @var int Cache duration in seconds (6 hours) */
     private const CACHE_TTL = 21600;
 
+    /** @var string WP option key for GitHub token */
+    private const TOKEN_OPTION = 'doqix_github_token';
+
     /** @var array Registered plugins: slug => plugin_file */
     private static $plugins = array();
 
@@ -48,6 +51,7 @@ class Doqix_Updater {
             add_filter( 'pre_set_site_transient_update_plugins', array( __CLASS__, 'check_updates' ) );
             add_filter( 'plugins_api', array( __CLASS__, 'plugin_info' ), 20, 3 );
             add_filter( 'upgrader_post_install', array( __CLASS__, 'after_install' ), 10, 3 );
+            add_filter( 'http_request_args', array( __CLASS__, 'inject_auth_header' ), 10, 2 );
             self::$hooked = true;
         }
     }
@@ -61,9 +65,15 @@ class Doqix_Updater {
             return $cached;
         }
 
+        $headers = array( 'Accept' => 'application/json' );
+        $token   = get_option( self::TOKEN_OPTION, '' );
+        if ( ! empty( $token ) ) {
+            $headers['Authorization'] = 'token ' . $token;
+        }
+
         $response = wp_remote_get( self::MANIFEST_URL, array(
             'timeout' => 10,
-            'headers' => array( 'Accept' => 'application/json' ),
+            'headers' => $headers,
         ) );
 
         if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
@@ -194,6 +204,32 @@ class Doqix_Updater {
         }
 
         return $response;
+    }
+
+    /**
+     * Inject auth header for GitHub API/download requests to our repo.
+     */
+    public static function inject_auth_header( $args, $url ) {
+        $token = get_option( self::TOKEN_OPTION, '' );
+        if ( empty( $token ) ) {
+            return $args;
+        }
+
+        // Only inject for requests to our GitHub repo
+        if ( strpos( $url, 'github.com/StephanM-ZA/doqix_website' ) !== false
+            || strpos( $url, 'raw.githubusercontent.com/StephanM-ZA/doqix_website' ) !== false
+            || strpos( $url, 'api.github.com/repos/StephanM-ZA/doqix_website' ) !== false ) {
+            $args['headers']['Authorization'] = 'token ' . $token;
+        }
+
+        return $args;
+    }
+
+    /**
+     * Get the token option key (for use in settings page).
+     */
+    public static function get_token_option_key() {
+        return self::TOKEN_OPTION;
     }
 
     /**

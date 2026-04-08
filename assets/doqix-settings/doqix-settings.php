@@ -80,6 +80,7 @@ class Doqix_Settings {
     private function get_tabs() {
         return array(
             'redirect' => 'Homepage Redirect',
+            'updates'  => 'Plugin Updates',
         );
     }
 
@@ -164,6 +165,9 @@ class Doqix_Settings {
         register_setting( 'doqix_settings_redirect', self::OPTION_KEY, array(
             'sanitize_callback' => array( $this, 'sanitize_redirect_settings' ),
         ) );
+        register_setting( 'doqix_settings_updates', Doqix_Updater::get_token_option_key(), array(
+            'sanitize_callback' => 'sanitize_text_field',
+        ) );
     }
 
     public function sanitize_redirect_settings( $input ) {
@@ -198,6 +202,9 @@ class Doqix_Settings {
             <div class="doqix-tab-content" style="margin-top: 20px;">
                 <?php
                 switch ( $current_tab ) {
+                    case 'updates':
+                        $this->render_updates_tab();
+                        break;
                     case 'redirect':
                     default:
                         $this->render_redirect_tab();
@@ -243,6 +250,56 @@ class Doqix_Settings {
                 </tr>
             </table>
             <?php submit_button(); ?>
+        </form>
+        <?php
+    }
+    private function render_updates_tab() {
+        $token_key = Doqix_Updater::get_token_option_key();
+        $token     = get_option( $token_key, '' );
+        ?>
+        <form method="post" action="options.php">
+            <?php settings_fields( 'doqix_settings_updates' ); ?>
+            <h2>GitHub Auto-Updates</h2>
+            <p class="description">Do.Qix plugins check GitHub for new versions. Since the repository is private, a personal access token is required.</p>
+            <table class="form-table">
+                <tr>
+                    <th scope="row">GitHub Token</th>
+                    <td>
+                        <input type="password" name="<?php echo esc_attr( $token_key ); ?>" value="<?php echo esc_attr( $token ); ?>" class="regular-text" autocomplete="off">
+                        <p class="description">
+                            A GitHub personal access token with <code>repo</code> scope.<br>
+                            Create one at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → "Generate new token (classic)" → check <code>repo</code> → Generate.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Status</th>
+                    <td>
+                        <?php
+                        if ( empty( $token ) ) {
+                            echo '<span style="color:#cc1818;">&#10007; No token set — updates will not work for private repos.</span>';
+                        } else {
+                            // Quick test: try to fetch the manifest
+                            Doqix_Updater::clear_cache();
+                            $test_response = wp_remote_get( 'https://raw.githubusercontent.com/StephanM-ZA/doqix_website/main/updates.json', array(
+                                'timeout' => 5,
+                                'headers' => array(
+                                    'Authorization' => 'token ' . $token,
+                                    'Accept'        => 'application/json',
+                                ),
+                            ) );
+                            if ( ! is_wp_error( $test_response ) && 200 === wp_remote_retrieve_response_code( $test_response ) ) {
+                                echo '<span style="color:#00a32a;">&#10003; Connected — token is valid and can reach the repository.</span>';
+                            } else {
+                                $code = is_wp_error( $test_response ) ? $test_response->get_error_message() : wp_remote_retrieve_response_code( $test_response );
+                                echo '<span style="color:#cc1818;">&#10007; Connection failed (' . esc_html( $code ) . '). Check your token has <code>repo</code> scope.</span>';
+                            }
+                        }
+                        ?>
+                    </td>
+                </tr>
+            </table>
+            <?php submit_button( 'Save Token' ); ?>
         </form>
         <?php
     }
