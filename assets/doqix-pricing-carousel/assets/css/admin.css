@@ -1,1 +1,914 @@
-/* Do.Qix Pricing Carousel — Admin Styles */
+/**
+ * Do.Qix Pricing Carousel — Admin Styles
+ *
+ * Styles the WP admin settings page rendered by class-admin.php.
+ * Accent colour: #0886B5
+ * Live-preview colours use var(--pricing-*, fallback) custom properties.
+ */
+
+/* ────────────────────────────────────────────
+ * Base / Reset for .doqix-pricing-admin
+ * ──────────────────────────────────────────── */
+.doqix-pricing-admin {
+	max-width: 1100px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	color: #1d2327;
+}
+
+.doqix-pricing-admin *,
+.doqix-pricing-admin *::before,
+.doqix-pricing-admin *::after {
+	box-sizing: border-box;
+}
+
+/* ────────────────────────────────────────────
+ * Preset Tabs (extends WP .nav-tab-wrapper)
+ * ──────────────────────────────────────────── */
+.doqix-preset-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0;
+	border-bottom: 1px solid #c3c4c7;
+	margin-bottom: 0;
+}
+
+.doqix-preset-tabs .nav-tab {
+	position: relative;
+}
+
+/* Delete preset link — hidden until tab hover */
+.doqix-preset-delete {
+	display: none;
+	position: absolute;
+	top: 2px;
+	right: 4px;
+	font-size: 14px;
+	line-height: 1;
+}
+
+.doqix-preset-tabs .nav-tab:hover .doqix-preset-delete {
+	display: inline-block;
+}
+
+.doqix-delete-link {
+	color: #cc1818;
+	text-decoration: none;
+	opacity: 0.6;
+	padding: 2px;
+}
+
+.doqix-delete-link:hover {
+	opacity: 1;
+	color: #cc1818;
+}
+
+/* Add-preset button (dashed border) */
+.doqix-add-preset-btn {
+	border: 1px dashed #c3c4c7 !important;
+	background: transparent !important;
+	color: #0886B5 !important;
+	font-size: 18px !important;
+	padding: 4px 16px !important;
+	cursor: pointer;
+}
+
+.doqix-add-preset-btn:hover {
+	background: rgba(8, 134, 181, 0.05) !important;
+}
+
+/* Add-preset inline form */
+#doqix-add-preset-form {
+	display: none;
+	margin: 10px 0;
+	padding: 15px;
+	background: #f9f9f9;
+	border: 1px solid #ccd0d4;
+	border-radius: 4px;
+}
+
+#doqix-add-preset-form label {
+	font-weight: 600;
+	font-size: 13px;
+}
+
+/* ────────────────────────────────────────────
+ * Sub-Tabs (.subsubsub override)
+ * ──────────────────────────────────────────── */
+.doqix-sub-tabs {
+	display: flex;
+	gap: 0;
+	background: #fff;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 0 20px;
+	margin: 15px 0 20px;
+	list-style: none;
+	float: none;
+}
+
+.doqix-sub-tabs li {
+	margin: 0;
+	padding: 0;
+}
+
+.doqix-sub-tabs li a {
+	display: inline-block;
+	padding: 12px 18px;
+	font-size: 13px;
+	color: #646970;
+	text-decoration: none;
+	border-bottom: 2px solid transparent;
+	transition: all 0.15s;
+}
+
+.doqix-sub-tabs li a:hover {
+	color: #1d2327;
+}
+
+.doqix-sub-tabs li a.current {
+	color: #0886B5;
+	border-bottom-color: #0886B5;
+	font-weight: 600;
+}
+
+/* ────────────────────────────────────────────
+ * Tab Content
+ * ──────────────────────────────────────────── */
+.doqix-tab-content {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-top: none;
+	padding: 24px;
+	border-radius: 0 0 4px 4px;
+}
+
+/* ────────────────────────────────────────────
+ * Card Repeater Panels
+ * ──────────────────────────────────────────── */
+.doqix-card-panel {
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	margin-bottom: 12px;
+	overflow: hidden;
+}
+
+.doqix-card-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 16px;
+	background: #f6f7f7;
+	border-bottom: 1px solid #e0e0e0;
+	cursor: pointer;
+	user-select: none;
+	transition: background 0.15s;
+}
+
+.doqix-card-header:hover {
+	background: #eef0f1;
+}
+
+.doqix-drag-handle {
+	color: #c3c4c7;
+	cursor: grab;
+	font-size: 16px;
+	line-height: 1;
+}
+
+.doqix-drag-handle:active {
+	cursor: grabbing;
+}
+
+.doqix-card-title {
+	font-weight: 600;
+	font-size: 14px;
+	flex: 1;
+}
+
+.doqix-badge-preview {
+	background: #ff9500;
+	color: #fff;
+	padding: 2px 10px;
+	border-radius: 10px;
+	font-size: 10px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.doqix-featured-star {
+	color: #ff9500;
+	font-size: 16px;
+	line-height: 1;
+}
+
+.doqix-remove-card {
+	color: #cc1818 !important;
+	font-size: 12px;
+	cursor: pointer;
+	padding: 4px 8px;
+	border-radius: 3px;
+}
+
+.doqix-remove-card:hover {
+	background: rgba(204, 24, 24, 0.08);
+}
+
+/* Collapse arrow */
+.doqix-collapse-arrow {
+	color: #999;
+	font-size: 12px;
+	transition: transform 0.2s;
+	display: inline-block;
+}
+
+.doqix-card-panel.doqix-open .doqix-collapse-arrow {
+	transform: rotate(90deg);
+}
+
+/* Card body — hidden by default, shown when .doqix-open on parent */
+.doqix-card-body {
+	padding: 20px;
+	display: none;
+}
+
+.doqix-card-panel.doqix-open .doqix-card-body {
+	display: block;
+}
+
+/* ────────────────────────────────────────────
+ * Form Fields
+ * ──────────────────────────────────────────── */
+.doqix-field-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.doqix-field {
+	margin-bottom: 12px;
+}
+
+.doqix-field-grid .doqix-field {
+	margin-bottom: 0;
+}
+
+.doqix-field label {
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	color: #1d2327;
+	margin-bottom: 4px;
+}
+
+.doqix-field input[type="text"],
+.doqix-field input[type="number"],
+.doqix-field input[type="url"],
+.doqix-field select {
+	width: 100%;
+	padding: 6px 10px;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	font-size: 13px;
+	background: #fff;
+	color: #1d2327;
+}
+
+.doqix-field input[type="text"]:focus,
+.doqix-field input[type="number"]:focus,
+.doqix-field input[type="url"]:focus,
+.doqix-field select:focus {
+	border-color: #0886B5;
+	outline: none;
+	box-shadow: 0 0 0 1px #0886B5;
+}
+
+.doqix-field .description,
+.doqix-hint {
+	font-size: 11px;
+	color: #999;
+	margin-top: 3px;
+}
+
+/* Small input override (for number fields like breakpoint, scale) */
+.doqix-field input.small-text {
+	width: 80px;
+}
+
+/* ────────────────────────────────────────────
+ * Toggle (pure CSS checkbox-based)
+ * ──────────────────────────────────────────── */
+.doqix-toggle-label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	font-size: 13px;
+	color: #1d2327;
+	position: relative;
+	padding-left: 46px;
+	min-height: 20px;
+	line-height: 20px;
+}
+
+/* Hide the native checkbox */
+.doqix-toggle-label input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* The toggle slider track */
+.doqix-toggle-label::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 36px;
+	height: 20px;
+	background: #c3c4c7;
+	border-radius: 10px;
+	transition: background 0.2s;
+}
+
+/* The toggle slider thumb */
+.doqix-toggle-label::after {
+	content: "";
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	width: 16px;
+	height: 16px;
+	background: #fff;
+	border-radius: 50%;
+	transition: transform 0.2s;
+}
+
+/* Checked state */
+.doqix-toggle-label input[type="checkbox"]:checked ~ .doqix-toggle-text,
+.doqix-toggle-label:has(input[type="checkbox"]:checked)::before {
+	background: #0886B5;
+}
+
+.doqix-toggle-label:has(input[type="checkbox"]:checked)::after {
+	transform: translateX(16px);
+}
+
+/* Fallback for browsers without :has() — JS adds .doqix-toggle-on */
+.doqix-toggle-label.doqix-toggle-on::before {
+	background: #0886B5;
+}
+
+.doqix-toggle-label.doqix-toggle-on::after {
+	transform: translateX(16px);
+}
+
+/* ────────────────────────────────────────────
+ * Mini Editor
+ * ──────────────────────────────────────────── */
+.doqix-mini-editor-wrap {
+	margin-bottom: 16px;
+}
+
+.doqix-mini-editor-wrap > label {
+	font-size: 13px;
+	font-weight: 600;
+	margin-bottom: 8px;
+	display: block;
+}
+
+.doqix-mini-toolbar {
+	display: flex;
+	gap: 2px;
+	padding: 4px 6px;
+	background: #f6f7f7;
+	border: 1px solid #c3c4c7;
+	border-bottom: none;
+	border-radius: 4px 4px 0 0;
+}
+
+.doqix-mini-toolbar button,
+.doqix-mini-toolbar .button.button-small {
+	width: 28px;
+	height: 26px;
+	border: none !important;
+	background: transparent !important;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 13px;
+	color: #555;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	min-height: 0;
+	line-height: 1;
+}
+
+.doqix-mini-toolbar button:hover,
+.doqix-mini-toolbar .button.button-small:hover {
+	background: #e0e0e0 !important;
+}
+
+.doqix-mini-toolbar .doqix-sep {
+	width: 1px;
+	background: #ddd;
+	margin: 2px 4px;
+	align-self: stretch;
+}
+
+.doqix-mini-editor {
+	min-height: 80px;
+	padding: 10px 12px;
+	font-size: 13px;
+	line-height: 1.6;
+	outline: none;
+	border: 1px solid #c3c4c7;
+	border-top: none;
+	border-radius: 0 0 4px 4px;
+	background: #fff;
+}
+
+.doqix-mini-editor:focus {
+	border-color: #0886B5;
+	box-shadow: 0 0 0 1px #0886B5;
+}
+
+.doqix-mini-editor p {
+	margin: 0 0 4px;
+}
+
+/* ────────────────────────────────────────────
+ * Colour Fields
+ * ──────────────────────────────────────────── */
+.doqix-color-field {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.doqix-color-field label {
+	margin-bottom: 0;
+}
+
+.doqix-color-field input[type="color"],
+.doqix-color-input {
+	width: 36px;
+	height: 30px;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 2px;
+	cursor: pointer;
+	background: #fff;
+}
+
+.doqix-color-hex {
+	font-size: 11px;
+	color: #666;
+	min-width: 70px;
+	font-family: monospace;
+}
+
+.doqix-color-reset,
+.doqix-reset-color {
+	font-size: 11px;
+	color: #0886B5;
+	cursor: pointer;
+	text-decoration: underline;
+	background: none;
+	border: none;
+}
+
+.doqix-color-reset:hover,
+.doqix-reset-color:hover {
+	color: #065a7a;
+}
+
+/* ────────────────────────────────────────────
+ * Colour Overrides (per-card collapsible)
+ * ──────────────────────────────────────────── */
+.doqix-color-overrides-toggle {
+	font-size: 12px;
+	color: #0886B5;
+	cursor: pointer;
+	padding: 8px 0;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-top: 16px;
+	text-decoration: none;
+}
+
+.doqix-color-overrides-toggle:hover {
+	color: #065a7a;
+}
+
+.doqix-color-overrides {
+	display: none;
+	margin-top: 8px;
+}
+
+.doqix-color-overrides.doqix-open {
+	display: grid;
+}
+
+.doqix-color-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+/* ────────────────────────────────────────────
+ * Device Split (Carousel tab)
+ * ──────────────────────────────────────────── */
+.doqix-device-split {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	margin-bottom: 24px;
+}
+
+.doqix-device-panel {
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.doqix-device-panel h4 {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	margin: 0;
+	background: #f6f7f7;
+	border-bottom: 1px solid #e0e0e0;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.doqix-device-panel label {
+	display: block;
+	padding: 8px 16px;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.doqix-device-panel label:hover {
+	background: #f9f9f9;
+}
+
+/* ────────────────────────────────────────────
+ * Radio Options
+ * ──────────────────────────────────────────── */
+.doqix-radio-option {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 14px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 13px;
+	transition: all 0.15s;
+	margin-bottom: 8px;
+}
+
+.doqix-radio-option.selected,
+.doqix-radio-option.active {
+	border-color: #0886B5;
+	background: rgba(8, 134, 181, 0.04);
+}
+
+/* ────────────────────────────────────────────
+ * Nav Options (Carousel tab)
+ * ──────────────────────────────────────────── */
+.doqix-nav-options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.doqix-nav-option {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	padding: 16px 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.15s;
+	min-width: 140px;
+	text-align: center;
+}
+
+.doqix-nav-option:hover {
+	border-color: #999;
+}
+
+.doqix-nav-option.active,
+.doqix-nav-option.selected {
+	border-color: #0886B5;
+	background: rgba(8, 134, 181, 0.04);
+}
+
+/* Hide the native radio inside nav options */
+.doqix-nav-option input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.doqix-nav-preview {
+	font-size: 20px;
+	color: #999;
+	margin-bottom: 4px;
+}
+
+.doqix-nav-option.active .doqix-nav-preview,
+.doqix-nav-option.selected .doqix-nav-preview {
+	color: #0886B5;
+}
+
+.doqix-nav-label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.doqix-nav-sublabel {
+	font-size: 10px;
+	color: #999;
+}
+
+/* ────────────────────────────────────────────
+ * Colours Layout (2-column: pickers + preview)
+ * ──────────────────────────────────────────── */
+.doqix-colours-layout {
+	display: grid;
+	grid-template-columns: 1fr 340px;
+	gap: 32px;
+	align-items: start;
+}
+
+.doqix-preview-area {
+	position: sticky;
+	top: 40px;
+	align-self: start;
+}
+
+.doqix-preview-label {
+	display: block;
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #999;
+	text-align: center;
+	margin-bottom: 12px;
+}
+
+/* ────────────────────────────────────────────
+ * Live Preview Card (uses CSS custom properties)
+ * ──────────────────────────────────────────── */
+.doqix-preview-card {
+	border-radius: 12px;
+	overflow: visible;
+	position: relative;
+	border: 2px solid var(--pricing-accent, #0886B5);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	background: #fff;
+}
+
+.doqix-preview-badge {
+	position: absolute;
+	top: -14px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: var(--pricing-badge-bg, #ff9500);
+	color: var(--pricing-badge-text, #fff);
+	padding: 6px 20px;
+	border-radius: 20px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	white-space: nowrap;
+	z-index: 2;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doqix-preview-header {
+	background: var(--pricing-header-bg, #0886B5);
+	color: var(--pricing-header-text, #fff);
+	padding: 24px 20px 20px;
+	text-align: center;
+	border-radius: 10px 10px 0 0;
+}
+
+.doqix-preview-header strong {
+	font-size: 17px;
+	font-weight: 700;
+}
+
+.doqix-preview-header small {
+	font-size: 11px;
+	opacity: 0.85;
+}
+
+.doqix-preview-price {
+	font-size: 34px;
+	font-weight: 800;
+	display: block;
+	margin-top: 10px;
+}
+
+.doqix-preview-price small {
+	font-size: 13px;
+	font-weight: 400;
+	opacity: 0.8;
+}
+
+.doqix-preview-body {
+	padding: 16px 20px;
+	background: var(--pricing-card-bg, #f9fcfd);
+}
+
+.doqix-preview-savings {
+	font-size: 11px;
+	color: var(--pricing-accent, #0886B5);
+	text-align: center;
+	font-weight: 600;
+	margin-bottom: 14px;
+}
+
+.doqix-preview-features {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.doqix-preview-features li {
+	padding: 8px 0;
+	border-bottom: 1px solid #e8eff2;
+	font-size: 12px;
+	color: var(--pricing-feat-text, #1d2327);
+}
+
+.doqix-preview-features li:last-child {
+	border-bottom: none;
+}
+
+.doqix-preview-feat {
+	padding: 8px 0;
+	border-bottom: 1px solid #e8eff2;
+	font-size: 12px;
+	color: var(--pricing-feat-text, #1d2327);
+}
+
+.doqix-preview-feat:last-child {
+	border-bottom: none;
+}
+
+.doqix-preview-feat::before {
+	content: "\2713 ";
+	color: var(--pricing-feat-check, #0886B5);
+	font-weight: 700;
+}
+
+.doqix-preview-excludes {
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top: 2px solid #f0f0f0;
+	font-size: 11px;
+	color: var(--pricing-exc-text, #999);
+}
+
+.doqix-preview-exc-title {
+	font-weight: 600;
+	color: var(--pricing-exc-title, #666);
+	margin-bottom: 4px;
+}
+
+.doqix-preview-exc-item {
+	padding: 2px 0;
+	color: var(--pricing-exc-text, #999);
+}
+
+.doqix-preview-exc-item::before {
+	content: "\2022 ";
+}
+
+.doqix-preview-cta {
+	margin: 0;
+	padding: 0;
+}
+
+.doqix-preview-cta a {
+	display: block;
+	background: var(--pricing-cta-bg, #0886B5);
+	color: var(--pricing-cta-text, #fff);
+	padding: 12px;
+	border-radius: 0 0 10px 10px;
+	font-size: 13px;
+	font-weight: 600;
+	text-align: center;
+	text-decoration: none;
+	transition: opacity 0.15s;
+}
+
+.doqix-preview-cta a:hover {
+	opacity: 0.9;
+}
+
+/* ────────────────────────────────────────────
+ * Note / Callout
+ * ──────────────────────────────────────────── */
+.doqix-note {
+	font-size: 11px;
+	color: #999;
+	font-style: italic;
+	padding: 8px 12px;
+	background: #fef9e7;
+	border-left: 3px solid #f0c674;
+	border-radius: 0 4px 4px 0;
+	margin: 12px 0;
+}
+
+/* ────────────────────────────────────────────
+ * Section Titles and Dividers
+ * ──────────────────────────────────────────── */
+.doqix-pricing-admin h3 {
+	font-size: 14px;
+	font-weight: 600;
+	color: #1d2327;
+	margin: 20px 0 8px;
+}
+
+.doqix-pricing-admin hr {
+	border: none;
+	border-top: 1px solid #f0f0f0;
+	margin: 24px 0;
+}
+
+.doqix-pricing-admin p.description {
+	font-size: 12px;
+	color: #646970;
+	margin-bottom: 16px;
+}
+
+/* ────────────────────────────────────────────
+ * WP Submit Button Override
+ * ──────────────────────────────────────────── */
+.doqix-pricing-form .button-primary {
+	background: #0886B5;
+	border-color: #076d94;
+}
+
+.doqix-pricing-form .button-primary:hover {
+	background: #076d94;
+	border-color: #065a7a;
+}
+
+/* ────────────────────────────────────────────
+ * Responsive
+ * ──────────────────────────────────────────── */
+@media screen and (max-width: 782px) {
+	.doqix-field-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.doqix-device-split {
+		grid-template-columns: 1fr;
+	}
+
+	.doqix-colours-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.doqix-preview-area {
+		position: static;
+	}
+
+	.doqix-color-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.doqix-nav-options {
+		flex-direction: column;
+	}
+
+	.doqix-nav-option {
+		min-width: auto;
+	}
+
+	.doqix-sub-tabs {
+		padding: 0 10px;
+	}
+
+	.doqix-sub-tabs li a {
+		padding: 10px 12px;
+		font-size: 12px;
+	}
+}
