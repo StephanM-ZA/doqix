@@ -121,8 +121,8 @@
       return;
     }
 
-    var activeScale = config.activeScale || 1.15;
-    var inactiveScale = 1 / activeScale;
+    var activeScale = config.activeScale || 1.05;
+    var inactiveScale = 1 - (activeScale - 1) * 0.6;
 
     /* Calculate offset to centre active card in track. */
     var trackRect = track.getBoundingClientRect();
