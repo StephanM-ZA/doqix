@@ -260,6 +260,7 @@ class Doqix_Pricing_Admin {
 			return;
 		}
 
+		$existing_cards = isset( $preset['cards'] ) ? $preset['cards'] : array();
 		$clean_cards = array();
 		foreach ( $input['cards'] as $raw_card ) {
 			if ( ! is_array( $raw_card ) ) {
@@ -277,6 +278,17 @@ class Doqix_Pricing_Admin {
 				if ( isset( $raw_card[ $key ] ) ) {
 					$card[ $key ] = sanitize_text_field( $raw_card[ $key ] );
 				}
+			}
+
+			// Auto-calculate annual price if empty and monthly price is numeric
+			if ( empty( $card['price_annual'] ) && is_numeric( $card['price'] ) ) {
+				$discount = isset( $preset['annual_discount'] ) ? (int) $preset['annual_discount'] : 15;
+				$card['price_annual'] = (string) round( (float) $card['price'] * ( 1 - $discount / 100 ) );
+			}
+
+			// If billing is off and annual price wasn't submitted (disabled field), preserve existing
+			if ( empty( $preset['billing_toggle'] ) && isset( $existing_cards[ $card['sort_order'] ]['price_annual'] ) ) {
+				$card['price_annual'] = $existing_cards[ $card['sort_order'] ]['price_annual'];
 			}
 
 			// Rich text fields
@@ -572,7 +584,31 @@ class Doqix_Pricing_Admin {
 						$this->render_text_field( $base . '[subtitle]', __( 'Subtitle', 'doqix-pricing-carousel' ), $card['subtitle'] );
 						$this->render_text_field( $base . '[price]', __( 'Price', 'doqix-pricing-carousel' ), $card['price'] );
 						$this->render_text_field( $base . '[price_suffix]', __( 'Price Suffix', 'doqix-pricing-carousel' ), $card['price_suffix'] );
-						$this->render_text_field( $base . '[price_annual]', __( 'Annual Price', 'doqix-pricing-carousel' ), $card['price_annual'], __( 'Used when billing toggle on', 'doqix-pricing-carousel' ) );
+						<?php
+						$billing_on = ! empty( $preset['billing_toggle'] );
+						$discount   = isset( $preset['annual_discount'] ) ? (int) $preset['annual_discount'] : 15;
+						$disabled   = $billing_on ? '' : ' disabled';
+						$calc_price = is_numeric( $card['price'] ) ? round( (float) $card['price'] * ( 1 - $discount / 100 ) ) : '';
+						$display_val = ! empty( $card['price_annual'] ) ? $card['price_annual'] : '';
+						?>
+						<div class="doqix-field">
+							<label><?php esc_html_e( 'Annual Price', 'doqix-pricing-carousel' ); ?></label>
+							<input type="text"
+								name="<?php echo esc_attr( $base . '[price_annual]' ); ?>"
+								value="<?php echo esc_attr( $display_val ); ?>"
+								placeholder="<?php echo esc_attr( $calc_price ); ?>"
+								class="doqix-annual-price"
+								data-discount="<?php echo esc_attr( $discount ); ?>"
+								<?php echo $disabled; ?>>
+							<span class="doqix-hint">
+								<?php if ( $billing_on ) : ?>
+									<?php printf( esc_html__( 'Auto-calculated: %s%% off monthly. Override by typing a value.', 'doqix-pricing-carousel' ), $discount ); ?>
+								<?php else : ?>
+									<?php esc_html_e( 'Enable billing toggle to use annual pricing.', 'doqix-pricing-carousel' ); ?>
+								<?php endif; ?>
+							</span>
+						</div>
+						<?php
 						$this->render_text_field( $base . '[setup_fee]', __( 'Setup Fee', 'doqix-pricing-carousel' ), $card['setup_fee'] );
 						$this->render_text_field( $base . '[savings]', __( 'Savings Line', 'doqix-pricing-carousel' ), $card['savings'] );
 						$this->render_text_field( $base . '[cta_label]', __( 'CTA Label', 'doqix-pricing-carousel' ), $card['cta_label'] );

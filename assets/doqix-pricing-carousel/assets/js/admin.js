@@ -350,7 +350,31 @@
   });
 
   /* ────────────────────────────────────────────
-   * 11. Featured Toggle — only one card at a time
+   * 11. Annual Price auto-calculate from monthly price
+   * ──────────────────────────────────────────── */
+
+  document.addEventListener('input', function(e) {
+    var inp = e.target;
+    if (!inp.name || inp.name.indexOf('[price]') === -1 || inp.name.indexOf('[price_annual]') !== -1) return;
+
+    var panel = inp.closest('.doqix-card-panel');
+    if (!panel) return;
+
+    var annualInput = panel.querySelector('.doqix-annual-price');
+    if (!annualInput) return;
+
+    var price = parseFloat(inp.value);
+    var discount = parseFloat(annualInput.getAttribute('data-discount')) || 15;
+
+    if (!isNaN(price) && price > 0) {
+      annualInput.placeholder = Math.round(price * (1 - discount / 100));
+    } else {
+      annualInput.placeholder = '';
+    }
+  });
+
+  /* ────────────────────────────────────────────
+   * 12. Featured Toggle — only one card at a time
    * ──────────────────────────────────────────── */
 
   document.addEventListener('change', function(e) {
