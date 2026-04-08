@@ -188,6 +188,17 @@ if ( is_admin() ) {
 }
 new Doqix_ROI_Frontend();
 
+/* ── GitHub Update Checker ── */
+if ( ! class_exists( 'Doqix_Updater' ) ) {
+	$updater_path = WP_PLUGIN_DIR . '/doqix-settings/includes/class-doqix-updater.php';
+	if ( file_exists( $updater_path ) ) {
+		require_once $updater_path;
+	}
+}
+if ( class_exists( 'Doqix_Updater' ) ) {
+	Doqix_Updater::register( 'doqix-roi-calculator', plugin_basename( __FILE__ ), DOQIX_ROI_VERSION );
+}
+
 /* ── Activation: seed defaults (preserves existing on re-activation) ── */
 register_activation_hook( __FILE__, function () {
 	add_option( DOQIX_ROI_OPTION_KEY, doqix_roi_get_defaults() );

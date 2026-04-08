@@ -62,3 +62,6 @@ wp-content/cache/
 
 # Claude development plans (external to project)
 .claude/plans/
+
+# Superpowers brainstorming mockups
+.superpowers/

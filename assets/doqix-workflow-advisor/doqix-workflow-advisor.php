@@ -378,6 +378,17 @@ if ( is_admin() ) {
 }
 new Doqix_WFA_Frontend();
 
+/* ── GitHub Update Checker ── */
+if ( ! class_exists( 'Doqix_Updater' ) ) {
+	$updater_path = WP_PLUGIN_DIR . '/doqix-settings/includes/class-doqix-updater.php';
+	if ( file_exists( $updater_path ) ) {
+		require_once $updater_path;
+	}
+}
+if ( class_exists( 'Doqix_Updater' ) ) {
+	Doqix_Updater::register( 'doqix-workflow-advisor', plugin_basename( __FILE__ ), DOQIX_WFA_VERSION );
+}
+
 /* ── Activation: seed defaults (preserves existing on re-activation) ── */
 register_activation_hook( __FILE__, function () {
 	add_option( DOQIX_WFA_OPTION_KEY, doqix_wfa_get_defaults() );

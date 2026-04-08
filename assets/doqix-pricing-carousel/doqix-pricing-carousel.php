@@ -287,6 +287,17 @@ if ( is_admin() ) {
 }
 new Doqix_Pricing_Frontend();
 
+/* ── GitHub Update Checker ── */
+if ( ! class_exists( 'Doqix_Updater' ) ) {
+	$updater_path = WP_PLUGIN_DIR . '/doqix-settings/includes/class-doqix-updater.php';
+	if ( file_exists( $updater_path ) ) {
+		require_once $updater_path;
+	}
+}
+if ( class_exists( 'Doqix_Updater' ) ) {
+	Doqix_Updater::register( 'doqix-pricing-carousel', plugin_basename( __FILE__ ), DOQIX_PRICING_VERSION );
+}
+
 /* ── Activation: seed defaults (preserves existing on re-activation) ── */
 register_activation_hook( __FILE__, function () {
 	add_option( DOQIX_PRICING_OPTION_KEY, doqix_pricing_get_defaults() );

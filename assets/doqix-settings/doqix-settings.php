@@ -24,7 +24,7 @@ class Doqix_Settings {
         add_action( 'plugins_loaded', array( $this, 'maybe_migrate' ) );
         add_action( 'init', array( $this, 'maybe_redirect_early' ), 1 );
         add_filter( 'redirect_canonical', array( $this, 'stop_canonical_redirect' ), 10, 2 );
-        add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
+        add_action( 'admin_menu', array( $this, 'add_settings_page' ), 5 );
         add_action( 'admin_init', array( $this, 'register_settings' ) );
         add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'settings_link' ) );
     }
@@ -249,3 +249,7 @@ class Doqix_Settings {
 }
 
 new Doqix_Settings();
+
+/* ── Plugin Updater ── */
+require_once __DIR__ . '/includes/class-doqix-updater.php';
+Doqix_Updater::register( 'doqix-settings', plugin_basename( __FILE__ ), DOQIX_SETTINGS_VERSION );
