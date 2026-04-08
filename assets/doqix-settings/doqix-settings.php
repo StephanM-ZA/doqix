@@ -26,6 +26,7 @@ class Doqix_Settings {
         add_filter( 'redirect_canonical', array( $this, 'stop_canonical_redirect' ), 10, 2 );
         add_action( 'admin_menu', array( $this, 'add_settings_page' ), 5 );
         add_action( 'admin_init', array( $this, 'register_settings' ) );
+        add_action( 'admin_init', array( $this, 'handle_check_updates' ) );
         add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'settings_link' ) );
     }
 
@@ -185,6 +186,22 @@ class Doqix_Settings {
         return $links;
     }
 
+    public function handle_check_updates() {
+        if ( ! isset( $_GET['doqix_check_updates'] ) || ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+        check_admin_referer( 'doqix_check_updates' );
+
+        // Clear cached manifest and force WP to re-check plugin updates
+        Doqix_Updater::clear_cache();
+        delete_site_transient( 'update_plugins' );
+        wp_update_plugins();
+
+        // Redirect back to updates tab with success notice
+        wp_safe_redirect( admin_url( 'admin.php?page=doqix-settings&tab=updates&checked=1' ) );
+        exit;
+    }
+
     public function render_settings_page() {
         $current_tab = $this->get_current_tab();
         $tabs        = $this->get_tabs();
@@ -256,7 +273,12 @@ class Doqix_Settings {
     private function render_updates_tab() {
         $token_key = Doqix_Updater::get_token_option_key();
         $token     = get_option( $token_key, '' );
-        ?>
+
+        if ( isset( $_GET['checked'] ) ) : ?>
+            <div class="notice notice-success is-dismissible">
+                <p><?php esc_html_e( 'Update check complete. Go to the Plugins page to see available updates.', 'doqix-settings' ); ?></p>
+            </div>
+        <?php endif; ?>
         <form method="post" action="options.php">
             <?php settings_fields( 'doqix_settings_updates' ); ?>
             <h2>GitHub Auto-Updates</h2>
@@ -280,7 +302,6 @@ class Doqix_Settings {
                             echo '<span style="color:#cc1818;">&#10007; No token set — updates will not work for private repos.</span>';
                         } else {
                             // Quick test: try to fetch the manifest
-                            Doqix_Updater::clear_cache();
                             $test_response = wp_remote_get( 'https://raw.githubusercontent.com/StephanM-ZA/doqix_website/main/updates.json', array(
                                 'timeout' => 5,
                                 'headers' => array(
@@ -296,6 +317,19 @@ class Doqix_Settings {
                             }
                         }
                         ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Check for Updates</th>
+                    <td>
+                        <?php
+                        $check_url = wp_nonce_url(
+                            admin_url( 'admin.php?page=doqix-settings&tab=updates&doqix_check_updates=1' ),
+                            'doqix_check_updates'
+                        );
+                        ?>
+                        <a href="<?php echo esc_url( $check_url ); ?>" class="button button-secondary">Check Now</a>
+                        <p class="description">Clears the 6-hour cache and checks GitHub for new versions immediately.</p>
                     </td>
                 </tr>
             </table>
