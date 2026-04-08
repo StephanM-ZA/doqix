@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix Pricing Carousel
  * Plugin URI:  https://doqix.co.za
  * Description: Configurable pricing table carousel. Use shortcode [doqix_pricing] or [doqix_pricing preset="name"].
- * Version:     1.0.6
+ * Version:     1.0.7
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_PRICING_VERSION',    '1.0.6' );
+define( 'DOQIX_PRICING_VERSION',    '1.0.7' );
 define( 'DOQIX_PRICING_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_PRICING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_PRICING_OPTION_KEY', 'doqix_pricing_settings' );
@@ -225,6 +225,14 @@ function doqix_pricing_maybe_migrate() {
 	$stored_version = isset( $settings['global']['version'] ) ? $settings['global']['version'] : '0.0.0';
 	if ( version_compare( $stored_version, DOQIX_PRICING_VERSION, '>=' ) ) {
 		return; // Up to date
+	}
+
+	// ── 1.0.7: One-time reset — replace default preset cards with Pricing Strategy v2.0 data
+	if ( version_compare( $stored_version, '1.0.7', '<' ) ) {
+		$fresh_preset = doqix_pricing_get_preset_defaults();
+		if ( isset( $settings['presets']['default'] ) ) {
+			$settings['presets']['default']['cards'] = $fresh_preset['cards'];
+		}
 	}
 
 	// Deep merge current defaults into existing settings
