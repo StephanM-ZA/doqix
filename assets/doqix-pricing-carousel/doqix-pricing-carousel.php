@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix Pricing Carousel
  * Plugin URI:  https://doqix.co.za
  * Description: Configurable pricing table carousel. Use shortcode [doqix_pricing] or [doqix_pricing preset="name"].
- * Version:     1.0.5
+ * Version:     1.0.6
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_PRICING_VERSION',    '1.0.5' );
+define( 'DOQIX_PRICING_VERSION',    '1.0.6' );
 define( 'DOQIX_PRICING_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_PRICING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_PRICING_OPTION_KEY', 'doqix_pricing_settings' );
@@ -107,23 +107,27 @@ function doqix_pricing_get_preset_defaults() {
 		'cards'             => array(
 			array_merge( doqix_pricing_get_card_defaults(), array(
 				'name'        => 'Solo',
-				'subtitle'    => 'For solopreneurs and small ops',
+				'subtitle'    => 'Solopreneurs & freelancers',
 				'price'       => 'R999',
 				'price_suffix' => '/mo',
 				'setup_fee'   => 'Free setup',
-				'features'    => '<ul><li>1 automated workflow</li><li>Email support</li><li>Self-hosted infrastructure</li></ul>',
-				'cta_label'   => 'Get Started',
+				'savings'     => 'Save ~R3,000-R8,000/mo',
+				'features'    => '<ul><li>1 workflow</li><li>Email support (48hr)</li><li>Hosting &amp; monitoring</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
+				'excludes'    => '<ul><li>Training (R1,500/session)</li><li>Extra workflows (+R750/mo each)</li><li>Additional hosting costs</li><li>Third-party API costs</li></ul>',
+				'cta_label'   => 'Start Free',
 				'cta_url'     => '/contact',
 				'sort_order'  => 0,
 			) ),
 			array_merge( doqix_pricing_get_card_defaults(), array(
 				'name'        => 'Team',
-				'subtitle'    => 'For growing teams',
+				'subtitle'    => 'Small teams (2-15 people)',
 				'price'       => 'R2,500',
 				'price_suffix' => '/mo',
 				'setup_fee'   => 'R1,500 setup',
-				'features'    => '<ul><li>Up to 3 workflows</li><li>Priority + WhatsApp support</li><li>Self-hosted infrastructure</li></ul>',
-				'cta_label'   => 'Get Started',
+				'savings'     => 'Save ~R8,000-R20,000/mo',
+				'features'    => '<ul><li>Up to 3 workflows</li><li>Priority + WhatsApp (24hr)</li><li>Hosting &amp; monitoring</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
+				'excludes'    => '<ul><li>Training (R1,500/session)</li><li>Extra workflows (+R650/mo each)</li><li>Additional hosting costs</li><li>Third-party API costs</li></ul>',
+				'cta_label'   => 'Start Free',
 				'cta_url'     => '/contact',
 				'badge'       => 'Most Popular',
 				'featured'    => 1,
@@ -131,23 +135,27 @@ function doqix_pricing_get_preset_defaults() {
 			) ),
 			array_merge( doqix_pricing_get_card_defaults(), array(
 				'name'        => 'Business',
-				'subtitle'    => 'For scaling operations',
+				'subtitle'    => 'Growing SMEs (15-50 people)',
 				'price'       => 'R5,500',
 				'price_suffix' => '/mo',
 				'setup_fee'   => 'R2,500 setup',
-				'features'    => '<ul><li>Up to 6 workflows</li><li>Dedicated + strategy call</li><li>Training included</li><li>Self-hosted infrastructure</li></ul>',
-				'cta_label'   => 'Get Started',
+				'savings'     => 'Save ~R20,000-R50,000/mo',
+				'features'    => '<ul><li>Up to 6 workflows</li><li>Dedicated + monthly strategy call</li><li>Training included</li><li>Hosting &amp; monitoring</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
+				'excludes'    => '<ul><li>Extra workflows (+R500/mo each)</li><li>Additional hosting costs</li><li>Third-party API costs</li></ul>',
+				'cta_label'   => 'Start Free',
 				'cta_url'     => '/contact',
 				'sort_order'  => 2,
 			) ),
 			array_merge( doqix_pricing_get_card_defaults(), array(
 				'name'        => 'Enterprise',
-				'subtitle'    => 'For large organisations',
+				'subtitle'    => 'Larger operations (50+)',
 				'price'       => 'Custom',
 				'price_suffix' => '',
 				'setup_fee'   => "Let's talk",
-				'features'    => '<ul><li>Unlimited workflows</li><li>Dedicated account manager</li><li>Training included</li><li>Self-hosted infrastructure</li></ul>',
-				'cta_label'   => 'Contact Us',
+				'savings'     => 'Save R50,000+/mo',
+				'features'    => '<ul><li>Unlimited workflows (scoped)</li><li>Dedicated account manager</li><li>Training included</li><li>Hosting &amp; monitoring</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
+				'excludes'    => '',
+				'cta_label'   => 'Show Me What\'s Possible',
 				'cta_url'     => '/contact',
 				'sort_order'  => 3,
 			) ),
