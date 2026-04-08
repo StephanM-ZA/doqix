@@ -23,6 +23,19 @@
   margin: 0 auto;
 }
 
+/* Reset all text inside the pricing widget — Themify overrides aggressively */
+#doqix-pricing,
+#doqix-pricing div,
+#doqix-pricing span,
+#doqix-pricing a {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
 /* ── Billing Toggle ── */
 .doqix-pricing-billing-toggle {
   display: flex;
@@ -210,23 +223,24 @@
   flex: 1;
 }
 
-.doqix-pricing-feat {
-  padding: 9px 0;
-  border-bottom: 1px solid #e8eff2;
-  font-size: 13px;
-  margin: 0;
-  line-height: 1.5;
-  color: var(--pricing-feat-text, #1d2327);
+#doqix-pricing .doqix-pricing-feat {
+  padding: 9px 0 !important;
+  border-bottom: 1px solid #e8eff2 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+  color: var(--pricing-feat-text, #1d2327) !important;
 }
 
-.doqix-pricing-feat:last-child {
-  border-bottom: none;
+#doqix-pricing .doqix-pricing-feat:last-child {
+  border-bottom: none !important;
 }
 
-.doqix-pricing-feat::before {
-  content: "\2713\0020";
-  color: var(--pricing-feat-check, #0886B5);
-  font-weight: 700;
+#doqix-pricing .doqix-pricing-feat::before {
+  content: "\2713\0020" !important;
+  color: var(--pricing-feat-check, #0886B5) !important;
+  font-weight: 700 !important;
 }
 
 /* ── Description ── */
@@ -253,15 +267,17 @@
   margin-bottom: 6px;
 }
 
-.doqix-pricing-exc-item {
-  padding: 3px 0;
-  margin: 0;
-  font-size: 11px;
-  color: var(--pricing-exc-text, #999);
+#doqix-pricing .doqix-pricing-exc-item {
+  padding: 3px 0 !important;
+  margin: 0 !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  color: var(--pricing-exc-text, #999) !important;
 }
 
-.doqix-pricing-exc-item::before {
-  content: "\2022\0020";
+#doqix-pricing .doqix-pricing-exc-item::before {
+  content: "\2022\0020" !important;
 }
 
 /* ── CTA Button ── */
