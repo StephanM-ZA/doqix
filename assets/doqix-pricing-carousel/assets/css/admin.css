@@ -449,10 +449,6 @@
 	gap: 8px;
 }
 
-.doqix-color-field label {
-	margin-bottom: 0;
-}
-
 .doqix-color-field input[type="color"],
 .doqix-color-input {
 	width: 36px;
@@ -657,7 +653,7 @@
 
 .doqix-preview-area {
 	position: sticky;
-	top: 40px;
+	top: 20px;
 	align-self: start;
 }
 
@@ -751,23 +747,6 @@
 	margin-bottom: 14px;
 }
 
-.doqix-preview-features {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.doqix-preview-features li {
-	padding: 8px 0;
-	border-bottom: 1px solid #e8eff2;
-	font-size: 12px;
-	color: var(--pricing-feat-text, #1d2327);
-}
-
-.doqix-preview-features li:last-child {
-	border-bottom: none;
-}
-
 .doqix-preview-feat {
 	padding: 8px 0;
 	border-bottom: 1px solid #e8eff2;
@@ -779,12 +758,16 @@
 	border-bottom: none;
 }
 
-/* Checkmarks are inline in HTML, no ::before needed */
+.doqix-preview-feat::before {
+	content: "\2713 ";
+	color: var(--pricing-feat-check, #0886B5);
+	font-weight: 700;
+}
 
 .doqix-preview-excludes {
 	margin-top: 14px;
 	padding-top: 12px;
-	border-top: 1px solid #e8eff2;
+	border-top: 2px solid #f0f0f0;
 	font-size: 11px;
 	color: var(--pricing-exc-text, #999);
 }

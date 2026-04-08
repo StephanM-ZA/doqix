@@ -871,7 +871,7 @@ class Doqix_Pricing_Admin {
 				</div>
 
 				<!-- Right column: live preview -->
-				<div class="doqix-preview-area" style="position:sticky;top:40px;align-self:start;">
+				<div class="doqix-preview-area">
 					<span class="doqix-preview-label"><?php esc_html_e( 'LIVE PREVIEW', 'doqix-pricing-carousel' ); ?></span>
 					<?php
 					// Build initial CSS custom property values from preset (use visual defaults for preview)
@@ -884,35 +884,27 @@ class Doqix_Pricing_Admin {
 					}
 					?>
 					<div id="doqix-preview-card" class="doqix-preview-card" style="<?php echo $style_vars; ?>">
-						<div class="doqix-preview-badge" style="background:var(--pricing-badge-bg, #ff9500);color:var(--pricing-badge-text, #fff);">
-							MOST POPULAR
-						</div>
-						<div class="doqix-preview-header" style="background:var(--pricing-header-bg, #0886B5);color:var(--pricing-header-text, #fff);">
+						<div class="doqix-preview-badge">MOST POPULAR</div>
+						<div class="doqix-preview-header">
 							<div class="doqix-preview-name">Team</div>
 							<div class="doqix-preview-sub">Small teams (2-15 people)</div>
 							<div class="doqix-preview-price">R2,500<span>/mo</span></div>
 							<div class="doqix-preview-setup">R1,500 setup</div>
 						</div>
-						<div class="doqix-preview-body" style="background:var(--pricing-card-bg, #f9fcfd);">
-							<div class="doqix-preview-savings" style="color:var(--pricing-accent, #0886B5);">
-								Save ~R8,000-R20,000/mo
-							</div>
-							<div class="doqix-preview-features">
-								<div class="doqix-preview-feat"><span style="color:var(--pricing-feat-check, #0886B5);">&#10003;</span> <span style="color:var(--pricing-feat-text, #1d2327);">Up to 3 workflows</span></div>
-								<div class="doqix-preview-feat"><span style="color:var(--pricing-feat-check, #0886B5);">&#10003;</span> <span style="color:var(--pricing-feat-text, #1d2327);">Priority + WhatsApp (24hr)</span></div>
-								<div class="doqix-preview-feat"><span style="color:var(--pricing-feat-check, #0886B5);">&#10003;</span> <span style="color:var(--pricing-feat-text, #1d2327);">Hosting &amp; monitoring</span></div>
-								<div class="doqix-preview-feat"><span style="color:var(--pricing-feat-check, #0886B5);">&#10003;</span> <span style="color:var(--pricing-feat-text, #1d2327);">POPIA compliant</span></div>
-								<div class="doqix-preview-feat"><span style="color:var(--pricing-feat-check, #0886B5);">&#10003;</span> <span style="color:var(--pricing-feat-text, #1d2327);">No lock-in</span></div>
-							</div>
+						<div class="doqix-preview-body">
+							<div class="doqix-preview-savings">Save ~R8,000-R20,000/mo</div>
+							<div class="doqix-preview-feat">Up to 3 workflows</div>
+							<div class="doqix-preview-feat">Priority + WhatsApp (24hr)</div>
+							<div class="doqix-preview-feat">Hosting &amp; monitoring</div>
+							<div class="doqix-preview-feat">POPIA compliant</div>
+							<div class="doqix-preview-feat">No lock-in</div>
 							<div class="doqix-preview-excludes">
-								<div class="doqix-preview-exc-title" style="color:var(--pricing-exc-title, #666);">Excludes:</div>
-								<div style="color:var(--pricing-exc-text, #999);">&#8226; Training (R1,500/session)</div>
-								<div style="color:var(--pricing-exc-text, #999);">&#8226; Additional hosting costs</div>
+								<div class="doqix-preview-exc-title">Excludes:</div>
+								<div class="doqix-preview-exc-item">Training (R1,500/session)</div>
+								<div class="doqix-preview-exc-item">Additional hosting costs</div>
 							</div>
 						</div>
-						<div class="doqix-preview-cta" style="background:var(--pricing-cta-bg, #0886B5);color:var(--pricing-cta-text, #fff);">
-							Start Free
-						</div>
+						<div class="doqix-preview-cta">Start Free</div>
 					</div>
 				</div>
 
@@ -1022,24 +1014,26 @@ class Doqix_Pricing_Admin {
 		$picker_val  = $is_set ? $value : $visual_default;
 		$display_hex = $is_set ? $value : $visual_default;
 		?>
-		<div class="doqix-field doqix-color-field">
+		<div class="doqix-field">
 			<label for="<?php echo esc_attr( $name ); ?>">
 				<?php echo esc_html( $label ); ?>
 			</label>
-			<input type="color"
-				   id="<?php echo esc_attr( $name ); ?>"
-				   name="<?php echo esc_attr( $name ); ?>"
-				   value="<?php echo esc_attr( $picker_val ); ?>"
-				   class="doqix-color-input"
-				   data-is-set="<?php echo $is_set ? '1' : '0'; ?>"
-				   data-visual-default="<?php echo esc_attr( $visual_default ); ?>"
-				   <?php if ( $data_var ) : ?>data-var="<?php echo esc_attr( $data_var ); ?>"<?php endif; ?>>
-			<code class="doqix-color-hex"><?php echo esc_html( $display_hex ); ?></code>
-			<button type="button" class="doqix-color-reset"
-					data-default="<?php echo esc_attr( $visual_default ); ?>"
-					title="<?php esc_attr_e( 'Reset to theme default', 'doqix-pricing-carousel' ); ?>">
-				<?php esc_html_e( 'Reset', 'doqix-pricing-carousel' ); ?>
-			</button>
+			<div class="doqix-color-field">
+				<input type="color"
+					   id="<?php echo esc_attr( $name ); ?>"
+					   name="<?php echo esc_attr( $name ); ?>"
+					   value="<?php echo esc_attr( $picker_val ); ?>"
+					   class="doqix-color-input"
+					   data-is-set="<?php echo $is_set ? '1' : '0'; ?>"
+					   data-visual-default="<?php echo esc_attr( $visual_default ); ?>"
+					   <?php if ( $data_var ) : ?>data-var="<?php echo esc_attr( $data_var ); ?>"<?php endif; ?>>
+				<code class="doqix-color-hex"><?php echo esc_html( $display_hex ); ?></code>
+				<button type="button" class="doqix-color-reset"
+						data-default="<?php echo esc_attr( $visual_default ); ?>"
+						title="<?php esc_attr_e( 'Reset to theme default', 'doqix-pricing-carousel' ); ?>">
+					<?php esc_html_e( 'Reset', 'doqix-pricing-carousel' ); ?>
+				</button>
+			</div>
 		</div>
 		<?php
 	}

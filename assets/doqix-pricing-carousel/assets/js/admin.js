@@ -117,11 +117,8 @@
       // Reindex all cards
       reindexCards(container);
 
-      // Open the new card body
-      var newBody = clone.querySelector('.doqix-card-body');
-      if (newBody) newBody.classList.add('doqix-open');
-      var newArrow = clone.querySelector('.doqix-collapse-arrow');
-      if (newArrow) newArrow.classList.add('doqix-open');
+      // Open the new card panel
+      clone.classList.add('doqix-open');
     });
   }
 

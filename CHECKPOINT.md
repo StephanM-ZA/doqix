@@ -15,7 +15,7 @@
 - [x] Task 2+3: Plugin scaffold + Admin skeleton (commit `6f7552b`) — main file, admin class with tabs/presets, frontend stub
 
 ### In Progress
-- [ ] Task 4: Admin — Cards tab (repeater panels, mini editors, colour overrides)
+- [ ] CSS/styling audit — matching actual admin UI to mockup exactly
 
 ### Remaining Tasks
 - [ ] Task 5: Admin — Carousel & Billing tabs
