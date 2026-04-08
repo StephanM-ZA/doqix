@@ -56,8 +56,11 @@ class Doqix_Updater {
         }
     }
 
+    /** @var string GitHub API URL for latest release */
+    private const RELEASE_API_URL = 'https://api.github.com/repos/StephanM-ZA/doqix_website/releases/latest';
+
     /**
-     * Fetch the manifest from GitHub (cached).
+     * Fetch the manifest from GitHub and resolve download URLs from latest release (cached).
      */
     private static function get_manifest() {
         $cached = get_transient( self::CACHE_KEY );
@@ -65,12 +68,13 @@ class Doqix_Updater {
             return $cached;
         }
 
-        $headers = array( 'Accept' => 'application/json' );
         $token   = get_option( self::TOKEN_OPTION, '' );
+        $headers = array( 'Accept' => 'application/json' );
         if ( ! empty( $token ) ) {
             $headers['Authorization'] = 'token ' . $token;
         }
 
+        // Fetch updates.json manifest
         $response = wp_remote_get( self::MANIFEST_URL, array(
             'timeout' => 10,
             'headers' => $headers,
@@ -85,6 +89,39 @@ class Doqix_Updater {
 
         if ( ! is_array( $data ) ) {
             return array();
+        }
+
+        // Fetch latest release to get actual asset download URLs (required for private repos)
+        $release_headers = array(
+            'Accept'     => 'application/vnd.github.v3+json',
+            'User-Agent' => 'DoQix-WordPress-Updater',
+        );
+        if ( ! empty( $token ) ) {
+            $release_headers['Authorization'] = 'token ' . $token;
+        }
+
+        $release_response = wp_remote_get( self::RELEASE_API_URL, array(
+            'timeout' => 10,
+            'headers' => $release_headers,
+        ) );
+
+        if ( ! is_wp_error( $release_response ) && 200 === wp_remote_retrieve_response_code( $release_response ) ) {
+            $release = json_decode( wp_remote_retrieve_body( $release_response ), true );
+            if ( isset( $release['assets'] ) && is_array( $release['assets'] ) ) {
+                // Build asset name → browser_download_url map
+                $asset_urls = array();
+                foreach ( $release['assets'] as $asset ) {
+                    $asset_urls[ $asset['name'] ] = $asset['url']; // API URL for private repos
+                }
+                // Override download_url in manifest with actual API asset URLs
+                foreach ( $data as $slug => &$plugin_info ) {
+                    $zip_name = $slug . '.zip';
+                    if ( isset( $asset_urls[ $zip_name ] ) ) {
+                        $plugin_info['download_url'] = $asset_urls[ $zip_name ];
+                    }
+                }
+                unset( $plugin_info );
+            }
         }
 
         set_transient( self::CACHE_KEY, $data, self::CACHE_TTL );
@@ -216,10 +253,17 @@ class Doqix_Updater {
         }
 
         // Only inject for requests to our GitHub repo
-        if ( strpos( $url, 'github.com/StephanM-ZA/doqix_website' ) !== false
+        $is_github = strpos( $url, 'github.com/StephanM-ZA/doqix_website' ) !== false
             || strpos( $url, 'raw.githubusercontent.com/StephanM-ZA/doqix_website' ) !== false
-            || strpos( $url, 'api.github.com/repos/StephanM-ZA/doqix_website' ) !== false ) {
+            || strpos( $url, 'api.github.com/repos/StephanM-ZA/doqix_website' ) !== false;
+
+        if ( $is_github ) {
             $args['headers']['Authorization'] = 'token ' . $token;
+
+            // For release asset downloads via API, request binary content
+            if ( strpos( $url, 'api.github.com/repos/StephanM-ZA/doqix_website/releases/assets/' ) !== false ) {
+                $args['headers']['Accept'] = 'application/octet-stream';
+            }
         }
 
         return $args;
