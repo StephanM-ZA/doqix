@@ -358,36 +358,48 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 30px;
   gap: 10px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 5;
 }
 
-/* ── Navigation: Arrows ── */
-.doqix-nav-arrow {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: #555;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s ease;
+/* ── Navigation: Arrows (positioned left/right of carousel) ── */
+#doqix-pricing .doqix-nav-arrow {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #555 !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background 0.2s ease, box-shadow 0.2s ease !important;
   user-select: none;
-  line-height: 1;
+  line-height: 1 !important;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.doqix-nav-arrow:hover {
-  background: rgba(0, 0, 0, 0.12);
+#doqix-pricing .doqix-nav-arrow:hover {
+  background: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.doqix-nav-arrow.doqix-nav-left,
-.doqix-nav-arrow.doqix-nav-right {
-  flex-shrink: 0;
+#doqix-pricing .doqix-nav-left {
+  left: 12px;
+}
+
+#doqix-pricing .doqix-nav-right {
+  right: 12px;
 }
 
 /* ── Navigation: Dots ── */
@@ -480,6 +492,7 @@
 .doqix-pricing[data-mode="carousel"],
 #doqix-pricing[data-mode="carousel"] {
   overflow: hidden;
+  position: relative;
 }
 
 .doqix-pricing[data-mode="carousel"] .doqix-pricing-track,

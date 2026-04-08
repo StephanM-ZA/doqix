@@ -86,7 +86,7 @@
     buildNav();
     initSwipe();
     positionCards();
-    if (config.autoplay) {
+    if (parseInt(config.autoplay, 10) === 1) {
       startAutoplay();
     }
   }
@@ -95,9 +95,13 @@
     isCarousel = false;
     stopAutoplay();
 
-    /* Clear nav. */
+    /* Clear nav and side arrows. */
     if (nav) {
       nav.innerHTML = '';
+    }
+    var sideArrows = container.querySelectorAll('.doqix-nav-arrow');
+    for (var a = 0; a < sideArrows.length; a++) {
+      sideArrows[a].remove();
     }
 
     /* Reset transforms, opacity, filters on all cards. */
@@ -169,6 +173,7 @@
     var style = config.navStyle || 'dots';
 
     if (style === 'arrows') {
+      /* Arrows go on the sides of the carousel, not in the nav bar */
       var left = document.createElement('button');
       left.className = 'doqix-nav-arrow doqix-nav-left';
       left.setAttribute('type', 'button');
@@ -187,8 +192,8 @@
         navigate(1);
       });
 
-      nav.appendChild(left);
-      nav.appendChild(right);
+      container.appendChild(left);
+      container.appendChild(right);
     } else if (style === 'dots') {
       for (var i = 0; i < cards.length; i++) {
         (function (idx) {
@@ -274,7 +279,7 @@
   }
 
   function resetAutoplay() {
-    if (config.autoplay && isCarousel) {
+    if (parseInt(config.autoplay, 10) === 1 && isCarousel) {
       startAutoplay();
     }
   }
