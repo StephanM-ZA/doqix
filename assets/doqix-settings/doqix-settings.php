@@ -106,11 +106,24 @@ class Doqix_Settings {
     }
 
     public function add_settings_page() {
-        add_options_page(
-            'Do.Qix Settings',
-            'Do.Qix Settings',
+        // Register parent Do.Qix menu
+        add_menu_page(
+            'Do.Qix',
+            'Do.Qix',
             'manage_options',
-            self::MENU_SLUG,
+            'doqix-settings',
+            array( $this, 'render_settings_page' ),
+            'dashicons-admin-generic',
+            80
+        );
+
+        // Rename the auto-created first submenu item
+        add_submenu_page(
+            'doqix-settings',
+            'Site Settings',
+            'Site Settings',
+            'manage_options',
+            'doqix-settings',
             array( $this, 'render_settings_page' )
         );
     }
@@ -130,7 +143,7 @@ class Doqix_Settings {
     }
 
     public function settings_link( $links ) {
-        $url  = admin_url( 'options-general.php?page=' . self::MENU_SLUG );
+        $url  = admin_url( 'admin.php?page=' . self::MENU_SLUG );
         $link = '<a href="' . esc_url( $url ) . '">Settings</a>';
         array_unshift( $links, $link );
         return $links;
@@ -144,7 +157,7 @@ class Doqix_Settings {
             <h1>Do.Qix Settings</h1>
             <nav class="nav-tab-wrapper">
                 <?php foreach ( $tabs as $slug => $label ) : ?>
-                    <a href="<?php echo esc_url( admin_url( 'options-general.php?page=' . self::MENU_SLUG . '&tab=' . $slug ) ); ?>"
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=' . self::MENU_SLUG . '&tab=' . $slug ) ); ?>"
                        class="nav-tab <?php echo $current_tab === $slug ? 'nav-tab-active' : ''; ?>">
                         <?php echo esc_html( $label ); ?>
                     </a>

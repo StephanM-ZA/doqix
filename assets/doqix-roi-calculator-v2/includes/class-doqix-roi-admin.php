@@ -25,15 +25,30 @@ class Doqix_ROI_V2_Admin {
 	 * ──────────────────────────────────────────── */
 
 	public function add_settings_page() {
-		$this->hook = add_menu_page(
-			__( 'ROI Calculator V2', 'doqix-roi-calculator' ),
-			__( 'ROI Calculator V2', 'doqix-roi-calculator' ),
-			'manage_options',
-			'doqix-roi-calculator-v2',
-			array( $this, 'render_settings_page' ),
-			'dashicons-calculator',
-			81
-		);
+		$parent_slug = 'doqix-settings';
+
+		// Check if parent Do.Qix menu exists (doqix-settings plugin active)
+		if ( ! empty( $GLOBALS['admin_page_hooks'][ $parent_slug ] ) ) {
+			$this->hook = add_submenu_page(
+				$parent_slug,
+				__( 'ROI Calculator', 'doqix-roi-calculator' ),
+				__( 'ROI Calculator', 'doqix-roi-calculator' ),
+				'manage_options',
+				'doqix-roi-calculator-v2',
+				array( $this, 'render_settings_page' )
+			);
+		} else {
+			// Fallback: standalone top-level menu
+			$this->hook = add_menu_page(
+				__( 'ROI Calculator V2', 'doqix-roi-calculator' ),
+				__( 'ROI Calculator V2', 'doqix-roi-calculator' ),
+				'manage_options',
+				'doqix-roi-calculator-v2',
+				array( $this, 'render_settings_page' ),
+				'dashicons-calculator',
+				81
+			);
+		}
 	}
 
 	/* ────────────────────────────────────────────
