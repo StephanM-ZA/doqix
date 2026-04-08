@@ -584,10 +584,10 @@ class Doqix_Pricing_Admin {
 						$this->render_text_field( $base . '[subtitle]', __( 'Subtitle', 'doqix-pricing-carousel' ), $card['subtitle'] );
 						$this->render_text_field( $base . '[price]', __( 'Price', 'doqix-pricing-carousel' ), $card['price'] );
 						$this->render_text_field( $base . '[price_suffix]', __( 'Price Suffix', 'doqix-pricing-carousel' ), $card['price_suffix'] );
-						<?php
+
 						$billing_on = ! empty( $preset['billing_toggle'] );
 						$discount   = isset( $preset['annual_discount'] ) ? (int) $preset['annual_discount'] : 15;
-						$disabled   = $billing_on ? '' : ' disabled';
+						$disabled_attr = $billing_on ? '' : ' disabled';
 						$calc_price = is_numeric( $card['price'] ) ? round( (float) $card['price'] * ( 1 - $discount / 100 ) ) : '';
 						$display_val = ! empty( $card['price_annual'] ) ? $card['price_annual'] : '';
 						?>
@@ -599,7 +599,7 @@ class Doqix_Pricing_Admin {
 								placeholder="<?php echo esc_attr( $calc_price ); ?>"
 								class="doqix-annual-price"
 								data-discount="<?php echo esc_attr( $discount ); ?>"
-								<?php echo $disabled; ?>>
+								<?php echo $disabled_attr; ?>>
 							<span class="doqix-hint">
 								<?php if ( $billing_on ) : ?>
 									<?php printf( esc_html__( 'Auto-calculated: %s%% off monthly. Override by typing a value.', 'doqix-pricing-carousel' ), $discount ); ?>

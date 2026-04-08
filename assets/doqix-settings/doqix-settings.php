@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix Settings
  * Plugin URI: https://www.digitaloperations.co.za
  * Description: Central settings hub for Do.Qix customizations. Currently includes homepage redirect settings with support for additional tabs.
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author: Digital Operations
  * Author URI: https://www.digitaloperations.co.za
  * License: GPL-2.0+
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'DOQIX_SETTINGS_VERSION', '2.0.1' );
+define( 'DOQIX_SETTINGS_VERSION', '2.0.2' );
 
 class Doqix_Settings {
 

@@ -1,6 +1,6 @@
 {
     "doqix-settings": {
-        "version": "2.0.1",
+        "version": "2.0.2",
         "slug": "doqix-settings",
         "plugin_file": "doqix-settings/doqix-settings.php",
         "download_url": "https://github.com/StephanM-ZA/doqix_website/releases/latest/download/doqix-settings.zip",
@@ -27,7 +27,7 @@
         "requires_php": "7.4"
     },
     "doqix-pricing-carousel": {
-        "version": "1.0.2",
+        "version": "1.0.3",
         "slug": "doqix-pricing-carousel",
         "plugin_file": "doqix-pricing-carousel/doqix-pricing-carousel.php",
         "download_url": "https://github.com/StephanM-ZA/doqix_website/releases/latest/download/doqix-pricing-carousel.zip",
