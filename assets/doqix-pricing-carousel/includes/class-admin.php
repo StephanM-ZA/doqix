@@ -626,10 +626,10 @@ class Doqix_Pricing_Admin {
 
 					<!-- Collapsible colour overrides -->
 					<div class="doqix-color-overrides-section">
-						<a href="#" class="doqix-color-overrides-toggle" onclick="event.preventDefault(); var g=this.nextElementSibling; g.style.display=g.style.display==='none'?'block':'none';">
+						<a href="#" class="doqix-color-overrides-toggle">
 							<?php esc_html_e( 'Colour Overrides (empty = inherit from preset)', 'doqix-pricing-carousel' ); ?>
 						</a>
-						<div class="doqix-color-overrides" style="display:none;">
+						<div class="doqix-color-overrides">
 							<div class="doqix-field-grid">
 								<?php
 								$this->render_color_field( $base . '[color_header_bg]', __( 'Header BG', 'doqix-pricing-carousel' ), $card['color_header_bg'] );

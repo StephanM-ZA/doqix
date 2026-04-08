@@ -12,14 +12,9 @@
    * ──────────────────────────────────────────── */
 
   window.doqixPricingToggleCard = function(header) {
-    var body = header.nextElementSibling;
-    if (!body) return;
-    body.classList.toggle('doqix-open');
-
-    var arrow = header.querySelector('.doqix-collapse-arrow');
-    if (arrow) {
-      arrow.classList.toggle('doqix-open');
-    }
+    var panel = header.closest('.doqix-card-panel');
+    if (!panel) return;
+    panel.classList.toggle('doqix-open');
   };
 
   /* ────────────────────────────────────────────
@@ -367,12 +362,6 @@
     if (!overrides) return;
 
     overrides.classList.toggle('doqix-open');
-    if (!overrides.classList.contains('doqix-open')) {
-      overrides.style.display = 'none';
-    } else {
-      overrides.style.display = 'block';
-    }
-
     toggle.classList.toggle('doqix-open');
   });
 
