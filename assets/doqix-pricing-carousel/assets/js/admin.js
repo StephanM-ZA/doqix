@@ -208,10 +208,10 @@
           hiddenInput.value = editors[i].innerHTML;
         }
       }
-      // Clear colour values that are still at "theme default" (not user-set)
+      // Clear colour values only if explicitly reset (data-is-set="reset")
       var colorInputs = form.querySelectorAll('.doqix-color-input');
       for (var j = 0; j < colorInputs.length; j++) {
-        if (colorInputs[j].getAttribute('data-is-set') === '0') {
+        if (colorInputs[j].getAttribute('data-is-set') === 'reset') {
           colorInputs[j].value = '';
         }
       }
@@ -292,7 +292,7 @@
 
     var visualDefault = colorInput.getAttribute('data-visual-default') || '#0886B5';
     colorInput.value = visualDefault;
-    colorInput.setAttribute('data-is-set', '0');
+    colorInput.setAttribute('data-is-set', 'reset');
 
     // Show the default hex value
     var codeEl = field.querySelector('code');
