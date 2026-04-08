@@ -23,17 +23,60 @@
   margin: 0 auto;
 }
 
-/* Reset all text inside the pricing widget — Themify overrides aggressively */
-#doqix-pricing,
-#doqix-pricing div,
-#doqix-pricing span,
-#doqix-pricing a {
+/* Base font reset — Themify overrides aggressively */
+#doqix-pricing {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 400 !important;
-  font-size: 14px !important;
-  line-height: 1.5 !important;
   letter-spacing: normal !important;
   text-transform: none !important;
+}
+
+#doqix-pricing .doqix-pricing-name {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+}
+
+#doqix-pricing .doqix-pricing-sub {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  opacity: 0.85;
+}
+
+#doqix-pricing .doqix-pricing-price {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+}
+
+#doqix-pricing .doqix-price-suffix {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+#doqix-pricing .doqix-pricing-setup {
+  font-size: 11px !important;
+  font-weight: 400 !important;
+}
+
+#doqix-pricing .doqix-pricing-savings {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+#doqix-pricing .doqix-pricing-badge {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+#doqix-pricing .doqix-pricing-exc-title {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+#doqix-pricing .doqix-pricing-cta {
+  font-size: 14px !important;
+  font-weight: 600 !important;
 }
 
 /* ── Billing Toggle ── */
