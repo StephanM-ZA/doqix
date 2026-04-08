@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix Settings
  * Plugin URI: https://www.digitaloperations.co.za
  * Description: Central settings hub for Do.Qix customizations. Currently includes homepage redirect settings with support for additional tabs.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: Digital Operations
  * Author URI: https://www.digitaloperations.co.za
  * License: GPL-2.0+
@@ -13,17 +13,49 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+define( 'DOQIX_SETTINGS_VERSION', '2.0.1' );
+
 class Doqix_Settings {
 
     private const OPTION_KEY = 'doqix_redirect_settings';
     private const MENU_SLUG  = 'doqix-settings';
 
     public function __construct() {
+        add_action( 'plugins_loaded', array( $this, 'maybe_migrate' ) );
         add_action( 'init', array( $this, 'maybe_redirect_early' ), 1 );
         add_filter( 'redirect_canonical', array( $this, 'stop_canonical_redirect' ), 10, 2 );
         add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
         add_action( 'admin_init', array( $this, 'register_settings' ) );
         add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'settings_link' ) );
+    }
+
+    /**
+     * Migrate stored settings when the plugin version is bumped.
+     *
+     * Uses wp_parse_args to add any new default fields while preserving
+     * existing user values.
+     */
+    public function maybe_migrate() {
+        $settings = get_option( self::OPTION_KEY );
+        if ( false === $settings ) {
+            return; // Fresh install — nothing to migrate
+        }
+
+        $stored_version = isset( $settings['_version'] ) ? $settings['_version'] : '0.0.0';
+        if ( version_compare( $stored_version, DOQIX_SETTINGS_VERSION, '>=' ) ) {
+            return; // Up to date
+        }
+
+        $defaults = array(
+            'enabled'            => 1,
+            'redirect_path'      => '/doqix',
+            'redirect_logged_in' => 0,
+        );
+        $settings = wp_parse_args( $settings, $defaults );
+
+        // Stamp current version
+        $settings['_version'] = DOQIX_SETTINGS_VERSION;
+        update_option( self::OPTION_KEY, $settings );
     }
 
     private function get_redirect_settings() {

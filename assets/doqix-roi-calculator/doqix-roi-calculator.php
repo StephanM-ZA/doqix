@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix ROI Calculator
  * Plugin URI:  https://doqix.co.za
  * Description: Interactive ROI calculator showing potential automation savings. Use shortcode [doqix_roi_calculator] on any page.
- * Version:     1.2.0
+ * Version:     1.2.1
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_ROI_VERSION',    '1.2.0' );
+define( 'DOQIX_ROI_VERSION',    '1.2.1' );
 define( 'DOQIX_ROI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_ROI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_ROI_OPTION_KEY', 'doqix_roi_settings' );
@@ -96,6 +96,88 @@ function doqix_roi_get_defaults() {
 	);
 }
 
+/* ── Deep merge defaults ── */
+
+/**
+ * Recursively merge default values into existing settings.
+ *
+ * - Missing keys get the default value.
+ * - Associative arrays are recursed into.
+ * - Scalars and indexed (numeric) arrays are kept as-is.
+ *
+ * @param array $defaults Default settings.
+ * @param array $existing Existing (stored) settings.
+ * @return array Merged settings.
+ */
+function doqix_roi_deep_merge_defaults( $defaults, $existing ) {
+	foreach ( $defaults as $key => $value ) {
+		if ( ! isset( $existing[ $key ] ) ) {
+			$existing[ $key ] = $value;
+		} elseif ( is_array( $value ) && is_array( $existing[ $key ] ) && ! wp_is_numeric_array( $value ) ) {
+			$existing[ $key ] = doqix_roi_deep_merge_defaults( $value, $existing[ $key ] );
+		}
+		// Scalar or numeric array — keep existing
+	}
+	return $existing;
+}
+
+/* ── Migration: legacy preset restructure + version upgrade ── */
+
+/**
+ * Phase 1: Move legacy per-field content/display settings into presets.
+ * Phase 2: Deep-merge current defaults so new fields get default values
+ *          while existing user data is preserved.
+ */
+function doqix_roi_maybe_migrate() {
+	$s = get_option( DOQIX_ROI_OPTION_KEY );
+	if ( false === $s || empty( $s ) ) {
+		return; // Fresh install — activation hook handles this
+	}
+
+	$dirty = false;
+
+	/* Phase 1: Legacy preset migration (pre-preset → presets structure) */
+	if ( ! isset( $s['presets'] ) ) {
+		$preset_keys    = array( 'heading_text', 'intro_text', 'footnote_text', 'color_accent', 'color_cta', 'cta_enabled', 'cta_url', 'cta_text', 'cta_subtext', 'share_url', 'share_enabled' );
+		$default_preset = doqix_roi_get_preset_defaults();
+		foreach ( $preset_keys as $k ) {
+			if ( isset( $s[ $k ] ) ) {
+				$default_preset[ $k ] = $s[ $k ];
+				unset( $s[ $k ] );
+			}
+		}
+		$s['presets'] = array( 'default' => $default_preset );
+		$dirty = true;
+	}
+
+	/* Phase 2: Version-based migration — merge new default fields */
+	$stored_version = isset( $s['version'] ) ? $s['version'] : '0.0.0';
+	if ( version_compare( $stored_version, DOQIX_ROI_VERSION, '>=' ) ) {
+		if ( $dirty ) {
+			update_option( DOQIX_ROI_OPTION_KEY, $s );
+		}
+		return; // Up to date
+	}
+
+	// Deep merge top-level defaults
+	$defaults = doqix_roi_get_defaults();
+	$s = doqix_roi_deep_merge_defaults( $defaults, $s );
+
+	// Deep merge preset-level defaults into each existing preset
+	$preset_defaults = doqix_roi_get_preset_defaults();
+	if ( isset( $s['presets'] ) && is_array( $s['presets'] ) ) {
+		foreach ( $s['presets'] as $slug => &$preset ) {
+			$preset = doqix_roi_deep_merge_defaults( $preset_defaults, $preset );
+		}
+		unset( $preset );
+	}
+
+	// Stamp current version
+	$s['version'] = DOQIX_ROI_VERSION;
+	update_option( DOQIX_ROI_OPTION_KEY, $s );
+}
+add_action( 'plugins_loaded', 'doqix_roi_maybe_migrate' );
+
 /* ── Load classes ── */
 require_once DOQIX_ROI_PLUGIN_DIR . 'includes/class-doqix-roi-admin.php';
 require_once DOQIX_ROI_PLUGIN_DIR . 'includes/class-doqix-roi-frontend.php';
@@ -105,26 +187,6 @@ if ( is_admin() ) {
 	new Doqix_ROI_Admin();
 }
 new Doqix_ROI_Frontend();
-
-/* ── Migration: move legacy per-field content/display settings into presets ── */
-function doqix_roi_maybe_migrate() {
-	$s = get_option( DOQIX_ROI_OPTION_KEY, array() );
-	if ( empty( $s ) || isset( $s['presets'] ) ) {
-		return;
-	}
-
-	$preset_keys   = array( 'heading_text', 'intro_text', 'footnote_text', 'color_accent', 'color_cta', 'cta_enabled', 'cta_url', 'cta_text', 'cta_subtext', 'share_url', 'share_enabled' );
-	$default_preset = doqix_roi_get_preset_defaults();
-	foreach ( $preset_keys as $k ) {
-		if ( isset( $s[ $k ] ) ) {
-			$default_preset[ $k ] = $s[ $k ];
-			unset( $s[ $k ] );
-		}
-	}
-	$s['presets'] = array( 'default' => $default_preset );
-	update_option( DOQIX_ROI_OPTION_KEY, $s );
-}
-add_action( 'admin_init', 'doqix_roi_maybe_migrate' );
 
 /* ── Activation: seed defaults (preserves existing on re-activation) ── */
 register_activation_hook( __FILE__, function () {

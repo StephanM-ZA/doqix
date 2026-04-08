@@ -175,6 +175,77 @@ function doqix_pricing_get_defaults() {
 	);
 }
 
+/* ── Deep merge defaults ── */
+
+/**
+ * Recursively merge default values into existing settings.
+ *
+ * - Missing keys get the default value.
+ * - Associative arrays are recursed into.
+ * - Scalars and indexed (numeric) arrays are kept as-is.
+ *
+ * @param array $defaults Default settings.
+ * @param array $existing Existing (stored) settings.
+ * @return array Merged settings.
+ */
+function doqix_pricing_deep_merge_defaults( $defaults, $existing ) {
+	foreach ( $defaults as $key => $value ) {
+		if ( ! isset( $existing[ $key ] ) ) {
+			$existing[ $key ] = $value;
+		} elseif ( is_array( $value ) && is_array( $existing[ $key ] ) && ! wp_is_numeric_array( $value ) ) {
+			$existing[ $key ] = doqix_pricing_deep_merge_defaults( $value, $existing[ $key ] );
+		}
+		// Scalar or numeric array — keep existing
+	}
+	return $existing;
+}
+
+/* ── Version migration ── */
+
+/**
+ * Migrate stored settings when the plugin version is bumped.
+ *
+ * Deep-merges current defaults so new fields get their default values
+ * while existing user data is preserved.
+ */
+function doqix_pricing_maybe_migrate() {
+	$settings = get_option( DOQIX_PRICING_OPTION_KEY );
+	if ( false === $settings ) {
+		return; // Fresh install — activation hook handles this
+	}
+
+	$stored_version = isset( $settings['global']['version'] ) ? $settings['global']['version'] : '0.0.0';
+	if ( version_compare( $stored_version, DOQIX_PRICING_VERSION, '>=' ) ) {
+		return; // Up to date
+	}
+
+	// Deep merge current defaults into existing settings
+	$defaults = doqix_pricing_get_defaults();
+	$settings = doqix_pricing_deep_merge_defaults( $defaults, $settings );
+
+	// Also merge preset-level defaults into each existing preset
+	$preset_defaults = doqix_pricing_get_preset_defaults();
+	if ( isset( $settings['presets'] ) && is_array( $settings['presets'] ) ) {
+		foreach ( $settings['presets'] as $slug => &$preset ) {
+			$preset = doqix_pricing_deep_merge_defaults( $preset_defaults, $preset );
+			// Merge card-level defaults into each existing card
+			if ( isset( $preset['cards'] ) && is_array( $preset['cards'] ) ) {
+				$card_defaults = doqix_pricing_get_card_defaults();
+				foreach ( $preset['cards'] as &$card ) {
+					$card = doqix_pricing_deep_merge_defaults( $card_defaults, $card );
+				}
+				unset( $card );
+			}
+		}
+		unset( $preset );
+	}
+
+	// Stamp current version
+	$settings['global']['version'] = DOQIX_PRICING_VERSION;
+	update_option( DOQIX_PRICING_OPTION_KEY, $settings );
+}
+add_action( 'plugins_loaded', 'doqix_pricing_maybe_migrate' );
+
 /* ── Theme colour detection ── */
 
 /**
