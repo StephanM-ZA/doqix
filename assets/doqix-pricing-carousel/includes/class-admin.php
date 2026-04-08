@@ -631,23 +631,6 @@ class Doqix_Pricing_Admin {
 							</label>
 						</div>
 
-						<!-- Icon type select -->
-						<div class="doqix-field">
-							<label for="<?php echo esc_attr( $base . '[icon_type]' ); ?>">
-								<?php esc_html_e( 'Icon Type', 'doqix-pricing-carousel' ); ?>
-							</label>
-							<select id="<?php echo esc_attr( $base . '[icon_type]' ); ?>"
-									name="<?php echo esc_attr( $base . '[icon_type]' ); ?>"
-									class="regular-text">
-								<option value="none" <?php selected( $card['icon_type'], 'none' ); ?>><?php esc_html_e( 'None', 'doqix-pricing-carousel' ); ?></option>
-								<option value="dashicon" <?php selected( $card['icon_type'], 'dashicon' ); ?>><?php esc_html_e( 'Dashicon', 'doqix-pricing-carousel' ); ?></option>
-								<option value="image" <?php selected( $card['icon_type'], 'image' ); ?>><?php esc_html_e( 'Image URL', 'doqix-pricing-carousel' ); ?></option>
-							</select>
-						</div>
-
-						<!-- Icon value (shown conditionally via CSS/JS) -->
-						<?php $this->render_text_field( $base . '[icon_value]', __( 'Icon Value', 'doqix-pricing-carousel' ), $card['icon_value'] ); ?>
-
 						<!-- Hidden sort_order -->
 						<input type="hidden" name="<?php echo esc_attr( $base . '[sort_order]' ); ?>" value="<?php echo esc_attr( $i ); ?>">
 					</div>
@@ -1071,29 +1054,26 @@ class Doqix_Pricing_Admin {
 	public function render_mini_editor( $name, $label, $value, $optional = false ) {
 		$editor_id = sanitize_key( str_replace( array( '[', ']' ), '-', $name ) );
 		?>
-		<div class="doqix-field doqix-mini-editor-wrap">
+		<div class="doqix-field doqix-wp-editor-wrap">
 			<label>
 				<?php echo esc_html( $label ); ?>
 				<?php if ( $optional ) : ?>
 					<span class="description">(<?php esc_html_e( 'optional', 'doqix-pricing-carousel' ); ?>)</span>
 				<?php endif; ?>
 			</label>
-			<div class="doqix-mini-toolbar">
-				<button type="button" class="button button-small" data-cmd="bold" title="Bold"><b>B</b></button>
-				<button type="button" class="button button-small" data-cmd="italic" title="Italic"><i>I</i></button>
-				<button type="button" class="button button-small" data-cmd="insertUnorderedList" title="Bullet list">&#8226;</button>
-				<button type="button" class="button button-small" data-cmd="createLink" title="Link">&#128279;</button>
-			</div>
-			<div class="doqix-mini-editor"
-				 id="<?php echo esc_attr( $editor_id ); ?>"
-				 contenteditable="true"
-				 data-target="<?php echo esc_attr( $name ); ?>">
-				<?php echo wp_kses_post( $value ); ?>
-			</div>
-			<input type="hidden"
-				   name="<?php echo esc_attr( $name ); ?>"
-				   value="<?php echo esc_attr( $value ); ?>"
-				   class="doqix-mini-editor-input">
+			<?php
+			wp_editor( $value, $editor_id, array(
+				'textarea_name' => $name,
+				'textarea_rows' => 6,
+				'media_buttons' => false,
+				'teeny'         => true,
+				'quicktags'     => true,
+				'tinymce'       => array(
+					'toolbar1' => 'bold,italic,underline,bullist,numlist,link,unlink',
+					'toolbar2' => '',
+				),
+			) );
+			?>
 		</div>
 		<?php
 	}
