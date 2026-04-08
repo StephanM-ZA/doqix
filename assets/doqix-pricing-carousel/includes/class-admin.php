@@ -1035,7 +1035,7 @@ class Doqix_Pricing_Admin {
 				   data-visual-default="<?php echo esc_attr( $visual_default ); ?>"
 				   <?php if ( $data_var ) : ?>data-var="<?php echo esc_attr( $data_var ); ?>"<?php endif; ?>>
 			<code class="doqix-color-hex"><?php echo esc_html( $display_hex ); ?></code>
-			<button type="button" class="button button-small doqix-color-reset"
+			<button type="button" class="doqix-color-reset"
 					data-default="<?php echo esc_attr( $visual_default ); ?>"
 					title="<?php esc_attr_e( 'Reset to theme default', 'doqix-pricing-carousel' ); ?>">
 				<?php esc_html_e( 'Reset', 'doqix-pricing-carousel' ); ?>

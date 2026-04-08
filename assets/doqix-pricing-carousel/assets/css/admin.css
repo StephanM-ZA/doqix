@@ -709,27 +709,33 @@
 	border-radius: 10px 10px 0 0;
 }
 
-.doqix-preview-header strong {
+.doqix-preview-name {
 	font-size: 17px;
 	font-weight: 700;
 }
 
-.doqix-preview-header small {
+.doqix-preview-sub {
 	font-size: 11px;
 	opacity: 0.85;
+	margin-top: 2px;
 }
 
 .doqix-preview-price {
 	font-size: 34px;
 	font-weight: 800;
-	display: block;
 	margin-top: 10px;
 }
 
-.doqix-preview-price small {
+.doqix-preview-price span {
 	font-size: 13px;
 	font-weight: 400;
 	opacity: 0.8;
+}
+
+.doqix-preview-setup {
+	font-size: 11px;
+	opacity: 0.8;
+	margin-top: 2px;
 }
 
 .doqix-preview-body {
@@ -799,25 +805,14 @@
 }
 
 .doqix-preview-cta {
-	margin: 0;
-	padding: 0;
-}
-
-.doqix-preview-cta a {
-	display: block;
+	margin: 16px 20px 20px;
 	background: var(--pricing-cta-bg, #0886B5);
 	color: var(--pricing-cta-text, #fff);
 	padding: 12px;
-	border-radius: 0 0 10px 10px;
+	border-radius: 8px;
 	font-size: 13px;
 	font-weight: 600;
 	text-align: center;
-	text-decoration: none;
-	transition: opacity 0.15s;
-}
-
-.doqix-preview-cta a:hover {
-	opacity: 0.9;
 }
 
 /* ────────────────────────────────────────────
