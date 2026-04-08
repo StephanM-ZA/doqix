@@ -27,7 +27,7 @@
         "requires_php": "7.4"
     },
     "doqix-pricing-carousel": {
-        "version": "1.0.8",
+        "version": "1.0.9",
         "slug": "doqix-pricing-carousel",
         "plugin_file": "doqix-pricing-carousel/doqix-pricing-carousel.php",
         "download_url": "https://github.com/StephanM-ZA/doqix_website/releases/latest/download/doqix-pricing-carousel.zip",

@@ -154,8 +154,10 @@ class Doqix_Pricing_Frontend {
 			'color_header_bg'   => '--pricing-header-bg',
 			'color_header_text' => '--pricing-header-text',
 			'color_card_bg'     => '--pricing-card-bg',
-			'color_cta_bg'      => '--pricing-cta-bg',
-			'color_cta_text'    => '--pricing-cta-text',
+			'color_cta_bg'         => '--pricing-cta-bg',
+			'color_cta_text'       => '--pricing-cta-text',
+			'color_cta_hover_bg'   => '--pricing-cta-hover-bg',
+			'color_cta_hover_text' => '--pricing-cta-hover-text',
 			'color_badge_bg'    => '--pricing-badge-bg',
 			'color_badge_text'  => '--pricing-badge-text',
 			'color_feat_text'   => '--pricing-feat-text',
@@ -265,7 +267,9 @@ class Doqix_Pricing_Frontend {
 				<div class="doqix-pricing-savings"><?php echo esc_html( $card['savings'] ); ?></div>
 <?php endif; ?>
 <?php if ( ! empty( $card['features'] ) ) : ?>
-				<div class="doqix-pricing-features"><?php echo wp_kses_post( $card['features'] ); ?></div>
+				<div class="doqix-pricing-features">
+					<?php echo $this->html_to_divs( $card['features'], 'doqix-pricing-feat' ); ?>
+				</div>
 <?php endif; ?>
 <?php if ( ! empty( $card['description'] ) ) : ?>
 				<div class="doqix-pricing-description"><?php echo wp_kses_post( $card['description'] ); ?></div>
@@ -273,7 +277,7 @@ class Doqix_Pricing_Frontend {
 <?php if ( ! empty( $card['excludes'] ) ) : ?>
 				<div class="doqix-pricing-excludes">
 					<div class="doqix-pricing-exc-title">Excludes:</div>
-					<?php echo wp_kses_post( $card['excludes'] ); ?>
+					<?php echo $this->html_to_divs( $card['excludes'], 'doqix-pricing-exc-item' ); ?>
 				</div>
 <?php endif; ?>
 			</div>
@@ -321,5 +325,41 @@ class Doqix_Pricing_Frontend {
 	private function extract_numeric_price( $price ) {
 		$cleaned = preg_replace( '/[^0-9.]/', '', $price );
 		return is_numeric( $cleaned ) ? $cleaned : '';
+	}
+
+	/**
+	 * Convert HTML (ul/li, p tags, or plain text) into flat div elements.
+	 *
+	 * Strips <ul>, <ol>, <li>, <p> wrappers and outputs one <div> per item.
+	 * This avoids theme CSS overriding list styles.
+	 *
+	 * @param  string $html  Raw HTML content.
+	 * @param  string $class CSS class for each div.
+	 * @return string        Cleaned HTML with divs.
+	 */
+	private function html_to_divs( $html, $class ) {
+		$items = array();
+
+		/* Try <li> items first */
+		if ( preg_match_all( '/<li[^>]*>(.*?)<\/li>/si', $html, $matches ) ) {
+			$items = $matches[1];
+		}
+		/* Try <p> items */
+		elseif ( preg_match_all( '/<p[^>]*>(.*?)<\/p>/si', $html, $matches ) ) {
+			$items = $matches[1];
+		}
+		/* Plain text — split by newlines */
+		else {
+			$items = array_filter( array_map( 'trim', preg_split( '/\r?\n/', wp_strip_all_tags( $html ) ) ) );
+		}
+
+		$out = '';
+		foreach ( $items as $item ) {
+			$text = trim( wp_strip_all_tags( $item ) );
+			if ( '' !== $text ) {
+				$out .= '<div class="' . esc_attr( $class ) . '">' . esc_html( $text ) . '</div>';
+			}
+		}
+		return $out;
 	}
 }

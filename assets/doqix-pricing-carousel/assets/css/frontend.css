@@ -82,11 +82,11 @@
   overflow: visible;
   border: 1px solid #e0e0e0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  background: var(--pricing-card-bg, #f9fcfd);
+  background: var(--pricing-header-bg, #0886B5);
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 0 12px;
+  margin: 0 6px;
   transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -210,55 +210,23 @@
   flex: 1;
 }
 
-.doqix-pricing-features p {
-  padding: 8px 0;
+.doqix-pricing-feat {
+  padding: 9px 0;
   border-bottom: 1px solid #e8eff2;
   font-size: 13px;
   margin: 0;
   line-height: 1.5;
+  color: var(--pricing-feat-text, #1d2327);
 }
 
-.doqix-pricing-features p:last-child {
+.doqix-pricing-feat:last-child {
   border-bottom: none;
 }
 
-.doqix-pricing-features p::before {
+.doqix-pricing-feat::before {
   content: "\2713\0020";
   color: var(--pricing-feat-check, #0886B5);
   font-weight: 700;
-}
-
-/* Features stored as <ul><li> — high specificity to override theme */
-#doqix-pricing .doqix-pricing-features ul {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-#doqix-pricing .doqix-pricing-features ul li {
-  padding: 8px 0 !important;
-  border-bottom: 1px solid #e8eff2 !important;
-  font-size: 13px !important;
-  margin: 0 !important;
-  line-height: 1.5 !important;
-  list-style: none !important;
-  color: var(--pricing-feat-text, #333) !important;
-}
-
-#doqix-pricing .doqix-pricing-features ul li:last-child {
-  border-bottom: none !important;
-}
-
-#doqix-pricing .doqix-pricing-features ul li::before {
-  content: "\2713\0020" !important;
-  color: var(--pricing-feat-check, #0886B5) !important;
-  font-weight: 700 !important;
-}
-
-#doqix-pricing .doqix-pricing-features p {
-  padding: 8px 0;
-  font-size: 13px;
-  margin: 0;
 }
 
 /* ── Description ── */
@@ -285,34 +253,15 @@
   margin-bottom: 6px;
 }
 
-.doqix-pricing-excludes p {
+.doqix-pricing-exc-item {
   padding: 3px 0;
   margin: 0;
   font-size: 11px;
+  color: var(--pricing-exc-text, #999);
 }
 
-.doqix-pricing-excludes p::before {
+.doqix-pricing-exc-item::before {
   content: "\2022\0020";
-}
-
-/* Excludes stored as <ul><li> — high specificity to override theme */
-#doqix-pricing .doqix-pricing-excludes ul {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-#doqix-pricing .doqix-pricing-excludes ul li {
-  padding: 3px 0 !important;
-  margin: 0 !important;
-  font-size: 11px !important;
-  line-height: 1.5 !important;
-  list-style: none !important;
-  color: var(--pricing-exc-text, #999) !important;
-}
-
-#doqix-pricing .doqix-pricing-excludes ul li::before {
-  content: "\2022\0020" !important;
 }
 
 /* ── CTA Button ── */
@@ -328,14 +277,16 @@
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s ease, opacity 0.2s ease;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
   border: none;
   line-height: 1.4;
 }
 
 .doqix-pricing-cta:hover {
-  opacity: 0.88;
-  filter: brightness(0.92);
+  background: var(--pricing-cta-hover-bg, #076d94);
+  color: var(--pricing-cta-hover-text, #fff);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #doqix-pricing .doqix-pricing-cta {
@@ -467,19 +418,16 @@
 /* ══════════════════════════════════════════════════════════════════════════════
    CAROUSEL MODE
    ══════════════════════════════════════════════════════════════════════════════ */
-.doqix-pricing[data-mode="carousel"] .doqix-pricing-track {
-  display: flex;
-  flex-wrap: nowrap;
+.doqix-pricing[data-mode="carousel"],
+#doqix-pricing[data-mode="carousel"] {
   overflow: hidden;
-  transition: transform 0.4s ease;
-  padding: 30px 0 20px;
-  align-items: center;
 }
 
+.doqix-pricing[data-mode="carousel"] .doqix-pricing-track,
 #doqix-pricing[data-mode="carousel"] .doqix-pricing-track {
   display: flex;
   flex-wrap: nowrap;
-  overflow: hidden;
+  overflow: visible;
   transition: transform 0.4s ease;
   padding: 30px 0 20px;
   align-items: center;

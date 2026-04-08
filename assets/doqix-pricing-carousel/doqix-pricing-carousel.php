@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix Pricing Carousel
  * Plugin URI:  https://doqix.co.za
  * Description: Configurable pricing table carousel. Use shortcode [doqix_pricing] or [doqix_pricing preset="name"].
- * Version:     1.0.8
+ * Version:     1.0.9
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_PRICING_VERSION',    '1.0.8' );
+define( 'DOQIX_PRICING_VERSION',    '1.0.9' );
 define( 'DOQIX_PRICING_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_PRICING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_PRICING_OPTION_KEY', 'doqix_pricing_settings' );
@@ -90,18 +90,20 @@ function doqix_pricing_get_preset_defaults() {
 		'annual_discount'   => 15,
 
 		/* Preset-level colours (empty = theme default) */
-		'color_header_bg'   => '',
-		'color_header_text' => '',
-		'color_accent'      => '',
-		'color_card_bg'     => '',
-		'color_cta_bg'      => '',
-		'color_cta_text'    => '',
-		'color_badge_bg'    => '',
-		'color_badge_text'  => '',
-		'color_feat_text'   => '',
-		'color_feat_check'  => '',
-		'color_exc_text'    => '',
-		'color_exc_title'   => '',
+		'color_header_bg'      => '',
+		'color_header_text'    => '',
+		'color_accent'         => '',
+		'color_card_bg'        => '',
+		'color_cta_bg'         => '',
+		'color_cta_text'       => '',
+		'color_cta_hover_bg'   => '',
+		'color_cta_hover_text' => '',
+		'color_badge_bg'       => '',
+		'color_badge_text'     => '',
+		'color_feat_text'      => '',
+		'color_feat_check'     => '',
+		'color_exc_text'       => '',
+		'color_exc_title'      => '',
 
 		/* Cards */
 		'cards'             => array(
@@ -227,8 +229,8 @@ function doqix_pricing_maybe_migrate() {
 		return; // Up to date
 	}
 
-	// ── 1.0.8: One-time reset — replace default preset cards with Pricing Strategy v2.0 data
-	if ( version_compare( $stored_version, '1.0.8', '<' ) ) {
+	// ── 1.0.9: One-time reset — replace default preset cards with Pricing Strategy v2.0 data
+	if ( version_compare( $stored_version, '1.0.9', '<' ) ) {
 		$fresh_preset = doqix_pricing_get_preset_defaults();
 		if ( isset( $settings['presets']['default'] ) ) {
 			$settings['presets']['default']['cards'] = $fresh_preset['cards'];
