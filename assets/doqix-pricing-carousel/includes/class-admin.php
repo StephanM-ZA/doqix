@@ -557,9 +557,8 @@ class Doqix_Pricing_Admin {
 					<?php if ( ! empty( $card['featured'] ) ) : ?>
 						<span class="doqix-featured-star" title="<?php esc_attr_e( 'Featured', 'doqix-pricing-carousel' ); ?>">&#9733;</span>
 					<?php endif; ?>
-					<button type="button" class="button button-small doqix-remove-card"
-							onclick="event.stopPropagation(); doqixPricingRemoveCard(this);"
-							title="<?php esc_attr_e( 'Remove card', 'doqix-pricing-carousel' ); ?>">&times;</button>
+					<button type="button" class="doqix-remove-card"
+							onclick="event.stopPropagation(); doqixPricingRemoveCard(this);"><?php esc_html_e( 'Remove', 'doqix-pricing-carousel' ); ?></button>
 					<span class="doqix-collapse-arrow">&#9654;</span>
 				</div>
 

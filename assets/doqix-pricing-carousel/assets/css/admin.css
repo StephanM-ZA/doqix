@@ -201,11 +201,13 @@
 }
 
 .doqix-remove-card {
-	color: #cc1818 !important;
+	color: #cc1818;
 	font-size: 12px;
 	cursor: pointer;
 	padding: 4px 8px;
 	border-radius: 3px;
+	border: none;
+	background: none;
 }
 
 .doqix-remove-card:hover {
