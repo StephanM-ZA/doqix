@@ -350,7 +350,52 @@
   });
 
   /* ────────────────────────────────────────────
-   * 11. Colour Overrides Toggle
+   * 11. Featured Toggle — only one card at a time
+   * ──────────────────────────────────────────── */
+
+  document.addEventListener('change', function(e) {
+    var inp = e.target;
+    if (!inp.name || inp.name.indexOf('[featured]') === -1 || inp.type !== 'checkbox') return;
+
+    var container = document.getElementById('doqix-cards-container');
+    if (!container) return;
+
+    var thisPanel = inp.closest('.doqix-card-panel');
+
+    if (inp.checked) {
+      // Uncheck all other featured toggles
+      var allChecks = container.querySelectorAll('input[type="checkbox"][name*="[featured]"]');
+      for (var i = 0; i < allChecks.length; i++) {
+        if (allChecks[i] !== inp) {
+          allChecks[i].checked = false;
+          // Remove star from other panels
+          var otherPanel = allChecks[i].closest('.doqix-card-panel');
+          if (otherPanel) {
+            var otherStar = otherPanel.querySelector('.doqix-featured-star');
+            if (otherStar) otherStar.remove();
+          }
+        }
+      }
+      // Add star to this panel header if not present
+      if (thisPanel && !thisPanel.querySelector('.doqix-featured-star')) {
+        var header = thisPanel.querySelector('.doqix-card-header');
+        var removeBtn = header.querySelector('.doqix-remove-card');
+        var star = document.createElement('span');
+        star.className = 'doqix-featured-star';
+        star.textContent = '\u2605';
+        header.insertBefore(star, removeBtn);
+      }
+    } else {
+      // Remove star from this panel
+      if (thisPanel) {
+        var star = thisPanel.querySelector('.doqix-featured-star');
+        if (star) star.remove();
+      }
+    }
+  });
+
+  /* ────────────────────────────────────────────
+   * 12. Colour Overrides Toggle
    * ──────────────────────────────────────────── */
 
   document.addEventListener('click', function(e) {
