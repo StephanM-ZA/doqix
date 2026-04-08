@@ -1,65 +1,71 @@
 # CHECKPOINT — Do.Qix Website Build
 
-**Date:** 2026-03-20
+**Date:** 2026-04-08
 **Branch:** main
-**Status:** ROI Calculator styling issue — needs fix
+**Last commit:** `6f7552b` feat(pricing-carousel): scaffold plugin with admin settings page
 
 ---
 
-## Current Issue
-ROI Calculator V1 styling is broken on frontend. Changes to heading/description/footnote CSS inadvertently affected the overall calculator layout. The calculator cards, buttons, and text are being overridden by Themify theme styles.
+## Current Task: Pricing Carousel Plugin — BUILDING
 
-**Root cause:** Removed too much CSS from the plugin — only heading, description, and footnote formatting should have been stripped. The calculator structural styling (cards, sliders, buttons, CTA, result panels) must remain intact.
+**Status:** Executing implementation plan via subagent-driven development.
 
-**Fix needed:** Restore the calculator's structural CSS while keeping heading/description/footnote as unstyled `<div>` wrappers controlled by the editor. Same fix needed on V2.
+### Completed Tasks
+- [x] Task 1: Unified Do.Qix admin menu (commits `7260a73`, `3148ebf`) — doqix-settings, ROI V1, ROI V2 all updated
+- [x] Task 2+3: Plugin scaffold + Admin skeleton (commit `6f7552b`) — main file, admin class with tabs/presets, frontend stub
+
+### In Progress
+- [ ] Task 4: Admin — Cards tab (repeater panels, mini editors, colour overrides)
+
+### Remaining Tasks
+- [ ] Task 5: Admin — Carousel & Billing tabs
+- [ ] Task 6: Admin — Colours tab with live preview
+- [ ] Task 7: Admin — Sanitisation
+- [ ] Task 8: Admin CSS
+- [ ] Task 9: Admin JS
+- [ ] Task 10: Frontend — Shortcode rendering
+- [ ] Task 11: Frontend CSS
+- [ ] Task 12: Frontend JS
+- [ ] Task 13: Uninstall + readme
+- [ ] Task 14: End-to-end verification
+
+### How to Resume
+Say `resume` after `/compact` or `/clear`. The plan is at `docs/superpowers/plans/2026-04-08-pricing-carousel.md`. Continue with Task 4 using subagent-driven development.
 
 ---
 
-## Overall Progress
+## Website Build Progress
 
 ### Phase 1: Foundation — COMPLETE
 ### Phase 2: Home Page — IN PROGRESS
 - [x] Step 8: Hero
 - [x] Step 9: The Problem
-- [ ] Step 10: What We Do ← NEXT (after ROI fix)
-- [ ] Steps 11-15: remaining
+- [ ] Step 10: What We Do ← NEXT (after plugin)
+- [ ] Steps 11-15 remaining
 
 ### Phases 3-10: Not started
 
 ---
 
-## ROI Calculator Changes This Session
-
-### Features added (both V1 & V2):
-1. **WYSIWYG editors** for heading, description, footnote (with colour picker + font size)
-2. **Named presets system** — tabbed admin UI, each preset gets own shortcode
-3. **CTA toggle** — checkbox to show/hide CTA, greyed out fields when disabled
-4. **V2 renamed** to coexist with V1 (different constants, classes, shortcode `[doqix_roi_calculator_v2]`)
-5. **CTA URL** accepts relative paths (`/contact`)
-
-### Current issue:
-- Heading changed from `<h2>` to `<div class="roi-heading">`
-- Description and footnote already `<div>`
-- Stripped ALL formatting CSS from heading, description, footnote
-- But this broke the overall layout — Themify theme styles now override calculator cards/buttons/etc.
-- Need to isolate: only remove formatting from heading/description/footnote, leave everything else intact
+## ROI Calculator — COMPLETE (v2.1.0)
 
 ---
 
-## Key Decisions (carried from previous session)
+## Key Decisions
 
-- Plugins: WP Super Cache, AIOS, Quform
-- Font: Inter via Google Fonts
-- CTA: "Start Free" (buttons), "Get My Free Plan" (form submit)
-- Muted colour: #6B7980
+| Decision | Value |
+|----------|-------|
+| Plugins | WP Super Cache, AIOS, Quform |
+| Font | Inter (Google Fonts) |
+| CTA buttons | "Start Free" |
+| Pricing model | 4-tier flat retainer (Solo/Team/Business/Enterprise) |
+| Pricing Carousel | Bold header band, badge pill, clean excludes, carousel + grid hybrid |
+| Admin menu | Unified "Do.Qix" parent with alphabetical submenus |
 
 ---
 
-## Files Modified This Session
-- `assets/doqix-roi-calculator/` — all 3 PHP files + CSS
-- `assets/doqix-roi-calculator-v2/` — all 3 PHP files + CSS + JS + admin CSS
-
-## Next Steps
-1. Fix ROI calculator CSS — restore structural styles, keep heading/description/footnote editor-driven
-2. Rezip and test
-3. Continue Phase 2: Step 10 (What We Do)
+## Uncommitted Changes
+- `docs/Website_Copy.md` — Section reorganisation (ROI/Pricing → Home, Why/Results → Services)
+- `docs/superpowers/specs/2026-04-08-pricing-carousel-design.md` — Design spec
+- `docs/superpowers/plans/2026-04-08-pricing-carousel.md` — Implementation plan
+- `CHECKPOINT.md` — This file

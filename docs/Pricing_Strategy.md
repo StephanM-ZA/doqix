@@ -57,8 +57,18 @@ The v1.0 pricing strategy proposed R3,500-R5,000 per workflow as a build fee. Th
 | **Training** | R1,500/session | R1,500/session | Included | Included |
 | **Extra workflows** | +R750/mo each | +R650/mo each | +R500/mo each | Included in scope |
 | **Commitment** | Month-to-month | Month-to-month | Month-to-month | Month-to-month |
+| **Custom development** | Custom quote | Custom quote | Custom quote | Custom quote |
 | **Typical savings** | R3,000-R8,000/mo | R8,000-R20,000/mo | R20,000-R50,000/mo | R50,000+/mo |
 | **CTA** | Start Free | Start Free | Start Free | Show Me What's Possible |
+
+### 4.6. Exclusions
+
+The following are **not included** in any standard tier and will be scoped and quoted separately:
+
+- Additional hosting requirements beyond standard managed infrastructure
+- Third-party API costs (e.g., paid API subscriptions, SMS credits, premium connectors)
+
+*These costs, where applicable, will be itemised in the client's quote before any work begins.*
 
 ### 4.2. Tier Design Logic
 
@@ -279,6 +289,7 @@ No hidden fees. No confusing credit systems. No per-task charges that punish you
 | Extra workflows | Solo +R750/mo, Team +R650/mo, Business +R500/mo | Published per tier on website |
 | Training workshop | R1,500 per session | Free for Business & Enterprise. Solo/Team pay per session. |
 | Emergency support | R500/hr | Urgent issues outside normal SLA |
+| Custom development | Custom quote | Bespoke integrations, dashboards, or tools beyond standard workflows |
 
 ## 10.1. Launch Promotion
 

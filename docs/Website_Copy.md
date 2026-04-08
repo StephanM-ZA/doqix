@@ -37,7 +37,7 @@ LinkedIn | X
 
 **H1:** Stop the Busywork. Start What Matters.
 
-**Subhead:** We build automations that handle the work your team shouldn't be doing — the copy-pasting, the data entry, the inbox treadmill. You won't touch a line of code. You won't learn new software. We do all of it.
+**Subhead:** We build workflow automations that handle the work your team shouldn't be doing — the copy-pasting, the data entry, the inbox treadmill. You won't touch a line of code. We do all of it.
 
 **CTA:** Start Free
 
@@ -111,51 +111,72 @@ Your automations go live. Data flows where it needs to go. Emails send themselve
 
 ---
 
-### Why Do.Qix
+### ROI
 
-**H2:** Why SA Businesses Choose Us
+**H2:** See What You Could Save
 
-**We speak plain English.** No jargon, no 47-page proposals. If your gran wouldn't understand it, we haven't explained it well enough.
+**(Hours Saved x Hourly Rate x Frequency) + Errors Prevented = Monthly Benefit**
 
-**We fix the process first, then automate it.** Most companies skip straight to building. We don't. Automating a mess just gives you a faster mess. We streamline first, *then* build — so it actually works.
+**Example 1:** Your admin spends 2 hours/day on data entry at R250/hr.
+That's **R11,000/month** on one task. Automate it — that money goes back into the business.
 
-**We price in rands, not dollars.** Flat monthly rate. No confusing credit systems. No per-task fees that balloon when you grow. No nasty surprises. You know your number before we start.
+**Example 2:** Sales team loses 30 min per lead on manual CRM entry. 200 leads/month.
+That's **R30,000/month** in selling time recovered.
 
-**Your data stays in your hands.** We build on n8n — a powerful open-source platform we self-host for you. Your data lives where you decide. Not on someone else's cloud. Not behind someone else's paywall. No lock-in, ever.
+**Example 3:** Data errors cost R500 each to fix. Happens 40 times/month.
+That's **R20,000/month** in preventable rework.
 
-**We're here. We get it.** Load-shedding contingencies, POPIA compliance, the reality of ZAR budgets and dollar-priced tools — we understand because we're building businesses here too. When you need help, you talk to a real person who knows your world.
+Now add those up. Across every repetitive task in your company. The ROI is real, it's fast, and it compounds.
 
-**We don't disappear after launch.** We monitor your automations, keep them running, and evolve them as your business grows. Long-term partner, not hit-and-run.
+**CTA:** Want us to calculate yours? Start Free.
 
 ---
 
-### Real Results
+### Pricing
 
-**H2:** This Is What Automation Actually Looks Like
+**H2:** Pricing That Makes Sense
 
-These are the kinds of results we build for — the same patterns we implement for SA businesses every day.
+No hidden fees. No confusing credit systems. No per-task charges that punish you for growing. Everything in **South African rands.** Month-to-month — we keep clients because we deliver, not because of contracts.
 
-**The property agency that stopped losing leads.**
-A Joburg-based property group was capturing leads from five different portals — manually. Agents were spending the first hour of every day copying contact details into their CRM. We automated the entire flow: leads from all portals now land in the right agent's pipeline instantly, with a welcome WhatsApp sent within seconds. Lead response time went from hours to under a minute. They haven't lost a lead to a slow reply since.
+**Four plans:**
 
-**The accounting firm that got Fridays back.**
-A mid-size firm in Cape Town was spending 6+ hours every Friday pulling data from Xero, formatting reports, and emailing them to clients. We built an automation that pulls the numbers, populates the report template, and delivers it — every Friday at 7am, without anyone lifting a finger. That's 300+ hours a year, back to billable work.
+| | **Solo** | **Team** *(Most popular)* | **Business** | **Enterprise** |
+|---|---|---|---|---|
+| **Best for** | Solopreneurs & freelancers | Small teams (2-15 people) | Growing SMEs (15-50 people) | Larger operations (50+) |
+| **Setup** | Free | R1,500 | R2,500 | Let's talk |
+| **Monthly** | R999/mo | R2,500/mo | R5,500/mo | Custom quote |
+| **Workflows** | 1 | Up to 3 | Up to 6 | Unlimited (scoped) |
+| **Support** | Email (48hr) | Priority + WhatsApp (24hr) | Dedicated + monthly strategy call | Dedicated account manager |
+| **Training** | R1,500/session | R1,500/session | Included | Included |
+| **Custom development** | Custom quote | Custom quote | Custom quote | Custom quote |
+| **You'll save** | ~R3,000-R8,000/mo | ~R8,000-R20,000/mo | ~R20,000-R50,000/mo | R50,000+/mo |
+| | Start Free | Start Free | Start Free | Show Me What's Possible |
 
-**The e-commerce brand that stopped hiring for admin.**
-An online retailer was about to hire a third admin assistant just to keep up with order processing, stock updates, and shipping notifications. We automated the lot — from order confirmation to tracking updates to restock alerts. They didn't need the hire. They redeployed the budget into marketing and grew 40% that quarter.
+**Every plan includes:** Hosting, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.
 
-**The professional services firm that killed the copy-paste.**
-A Durban consultancy had staff entering the same client data into four different systems for every new engagement. Contracts, onboarding emails, project setup, billing — all manual. We connected the systems. Now they enter client details once, and everything cascades. Errors dropped to near zero. Onboarding time went from 2 days to 20 minutes.
+**Need more workflows?** Add them anytime:
+- Solo: +R750/mo per workflow
+- Team: +R650/mo per workflow
+- Business: +R500/mo per workflow
 
-**Stat callouts (visual badges):**
-- 8-15 hours/week reclaimed (typical client result)
-- 95%+ reduction in data entry errors
-- R11,000-R30,000/month in recovered time (per automated process)
-- Days-to-minutes onboarding improvements
+**Add-ons:**
+- Custom development — Custom quote
+- Emergency support — R500/hr
 
-**Closing line:** Research shows 60% of all jobs have at least 30% of activities that can be automated. This isn't about replacing people. It's about freeing them to do work that actually needs a human brain.
+**Excludes:** Additional hosting and third-party API costs — these are quoted separately where applicable.
 
-*(We're building our SA case study library. As client results come in, named stories with real numbers will replace these scenarios.)*
+**Launch offer:** First month at 50% on any plan. No catch — just a reason to start now.
+
+**The fine print (there isn't much):**
+- Cancel anytime — no lock-in contracts
+- You get a detailed quote before any work starts
+- No dollar-denominated surprises — everything is in ZAR
+
+Your competitors on Zapier are watching their bills climb in dollars every month. You'll know your number — in rands — before we write a single line of code.
+
+**Not sure which plan?** That's what the free call is for. We'll map your processes, show you where the time is going, and recommend the right fit.
+
+**CTA:** Start Free
 
 ---
 
@@ -338,27 +359,6 @@ We don't just throw tech at your problems. We follow a structured approach — b
 
 ---
 
-### ROI
-
-**H2:** See What You Could Save
-
-**(Hours Saved x Hourly Rate x Frequency) + Errors Prevented = Monthly Benefit**
-
-**Example 1:** Your admin spends 2 hours/day on data entry at R250/hr.
-That's **R11,000/month** on one task. Automate it — that money goes back into the business.
-
-**Example 2:** Sales team loses 30 min per lead on manual CRM entry. 200 leads/month.
-That's **R30,000/month** in selling time recovered.
-
-**Example 3:** Data errors cost R500 each to fix. Happens 40 times/month.
-That's **R20,000/month** in preventable rework.
-
-Now add those up. Across every repetitive task in your company. The ROI is real, it's fast, and it compounds.
-
-**CTA:** Want us to calculate yours? Start Free.
-
----
-
 ### The Caution
 
 **H2:** One Thing We Tell Every Client First
@@ -369,47 +369,51 @@ This is why we don't skip steps. We streamline your process first — eliminate 
 
 ---
 
-### Pricing
+### Why Do.Qix
 
-**H2:** Pricing That Makes Sense
+**H2:** Why SA Businesses Choose Us
 
-No hidden fees. No confusing credit systems. No per-task charges that punish you for growing. Everything in **South African rands.** Month-to-month — we keep clients because we deliver, not because of contracts.
+**We speak plain English.** No jargon, no 47-page proposals. If your gran wouldn't understand it, we haven't explained it well enough.
 
-**Four plans:**
+**We fix the process first, then automate it.** Most companies skip straight to building. We don't. Automating a mess just gives you a faster mess. We streamline first, *then* build — so it actually works.
 
-| | **Solo** | **Team** *(Most popular)* | **Business** | **Enterprise** |
-|---|---|---|---|---|
-| **Best for** | Solopreneurs & freelancers | Small teams (2-15 people) | Growing SMEs (15-50 people) | Larger operations (50+) |
-| **Setup** | Free | R1,500 | R2,500 | Let's talk |
-| **Monthly** | R999/mo | R2,500/mo | R5,500/mo | Custom quote |
-| **Workflows** | 1 | Up to 3 | Up to 6 | Unlimited (scoped) |
-| **Support** | Email (48hr) | Priority + WhatsApp (24hr) | Dedicated + monthly strategy call | Dedicated account manager |
-| **Training** | R1,500/session | R1,500/session | Included | Included |
-| **You'll save** | ~R3,000-R8,000/mo | ~R8,000-R20,000/mo | ~R20,000-R50,000/mo | R50,000+/mo |
-| | Start Free | Start Free | Start Free | Show Me What's Possible |
+**We price in rands, not dollars.** Flat monthly rate. No confusing credit systems. No per-task fees that balloon when you grow. No nasty surprises. You know your number before we start.
 
-**Every plan includes:** Hosting, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.
+**Your data stays in your hands.** We build on n8n — a powerful open-source platform we self-host for you. Your data lives where you decide. Not on someone else's cloud. Not behind someone else's paywall. No lock-in, ever.
 
-**Need more workflows?** Add them anytime:
-- Solo: +R750/mo per workflow
-- Team: +R650/mo per workflow
-- Business: +R500/mo per workflow
+**We're here. We get it.** Load-shedding contingencies, POPIA compliance, the reality of ZAR budgets and dollar-priced tools — we understand because we're building businesses here too. When you need help, you talk to a real person who knows your world.
 
-**Add-ons:**
-- Emergency support — R500/hr
+**We don't disappear after launch.** We monitor your automations, keep them running, and evolve them as your business grows. Long-term partner, not hit-and-run.
 
-**Launch offer:** First month at 50% on any plan. No catch — just a reason to start now.
+---
 
-**The fine print (there isn't much):**
-- Cancel anytime — no lock-in contracts
-- You get a detailed quote before any work starts
-- No dollar-denominated surprises — everything is in ZAR
+### Real Results
 
-Your competitors on Zapier are watching their bills climb in dollars every month. You'll know your number — in rands — before we write a single line of code.
+**H2:** This Is What Automation Actually Looks Like
 
-**Not sure which plan?** That's what the free call is for. We'll map your processes, show you where the time is going, and recommend the right fit.
+These are the kinds of results we build for — the same patterns we implement for SA businesses every day.
 
-**CTA:** Start Free
+**The property agency that stopped losing leads.**
+A Joburg-based property group was capturing leads from five different portals — manually. Agents were spending the first hour of every day copying contact details into their CRM. We automated the entire flow: leads from all portals now land in the right agent's pipeline instantly, with a welcome WhatsApp sent within seconds. Lead response time went from hours to under a minute. They haven't lost a lead to a slow reply since.
+
+**The accounting firm that got Fridays back.**
+A mid-size firm in Cape Town was spending 6+ hours every Friday pulling data from Xero, formatting reports, and emailing them to clients. We built an automation that pulls the numbers, populates the report template, and delivers it — every Friday at 7am, without anyone lifting a finger. That's 300+ hours a year, back to billable work.
+
+**The e-commerce brand that stopped hiring for admin.**
+An online retailer was about to hire a third admin assistant just to keep up with order processing, stock updates, and shipping notifications. We automated the lot — from order confirmation to tracking updates to restock alerts. They didn't need the hire. They redeployed the budget into marketing and grew 40% that quarter.
+
+**The professional services firm that killed the copy-paste.**
+A Durban consultancy had staff entering the same client data into four different systems for every new engagement. Contracts, onboarding emails, project setup, billing — all manual. We connected the systems. Now they enter client details once, and everything cascades. Errors dropped to near zero. Onboarding time went from 2 days to 20 minutes.
+
+**Stat callouts (visual badges):**
+- 8-15 hours/week reclaimed (typical client result)
+- 95%+ reduction in data entry errors
+- R11,000-R30,000/month in recovered time (per automated process)
+- Days-to-minutes onboarding improvements
+
+**Closing line:** Research shows 60% of all jobs have at least 30% of activities that can be automated. This isn't about replacing people. It's about freeing them to do work that actually needs a human brain.
+
+*(We're building our SA case study library. As client results come in, named stories with real numbers will replace these scenarios.)*
 
 ---
 
