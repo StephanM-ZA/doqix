@@ -14,7 +14,7 @@ class Doqix_Pricing_Admin {
 	private $hook = '';
 
 	public function __construct() {
-		add_action( 'admin_menu',            array( $this, 'add_settings_page' ) );
+		add_action( 'admin_menu',            array( $this, 'add_settings_page' ), 20 );
 		add_action( 'admin_init',            array( $this, 'register_settings' ) );
 		add_action( 'admin_init',            array( $this, 'handle_preset_actions' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
