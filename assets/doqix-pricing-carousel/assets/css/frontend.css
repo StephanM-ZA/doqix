@@ -228,6 +228,33 @@
   font-weight: 700;
 }
 
+/* Features stored as <ul><li> — high specificity to override theme */
+#doqix-pricing .doqix-pricing-features ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#doqix-pricing .doqix-pricing-features ul li {
+  padding: 8px 0 !important;
+  border-bottom: 1px solid #e8eff2 !important;
+  font-size: 13px !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+  list-style: none !important;
+  color: var(--pricing-feat-text, #333) !important;
+}
+
+#doqix-pricing .doqix-pricing-features ul li:last-child {
+  border-bottom: none !important;
+}
+
+#doqix-pricing .doqix-pricing-features ul li::before {
+  content: "\2713\0020" !important;
+  color: var(--pricing-feat-check, #0886B5) !important;
+  font-weight: 700 !important;
+}
+
 #doqix-pricing .doqix-pricing-features p {
   padding: 8px 0;
   font-size: 13px;
@@ -266,6 +293,26 @@
 
 .doqix-pricing-excludes p::before {
   content: "\2022\0020";
+}
+
+/* Excludes stored as <ul><li> — high specificity to override theme */
+#doqix-pricing .doqix-pricing-excludes ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#doqix-pricing .doqix-pricing-excludes ul li {
+  padding: 3px 0 !important;
+  margin: 0 !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+  list-style: none !important;
+  color: var(--pricing-exc-text, #999) !important;
+}
+
+#doqix-pricing .doqix-pricing-excludes ul li::before {
+  content: "\2022\0020" !important;
 }
 
 /* ── CTA Button ── */
