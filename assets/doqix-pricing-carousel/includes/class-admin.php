@@ -202,14 +202,215 @@ class Doqix_Pricing_Admin {
 	 * ──────────────────────────────────────────── */
 
 	public function sanitize_settings( $input ) {
-		$existing = get_option( DOQIX_PRICING_OPTION_KEY, doqix_pricing_get_defaults() );
+		$settings = $this->get_settings();
 
 		// Read which preset + sub-tab was submitted
 		$preset_slug = isset( $input['_preset_slug'] ) ? sanitize_key( $input['_preset_slug'] ) : 'default';
 		$sub_tab     = isset( $input['_sub_tab'] ) ? sanitize_key( $input['_sub_tab'] ) : 'cards';
 
-		// For now, return existing settings unchanged
-		return $existing;
+		// Ensure presets array exists
+		if ( ! isset( $settings['presets'] ) || ! is_array( $settings['presets'] ) ) {
+			$settings['presets'] = array( 'default' => doqix_pricing_get_preset_defaults() );
+		}
+
+		// Get or create the target preset
+		if ( ! isset( $settings['presets'][ $preset_slug ] ) ) {
+			$settings['presets'][ $preset_slug ] = doqix_pricing_get_preset_defaults();
+		}
+
+		// Merge with defaults so all keys exist
+		$settings['presets'][ $preset_slug ] = wp_parse_args(
+			$settings['presets'][ $preset_slug ],
+			doqix_pricing_get_preset_defaults()
+		);
+
+		// Read submitted preset data
+		$preset_input = isset( $input['presets'][ $preset_slug ] ) && is_array( $input['presets'][ $preset_slug ] )
+			? $input['presets'][ $preset_slug ]
+			: array();
+
+		// Delegate to sub-tab sanitiser
+		switch ( $sub_tab ) {
+			case 'cards':
+				$this->sanitize_cards( $settings['presets'][ $preset_slug ], $preset_input );
+				break;
+			case 'carousel':
+				$this->sanitize_carousel( $settings['presets'][ $preset_slug ], $preset_input );
+				break;
+			case 'colours':
+				$this->sanitize_colours( $settings['presets'][ $preset_slug ], $preset_input );
+				break;
+			case 'billing':
+				$this->sanitize_billing( $settings['presets'][ $preset_slug ], $preset_input );
+				break;
+		}
+
+		return $settings;
+	}
+
+	/**
+	 * Sanitise cards sub-tab input.
+	 *
+	 * @param array $preset Reference to the preset being updated.
+	 * @param array $input  Submitted preset data.
+	 */
+	private function sanitize_cards( &$preset, $input ) {
+		if ( ! isset( $input['cards'] ) || ! is_array( $input['cards'] ) ) {
+			$preset['cards'] = array();
+			return;
+		}
+
+		$clean_cards = array();
+		foreach ( $input['cards'] as $raw_card ) {
+			if ( ! is_array( $raw_card ) ) {
+				continue;
+			}
+
+			$card = doqix_pricing_get_card_defaults();
+
+			// Text fields
+			$text_keys = array(
+				'name', 'subtitle', 'price', 'price_suffix', 'price_annual',
+				'setup_fee', 'savings', 'cta_label', 'cta_url', 'badge', 'icon_value',
+			);
+			foreach ( $text_keys as $key ) {
+				if ( isset( $raw_card[ $key ] ) ) {
+					$card[ $key ] = sanitize_text_field( $raw_card[ $key ] );
+				}
+			}
+
+			// Rich text fields
+			$rich_keys = array( 'features', 'description', 'excludes' );
+			foreach ( $rich_keys as $key ) {
+				if ( isset( $raw_card[ $key ] ) ) {
+					$card[ $key ] = wp_kses_post( $raw_card[ $key ] );
+				}
+			}
+
+			// Featured: 0 or 1
+			$card['featured'] = ! empty( $raw_card['featured'] ) ? 1 : 0;
+
+			// Sort order
+			$card['sort_order'] = isset( $raw_card['sort_order'] ) ? absint( $raw_card['sort_order'] ) : 0;
+
+			// Icon type: validate against allowed values
+			$valid_icon_types = array( 'none', 'dashicon', 'image' );
+			if ( isset( $raw_card['icon_type'] ) && in_array( $raw_card['icon_type'], $valid_icon_types, true ) ) {
+				$card['icon_type'] = $raw_card['icon_type'];
+			}
+
+			// Card-level colour overrides
+			$color_keys = array(
+				'color_header_bg', 'color_header_text', 'color_cta_bg', 'color_cta_text',
+				'color_badge_bg', 'color_badge_text', 'color_card_bg',
+				'color_feat_text', 'color_feat_check', 'color_exc_text',
+			);
+			foreach ( $color_keys as $key ) {
+				if ( isset( $raw_card[ $key ] ) && '' !== $raw_card[ $key ] ) {
+					$sanitized = sanitize_hex_color( $raw_card[ $key ] );
+					$card[ $key ] = $sanitized ? $sanitized : '';
+				} else {
+					$card[ $key ] = '';
+				}
+			}
+
+			$clean_cards[] = $card;
+		}
+
+		$preset['cards'] = $clean_cards;
+	}
+
+	/**
+	 * Sanitise carousel sub-tab input.
+	 *
+	 * @param array $preset Reference to the preset being updated.
+	 * @param array $input  Submitted preset data.
+	 */
+	private function sanitize_carousel( &$preset, $input ) {
+		// Display modes
+		$valid_display = array( 'grid', 'carousel' );
+
+		if ( isset( $input['display_desktop'] ) && in_array( $input['display_desktop'], $valid_display, true ) ) {
+			$preset['display_desktop'] = $input['display_desktop'];
+		}
+		if ( isset( $input['display_mobile'] ) && in_array( $input['display_mobile'], $valid_display, true ) ) {
+			$preset['display_mobile'] = $input['display_mobile'];
+		}
+
+		// Mobile breakpoint: clamp 320-1200
+		if ( isset( $input['mobile_breakpoint'] ) ) {
+			$bp = absint( $input['mobile_breakpoint'] );
+			$preset['mobile_breakpoint'] = max( 320, min( 1200, $bp ) );
+		}
+
+		// Nav style
+		$valid_nav = array( 'arrows', 'dots', 'breadcrumbs' );
+		if ( isset( $input['nav_style'] ) && in_array( $input['nav_style'], $valid_nav, true ) ) {
+			$preset['nav_style'] = $input['nav_style'];
+		}
+
+		// Active scale: clamp 1.0-1.5
+		if ( isset( $input['active_scale'] ) ) {
+			$scale = floatval( $input['active_scale'] );
+			$preset['active_scale'] = max( 1.0, min( 1.5, $scale ) );
+		}
+
+		// Autoplay
+		$preset['autoplay'] = ! empty( $input['autoplay'] ) ? 1 : 0;
+
+		// Autoplay speed: min 1000
+		if ( isset( $input['autoplay_speed'] ) ) {
+			$speed = absint( $input['autoplay_speed'] );
+			$preset['autoplay_speed'] = max( 1000, $speed );
+		}
+	}
+
+	/**
+	 * Sanitise colours sub-tab input.
+	 *
+	 * @param array $preset Reference to the preset being updated.
+	 * @param array $input  Submitted preset data.
+	 */
+	private function sanitize_colours( &$preset, $input ) {
+		$colour_keys = array(
+			'color_header_bg', 'color_header_text', 'color_accent', 'color_card_bg',
+			'color_cta_bg', 'color_cta_text', 'color_badge_bg', 'color_badge_text',
+			'color_feat_text', 'color_feat_check', 'color_exc_text', 'color_exc_title',
+		);
+
+		foreach ( $colour_keys as $key ) {
+			if ( isset( $input[ $key ] ) && '' !== $input[ $key ] ) {
+				$sanitized = sanitize_hex_color( $input[ $key ] );
+				$preset[ $key ] = $sanitized ? $sanitized : '';
+			} else {
+				$preset[ $key ] = '';
+			}
+		}
+	}
+
+	/**
+	 * Sanitise billing sub-tab input.
+	 *
+	 * @param array $preset Reference to the preset being updated.
+	 * @param array $input  Submitted preset data.
+	 */
+	private function sanitize_billing( &$preset, $input ) {
+		// Billing toggle
+		$preset['billing_toggle'] = ! empty( $input['billing_toggle'] ) ? 1 : 0;
+
+		// Labels
+		if ( isset( $input['monthly_label'] ) ) {
+			$preset['monthly_label'] = sanitize_text_field( $input['monthly_label'] );
+		}
+		if ( isset( $input['annual_label'] ) ) {
+			$preset['annual_label'] = sanitize_text_field( $input['annual_label'] );
+		}
+
+		// Annual discount: 0-100
+		if ( isset( $input['annual_discount'] ) ) {
+			$discount = absint( $input['annual_discount'] );
+			$preset['annual_discount'] = min( 100, $discount );
+		}
 	}
 
 	/* ────────────────────────────────────────────
@@ -462,21 +663,307 @@ class Doqix_Pricing_Admin {
 	}
 
 	private function render_carousel_tab( $preset_slug, $preset ) {
-		echo '<div class="doqix-tab-content doqix-tab-carousel">';
-		echo '<p>' . esc_html__( 'Carousel tab — full implementation in a later task.', 'doqix-pricing-carousel' ) . '</p>';
-		echo '</div>';
+		$base = DOQIX_PRICING_OPTION_KEY . '[presets][' . esc_attr( $preset_slug ) . ']';
+		?>
+		<div class="doqix-tab-content doqix-tab-carousel">
+
+			<!-- Display Mode -->
+			<h3><?php esc_html_e( 'Display Mode', 'doqix-pricing-carousel' ); ?></h3>
+			<p class="description"><?php esc_html_e( 'Choose how pricing cards are presented on desktop and mobile devices.', 'doqix-pricing-carousel' ); ?></p>
+
+			<div class="doqix-device-split">
+				<!-- Desktop -->
+				<div class="doqix-device-panel">
+					<h4><?php esc_html_e( 'Desktop', 'doqix-pricing-carousel' ); ?></h4>
+					<label>
+						<input type="radio"
+							   name="<?php echo esc_attr( $base . '[display_desktop]' ); ?>"
+							   value="grid"
+							   <?php checked( $preset['display_desktop'] ?? 'grid', 'grid' ); ?>>
+						<strong><?php esc_html_e( 'Grid', 'doqix-pricing-carousel' ); ?></strong>
+						&mdash; <?php esc_html_e( 'All cards visible in a row', 'doqix-pricing-carousel' ); ?>
+					</label><br>
+					<label>
+						<input type="radio"
+							   name="<?php echo esc_attr( $base . '[display_desktop]' ); ?>"
+							   value="carousel"
+							   <?php checked( $preset['display_desktop'] ?? 'grid', 'carousel' ); ?>>
+						<strong><?php esc_html_e( 'Carousel', 'doqix-pricing-carousel' ); ?></strong>
+						&mdash; <?php esc_html_e( 'Scroll/swipe with active card scaling', 'doqix-pricing-carousel' ); ?>
+					</label>
+				</div>
+
+				<!-- Mobile -->
+				<div class="doqix-device-panel">
+					<h4><?php esc_html_e( 'Mobile', 'doqix-pricing-carousel' ); ?></h4>
+					<label>
+						<input type="radio"
+							   name="<?php echo esc_attr( $base . '[display_mobile]' ); ?>"
+							   value="grid"
+							   <?php checked( $preset['display_mobile'] ?? 'carousel', 'grid' ); ?>>
+						<strong><?php esc_html_e( 'Grid', 'doqix-pricing-carousel' ); ?></strong>
+						&mdash; <?php esc_html_e( 'Cards stack vertically', 'doqix-pricing-carousel' ); ?>
+					</label><br>
+					<label>
+						<input type="radio"
+							   name="<?php echo esc_attr( $base . '[display_mobile]' ); ?>"
+							   value="carousel"
+							   <?php checked( $preset['display_mobile'] ?? 'carousel', 'carousel' ); ?>>
+						<strong><?php esc_html_e( 'Carousel', 'doqix-pricing-carousel' ); ?></strong>
+						&mdash; <?php esc_html_e( 'Swipe with active card + peeking edges', 'doqix-pricing-carousel' ); ?>
+					</label>
+				</div>
+			</div>
+
+			<!-- Breakpoint -->
+			<div class="doqix-field" style="margin-top:15px;">
+				<label for="<?php echo esc_attr( $base . '[mobile_breakpoint]' ); ?>">
+					<?php esc_html_e( 'Mobile Breakpoint (px)', 'doqix-pricing-carousel' ); ?>
+				</label>
+				<input type="number"
+					   id="<?php echo esc_attr( $base . '[mobile_breakpoint]' ); ?>"
+					   name="<?php echo esc_attr( $base . '[mobile_breakpoint]' ); ?>"
+					   value="<?php echo esc_attr( $preset['mobile_breakpoint'] ?? 768 ); ?>"
+					   min="320" max="1200"
+					   class="small-text">
+				<p class="description"><?php esc_html_e( 'Below this width → mobile layout', 'doqix-pricing-carousel' ); ?></p>
+			</div>
+
+			<hr>
+
+			<!-- Navigation Style -->
+			<h3><?php esc_html_e( 'Navigation Style', 'doqix-pricing-carousel' ); ?></h3>
+			<p class="description"><?php esc_html_e( 'Applies when carousel mode is active.', 'doqix-pricing-carousel' ); ?></p>
+
+			<div class="doqix-nav-options">
+				<?php
+				$nav_current = $preset['nav_style'] ?? 'breadcrumbs';
+				$nav_choices = array(
+					'arrows'      => array(
+						'preview'  => '&#8249; &#8250;',
+						'label'    => __( 'Arrows', 'doqix-pricing-carousel' ),
+						'sublabel' => __( 'Side buttons', 'doqix-pricing-carousel' ),
+					),
+					'dots'        => array(
+						'preview'  => '&#9679; &#9679; &#9679;',
+						'label'    => __( 'Dots', 'doqix-pricing-carousel' ),
+						'sublabel' => __( 'Below carousel', 'doqix-pricing-carousel' ),
+					),
+					'breadcrumbs' => array(
+						'preview'  => 'A | B | C',
+						'label'    => __( 'Breadcrumbs', 'doqix-pricing-carousel' ),
+						'sublabel' => __( 'Named pills', 'doqix-pricing-carousel' ),
+					),
+				);
+				foreach ( $nav_choices as $val => $meta ) : ?>
+					<label class="doqix-nav-option <?php echo ( $nav_current === $val ) ? 'active' : ''; ?>">
+						<input type="radio"
+							   name="<?php echo esc_attr( $base . '[nav_style]' ); ?>"
+							   value="<?php echo esc_attr( $val ); ?>"
+							   <?php checked( $nav_current, $val ); ?>>
+						<span class="doqix-nav-preview"><?php echo $meta['preview']; ?></span>
+						<span class="doqix-nav-label"><?php echo esc_html( $meta['label'] ); ?></span>
+						<span class="doqix-nav-sublabel"><?php echo esc_html( $meta['sublabel'] ); ?></span>
+					</label>
+				<?php endforeach; ?>
+			</div>
+
+			<p class="doqix-note"><?php esc_html_e( 'Navigation controls are hidden when grid mode is active on that screen size.', 'doqix-pricing-carousel' ); ?></p>
+
+			<hr>
+
+			<!-- Carousel Options -->
+			<h3><?php esc_html_e( 'Carousel Options', 'doqix-pricing-carousel' ); ?></h3>
+
+			<div class="doqix-field-grid">
+				<!-- Active card scale -->
+				<div class="doqix-field">
+					<label for="<?php echo esc_attr( $base . '[active_scale]' ); ?>">
+						<?php esc_html_e( 'Active Card Scale', 'doqix-pricing-carousel' ); ?>
+					</label>
+					<input type="number"
+						   id="<?php echo esc_attr( $base . '[active_scale]' ); ?>"
+						   name="<?php echo esc_attr( $base . '[active_scale]' ); ?>"
+						   value="<?php echo esc_attr( $preset['active_scale'] ?? 1.15 ); ?>"
+						   step="0.05" min="1" max="1.5"
+						   class="small-text">
+					<p class="description"><?php esc_html_e( '1.0 = same size, 1.15 = 15% larger', 'doqix-pricing-carousel' ); ?></p>
+				</div>
+
+				<!-- Autoplay toggle + speed -->
+				<div class="doqix-field">
+					<label>
+						<?php esc_html_e( 'Autoplay', 'doqix-pricing-carousel' ); ?>
+					</label>
+					<input type="hidden" name="<?php echo esc_attr( $base . '[autoplay]' ); ?>" value="0">
+					<label class="doqix-toggle-label">
+						<input type="checkbox"
+							   name="<?php echo esc_attr( $base . '[autoplay]' ); ?>"
+							   value="1"
+							   <?php checked( $preset['autoplay'] ?? 0, 1 ); ?>>
+						<?php esc_html_e( 'Enable autoplay', 'doqix-pricing-carousel' ); ?>
+					</label>
+					<br>
+					<label for="<?php echo esc_attr( $base . '[autoplay_speed]' ); ?>" style="margin-top:8px;display:inline-block;">
+						<?php esc_html_e( 'Speed (ms)', 'doqix-pricing-carousel' ); ?>
+					</label>
+					<input type="number"
+						   id="<?php echo esc_attr( $base . '[autoplay_speed]' ); ?>"
+						   name="<?php echo esc_attr( $base . '[autoplay_speed]' ); ?>"
+						   value="<?php echo esc_attr( $preset['autoplay_speed'] ?? 5000 ); ?>"
+						   min="1000" step="500"
+						   class="small-text">
+				</div>
+			</div>
+
+		</div><!-- .doqix-tab-carousel -->
+		<?php
 	}
 
 	private function render_colours_tab( $preset_slug, $preset ) {
-		echo '<div class="doqix-tab-content doqix-tab-colours">';
-		echo '<p>' . esc_html__( 'Colours tab — full implementation in a later task.', 'doqix-pricing-carousel' ) . '</p>';
-		echo '</div>';
+		$base = DOQIX_PRICING_OPTION_KEY . '[presets][' . esc_attr( $preset_slug ) . ']';
+
+		$colour_fields = array(
+			'color_header_bg'   => __( 'Header Background', 'doqix-pricing-carousel' ),
+			'color_header_text' => __( 'Header Text', 'doqix-pricing-carousel' ),
+			'color_accent'      => __( 'Accent Colour', 'doqix-pricing-carousel' ),
+			'color_card_bg'     => __( 'Card Background', 'doqix-pricing-carousel' ),
+			'color_cta_bg'      => __( 'CTA Background', 'doqix-pricing-carousel' ),
+			'color_cta_text'    => __( 'CTA Text', 'doqix-pricing-carousel' ),
+			'color_badge_bg'    => __( 'Badge Background', 'doqix-pricing-carousel' ),
+			'color_badge_text'  => __( 'Badge Text', 'doqix-pricing-carousel' ),
+			'color_feat_text'   => __( 'Features Text', 'doqix-pricing-carousel' ),
+			'color_feat_check'  => __( 'Features Checkmark', 'doqix-pricing-carousel' ),
+			'color_exc_text'    => __( 'Excludes Text', 'doqix-pricing-carousel' ),
+			'color_exc_title'   => __( 'Excludes Title', 'doqix-pricing-carousel' ),
+		);
+		?>
+		<div class="doqix-tab-content doqix-tab-colours">
+
+			<p class="description"><?php esc_html_e( 'Preset-level colours. Cards inherit these unless overridden per-card. Empty = theme default.', 'doqix-pricing-carousel' ); ?></p>
+
+			<div class="doqix-colours-layout">
+
+				<!-- Left column: colour pickers -->
+				<div class="doqix-colours-pickers">
+					<div class="doqix-color-grid">
+						<?php foreach ( $colour_fields as $key => $label ) :
+							// Build data-var: color_header_bg → --pricing-header-bg
+							$var_suffix = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
+							$data_var   = '--pricing-' . $var_suffix;
+							$this->render_color_field(
+								$base . '[' . $key . ']',
+								$label,
+								$preset[ $key ] ?? '',
+								$data_var
+							);
+						endforeach; ?>
+					</div>
+				</div>
+
+				<!-- Right column: live preview -->
+				<div class="doqix-preview-area" style="position:sticky;top:40px;align-self:start;">
+					<span class="doqix-preview-label"><?php esc_html_e( 'LIVE PREVIEW', 'doqix-pricing-carousel' ); ?></span>
+					<?php
+					// Build initial CSS custom property values from preset
+					$style_vars = '';
+					foreach ( $colour_fields as $key => $label ) {
+						$var_suffix = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
+						$val        = $preset[ $key ] ?? '';
+						if ( '' !== $val ) {
+							$style_vars .= '--pricing-' . $var_suffix . ':' . esc_attr( $val ) . ';';
+						}
+					}
+					?>
+					<div id="doqix-preview-card" class="doqix-preview-card" style="<?php echo $style_vars; ?>">
+						<div class="doqix-preview-badge" style="background:var(--pricing-badge-bg, #ff6b35);color:var(--pricing-badge-text, #fff);">
+							<?php esc_html_e( 'MOST POPULAR', 'doqix-pricing-carousel' ); ?>
+						</div>
+						<div class="doqix-preview-header" style="background:var(--pricing-header-bg, #1a1a2e);color:var(--pricing-header-text, #fff);">
+							<strong><?php esc_html_e( 'Team', 'doqix-pricing-carousel' ); ?></strong><br>
+							<small><?php esc_html_e( 'Small teams (2-15 people)', 'doqix-pricing-carousel' ); ?></small><br>
+							<span class="doqix-preview-price" style="color:var(--pricing-accent, var(--pricing-header-text, #fff));">R2,500<small>/mo</small></span><br>
+							<small>R1,500 <?php esc_html_e( 'setup', 'doqix-pricing-carousel' ); ?></small>
+						</div>
+						<div class="doqix-preview-body" style="background:var(--pricing-card-bg, #fff);color:var(--pricing-feat-text, #333);">
+							<div class="doqix-preview-savings" style="color:var(--pricing-accent, #ff6b35);">
+								<?php esc_html_e( 'Save 15% annually', 'doqix-pricing-carousel' ); ?>
+							</div>
+							<ul class="doqix-preview-features">
+								<li><span style="color:var(--pricing-feat-check, #22c55e);">&#10003;</span> <?php esc_html_e( 'Up to 3 workflows', 'doqix-pricing-carousel' ); ?></li>
+								<li><span style="color:var(--pricing-feat-check, #22c55e);">&#10003;</span> <?php esc_html_e( 'Priority support', 'doqix-pricing-carousel' ); ?></li>
+								<hr style="border:none;border-top:1px solid #eee;">
+								<li><span style="color:var(--pricing-feat-check, #22c55e);">&#10003;</span> <?php esc_html_e( 'WhatsApp support', 'doqix-pricing-carousel' ); ?></li>
+								<li><span style="color:var(--pricing-feat-check, #22c55e);">&#10003;</span> <?php esc_html_e( 'Self-hosted infra', 'doqix-pricing-carousel' ); ?></li>
+							</ul>
+							<div class="doqix-preview-excludes">
+								<strong style="color:var(--pricing-exc-title, #999);"><?php esc_html_e( 'Not included:', 'doqix-pricing-carousel' ); ?></strong>
+								<span style="color:var(--pricing-exc-text, #999);"><?php esc_html_e( 'Dedicated manager', 'doqix-pricing-carousel' ); ?></span>
+							</div>
+						</div>
+						<div class="doqix-preview-cta">
+							<a href="#" style="background:var(--pricing-cta-bg, #ff6b35);color:var(--pricing-cta-text, #fff);display:block;text-align:center;padding:10px;text-decoration:none;border-radius:4px;">
+								<?php esc_html_e( 'Start Free', 'doqix-pricing-carousel' ); ?>
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div><!-- .doqix-tab-colours -->
+		<?php
 	}
 
 	private function render_billing_tab( $preset_slug, $preset ) {
-		echo '<div class="doqix-tab-content doqix-tab-billing">';
-		echo '<p>' . esc_html__( 'Billing tab — full implementation in a later task.', 'doqix-pricing-carousel' ) . '</p>';
-		echo '</div>';
+		$base = DOQIX_PRICING_OPTION_KEY . '[presets][' . esc_attr( $preset_slug ) . ']';
+		?>
+		<div class="doqix-tab-content doqix-tab-billing">
+
+			<!-- Enable billing toggle -->
+			<div class="doqix-field">
+				<label>
+					<?php esc_html_e( 'Billing Toggle', 'doqix-pricing-carousel' ); ?>
+				</label>
+				<input type="hidden" name="<?php echo esc_attr( $base . '[billing_toggle]' ); ?>" value="0">
+				<label class="doqix-toggle-label">
+					<input type="checkbox"
+						   name="<?php echo esc_attr( $base . '[billing_toggle]' ); ?>"
+						   value="1"
+						   <?php checked( $preset['billing_toggle'] ?? 0, 1 ); ?>>
+					<?php esc_html_e( 'Show billing period toggle on frontend (default: off)', 'doqix-pricing-carousel' ); ?>
+				</label>
+			</div>
+
+			<!-- Labels and discount -->
+			<div class="doqix-field-grid" style="max-width:500px;">
+				<?php
+				$this->render_text_field(
+					$base . '[monthly_label]',
+					__( 'Monthly Label', 'doqix-pricing-carousel' ),
+					$preset['monthly_label'] ?? 'Monthly'
+				);
+				$this->render_text_field(
+					$base . '[annual_label]',
+					__( 'Annual Label', 'doqix-pricing-carousel' ),
+					$preset['annual_label'] ?? 'Annual'
+				);
+				?>
+				<div class="doqix-field">
+					<label for="<?php echo esc_attr( $base . '[annual_discount]' ); ?>">
+						<?php esc_html_e( 'Annual Discount %', 'doqix-pricing-carousel' ); ?>
+					</label>
+					<input type="number"
+						   id="<?php echo esc_attr( $base . '[annual_discount]' ); ?>"
+						   name="<?php echo esc_attr( $base . '[annual_discount]' ); ?>"
+						   value="<?php echo esc_attr( $preset['annual_discount'] ?? 15 ); ?>"
+						   min="0" max="100"
+						   class="small-text">
+				</div>
+			</div>
+
+		</div><!-- .doqix-tab-billing -->
+		<?php
 	}
 
 	/* ────────────────────────────────────────────
@@ -516,7 +1003,7 @@ class Doqix_Pricing_Admin {
 	 * @param string $label Field label.
 	 * @param string $value Current hex value (or empty).
 	 */
-	public function render_color_field( $name, $label, $value ) {
+	public function render_color_field( $name, $label, $value, $data_var = '' ) {
 		?>
 		<div class="doqix-field doqix-color-field">
 			<label for="<?php echo esc_attr( $name ); ?>">
@@ -526,7 +1013,8 @@ class Doqix_Pricing_Admin {
 				   id="<?php echo esc_attr( $name ); ?>"
 				   name="<?php echo esc_attr( $name ); ?>"
 				   value="<?php echo esc_attr( $value ?: '#000000' ); ?>"
-				   class="doqix-color-input">
+				   class="doqix-color-input"
+				   <?php if ( $data_var ) : ?>data-var="<?php echo esc_attr( $data_var ); ?>"<?php endif; ?>>
 			<code class="doqix-color-hex"><?php echo esc_html( $value ?: '' ); ?></code>
 			<button type="button" class="button button-small doqix-color-reset"
 					data-default=""
