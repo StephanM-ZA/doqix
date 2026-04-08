@@ -59,6 +59,17 @@
     handleResize();
     window.addEventListener('resize', debounce(handleResize, 150));
 
+    /* Click inactive card to make it active */
+    for (var c = 0; c < cards.length; c++) {
+      (function(idx) {
+        cards[idx].addEventListener('click', function() {
+          if (isCarousel && idx !== currentIndex) {
+            goTo(idx);
+          }
+        });
+      })(c);
+    }
+
     if (config.billingToggle) {
       initBillingToggle();
     }
@@ -136,16 +147,25 @@
     track.style.transform = 'translateX(' + offset + 'px)';
 
     for (var i = 0; i < cards.length; i++) {
+      var cta = cards[i].querySelector('.doqix-pricing-cta');
       if (i === currentIndex) {
         cards[i].style.transform = 'scale(' + activeScale + ')';
         cards[i].style.opacity = '1';
         cards[i].style.filter = 'none';
         cards[i].classList.add('doqix-active');
+        if (cta) {
+          cta.style.pointerEvents = '';
+          cta.style.opacity = '';
+        }
       } else {
         cards[i].style.transform = 'scale(' + inactiveScale + ')';
         cards[i].style.opacity = '0.6';
         cards[i].style.filter = 'blur(0.5px)';
         cards[i].classList.remove('doqix-active');
+        if (cta) {
+          cta.style.pointerEvents = 'none';
+          cta.style.opacity = '0.5';
+        }
       }
     }
 

@@ -286,7 +286,13 @@ class Doqix_Pricing_Frontend {
 <?php endif; ?>
 			</div>
 
-			<a class="doqix-pricing-cta" href="<?php echo esc_url( $card['cta_url'] ); ?>"><?php echo esc_html( $card['cta_label'] ); ?></a>
+			<?php
+				$cta_url = $card['cta_url'];
+				if ( ! empty( $card['name'] ) ) {
+					$cta_url = add_query_arg( 'plan', sanitize_title( $card['name'] ), $cta_url );
+				}
+			?>
+			<a class="doqix-pricing-cta" href="<?php echo esc_url( $cta_url ); ?>" data-plan="<?php echo esc_attr( $card['name'] ); ?>"><?php echo esc_html( $card['cta_label'] ); ?></a>
 		</div>
 <?php endforeach; ?>
 	</div>
