@@ -319,10 +319,16 @@ class Doqix_ROI_V2_Admin {
 					<?php echo esc_html( $preset['label'] ?? ucfirst( $slug ) ); ?>
 				</a>
 				<?php endforeach; ?>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'doqix-roi-calculator-v2', 'tab' => 'info' ), admin_url( 'admin.php' ) ) ); ?>"
+				   class="nav-tab <?php echo 'info' === $active ? 'nav-tab-active' : ''; ?>">
+					<?php esc_html_e( 'Info', 'doqix-roi-calculator' ); ?>
+				</a>
 			</h2>
 
 			<?php if ( 'global' === $active ) : ?>
 				<?php $this->render_global_tab( $s, $opt ); ?>
+			<?php elseif ( 'info' === $active ) : ?>
+				<?php $this->render_info_tab(); ?>
 			<?php else :
 				$preset_slug = str_replace( 'preset-', '', $active );
 				if ( isset( $presets[ $preset_slug ] ) ) {
@@ -537,6 +543,203 @@ class Doqix_ROI_V2_Admin {
 
 			<?php submit_button(); ?>
 		</form>
+		<?php
+	}
+
+	/* ────────────────────────────────────────────
+	 * Info tab: calculation logic reference
+	 * ──────────────────────────────────────────── */
+
+	private function render_info_tab() {
+		$s = $this->get_settings();
+		?>
+		<div class="doqix-info-tab" style="max-width:860px;">
+
+			<h2><?php esc_html_e( 'How the Calculator Works', 'doqix-roi-calculator' ); ?></h2>
+			<p><?php esc_html_e( 'The ROI calculator uses a role-based formula driven by the sliders configured in the Global tab. Each slider has a role that determines how its value feeds into the savings calculation.', 'doqix-roi-calculator' ); ?></p>
+
+			<!-- Slider Roles -->
+			<h3><?php esc_html_e( 'Slider Roles', 'doqix-roi-calculator' ); ?></h3>
+			<table class="widefat striped" style="max-width:860px;">
+				<thead>
+					<tr>
+						<th><?php esc_html_e( 'Role', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'How it works', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'Example', 'doqix-roi-calculator' ); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong><?php esc_html_e( 'Multiplier', 'doqix-roi-calculator' ); ?></strong></td>
+						<td><?php esc_html_e( 'All multiplier slider values are multiplied together. The product represents the total weekly hours of repetitive work across the team.', 'doqix-roi-calculator' ); ?></td>
+						<td><code>3 people x 8 hrs/week = 24 hrs/week</code></td>
+					</tr>
+					<tr>
+						<td><strong><?php esc_html_e( 'Efficiency (%)', 'doqix-roi-calculator' ); ?></strong></td>
+						<td><?php esc_html_e( 'Converted to a decimal (divided by 100) and multiplied together. Represents the percentage of manual work that automation can realistically handle.', 'doqix-roi-calculator' ); ?></td>
+						<td><code>70% &rarr; 0.70</code></td>
+					</tr>
+					<tr>
+						<td><strong><?php esc_html_e( 'Hourly Rate', 'doqix-roi-calculator' ); ?></strong></td>
+						<td><?php esc_html_e( 'All rate slider values are summed. The total is the cost per hour of the manual work being automated.', 'doqix-roi-calculator' ); ?></td>
+						<td><code>R150/hr</code></td>
+					</tr>
+					<tr>
+						<td><strong><?php esc_html_e( 'Monthly Flat Amount', 'doqix-roi-calculator' ); ?></strong></td>
+						<td><?php esc_html_e( 'All flat monthly values are summed and added directly to the monthly savings. Covers fixed recurring costs like error correction, rework, or licence fees.', 'doqix-roi-calculator' ); ?></td>
+						<td><code>R2 000 error cost/month</code></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Core Formula -->
+			<h3><?php esc_html_e( 'Core Formula', 'doqix-roi-calculator' ); ?></h3>
+			<div style="background:#f6f7f7;border:1px solid #c3c4c7;border-radius:4px;padding:16px 20px;font-family:monospace;font-size:13px;line-height:2;">
+				<strong>1.</strong> <?php esc_html_e( 'Hours Saved / Month', 'doqix-roi-calculator' ); ?> = (<em><?php esc_html_e( 'Multiplier Product', 'doqix-roi-calculator' ); ?></em>) &times; 4.33 &times; (<em><?php esc_html_e( 'Efficiency Product', 'doqix-roi-calculator' ); ?></em>)<br>
+				<strong>2.</strong> <?php esc_html_e( 'Monthly Savings', 'doqix-roi-calculator' ); ?> = (<em><?php esc_html_e( 'Hours Saved / Month', 'doqix-roi-calculator' ); ?></em> &times; <em><?php esc_html_e( 'Rate Sum', 'doqix-roi-calculator' ); ?></em>) + <em><?php esc_html_e( 'Flat Monthly Sum', 'doqix-roi-calculator' ); ?></em><br>
+				<strong>3.</strong> <?php esc_html_e( 'Annual Savings', 'doqix-roi-calculator' ); ?> = <?php esc_html_e( 'Monthly Savings', 'doqix-roi-calculator' ); ?> &times; 12<br>
+				<strong>4.</strong> <?php esc_html_e( 'Hours Saved / Year', 'doqix-roi-calculator' ); ?> = <?php esc_html_e( 'Hours Saved / Month', 'doqix-roi-calculator' ); ?> &times; 12
+			</div>
+
+			<p class="description" style="margin-top:8px;">
+				<?php esc_html_e( 'The constant 4.33 converts weekly hours to monthly (52 weeks / 12 months).', 'doqix-roi-calculator' ); ?>
+			</p>
+
+			<!-- Worked Example -->
+			<h3><?php esc_html_e( 'Worked Example (Default Sliders)', 'doqix-roi-calculator' ); ?></h3>
+			<table class="widefat striped" style="max-width:860px;">
+				<tbody>
+					<tr>
+						<td><?php esc_html_e( 'Multiplier Product', 'doqix-roi-calculator' ); ?></td>
+						<td><code>3 people &times; 8 hours = 24 hrs/week</code></td>
+					</tr>
+					<tr>
+						<td><?php esc_html_e( 'Efficiency Product', 'doqix-roi-calculator' ); ?></td>
+						<td><code>70% &rarr; 0.70</code></td>
+					</tr>
+					<tr>
+						<td><?php esc_html_e( 'Hours Saved / Month', 'doqix-roi-calculator' ); ?></td>
+						<td><code>24 &times; 4.33 &times; 0.70 = 72.7 hrs</code></td>
+					</tr>
+					<tr>
+						<td><?php esc_html_e( 'Rate Sum', 'doqix-roi-calculator' ); ?></td>
+						<td><code>R150/hr</code></td>
+					</tr>
+					<tr>
+						<td><?php esc_html_e( 'Flat Monthly Sum', 'doqix-roi-calculator' ); ?></td>
+						<td><code>R2 000</code></td>
+					</tr>
+					<tr>
+						<td><strong><?php esc_html_e( 'Monthly Savings', 'doqix-roi-calculator' ); ?></strong></td>
+						<td><code>(72.7 &times; R150) + R2 000 = <strong>R12 911</strong></code></td>
+					</tr>
+					<tr>
+						<td><strong><?php esc_html_e( 'Annual Savings', 'doqix-roi-calculator' ); ?></strong></td>
+						<td><code>R12 911 &times; 12 = <strong>R154 930</strong></code></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Tier Matching -->
+			<h3><?php esc_html_e( 'Tier Matching Logic', 'doqix-roi-calculator' ); ?></h3>
+			<p><?php esc_html_e( 'After calculating monthly savings, the calculator recommends a pricing tier using these steps:', 'doqix-roi-calculator' ); ?></p>
+			<ol style="line-height:1.8;">
+				<li><?php esc_html_e( 'Tiers are sorted by threshold (ascending). The highest tier whose threshold the monthly savings meets or exceeds is selected as the base match.', 'doqix-roi-calculator' ); ?></li>
+				<li><strong><?php esc_html_e( 'ROI Bump:', 'doqix-roi-calculator' ); ?></strong> <?php printf(
+					/* translators: %s = ROI bump percentage setting */
+					esc_html__( 'If the ROI percentage exceeds the "ROI bump" setting (%s%%), the calculator bumps the recommendation to the next tier. This indicates the client is getting exceptional value and could benefit from a higher-tier plan.', 'doqix-roi-calculator' ),
+					esc_html( $s['thresholds']['roi_bump_pct'] )
+				); ?></li>
+				<li><strong><?php esc_html_e( 'Efficiency Bump:', 'doqix-roi-calculator' ); ?></strong> <?php printf(
+					/* translators: %1$s = efficiency bump %, %2$s = next tier multiplier */
+					esc_html__( 'If the efficiency slider is at or above %1$s%% AND monthly savings are at least %2$sx the next tier\'s price (or the next tier is Enterprise/custom), the recommendation bumps up. High efficiency signals mature automation readiness.', 'doqix-roi-calculator' ),
+					esc_html( $s['thresholds']['efficiency_bump_pct'] ),
+					esc_html( $s['thresholds']['next_tier_multiplier'] )
+				); ?></li>
+			</ol>
+
+			<!-- ROI Calculation -->
+			<h3><?php esc_html_e( 'ROI Percentage', 'doqix-roi-calculator' ); ?></h3>
+			<div style="background:#f6f7f7;border:1px solid #c3c4c7;border-radius:4px;padding:16px 20px;font-family:monospace;font-size:13px;line-height:2;">
+				<?php esc_html_e( 'ROI %', 'doqix-roi-calculator' ); ?> = ((<em><?php esc_html_e( 'Monthly Savings', 'doqix-roi-calculator' ); ?></em> &minus; <em><?php esc_html_e( 'Tier Price', 'doqix-roi-calculator' ); ?></em>) / <em><?php esc_html_e( 'Tier Price', 'doqix-roi-calculator' ); ?></em>) &times; 100
+			</div>
+			<p class="description" style="margin-top:8px;">
+				<?php printf(
+					/* translators: %s = ROI cap display value */
+					esc_html__( 'When the ROI multiplier exceeds %sx, it displays as "%sx+" to avoid unrealistically large numbers. Enterprise tiers (price = 0) show a custom pricing message instead of ROI.', 'doqix-roi-calculator' ),
+					esc_html( $s['thresholds']['roi_cap_display'] ),
+					esc_html( $s['thresholds']['roi_cap_display'] )
+				); ?>
+			</p>
+
+			<!-- Current Config Summary -->
+			<h3><?php esc_html_e( 'Current Configuration', 'doqix-roi-calculator' ); ?></h3>
+
+			<h4><?php esc_html_e( 'Tiers', 'doqix-roi-calculator' ); ?></h4>
+			<table class="widefat striped" style="max-width:860px;">
+				<thead>
+					<tr>
+						<th><?php esc_html_e( 'Name', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'Price', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'Threshold', 'doqix-roi-calculator' ); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ( $s['tiers'] as $tier ) : ?>
+					<tr>
+						<td><?php echo esc_html( $tier['name'] ); ?></td>
+						<td><?php echo $tier['price'] > 0 ? 'R' . esc_html( number_format( $tier['price'] ) ) : esc_html__( 'Custom', 'doqix-roi-calculator' ); ?></td>
+						<td>R<?php echo esc_html( number_format( $tier['threshold'] ) ); ?>+</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+
+			<h4><?php esc_html_e( 'Sliders', 'doqix-roi-calculator' ); ?></h4>
+			<table class="widefat striped" style="max-width:860px;">
+				<thead>
+					<tr>
+						<th><?php esc_html_e( 'Label', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'Role', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'Default', 'doqix-roi-calculator' ); ?></th>
+						<th><?php esc_html_e( 'Range', 'doqix-roi-calculator' ); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ( $s['sliders'] as $slider ) : ?>
+					<tr>
+						<td><?php echo esc_html( $slider['label'] ); ?></td>
+						<td><?php echo esc_html( $slider['role'] ); ?></td>
+						<td><?php echo esc_html( $slider['prefix'] . $slider['default'] . $slider['suffix'] ); ?></td>
+						<td><?php echo esc_html( $slider['prefix'] . $slider['min'] . $slider['suffix'] . ' – ' . $slider['prefix'] . $slider['max'] . $slider['suffix'] ); ?></td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+
+			<h4 style="margin-top:20px;"><?php esc_html_e( 'Threshold Settings', 'doqix-roi-calculator' ); ?></h4>
+			<table class="widefat striped" style="max-width:860px;">
+				<tbody>
+					<tr>
+						<td><?php esc_html_e( 'ROI bump %', 'doqix-roi-calculator' ); ?></td>
+						<td><?php echo esc_html( $s['thresholds']['roi_bump_pct'] ); ?>%</td>
+					</tr>
+					<tr>
+						<td><?php esc_html_e( 'Efficiency bump %', 'doqix-roi-calculator' ); ?></td>
+						<td><?php echo esc_html( $s['thresholds']['efficiency_bump_pct'] ); ?>%</td>
+					</tr>
+					<tr>
+						<td><?php esc_html_e( 'Next tier multiplier', 'doqix-roi-calculator' ); ?></td>
+						<td><?php echo esc_html( $s['thresholds']['next_tier_multiplier'] ); ?>x</td>
+					</tr>
+					<tr>
+						<td><?php esc_html_e( 'ROI display cap', 'doqix-roi-calculator' ); ?></td>
+						<td><?php echo esc_html( $s['thresholds']['roi_cap_display'] ); ?>x</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
 		<?php
 	}
 
