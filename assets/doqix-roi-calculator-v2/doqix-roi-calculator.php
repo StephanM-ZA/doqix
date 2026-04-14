@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix ROI Calculator V2
  * Plugin URI:  https://doqix.co.za
  * Description: Interactive ROI calculator V2 with dynamic tiers, sliders, thresholds, and named presets. Use shortcode [doqix_roi_calculator_v2] or [doqix_roi_calculator_v2 preset="name"] on any page.
- * Version:     2.1.2
+ * Version:     2.1.3
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_ROI_V2_VERSION',    '2.1.2' );
+define( 'DOQIX_ROI_V2_VERSION',    '2.1.3' );
 define( 'DOQIX_ROI_V2_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_ROI_V2_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_ROI_V2_OPTION_KEY', 'doqix_roi_v2_settings' );
@@ -58,7 +58,7 @@ function doqix_roi_v2_get_defaults() {
 		'tiers' => array(
 			array( 'name' => 'Solo',       'price' => 999,  'threshold' => 2500 ),
 			array( 'name' => 'Team',       'price' => 2500, 'threshold' => 7500 ),
-			array( 'name' => 'Business',   'price' => 5500, 'threshold' => 25000 ),
+			array( 'name' => 'Business',   'price' => 5500, 'threshold' => 15000 ),
 			array( 'name' => 'Enterprise', 'price' => 0,    'threshold' => 100000 ),
 		),
 

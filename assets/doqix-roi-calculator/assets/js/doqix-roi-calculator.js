@@ -90,7 +90,7 @@
     var tier = 0;
     if (monthlySavings >= 2500)   tier = 1;
     if (monthlySavings >= 7500)   tier = 2;
-    if (monthlySavings >= 25000)  tier = 3;
+    if (monthlySavings >= 15000)  tier = 3;
     if (monthlySavings >= 100000) tier = 4;
 
     while (tier >= 1 && tier < 4 && TIERS[tier].price > 0) {

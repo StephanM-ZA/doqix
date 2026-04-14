@@ -63,12 +63,7 @@ The v1.0 pricing strategy proposed R3,500-R5,000 per workflow as a build fee. Th
 
 ### 4.6. Exclusions
 
-The following are **not included** in any standard tier and will be scoped and quoted separately:
-
-- Additional hosting requirements beyond standard managed infrastructure
-- Third-party API costs (e.g., paid API subscriptions, SMS credits, premium connectors)
-
-*These costs, where applicable, will be itemised in the client's quote before any work begins.*
+Refer to Section 4.5.1 above. All exclusions will be itemised in the client's quote before any work begins.
 
 ### 4.2. Tier Design Logic
 
@@ -121,11 +116,19 @@ Clients who want more workflows than their tier includes can add them without ch
 ### 4.5. What Every Tier Includes
 
 - n8n hosting on our managed infrastructure (self-hosted, SA-based where possible)
+- Workflow builds (covered by setup fee — no separate build quotes)
 - 24/7 workflow monitoring and error alerts
 - Ongoing maintenance (app updates, connection fixes, minor adjustments)
 - POPIA-compliant data handling
 - No vendor lock-in — client owns their workflows
 - Month-to-month — cancel anytime
+
+### 4.5.1. What Is NOT Included
+
+- AI integration (scoped and quoted separately per project)
+- Additional hosting beyond n8n (e.g., databases, custom apps, dedicated servers)
+- Third-party API costs (paid API subscriptions, SMS credits, premium connectors)
+- Training sessions for Solo/Team (R1,500/session — included for Business/Enterprise)
 
 ---
 
@@ -267,7 +270,7 @@ No hidden fees. No confusing credit systems. No per-task charges that punish you
 | **You'll save** | ~R3,000-R8,000/mo | ~R8,000-R20,000/mo | ~R20,000-R50,000/mo | R50,000+/mo |
 | | Start Free | Start Free | Start Free | Show Me What's Possible |
 
-**Every plan includes:** Hosting, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.
+**Every plan includes:** n8n hosting, workflow builds, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.
 
 **Need more workflows?** Add them anytime:
 - Solo: +R750/mo per workflow
