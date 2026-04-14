@@ -16,9 +16,9 @@
 | **Workflows included** | 1 / 3 / 6 | 5 / unlimited | Unlimited (DIY) | Unlimited (DIY) | Varies | Varies | 2–15 |
 | **Workflow builds** | Yes | No (DIY) | No (DIY) | No (DIY) | Yes | Yes | Yes |
 | **Executions** | Unlimited | 2,500 / 10,000 | 10,000 ops | 750 / 2,000 tasks | Varies | Varies | Varies |
-| **Hosting** | n8n only | Yes (cloud) | Yes (cloud) | Yes (cloud) | Partial | Platform only | Varies |
+| **Hosting** | Workflow hosting | Yes (cloud) | Yes (cloud) | Yes (cloud) | Partial | Platform only | Varies |
 | **Monitoring & maintenance** | Yes | Basic | Basic | Basic | No | No | Yes |
-| **AI integration** | No (quoted) | No (DIY) | No (DIY) | Limited | Yes | Yes | Yes |
+| **AI integration** | Quoted separately | No (DIY) | No (DIY) | Limited | Yes | Yes | Yes |
 | **Support** | Email to dedicated | Docs / community | Docs / email | Docs only | CRM-based | Phone / email | Slack / email |
 | **Currency** | ZAR | USD | USD | USD | ZAR | ZAR | USD |
 | **Lock-in** | None | Monthly | Monthly | Monthly | None | None | 3–6 months |

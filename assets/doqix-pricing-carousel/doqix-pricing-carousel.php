@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix Pricing Carousel
  * Plugin URI:  https://doqix.co.za
  * Description: Configurable pricing table carousel. Use shortcode [doqix_pricing] or [doqix_pricing preset="name"].
- * Version:     1.1.9
+ * Version:     1.2.0
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_PRICING_VERSION',    '1.1.9' );
+define( 'DOQIX_PRICING_VERSION',    '1.2.0' );
 define( 'DOQIX_PRICING_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_PRICING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_PRICING_OPTION_KEY', 'doqix_pricing_settings' );
@@ -119,8 +119,8 @@ function doqix_pricing_get_preset_defaults() {
 				'price_suffix' => '/mo',
 				'setup_fee'   => 'Free setup',
 				'savings'     => 'Save ~R3,000-R8,000/mo',
-				'features'    => '<ul><li>1 workflow</li><li>Email support (48hr)</li><li>Hosting &amp; monitoring</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
-				'excludes'    => '<ul><li>Training (R1,500/session)</li><li>Extra workflows (+R750/mo each)</li><li>Additional hosting costs</li><li>Third-party API costs</li></ul>',
+				'features'    => '<ul><li>1 workflow</li><li>Email support (48hr)</li><li>Workflow hosting &amp; monitoring</li><li>Workflow builds</li><li>Maintenance &amp; updates</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
+				'excludes'    => '<ul><li>Training (R1,500/session)</li><li>Extra workflows (+R750/mo each)</li><li>Third-party API costs</li><li>Additional services (quoted separately)</li></ul>',
 				'cta_label'   => 'Start Free',
 				'cta_url'     => '/contact',
 				'sort_order'  => 0,
@@ -132,8 +132,8 @@ function doqix_pricing_get_preset_defaults() {
 				'price_suffix' => '/mo',
 				'setup_fee'   => 'R1,500 setup',
 				'savings'     => 'Save ~R8,000-R20,000/mo',
-				'features'    => '<ul><li>Up to 3 workflows</li><li>Priority + WhatsApp (24hr)</li><li>Hosting &amp; monitoring</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
-				'excludes'    => '<ul><li>Training (R1,500/session)</li><li>Extra workflows (+R650/mo each)</li><li>Additional hosting costs</li><li>Third-party API costs</li></ul>',
+				'features'    => '<ul><li>Up to 3 workflows</li><li>Priority + WhatsApp (24hr)</li><li>Workflow hosting &amp; monitoring</li><li>Workflow builds</li><li>Maintenance &amp; updates</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
+				'excludes'    => '<ul><li>Training (R1,500/session)</li><li>Extra workflows (+R650/mo each)</li><li>Third-party API costs</li><li>Additional services (quoted separately)</li></ul>',
 				'cta_label'   => 'Start Free',
 				'cta_url'     => '/contact',
 				'badge'       => 'Most Popular',
@@ -147,8 +147,8 @@ function doqix_pricing_get_preset_defaults() {
 				'price_suffix' => '/mo',
 				'setup_fee'   => 'R2,500 setup',
 				'savings'     => 'Save ~R20,000-R50,000/mo',
-				'features'    => '<ul><li>Up to 6 workflows</li><li>Dedicated + monthly strategy call</li><li>Training included</li><li>Hosting &amp; monitoring</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
-				'excludes'    => '<ul><li>Extra workflows (+R500/mo each)</li><li>Additional hosting costs</li><li>Third-party API costs</li></ul>',
+				'features'    => '<ul><li>Up to 6 workflows</li><li>Dedicated + monthly strategy call</li><li>Training included</li><li>Workflow hosting &amp; monitoring</li><li>Workflow builds</li><li>Maintenance &amp; updates</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
+				'excludes'    => '<ul><li>Extra workflows (+R500/mo each)</li><li>Third-party API costs</li><li>Additional services (quoted separately)</li></ul>',
 				'cta_label'   => 'Start Free',
 				'cta_url'     => '/contact',
 				'sort_order'  => 2,
@@ -160,8 +160,8 @@ function doqix_pricing_get_preset_defaults() {
 				'price_suffix' => '',
 				'setup_fee'   => "Let's talk",
 				'savings'     => 'Save R50,000+/mo',
-				'features'    => '<ul><li>Unlimited workflows (scoped)</li><li>Dedicated account manager</li><li>Training included</li><li>Hosting &amp; monitoring</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
-				'excludes'    => '',
+				'features'    => '<ul><li>Unlimited workflows (scoped)</li><li>Dedicated account manager</li><li>Training included</li><li>Workflow hosting &amp; monitoring</li><li>Workflow builds</li><li>Maintenance &amp; updates</li><li>POPIA compliant</li><li>No lock-in</li></ul>',
+				'excludes'    => '<ul><li>Additional services (quoted separately)</li></ul>',
 				'cta_label'   => 'Show Me What\'s Possible',
 				'cta_url'     => '/contact',
 				'sort_order'  => 3,
@@ -234,8 +234,8 @@ function doqix_pricing_maybe_migrate() {
 		return; // Up to date
 	}
 
-	// ── 1.1.9: One-time reset — replace default preset cards with Pricing Strategy v2.0 data
-	if ( version_compare( $stored_version, '1.1.9', '<' ) ) {
+	// ── 1.2.0: One-time reset — update cards with generic hosting language and catch-all excludes
+	if ( version_compare( $stored_version, '1.2.0', '<' ) ) {
 		$fresh_preset = doqix_pricing_get_preset_defaults();
 		if ( isset( $settings['presets']['default'] ) ) {
 			$settings['presets']['default']['cards'] = $fresh_preset['cards'];

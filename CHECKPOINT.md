@@ -62,8 +62,8 @@
 | Font | Inter (Google Fonts) |
 | CTA buttons | "Start Free" (Solo/Team/Business), "Show Me What's Possible" (Enterprise) |
 | Pricing model | 4-tier flat retainer (Solo/Team/Business/Enterprise) |
-| Pricing includes | n8n hosting, workflow builds, monitoring, maintenance, POPIA |
-| Pricing excludes | AI integration, extra hosting, third-party API costs, training (Solo/Team) |
+| Pricing includes | Workflow hosting & monitoring, workflow builds, maintenance & updates, POPIA |
+| Pricing excludes | Third-party API costs, training (Solo/Team), additional services (quoted separately) |
 | Business threshold | R15,000 monthly savings (lowered from R25,000) |
 | Pricing Carousel | Bold header band, badge pill, clean excludes, carousel + grid hybrid |
 | Admin menu | Unified "Do.Qix" parent with alphabetical submenus |

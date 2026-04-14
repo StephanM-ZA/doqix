@@ -15,7 +15,7 @@ Do.Qix prices on **value delivered**, not headcount. Our clients pay for workflo
 - Everything in South African rands — no dollar-denominated surprises
 - Low barrier to entry — even a solopreneur can say yes today
 - Month-to-month on every tier — we keep clients because we deliver, not because of contracts
-- Every tier includes hosting, monitoring, and support — no nickel-and-diming
+- Every tier includes workflow hosting, monitoring, and support — no nickel-and-diming
 
 **Business strategy:** Retainable monthly recurring revenue (MRR). Get clients in the door easily, deliver obvious value, and let the retention do the heavy lifting. Upsells happen naturally when one workflow proves itself.
 
@@ -115,20 +115,18 @@ Clients who want more workflows than their tier includes can add them without ch
 
 ### 4.5. What Every Tier Includes
 
-- n8n hosting on our managed infrastructure (self-hosted, SA-based where possible)
+- Workflow hosting & monitoring
 - Workflow builds (covered by setup fee — no separate build quotes)
-- 24/7 workflow monitoring and error alerts
-- Ongoing maintenance (app updates, connection fixes, minor adjustments)
+- Maintenance & updates (app updates, connection fixes, minor adjustments)
 - POPIA-compliant data handling
 - No vendor lock-in — client owns their workflows
 - Month-to-month — cancel anytime
 
 ### 4.5.1. What Is NOT Included
 
-- AI integration (scoped and quoted separately per project)
-- Additional hosting beyond n8n (e.g., databases, custom apps, dedicated servers)
 - Third-party API costs (paid API subscriptions, SMS credits, premium connectors)
 - Training sessions for Solo/Team (R1,500/session — included for Business/Enterprise)
+- Additional services (quoted separately — e.g., AI integration, custom hosting, dedicated servers)
 
 ---
 
@@ -270,7 +268,7 @@ No hidden fees. No confusing credit systems. No per-task charges that punish you
 | **You'll save** | ~R3,000-R8,000/mo | ~R8,000-R20,000/mo | ~R20,000-R50,000/mo | R50,000+/mo |
 | | Start Free | Start Free | Start Free | Show Me What's Possible |
 
-**Every plan includes:** n8n hosting, workflow builds, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.
+**Every plan includes:** Workflow hosting & monitoring, workflow builds, maintenance & updates, POPIA compliance, and no lock-in. You own what we build.
 
 **Need more workflows?** Add them anytime:
 - Solo: +R750/mo per workflow
