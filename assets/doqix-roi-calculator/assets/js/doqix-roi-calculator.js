@@ -338,8 +338,7 @@
       if (navigator.share) {
         navigator.share({
           title: shareTitle,
-          text: shareText,
-          url: shareUrl
+          text: shareText
         }).catch(function() {});
         return;
       }
