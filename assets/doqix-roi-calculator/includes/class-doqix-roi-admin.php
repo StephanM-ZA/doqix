@@ -386,6 +386,7 @@ class Doqix_ROI_Admin {
 					'cta_subtext'    => sanitize_text_field( $pi['cta_subtext'] ?? $pd['cta_subtext'] ),
 					'share_url'      => sanitize_text_field( $pi['share_url'] ?? $pd['share_url'] ),
 					'share_enabled'  => ! empty( $pi['share_enabled'] ) ? 1 : 0,
+					'og_description' => sanitize_text_field( $pi['og_description'] ?? $pd['og_description'] ?? '' ),
 				);
 			}
 		}
@@ -510,6 +511,17 @@ class Doqix_ROI_Admin {
 					<h2>Display Options</h2>
 					<table class="form-table">
 						<tr><th>Show Share Button</th><td><label><input type="checkbox" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][share_enabled]" ); ?>" value="1" <?php checked( ! empty( $preset['share_enabled'] ) ); ?>> Enabled</label></td></tr>
+					</table>
+
+					<h2>Social Share Preview (Open Graph)</h2>
+					<table class="form-table">
+						<tr>
+							<th>OG Description</th>
+							<td>
+								<input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$preset_slug}][og_description]" ); ?>" value="<?php echo esc_attr( $preset['og_description'] ?? '' ); ?>" class="large-text" placeholder="Leave blank to use intro text">
+								<p class="description">Shown in WhatsApp/social media link previews. Leave blank to use the intro text above.</p>
+							</td>
+						</tr>
 					</table>
 
 					<?php submit_button(); ?>

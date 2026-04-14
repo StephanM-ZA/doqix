@@ -270,6 +270,7 @@ class Doqix_ROI_V2_Admin {
 					'cta_subtext'   => sanitize_text_field( $preset_input['cta_subtext'] ?? $base['cta_subtext'] ),
 					'share_url'     => esc_url_raw( $preset_input['share_url'] ?? $base['share_url'] ),
 					'share_enabled' => ! empty( $preset_input['share_enabled'] ) ? 1 : 0,
+					'og_description' => sanitize_text_field( $preset_input['og_description'] ?? $base['og_description'] ?? '' ),
 				);
 			}
 		}
@@ -960,6 +961,19 @@ class Doqix_ROI_V2_Admin {
 							'textarea_rows' => 3,
 						) ); ?>
 						<p class="description"><?php esc_html_e( 'Shown centred at the bottom of the calculator. Leave empty to hide.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+			</table>
+
+			<!-- ═══════════════ SOCIAL SHARE PREVIEW ═══════════════ -->
+			<h2><?php esc_html_e( 'Social Share Preview (Open Graph)', 'doqix-roi-calculator' ); ?></h2>
+
+			<table class="form-table">
+				<tr>
+					<th scope="row"><label for="og-desc-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'OG Description', 'doqix-roi-calculator' ); ?></label></th>
+					<td>
+						<input type="text" id="og-desc-<?php echo esc_attr( $slug ); ?>" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][og_description]" ); ?>" value="<?php echo esc_attr( $p['og_description'] ?? '' ); ?>" class="large-text" placeholder="<?php esc_attr_e( 'Leave blank to use intro text', 'doqix-roi-calculator' ); ?>">
+						<p class="description"><?php esc_html_e( 'Shown in WhatsApp/social media link previews. Leave blank to use the intro text above.', 'doqix-roi-calculator' ); ?></p>
 					</td>
 				</tr>
 			</table>

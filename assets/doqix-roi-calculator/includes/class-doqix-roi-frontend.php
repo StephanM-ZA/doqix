@@ -15,6 +15,63 @@ class Doqix_ROI_Frontend {
 	public function __construct() {
 		add_shortcode( 'doqix_roi_calculator', array( $this, 'render_shortcode' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_assets' ) );
+		add_action( 'wp_head', array( $this, 'maybe_inject_og_tags' ), 1 );
+	}
+
+	/**
+	 * Inject Open Graph meta tags on pages containing the shortcode.
+	 *
+	 * Prevents social-media link previews from showing raw shortcode text.
+	 */
+	public function maybe_inject_og_tags() {
+		if ( ! is_singular() ) {
+			return;
+		}
+
+		$post = get_queried_object();
+		if ( ! $post || ! isset( $post->post_content ) ) {
+			return;
+		}
+
+		$found = has_shortcode( $post->post_content, 'doqix_roi_calculator' );
+		if ( ! $found ) {
+			$builder_meta = get_post_meta( $post->ID, '_themify_builder_settings_json', true );
+			if ( $builder_meta && is_string( $builder_meta ) && strpos( $builder_meta, 'doqix_roi_calculator' ) !== false ) {
+				$found = true;
+			}
+		}
+
+		if ( ! $found ) {
+			return;
+		}
+
+		/* Resolve preset — use default if shortcode atts can't be parsed early */
+		$all     = wp_parse_args( get_option( DOQIX_ROI_OPTION_KEY, array() ), doqix_roi_get_defaults() );
+		$presets = isset( $all['presets'] ) ? $all['presets'] : array();
+		$preset  = isset( $presets['default'] ) ? $presets['default'] : doqix_roi_get_preset_defaults();
+		$preset  = wp_parse_args( $preset, doqix_roi_get_preset_defaults() );
+
+		$og_title = ! empty( $preset['heading_text'] )
+			? wp_strip_all_tags( $preset['heading_text'] ) . ' — ' . get_bloginfo( 'name' )
+			: get_the_title( $post ) . ' — ' . get_bloginfo( 'name' );
+
+		$og_desc = ! empty( $preset['og_description'] )
+			? wp_strip_all_tags( $preset['og_description'] )
+			: ( ! empty( $preset['intro_text'] ) ? wp_strip_all_tags( $preset['intro_text'] ) : '' );
+
+		$og_url = get_permalink( $post );
+
+		if ( $og_title ) {
+			echo '<meta property="og:title" content="' . esc_attr( $og_title ) . '" />' . "\n";
+		}
+		if ( $og_desc ) {
+			echo '<meta property="og:description" content="' . esc_attr( $og_desc ) . '" />' . "\n";
+			echo '<meta name="description" content="' . esc_attr( $og_desc ) . '" />' . "\n";
+		}
+		if ( $og_url ) {
+			echo '<meta property="og:url" content="' . esc_url( $og_url ) . '" />' . "\n";
+		}
+		echo '<meta property="og:type" content="website" />' . "\n";
 	}
 
 	/**

@@ -9,7 +9,7 @@
         "requires_php": "7.4"
     },
     "doqix-roi-calculator": {
-        "version": "1.2.3",
+        "version": "1.2.4",
         "slug": "doqix-roi-calculator",
         "plugin_file": "doqix-roi-calculator/doqix-roi-calculator.php",
         "download_url": "https://github.com/StephanM-ZA/doqix_website/releases/latest/download/doqix-roi-calculator.zip",
@@ -18,7 +18,7 @@
         "requires_php": "7.4"
     },
     "doqix-roi-calculator-v2": {
-        "version": "2.1.3",
+        "version": "2.1.4",
         "slug": "doqix-roi-calculator-v2",
         "plugin_file": "doqix-roi-calculator-v2/doqix-roi-calculator.php",
         "download_url": "https://github.com/StephanM-ZA/doqix_website/releases/latest/download/doqix-roi-calculator-v2.zip",
