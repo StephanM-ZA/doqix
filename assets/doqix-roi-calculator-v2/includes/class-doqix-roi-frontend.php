@@ -330,12 +330,12 @@ class Doqix_ROI_V2_Frontend {
 				</div>
 				<?php
 				/* Special: total hours display after 'hours' slider when both people+hours exist */
-				if ( 'hours' === $key && $has_people_and_hours ) : ?>
+				if ( 'hours' === $key && $has_people_and_hours && ! empty( $preset['show_total_hours'] ) ) : ?>
 				<div class="total-hours" id="out-total-hours">= <?php echo esc_html( $people_default * $hours_default ); ?> hrs/week across your team</div>
 				<?php endif; ?>
 				<?php
 				/* Special: efficiency note after efficiency-role sliders */
-				if ( 'efficiency' === $slider['role'] ) : ?>
+				if ( 'efficiency' === $slider['role'] && ! empty( $preset['show_efficiency_note'] ) ) : ?>
 				<div class="efficiency-note" id="out-efficiency-note" style="display:none;"></div>
 				<?php endif; ?>
 			</div>
@@ -345,11 +345,14 @@ class Doqix_ROI_V2_Frontend {
 		<!-- Outputs -->
 		<div class="roi-outputs">
 
+			<?php if ( ! empty( $preset['show_hero'] ) ) : ?>
 			<div class="hero-result">
 				<div class="hero-amount" id="out-monthly">R0</div>
 				<div class="hero-label"><?php echo esc_html( $preset['label_hero'] ?? 'Your Monthly Savings' ); ?></div>
 			</div>
+			<?php endif; ?>
 
+			<?php if ( ! empty( $preset['show_results'] ) ) : ?>
 			<div class="result-cards">
 				<div class="result-card">
 					<div class="card-value" id="out-annual">R0</div>
@@ -367,12 +370,17 @@ class Doqix_ROI_V2_Frontend {
 					<div class="card-value" id="out-hours-year">0 hrs</div>
 					<div class="card-label"><?php echo esc_html( $preset['label_hours_year'] ?? 'back per year' ); ?></div>
 				</div>
+				<?php if ( ! empty( $preset['show_tier'] ) ) : ?>
 				<div class="result-card tier-suggestion">
 					<div class="tier-text" id="out-tier"></div>
 				</div>
+				<?php endif; ?>
 			</div>
+			<?php endif; ?>
 
+			<?php if ( ! empty( $preset['show_nudge'] ) ) : ?>
 			<div class="benchmark" id="out-benchmark"></div>
+			<?php endif; ?>
 
 			<?php if ( ! isset( $preset['cta_enabled'] ) || ! empty( $preset['cta_enabled'] ) ) : ?>
 			<a href="<?php echo esc_url( $preset['cta_url'] ); ?>" class="roi-cta">

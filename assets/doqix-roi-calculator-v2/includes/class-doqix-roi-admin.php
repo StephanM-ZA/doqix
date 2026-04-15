@@ -368,6 +368,12 @@ class Doqix_ROI_V2_Admin {
 				/* Share template is plain text */
 				$preset_sanitized['template_share'] = sanitize_textarea_field( $preset_input['template_share'] ?? $base['template_share'] ?? '' );
 
+				/* Sanitize section toggles */
+				$toggle_keys = array( 'show_hero', 'show_results', 'show_tier', 'show_nudge', 'show_total_hours', 'show_efficiency_note' );
+				foreach ( $toggle_keys as $tk ) {
+					$preset_sanitized[ $tk ] = ! empty( $preset_input[ $tk ] ) ? 1 : 0;
+				}
+
 				$sanitized['presets'][ $slug ] = $preset_sanitized;
 			}
 		}
@@ -1002,6 +1008,35 @@ class Doqix_ROI_V2_Admin {
 						'textarea_rows' => 5,
 					) ); ?></td>
 				</tr>
+			</table>
+
+			<!-- ═══════════════ SECTION VISIBILITY ═══════════════ -->
+			<h2><?php esc_html_e( 'Section Visibility', 'doqix-roi-calculator' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Toggle individual sections of the calculator output.', 'doqix-roi-calculator' ); ?></p>
+
+			<table class="form-table">
+				<?php
+				$toggles = array(
+					'show_hero'            => __( 'Hero Result (big savings number)', 'doqix-roi-calculator' ),
+					'show_results'         => __( 'Result Cards (annual, ROI, hours)', 'doqix-roi-calculator' ),
+					'show_tier'            => __( 'Tier Suggestion', 'doqix-roi-calculator' ),
+					'show_nudge'           => __( 'Nudge Quote', 'doqix-roi-calculator' ),
+					'show_total_hours'     => __( 'Total Hours Display (below hours slider)', 'doqix-roi-calculator' ),
+					'show_efficiency_note' => __( 'Efficiency Note (high automation warning)', 'doqix-roi-calculator' ),
+				);
+				foreach ( $toggles as $toggle_key => $toggle_label ) : ?>
+				<tr>
+					<th scope="row"><?php echo esc_html( $toggle_label ); ?></th>
+					<td>
+						<input type="hidden" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][{$toggle_key}]" ); ?>" value="0">
+						<label>
+							<input type="checkbox" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][{$toggle_key}]" ); ?>"
+								   value="1" <?php checked( $p[ $toggle_key ] ?? 1, 1 ); ?>>
+							<?php esc_html_e( 'Visible', 'doqix-roi-calculator' ); ?>
+						</label>
+					</td>
+				</tr>
+				<?php endforeach; ?>
 			</table>
 
 			<!-- ═══════════════ LABELS & TEMPLATES ═══════════════ -->

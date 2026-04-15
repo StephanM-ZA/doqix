@@ -99,6 +99,14 @@ function doqix_roi_v2_get_preset_defaults() {
 		'template_tier_enterprise'  => 'At this scale, our <strong>{tier_name}</strong> plan is the right fit.<br>You\'d save <strong>{monthly}/mo</strong>. We\'ll scope pricing to your needs.',
 		'template_tier_no_match'    => 'Start with one quick win — even small automations compound over time.<br><strong>{hours_month} hours</strong> back is still <strong>{hours_month} hours</strong> you\'re not wasting.',
 		'template_share'            => "💡 Ever wondered what repetitive work actually costs? I just found out:\n\n💰 Monthly: *{monthly}*\n📊 Annual: *{annual}*\n⏱️ Hours saved: *{hours_month}/month*\n\n👉 {share_url}",
+
+		/* Section visibility */
+		'show_hero'            => 1,
+		'show_results'         => 1,
+		'show_tier'            => 1,
+		'show_nudge'           => 1,
+		'show_total_hours'     => 1,
+		'show_efficiency_note' => 1,
 	);
 }
 

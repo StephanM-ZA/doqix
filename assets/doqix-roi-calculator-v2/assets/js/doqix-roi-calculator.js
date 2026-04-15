@@ -355,10 +355,10 @@
     }
 
     /* ── Output values ── */
-    outMonthly.textContent    = formatCurrency(monthlySavings);
-    outAnnual.textContent     = formatCurrency(annualSavings);
-    outHoursMonth.textContent = formatHours(hoursSavedMonth) + ' hrs';
-    outHoursYear.textContent  = formatHours(hoursSavedYear) + ' hrs';
+    if (outMonthly) outMonthly.textContent    = formatCurrency(monthlySavings);
+    if (outAnnual) outAnnual.textContent     = formatCurrency(annualSavings);
+    if (outHoursMonth) outHoursMonth.textContent = formatHours(hoursSavedMonth) + ' hrs';
+    if (outHoursYear) outHoursYear.textContent  = formatHours(hoursSavedYear) + ' hrs';
 
     /* ── Tier suggestion ── */
     var tier = getTier(maxEfficiency, monthlySavings);
@@ -419,15 +419,17 @@
     var people = valsByKey.people !== undefined ? Math.round(valsByKey.people).toString() : '0';
     var rateDisplay = rateSum > 0 ? formatCurrency(rateSum) : 'R0';
 
-    outBenchmark.textContent = getNudge(tierName, {
-      monthly: formatCurrency(monthlySavings),
-      annual: formatCurrency(annualSavings),
-      hours: formatHours(hoursSavedMonth),
-      people: people,
-      rate: rateDisplay,
-      tier: tier ? tier.name : 'Solo',
-      price: (tier && tier.price > 0) ? formatCurrency(tier.price) : 'Custom'
-    });
+    if (outBenchmark) {
+      outBenchmark.textContent = getNudge(tierName, {
+        monthly: formatCurrency(monthlySavings),
+        annual: formatCurrency(annualSavings),
+        hours: formatHours(hoursSavedMonth),
+        people: people,
+        rate: rateDisplay,
+        tier: tier ? tier.name : 'Solo',
+        price: (tier && tier.price > 0) ? formatCurrency(tier.price) : 'Custom'
+      });
+    }
   }
 
   /* ── Event listeners (dynamic) ── */
