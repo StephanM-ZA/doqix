@@ -201,12 +201,20 @@
     var style = config.navStyle || 'dots';
 
     if (style === 'arrows') {
+      /* Arrow icon lookup */
+      var arrowIcons = {
+        chevron: ['\u2039', '\u203A'],
+        arrow:   ['\u2190', '\u2192'],
+        caret:   ['\u25C0', '\u25B6']
+      };
+      var icons = arrowIcons[config.arrowIcon] || arrowIcons.chevron;
+
       /* Arrows go on the sides of the carousel, not in the nav bar */
       var left = document.createElement('button');
       left.className = 'doqix-nav-arrow doqix-nav-left';
       left.setAttribute('type', 'button');
       left.setAttribute('aria-label', 'Previous');
-      left.textContent = '\u2039';
+      left.textContent = icons[0];
       left.addEventListener('click', function () {
         navigate(-1);
       });
@@ -215,7 +223,7 @@
       right.className = 'doqix-nav-arrow doqix-nav-right';
       right.setAttribute('type', 'button');
       right.setAttribute('aria-label', 'Next');
-      right.textContent = '\u203A';
+      right.textContent = icons[1];
       right.addEventListener('click', function () {
         navigate(1);
       });

@@ -146,29 +146,44 @@ class Doqix_Pricing_Frontend {
 			'annualDiscount' => intval( $preset['annual_discount'] ),
 			'cardNames'      => $card_names,
 			'currencySymbol' => $currency,
+			'arrowIcon'      => $preset['arrow_icon'] ?? 'chevron',
 		);
 
 		wp_localize_script( 'doqix-pricing-frontend', 'doqixPricingConfig', $config );
 
 		/* ── Inline CSS Variables (wrapper) ── */
 		$colour_map = array(
-			'color_accent'      => '--pricing-accent',
-			'color_header_bg'   => '--pricing-header-bg',
-			'color_header_text' => '--pricing-header-text',
-			'color_card_bg'     => '--pricing-card-bg',
-			'color_cta_bg'         => '--pricing-cta-bg',
-			'color_cta_text'       => '--pricing-cta-text',
-			'color_cta_hover_bg'   => '--pricing-cta-hover-bg',
-			'color_cta_hover_text' => '--pricing-cta-hover-text',
-			'color_arrow_bg'       => '--pricing-arrow-bg',
-			'color_arrow_color'    => '--pricing-arrow-color',
-			'color_arrow_hover_bg' => '--pricing-arrow-hover-bg',
-			'color_badge_bg'    => '--pricing-badge-bg',
-			'color_badge_text'  => '--pricing-badge-text',
-			'color_feat_text'   => '--pricing-feat-text',
-			'color_feat_check'  => '--pricing-feat-check',
-			'color_exc_text'    => '--pricing-exc-text',
-			'color_exc_title'   => '--pricing-exc-title',
+			'color_accent'            => '--pricing-accent',
+			'color_header_bg'         => '--pricing-header-bg',
+			'color_header_text'       => '--pricing-header-text',
+			'color_card_bg'           => '--pricing-card-bg',
+			'color_card_border'       => '--pricing-card-border',
+			'color_price_text'        => '--pricing-price-text',
+			'color_subtitle_text'     => '--pricing-subtitle-text',
+			'color_body_text'         => '--pricing-body-text',
+			'color_featured_border'   => '--pricing-featured-border',
+			'color_cta_bg'            => '--pricing-cta-bg',
+			'color_cta_text'          => '--pricing-cta-text',
+			'color_cta_hover_bg'      => '--pricing-cta-hover-bg',
+			'color_cta_hover_text'    => '--pricing-cta-hover-text',
+			'color_arrow_bg'          => '--pricing-arrow-bg',
+			'color_arrow_color'       => '--pricing-arrow-color',
+			'color_arrow_hover_bg'    => '--pricing-arrow-hover-bg',
+			'color_arrow_hover_color' => '--pricing-arrow-hover-color',
+			'color_badge_bg'          => '--pricing-badge-bg',
+			'color_badge_text'        => '--pricing-badge-text',
+			'color_feat_text'         => '--pricing-feat-text',
+			'color_feat_check'        => '--pricing-feat-check',
+			'color_exc_text'          => '--pricing-exc-text',
+			'color_exc_title'         => '--pricing-exc-title',
+			'color_dot_bg'            => '--pricing-dot-bg',
+			'color_dot_active_bg'     => '--pricing-dot-active-bg',
+			'color_crumb_bg'          => '--pricing-crumb-bg',
+			'color_crumb_text'        => '--pricing-crumb-text',
+			'color_crumb_active_bg'   => '--pricing-crumb-active-bg',
+			'color_crumb_active_text' => '--pricing-crumb-active-text',
+			'color_toggle_bg'         => '--pricing-toggle-bg',
+			'color_toggle_active_bg'  => '--pricing-toggle-active-bg',
 		);
 
 		$wrapper_vars = array();
@@ -185,6 +200,28 @@ class Doqix_Pricing_Frontend {
 
 		/* Active scale as CSS variable. */
 		$wrapper_vars[] = '--pricing-active-scale:' . esc_attr( $preset['active_scale'] );
+
+		/* Style control CSS variables. */
+		$shadow_map   = array( 'none' => 'none', 'subtle' => '0 2px 8px rgba(0,0,0,0.06)', 'medium' => '0 4px 16px rgba(0,0,0,0.12)', 'strong' => '0 8px 28px rgba(0,0,0,0.18)' );
+		$arrow_sizes  = array( 'small' => 32, 'medium' => 44, 'large' => 56 );
+		$arrow_shapes = array( 'circle' => '50%', 'rounded' => '8px', 'square' => '0' );
+		$dot_sizes    = array( 'small' => 8, 'medium' => 10, 'large' => 14 );
+
+		$card_radius = intval( $preset['card_border_radius'] ?? 12 );
+		$card_shadow = $shadow_map[ $preset['card_shadow'] ?? 'subtle' ] ?? $shadow_map['subtle'];
+		$card_gap    = intval( $preset['card_gap'] ?? 24 );
+		$fbw         = intval( $preset['featured_border_width'] ?? 2 );
+		$asize       = $arrow_sizes[ $preset['arrow_size'] ?? 'medium' ] ?? 44;
+		$ashape      = $arrow_shapes[ $preset['arrow_shape'] ?? 'circle' ] ?? '50%';
+		$dsize       = $dot_sizes[ $preset['dot_size'] ?? 'medium' ] ?? 10;
+
+		$wrapper_vars[] = '--pricing-card-radius:' . $card_radius . 'px';
+		$wrapper_vars[] = '--pricing-card-shadow:' . $card_shadow;
+		$wrapper_vars[] = '--pricing-card-gap:' . $card_gap . 'px';
+		$wrapper_vars[] = '--pricing-featured-border-width:' . $fbw . 'px';
+		$wrapper_vars[] = '--pricing-arrow-size:' . $asize . 'px';
+		$wrapper_vars[] = '--pricing-arrow-radius:' . $ashape;
+		$wrapper_vars[] = '--pricing-dot-size:' . $dsize . 'px';
 
 		$wrapper_style = implode( ';', $wrapper_vars );
 

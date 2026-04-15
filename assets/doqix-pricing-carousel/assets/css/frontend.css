@@ -104,7 +104,7 @@
   position: relative;
   width: 44px;
   height: 24px;
-  background: #ccc;
+  background: var(--pricing-toggle-bg, #ccc);
   border-radius: 12px;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -112,7 +112,7 @@
 }
 
 .doqix-billing-switch.doqix-billing-on {
-  background: var(--pricing-accent, #0886B5);
+  background: var(--pricing-toggle-active-bg, var(--pricing-accent, #0886B5));
 }
 
 .doqix-billing-thumb {
@@ -134,10 +134,10 @@
 /* ── Cards ── */
 .doqix-pricing-card {
   flex: 0 0 300px;
-  border-radius: 12px;
+  border-radius: var(--pricing-card-radius, 12px);
   overflow: visible;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--pricing-card-border, #e0e0e0);
+  box-shadow: var(--pricing-card-shadow, 0 2px 8px rgba(0, 0, 0, 0.06));
   background: var(--pricing-header-bg, #0886B5);
   display: flex;
   flex-direction: column;
@@ -148,12 +148,12 @@
 
 #doqix-pricing .doqix-pricing-card {
   flex: 0 0 300px;
-  border-radius: 12px;
+  border-radius: var(--pricing-card-radius, 12px);
   overflow: visible;
 }
 
 .doqix-pricing-card.doqix-featured {
-  border: 2px solid var(--pricing-accent, #0886B5);
+  border: var(--pricing-featured-border-width, 2px) solid var(--pricing-featured-border, var(--pricing-accent, #0886B5));
   box-shadow: 0 4px 16px rgba(8, 134, 181, 0.15);
 }
 
@@ -204,7 +204,7 @@
   color: var(--pricing-header-text, #fff);
   padding: 24px 20px 20px;
   text-align: center;
-  border-radius: 12px 12px 0 0;
+  border-radius: var(--pricing-card-radius, 12px) var(--pricing-card-radius, 12px) 0 0;
 }
 
 #doqix-pricing .doqix-pricing-header {
@@ -221,6 +221,7 @@
   font-size: 12px;
   opacity: 0.85;
   margin-top: 2px;
+  color: var(--pricing-subtitle-text, inherit);
 }
 
 .doqix-pricing-price {
@@ -228,6 +229,7 @@
   font-weight: 800;
   margin-top: 12px;
   line-height: 1.2;
+  color: var(--pricing-price-text, inherit);
 }
 
 .doqix-price-suffix {
@@ -246,6 +248,7 @@
 .doqix-pricing-body {
   padding: 18px 20px;
   background: var(--pricing-card-bg, #f9fcfd);
+  color: var(--pricing-body-text, inherit);
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -371,14 +374,14 @@
   position: absolute !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  width: 44px !important;
-  min-width: 44px !important;
-  max-width: 44px !important;
-  height: 44px !important;
-  min-height: 44px !important;
-  max-height: 44px !important;
+  width: var(--pricing-arrow-size, 44px) !important;
+  min-width: var(--pricing-arrow-size, 44px) !important;
+  max-width: var(--pricing-arrow-size, 44px) !important;
+  height: var(--pricing-arrow-size, 44px) !important;
+  min-height: var(--pricing-arrow-size, 44px) !important;
+  max-height: var(--pricing-arrow-size, 44px) !important;
   padding: 0 !important;
-  border-radius: 50% !important;
+  border-radius: var(--pricing-arrow-radius, 50%) !important;
   background: var(--pricing-arrow-bg, rgba(255, 255, 255, 0.9)) !important;
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
   color: var(--pricing-arrow-color, #555) !important;
@@ -388,7 +391,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  transition: background 0.2s ease, box-shadow 0.2s ease !important;
+  transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease !important;
   user-select: none;
   line-height: 1 !important;
   z-index: 10;
@@ -397,6 +400,7 @@
 
 #doqix-pricing .doqix-nav-arrow:hover {
   background: var(--pricing-arrow-hover-bg, #fff) !important;
+  color: var(--pricing-arrow-hover-color, #333) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -410,16 +414,16 @@
 
 /* ── Navigation: Dots ── */
 .doqix-nav-dot {
-  width: 10px;
-  height: 10px;
+  width: var(--pricing-dot-size, 10px);
+  height: var(--pricing-dot-size, 10px);
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--pricing-dot-bg, rgba(0, 0, 0, 0.15));
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .doqix-nav-dot.doqix-nav-active {
-  background: var(--pricing-accent, #0886B5);
+  background: var(--pricing-dot-active-bg, var(--pricing-accent, #0886B5));
   transform: scale(1.3);
 }
 
@@ -427,9 +431,9 @@
 .doqix-nav-crumb {
   padding: 6px 16px;
   border-radius: 20px;
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--pricing-crumb-bg, rgba(0, 0, 0, 0.04));
   border: 1px solid rgba(0, 0, 0, 0.1);
-  color: #aaa;
+  color: var(--pricing-crumb-text, #aaa);
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -438,9 +442,9 @@
 }
 
 .doqix-nav-crumb.doqix-nav-active {
-  background: var(--pricing-accent, #0886B5);
-  border-color: var(--pricing-accent, #0886B5);
-  color: #fff;
+  background: var(--pricing-crumb-active-bg, var(--pricing-accent, #0886B5));
+  border-color: var(--pricing-crumb-active-bg, var(--pricing-accent, #0886B5));
+  color: var(--pricing-crumb-active-text, #fff);
   font-weight: 600;
 }
 
@@ -455,7 +459,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
+  gap: var(--pricing-card-gap, 24px);
 }
 
 .doqix-pricing[data-mode="grid"] .doqix-pricing-card {
@@ -476,7 +480,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
+  gap: var(--pricing-card-gap, 24px);
 }
 
 #doqix-pricing[data-mode="grid"] .doqix-pricing-card {

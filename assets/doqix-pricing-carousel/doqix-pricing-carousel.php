@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix Pricing Carousel
  * Plugin URI:  https://doqix.co.za
  * Description: Configurable pricing table carousel. Use shortcode [doqix_pricing] or [doqix_pricing preset="name"].
- * Version:     1.2.1
+ * Version:     1.3.0
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_PRICING_VERSION',    '1.2.1' );
+define( 'DOQIX_PRICING_VERSION',    '1.3.0' );
 define( 'DOQIX_PRICING_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_PRICING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_PRICING_OPTION_KEY', 'doqix_pricing_settings' );
@@ -109,6 +109,40 @@ function doqix_pricing_get_preset_defaults() {
 		'color_feat_check'     => '',
 		'color_exc_text'       => '',
 		'color_exc_title'      => '',
+
+		/* Navigation: dots */
+		'color_dot_bg'            => '',
+		'color_dot_active_bg'     => '',
+
+		/* Navigation: breadcrumbs */
+		'color_crumb_bg'          => '',
+		'color_crumb_text'        => '',
+		'color_crumb_active_bg'   => '',
+		'color_crumb_active_text' => '',
+
+		/* Navigation: arrow hover icon */
+		'color_arrow_hover_color' => '',
+
+		/* Card extras */
+		'color_card_border'       => '',
+		'color_price_text'        => '',
+		'color_subtitle_text'     => '',
+		'color_body_text'         => '',
+		'color_featured_border'   => '',
+
+		/* Billing toggle */
+		'color_toggle_bg'         => '',
+		'color_toggle_active_bg'  => '',
+
+		/* Style controls */
+		'arrow_size'              => 'medium',
+		'arrow_shape'             => 'circle',
+		'arrow_icon'              => 'chevron',
+		'dot_size'                => 'medium',
+		'card_border_radius'      => 12,
+		'card_shadow'             => 'subtle',
+		'card_gap'                => 24,
+		'featured_border_width'   => 2,
 
 		/* Cards */
 		'cards'             => array(

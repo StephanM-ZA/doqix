@@ -460,6 +460,100 @@
   });
 
   /* ────────────────────────────────────────────
+   * 12b. Radio Pills → Active Class + Preview Update
+   * ──────────────────────────────────────────── */
+
+  document.addEventListener('change', function(e) {
+    var inp = e.target;
+    if (inp.type !== 'radio') return;
+
+    var pills = inp.closest('.doqix-radio-pills');
+    if (!pills) return;
+
+    // Update active class on pill labels
+    var labels = pills.querySelectorAll('.doqix-pill');
+    for (var i = 0; i < labels.length; i++) {
+      var radio = labels[i].querySelector('input[type="radio"]');
+      if (radio && radio.checked) {
+        labels[i].classList.add('active');
+      } else {
+        labels[i].classList.remove('active');
+      }
+    }
+
+    // Update preview sidebar CSS vars
+    var preview = document.getElementById('doqix-preview-card');
+    if (!preview) return;
+
+    var control = pills.getAttribute('data-control');
+    var val = inp.value;
+
+    if (control === 'arrow_shape') {
+      var shapeMap = { circle: '50%', rounded: '8px', square: '0' };
+      preview.style.setProperty('--pricing-arrow-radius', shapeMap[val] || '50%');
+    } else if (control === 'card_shadow') {
+      var shadowMap = { none: 'none', subtle: '0 2px 8px rgba(0,0,0,0.06)', medium: '0 4px 16px rgba(0,0,0,0.12)', strong: '0 8px 28px rgba(0,0,0,0.18)' };
+      preview.style.setProperty('--pricing-card-shadow', shadowMap[val] || shadowMap.subtle);
+    } else if (control === 'dot_size') {
+      var dotMap = { small: '8px', medium: '10px', large: '14px' };
+      preview.style.setProperty('--pricing-dot-size', dotMap[val] || '10px');
+    } else if (control === 'arrow_size') {
+      var arrowMap = { small: '24px', medium: '28px', large: '32px' };
+      preview.style.setProperty('--pricing-arrow-size', arrowMap[val] || '28px');
+    }
+  });
+
+  /* ────────────────────────────────────────────
+   * 12c. Number Inputs → Preview Update
+   * ──────────────────────────────────────────── */
+
+  document.addEventListener('input', function(e) {
+    var inp = e.target;
+    if (inp.type !== 'number') return;
+
+    var control = inp.getAttribute('data-control');
+    if (!control) return;
+
+    var preview = document.getElementById('doqix-preview-card');
+    if (!preview) return;
+
+    var val = parseInt(inp.value, 10);
+
+    if (control === 'card_border_radius') {
+      preview.style.setProperty('--pricing-card-radius', (isNaN(val) ? 12 : val) + 'px');
+      // Also update header radius in preview
+      var header = preview.querySelector('.doqix-preview-header');
+      if (header) {
+        header.style.borderRadius = (isNaN(val) ? 12 : val) + 'px ' + (isNaN(val) ? 12 : val) + 'px 0 0';
+      }
+    } else if (control === 'card_gap') {
+      preview.style.setProperty('--pricing-card-gap', (isNaN(val) ? 24 : val) + 'px');
+    } else if (control === 'featured_border_width') {
+      preview.style.setProperty('--pricing-featured-border-width', (isNaN(val) ? 2 : val) + 'px');
+      preview.style.borderWidth = (isNaN(val) ? 2 : val) + 'px';
+    }
+  });
+
+  /* ────────────────────────────────────────────
+   * 12d. Nav Option Cards → Active Class
+   * ──────────────────────────────────────────── */
+
+  document.addEventListener('change', function(e) {
+    var inp = e.target;
+    if (inp.type !== 'radio') return;
+
+    var navOption = inp.closest('.doqix-nav-option');
+    if (!navOption) return;
+
+    var container = navOption.parentElement;
+    var options = container.querySelectorAll('.doqix-nav-option');
+    for (var i = 0; i < options.length; i++) {
+      options[i].classList.remove('active');
+    }
+    navOption.classList.add('active');
+  });
+
+  /* ────────────────────────────────────────────
    * 12. Colour Overrides Toggle
    * ──────────────────────────────────────────── */
 

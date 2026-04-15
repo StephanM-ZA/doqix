@@ -642,13 +642,31 @@
 }
 
 /* ────────────────────────────────────────────
- * Colours Layout (2-column: pickers + preview)
+ * Preset Content (2-column: main + preview sidebar)
  * ──────────────────────────────────────────── */
-.doqix-colours-layout {
+.doqix-preset-content {
 	display: grid;
-	grid-template-columns: 1fr 340px;
-	gap: 32px;
+	grid-template-columns: 1fr 280px;
+	gap: 24px;
 	align-items: start;
+}
+
+.doqix-preset-main {
+	min-width: 0;
+}
+
+/* ────────────────────────────────────────────
+ * Preview Sidebar (persistent across all tabs)
+ * ──────────────────────────────────────────── */
+.doqix-preview-sidebar {
+	position: sticky;
+	top: 40px;
+	align-self: start;
+}
+
+/* Legacy layout kept for backward compat */
+.doqix-colours-layout {
+	display: block;
 }
 
 .doqix-preview-area {
@@ -672,11 +690,11 @@
  * Live Preview Card (uses CSS custom properties)
  * ──────────────────────────────────────────── */
 .doqix-preview-card {
-	border-radius: 12px;
+	border-radius: var(--pricing-card-radius, 12px);
 	overflow: visible;
 	position: relative;
-	border: 2px solid var(--pricing-accent, #0886B5);
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	border: var(--pricing-featured-border-width, 2px) solid var(--pricing-featured-border, var(--pricing-accent, #0886B5));
+	box-shadow: var(--pricing-card-shadow, 0 8px 24px rgba(0, 0, 0, 0.1));
 	background: #fff;
 }
 
@@ -702,7 +720,7 @@
 	color: var(--pricing-header-text, #fff);
 	padding: 24px 20px 20px;
 	text-align: center;
-	border-radius: 10px 10px 0 0;
+	border-radius: var(--pricing-card-radius, 10px) var(--pricing-card-radius, 10px) 0 0;
 }
 
 .doqix-preview-name {
@@ -714,12 +732,14 @@
 	font-size: 11px;
 	opacity: 0.85;
 	margin-top: 2px;
+	color: var(--pricing-subtitle-text, inherit);
 }
 
 .doqix-preview-price {
 	font-size: 34px;
 	font-weight: 800;
 	margin-top: 10px;
+	color: var(--pricing-price-text, inherit);
 }
 
 .doqix-preview-price span {
@@ -737,6 +757,7 @@
 .doqix-preview-body {
 	padding: 16px 20px;
 	background: var(--pricing-card-bg, #f9fcfd);
+	color: var(--pricing-body-text, inherit);
 }
 
 .doqix-preview-savings {
@@ -799,6 +820,132 @@
 }
 
 /* ────────────────────────────────────────────
+ * Preview Sidebar: Mini Navigation
+ * ──────────────────────────────────────────── */
+.doqix-preview-nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	padding: 12px 20px 16px;
+	background: var(--pricing-card-bg, #f9fcfd);
+	border-radius: 0 0 10px 10px;
+}
+
+.doqix-preview-arrow {
+	width: var(--pricing-arrow-size, 28px);
+	height: var(--pricing-arrow-size, 28px);
+	max-width: 28px;
+	max-height: 28px;
+	border-radius: var(--pricing-arrow-radius, 50%);
+	background: var(--pricing-arrow-bg, rgba(255,255,255,0.9));
+	color: var(--pricing-arrow-color, #555);
+	border: 1px solid rgba(0,0,0,0.1);
+	font-size: 14px;
+	cursor: default;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	line-height: 1;
+}
+
+.doqix-preview-dot {
+	width: var(--pricing-dot-size, 8px);
+	height: var(--pricing-dot-size, 8px);
+	max-width: 10px;
+	max-height: 10px;
+	border-radius: 50%;
+	background: var(--pricing-dot-bg, #ccc);
+	display: inline-block;
+}
+
+.doqix-preview-dot.active {
+	background: var(--pricing-dot-active-bg, var(--pricing-accent, #0886B5));
+}
+
+/* ────────────────────────────────────────────
+ * Colour Group Labels
+ * ──────────────────────────────────────────── */
+.doqix-color-group-label {
+	margin: 20px 0 8px;
+	font-size: 13px;
+	font-weight: 700;
+	color: #1d2327;
+	border-bottom: 1px solid #f0f0f0;
+	padding-bottom: 6px;
+}
+
+.doqix-color-group-label:first-child {
+	margin-top: 0;
+}
+
+/* ────────────────────────────────────────────
+ * Radio Pills
+ * ──────────────────────────────────────────── */
+.doqix-radio-pills {
+	display: inline-flex;
+	gap: 0;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.doqix-pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 14px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #1d2327;
+	background: #fff;
+	border-right: 1px solid #c3c4c7;
+	cursor: pointer;
+	transition: all 0.15s;
+	user-select: none;
+	min-width: 36px;
+}
+
+.doqix-pill:last-child {
+	border-right: none;
+}
+
+.doqix-pill:hover {
+	background: #f0f0f1;
+}
+
+.doqix-pill.active {
+	background: #0886B5;
+	color: #fff;
+	border-color: #0886B5;
+}
+
+.doqix-pill input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* ────────────────────────────────────────────
+ * Fieldset
+ * ──────────────────────────────────────────── */
+.doqix-fieldset {
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	padding: 16px 20px;
+	margin: 16px 0;
+}
+
+.doqix-fieldset legend {
+	font-size: 13px;
+	font-weight: 700;
+	color: #1d2327;
+	padding: 0 8px;
+}
+
+/* ────────────────────────────────────────────
  * Note / Callout
  * ──────────────────────────────────────────── */
 .doqix-note {
@@ -850,6 +997,18 @@
 /* ────────────────────────────────────────────
  * Responsive
  * ──────────────────────────────────────────── */
+@media screen and (max-width: 1200px) {
+	.doqix-preset-content {
+		grid-template-columns: 1fr;
+	}
+
+	.doqix-preview-sidebar {
+		position: static;
+		max-width: 340px;
+		margin: 0 auto;
+	}
+}
+
 @media screen and (max-width: 782px) {
 	.doqix-field-grid {
 		grid-template-columns: 1fr;

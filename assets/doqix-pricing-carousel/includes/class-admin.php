@@ -380,6 +380,51 @@ class Doqix_Pricing_Admin {
 
 		// Loop
 		$preset['loop'] = ! empty( $input['loop'] ) ? 1 : 0;
+
+		// Style controls: arrow_size
+		$valid_arrow_sizes = array( 'small', 'medium', 'large' );
+		if ( isset( $input['arrow_size'] ) && in_array( $input['arrow_size'], $valid_arrow_sizes, true ) ) {
+			$preset['arrow_size'] = $input['arrow_size'];
+		}
+
+		// arrow_shape
+		$valid_arrow_shapes = array( 'circle', 'rounded', 'square' );
+		if ( isset( $input['arrow_shape'] ) && in_array( $input['arrow_shape'], $valid_arrow_shapes, true ) ) {
+			$preset['arrow_shape'] = $input['arrow_shape'];
+		}
+
+		// arrow_icon
+		$valid_arrow_icons = array( 'chevron', 'arrow', 'caret' );
+		if ( isset( $input['arrow_icon'] ) && in_array( $input['arrow_icon'], $valid_arrow_icons, true ) ) {
+			$preset['arrow_icon'] = $input['arrow_icon'];
+		}
+
+		// dot_size
+		$valid_dot_sizes = array( 'small', 'medium', 'large' );
+		if ( isset( $input['dot_size'] ) && in_array( $input['dot_size'], $valid_dot_sizes, true ) ) {
+			$preset['dot_size'] = $input['dot_size'];
+		}
+
+		// card_shadow
+		$valid_shadows = array( 'none', 'subtle', 'medium', 'strong' );
+		if ( isset( $input['card_shadow'] ) && in_array( $input['card_shadow'], $valid_shadows, true ) ) {
+			$preset['card_shadow'] = $input['card_shadow'];
+		}
+
+		// card_border_radius: 0-30
+		if ( isset( $input['card_border_radius'] ) ) {
+			$preset['card_border_radius'] = max( 0, min( 30, intval( $input['card_border_radius'] ) ) );
+		}
+
+		// card_gap: 0-60
+		if ( isset( $input['card_gap'] ) ) {
+			$preset['card_gap'] = max( 0, min( 60, intval( $input['card_gap'] ) ) );
+		}
+
+		// featured_border_width: 0-6
+		if ( isset( $input['featured_border_width'] ) ) {
+			$preset['featured_border_width'] = max( 0, min( 6, intval( $input['featured_border_width'] ) ) );
+		}
 	}
 
 	/**
@@ -391,8 +436,15 @@ class Doqix_Pricing_Admin {
 	private function sanitize_colours( &$preset, $input ) {
 		$colour_keys = array(
 			'color_header_bg', 'color_header_text', 'color_accent', 'color_card_bg',
-			'color_cta_bg', 'color_cta_text', 'color_badge_bg', 'color_badge_text',
+			'color_cta_bg', 'color_cta_text', 'color_cta_hover_bg', 'color_cta_hover_text',
+			'color_badge_bg', 'color_badge_text',
 			'color_feat_text', 'color_feat_check', 'color_exc_text', 'color_exc_title',
+			'color_arrow_bg', 'color_arrow_color', 'color_arrow_hover_bg', 'color_arrow_hover_color',
+			'color_dot_bg', 'color_dot_active_bg',
+			'color_crumb_bg', 'color_crumb_text', 'color_crumb_active_bg', 'color_crumb_active_text',
+			'color_card_border', 'color_price_text', 'color_subtitle_text', 'color_body_text',
+			'color_featured_border',
+			'color_toggle_bg', 'color_toggle_active_bg',
 		);
 
 		foreach ( $colour_keys as $key ) {
@@ -526,22 +578,27 @@ class Doqix_Pricing_Admin {
 				<input type="hidden" name="<?php echo esc_attr( DOQIX_PRICING_OPTION_KEY ); ?>[_preset_slug]" value="<?php echo esc_attr( $active_slug ); ?>">
 				<input type="hidden" name="<?php echo esc_attr( DOQIX_PRICING_OPTION_KEY ); ?>[_sub_tab]" value="<?php echo esc_attr( $active_sub ); ?>">
 
-				<?php
-				switch ( $active_sub ) {
-					case 'cards':
-						$this->render_cards_tab( $active_slug, $preset );
-						break;
-					case 'carousel':
-						$this->render_carousel_tab( $active_slug, $preset );
-						break;
-					case 'colours':
-						$this->render_colours_tab( $active_slug, $preset );
-						break;
-					case 'billing':
-						$this->render_billing_tab( $active_slug, $preset );
-						break;
-				}
-				?>
+				<div class="doqix-preset-content">
+					<div class="doqix-preset-main">
+					<?php
+					switch ( $active_sub ) {
+						case 'cards':
+							$this->render_cards_tab( $active_slug, $preset );
+							break;
+						case 'carousel':
+							$this->render_carousel_tab( $active_slug, $preset );
+							break;
+						case 'colours':
+							$this->render_colours_tab( $active_slug, $preset );
+							break;
+						case 'billing':
+							$this->render_billing_tab( $active_slug, $preset );
+							break;
+					}
+					?>
+					</div>
+					<?php $this->render_preview_sidebar( $preset ); ?>
+				</div>
 
 				<?php submit_button(); ?>
 			</form>
@@ -786,15 +843,141 @@ class Doqix_Pricing_Admin {
 
 			<p class="doqix-note"><?php esc_html_e( 'Navigation controls are hidden when grid mode is active on that screen size.', 'doqix-pricing-carousel' ); ?></p>
 
-			<!-- Arrow Colours (only visible for arrow nav style) -->
-			<h3><?php esc_html_e( 'Arrow Colours', 'doqix-pricing-carousel' ); ?></h3>
-			<div class="doqix-color-grid">
+			<hr>
+
+			<!-- Arrow Appearance -->
+			<fieldset class="doqix-fieldset">
+				<legend><?php esc_html_e( 'Arrow Appearance', 'doqix-pricing-carousel' ); ?></legend>
+
+				<div class="doqix-field">
+					<label><?php esc_html_e( 'Arrow Size', 'doqix-pricing-carousel' ); ?></label>
+					<?php
+					$arrow_size_current = $preset['arrow_size'] ?? 'medium';
+					$arrow_size_options = array( 'small' => 'S', 'medium' => 'M', 'large' => 'L' );
+					?>
+					<div class="doqix-radio-pills" data-control="arrow_size">
+						<?php foreach ( $arrow_size_options as $val => $label ) : ?>
+						<label class="doqix-pill <?php echo ( $arrow_size_current === $val ) ? 'active' : ''; ?>">
+							<input type="radio" name="<?php echo esc_attr( $base . '[arrow_size]' ); ?>" value="<?php echo esc_attr( $val ); ?>" <?php checked( $arrow_size_current, $val ); ?>>
+							<?php echo esc_html( $label ); ?>
+						</label>
+						<?php endforeach; ?>
+					</div>
+				</div>
+
+				<div class="doqix-field">
+					<label><?php esc_html_e( 'Arrow Shape', 'doqix-pricing-carousel' ); ?></label>
+					<?php
+					$arrow_shape_current = $preset['arrow_shape'] ?? 'circle';
+					$arrow_shape_options = array( 'circle' => '&#9679;', 'rounded' => '&#9644;', 'square' => '&#9632;' );
+					?>
+					<div class="doqix-radio-pills" data-control="arrow_shape">
+						<?php foreach ( $arrow_shape_options as $val => $label ) : ?>
+						<label class="doqix-pill <?php echo ( $arrow_shape_current === $val ) ? 'active' : ''; ?>">
+							<input type="radio" name="<?php echo esc_attr( $base . '[arrow_shape]' ); ?>" value="<?php echo esc_attr( $val ); ?>" <?php checked( $arrow_shape_current, $val ); ?>>
+							<?php echo $label; ?>
+						</label>
+						<?php endforeach; ?>
+					</div>
+				</div>
+
+				<div class="doqix-field">
+					<label><?php esc_html_e( 'Arrow Icon', 'doqix-pricing-carousel' ); ?></label>
+					<?php
+					$arrow_icon_current = $preset['arrow_icon'] ?? 'chevron';
+					$arrow_icon_options = array( 'chevron' => '&#8249; &#8250;', 'arrow' => '&#8592; &#8594;', 'caret' => '&#9664; &#9654;' );
+					?>
+					<div class="doqix-radio-pills" data-control="arrow_icon">
+						<?php foreach ( $arrow_icon_options as $val => $label ) : ?>
+						<label class="doqix-pill <?php echo ( $arrow_icon_current === $val ) ? 'active' : ''; ?>">
+							<input type="radio" name="<?php echo esc_attr( $base . '[arrow_icon]' ); ?>" value="<?php echo esc_attr( $val ); ?>" <?php checked( $arrow_icon_current, $val ); ?>>
+							<?php echo $label; ?>
+						</label>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</fieldset>
+
+			<!-- Dot Size -->
+			<div class="doqix-field" style="margin-top:16px;">
+				<label><?php esc_html_e( 'Dot Size', 'doqix-pricing-carousel' ); ?></label>
 				<?php
-				$this->render_color_field( $base . '[color_arrow_bg]', __( 'Arrow Background', 'doqix-pricing-carousel' ), $preset['color_arrow_bg'] ?? '', '--pricing-arrow-bg', '#ffffff' );
-				$this->render_color_field( $base . '[color_arrow_color]', __( 'Arrow Colour', 'doqix-pricing-carousel' ), $preset['color_arrow_color'] ?? '', '--pricing-arrow-color', '#555555' );
-				$this->render_color_field( $base . '[color_arrow_hover_bg]', __( 'Arrow Hover BG', 'doqix-pricing-carousel' ), $preset['color_arrow_hover_bg'] ?? '', '--pricing-arrow-hover-bg', '#ffffff' );
+				$dot_size_current = $preset['dot_size'] ?? 'medium';
+				$dot_size_options = array( 'small' => 'S', 'medium' => 'M', 'large' => 'L' );
 				?>
+				<div class="doqix-radio-pills" data-control="dot_size">
+					<?php foreach ( $dot_size_options as $val => $label ) : ?>
+					<label class="doqix-pill <?php echo ( $dot_size_current === $val ) ? 'active' : ''; ?>">
+						<input type="radio" name="<?php echo esc_attr( $base . '[dot_size]' ); ?>" value="<?php echo esc_attr( $val ); ?>" <?php checked( $dot_size_current, $val ); ?>>
+						<?php echo esc_html( $label ); ?>
+					</label>
+					<?php endforeach; ?>
+				</div>
 			</div>
+
+			<hr>
+
+			<!-- Card Style -->
+			<fieldset class="doqix-fieldset">
+				<legend><?php esc_html_e( 'Card Style', 'doqix-pricing-carousel' ); ?></legend>
+
+				<div class="doqix-field-grid">
+					<div class="doqix-field">
+						<label for="<?php echo esc_attr( $base . '[card_border_radius]' ); ?>">
+							<?php esc_html_e( 'Border Radius (px)', 'doqix-pricing-carousel' ); ?>
+						</label>
+						<input type="number"
+							   id="<?php echo esc_attr( $base . '[card_border_radius]' ); ?>"
+							   name="<?php echo esc_attr( $base . '[card_border_radius]' ); ?>"
+							   value="<?php echo esc_attr( $preset['card_border_radius'] ?? 12 ); ?>"
+							   min="0" max="30"
+							   class="small-text"
+							   data-control="card_border_radius">
+					</div>
+
+					<div class="doqix-field">
+						<label><?php esc_html_e( 'Shadow', 'doqix-pricing-carousel' ); ?></label>
+						<?php
+						$shadow_current = $preset['card_shadow'] ?? 'subtle';
+						$shadow_options = array( 'none' => __( 'None', 'doqix-pricing-carousel' ), 'subtle' => __( 'Subtle', 'doqix-pricing-carousel' ), 'medium' => __( 'Medium', 'doqix-pricing-carousel' ), 'strong' => __( 'Strong', 'doqix-pricing-carousel' ) );
+						?>
+						<div class="doqix-radio-pills" data-control="card_shadow">
+							<?php foreach ( $shadow_options as $val => $label ) : ?>
+							<label class="doqix-pill <?php echo ( $shadow_current === $val ) ? 'active' : ''; ?>">
+								<input type="radio" name="<?php echo esc_attr( $base . '[card_shadow]' ); ?>" value="<?php echo esc_attr( $val ); ?>" <?php checked( $shadow_current, $val ); ?>>
+								<?php echo esc_html( $label ); ?>
+							</label>
+							<?php endforeach; ?>
+						</div>
+					</div>
+
+					<div class="doqix-field">
+						<label for="<?php echo esc_attr( $base . '[card_gap]' ); ?>">
+							<?php esc_html_e( 'Card Gap (px)', 'doqix-pricing-carousel' ); ?>
+						</label>
+						<input type="number"
+							   id="<?php echo esc_attr( $base . '[card_gap]' ); ?>"
+							   name="<?php echo esc_attr( $base . '[card_gap]' ); ?>"
+							   value="<?php echo esc_attr( $preset['card_gap'] ?? 24 ); ?>"
+							   min="0" max="60" step="4"
+							   class="small-text"
+							   data-control="card_gap">
+					</div>
+
+					<div class="doqix-field">
+						<label for="<?php echo esc_attr( $base . '[featured_border_width]' ); ?>">
+							<?php esc_html_e( 'Featured Border Width (px)', 'doqix-pricing-carousel' ); ?>
+						</label>
+						<input type="number"
+							   id="<?php echo esc_attr( $base . '[featured_border_width]' ); ?>"
+							   name="<?php echo esc_attr( $base . '[featured_border_width]' ); ?>"
+							   value="<?php echo esc_attr( $preset['featured_border_width'] ?? 2 ); ?>"
+							   min="0" max="6"
+							   class="small-text"
+							   data-control="featured_border_width">
+					</div>
+				</div>
+			</fieldset>
 
 			<hr>
 
@@ -878,33 +1061,17 @@ class Doqix_Pricing_Admin {
 	private function render_colours_tab( $preset_slug, $preset ) {
 		$base = DOQIX_PRICING_OPTION_KEY . '[presets][' . esc_attr( $preset_slug ) . ']';
 
-		$colour_fields = array(
-			'color_header_bg'   => array( __( 'Header Background', 'doqix-pricing-carousel' ), '#0886B5' ),
-			'color_header_text' => array( __( 'Header Text', 'doqix-pricing-carousel' ), '#ffffff' ),
-			'color_accent'      => array( __( 'Accent Colour', 'doqix-pricing-carousel' ), '#0886B5' ),
-			'color_card_bg'     => array( __( 'Card Background', 'doqix-pricing-carousel' ), '#f9fcfd' ),
-			'color_cta_bg'         => array( __( 'CTA Background', 'doqix-pricing-carousel' ), '#0886B5' ),
-			'color_cta_text'       => array( __( 'CTA Text', 'doqix-pricing-carousel' ), '#ffffff' ),
-			'color_cta_hover_bg'   => array( __( 'CTA Hover Background', 'doqix-pricing-carousel' ), '#076d94' ),
-			'color_cta_hover_text' => array( __( 'CTA Hover Text', 'doqix-pricing-carousel' ), '#ffffff' ),
-			'color_badge_bg'       => array( __( 'Badge Background', 'doqix-pricing-carousel' ), '#ff9500' ),
-			'color_badge_text'  => array( __( 'Badge Text', 'doqix-pricing-carousel' ), '#ffffff' ),
-			'color_feat_text'   => array( __( 'Features Text', 'doqix-pricing-carousel' ), '#1d2327' ),
-			'color_feat_check'  => array( __( 'Features Checkmark', 'doqix-pricing-carousel' ), '#0886B5' ),
-			'color_exc_text'    => array( __( 'Excludes Text', 'doqix-pricing-carousel' ), '#999999' ),
-			'color_exc_title'   => array( __( 'Excludes Title', 'doqix-pricing-carousel' ), '#666666' ),
-		);
+		$colour_groups = $this->get_colour_groups();
 		?>
 		<div class="doqix-tab-content doqix-tab-colours">
 
 			<p class="description"><?php esc_html_e( 'Preset-level colours. Cards inherit these unless overridden per-card. Empty = theme default.', 'doqix-pricing-carousel' ); ?></p>
 
-			<div class="doqix-colours-layout">
-
-				<!-- Left column: colour pickers -->
-				<div class="doqix-colours-pickers">
+			<div class="doqix-colours-pickers">
+				<?php foreach ( $colour_groups as $group_label => $fields ) : ?>
+					<h4 class="doqix-color-group-label"><?php echo esc_html( $group_label ); ?></h4>
 					<div class="doqix-color-grid">
-						<?php foreach ( $colour_fields as $key => $meta ) :
+						<?php foreach ( $fields as $key => $meta ) :
 							$label          = $meta[0];
 							$visual_default = $meta[1];
 							$var_suffix     = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
@@ -918,49 +1085,146 @@ class Doqix_Pricing_Admin {
 							);
 						endforeach; ?>
 					</div>
-				</div>
-
-				<!-- Right column: live preview -->
-				<div class="doqix-preview-area">
-					<span class="doqix-preview-label"><?php esc_html_e( 'LIVE PREVIEW', 'doqix-pricing-carousel' ); ?></span>
-					<?php
-					// Build initial CSS custom property values from preset (use visual defaults for preview)
-					$style_vars = '';
-					foreach ( $colour_fields as $key => $meta ) {
-						$var_suffix     = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
-						$val            = $preset[ $key ] ?? '';
-						$visual_default = $meta[1];
-						$style_vars .= '--pricing-' . $var_suffix . ':' . esc_attr( $val ?: $visual_default ) . ';';
-					}
-					?>
-					<div id="doqix-preview-card" class="doqix-preview-card" style="<?php echo $style_vars; ?>">
-						<div class="doqix-preview-badge">MOST POPULAR</div>
-						<div class="doqix-preview-header">
-							<div class="doqix-preview-name">Team</div>
-							<div class="doqix-preview-sub">Small teams (2-15 people)</div>
-							<div class="doqix-preview-price">R2,500<span>/mo</span></div>
-							<div class="doqix-preview-setup">R1,500 setup</div>
-						</div>
-						<div class="doqix-preview-body">
-							<div class="doqix-preview-savings">Save ~R8,000-R20,000/mo</div>
-							<div class="doqix-preview-feat">Up to 3 workflows</div>
-							<div class="doqix-preview-feat">Priority + WhatsApp (24hr)</div>
-							<div class="doqix-preview-feat">Hosting &amp; monitoring</div>
-							<div class="doqix-preview-feat">POPIA compliant</div>
-							<div class="doqix-preview-feat">No lock-in</div>
-							<div class="doqix-preview-excludes">
-								<div class="doqix-preview-exc-title">Excludes:</div>
-								<div class="doqix-preview-exc-item">Training (R1,500/session)</div>
-								<div class="doqix-preview-exc-item">Additional hosting costs</div>
-							</div>
-						</div>
-						<div class="doqix-preview-cta">Start Free</div>
-					</div>
-				</div>
-
+				<?php endforeach; ?>
 			</div>
 
 		</div><!-- .doqix-tab-colours -->
+		<?php
+	}
+
+	/**
+	 * Get all colour groups for the colours tab and preview sidebar.
+	 *
+	 * @return array Grouped colour fields.
+	 */
+	private function get_colour_groups() {
+		return array(
+			__( 'Card', 'doqix-pricing-carousel' ) => array(
+				'color_header_bg'      => array( __( 'Header Background', 'doqix-pricing-carousel' ), '#0886B5' ),
+				'color_header_text'    => array( __( 'Header Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+				'color_card_bg'        => array( __( 'Card Background', 'doqix-pricing-carousel' ), '#f9fcfd' ),
+				'color_card_border'    => array( __( 'Card Border', 'doqix-pricing-carousel' ), '#e0e0e0' ),
+				'color_accent'         => array( __( 'Accent Colour', 'doqix-pricing-carousel' ), '#0886B5' ),
+				'color_price_text'     => array( __( 'Price Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+				'color_subtitle_text'  => array( __( 'Subtitle Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+				'color_body_text'      => array( __( 'Body Text', 'doqix-pricing-carousel' ), '#1d2327' ),
+				'color_featured_border' => array( __( 'Featured Border', 'doqix-pricing-carousel' ), '#0886B5' ),
+			),
+			__( 'CTA Button', 'doqix-pricing-carousel' ) => array(
+				'color_cta_bg'         => array( __( 'CTA Background', 'doqix-pricing-carousel' ), '#0886B5' ),
+				'color_cta_text'       => array( __( 'CTA Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+				'color_cta_hover_bg'   => array( __( 'CTA Hover Background', 'doqix-pricing-carousel' ), '#076d94' ),
+				'color_cta_hover_text' => array( __( 'CTA Hover Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+			),
+			__( 'Badge', 'doqix-pricing-carousel' ) => array(
+				'color_badge_bg'       => array( __( 'Badge Background', 'doqix-pricing-carousel' ), '#ff9500' ),
+				'color_badge_text'     => array( __( 'Badge Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+			),
+			__( 'Features & Excludes', 'doqix-pricing-carousel' ) => array(
+				'color_feat_text'      => array( __( 'Features Text', 'doqix-pricing-carousel' ), '#1d2327' ),
+				'color_feat_check'     => array( __( 'Features Checkmark', 'doqix-pricing-carousel' ), '#0886B5' ),
+				'color_exc_text'       => array( __( 'Excludes Text', 'doqix-pricing-carousel' ), '#999999' ),
+				'color_exc_title'      => array( __( 'Excludes Title', 'doqix-pricing-carousel' ), '#666666' ),
+			),
+			__( 'Navigation: Arrows', 'doqix-pricing-carousel' ) => array(
+				'color_arrow_bg'       => array( __( 'Arrow Background', 'doqix-pricing-carousel' ), '#ffffff' ),
+				'color_arrow_color'    => array( __( 'Arrow Colour', 'doqix-pricing-carousel' ), '#555555' ),
+				'color_arrow_hover_bg' => array( __( 'Arrow Hover BG', 'doqix-pricing-carousel' ), '#ffffff' ),
+				'color_arrow_hover_color' => array( __( 'Arrow Hover Colour', 'doqix-pricing-carousel' ), '#333333' ),
+			),
+			__( 'Navigation: Dots', 'doqix-pricing-carousel' ) => array(
+				'color_dot_bg'         => array( __( 'Dot Background', 'doqix-pricing-carousel' ), '#cccccc' ),
+				'color_dot_active_bg'  => array( __( 'Dot Active Background', 'doqix-pricing-carousel' ), '#0886B5' ),
+			),
+			__( 'Navigation: Breadcrumbs', 'doqix-pricing-carousel' ) => array(
+				'color_crumb_bg'          => array( __( 'Crumb Background', 'doqix-pricing-carousel' ), '#f0f0f0' ),
+				'color_crumb_text'        => array( __( 'Crumb Text', 'doqix-pricing-carousel' ), '#aaaaaa' ),
+				'color_crumb_active_bg'   => array( __( 'Crumb Active Background', 'doqix-pricing-carousel' ), '#0886B5' ),
+				'color_crumb_active_text' => array( __( 'Crumb Active Text', 'doqix-pricing-carousel' ), '#ffffff' ),
+			),
+			__( 'Billing Toggle', 'doqix-pricing-carousel' ) => array(
+				'color_toggle_bg'        => array( __( 'Toggle Background', 'doqix-pricing-carousel' ), '#cccccc' ),
+				'color_toggle_active_bg' => array( __( 'Toggle Active Background', 'doqix-pricing-carousel' ), '#0886B5' ),
+			),
+		);
+	}
+
+	/**
+	 * Render the persistent preview sidebar.
+	 * Called once per preset, outside the sub-tab content divs.
+	 *
+	 * @param array $preset Preset settings.
+	 */
+	private function render_preview_sidebar( $preset ) {
+		$colour_groups = $this->get_colour_groups();
+
+		// Build CSS custom property values from all colour groups
+		$style_vars = '';
+		foreach ( $colour_groups as $fields ) {
+			foreach ( $fields as $key => $meta ) {
+				$var_suffix     = str_replace( '_', '-', str_replace( 'color_', '', $key ) );
+				$val            = $preset[ $key ] ?? '';
+				$visual_default = $meta[1];
+				$style_vars .= '--pricing-' . $var_suffix . ':' . esc_attr( $val ?: $visual_default ) . ';';
+			}
+		}
+
+		// Add style control vars
+		$shadow_map    = array( 'none' => 'none', 'subtle' => '0 2px 8px rgba(0,0,0,0.06)', 'medium' => '0 4px 16px rgba(0,0,0,0.12)', 'strong' => '0 8px 28px rgba(0,0,0,0.18)' );
+		$arrow_sizes   = array( 'small' => 32, 'medium' => 44, 'large' => 56 );
+		$arrow_shapes  = array( 'circle' => '50%', 'rounded' => '8px', 'square' => '0' );
+		$dot_sizes     = array( 'small' => 8, 'medium' => 10, 'large' => 14 );
+
+		$radius = intval( $preset['card_border_radius'] ?? 12 );
+		$shadow = $shadow_map[ $preset['card_shadow'] ?? 'subtle' ] ?? $shadow_map['subtle'];
+		$gap    = intval( $preset['card_gap'] ?? 24 );
+		$fbw    = intval( $preset['featured_border_width'] ?? 2 );
+		$asize  = $arrow_sizes[ $preset['arrow_size'] ?? 'medium' ] ?? 44;
+		$ashape = $arrow_shapes[ $preset['arrow_shape'] ?? 'circle' ] ?? '50%';
+		$dsize  = $dot_sizes[ $preset['dot_size'] ?? 'medium' ] ?? 10;
+
+		$style_vars .= '--pricing-card-radius:' . $radius . 'px;';
+		$style_vars .= '--pricing-card-shadow:' . $shadow . ';';
+		$style_vars .= '--pricing-card-gap:' . $gap . 'px;';
+		$style_vars .= '--pricing-featured-border-width:' . $fbw . 'px;';
+		$style_vars .= '--pricing-arrow-size:' . $asize . 'px;';
+		$style_vars .= '--pricing-arrow-radius:' . $ashape . ';';
+		$style_vars .= '--pricing-dot-size:' . $dsize . 'px;';
+		?>
+		<div class="doqix-preview-sidebar">
+			<span class="doqix-preview-label"><?php esc_html_e( 'LIVE PREVIEW', 'doqix-pricing-carousel' ); ?></span>
+			<div id="doqix-preview-card" class="doqix-preview-card" style="<?php echo $style_vars; ?>">
+				<div class="doqix-preview-badge">MOST POPULAR</div>
+				<div class="doqix-preview-header">
+					<div class="doqix-preview-name">Team</div>
+					<div class="doqix-preview-sub">Small teams (2-15 people)</div>
+					<div class="doqix-preview-price">R2,500<span>/mo</span></div>
+					<div class="doqix-preview-setup">R1,500 setup</div>
+				</div>
+				<div class="doqix-preview-body">
+					<div class="doqix-preview-savings">Save ~R8,000-R20,000/mo</div>
+					<div class="doqix-preview-feat">Up to 3 workflows</div>
+					<div class="doqix-preview-feat">Priority + WhatsApp (24hr)</div>
+					<div class="doqix-preview-feat">Hosting &amp; monitoring</div>
+					<div class="doqix-preview-feat">POPIA compliant</div>
+					<div class="doqix-preview-feat">No lock-in</div>
+					<div class="doqix-preview-excludes">
+						<div class="doqix-preview-exc-title">Excludes:</div>
+						<div class="doqix-preview-exc-item">Training (R1,500/session)</div>
+						<div class="doqix-preview-exc-item">Additional hosting costs</div>
+					</div>
+				</div>
+				<div class="doqix-preview-cta">Start Free</div>
+				<!-- Mini navigation preview -->
+				<div class="doqix-preview-nav">
+					<button type="button" class="doqix-preview-arrow doqix-preview-arrow-left">&lsaquo;</button>
+					<span class="doqix-preview-dot active"></span>
+					<span class="doqix-preview-dot"></span>
+					<span class="doqix-preview-dot"></span>
+					<button type="button" class="doqix-preview-arrow doqix-preview-arrow-right">&rsaquo;</button>
+				</div>
+			</div>
+		</div>
 		<?php
 	}
 
