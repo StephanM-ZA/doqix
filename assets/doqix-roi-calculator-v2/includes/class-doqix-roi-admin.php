@@ -196,22 +196,36 @@ class Doqix_ROI_V2_Admin {
 				$role   = in_array( $slider['role'] ?? '', $valid_roles, true ) ? $slider['role'] : 'multiplier';
 				$format = in_array( $slider['format'] ?? '', $valid_formats, true ) ? $slider['format'] : 'number';
 
-				$min  = intval( $slider['min'] ?? 0 );
-				$max  = intval( $slider['max'] ?? 100 );
-				$step = intval( $slider['step'] ?? 1 );
-				$def  = intval( $slider['default'] ?? $min );
+				$min  = floatval( $slider['min'] ?? 0 );
+				$max  = floatval( $slider['max'] ?? 100 );
+				$step = max( 0.01, floatval( $slider['step'] ?? 1 ) );
+				$def  = floatval( $slider['default'] ?? $min );
 
-				if ( $min > $max ) {
-					$min = $max;
+				// Enforce min < max (swap if reversed)
+				if ( $min >= $max ) {
+					$temp = $min;
+					$min  = $max;
+					$max  = $temp;
+					// If they were equal, push max up by 1
+					if ( $min >= $max ) {
+						$max = $min + 1;
+					}
 				}
-				if ( $def < $min ) {
-					$def = $min;
+
+				// Clamp default within range
+				$def = max( $min, min( $max, $def ) );
+
+				// Enforce non-negative for multiplier/rate roles
+				if ( in_array( $role, array( 'multiplier', 'rate' ), true ) ) {
+					$min = max( 0, $min );
+					$def = max( 0, $def );
 				}
-				if ( $def > $max ) {
-					$def = $max;
-				}
-				if ( $step < 1 ) {
-					$step = 1;
+
+				// Enforce 0-100 range for efficiency role
+				if ( 'efficiency' === $role ) {
+					$min = max( 0, $min );
+					$max = min( 100, $max );
+					$def = max( $min, min( $max, $def ) );
 				}
 
 				$sanitized['sliders'][] = array(
@@ -231,6 +245,23 @@ class Doqix_ROI_V2_Admin {
 		}
 		if ( empty( $sanitized['sliders'] ) ) {
 			$sanitized['sliders'] = $defaults['sliders'];
+		}
+
+		// Check for formula completeness — warn if no rate slider exists
+		$has_rate = false;
+		foreach ( $sanitized['sliders'] as $s_check ) {
+			if ( ( $s_check['role'] ?? '' ) === 'rate' ) {
+				$has_rate = true;
+				break;
+			}
+		}
+		if ( ! $has_rate ) {
+			add_settings_error(
+				'doqix_roi_v2_settings',
+				'no_rate_slider',
+				__( 'No slider with the "Hourly rate" role found. Savings will only include flat monthly amounts.', 'doqix-roi-calculator' ),
+				'warning'
+			);
 		}
 
 		/* ── Thresholds ── */
