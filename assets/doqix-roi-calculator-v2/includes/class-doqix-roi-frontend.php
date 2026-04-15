@@ -390,16 +390,31 @@ class Doqix_ROI_V2_Frontend {
 	 * ──────────────────────────────────────────── */
 
 	private static function get_theme_accent_color() {
-		/* Themify themes: accent stored in themify_setting option */
+		/* Themify framework: accent stored as separate options (themify_setting-KEY) */
+		$themify_keys = array( 'styling-link_color', 'styling-accent_color' );
+		foreach ( $themify_keys as $key ) {
+			$val = get_option( 'themify_setting-' . $key, '' );
+			if ( ! empty( $val ) ) {
+				if ( strpos( $val, '#' ) !== 0 ) {
+					$val = '#' . $val;
+				}
+				$color = sanitize_hex_color( $val );
+				if ( $color ) {
+					return $color;
+				}
+			}
+		}
+
+		/* Themify (legacy/array form): themify_setting as a single option */
 		$themify = get_option( 'themify_setting', array() );
 		if ( is_array( $themify ) ) {
-			foreach ( array( 'styling-link_color', 'styling-accent_color' ) as $tf_key ) {
+			foreach ( $themify_keys as $tf_key ) {
 				if ( ! empty( $themify[ $tf_key ] ) ) {
-					$color = $themify[ $tf_key ];
-					if ( strpos( $color, '#' ) !== 0 ) {
-						$color = '#' . $color;
+					$val = $themify[ $tf_key ];
+					if ( strpos( $val, '#' ) !== 0 ) {
+						$val = '#' . $val;
 					}
-					$color = sanitize_hex_color( $color );
+					$color = sanitize_hex_color( $val );
 					if ( $color ) {
 						return $color;
 					}

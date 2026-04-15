@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix Pricing Carousel
  * Plugin URI:  https://doqix.co.za
  * Description: Configurable pricing table carousel. Use shortcode [doqix_pricing] or [doqix_pricing preset="name"].
- * Version:     1.2.0
+ * Version:     1.2.1
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_PRICING_VERSION',    '1.2.0' );
+define( 'DOQIX_PRICING_VERSION',    '1.2.1' );
 define( 'DOQIX_PRICING_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_PRICING_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_PRICING_OPTION_KEY', 'doqix_pricing_settings' );
@@ -279,12 +279,34 @@ add_action( 'plugins_loaded', 'doqix_pricing_maybe_migrate' );
  * @return string Hex colour string or empty string.
  */
 function doqix_pricing_get_theme_accent_color() {
-	/* Themify framework */
 	$themify_keys = array( 'styling-link_color', 'styling-accent_color' );
+
+	/* Themify framework: accent stored as separate options (themify_setting-KEY) */
 	foreach ( $themify_keys as $key ) {
 		$val = get_option( 'themify_setting-' . $key, '' );
-		if ( ! empty( $val ) && preg_match( '/^#[0-9a-fA-F]{3,6}$/', $val ) ) {
-			return $val;
+		if ( ! empty( $val ) ) {
+			if ( strpos( $val, '#' ) !== 0 ) {
+				$val = '#' . $val;
+			}
+			if ( preg_match( '/^#[0-9a-fA-F]{3,6}$/', $val ) ) {
+				return $val;
+			}
+		}
+	}
+
+	/* Themify (legacy/array form): themify_setting as a single option */
+	$themify = get_option( 'themify_setting', array() );
+	if ( is_array( $themify ) ) {
+		foreach ( $themify_keys as $tf_key ) {
+			if ( ! empty( $themify[ $tf_key ] ) ) {
+				$val = $themify[ $tf_key ];
+				if ( strpos( $val, '#' ) !== 0 ) {
+					$val = '#' . $val;
+				}
+				if ( preg_match( '/^#[0-9a-fA-F]{3,6}$/', $val ) ) {
+					return $val;
+				}
+			}
 		}
 	}
 

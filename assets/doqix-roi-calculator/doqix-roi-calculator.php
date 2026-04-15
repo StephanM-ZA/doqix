@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix ROI Calculator
  * Plugin URI:  https://doqix.co.za
  * Description: Interactive ROI calculator showing potential automation savings. Use shortcode [doqix_roi_calculator] on any page.
- * Version:     1.2.5
+ * Version:     1.2.6
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_ROI_VERSION',    '1.2.5' );
+define( 'DOQIX_ROI_VERSION',    '1.2.6' );
 define( 'DOQIX_ROI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_ROI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_ROI_OPTION_KEY', 'doqix_roi_settings' );
