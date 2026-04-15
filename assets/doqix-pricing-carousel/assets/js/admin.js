@@ -498,8 +498,8 @@
       var dotMap = { small: '8px', medium: '10px', large: '14px' };
       preview.style.setProperty('--pricing-dot-size', dotMap[val] || '10px');
     } else if (control === 'arrow_size') {
-      var arrowMap = { small: '24px', medium: '28px', large: '32px' };
-      preview.style.setProperty('--pricing-arrow-size', arrowMap[val] || '28px');
+      var arrowMap = { small: '32px', medium: '44px', large: '56px' };
+      preview.style.setProperty('--pricing-arrow-size', arrowMap[val] || '44px');
     }
   });
 
