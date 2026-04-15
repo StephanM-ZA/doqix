@@ -126,6 +126,17 @@ class Doqix_ROI_V2_Frontend {
 				'abbreviate' => ! empty( $all['currency']['abbreviate'] ),
 				'abbrevThreshold' => intval( $all['currency']['abbreviate_threshold'] ?? 100000 ),
 			),
+			'labels' => array(
+				'share_btn'       => $preset['label_share_btn'] ?? 'Share Your Results',
+				'efficiency_note' => $preset['label_efficiency_note'] ?? 'Reaching {pct}% automation typically requires additional workflows beyond the base plan.',
+				'total_hours'     => $preset['label_total_hours'] ?? '= {hours} hrs/week across your team',
+			),
+			'templates' => array(
+				'tier_with_price' => $preset['template_tier_with_price'] ?? '',
+				'tier_enterprise' => $preset['template_tier_enterprise'] ?? '',
+				'tier_no_match'   => $preset['template_tier_no_match'] ?? '',
+				'share'           => $preset['template_share'] ?? '',
+			),
 		);
 	}
 
@@ -272,7 +283,7 @@ class Doqix_ROI_V2_Frontend {
 
 		<!-- Inputs -->
 		<div class="roi-inputs">
-			<div class="panel-label"><?php esc_html_e( 'Your Team', 'doqix-roi-calculator' ); ?></div>
+			<div class="panel-label"><?php echo esc_html( $preset['label_panel'] ?? 'Your Team' ); ?></div>
 
 			<?php foreach ( $sliders as $slider ) :
 				$key     = $slider['key'];
@@ -336,25 +347,25 @@ class Doqix_ROI_V2_Frontend {
 
 			<div class="hero-result">
 				<div class="hero-amount" id="out-monthly">R0</div>
-				<div class="hero-label"><?php esc_html_e( 'Your Monthly Savings', 'doqix-roi-calculator' ); ?></div>
+				<div class="hero-label"><?php echo esc_html( $preset['label_hero'] ?? 'Your Monthly Savings' ); ?></div>
 			</div>
 
 			<div class="result-cards">
 				<div class="result-card">
 					<div class="card-value" id="out-annual">R0</div>
-					<div class="card-label"><?php esc_html_e( 'per year', 'doqix-roi-calculator' ); ?></div>
+					<div class="card-label"><?php echo esc_html( $preset['label_annual'] ?? 'per year' ); ?></div>
 				</div>
 				<div class="result-card">
 					<div class="card-value" id="out-roi-pct">0%</div>
-					<div class="card-label"><?php esc_html_e( 'return on investment', 'doqix-roi-calculator' ); ?></div>
+					<div class="card-label"><?php echo esc_html( $preset['label_roi'] ?? 'return on investment' ); ?></div>
 				</div>
 				<div class="result-card">
 					<div class="card-value" id="out-hours-month">0 hrs</div>
-					<div class="card-label"><?php esc_html_e( 'back per month', 'doqix-roi-calculator' ); ?></div>
+					<div class="card-label"><?php echo esc_html( $preset['label_hours_month'] ?? 'back per month' ); ?></div>
 				</div>
 				<div class="result-card">
 					<div class="card-value" id="out-hours-year">0 hrs</div>
-					<div class="card-label"><?php esc_html_e( 'back per year', 'doqix-roi-calculator' ); ?></div>
+					<div class="card-label"><?php echo esc_html( $preset['label_hours_year'] ?? 'back per year' ); ?></div>
 				</div>
 				<div class="result-card tier-suggestion">
 					<div class="tier-text" id="out-tier"></div>
@@ -371,7 +382,7 @@ class Doqix_ROI_V2_Frontend {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $preset['share_enabled'] ) ) : ?>
-			<button type="button" class="share-btn" id="btn-share"><?php esc_html_e( 'Share Your Results', 'doqix-roi-calculator' ); ?></button>
+			<button type="button" class="share-btn" id="btn-share"><?php echo esc_html( $preset['label_share_btn'] ?? 'Share Your Results' ); ?></button>
 			<?php endif; ?>
 
 		</div>

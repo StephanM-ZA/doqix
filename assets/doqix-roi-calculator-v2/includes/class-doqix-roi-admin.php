@@ -348,6 +348,26 @@ class Doqix_ROI_V2_Admin {
 					: ( $base['card_shadow'] ?? 'subtle' );
 				$preset_sanitized['cta_border_radius'] = max( 0, min( 24, intval( $preset_input['cta_border_radius'] ?? $base['cta_border_radius'] ?? 8 ) ) );
 
+				/* Sanitize label fields */
+				$text_fields = array(
+					'label_panel', 'label_hero', 'label_annual', 'label_roi',
+					'label_hours_month', 'label_hours_year', 'label_share_btn',
+					'label_efficiency_note', 'label_total_hours',
+				);
+				foreach ( $text_fields as $f ) {
+					$preset_sanitized[ $f ] = sanitize_text_field( $preset_input[ $f ] ?? $base[ $f ] ?? '' );
+				}
+
+				/* Templates allow limited HTML (strong, br, span with class) */
+				$template_fields = array( 'template_tier_with_price', 'template_tier_enterprise', 'template_tier_no_match' );
+				$allowed_html = array( 'strong' => array(), 'br' => array(), 'span' => array( 'class' => array() ) );
+				foreach ( $template_fields as $f ) {
+					$preset_sanitized[ $f ] = wp_kses( $preset_input[ $f ] ?? $base[ $f ] ?? '', $allowed_html );
+				}
+
+				/* Share template is plain text */
+				$preset_sanitized['template_share'] = sanitize_textarea_field( $preset_input['template_share'] ?? $base['template_share'] ?? '' );
+
 				$sanitized['presets'][ $slug ] = $preset_sanitized;
 			}
 		}
@@ -981,6 +1001,83 @@ class Doqix_ROI_V2_Admin {
 						'media_buttons' => false,
 						'textarea_rows' => 5,
 					) ); ?></td>
+				</tr>
+			</table>
+
+			<!-- ═══════════════ LABELS & TEMPLATES ═══════════════ -->
+			<h2><?php esc_html_e( 'Labels & Templates', 'doqix-roi-calculator' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Customize all visible text. Use {placeholders} in templates — they are replaced with calculated values.', 'doqix-roi-calculator' ); ?></p>
+
+			<table class="form-table">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Input Panel Label', 'doqix-roi-calculator' ); ?></th>
+					<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_panel]" ); ?>" value="<?php echo esc_attr( $p['label_panel'] ?? 'Your Team' ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Hero Result Label', 'doqix-roi-calculator' ); ?></th>
+					<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_hero]" ); ?>" value="<?php echo esc_attr( $p['label_hero'] ?? 'Your Monthly Savings' ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Annual Savings Label', 'doqix-roi-calculator' ); ?></th>
+					<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_annual]" ); ?>" value="<?php echo esc_attr( $p['label_annual'] ?? 'per year' ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'ROI Label', 'doqix-roi-calculator' ); ?></th>
+					<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_roi]" ); ?>" value="<?php echo esc_attr( $p['label_roi'] ?? 'return on investment' ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Hours/Month Label', 'doqix-roi-calculator' ); ?></th>
+					<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_hours_month]" ); ?>" value="<?php echo esc_attr( $p['label_hours_month'] ?? 'back per month' ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Hours/Year Label', 'doqix-roi-calculator' ); ?></th>
+					<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_hours_year]" ); ?>" value="<?php echo esc_attr( $p['label_hours_year'] ?? 'back per year' ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Share Button Text', 'doqix-roi-calculator' ); ?></th>
+					<td><input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_share_btn]" ); ?>" value="<?php echo esc_attr( $p['label_share_btn'] ?? 'Share Your Results' ); ?>" class="regular-text"></td>
+				</tr>
+			</table>
+
+			<h3><?php esc_html_e( 'Templates', 'doqix-roi-calculator' ); ?></h3>
+			<p class="description"><?php esc_html_e( 'Available placeholders: {monthly}, {annual}, {hours_month}, {hours_year}, {roi_pct}, {roi_x}, {tier_name}, {tier_price}, {people}, {rate}, {pct}, {hours}, {share_url}', 'doqix-roi-calculator' ); ?></p>
+
+			<table class="form-table">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Tier (with price)', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<textarea name="<?php echo esc_attr( "{$opt}[presets][{$slug}][template_tier_with_price]" ); ?>" rows="3" class="large-text"><?php echo esc_textarea( $p['template_tier_with_price'] ?? '' ); ?></textarea>
+						<p class="description"><?php esc_html_e( 'HTML allowed. Shown when a priced tier matches.', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Tier (enterprise/custom)', 'doqix-roi-calculator' ); ?></th>
+					<td><textarea name="<?php echo esc_attr( "{$opt}[presets][{$slug}][template_tier_enterprise]" ); ?>" rows="3" class="large-text"><?php echo esc_textarea( $p['template_tier_enterprise'] ?? '' ); ?></textarea></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Tier (no match)', 'doqix-roi-calculator' ); ?></th>
+					<td><textarea name="<?php echo esc_attr( "{$opt}[presets][{$slug}][template_tier_no_match]" ); ?>" rows="3" class="large-text"><?php echo esc_textarea( $p['template_tier_no_match'] ?? '' ); ?></textarea></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Efficiency Note', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_efficiency_note]" ); ?>" value="<?php echo esc_attr( $p['label_efficiency_note'] ?? '' ); ?>" class="large-text">
+						<p class="description"><?php esc_html_e( '{pct} = current efficiency percentage', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Total Hours Display', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<input type="text" name="<?php echo esc_attr( "{$opt}[presets][{$slug}][label_total_hours]" ); ?>" value="<?php echo esc_attr( $p['label_total_hours'] ?? '' ); ?>" class="regular-text">
+						<p class="description"><?php esc_html_e( '{hours} = calculated total hours', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Share Message', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<textarea name="<?php echo esc_attr( "{$opt}[presets][{$slug}][template_share]" ); ?>" rows="6" class="large-text"><?php echo esc_textarea( $p['template_share'] ?? '' ); ?></textarea>
+						<p class="description"><?php esc_html_e( 'Plain text with {placeholders}. Newlines preserved.', 'doqix-roi-calculator' ); ?></p>
+					</td>
 				</tr>
 			</table>
 

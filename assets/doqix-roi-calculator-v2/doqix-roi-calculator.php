@@ -82,6 +82,23 @@ function doqix_roi_v2_get_preset_defaults() {
 		'share_url'      => 'https://doqix.co.za',
 		'share_enabled'  => 1,
 		'og_description' => '',
+
+		/* Labels */
+		'label_panel'           => 'Your Team',
+		'label_hero'            => 'Your Monthly Savings',
+		'label_annual'          => 'per year',
+		'label_roi'             => 'return on investment',
+		'label_hours_month'     => 'back per month',
+		'label_hours_year'      => 'back per year',
+		'label_share_btn'       => 'Share Your Results',
+		'label_efficiency_note' => 'Reaching {pct}% automation typically requires additional workflows beyond the base plan.',
+		'label_total_hours'     => '= {hours} hrs/week across your team',
+
+		/* Templates (with {placeholder} tokens) */
+		'template_tier_with_price'  => 'You\'d pay us <strong>{tier_price}/mo</strong> for our <strong>{tier_name}</strong> plan.<br>You\'d save <strong>{monthly}/mo</strong>. That\'s <span class="roi-multiplier">{roi_x}</span> your investment back.',
+		'template_tier_enterprise'  => 'At this scale, our <strong>{tier_name}</strong> plan is the right fit.<br>You\'d save <strong>{monthly}/mo</strong>. We\'ll scope pricing to your needs.',
+		'template_tier_no_match'    => 'Start with one quick win — even small automations compound over time.<br><strong>{hours_month} hours</strong> back is still <strong>{hours_month} hours</strong> you\'re not wasting.',
+		'template_share'            => "💡 Ever wondered what repetitive work actually costs? I just found out:\n\n💰 Monthly: *{monthly}*\n📊 Annual: *{annual}*\n⏱️ Hours saved: *{hours_month}/month*\n\n👉 {share_url}",
 	);
 }
 

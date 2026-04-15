@@ -86,6 +86,9 @@
   var currAbbrev    = curr.abbreviate !== false;
   var currAbbrevAt  = curr.abbrevThreshold || 100000;
 
+  var labels = config.labels || {};
+  var templates = config.templates || {};
+
   function formatCurrency(n) {
     n = Math.round(n * Math.pow(10, currDecimals)) / Math.pow(10, currDecimals);
     if (currAbbrev && Math.abs(n) >= 1000000) {
@@ -256,6 +259,24 @@
       .replace(/\{price\}/g, data.price);
   }
 
+  /* ── Template helper ── */
+  function fillTemplate(tpl, data) {
+    return tpl
+      .replace(/\{monthly\}/g, data.monthly || '')
+      .replace(/\{annual\}/g, data.annual || '')
+      .replace(/\{hours_month\}/g, data.hours_month || '')
+      .replace(/\{hours_year\}/g, data.hours_year || '')
+      .replace(/\{roi_pct\}/g, data.roi_pct || '')
+      .replace(/\{roi_x\}/g, data.roi_x || '')
+      .replace(/\{tier_name\}/g, data.tier_name || '')
+      .replace(/\{tier_price\}/g, data.tier_price || '')
+      .replace(/\{people\}/g, data.people || '')
+      .replace(/\{rate\}/g, data.rate || '')
+      .replace(/\{pct\}/g, data.pct || '')
+      .replace(/\{hours\}/g, data.hours || '')
+      .replace(/\{share_url\}/g, config.share_url || '');
+  }
+
   /* ── Core calculation (role-based, generic) ── */
   function calculate() {
     /* Collect values by role */
@@ -317,13 +338,16 @@
     /* ── Special displays ── */
     /* Total hours (if both people + hours sliders exist) */
     if (outTotalHours && valsByKey.people !== undefined && valsByKey.hours !== undefined) {
-      outTotalHours.textContent = '= ' + Math.round(valsByKey.people * valsByKey.hours) + ' hrs/week across your team';
+      var totalHrs = Math.round(valsByKey.people * valsByKey.hours);
+      outTotalHours.textContent = (labels.total_hours || '= {hours} hrs/week across your team')
+        .replace(/\{hours\}/g, totalHrs);
     }
 
     /* Efficiency note */
     if (outEfficiencyNote) {
       if (maxEfficiency >= 0.80) {
-        outEfficiencyNote.textContent = 'Reaching ' + Math.round(maxEfficiency * 100) + '% automation typically requires additional workflows beyond the base plan.';
+        outEfficiencyNote.textContent = (labels.efficiency_note || 'Reaching {pct}% automation typically requires additional workflows beyond the base plan.')
+          .replace(/\{pct\}/g, Math.round(maxEfficiency * 100));
         outEfficiencyNote.style.display = 'block';
       } else {
         outEfficiencyNote.style.display = 'none';
@@ -340,30 +364,54 @@
     var tier = getTier(maxEfficiency, monthlySavings);
     var roiCap = (config.thresholds || {}).roi_cap_display || 10;
 
+    var templateData = {
+      monthly: formatCurrency(monthlySavings),
+      annual: formatCurrency(annualSavings),
+      hours_month: formatHours(hoursSavedMonth) + ' hrs',
+      hours_year: formatHours(hoursSavedYear) + ' hrs',
+      roi_pct: '',
+      roi_x: '',
+      tier_name: '',
+      tier_price: '',
+      people: valsByKey.people !== undefined ? Math.round(valsByKey.people).toString() : '0',
+      rate: rateSum > 0 ? formatCurrency(rateSum) : currSymbol + '0',
+      hours: formatHours(hoursSavedMonth)
+    };
+
     if (tier && tier.price > 0) {
       var roiPct = Math.round(safeDivide(monthlySavings - tier.price, tier.price) * 100);
       if (roiPct < 0) roiPct = 0;
-      outRoiPct.textContent = roiPct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, currThousands) + '%';
+      if (outRoiPct) outRoiPct.textContent = roiPct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, currThousands) + '%';
 
       var roiMultiplier = Math.round(safeDivide(monthlySavings, tier.price));
       if (roiMultiplier < 1) roiMultiplier = 1;
       var multiplierText = roiMultiplier > roiCap ? roiCap + 'x+' : roiMultiplier + 'x';
 
-      outTier.innerHTML =
-        'You\u2019d pay us <strong>' + formatCurrency(tier.price) + '/mo</strong> for our <strong>' + tier.name + '</strong> plan.<br>' +
-        'You\u2019d save <strong>' + formatCurrency(monthlySavings) + '/mo</strong>. That\u2019s <span class="roi-multiplier">' + multiplierText + '</span> your investment back.';
+      templateData.roi_pct = roiPct + '%';
+      templateData.roi_x = multiplierText;
+      templateData.tier_name = tier.name;
+      templateData.tier_price = formatCurrency(tier.price);
+
+      if (outTier) outTier.innerHTML = fillTemplate(
+        templates.tier_with_price || 'You\u2019d pay us <strong>{tier_price}/mo</strong> for our <strong>{tier_name}</strong> plan.<br>You\u2019d save <strong>{monthly}/mo</strong>. That\u2019s <span class="roi-multiplier">{roi_x}</span> your investment back.',
+        templateData
+      );
 
     } else if (tier && tier.price === 0) {
-      outRoiPct.textContent = '\u2014';
-      outTier.innerHTML =
-        'At this scale, our <strong>' + tier.name + '</strong> plan is the right fit.<br>' +
-        'You\u2019d save <strong>' + formatCurrency(monthlySavings) + '/mo</strong>. We\u2019ll scope pricing to your needs.';
+      if (outRoiPct) outRoiPct.textContent = '\u2014';
+      templateData.tier_name = tier.name;
+
+      if (outTier) outTier.innerHTML = fillTemplate(
+        templates.tier_enterprise || 'At this scale, our <strong>{tier_name}</strong> plan is the right fit.<br>You\u2019d save <strong>{monthly}/mo</strong>. We\u2019ll scope pricing to your needs.',
+        templateData
+      );
 
     } else {
-      outRoiPct.textContent = '\u2014';
-      outTier.innerHTML =
-        'Start with one quick win \u2014 even small automations compound over time.<br>' +
-        '<strong>' + formatHours(hoursSavedMonth) + ' hours</strong> back is still <strong>' + formatHours(hoursSavedMonth) + ' hours</strong> you\u2019re not wasting.';
+      if (outRoiPct) outRoiPct.textContent = '\u2014';
+      if (outTier) outTier.innerHTML = fillTemplate(
+        templates.tier_no_match || 'Start with one quick win \u2014 even small automations compound over time.<br><strong>{hours_month} hours</strong> back is still <strong>{hours_month} hours</strong> you\u2019re not wasting.',
+        templateData
+      );
     }
 
     /* ── Nudge quote ── */
@@ -461,16 +509,17 @@
       var monthlySavings  = clamp((hoursSavedMonth * rateSum) + flatSum, 0, MAX_SAFE);
       var annualSavings   = clamp(monthlySavings * 12, 0, MAX_SAFE);
 
-      var shareText =
-        '\uD83D\uDCA1 Ever wondered what repetitive work actually costs? I just found out:\n' +
-        '\n' +
-        '\uD83D\uDCB0 Monthly: *' + formatCurrency(monthlySavings) + '*\n' +
-        '\uD83D\uDCCA Annual: *' + formatCurrency(annualSavings) + '*\n' +
-        '\u23F1\uFE0F Hours saved: *' + formatHours(hoursSavedMonth) + '/month*\n' +
-        '\n' +
-        '\uD83D\uDC49 Go to https://doqix.co.za to find out more.';
+      var shareData = {
+        monthly: formatCurrency(monthlySavings),
+        annual: formatCurrency(annualSavings),
+        hours_month: formatHours(hoursSavedMonth),
+        share_url: config.share_url || 'https://doqix.co.za'
+      };
+      var shareText = fillTemplate(
+        templates.share || '\uD83D\uDCA1 Ever wondered what repetitive work actually costs? I just found out:\n\n\uD83D\uDCB0 Monthly: *{monthly}*\n\uD83D\uDCCA Annual: *{annual}*\n\u23F1\uFE0F Hours saved: *{hours_month}/month*\n\n\uD83D\uDC49 {share_url}',
+        shareData
+      );
 
-      var shareUrl   = config.share_url || 'https://doqix.co.za';
       var shareTitle = 'My Automation Savings \u2014 DoQix - Efficiency Engineered';
 
       if (navigator.share) {
