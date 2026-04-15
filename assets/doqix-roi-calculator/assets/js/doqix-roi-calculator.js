@@ -1,6 +1,6 @@
 /**
  * Do.Qix ROI Calculator — Frontend Logic
- * Version: 1.0.0
+ * Version: 1.3.0
  *
  * Config-driven: reads tier names/prices and share URL from
  * window.doqixRoiConfig (set by wp_localize_script).

@@ -213,6 +213,13 @@
       for (var j = 0; j < colorInputs.length; j++) {
         if (colorInputs[j].getAttribute('data-is-set') === 'reset') {
           colorInputs[j].value = '';
+          /* Create hidden input to ensure empty string is submitted */
+          var hidden = document.createElement('input');
+          hidden.type = 'hidden';
+          hidden.name = colorInputs[j].name;
+          hidden.value = '';
+          form.appendChild(hidden);
+          colorInputs[j].name = '';
         }
       }
     });
@@ -294,13 +301,18 @@
     colorInput.value = visualDefault;
     colorInput.setAttribute('data-is-set', 'reset');
 
-    // Show the default hex value
+    // Show theme default label
     var codeEl = field.querySelector('code');
-    if (codeEl) codeEl.textContent = visualDefault;
+    if (codeEl) codeEl.textContent = 'Theme default';
 
-    // Trigger input event to update preview
-    var evt = new Event('input', { bubbles: true });
-    colorInput.dispatchEvent(evt);
+    // Update live preview directly (don't dispatch input event — it would overwrite data-is-set)
+    var dataVar = colorInput.getAttribute('data-var');
+    if (dataVar) {
+      var preview = document.getElementById('doqix-preview-card');
+      if (preview) {
+        preview.style.setProperty(dataVar, visualDefault);
+      }
+    }
   });
 
   /* ────────────────────────────────────────────

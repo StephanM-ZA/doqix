@@ -3,14 +3,14 @@
  * Version: 2.2.0
  *
  * Fully dynamic: reads tiers[], sliders[], thresholds{} from
- * window.doqixRoiConfig (set by wp_localize_script).
+ * window.doqixRoiV2Config (set by wp_localize_script).
  * Supports N tiers, N sliders with role-based formula.
  */
 (function() {
   'use strict';
 
-  var config = window.doqixRoiConfig || {};
-  var container = document.getElementById('roi-calculator');
+  var config = window.doqixRoiV2Config || {};
+  var container = document.getElementById('roi-calculator-v2');
   if (!container) return;
 
   /* ── Build slider refs from config ── */

@@ -155,7 +155,7 @@ class Doqix_ROI_Admin {
 		}
 
 		if ( isset( $_POST['doqix_add_preset'] ) && ! empty( $_POST['new_preset_name'] ) ) {
-			$name = sanitize_text_field( $_POST['new_preset_name'] );
+			$name = sanitize_text_field( wp_unslash( $_POST['new_preset_name'] ) );
 			$slug = sanitize_key( str_replace( ' ', '-', strtolower( $name ) ) );
 			if ( $slug && ! isset( $s['presets'][ $slug ] ) ) {
 				$p = doqix_roi_get_preset_defaults();
@@ -168,7 +168,7 @@ class Doqix_ROI_Admin {
 		}
 
 		if ( isset( $_POST['doqix_delete_preset'] ) && ! empty( $_POST['delete_preset_slug'] ) ) {
-			$slug = sanitize_key( $_POST['delete_preset_slug'] );
+			$slug = sanitize_key( wp_unslash( $_POST['delete_preset_slug'] ) );
 			if ( $slug !== 'default' && isset( $s['presets'][ $slug ] ) ) {
 				unset( $s['presets'][ $slug ] );
 				update_option( DOQIX_ROI_OPTION_KEY, $s );
@@ -717,7 +717,7 @@ class Doqix_ROI_Admin {
 								</div>
 
 								<!-- Mini share button -->
-								<div style="border:1px solid var(--roi-share-text);color:var(--roi-share-text);border-radius:var(--roi-cta-radius);padding:6px;text-align:center;font-weight:600;font-size:9px;margin-bottom:8px;cursor:default;">
+								<div style="border:1px solid var(--roi-share-text);color:var(--roi-share-text);border-radius:var(--roi-radius);padding:6px;text-align:center;font-weight:600;font-size:9px;margin-bottom:8px;cursor:default;">
 									Share Your Results
 								</div>
 

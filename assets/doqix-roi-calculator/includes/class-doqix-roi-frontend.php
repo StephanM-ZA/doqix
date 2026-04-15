@@ -250,7 +250,7 @@ class Doqix_ROI_Frontend {
 
 		ob_start();
 		?>
-<section class="doqix-roi" id="roi-calculator"<?php if ( $inline_vars ) echo ' style="' . $inline_vars . '"'; ?>>
+<section class="doqix-roi" id="roi-calculator"<?php if ( $inline_vars ) echo ' style="' . esc_attr( $inline_vars ) . '"'; ?>>
 
 	<?php if ( ! empty( $preset['heading_text'] ) ) : ?>
 	<h2><?php echo wp_kses_post( $preset['heading_text'] ); ?></h2>

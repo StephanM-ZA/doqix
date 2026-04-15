@@ -153,7 +153,7 @@ class Doqix_ROI_V2_Frontend {
 			true
 		);
 
-		wp_localize_script( 'doqix-roi-calculator-v2', 'doqixRoiConfig', $this->build_config( $preset, $all ) );
+		wp_localize_script( 'doqix-roi-calculator-v2', 'doqixRoiV2Config', $this->build_config( $preset, $all ) );
 	}
 
 	/**
@@ -250,7 +250,7 @@ class Doqix_ROI_V2_Frontend {
 
 		ob_start();
 		?>
-<section class="doqix-roi" id="roi-calculator"<?php if ( $inline_vars ) echo ' style="' . $inline_vars . '"'; ?>>
+<section class="doqix-roi" id="roi-calculator-v2"<?php if ( $inline_vars ) echo ' style="' . esc_attr( $inline_vars ) . '"'; ?>>
 
 	<?php if ( ! empty( $preset['heading_text'] ) ) : ?>
 	<h2><?php echo wp_kses_post( $preset['heading_text'] ); ?></h2>

@@ -1193,7 +1193,7 @@ class Doqix_Pricing_Admin {
 		?>
 		<div class="doqix-preview-sidebar">
 			<span class="doqix-preview-label"><?php esc_html_e( 'LIVE PREVIEW', 'doqix-pricing-carousel' ); ?></span>
-			<div id="doqix-preview-card" class="doqix-preview-card" style="<?php echo $style_vars; ?>">
+			<div id="doqix-preview-card" class="doqix-preview-card" style="<?php echo esc_attr( $style_vars ); ?>">
 				<div class="doqix-preview-badge">MOST POPULAR</div>
 				<div class="doqix-preview-header">
 					<div class="doqix-preview-name">Team</div>

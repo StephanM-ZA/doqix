@@ -229,7 +229,7 @@ class Doqix_Pricing_Frontend {
 		ob_start();
 		?>
 <div class="doqix-pricing" id="doqix-pricing"
-	style="<?php echo $wrapper_style; ?>"
+	style="<?php echo esc_attr( $wrapper_style ); ?>"
 	data-display-desktop="<?php echo esc_attr( $preset['display_desktop'] ); ?>"
 	data-display-mobile="<?php echo esc_attr( $preset['display_mobile'] ); ?>"
 	data-breakpoint="<?php echo esc_attr( intval( $preset['mobile_breakpoint'] ) ); ?>">
