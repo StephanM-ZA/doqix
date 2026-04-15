@@ -257,13 +257,11 @@ class Doqix_ROI_V2_Admin {
 
 				$base = isset( $existing_presets[ $slug ] ) ? $existing_presets[ $slug ] : $preset_defaults;
 
-				$sanitized['presets'][ $slug ] = array(
+				$preset_sanitized = array(
 					'label'         => sanitize_text_field( $preset_input['label'] ?? $base['label'] ),
 					'heading_text'  => wp_kses_post( $preset_input['heading_text'] ?? $base['heading_text'] ),
 					'intro_text'    => wp_kses_post( $preset_input['intro_text'] ?? $base['intro_text'] ),
 					'footnote_text' => wp_kses_post( $preset_input['footnote_text'] ?? $base['footnote_text'] ),
-					'color_accent'  => isset( $preset_input['color_accent'] ) && '' !== $preset_input['color_accent'] ? sanitize_hex_color( $preset_input['color_accent'] ) : '',
-					'color_cta'     => isset( $preset_input['color_cta'] ) && '' !== $preset_input['color_cta'] ? sanitize_hex_color( $preset_input['color_cta'] ) : '',
 					'cta_enabled'   => ! empty( $preset_input['cta_enabled'] ) ? 1 : 0,
 					'cta_url'       => sanitize_text_field( $preset_input['cta_url'] ?? $base['cta_url'] ),
 					'cta_text'      => sanitize_text_field( $preset_input['cta_text'] ?? $base['cta_text'] ),
@@ -272,6 +270,33 @@ class Doqix_ROI_V2_Admin {
 					'share_enabled' => ! empty( $preset_input['share_enabled'] ) ? 1 : 0,
 					'og_description' => sanitize_text_field( $preset_input['og_description'] ?? $base['og_description'] ?? '' ),
 				);
+
+				/* Sanitize all color keys */
+				$color_keys = array(
+					'color_accent', 'color_cta',
+					'color_card_bg', 'color_card_border', 'color_heading_text', 'color_body_text',
+					'color_slider_track', 'color_slider_label',
+					'color_hero_bg', 'color_hero_value', 'color_hero_label',
+					'color_result_value', 'color_result_label', 'color_roi_highlight', 'color_tier_text',
+					'color_cta_text', 'color_cta_hover_bg', 'color_cta_hover_text',
+					'color_share_text', 'color_footnote',
+					'color_tooltip_bg', 'color_tooltip_text',
+				);
+				foreach ( $color_keys as $ck ) {
+					$preset_sanitized[ $ck ] = isset( $preset_input[ $ck ] ) && '' !== $preset_input[ $ck ]
+						? sanitize_hex_color( $preset_input[ $ck ] )
+						: '';
+				}
+
+				/* Sanitize style controls */
+				$preset_sanitized['card_border_radius'] = max( 0, min( 24, intval( $preset_input['card_border_radius'] ?? $base['card_border_radius'] ?? 8 ) ) );
+				$valid_shadows = array( 'none', 'subtle', 'medium', 'strong' );
+				$preset_sanitized['card_shadow'] = in_array( $preset_input['card_shadow'] ?? '', $valid_shadows, true )
+					? $preset_input['card_shadow']
+					: ( $base['card_shadow'] ?? 'subtle' );
+				$preset_sanitized['cta_border_radius'] = max( 0, min( 24, intval( $preset_input['cta_border_radius'] ?? $base['cta_border_radius'] ?? 8 ) ) );
+
+				$sanitized['presets'][ $slug ] = $preset_sanitized;
 			}
 		}
 
@@ -850,53 +875,220 @@ class Doqix_ROI_V2_Admin {
 			</table>
 
 			<!-- ═══════════════ COLORS ═══════════════ -->
-			<h2><?php esc_html_e( 'Colors', 'doqix-roi-calculator' ); ?></h2>
-			<p class="description"><?php esc_html_e( 'Customize the slider accent and CTA button colors to match your theme.', 'doqix-roi-calculator' ); ?></p>
+			<h2><?php esc_html_e( 'Colors & Style', 'doqix-roi-calculator' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Customize every color in the calculator. Empty fields inherit from your theme. The preview updates live as you pick colors.', 'doqix-roi-calculator' ); ?></p>
 
 			<?php
-			$accent_val     = $p['color_accent'];
-			$cta_val        = $p['color_cta'];
-			$accent_display = ! empty( $accent_val ) ? $accent_val : '#0886B5';
-			$cta_display    = ! empty( $cta_val )    ? $cta_val    : '#0886B5';
+			/* ── Color groups definition ── */
+			$color_groups = array(
+				'Accent & Cards' => array(
+					array( 'key' => 'color_accent',       'label' => 'Accent (sliders, highlights)', 'var' => '--roi-accent',        'default' => '#0886B5' ),
+					array( 'key' => 'color_card_bg',       'label' => 'Card Background',              'var' => '--roi-card-bg',       'default' => '#ffffff' ),
+					array( 'key' => 'color_card_border',   'label' => 'Card Border',                  'var' => '--roi-line',          'default' => '#e0e0e0' ),
+					array( 'key' => 'color_heading_text',  'label' => 'Heading Text',                 'var' => '--roi-heading-text',  'default' => '#1d2327' ),
+					array( 'key' => 'color_body_text',     'label' => 'Body / Intro Text',            'var' => '--roi-body-text',     'default' => '#555555' ),
+				),
+				'Sliders' => array(
+					array( 'key' => 'color_slider_track',  'label' => 'Track (unfilled)',  'var' => '--roi-slider-track',  'default' => '#d9dee2' ),
+					array( 'key' => 'color_slider_label',  'label' => 'Label Text',        'var' => '--roi-slider-label',  'default' => '#1d2327' ),
+				),
+				'Hero Result' => array(
+					array( 'key' => 'color_hero_bg',     'label' => 'Background',   'var' => '--roi-hero-bg',     'default' => '#ffffff' ),
+					array( 'key' => 'color_hero_value',  'label' => 'Amount Text',  'var' => '--roi-hero-value',  'default' => '#1d2327' ),
+					array( 'key' => 'color_hero_label',  'label' => 'Label Text',   'var' => '--roi-hero-label',  'default' => '#666666' ),
+				),
+				'Result Cards' => array(
+					array( 'key' => 'color_result_value',  'label' => 'Value Text',     'var' => '--roi-result-value',  'default' => '#1d2327' ),
+					array( 'key' => 'color_result_label',  'label' => 'Label Text',     'var' => '--roi-result-label',  'default' => '#666666' ),
+					array( 'key' => 'color_roi_highlight', 'label' => 'ROI Multiplier', 'var' => '--roi-highlight',     'default' => '#0886B5' ),
+					array( 'key' => 'color_tier_text',     'label' => 'Tier Suggestion','var' => '--roi-tier-text',     'default' => '#555555' ),
+				),
+				'CTA Button' => array(
+					array( 'key' => 'color_cta',            'label' => 'Background',       'var' => '--roi-action',         'default' => '#0886B5' ),
+					array( 'key' => 'color_cta_text',       'label' => 'Text',             'var' => '--roi-cta-text',       'default' => '#ffffff' ),
+					array( 'key' => 'color_cta_hover_bg',   'label' => 'Hover Background', 'var' => '--roi-cta-hover-bg',   'default' => '#076d94' ),
+					array( 'key' => 'color_cta_hover_text', 'label' => 'Hover Text',       'var' => '--roi-cta-hover-text', 'default' => '#ffffff' ),
+				),
+				'Share Button' => array(
+					array( 'key' => 'color_share_text', 'label' => 'Text & Border', 'var' => '--roi-share-text', 'default' => '#0886B5' ),
+				),
+				'Tooltips' => array(
+					array( 'key' => 'color_tooltip_bg',   'label' => 'Background', 'var' => '--roi-tooltip-bg',   'default' => '#1a1a1a' ),
+					array( 'key' => 'color_tooltip_text', 'label' => 'Text',       'var' => '--roi-tooltip-text', 'default' => '#ffffff' ),
+				),
+				'Misc' => array(
+					array( 'key' => 'color_footnote', 'label' => 'Footnote', 'var' => '--roi-footnote', 'default' => '#999999' ),
+				),
+			);
 			?>
-			<table class="form-table">
-				<tr>
-					<th scope="row"><label for="color-accent-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Slider Accent Color', 'doqix-roi-calculator' ); ?></label></th>
-					<td>
-						<span class="doqix-color-field">
-							<input type="color" id="color-accent-<?php echo esc_attr( $slug ); ?>"
-								name="<?php echo esc_attr( "{$opt}[presets][{$slug}][color_accent]" ); ?>"
-								value="<?php echo esc_attr( $accent_display ); ?>"
-								<?php if ( empty( $accent_val ) ) echo 'data-is-default="1"'; ?>>
-							<?php if ( ! empty( $accent_val ) ) : ?>
-							<code><?php echo esc_html( $accent_val ); ?></code>
-							<button type="button" class="button-link doqix-reset-color" data-target="color-accent-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Reset to theme default', 'doqix-roi-calculator' ); ?></button>
-							<?php else : ?>
-							<code><?php esc_html_e( 'Theme default', 'doqix-roi-calculator' ); ?></code>
-							<?php endif; ?>
-						</span>
-						<p class="description"><?php esc_html_e( 'Used for slider thumbs, track fill, value display, and ROI multiplier text.', 'doqix-roi-calculator' ); ?></p>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="color-cta-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'CTA Button Color', 'doqix-roi-calculator' ); ?></label></th>
-					<td>
-						<span class="doqix-color-field">
-							<input type="color" id="color-cta-<?php echo esc_attr( $slug ); ?>"
-								name="<?php echo esc_attr( "{$opt}[presets][{$slug}][color_cta]" ); ?>"
-								value="<?php echo esc_attr( $cta_display ); ?>"
-								<?php if ( empty( $cta_val ) ) echo 'data-is-default="1"'; ?>>
-							<?php if ( ! empty( $cta_val ) ) : ?>
-							<code><?php echo esc_html( $cta_val ); ?></code>
-							<button type="button" class="button-link doqix-reset-color" data-target="color-cta-<?php echo esc_attr( $slug ); ?>"><?php esc_html_e( 'Reset to theme default', 'doqix-roi-calculator' ); ?></button>
-							<?php else : ?>
-							<code><?php esc_html_e( 'Theme default', 'doqix-roi-calculator' ); ?></code>
-							<?php endif; ?>
-						</span>
-						<p class="description"><?php esc_html_e( 'Used for the CTA button background and share button outline.', 'doqix-roi-calculator' ); ?></p>
-					</td>
-				</tr>
-			</table>
+
+			<div class="doqix-roi-colours-layout">
+				<!-- Left column: color pickers -->
+				<div class="doqix-roi-colours-panel">
+					<?php foreach ( $color_groups as $group_label => $fields ) : ?>
+					<div class="doqix-roi-color-group">
+						<h4><?php echo esc_html( $group_label ); ?></h4>
+						<div class="doqix-roi-color-grid">
+							<?php foreach ( $fields as $field ) :
+								$val            = isset( $p[ $field['key'] ] ) ? $p[ $field['key'] ] : '';
+								$display_val    = ! empty( $val ) ? $val : $field['default'];
+								$is_default     = empty( $val );
+							?>
+							<div class="doqix-roi-color-field">
+								<label><?php echo esc_html( $field['label'] ); ?></label>
+								<span class="doqix-color-swatch">
+									<input type="color"
+										name="<?php echo esc_attr( "{$opt}[presets][{$slug}][{$field['key']}]" ); ?>"
+										value="<?php echo esc_attr( $display_val ); ?>"
+										data-var="<?php echo esc_attr( $field['var'] ); ?>"
+										data-visual-default="<?php echo esc_attr( $field['default'] ); ?>"
+										<?php if ( $is_default ) echo 'data-is-default="1"'; ?>>
+									<code><?php echo $is_default ? esc_html__( 'Theme default', 'doqix-roi-calculator' ) : esc_html( $val ); ?></code>
+									<?php if ( ! $is_default ) : ?>
+									<button type="button" class="button-link doqix-roi-reset-color">&times;</button>
+									<?php endif; ?>
+								</span>
+							</div>
+							<?php endforeach; ?>
+						</div>
+					</div>
+					<?php endforeach; ?>
+
+					<!-- Style Controls -->
+					<div class="doqix-roi-color-group">
+						<h4><?php esc_html_e( 'Style Controls', 'doqix-roi-calculator' ); ?></h4>
+						<div class="doqix-roi-style-controls">
+							<div class="doqix-roi-style-field">
+								<label><?php esc_html_e( 'Card Border Radius (px)', 'doqix-roi-calculator' ); ?></label>
+								<input type="number"
+									name="<?php echo esc_attr( "{$opt}[presets][{$slug}][card_border_radius]" ); ?>"
+									value="<?php echo esc_attr( $p['card_border_radius'] ?? 8 ); ?>"
+									min="0" max="24" step="1" class="small-text"
+									data-preview-var="--roi-radius"
+									data-preview-suffix="px">
+							</div>
+							<div class="doqix-roi-style-field">
+								<label><?php esc_html_e( 'Card Shadow', 'doqix-roi-calculator' ); ?></label>
+								<div class="doqix-roi-shadow-radios">
+									<?php
+									$shadow_val = $p['card_shadow'] ?? 'subtle';
+									$shadow_options = array( 'none' => 'None', 'subtle' => 'Subtle', 'medium' => 'Medium', 'strong' => 'Strong' );
+									foreach ( $shadow_options as $sval => $slabel ) : ?>
+									<label>
+										<input type="radio"
+											name="<?php echo esc_attr( "{$opt}[presets][{$slug}][card_shadow]" ); ?>"
+											value="<?php echo esc_attr( $sval ); ?>"
+											<?php checked( $shadow_val, $sval ); ?>>
+										<?php echo esc_html( $slabel ); ?>
+									</label>
+									<?php endforeach; ?>
+								</div>
+							</div>
+							<div class="doqix-roi-style-field">
+								<label><?php esc_html_e( 'CTA Border Radius (px)', 'doqix-roi-calculator' ); ?></label>
+								<input type="number"
+									name="<?php echo esc_attr( "{$opt}[presets][{$slug}][cta_border_radius]" ); ?>"
+									value="<?php echo esc_attr( $p['cta_border_radius'] ?? 8 ); ?>"
+									min="0" max="24" step="1" class="small-text"
+									data-preview-var="--roi-cta-radius"
+									data-preview-suffix="px">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Right column: live preview -->
+				<div class="doqix-roi-preview-area">
+					<div class="doqix-roi-preview-label"><?php esc_html_e( 'LIVE PREVIEW', 'doqix-roi-calculator' ); ?></div>
+					<div class="doqix-roi-preview" id="doqix-roi-preview"
+						style="
+							--roi-accent:<?php echo esc_attr( ! empty( $p['color_accent'] ) ? $p['color_accent'] : '#0886B5' ); ?>;
+							--roi-action:<?php echo esc_attr( ! empty( $p['color_cta'] ) ? $p['color_cta'] : '#0886B5' ); ?>;
+							--roi-card-bg:<?php echo esc_attr( ! empty( $p['color_card_bg'] ) ? $p['color_card_bg'] : '#ffffff' ); ?>;
+							--roi-line:<?php echo esc_attr( ! empty( $p['color_card_border'] ) ? $p['color_card_border'] : '#e0e0e0' ); ?>;
+							--roi-heading-text:<?php echo esc_attr( ! empty( $p['color_heading_text'] ) ? $p['color_heading_text'] : '#1d2327' ); ?>;
+							--roi-body-text:<?php echo esc_attr( ! empty( $p['color_body_text'] ) ? $p['color_body_text'] : '#555555' ); ?>;
+							--roi-slider-track:<?php echo esc_attr( ! empty( $p['color_slider_track'] ) ? $p['color_slider_track'] : '#d9dee2' ); ?>;
+							--roi-slider-label:<?php echo esc_attr( ! empty( $p['color_slider_label'] ) ? $p['color_slider_label'] : '#1d2327' ); ?>;
+							--roi-hero-bg:<?php echo esc_attr( ! empty( $p['color_hero_bg'] ) ? $p['color_hero_bg'] : '#ffffff' ); ?>;
+							--roi-hero-value:<?php echo esc_attr( ! empty( $p['color_hero_value'] ) ? $p['color_hero_value'] : '#1d2327' ); ?>;
+							--roi-hero-label:<?php echo esc_attr( ! empty( $p['color_hero_label'] ) ? $p['color_hero_label'] : '#666666' ); ?>;
+							--roi-result-value:<?php echo esc_attr( ! empty( $p['color_result_value'] ) ? $p['color_result_value'] : '#1d2327' ); ?>;
+							--roi-result-label:<?php echo esc_attr( ! empty( $p['color_result_label'] ) ? $p['color_result_label'] : '#666666' ); ?>;
+							--roi-highlight:<?php echo esc_attr( ! empty( $p['color_roi_highlight'] ) ? $p['color_roi_highlight'] : '#0886B5' ); ?>;
+							--roi-tier-text:<?php echo esc_attr( ! empty( $p['color_tier_text'] ) ? $p['color_tier_text'] : '#555555' ); ?>;
+							--roi-cta-text:<?php echo esc_attr( ! empty( $p['color_cta_text'] ) ? $p['color_cta_text'] : '#ffffff' ); ?>;
+							--roi-cta-hover-bg:<?php echo esc_attr( ! empty( $p['color_cta_hover_bg'] ) ? $p['color_cta_hover_bg'] : '#076d94' ); ?>;
+							--roi-cta-hover-text:<?php echo esc_attr( ! empty( $p['color_cta_hover_text'] ) ? $p['color_cta_hover_text'] : '#ffffff' ); ?>;
+							--roi-share-text:<?php echo esc_attr( ! empty( $p['color_share_text'] ) ? $p['color_share_text'] : '#0886B5' ); ?>;
+							--roi-footnote:<?php echo esc_attr( ! empty( $p['color_footnote'] ) ? $p['color_footnote'] : '#999999' ); ?>;
+							--roi-tooltip-bg:<?php echo esc_attr( ! empty( $p['color_tooltip_bg'] ) ? $p['color_tooltip_bg'] : '#1a1a1a' ); ?>;
+							--roi-tooltip-text:<?php echo esc_attr( ! empty( $p['color_tooltip_text'] ) ? $p['color_tooltip_text'] : '#ffffff' ); ?>;
+							--roi-radius:<?php echo intval( $p['card_border_radius'] ?? 8 ); ?>px;
+							--roi-shadow:<?php
+								$sm = array( 'none' => 'none', 'subtle' => '0 2px 8px rgba(0,0,0,0.08)', 'medium' => '0 4px 16px rgba(0,0,0,0.12)', 'strong' => '0 8px 28px rgba(0,0,0,0.18)' );
+								echo esc_attr( $sm[ $p['card_shadow'] ?? 'subtle' ] ?? $sm['subtle'] );
+							?>;
+							--roi-cta-radius:<?php echo intval( $p['cta_border_radius'] ?? 8 ); ?>px;
+						">
+						<!-- Mini sliders section -->
+						<div class="prev-inputs" style="background:var(--roi-card-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:12px;box-shadow:var(--roi-shadow);margin-bottom:10px;">
+							<div style="font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:0.55;margin-bottom:8px;color:var(--roi-slider-label);">Your Team</div>
+							<?php for ( $si = 0; $si < 2; $si++ ) : ?>
+							<div style="margin-bottom:8px;">
+								<div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+									<span style="font-size:9px;font-weight:600;color:var(--roi-slider-label);"><?php echo $si === 0 ? 'People doing tasks' : 'Hours per person'; ?></span>
+									<span style="font-size:9px;font-weight:700;color:var(--roi-accent);"><?php echo $si === 0 ? '3' : '8 hr'; ?></span>
+								</div>
+								<div style="height:4px;border-radius:2px;background:var(--roi-slider-track);position:relative;">
+									<div style="height:100%;width:40%;border-radius:2px;background:var(--roi-accent);"></div>
+									<div style="width:10px;height:10px;border-radius:50%;background:var(--roi-accent);border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:-3px;left:38%;"></div>
+								</div>
+							</div>
+							<?php endfor; ?>
+						</div>
+
+						<!-- Mini hero result -->
+						<div class="prev-hero" style="background:var(--roi-hero-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:12px;text-align:center;box-shadow:var(--roi-shadow);margin-bottom:10px;">
+							<div style="font-weight:700;font-size:22px;line-height:1.1;color:var(--roi-hero-value);">R12,911</div>
+							<div style="font-size:9px;color:var(--roi-hero-label);opacity:0.7;margin-top:2px;">Your Monthly Savings</div>
+						</div>
+
+						<!-- Mini result cards -->
+						<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+							<div style="background:var(--roi-card-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:8px;box-shadow:var(--roi-shadow);">
+								<div style="font-weight:700;font-size:12px;color:var(--roi-result-value);">R154,930</div>
+								<div style="font-size:8px;color:var(--roi-result-label);opacity:0.7;">per year</div>
+							</div>
+							<div style="background:var(--roi-card-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:8px;box-shadow:var(--roi-shadow);">
+								<div style="font-weight:700;font-size:12px;color:var(--roi-result-value);">415%</div>
+								<div style="font-size:8px;color:var(--roi-result-label);opacity:0.7;">return on investment</div>
+							</div>
+						</div>
+
+						<!-- Mini tier text -->
+						<div style="text-align:center;font-size:8px;color:var(--roi-tier-text);opacity:0.8;margin-bottom:10px;">
+							That's <span style="font-weight:700;color:var(--roi-highlight);">5x</span> your investment back.
+						</div>
+
+						<!-- Mini CTA button -->
+						<div style="background:var(--roi-action);color:var(--roi-cta-text);border-radius:var(--roi-cta-radius);padding:8px;text-align:center;font-weight:700;font-size:10px;margin-bottom:6px;cursor:default;">
+							Ready to turn these savings into reality?
+							<div style="font-weight:400;font-size:8px;opacity:0.85;margin-top:1px;">We'll walk you through exactly where to start.</div>
+						</div>
+
+						<!-- Mini share button -->
+						<div style="border:1px solid var(--roi-share-text);color:var(--roi-share-text);border-radius:var(--roi-cta-radius);padding:6px;text-align:center;font-weight:600;font-size:9px;margin-bottom:8px;cursor:default;">
+							Share Your Results
+						</div>
+
+						<!-- Mini footnote -->
+						<div style="font-size:7px;text-align:center;color:var(--roi-footnote);opacity:0.6;">
+							*For estimate purposes only.
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<!-- ═══════════════ CTA ═══════════════ -->
 			<h2><?php esc_html_e( 'Call to Action', 'doqix-roi-calculator' ); ?></h2>

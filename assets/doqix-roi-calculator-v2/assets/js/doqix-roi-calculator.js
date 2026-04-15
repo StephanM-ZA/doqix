@@ -67,8 +67,9 @@
     var max = parseFloat(slider.max);
     var val = parseFloat(slider.value);
     var pct = ((val - min) / (max - min)) * 100;
+    var trackColor = getComputedStyle(container).getPropertyValue('--roi-slider-track').trim() || 'rgba(13,32,40,0.12)';
     slider.style.background =
-      'linear-gradient(to right, ' + accentColor + ' 0%, ' + accentColor + ' ' + pct + '%, rgba(13,32,40,0.12) ' + pct + '%, rgba(13,32,40,0.12) 100%)';
+      'linear-gradient(to right, ' + accentColor + ' 0%, ' + accentColor + ' ' + pct + '%, ' + trackColor + ' ' + pct + '%, ' + trackColor + ' 100%)';
   }
 
   /* ── Format a slider's display value ── */

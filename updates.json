@@ -18,7 +18,7 @@
         "requires_php": "7.4"
     },
     "doqix-roi-calculator-v2": {
-        "version": "2.1.6",
+        "version": "2.2.0",
         "slug": "doqix-roi-calculator-v2",
         "plugin_file": "doqix-roi-calculator-v2/doqix-roi-calculator.php",
         "download_url": "https://github.com/StephanM-ZA/doqix_website/releases/latest/download/doqix-roi-calculator-v2.zip",
@@ -27,7 +27,7 @@
         "requires_php": "7.4"
     },
     "doqix-pricing-carousel": {
-        "version": "1.2.1",
+        "version": "1.3.0",
         "slug": "doqix-pricing-carousel",
         "plugin_file": "doqix-pricing-carousel/doqix-pricing-carousel.php",
         "download_url": "https://github.com/StephanM-ZA/doqix_website/releases/latest/download/doqix-pricing-carousel.zip",

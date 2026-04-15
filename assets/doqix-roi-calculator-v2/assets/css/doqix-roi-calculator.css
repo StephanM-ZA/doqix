@@ -19,6 +19,25 @@
   --roi-shadow: 0 2px 8px rgba(0,0,0,0.08);
   --roi-radius: 8px;
   --roi-card-bg: #fff;
+  --roi-heading-text: inherit;
+  --roi-body-text: inherit;
+  --roi-slider-track: rgba(13,32,40,0.12);
+  --roi-slider-label: inherit;
+  --roi-hero-bg: #fff;
+  --roi-hero-value: inherit;
+  --roi-hero-label: inherit;
+  --roi-result-value: inherit;
+  --roi-result-label: inherit;
+  --roi-highlight: #0886B5;
+  --roi-tier-text: inherit;
+  --roi-cta-text: #fff;
+  --roi-cta-hover-bg: inherit;
+  --roi-cta-hover-text: #fff;
+  --roi-share-text: #0886B5;
+  --roi-footnote: inherit;
+  --roi-tooltip-bg: #1a1a1a;
+  --roi-tooltip-text: #fff;
+  --roi-cta-radius: 8px;
   max-width: 1080px;
   margin: 0 auto;
   padding: 48px 24px;
@@ -34,9 +53,11 @@
 /* ── Heading + intro (centred) ── */
 .doqix-roi h2 {
   text-align: center;
+  color: var(--roi-heading-text);
 }
 
 .doqix-roi .section-intro {
+  color: var(--roi-body-text);
   opacity: 0.65;
   margin-bottom: 40px;
   max-width: 600px;
@@ -92,6 +113,7 @@
   font-weight: 600;
   position: relative;
   cursor: help;
+  color: var(--roi-slider-label);
 }
 
 .doqix-roi .slider-value {
@@ -109,7 +131,7 @@
   width: 100%;
   height: 6px;
   border-radius: 3px;
-  background: var(--roi-line);
+  background: var(--roi-slider-track);
   outline: none;
   cursor: pointer;
   margin: 0;
@@ -166,8 +188,8 @@
   position: absolute;
   bottom: calc(100% + 8px);
   left: 0;
-  background: #1a1a1a;
-  color: #fff;
+  background: var(--roi-tooltip-bg);
+  color: var(--roi-tooltip-text);
   font-size: 12px;
   font-weight: 400;
   line-height: 1.4;
@@ -186,7 +208,7 @@
   top: 100%;
   left: 16px;
   border: 6px solid transparent;
-  border-top-color: #1a1a1a;
+  border-top-color: var(--roi-tooltip-bg);
 }
 
 .doqix-roi .slider-label:hover .tooltip {
@@ -208,7 +230,7 @@
 
 /* ── Hero Result ── */
 .doqix-roi .hero-result {
-  background: var(--roi-card-bg);
+  background: var(--roi-hero-bg);
   border: 1px solid var(--roi-line);
   border-radius: var(--roi-radius);
   padding: 32px;
@@ -220,12 +242,14 @@
   font-weight: 700;
   font-size: 48px;
   line-height: 1.1;
+  color: var(--roi-hero-value);
 }
 
 .doqix-roi .hero-label {
   font-size: 16px;
   opacity: 0.6;
   margin-top: 4px;
+  color: var(--roi-hero-label);
 }
 
 /* ── Result Cards Grid ── */
@@ -247,12 +271,14 @@
   font-weight: 700;
   font-size: 24px;
   line-height: 1.2;
+  color: var(--roi-result-value);
 }
 
 .doqix-roi .card-label {
   font-size: 13px;
   opacity: 0.6;
   margin-top: 2px;
+  color: var(--roi-result-label);
 }
 
 /* ── Tier Suggestion ── */
@@ -265,11 +291,12 @@
   font-size: 14px;
   opacity: 0.7;
   line-height: 1.6;
+  color: var(--roi-tier-text);
 }
 
 .doqix-roi .roi-multiplier {
   font-weight: 700;
-  color: var(--roi-accent);
+  color: var(--roi-highlight);
 }
 
 .doqix-roi .efficiency-note {
@@ -300,21 +327,22 @@
   padding: 16px 32px;
   font-weight: 700;
   font-size: 16px;
-  color: #fff;
+  color: var(--roi-cta-text);
   background: var(--roi-action);
   border: none;
-  border-radius: var(--roi-radius);
+  border-radius: var(--roi-cta-radius);
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   box-shadow: none;
   outline: none;
-  transition: opacity 0.2s;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
 }
 
 #roi-calculator a.roi-cta:hover {
+  background: var(--roi-cta-hover-bg, var(--roi-action));
+  color: var(--roi-cta-hover-text);
   opacity: 0.9;
-  color: #fff;
   text-decoration: none;
 }
 
@@ -324,7 +352,7 @@
   font-size: 13px;
   opacity: 0.85;
   margin-top: 2px;
-  color: #fff;
+  color: var(--roi-cta-text);
 }
 
 /* ── Share Button (ID-prefixed — themes style <button>) ── */
@@ -335,9 +363,9 @@
   font-family: inherit;
   font-size: 14px;
   font-weight: 600;
-  color: var(--roi-action);
+  color: var(--roi-share-text);
   background: transparent;
-  border: 1px solid var(--roi-action);
+  border: 1px solid var(--roi-share-text);
   border-radius: var(--roi-radius);
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
@@ -347,12 +375,12 @@
 }
 
 #roi-calculator button.share-btn:hover {
-  background: var(--roi-action);
+  background: var(--roi-share-text);
   color: #fff;
 }
 
 #roi-calculator button.share-btn:focus {
-  outline: 2px solid var(--roi-action);
+  outline: 2px solid var(--roi-share-text);
   outline-offset: 2px;
 }
 
@@ -369,6 +397,7 @@
   opacity: 0.5;
   text-align: center;
   margin-top: 16px;
+  color: var(--roi-footnote);
 }
 
 /* ── Responsive: Tablet (<=768px) ── */
