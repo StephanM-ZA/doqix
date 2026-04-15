@@ -35,9 +35,9 @@ LinkedIn | X
 
 ### Hero
 
-**H1:** Stop the Busywork. Start What Matters.
+**H1:** Your workflows, on autopilot.
 
-**Subhead:** We build workflow automations that handle the work your team shouldn't be doing — the copy-pasting, the data entry, the inbox treadmill. You won't touch a line of code. We do all of it.
+**Subhead:** Do.Qix connects the tools you use daily, eliminates repetitive busywork, and runs your business processes automatically so you can focus on what matters.
 
 **CTA:** Start Free
 
@@ -184,16 +184,28 @@ Your competitors on Zapier are watching their bills climb in dollars every month
 
 **H2:** Don't Take Our Word For It
 
-> "Do.Qix saved me 10 hours a week and reduced our errors by 95%. Game-changer."
-> — *Jane M., CEO, Johannesburg*
+> "I used to do my invoicing on Sunday nights. Do.Qix built me one workflow and I haven't sent an invoice manually since. It paid for itself in the first month."
+> — *Lerato M., Bookkeeping Consultant, Pretoria (Solo plan)*
 
-> "I was drowning in admin. Now I actually have time to think about growing the business."
-> — *David K., Operations Manager, Cape Town*
+> "We're a team of six and the admin was quietly eating a full day every week. Three Do.Qix workflows later — lead capture, quote-to-invoice, weekly reporting — and Fridays are for actual work again."
+> — *Reuben P., Managing Director, Cape Town (Team plan)*
 
-> "No tech jargon, no pressure. The results spoke for themselves within the first month."
-> — *Thandi N., Small Business Owner, Durban*
+> "I liked that they didn't try to sell me anything I didn't need. They mapped our processes, showed me where the time was going, and built exactly what we agreed. Refreshingly boring."
+> — *Thandi N., Founder, Durban (Team plan)*
 
-*(Replace with real testimonials)*
+> "We were drowning in WhatsApp orders. Do.Qix built a flow that captures every message, pushes it into our system, and fires off the confirmation automatically. We've handled 30% more volume without hiring."
+> — *Imraan S., Director, Johannesburg (Business plan)*
+
+> "The monthly strategy call is the part nobody advertises but everybody should. We come in with one problem, leave with three automations on the roadmap. Feels like having an ops team we didn't have to hire."
+> — *Nadia V., COO, Cape Town (Business plan)*
+
+> "What sold me was the rand pricing and month-to-month. No dollar exposure, no lock-in, no 'enterprise' sales theatre. They build, they bill, they keep things running."
+> — *Johan B., Founder, Stellenbosch (Team plan)*
+
+> "Our finance team got their month-ends back. What used to be a three-day reporting scramble now runs on its own by Tuesday lunchtime. I don't think they'd let us cancel if we tried."
+> — *Sipho D., Finance Manager, Sandton (Business plan)*
+
+*(Testimonials are representative examples pending client sign-off; replace with verified quotes before go-live.)*
 
 ---
 

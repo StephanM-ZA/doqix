@@ -60,8 +60,11 @@ wp-content/cache/
 *.swo
 *~
 
-# Claude development plans (external to project)
-.claude/plans/
+# Claude local tooling (not project source)
+.claude/
 
 # Superpowers brainstorming mockups
 .superpowers/
+
+# Local dev artifact zips — built by GitHub Actions release workflow, not committed
+assets/*.zip

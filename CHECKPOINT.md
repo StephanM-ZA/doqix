@@ -1,94 +1,80 @@
 # CHECKPOINT — Do.Qix Website Build
 
-**Date:** 2026-04-14
+**Date:** 2026-04-15
 **Branch:** main
-**Last commit:** `9bd4169` fix(roi-calculator): lower Business tier threshold R25K→R15K, v1.2.3 & v2.1.3
+**Last commit:** `7dff602` feat(pricing-carousel): update features/excludes to generic language, v1.2.0
 
 ---
 
-## Current Task: Pricing Audit & ROI Calculator Refinement — COMPLETE
+## Current Task: Website Copy + Docs Reorganisation — IN PROGRESS
 
-**Status:** Pricing audit done, calculator updated, competitor research documented.
-
-### Completed This Session
-- [x] ROI Calculator V1 & V2: Info tab added (calculation logic reference)
-- [x] Fixed zip structure (parent folder) — was causing WordPress update loop
-- [x] Added release workflow knowledge to CLAUDE.md (tags trigger GitHub Actions)
-- [x] Full competitor pricing research (SA + international)
-- [x] Competitor comparison table saved to `docs/Pricing_Competitor_Comparison.md`
-- [x] Pricing Strategy doc updated with correct inclusions/exclusions:
-  - All tiers include: n8n hosting, workflow builds, monitoring, maintenance, POPIA
-  - NOT included: AI integration, additional hosting beyond n8n, third-party API costs, training (Solo/Team)
-- [x] Business tier threshold lowered: R25,000 → R15,000 (was unreachable with defaults)
-- [x] Calculator math verified correct with default sliders
-
-### Current Versions
-- ROI Calculator V1: **1.2.3**
-- ROI Calculator V2: **2.1.3**
-- Pricing Carousel: **1.1.9**
-
-### Remaining Tasks (Pricing Carousel)
-- [ ] Final visual polish based on user feedback
-- [ ] End-to-end test: carousel mode, grid mode, responsive, touch swipe
-- [ ] Admin: ensure all tabs save correctly (Cards, Carousel, Colours, Billing)
-- [ ] Frontend: test with billing toggle on
-- [ ] Uninstall hook + readme.txt
-- [ ] Final code review
+**Status:** Hero copy updated, enterprise sales kit built, docs folder reorganised into categorised structure, plan folders populated with standard 5-doc structure per tier, 7 testimonials drafted, pricing HTML block generated.
 
 ---
 
-## Website Build Progress
+## Completed This Session
 
-### Phase 1: Foundation — COMPLETE
-### Phase 2: Home Page — IN PROGRESS
-- [x] Step 8: Hero
-- [x] Step 9: The Problem
-- [ ] Step 10: What We Do ← NEXT (after plugin)
-- [ ] Steps 11-15 remaining
+### Website copy
+- [x] Updated Home hero H1/Subhead in `docs/website/Website_Copy.md` to "Your workflows, on autopilot."
+- [x] Replaced 3 placeholder testimonials with 7 representative SA testimonials (Solo/Team/Business mix)
+- [x] Generated LiveCanvas 4-tier pricing HTML block (Solo/Team/Business/Enterprise) with Team as featured
 
-### Phases 3-10: Not started
+### Enterprise sales kit (built, then restructured into `docs/plans/04_Enterprise/`)
+- [x] Pricing model, calculator, discovery questionnaire, proposal template, website enterprise copy
 
----
+### Plans folder (`docs/plans/`)
+- [x] Master README + 4 tier folders (01_Solo, 02_Team, 03_Business, 04_Enterprise)
+- [x] Each tier has standard 5 files:
+  - README.md
+  - 01_Pricing_Breakdown.md
+  - 02_Whats_Included.md
+  - 03_Target_Customer.md
+  - 04_Sales_Copy.md
+  - 05_ROI_Messaging.md
+- [x] Enterprise extras: `sub_tiers/` (Foundation, Growth, Partnership) + `sales_tooling/` (Calculator, Discovery, Proposal, Pricing Model Ref)
 
-## ROI Calculator — COMPLETE (V1: 1.2.3, V2: 2.1.3)
-
----
-
-## Key Decisions
-
-| Decision | Value |
-|----------|-------|
-| Plugins | WP Super Cache, AIOS, Quform |
-| Font | Inter (Google Fonts) |
-| CTA buttons | "Start Free" (Solo/Team/Business), "Show Me What's Possible" (Enterprise) |
-| Pricing model | 4-tier flat retainer (Solo/Team/Business/Enterprise) |
-| Pricing includes | Workflow hosting & monitoring, workflow builds, maintenance & updates, POPIA |
-| Pricing excludes | Third-party API costs, training (Solo/Team), additional services (quoted separately) |
-| Business threshold | R15,000 monthly savings (lowered from R25,000) |
-| Pricing Carousel | Bold header band, badge pill, clean excludes, carousel + grid hybrid |
-| Admin menu | Unified "Do.Qix" parent with alphabetical submenus |
-| Frontend approach | No `<ul><li>` — use `<div>` elements to avoid Themify theme overrides |
-| CTA links | Include `?plan=tier-name` query param for contact form pre-fill |
-| Release workflow | Push `v*` tag to trigger GitHub Actions → builds zips → GitHub Release |
-
----
-
-## Key Reference Documents
-
-| Document | Location |
-|----------|----------|
-| Pricing Strategy v2.0 | `docs/Pricing_Strategy.md` |
-| Competitor Comparison | `docs/Pricing_Competitor_Comparison.md` |
-| Pricing Carousel Plan | `docs/superpowers/plans/2026-04-08-pricing-carousel.md` |
+### Docs reorganisation
+- [x] `docs/` categorised into folders:
+  - `architecture/` — DoQix_Architecture, Structure, SiteMap, Wireframe
+  - `website/` — Website_Copy, SEO_Strategy, Social_Media_Plan
+  - `pricing/` — Pricing_Strategy, Pricing_Competitor_Comparison
+  - `plans/` — tier folders (see above)
+  - `market/` — SA_Competitor_List
+  - `security/` — Security_Implementation_Guide, n8n_Security_Recommendations
+  - `legal/` — Terms_and_Conditions
+  - `build/` — Build_Checklist
+  - `superpowers/` — untouched
+- [x] Created `docs/README.md` master index
+- [x] Updated cross-reference paths inside `plans/` to new pricing/ and website/ locations
 
 ---
 
-## Future Roadmap Items
-- [ ] Common CSS for all plugins (shared `doqix-admin-common.css` with CSS variables)
-- [ ] Remove hardcoded colours across plugins — use shared variables
-- [ ] Enable annual billing toggle (15% discount) on pricing carousel
+## Files Modified This Session
+
+- `docs/website/Website_Copy.md` (hero + testimonials)
+- `docs/README.md` (new)
+- `docs/plans/**` (30+ new files)
+- Moved: all previously-root-level docs into categorised subfolders
 
 ---
 
-## How to Resume
-Say `resume` after `/compact` or `/clear`.
+## Next Steps
+
+1. **Decide on testimonial imagery** — AI-generated, stock, or initials/silhouettes (see prior session recommendation)
+2. **Source 7 profile images** and save to `assets/testimonials/` as `01_lerato.jpg` … `07_sipho.jpg`
+3. **Drop the pricing HTML block** into the Pricing section of the WordPress site
+4. **Apply hero copy** to the live WordPress site (manual — user said they'd handle)
+5. **Replace placeholder SVGs** in pricing HTML with 4 distinct tier icons
+6. **Sync** any plan changes back into `docs/pricing/Pricing_Strategy.md` and `docs/website/Website_Copy.md` for consistency
+7. **Consider** creating `docs/website/Testimonial_Assets.md` to track image sourcing + POPIA consent per testimonial
+
+---
+
+## Uncommitted Changes
+
+- `CHECKPOINT.md` (modified)
+- All new docs/plans/** and docs/README.md and reorganisation moves — currently untracked/modified
+- `assets/doqix-pricing-carousel.zip` (untracked — local artifact, do not commit)
+- `.claude/` (untracked)
+
+**Nothing has been git-committed yet this session.** Recommend running `/commit` (commit-specialist) when ready to persist the reorganisation and new docs.
