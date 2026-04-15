@@ -13,6 +13,43 @@
   var container = document.getElementById('roi-calculator-v2');
   if (!container) return;
 
+  /* ── Safe math helpers ── */
+  var MAX_SAFE = 9007199254740991;
+
+  function safeFloat(val, fallback) {
+    var n = parseFloat(val);
+    return isFinite(n) ? n : (fallback || 0);
+  }
+
+  function safeProduct(arr) {
+    if (arr.length === 0) return 1;
+    var result = 1;
+    for (var i = 0; i < arr.length; i++) {
+      result *= arr[i];
+      if (!isFinite(result) || result > MAX_SAFE) return MAX_SAFE;
+    }
+    return Math.max(0, result);
+  }
+
+  function safeSum(arr) {
+    var result = 0;
+    for (var i = 0; i < arr.length; i++) {
+      result += arr[i];
+      if (!isFinite(result) || result > MAX_SAFE) return MAX_SAFE;
+    }
+    return Math.max(0, result);
+  }
+
+  function safeDivide(a, b) {
+    if (b === 0 || !isFinite(a) || !isFinite(b)) return 0;
+    var result = a / b;
+    return isFinite(result) ? result : 0;
+  }
+
+  function clamp(val, min, max) {
+    return Math.max(min, Math.min(max, val));
+  }
+
   /* ── Build slider refs from config ── */
   var sliders = config.sliders || [];
   var sliderEls = {};  // key → input element
@@ -103,7 +140,7 @@
 
     var roiBump = th.roi_bump_pct || 600;
     while (matchedIdx < tiers.length - 1 && matched.price > 0) {
-      var roi = ((monthlySavings - matched.price) / matched.price) * 100;
+      var roi = safeDivide(monthlySavings - matched.price, matched.price) * 100;
       if (roi > roiBump) {
         matchedIdx++;
         matched = tiers[matchedIdx];
@@ -215,7 +252,7 @@
       var el = sliderEls[sCfg.key];
       if (!el) continue;
 
-      var rawVal = parseFloat(el.value);
+      var rawVal = safeFloat(el.value, sCfg.default || 0);
       valsByKey[sCfg.key] = rawVal;
 
       switch (sCfg.role) {
@@ -248,30 +285,15 @@
        monthlySavings  = (hoursSavedMonth x sum(rates)) + sum(flat_monthlys)
        annualSavings   = monthlySavings x 12 */
 
-    var multiplierProduct = 1;
-    for (var mi = 0; mi < multipliers.length; mi++) {
-      multiplierProduct *= multipliers[mi];
-    }
+    var multiplierProduct = safeProduct(multipliers);
+    var efficiencyProduct = safeProduct(efficiencies);
+    var rateSum = safeSum(rates);
+    var flatSum = safeSum(flatMonthlys);
 
-    var efficiencyProduct = 1;
-    for (var ei = 0; ei < efficiencies.length; ei++) {
-      efficiencyProduct *= efficiencies[ei];
-    }
-
-    var rateSum = 0;
-    for (var ri = 0; ri < rates.length; ri++) {
-      rateSum += rates[ri];
-    }
-
-    var flatSum = 0;
-    for (var fi = 0; fi < flatMonthlys.length; fi++) {
-      flatSum += flatMonthlys[fi];
-    }
-
-    var hoursSavedMonth = multiplierProduct * WEEKS_PER_MONTH * efficiencyProduct;
-    var monthlySavings  = (hoursSavedMonth * rateSum) + flatSum;
-    var annualSavings   = monthlySavings * 12;
-    var hoursSavedYear  = hoursSavedMonth * 12;
+    var hoursSavedMonth = clamp(multiplierProduct * WEEKS_PER_MONTH * efficiencyProduct, 0, MAX_SAFE);
+    var monthlySavings  = clamp((hoursSavedMonth * rateSum) + flatSum, 0, MAX_SAFE);
+    var annualSavings   = clamp(monthlySavings * 12, 0, MAX_SAFE);
+    var hoursSavedYear  = clamp(hoursSavedMonth * 12, 0, MAX_SAFE);
 
     /* ── Special displays ── */
     /* Total hours (if both people + hours sliders exist) */
@@ -300,11 +322,11 @@
     var roiCap = (config.thresholds || {}).roi_cap_display || 10;
 
     if (tier && tier.price > 0) {
-      var roiPct = Math.round(((monthlySavings - tier.price) / tier.price) * 100);
+      var roiPct = Math.round(safeDivide(monthlySavings - tier.price, tier.price) * 100);
       if (roiPct < 0) roiPct = 0;
       outRoiPct.textContent = roiPct.toLocaleString('en-ZA') + '%';
 
-      var roiMultiplier = Math.round(monthlySavings / tier.price);
+      var roiMultiplier = Math.round(safeDivide(monthlySavings, tier.price));
       if (roiMultiplier < 1) roiMultiplier = 1;
       var multiplierText = roiMultiplier > roiCap ? roiCap + 'x+' : roiMultiplier + 'x';
 
@@ -393,27 +415,32 @@
     var originalShareText = btnShare.textContent;
     btnShare.addEventListener('click', function() {
       /* Re-calculate from current slider values */
-      var multiplierProduct = 1;
-      var efficiencyProduct = 1;
-      var rateSum = 0;
-      var flatSum = 0;
+      var shareMultipliers = [];
+      var shareRates = [];
+      var shareEfficiencies = [];
+      var shareFlatMonthlys = [];
 
       for (var si = 0; si < sliders.length; si++) {
         var sCfg = sliders[si];
         var el = sliderEls[sCfg.key];
         if (!el) continue;
-        var v = parseFloat(el.value);
+        var v = safeFloat(el.value, sCfg.default || 0);
         switch (sCfg.role) {
-          case 'multiplier':   multiplierProduct *= v; break;
-          case 'rate':         rateSum += v; break;
-          case 'efficiency':   efficiencyProduct *= (v / 100); break;
-          case 'flat_monthly': flatSum += v; break;
+          case 'multiplier':   shareMultipliers.push(v); break;
+          case 'rate':         shareRates.push(v); break;
+          case 'efficiency':   shareEfficiencies.push(v / 100); break;
+          case 'flat_monthly': shareFlatMonthlys.push(v); break;
         }
       }
 
-      var hoursSavedMonth = multiplierProduct * WEEKS_PER_MONTH * efficiencyProduct;
-      var monthlySavings  = (hoursSavedMonth * rateSum) + flatSum;
-      var annualSavings   = monthlySavings * 12;
+      var multiplierProduct = safeProduct(shareMultipliers);
+      var efficiencyProduct = safeProduct(shareEfficiencies);
+      var rateSum = safeSum(shareRates);
+      var flatSum = safeSum(shareFlatMonthlys);
+
+      var hoursSavedMonth = clamp(multiplierProduct * WEEKS_PER_MONTH * efficiencyProduct, 0, MAX_SAFE);
+      var monthlySavings  = clamp((hoursSavedMonth * rateSum) + flatSum, 0, MAX_SAFE);
+      var annualSavings   = clamp(monthlySavings * 12, 0, MAX_SAFE);
 
       var shareText =
         '\uD83D\uDCA1 Ever wondered what repetitive work actually costs? I just found out:\n' +
