@@ -1,80 +1,68 @@
-# CHECKPOINT — Do.Qix Website Build
+# CHECKPOINT — Do.Qix Plugin Full Expansion
 
-**Date:** 2026-04-15
+**Date:** 2026-04-15 (late evening)
 **Branch:** main
-**Last commit:** `7dff602` feat(pricing-carousel): update features/excludes to generic language, v1.2.0
-
----
-
-## Current Task: Website Copy + Docs Reorganisation — IN PROGRESS
-
-**Status:** Hero copy updated, enterprise sales kit built, docs folder reorganised into categorised structure, plan folders populated with standard 5-doc structure per tier, 7 testimonials drafted, pricing HTML block generated.
+**Tool call count:** ~25+ (auto-checkpointing)
 
 ---
 
 ## Completed This Session
 
-### Website copy
-- [x] Updated Home hero H1/Subhead in `docs/website/Website_Copy.md` to "Your workflows, on autopilot."
-- [x] Replaced 3 placeholder testimonials with 7 representative SA testimonials (Solo/Team/Business mix)
-- [x] Generated LiveCanvas 4-tier pricing HTML block (Solo/Team/Business/Enterprise) with Team as featured
+### Carousel Plugin v1.2.1 → v1.3.0 (commit 6fa933c)
+- 15 new preset-level color fields (dots, breadcrumbs, arrow hover, card border/price/subtitle/body text, featured border, billing toggle)
+- 8 style controls (arrow size/shape/icon, dot size, card border radius/shadow/gap, featured border width)
+- Grouped color admin (8 groups with section headers)
+- Persistent live preview sidebar across all sub-tabs
+- Frontend CSS updated to consume all new CSS variables
+- Arrow icon config (chevron/arrow/caret) passed to JS
+- Sanitization for all new fields
 
-### Enterprise sales kit (built, then restructured into `docs/plans/04_Enterprise/`)
-- [x] Pricing model, calculator, discovery questionnaire, proposal template, website enterprise copy
+### Calculator V2 v2.1.6 → v2.2.0 (commit 0d19356)
+- 20 new color fields (card, slider, hero, result, CTA, share, tooltip, footnote, tier, ROI highlight)
+- 3 style controls (card border radius, card shadow, CTA border radius)
+- Full live preview in admin (NEW — miniature calculator mockup)
+- Grouped color admin (8 groups with section headers)
+- All frontend CSS selectors consume CSS variables
+- Fixed hardcoded slider track color in JS
+- New admin CSS file for color grid + preview
+- Admin JS: live preview sync, reset buttons, shadow radio, form submit cleanup
 
-### Plans folder (`docs/plans/`)
-- [x] Master README + 4 tier folders (01_Solo, 02_Team, 03_Business, 04_Enterprise)
-- [x] Each tier has standard 5 files:
-  - README.md
-  - 01_Pricing_Breakdown.md
-  - 02_Whats_Included.md
-  - 03_Target_Customer.md
-  - 04_Sales_Copy.md
-  - 05_ROI_Messaging.md
-- [x] Enterprise extras: `sub_tiers/` (Foundation, Growth, Partnership) + `sales_tooling/` (Calculator, Discovery, Proposal, Pricing Model Ref)
+### Review Fixes (commit 45ae720)
+- Fixed carousel arrow size preview values (was 24/28/32px, corrected to 32/44/56px)
+- Updated stale version comments in V2 asset files (2.0.0 → 2.2.0)
 
-### Docs reorganisation
-- [x] `docs/` categorised into folders:
-  - `architecture/` — DoQix_Architecture, Structure, SiteMap, Wireframe
-  - `website/` — Website_Copy, SEO_Strategy, Social_Media_Plan
-  - `pricing/` — Pricing_Strategy, Pricing_Competitor_Comparison
-  - `plans/` — tier folders (see above)
-  - `market/` — SA_Competitor_List
-  - `security/` — Security_Implementation_Guide, n8n_Security_Recommendations
-  - `legal/` — Terms_and_Conditions
-  - `build/` — Build_Checklist
-  - `superpowers/` — untouched
-- [x] Created `docs/README.md` master index
-- [x] Updated cross-reference paths inside `plans/` to new pricing/ and website/ locations
+### In Progress
+- **Calculator V1 port** — agent running, porting V2 expansion to V1 (v1.2.6 → v1.3.0)
 
 ---
 
-## Files Modified This Session
+## Remaining Tasks
 
-- `docs/website/Website_Copy.md` (hero + testimonials)
-- `docs/README.md` (new)
-- `docs/plans/**` (30+ new files)
-- Moved: all previously-root-level docs into categorised subfolders
-
----
-
-## Next Steps
-
-1. **Decide on testimonial imagery** — AI-generated, stock, or initials/silhouettes (see prior session recommendation)
-2. **Source 7 profile images** and save to `assets/testimonials/` as `01_lerato.jpg` … `07_sipho.jpg`
-3. **Drop the pricing HTML block** into the Pricing section of the WordPress site
-4. **Apply hero copy** to the live WordPress site (manual — user said they'd handle)
-5. **Replace placeholder SVGs** in pricing HTML with 4 distinct tier icons
-6. **Sync** any plan changes back into `docs/pricing/Pricing_Strategy.md` and `docs/website/Website_Copy.md` for consistency
-7. **Consider** creating `docs/website/Testimonial_Assets.md` to track image sourcing + POPIA consent per testimonial
+1. ~~Carousel v1.3.0~~ ✅
+2. ~~Calculator V2 v2.2.0~~ ✅
+3. **Calculator V1 v1.3.0** — port in progress (background agent)
+4. **Update updates.json** — bump all 3 plugin versions
+5. **Final code review** — holistic review of all 3 plugins
+6. **Phase 2A** — Calculator V2 Pro plan written, ready to execute:
+   - Mathematical hardening (NaN/Infinity/overflow guards)
+   - Admin slider validation (min<max enforcement)
+   - Currency & locale system (symbol, position, separators)
+   - Configurable labels & templates (all hardcoded text → admin fields)
+   - Show/hide section toggles
+   - Version bump to v2.3.0
 
 ---
 
-## Uncommitted Changes
+## Open Issue (from previous session)
+- Carousel still showing light blue #0886B5 — likely admin color fields have value explicitly saved, not theme detection issue
 
-- `CHECKPOINT.md` (modified)
-- All new docs/plans/** and docs/README.md and reorganisation moves — currently untracked/modified
-- `assets/doqix-pricing-carousel.zip` (untracked — local artifact, do not commit)
-- `.claude/` (untracked)
+---
 
-**Nothing has been git-committed yet this session.** Recommend running `/commit` (commit-specialist) when ready to persist the reorganisation and new docs.
+## Plans Written
+- `docs/superpowers/plans/2026-04-15-full-plugin-expansion.md` — Phase 1 (executing)
+- `docs/superpowers/plans/2026-04-15-calculator-v2-pro.md` — Phase 2A (ready)
+
+---
+
+## Resume Command
+Say "resume" to continue. V1 port may still be running or may have completed.
