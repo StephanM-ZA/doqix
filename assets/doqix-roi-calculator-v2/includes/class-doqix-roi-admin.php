@@ -618,7 +618,7 @@ class Doqix_ROI_V2_Admin {
 							<label>
 								<?php esc_html_e( 'Step', 'doqix-roi-calculator' ); ?>
 								<input type="number" name="<?php echo esc_attr( "{$opt}[sliders][{$i}][step]" ); ?>"
-									value="<?php echo esc_attr( $slider['step'] ); ?>" min="1" class="small-text">
+									value="<?php echo esc_attr( $slider['step'] ); ?>" min="0.01" step="0.01" class="small-text">
 							</label>
 							<label>
 								<?php esc_html_e( 'Prefix', 'doqix-roi-calculator' ); ?>

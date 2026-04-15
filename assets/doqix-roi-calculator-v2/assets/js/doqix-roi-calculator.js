@@ -122,10 +122,10 @@
 
   /* ── Slider track fill ── */
   function updateSliderFill(slider) {
-    var min = parseFloat(slider.min);
-    var max = parseFloat(slider.max);
-    var val = parseFloat(slider.value);
-    var pct = ((val - min) / (max - min)) * 100;
+    var min = safeFloat(slider.min, 0);
+    var max = safeFloat(slider.max, 100);
+    var val = safeFloat(slider.value, min);
+    var pct = safeDivide(val - min, max - min) * 100;
     var trackColor = getComputedStyle(container).getPropertyValue('--roi-slider-track').trim() || 'rgba(13,32,40,0.12)';
     slider.style.background =
       'linear-gradient(to right, ' + accentColor + ' 0%, ' + accentColor + ' ' + pct + '%, ' + trackColor + ' ' + pct + '%, ' + trackColor + ' 100%)';
@@ -133,7 +133,7 @@
 
   /* ── Format a slider's display value ── */
   function formatSliderValue(sliderCfg, rawVal) {
-    var val = parseFloat(rawVal);
+    var val = safeFloat(rawVal, 0);
     if (sliderCfg.format === 'currency') {
       return formatCurrency(val);
     }
