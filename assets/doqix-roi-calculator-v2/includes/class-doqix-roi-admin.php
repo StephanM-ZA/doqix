@@ -264,6 +264,27 @@ class Doqix_ROI_V2_Admin {
 			);
 		}
 
+		/* ── Currency ── */
+		if ( isset( $input['currency'] ) ) {
+			$sanitized['currency'] = array(
+				'symbol'              => sanitize_text_field( $input['currency']['symbol'] ?? 'R' ),
+				'position'            => in_array( $input['currency']['position'] ?? 'before', array( 'before', 'after' ), true ) ? $input['currency']['position'] : 'before',
+				'thousand_separator'  => in_array( $input['currency']['thousand_separator'] ?? ',', array( ',', '.', ' ', '' ), true ) ? $input['currency']['thousand_separator'] : ',',
+				'decimal_separator'   => '.',
+				'decimal_places'      => max( 0, min( 2, intval( $input['currency']['decimal_places'] ?? 0 ) ) ),
+				'abbreviate'          => ! empty( $input['currency']['abbreviate'] ) ? 1 : 0,
+				'abbreviate_threshold' => max( 1000, intval( $input['currency']['abbreviate_threshold'] ?? 100000 ) ),
+			);
+		} else {
+			// Preserve existing currency settings
+			$existing = get_option( DOQIX_ROI_V2_OPTION_KEY, array() );
+			$sanitized['currency'] = $existing['currency'] ?? array(
+				'symbol' => 'R', 'position' => 'before', 'thousand_separator' => ',',
+				'decimal_separator' => '.', 'decimal_places' => 0, 'abbreviate' => 1,
+				'abbreviate_threshold' => 100000,
+			);
+		}
+
 		/* ── Thresholds ── */
 		$sanitized['thresholds'] = array(
 			'roi_bump_pct'         => absint( $input['thresholds']['roi_bump_pct'] ?? $defaults['thresholds']['roi_bump_pct'] ),
@@ -417,6 +438,64 @@ class Doqix_ROI_V2_Admin {
 		?>
 		<form method="post" action="options.php">
 			<?php settings_fields( 'doqix_roi_v2_settings_group' ); ?>
+
+			<!-- ═══════════════ CURRENCY ═══════════════ -->
+			<h2><?php esc_html_e( 'Currency & Number Format', 'doqix-roi-calculator' ); ?></h2>
+			<table class="form-table">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Currency Symbol', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<input type="text" name="<?php echo esc_attr( "{$opt}[currency][symbol]" ); ?>"
+							   value="<?php echo esc_attr( $s['currency']['symbol'] ?? 'R' ); ?>"
+							   class="small-text" style="width:60px">
+						<p class="description"><?php esc_html_e( 'e.g. R, $, €, £', 'doqix-roi-calculator' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Symbol Position', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<label><input type="radio" name="<?php echo esc_attr( "{$opt}[currency][position]" ); ?>"
+									  value="before" <?php checked( $s['currency']['position'] ?? 'before', 'before' ); ?>>
+							<?php esc_html_e( 'Before (R1,000)', 'doqix-roi-calculator' ); ?></label><br>
+						<label><input type="radio" name="<?php echo esc_attr( "{$opt}[currency][position]" ); ?>"
+									  value="after" <?php checked( $s['currency']['position'] ?? 'before', 'after' ); ?>>
+							<?php esc_html_e( 'After (1,000€)', 'doqix-roi-calculator' ); ?></label>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Thousand Separator', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<select name="<?php echo esc_attr( "{$opt}[currency][thousand_separator]" ); ?>">
+							<option value="," <?php selected( $s['currency']['thousand_separator'] ?? ',', ',' ); ?>>Comma (1,000)</option>
+							<option value="." <?php selected( $s['currency']['thousand_separator'] ?? ',', '.' ); ?>>Period (1.000)</option>
+							<option value=" " <?php selected( $s['currency']['thousand_separator'] ?? ',', ' ' ); ?>>Space (1 000)</option>
+							<option value="" <?php selected( $s['currency']['thousand_separator'] ?? ',', '' ); ?>>None (1000)</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Decimal Places', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<input type="number" name="<?php echo esc_attr( "{$opt}[currency][decimal_places]" ); ?>"
+							   value="<?php echo esc_attr( $s['currency']['decimal_places'] ?? 0 ); ?>"
+							   min="0" max="2" class="small-text">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Large Number Format', 'doqix-roi-calculator' ); ?></th>
+					<td>
+						<label><input type="checkbox" name="<?php echo esc_attr( "{$opt}[currency][abbreviate]" ); ?>"
+									  value="1" <?php checked( $s['currency']['abbreviate'] ?? 1, 1 ); ?>>
+							<?php esc_html_e( 'Abbreviate large numbers (100k, 1.2M)', 'doqix-roi-calculator' ); ?></label>
+						<br>
+						<label><?php esc_html_e( 'Abbreviate above:', 'doqix-roi-calculator' ); ?>
+							<input type="number" name="<?php echo esc_attr( "{$opt}[currency][abbreviate_threshold]" ); ?>"
+								   value="<?php echo esc_attr( $s['currency']['abbreviate_threshold'] ?? 100000 ); ?>"
+								   min="1000" step="1000" class="small-text">
+						</label>
+					</td>
+				</tr>
+			</table>
 
 			<!-- ═══════════════ TIERS ═══════════════ -->
 			<h2><?php esc_html_e( 'Pricing Tiers', 'doqix-roi-calculator' ); ?></h2>

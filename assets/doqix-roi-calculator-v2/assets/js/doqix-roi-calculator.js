@@ -76,17 +76,36 @@
   /* ── Helpers ── */
   var WEEKS_PER_MONTH = 4.33;
 
-  function formatZAR(n) {
-    n = Math.round(n);
-    if (n >= 1000000) return 'R' + (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-    if (n >= 100000)  return 'R' + Math.round(n / 1000) + 'k';
-    return 'R' + n.toLocaleString('en-ZA');
+  /* ── Currency config from admin ── */
+  var curr = config.currency || {};
+  var currSymbol    = curr.symbol || 'R';
+  var currPosition  = curr.position || 'before';
+  var currThousands = curr.thousands !== undefined ? curr.thousands : ',';
+  var currDecimal   = curr.decimal || '.';
+  var currDecimals  = curr.decimals || 0;
+  var currAbbrev    = curr.abbreviate !== false;
+  var currAbbrevAt  = curr.abbrevThreshold || 100000;
+
+  function formatCurrency(n) {
+    n = Math.round(n * Math.pow(10, currDecimals)) / Math.pow(10, currDecimals);
+    if (currAbbrev && Math.abs(n) >= 1000000) {
+      var formatted = (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      return currPosition === 'before' ? currSymbol + formatted : formatted + currSymbol;
+    }
+    if (currAbbrev && Math.abs(n) >= currAbbrevAt) {
+      var formatted = Math.round(n / 1000) + 'k';
+      return currPosition === 'before' ? currSymbol + formatted : formatted + currSymbol;
+    }
+    var parts = n.toFixed(currDecimals).split('.');
+    var intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, currThousands);
+    var formatted = currDecimals > 0 && parts[1] ? intPart + currDecimal + parts[1] : intPart;
+    return currPosition === 'before' ? currSymbol + formatted : formatted + currSymbol;
   }
 
   function formatHours(n) {
     n = Math.round(n);
     if (n >= 10000) return Math.round(n / 1000) + 'k';
-    return n.toLocaleString('en-ZA');
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, currThousands);
   }
 
   /* ── Accent color (admin-configurable, falls back to CSS variable) ── */
@@ -113,7 +132,7 @@
   function formatSliderValue(sliderCfg, rawVal) {
     var val = parseFloat(rawVal);
     if (sliderCfg.format === 'currency') {
-      return (sliderCfg.prefix || 'R') + Math.round(val).toLocaleString('en-ZA');
+      return formatCurrency(val);
     }
     if (sliderCfg.format === 'percentage') {
       return Math.round(val) + '%';
@@ -312,8 +331,8 @@
     }
 
     /* ── Output values ── */
-    outMonthly.textContent    = formatZAR(monthlySavings);
-    outAnnual.textContent     = formatZAR(annualSavings);
+    outMonthly.textContent    = formatCurrency(monthlySavings);
+    outAnnual.textContent     = formatCurrency(annualSavings);
     outHoursMonth.textContent = formatHours(hoursSavedMonth) + ' hrs';
     outHoursYear.textContent  = formatHours(hoursSavedYear) + ' hrs';
 
@@ -324,21 +343,21 @@
     if (tier && tier.price > 0) {
       var roiPct = Math.round(safeDivide(monthlySavings - tier.price, tier.price) * 100);
       if (roiPct < 0) roiPct = 0;
-      outRoiPct.textContent = roiPct.toLocaleString('en-ZA') + '%';
+      outRoiPct.textContent = roiPct.toString().replace(/\B(?=(\d{3})+(?!\d))/g, currThousands) + '%';
 
       var roiMultiplier = Math.round(safeDivide(monthlySavings, tier.price));
       if (roiMultiplier < 1) roiMultiplier = 1;
       var multiplierText = roiMultiplier > roiCap ? roiCap + 'x+' : roiMultiplier + 'x';
 
       outTier.innerHTML =
-        'You\u2019d pay us <strong>' + formatZAR(tier.price) + '/mo</strong> for our <strong>' + tier.name + '</strong> plan.<br>' +
-        'You\u2019d save <strong>' + formatZAR(monthlySavings) + '/mo</strong>. That\u2019s <span class="roi-multiplier">' + multiplierText + '</span> your investment back.';
+        'You\u2019d pay us <strong>' + formatCurrency(tier.price) + '/mo</strong> for our <strong>' + tier.name + '</strong> plan.<br>' +
+        'You\u2019d save <strong>' + formatCurrency(monthlySavings) + '/mo</strong>. That\u2019s <span class="roi-multiplier">' + multiplierText + '</span> your investment back.';
 
     } else if (tier && tier.price === 0) {
       outRoiPct.textContent = '\u2014';
       outTier.innerHTML =
         'At this scale, our <strong>' + tier.name + '</strong> plan is the right fit.<br>' +
-        'You\u2019d save <strong>' + formatZAR(monthlySavings) + '/mo</strong>. We\u2019ll scope pricing to your needs.';
+        'You\u2019d save <strong>' + formatCurrency(monthlySavings) + '/mo</strong>. We\u2019ll scope pricing to your needs.';
 
     } else {
       outRoiPct.textContent = '\u2014';
@@ -350,16 +369,16 @@
     /* ── Nudge quote ── */
     var tierName = tier ? tier.name : 'solo';
     var people = valsByKey.people !== undefined ? Math.round(valsByKey.people).toString() : '0';
-    var rateDisplay = rateSum > 0 ? formatZAR(rateSum) : 'R0';
+    var rateDisplay = rateSum > 0 ? formatCurrency(rateSum) : 'R0';
 
     outBenchmark.textContent = getNudge(tierName, {
-      monthly: formatZAR(monthlySavings),
-      annual: formatZAR(annualSavings),
+      monthly: formatCurrency(monthlySavings),
+      annual: formatCurrency(annualSavings),
       hours: formatHours(hoursSavedMonth),
       people: people,
       rate: rateDisplay,
       tier: tier ? tier.name : 'Solo',
-      price: (tier && tier.price > 0) ? formatZAR(tier.price) : 'Custom'
+      price: (tier && tier.price > 0) ? formatCurrency(tier.price) : 'Custom'
     });
   }
 
@@ -445,8 +464,8 @@
       var shareText =
         '\uD83D\uDCA1 Ever wondered what repetitive work actually costs? I just found out:\n' +
         '\n' +
-        '\uD83D\uDCB0 Monthly: *' + formatZAR(monthlySavings) + '*\n' +
-        '\uD83D\uDCCA Annual: *' + formatZAR(annualSavings) + '*\n' +
+        '\uD83D\uDCB0 Monthly: *' + formatCurrency(monthlySavings) + '*\n' +
+        '\uD83D\uDCCA Annual: *' + formatCurrency(annualSavings) + '*\n' +
         '\u23F1\uFE0F Hours saved: *' + formatHours(hoursSavedMonth) + '/month*\n' +
         '\n' +
         '\uD83D\uDC49 Go to https://doqix.co.za to find out more.';

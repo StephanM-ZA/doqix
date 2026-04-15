@@ -117,6 +117,15 @@ class Doqix_ROI_V2_Frontend {
 			'share_url'    => $preset['share_url'],
 			'color_accent' => $preset['color_accent'],
 			'color_cta'    => $preset['color_cta'],
+			'currency'     => array(
+				'symbol'    => $all['currency']['symbol'] ?? 'R',
+				'position'  => $all['currency']['position'] ?? 'before',
+				'thousands' => $all['currency']['thousand_separator'] ?? ',',
+				'decimal'   => $all['currency']['decimal_separator'] ?? '.',
+				'decimals'  => intval( $all['currency']['decimal_places'] ?? 0 ),
+				'abbreviate' => ! empty( $all['currency']['abbreviate'] ),
+				'abbrevThreshold' => intval( $all['currency']['abbreviate_threshold'] ?? 100000 ),
+			),
 		);
 	}
 

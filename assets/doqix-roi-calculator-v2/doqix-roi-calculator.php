@@ -180,6 +180,17 @@ function doqix_roi_v2_get_defaults() {
 			'roi_cap_display'      => 10,
 		),
 
+		/* Currency & number formatting (global, not per-preset) */
+		'currency' => array(
+			'symbol'              => 'R',
+			'position'            => 'before',
+			'thousand_separator'  => ',',
+			'decimal_separator'   => '.',
+			'decimal_places'      => 0,
+			'abbreviate'          => 1,
+			'abbreviate_threshold' => 100000,
+		),
+
 		/* Presets */
 		'presets' => array( 'default' => doqix_roi_v2_get_preset_defaults() ),
 	);
