@@ -59,10 +59,12 @@
       tr.className = 'doqix-repeater-row';
       tr.setAttribute('data-index', idx);
       tr.innerHTML =
+        '<td class="doqix-col-drag"><span class="doqix-drag-handle" title="Drag to reorder">&#x2630;</span></td>' +
         '<td><input type="text" name="' + OPT + '[tiers][' + idx + '][name]" value="" class="regular-text" required></td>' +
         '<td><input type="number" name="' + OPT + '[tiers][' + idx + '][price]" value="0" min="0" step="1" class="small-text"></td>' +
         '<td><input type="number" name="' + OPT + '[tiers][' + idx + '][threshold]" value="0" min="0" step="1" class="small-text"></td>' +
         '<td class="doqix-col-action"><button type="button" class="button doqix-remove-row">Remove</button></td>';
+      tr.setAttribute('draggable', 'true');
       tiersBody.appendChild(tr);
       updateRemoveButtons(tiersBody);
     });
@@ -93,6 +95,7 @@
       div.setAttribute('data-index', idx);
       div.innerHTML =
         '<div class="doqix-slider-card-header">' +
+          '<span class="doqix-drag-handle" title="Drag to reorder">&#x2630;</span>' +
           '<strong class="doqix-slider-card-title">New Slider</strong>' +
           '<button type="button" class="button doqix-remove-row">Remove</button>' +
         '</div>' +
@@ -122,6 +125,7 @@
             '<label>Tooltip<input type="text" name="' + OPT + '[sliders][' + idx + '][tooltip]" value="" class="large-text"></label>' +
           '</div>' +
         '</div>';
+      div.setAttribute('draggable', 'true');
       slidersContainer.appendChild(div);
       updateRemoveButtons(slidersContainer);
     });
@@ -281,5 +285,58 @@
         defaults[di].name = '';
       }
     });
+  }
+  /* ── Drag-to-reorder (sliders + tiers) ── */
+  function enableDragReorder(container, section) {
+    var draggedEl = null;
+
+    container.addEventListener('dragstart', function(e) {
+      var row = e.target.closest('.doqix-repeater-row');
+      if (!row) return;
+      draggedEl = row;
+      row.classList.add('doqix-dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', ''); // Required for Firefox
+    });
+
+    container.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      var target = e.target.closest('.doqix-repeater-row');
+      if (!target || target === draggedEl) return;
+
+      var rect = target.getBoundingClientRect();
+      var midY = rect.top + rect.height / 2;
+
+      if (e.clientY < midY) {
+        target.parentNode.insertBefore(draggedEl, target);
+      } else {
+        target.parentNode.insertBefore(draggedEl, target.nextSibling);
+      }
+    });
+
+    container.addEventListener('dragend', function() {
+      if (draggedEl) {
+        draggedEl.classList.remove('doqix-dragging');
+        draggedEl = null;
+      }
+      reindexRows(container, section);
+    });
+  }
+
+  if (slidersContainer) {
+    var sliderRows = slidersContainer.querySelectorAll('.doqix-repeater-row');
+    for (var i = 0; i < sliderRows.length; i++) {
+      sliderRows[i].setAttribute('draggable', 'true');
+    }
+    enableDragReorder(slidersContainer, 'sliders');
+  }
+
+  if (tiersBody) {
+    var tierRows = tiersBody.querySelectorAll('.doqix-repeater-row');
+    for (var i = 0; i < tierRows.length; i++) {
+      tierRows[i].setAttribute('draggable', 'true');
+    }
+    enableDragReorder(tiersBody, 'tiers');
   }
 })();

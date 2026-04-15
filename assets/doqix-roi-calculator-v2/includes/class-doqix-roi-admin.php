@@ -530,6 +530,7 @@ class Doqix_ROI_V2_Admin {
 			<table class="widefat doqix-repeater" id="doqix-tiers-table">
 				<thead>
 					<tr>
+						<th class="doqix-col-drag"></th>
 						<th><?php esc_html_e( 'Name', 'doqix-roi-calculator' ); ?></th>
 						<th><?php esc_html_e( 'Price (R/mo)', 'doqix-roi-calculator' ); ?></th>
 						<th><?php esc_html_e( 'Threshold (R/mo savings)', 'doqix-roi-calculator' ); ?></th>
@@ -539,6 +540,7 @@ class Doqix_ROI_V2_Admin {
 				<tbody id="doqix-tiers-body">
 					<?php foreach ( $s['tiers'] as $i => $tier ) : ?>
 					<tr class="doqix-repeater-row" data-index="<?php echo esc_attr( $i ); ?>">
+						<td class="doqix-col-drag"><span class="doqix-drag-handle" title="Drag to reorder">&#x2630;</span></td>
 						<td>
 							<input type="text" name="<?php echo esc_attr( "{$opt}[tiers][{$i}][name]" ); ?>"
 								value="<?php echo esc_attr( $tier['name'] ); ?>" class="regular-text" required>
@@ -568,6 +570,7 @@ class Doqix_ROI_V2_Admin {
 				<?php foreach ( $s['sliders'] as $i => $slider ) : ?>
 				<div class="doqix-slider-card doqix-repeater-row" data-index="<?php echo esc_attr( $i ); ?>">
 					<div class="doqix-slider-card-header">
+						<span class="doqix-drag-handle" title="Drag to reorder">&#x2630;</span>
 						<strong class="doqix-slider-card-title"><?php echo esc_html( $slider['label'] ?: __( 'New Slider', 'doqix-roi-calculator' ) ); ?></strong>
 						<button type="button" class="button doqix-remove-row"><?php esc_html_e( 'Remove', 'doqix-roi-calculator' ); ?></button>
 					</div>

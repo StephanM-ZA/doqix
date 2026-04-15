@@ -140,6 +140,40 @@
 	color: #666;
 }
 
+/* ── Drag handle ── */
+.doqix-drag-handle {
+	cursor: grab;
+	font-size: 16px;
+	color: #999;
+	padding: 0 4px;
+	user-select: none;
+	-webkit-user-select: none;
+	line-height: 1;
+}
+
+.doqix-drag-handle:hover {
+	color: #555;
+}
+
+.doqix-drag-handle:active {
+	cursor: grabbing;
+}
+
+.doqix-col-drag {
+	width: 30px;
+	text-align: center;
+}
+
+/* ── Dragging state ── */
+.doqix-dragging {
+	opacity: 0.4;
+	background: #f0f6fc !important;
+}
+
+.doqix-repeater-row {
+	transition: opacity 0.15s ease;
+}
+
 /* ── Color picker fields (legacy inline) ── */
 .doqix-roi-admin .doqix-color-field {
 	display: inline-flex;
