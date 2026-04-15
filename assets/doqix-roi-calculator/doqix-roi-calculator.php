@@ -3,7 +3,7 @@
  * Plugin Name: Do.Qix ROI Calculator
  * Plugin URI:  https://doqix.co.za
  * Description: Interactive ROI calculator showing potential automation savings. Use shortcode [doqix_roi_calculator] on any page.
- * Version:     1.2.6
+ * Version:     1.3.0
  * Author:      Do.Qix
  * Author URI:  https://doqix.co.za
  * License:     GPL-2.0-or-later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* ── Constants ── */
-define( 'DOQIX_ROI_VERSION',    '1.2.6' );
+define( 'DOQIX_ROI_VERSION',    '1.3.0' );
 define( 'DOQIX_ROI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DOQIX_ROI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DOQIX_ROI_OPTION_KEY', 'doqix_roi_settings' );
@@ -35,6 +35,46 @@ function doqix_roi_get_preset_defaults() {
 		'footnote_text'  => 'Self-hosted. No middleman pricing. *For estimate purposes only.',
 		'color_accent'   => '',
 		'color_cta'      => '',
+
+		// Card & Layout
+		'color_card_bg'        => '',
+		'color_card_border'    => '',
+		'color_heading_text'   => '',
+		'color_body_text'      => '',
+
+		// Slider
+		'color_slider_track'   => '',
+		'color_slider_label'   => '',
+
+		// Hero Result
+		'color_hero_bg'        => '',
+		'color_hero_value'     => '',
+		'color_hero_label'     => '',
+
+		// Result Cards
+		'color_result_value'   => '',
+		'color_result_label'   => '',
+
+		// CTA extras
+		'color_cta_text'       => '',
+		'color_cta_hover_bg'   => '',
+		'color_cta_hover_text' => '',
+
+		// Share
+		'color_share_text'     => '',
+
+		// Misc
+		'color_footnote'       => '',
+		'color_tier_text'      => '',
+		'color_roi_highlight'  => '',
+		'color_tooltip_bg'     => '',
+		'color_tooltip_text'   => '',
+
+		// Style controls
+		'card_border_radius'   => 8,
+		'card_shadow'          => 'subtle',
+		'cta_border_radius'    => 8,
+
 		'cta_enabled'    => 1,
 		'cta_url'        => '/contact',
 		'cta_text'       => 'Ready to turn these savings into reality?',

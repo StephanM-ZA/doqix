@@ -64,6 +64,13 @@
     }
   } catch(e) {}
 
+  /* ── Slider track colour (unfilled portion — reads CSS var) ── */
+  var trackColor = 'rgba(13,32,40,0.12)';
+  try {
+    var computed = getComputedStyle(container).getPropertyValue('--roi-slider-track').trim();
+    if (computed) trackColor = computed;
+  } catch(e) {}
+
   /* ── Slider track fill (accent colour up to thumb) ── */
   function updateSliderFill(slider) {
     var min = parseFloat(slider.min);
@@ -71,7 +78,7 @@
     var val = parseFloat(slider.value);
     var pct = ((val - min) / (max - min)) * 100;
     slider.style.background =
-      'linear-gradient(to right, ' + accentColor + ' 0%, ' + accentColor + ' ' + pct + '%, rgba(13,32,40,0.12) ' + pct + '%, rgba(13,32,40,0.12) 100%)';
+      'linear-gradient(to right, ' + accentColor + ' 0%, ' + accentColor + ' ' + pct + '%, ' + trackColor + ' ' + pct + '%, ' + trackColor + ' 100%)';
   }
 
   /* ── Tier mapping (config-driven with hardcoded fallbacks) ── */

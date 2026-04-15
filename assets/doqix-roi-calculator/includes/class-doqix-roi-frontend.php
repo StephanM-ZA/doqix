@@ -200,17 +200,53 @@ class Doqix_ROI_Frontend {
 		}
 
 		/* Resolve colors: preset override → theme color → CSS fallback */
-		$theme_color   = self::get_theme_accent_color();
-		$accent        = ! empty( $preset['color_accent'] ) ? $preset['color_accent'] : $theme_color;
-		$cta           = ! empty( $preset['color_cta'] )    ? $preset['color_cta']    : $theme_color;
+		$theme_color = self::get_theme_accent_color();
+
+		/* Full colour map: setting key → CSS variable name */
+		$colour_map = array(
+			'color_accent'        => '--roi-accent',
+			'color_cta'           => '--roi-action',
+			'color_card_bg'       => '--roi-card-bg',
+			'color_card_border'   => '--roi-line',
+			'color_heading_text'  => '--roi-heading-text',
+			'color_body_text'     => '--roi-body-text',
+			'color_slider_track'  => '--roi-slider-track',
+			'color_slider_label'  => '--roi-slider-label',
+			'color_hero_bg'       => '--roi-hero-bg',
+			'color_hero_value'    => '--roi-hero-value',
+			'color_hero_label'    => '--roi-hero-label',
+			'color_result_value'  => '--roi-result-value',
+			'color_result_label'  => '--roi-result-label',
+			'color_roi_highlight' => '--roi-highlight',
+			'color_tier_text'     => '--roi-tier-text',
+			'color_cta_text'      => '--roi-cta-text',
+			'color_cta_hover_bg'  => '--roi-cta-hover-bg',
+			'color_cta_hover_text'=> '--roi-cta-hover-text',
+			'color_share_text'    => '--roi-share-text',
+			'color_footnote'      => '--roi-footnote',
+			'color_tooltip_bg'    => '--roi-tooltip-bg',
+			'color_tooltip_text'  => '--roi-tooltip-text',
+		);
 
 		$inline_vars = '';
-		if ( $accent ) {
-			$inline_vars .= '--roi-accent:' . esc_attr( $accent ) . ';';
+		foreach ( $colour_map as $setting_key => $css_var ) {
+			$value = ! empty( $preset[ $setting_key ] ) ? $preset[ $setting_key ] : '';
+
+			/* Accent and CTA fall back to theme color if empty */
+			if ( '' === $value && in_array( $setting_key, array( 'color_accent', 'color_cta' ), true ) ) {
+				$value = $theme_color;
+			}
+
+			if ( '' !== $value ) {
+				$inline_vars .= $css_var . ':' . esc_attr( $value ) . ';';
+			}
 		}
-		if ( $cta ) {
-			$inline_vars .= '--roi-action:' . esc_attr( $cta ) . ';';
-		}
+
+		/* Style variables */
+		$shadow_map = array( 'none' => 'none', 'subtle' => '0 2px 8px rgba(0,0,0,0.08)', 'medium' => '0 4px 16px rgba(0,0,0,0.12)', 'strong' => '0 8px 28px rgba(0,0,0,0.18)' );
+		$inline_vars .= '--roi-radius:' . intval( $preset['card_border_radius'] ?? 8 ) . 'px;';
+		$inline_vars .= '--roi-shadow:' . ( $shadow_map[ $preset['card_shadow'] ?? 'subtle' ] ?? $shadow_map['subtle'] ) . ';';
+		$inline_vars .= '--roi-cta-radius:' . intval( $preset['cta_border_radius'] ?? 8 ) . 'px;';
 
 		ob_start();
 		?>
