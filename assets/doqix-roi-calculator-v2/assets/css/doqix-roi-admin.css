@@ -1,6 +1,6 @@
 /*
  * Do.Qix ROI Calculator V2 — Admin Settings Styles
- * Version: 2.4.0
+ * Version: 2.4.1
  * Loaded only on the ROI Calculator settings page.
  */
 
@@ -200,20 +200,17 @@
  * ═══════════════════════════════════════════ */
 
 .doqix-roi-colours-layout {
-	display: grid;
-	grid-template-columns: 1fr 280px;
-	gap: 24px;
-	align-items: start;
-	max-width: 1100px;
+	/* Live preview is now fixed-positioned (floats over viewport across all sections),
+	   so this no longer needs to be a 2-column grid. */
+	display: block;
+	max-width: 100%;
 }
 
-@media (max-width: 1200px) {
-	.doqix-roi-colours-layout {
-		grid-template-columns: 1fr;
-	}
-	.doqix-roi-preview-area {
-		position: static !important;
-		order: -1;
+/* Reserve space on the right so fixed preview doesn't overlap form content
+   on wide screens. WP admin content otherwise extends to the viewport edge. */
+@media (min-width: 1300px) {
+	.doqix-roi-admin form {
+		padding-right: 320px;
 	}
 }
 
@@ -331,11 +328,36 @@
  * ═══════════════════════════════════════════ */
 
 .doqix-roi-preview-area {
-	position: sticky;
-	top: 40px;
-	align-self: start;
-	max-height: calc(100vh - 60px);
+	/* Fixed so it stays visible across ALL admin sections (Section Visibility,
+	   Labels, Colours, CTA, Display). Was sticky-within-grid before, which
+	   meant it vanished once the user scrolled past the Colours section. */
+	position: fixed;
+	top: 90px; /* clears WP admin bar (32px) + breathing room */
+	right: 24px;
+	width: 280px;
+	max-height: calc(100vh - 110px);
 	overflow-y: auto;
+	z-index: 100;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 8px;
+	padding: 12px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* On narrow screens (no room to float), drop back into normal flow at top of Colours section. */
+@media (max-width: 1200px) {
+	.doqix-roi-preview-area {
+		position: static;
+		width: auto;
+		max-height: none;
+		margin: 0 0 16px 0;
+		box-shadow: none;
+		border: 1px dashed #c3c4c7;
+	}
+	.doqix-roi-admin form {
+		padding-right: 0;
+	}
 }
 
 .doqix-roi-preview-label {

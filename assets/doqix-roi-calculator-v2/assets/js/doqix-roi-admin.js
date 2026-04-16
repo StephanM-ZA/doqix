@@ -1,6 +1,6 @@
 /**
  * Do.Qix ROI Calculator — Admin Repeater Logic
- * Version: 2.4.0
+ * Version: 2.4.1
  *
  * Vanilla JS (no jQuery). Handles add/remove rows for tiers and sliders.
  */
