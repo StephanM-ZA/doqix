@@ -1,6 +1,6 @@
 /**
  * Do.Qix ROI Calculator — Frontend Logic V2
- * Version: 2.3.0
+ * Version: 2.4.0
  *
  * Fully dynamic: reads tiers[], sliders[], thresholds{} from
  * window.doqixRoiV2Config (set by wp_localize_script).
