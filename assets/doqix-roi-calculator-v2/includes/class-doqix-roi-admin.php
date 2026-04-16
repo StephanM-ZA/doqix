@@ -1294,13 +1294,13 @@ class Doqix_ROI_V2_Admin {
 						</div>
 
 						<!-- Mini hero result -->
-						<div class="prev-hero" style="background:var(--roi-hero-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:12px;text-align:center;box-shadow:var(--roi-shadow);margin-bottom:10px;">
+						<div class="prev-hero" data-preview-section="show_hero" style="background:var(--roi-hero-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:12px;text-align:center;box-shadow:var(--roi-shadow);margin-bottom:10px;<?php echo empty( $p['show_hero'] ) ? 'display:none;' : ''; ?>">
 							<div style="font-weight:700;font-size:22px;line-height:1.1;color:var(--roi-hero-value);">R12,911</div>
 							<div style="font-size:9px;color:var(--roi-hero-label);opacity:0.7;margin-top:2px;">Your Monthly Savings</div>
 						</div>
 
 						<!-- Mini result cards -->
-						<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+						<div data-preview-section="show_results" style="display:<?php echo empty( $p['show_results'] ) ? 'none' : 'grid'; ?>;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
 							<div style="background:var(--roi-card-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:8px;box-shadow:var(--roi-shadow);">
 								<div style="font-weight:700;font-size:12px;color:var(--roi-result-value);">R154,930</div>
 								<div style="font-size:8px;color:var(--roi-result-label);opacity:0.7;">per year</div>
@@ -1312,18 +1312,23 @@ class Doqix_ROI_V2_Admin {
 						</div>
 
 						<!-- Mini tier text -->
-						<div style="text-align:center;font-size:8px;color:var(--roi-tier-text);opacity:0.8;margin-bottom:10px;">
+						<div data-preview-section="show_tier" style="text-align:center;font-size:8px;color:var(--roi-tier-text);opacity:0.8;margin-bottom:10px;<?php echo empty( $p['show_tier'] ) ? 'display:none;' : ''; ?>">
 							That's <span style="font-weight:700;color:var(--roi-highlight);">5x</span> your investment back.
 						</div>
 
+						<!-- Mini nudge (benchmark) quote -->
+						<div data-preview-section="show_nudge" style="text-align:center;font-size:8px;font-style:italic;color:var(--roi-body-text);opacity:0.6;margin-bottom:10px;<?php echo empty( $p['show_nudge'] ) ? 'display:none;' : ''; ?>">
+							Teams your size see ROI in month one. That's not marketing — that's maths.
+						</div>
+
 						<!-- Mini CTA button -->
-						<div style="background:var(--roi-action);color:var(--roi-cta-text);border-radius:var(--roi-cta-radius);padding:8px;text-align:center;font-weight:700;font-size:10px;margin-bottom:6px;cursor:default;">
+						<div data-preview-section="cta_enabled" style="background:var(--roi-action);color:var(--roi-cta-text);border-radius:var(--roi-cta-radius);padding:8px;text-align:center;font-weight:700;font-size:10px;margin-bottom:6px;cursor:default;<?php echo empty( $p['cta_enabled'] ) ? 'display:none;' : ''; ?>">
 							Ready to turn these savings into reality?
 							<div style="font-weight:400;font-size:8px;opacity:0.85;margin-top:1px;">We'll walk you through exactly where to start.</div>
 						</div>
 
 						<!-- Mini share button -->
-						<div style="border:1px solid var(--roi-share-text);color:var(--roi-share-text);border-radius:var(--roi-cta-radius);padding:6px;text-align:center;font-weight:600;font-size:9px;margin-bottom:8px;cursor:default;">
+						<div data-preview-section="share_enabled" style="border:1px solid var(--roi-share-text);color:var(--roi-share-text);border-radius:var(--roi-radius);padding:6px;text-align:center;font-weight:600;font-size:9px;margin-bottom:8px;cursor:default;<?php echo empty( $p['share_enabled'] ) ? 'display:none;' : ''; ?>">
 							Share Your Results
 						</div>
 

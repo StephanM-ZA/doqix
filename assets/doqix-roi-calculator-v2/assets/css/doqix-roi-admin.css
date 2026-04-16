@@ -333,6 +333,9 @@
 .doqix-roi-preview-area {
 	position: sticky;
 	top: 40px;
+	align-self: start;
+	max-height: calc(100vh - 60px);
+	overflow-y: auto;
 }
 
 .doqix-roi-preview-label {

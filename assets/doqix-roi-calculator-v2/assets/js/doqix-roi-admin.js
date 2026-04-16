@@ -269,6 +269,31 @@
     }
   }
 
+  /* ── Section visibility checkboxes → live preview ── */
+  var toggleKeys = ['show_hero', 'show_results', 'show_tier', 'show_nudge', 'cta_enabled', 'share_enabled'];
+  var allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+  for (var cb = 0; cb < allCheckboxes.length; cb++) {
+    var checkbox = allCheckboxes[cb];
+    var name = checkbox.getAttribute('name') || '';
+    for (var tk = 0; tk < toggleKeys.length; tk++) {
+      if (name.indexOf('[' + toggleKeys[tk] + ']') !== -1) {
+        (function(key) {
+          checkbox.addEventListener('change', function() {
+            if (!preview) return;
+            var section = preview.querySelector('[data-preview-section="' + key + '"]');
+            if (!section) return;
+            if (this.checked) {
+              section.style.display = (key === 'show_results') ? 'grid' : '';
+            } else {
+              section.style.display = 'none';
+            }
+          });
+        })(toggleKeys[tk]);
+        break;
+      }
+    }
+  }
+
   /* ── Form submit: clear default color values so empty string is stored ── */
   var form = document.querySelector('form[action="options.php"]');
   if (form) {
