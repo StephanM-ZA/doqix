@@ -1,68 +1,53 @@
-# CHECKPOINT — Do.Qix Plugin Full Expansion
+# CHECKPOINT — Do.Qix Plugin Full Expansion + Phase 2A
 
-**Date:** 2026-04-15 (late evening)
+**Date:** 2026-04-15 (late night)
 **Branch:** main
-**Tool call count:** ~25+ (auto-checkpointing)
+**Tool call count:** ~35+ (auto-checkpointing)
 
 ---
 
 ## Completed This Session
 
-### Carousel Plugin v1.2.1 → v1.3.0 (commit 6fa933c)
-- 15 new preset-level color fields (dots, breadcrumbs, arrow hover, card border/price/subtitle/body text, featured border, billing toggle)
-- 8 style controls (arrow size/shape/icon, dot size, card border radius/shadow/gap, featured border width)
-- Grouped color admin (8 groups with section headers)
-- Persistent live preview sidebar across all sub-tabs
-- Frontend CSS updated to consume all new CSS variables
-- Arrow icon config (chevron/arrow/caret) passed to JS
-- Sanitization for all new fields
+### Phase 1 — All 3 Plugins Expanded (previous session, pushed)
+- Pricing Carousel v1.3.0 — 22 colors, 8 style controls, live preview
+- ROI Calculator V2 v2.2.0 → v2.3.0 — full expansion + Phase 2A
+- ROI Calculator V1 v1.3.0 — V2 expansion port
+- Cross-plugin review fixes: XSS hardening, V1/V2 ID collision, carousel reset bug
+- Pushed + tagged as `v1.3.0-full-admin-expansion`
 
-### Calculator V2 v2.1.6 → v2.2.0 (commit 0d19356)
-- 20 new color fields (card, slider, hero, result, CTA, share, tooltip, footnote, tier, ROI highlight)
-- 3 style controls (card border radius, card shadow, CTA border radius)
-- Full live preview in admin (NEW — miniature calculator mockup)
-- Grouped color admin (8 groups with section headers)
-- All frontend CSS selectors consume CSS variables
-- Fixed hardcoded slider track color in JS
-- New admin CSS file for color grid + preview
-- Admin JS: live preview sync, reset buttons, shadow radio, form submit cleanup
+### Phase 2A — Calculator V2 "Best Calculator" (this session)
+All 6 tasks completed and committed:
 
-### Review Fixes (commit 45ae720)
-- Fixed carousel arrow size preview values (was 24/28/32px, corrected to 32/44/56px)
-- Updated stale version comments in V2 asset files (2.0.0 → 2.2.0)
+| # | Task | Commit |
+|---|------|--------|
+| 1 | Mathematical hardening (safeFloat/safeProduct/safeDivide/clamp) | `f38cbff` |
+| 2 | Admin slider validation (floatval, min<max swap, role constraints) | `509939f` |
+| 3 | Currency & locale system (symbol, position, separators, abbreviation) | `1ff8f7c` |
+| 4 | Configurable labels & templates ({placeholder} tokens, all text editable) | `88aa7f3` |
+| 5 | Section visibility toggles (6 show/hide checkboxes) | `1f57dee` |
+| 6 | Version bump to v2.3.0 + updates.json | `73bdfc7` |
+| 7 | Review fixes (safeFloat in slider fill, step min 0.01, admin CSS version) | `0e73b24` |
 
-### In Progress
-- **Calculator V1 port** — agent running, porting V2 expansion to V1 (v1.2.6 → v1.3.0)
+### Preview Files Created (not committed)
+- `preview-calculator-v2.html` — Frontend calculator preview with live JS
+- `preview-admin-v2.html` — Admin panel preview with all tabs
 
 ---
 
-## Remaining Tasks
+## Remaining / Next Steps
 
-1. ~~Carousel v1.3.0~~ ✅
-2. ~~Calculator V2 v2.2.0~~ ✅
-3. **Calculator V1 v1.3.0** — port in progress (background agent)
-4. **Update updates.json** — bump all 3 plugin versions
-5. **Final code review** — holistic review of all 3 plugins
-6. **Phase 2A** — Calculator V2 Pro plan written, ready to execute:
-   - Mathematical hardening (NaN/Infinity/overflow guards)
-   - Admin slider validation (min<max enforcement)
-   - Currency & locale system (symbol, position, separators)
-   - Configurable labels & templates (all hardcoded text → admin fields)
-   - Show/hide section toggles
-   - Version bump to v2.3.0
+1. **Drag-to-reorder sliders** — User requested ability to change slider order in admin
+2. **V2 Info tab** — Actually already complete (matches V1). HTML preview was simplified.
+3. **Push + tag v2.3.0** — Not yet pushed
+4. **Clean up preview files** — Remove before push
+5. **Port Phase 2A to V1?** — User hasn't asked yet but may want parity
 
 ---
 
-## Open Issue (from previous session)
-- Carousel still showing light blue #0886B5 — likely admin color fields have value explicitly saved, not theme detection issue
-
----
-
-## Plans Written
-- `docs/superpowers/plans/2026-04-15-full-plugin-expansion.md` — Phase 1 (executing)
-- `docs/superpowers/plans/2026-04-15-calculator-v2-pro.md` — Phase 2A (ready)
+## Open Issues
+- Carousel still showing light blue #0886B5 — likely saved admin values
 
 ---
 
 ## Resume Command
-Say "resume" to continue. V1 port may still be running or may have completed.
+Say "resume" to continue. Next: implement slider drag-to-reorder.
