@@ -1,6 +1,6 @@
 /**
  * Do.Qix ROI Calculator — Admin Repeater Logic
- * Version: 2.4.1
+ * Version: 2.4.2
  *
  * Vanilla JS (no jQuery). Handles add/remove rows for tiers and sliders.
  */
@@ -363,5 +363,33 @@
       tierRows[i].setAttribute('draggable', 'true');
     }
     enableDragReorder(tiersBody, 'tiers');
+  }
+
+  /* ── Scroll-tracking for live preview (stays within admin block) ── */
+  var previewArea = document.querySelector('.doqix-roi-preview-area');
+  var adminWrap   = document.querySelector('.doqix-roi-admin');
+
+  if (previewArea && adminWrap && window.innerWidth >= 1300) {
+    var wpBarH   = 32; /* WP admin bar height */
+    var padTop   = 20; /* breathing room below admin bar */
+    var offsetTop = wpBarH + padTop;
+
+    window.addEventListener('scroll', function() {
+      var wrapRect    = adminWrap.getBoundingClientRect();
+      var wrapTop     = wrapRect.top;
+      var wrapBottom  = wrapRect.bottom;
+      var previewH    = previewArea.offsetHeight;
+
+      if (wrapTop >= offsetTop) {
+        /* Admin block hasn't scrolled past the bar yet — park at initial spot */
+        previewArea.style.top = '60px';
+      } else if (wrapBottom - offsetTop > previewH) {
+        /* Normal scrolling: float within admin block */
+        previewArea.style.top = (-wrapTop + offsetTop) + 'px';
+      } else {
+        /* Near the bottom of admin block: pin so it doesn't overflow */
+        previewArea.style.top = (adminWrap.offsetHeight - previewH - 12) + 'px';
+      }
+    });
   }
 })();

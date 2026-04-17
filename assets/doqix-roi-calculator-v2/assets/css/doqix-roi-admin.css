@@ -200,15 +200,16 @@
  * ═══════════════════════════════════════════ */
 
 .doqix-roi-colours-layout {
-	/* Live preview is now fixed-positioned (floats over viewport across all sections),
-	   so this no longer needs to be a 2-column grid. */
 	display: block;
 	max-width: 100%;
 }
 
-/* Reserve space on the right so fixed preview doesn't overlap form content
-   on wide screens. WP admin content otherwise extends to the viewport edge. */
+/* 2-column layout: form content + sticky preview sidebar.
+   The preview sticks within .doqix-roi-admin only, never over the rest of WP. */
 @media (min-width: 1300px) {
+	.doqix-roi-admin {
+		position: relative;
+	}
 	.doqix-roi-admin form {
 		padding-right: 320px;
 	}
@@ -328,16 +329,16 @@
  * ═══════════════════════════════════════════ */
 
 .doqix-roi-preview-area {
-	/* Fixed so it stays visible across ALL admin sections (Section Visibility,
-	   Labels, Colours, CTA, Display). Was sticky-within-grid before, which
-	   meant it vanished once the user scrolled past the Colours section. */
-	position: fixed;
-	top: 90px; /* clears WP admin bar (32px) + breathing room */
-	right: 24px;
+	/* Absolutely positioned within .doqix-roi-admin (position:relative).
+	   JS updates `top` on scroll so it stays in view but NEVER escapes the
+	   admin settings block. */
+	position: absolute;
+	top: 60px;
+	right: 0;
 	width: 280px;
 	max-height: calc(100vh - 110px);
 	overflow-y: auto;
-	z-index: 100;
+	z-index: 10;
 	background: #fff;
 	border: 1px solid #c3c4c7;
 	border-radius: 8px;
