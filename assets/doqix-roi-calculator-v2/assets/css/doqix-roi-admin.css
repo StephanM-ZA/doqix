@@ -204,12 +204,8 @@
 	max-width: 100%;
 }
 
-/* 2-column layout: form content + sticky preview sidebar.
-   The preview sticks within .doqix-roi-admin only, never over the rest of WP. */
+/* Reserve space on the right so fixed preview doesn't overlap form content. */
 @media (min-width: 1300px) {
-	.doqix-roi-admin {
-		position: relative;
-	}
 	.doqix-roi-admin form {
 		padding-right: 320px;
 	}
@@ -329,21 +325,22 @@
  * ═══════════════════════════════════════════ */
 
 .doqix-roi-preview-area {
-	/* Absolutely positioned within .doqix-roi-admin (position:relative).
-	   JS updates `top` on scroll so it stays in view but NEVER escapes the
-	   admin settings block. */
-	position: absolute;
-	top: 60px;
-	right: 0;
+	/* Fixed so it stays visible while scrolling through all admin sections.
+	   JS hides it when .doqix-roi-admin is not in the viewport so it never
+	   floats over unrelated WP pages. */
+	position: fixed;
+	top: 90px;
+	right: 24px;
 	width: 280px;
 	max-height: calc(100vh - 110px);
 	overflow-y: auto;
-	z-index: 10;
+	z-index: 100;
 	background: #fff;
 	border: 1px solid #c3c4c7;
 	border-radius: 8px;
 	padding: 12px;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	transition: opacity 0.2s ease;
 }
 
 /* On narrow screens (no room to float), drop back into normal flow at top of Colours section. */

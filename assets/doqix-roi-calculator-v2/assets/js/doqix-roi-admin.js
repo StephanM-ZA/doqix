@@ -1,6 +1,6 @@
 /**
  * Do.Qix ROI Calculator — Admin Repeater Logic
- * Version: 2.4.2
+ * Version: 2.4.3
  *
  * Vanilla JS (no jQuery). Handles add/remove rows for tiers and sliders.
  */
@@ -365,31 +365,22 @@
     enableDragReorder(tiersBody, 'tiers');
   }
 
-  /* ── Scroll-tracking for live preview (stays within admin block) ── */
+  /* ── Hide live preview when admin block scrolls out of view ── */
   var previewArea = document.querySelector('.doqix-roi-preview-area');
   var adminWrap   = document.querySelector('.doqix-roi-admin');
 
   if (previewArea && adminWrap && window.innerWidth >= 1300) {
-    var wpBarH   = 32; /* WP admin bar height */
-    var padTop   = 20; /* breathing room below admin bar */
-    var offsetTop = wpBarH + padTop;
-
-    window.addEventListener('scroll', function() {
-      var wrapRect    = adminWrap.getBoundingClientRect();
-      var wrapTop     = wrapRect.top;
-      var wrapBottom  = wrapRect.bottom;
-      var previewH    = previewArea.offsetHeight;
-
-      if (wrapTop >= offsetTop) {
-        /* Admin block hasn't scrolled past the bar yet — park at initial spot */
-        previewArea.style.top = '60px';
-      } else if (wrapBottom - offsetTop > previewH) {
-        /* Normal scrolling: float within admin block */
-        previewArea.style.top = (-wrapTop + offsetTop) + 'px';
-      } else {
-        /* Near the bottom of admin block: pin so it doesn't overflow */
-        previewArea.style.top = (adminWrap.offsetHeight - previewH - 12) + 'px';
-      }
-    });
+    /* Use IntersectionObserver: show preview only while the admin block is
+       at least partially visible. This prevents it from floating over
+       unrelated WP admin content (theme promos, other plugin pages, etc.). */
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          previewArea.style.opacity = entry.isIntersecting ? '1' : '0';
+          previewArea.style.pointerEvents = entry.isIntersecting ? 'auto' : 'none';
+        });
+      }, { threshold: 0 });
+      observer.observe(adminWrap);
+    }
   }
 })();

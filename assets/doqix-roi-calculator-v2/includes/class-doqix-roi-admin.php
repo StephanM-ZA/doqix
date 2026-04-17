@@ -1309,6 +1309,14 @@ class Doqix_ROI_V2_Admin {
 								<div style="font-weight:700;font-size:12px;color:var(--roi-result-value);">415%</div>
 								<div style="font-size:8px;color:var(--roi-result-label);opacity:0.7;">return on investment</div>
 							</div>
+							<div style="background:var(--roi-card-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:8px;box-shadow:var(--roi-shadow);">
+								<div style="font-weight:700;font-size:12px;color:var(--roi-result-value);">73 hrs</div>
+								<div style="font-size:8px;color:var(--roi-result-label);opacity:0.7;">back per month</div>
+							</div>
+							<div style="background:var(--roi-card-bg);border:1px solid var(--roi-line);border-radius:var(--roi-radius);padding:8px;box-shadow:var(--roi-shadow);">
+								<div style="font-weight:700;font-size:12px;color:var(--roi-result-value);">873 hrs</div>
+								<div style="font-size:8px;color:var(--roi-result-label);opacity:0.7;">back per year</div>
+							</div>
 						</div>
 
 						<!-- Mini tier text -->
