@@ -2,56 +2,83 @@
 
 **Date:** 2026-04-19
 **Branch:** main
-**Version:** web-v0.4.1 (pushed), uncommitted changes pending
+**Version:** web-v0.4.3 (pushed, clean)
 
 ---
 
-## Completed This Session
+## Homepage (index.html) — COMPLETE
 
-1. **Logo & favicon** — Replaced text "Do.Qix" with logo_new_green.png in header (3rem) and footer (10rem width), added favicon_green.png
-2. **Footer redesign** — Contact info with icons (email, phone, WhatsApp SVG, location), social links (LinkedIn, Instagram, Facebook), footer-top/footer-bottom layout, removed "Efficiency, Engineered"
-3. **Hero video** — AdobeStock .mov converted to .mp4 (8.3MB), runs as background behind hero at 10% opacity with edge fades
-4. **Mobile menu** — Hamburger icon (animated to X), full-width dropdown with nav links + CTA, hides desktop CTA on mobile
-5. **Header feather** — Soft gradient fade at bottom edge of fixed nav (85% opacity, feather at 98%)
-6. **Bullet list component** — Common `.bullet-list` in global.css with double-ring teal bullets (filled inner, thin outer ring)
-7. **Scroll anchor offset** — `scroll-margin-top: 6rem` on all sections with IDs
-8. **Nav hover** — Changed from white to teal (#00e5a0)
-9. **Section spacing** — Reduced all sections from py-32 to py-20
-10. **Cache-busting** — Added `?v=X.Y.Z` to all CSS/JS links, documented as MANDATORY rule
-11. **Dynamic pricing highlight** — Calculator tier moves "Recommended" badge and teal border to matching pricing card
-12. **Pricing banner** — Changes from orange "Launch offer" to teal "Based on your numbers, we recommend [Tier]" after calculator interaction
-13. **Component snippets** — Updated header.html and footer.html in design/components/
-14. **Contact details** — Email: stephan@digitaloperations.co.za, Phone: +27 61 514 8375, WhatsApp: wa.me link, Location: Cape Town
+### Features Built
+1. **Hero** — Video background (10% opacity), headline, proof points with double-ring bullets, CTA
+2. **Problem section** — Pain points with stats
+3. **Solution section** — Feature cards
+4. **How it works** — Step-by-step timeline
+5. **ROI Calculator** — Config-driven sliders, tier recommendations, contextual nudges, share button
+6. **Pricing** — 4 tiers (Solo R999, Team R2500, Business R5500, Enterprise custom), dynamic highlight from calculator
+7. **Testimonials** — Infinite carousel with autoplay
+8. **CTA section** — Final conversion block
+9. **Header** — Logo image, nav links with teal hover, mobile hamburger menu, feathered bottom edge
+10. **Footer** — Logo, contact info (email, phone, WhatsApp, location), nav/legal/social links, copyright
 
-## Files Modified (uncommitted)
+### Design System Established
+- **Background:** Royal Navy #0C1830 with full surface hierarchy
+- **Logo:** logo_new_green.png (header 3rem, footer 10rem width)
+- **Favicon:** favicon_green.png
+- **Font:** Inter only
+- **Accent:** Teal #00e5a0, Amber #ff8000
+- **Common components in global.css:** .bullet-list, .banner, .callout, .card, .btn variants, pricing cards, footer/header styles
+- **Component HTML snippets:** design/components/header.html, design/components/footer.html
 
-- `design/index/index.html` — Pricing cards with data-tier + pricing-badge on all 4 cards
-- `design/index/js/roi-calculator.js` — Dynamic pricing highlight + banner update logic
-- `design/global.css` — Pricing card styles (.pricing-card, .pricing-popular, .pricing-badge)
-- `index.html` — Root sync
-- `js/roi-calculator.js` — Root sync
-- `global.css` — Root sync
-- `.gitignore` — Added *.mov
+### Rules (in CLAUDE.md + memory)
+- No inline JS
+- No em dashes
+- No hardcoding
+- Version tag (web-vX.Y.Z) on every push
+- Cache-bust (?v=X.Y.Z) on all CSS/JS links
+- Sync design/ to root on every push
+- main = website, plugins = WordPress plugins
 
-## Already Pushed (web-v0.4.1)
+---
 
-- Logo, favicon, hero video, mobile menu, footer redesign
-- Cache-busting version strings
+## Pages To Build
 
-## Rules Added
+| Page | Stitch Design | Status |
+|------|--------------|--------|
+| index.html | design/index/ | DONE |
+| services.html | design/services/ | TODO |
+| products.html | design/products/ | TODO |
+| contact.html | design/contact/ | TODO |
+| privacy-policy.html | design/privacy-policy/ | TODO |
+| terms-and-conditions.html | design/terms-and-conditions/ | TODO |
+| thank-you.html | design/thank-you/ | TODO |
+| 404.html | design/404/ | TODO |
+| cookie-banner.html | design/cookie-banner/ | TODO (overlay component) |
+| exit-popup.html | design/exit-popup/ | TODO (overlay component) |
 
-- Cache-busting on deploy (MANDATORY) — bump ?v= strings with every web-vX.Y.Z tag
-- .mov files excluded from git (1.6GB each)
+### Each Page Needs
+1. Link global.css (with cache-bust version)
+2. Update Tailwind config to Royal Navy colour scheme
+3. Use common header from components/header.html
+4. Use common footer from components/footer.html
+5. Strip Stitch inline styles, use global.css classes
+6. Fix copy (no em dashes)
+7. External JS only
+8. Sync to root with path fixes
 
-## Next Steps
+---
 
-1. Push uncommitted pricing highlight changes
-2. Confirm live site renders correctly after CDN cache clears
-3. Fix any remaining footer spacing issues
-4. Start services page design
-5. Update remaining pages with Royal Navy colour scheme + common header/footer
+## Contact Details
+- Email: stephan@digitaloperations.co.za
+- Phone: +27 61 514 8375
+- WhatsApp: wa.me/27615148375
+- Location: Cape Town, South Africa
+
+## Deployment
+- GitHub Pages: digitaloperations.co.za/doqix/
+- Two-repo setup: stephanm-za.github.io (CNAME) + doqix (content)
+- Cloudflare DNS, SSL active
 
 ---
 
 ## Resume Command
-Say "resume" to continue.
+Say "resume" to continue with services page.

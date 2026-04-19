@@ -1,3 +1,9 @@
+// Force hero video autoplay (some browsers block even muted autoplay)
+var heroVideo = document.querySelector('.hero-video-bg video');
+if (heroVideo) {
+    heroVideo.play().catch(function () {});
+}
+
 // Scroll reveal
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
