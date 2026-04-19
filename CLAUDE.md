@@ -37,3 +37,31 @@ doqix-roi-calculator.zip
       └── assets/
 ```
 **Never** build flat zips (files at root) — this causes WordPress update loops.
+
+---
+
+## Website Development Rules
+
+### No Inline JavaScript (MANDATORY)
+
+All JavaScript MUST be in external `.js` files, never inline `<script>` blocks. HTML files should remain minimal with only markup.
+
+- Place JS files in a `js/` folder relative to the HTML file (e.g., `design/index/js/`)
+- Link with `<script src="js/filename.js"></script>` before `</body>`
+- One JS file per component/feature (e.g., `roi-calculator.js`, `testimonial-carousel.js`)
+- Shared utilities go in `js/main.js`
+
+### No Em Dashes in Copy (MANDATORY)
+
+Em dashes (—) are a telltale sign of AI-generated text. Never use them in any customer-facing copy.
+
+Use instead:
+- **Period** for new thoughts: "X. Y"
+- **Comma** for soft connections: "X, Y"
+- **Colon** for elaboration/lists: "X: Y"
+- **Parentheses** for asides: "X (aside) Y"
+- **En dash** (–) for attributions only (standard typography)
+
+### No Hardcoding Unless Necessary (MANDATORY)
+
+Never hardcode values in HTML when they can be defined in JS or CSS config. HTML should contain structure and IDs only. All data, defaults, ranges, labels, and configuration values belong in the JS or CSS files that control the component.

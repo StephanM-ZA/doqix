@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thank You | Do.Qix</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#003824",
+                        "inverse-on-surface": "#303036",
+                        "primary": "#6effc0",
+                        "surface-container": "#1f1f25",
+                        "on-tertiary": "#452b00",
+                        "on-error": "#690005",
+                        "tertiary-container": "#ffbd5b",
+                        "primary-container": "#00e5a0",
+                        "on-primary-fixed-variant": "#005236",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#35343a",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "surface-dim": "#131318",
+                        "secondary-fixed-dim": "#ffb95a",
+                        "on-secondary-fixed": "#2a1800",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2a292f",
+                        "tertiary-fixed-dim": "#fcba59",
+                        "tertiary-fixed": "#ffddb3",
+                        "on-tertiary-fixed": "#291800",
+                        "on-primary-container": "#006141",
+                        "outline-variant": "#3b4a41",
+                        "on-primary-fixed": "#002114",
+                        "surface-container-lowest": "#0e0e13",
+                        "background": "#131318",
+                        "surface-container-low": "#1b1b20",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-tertiary-container": "#744c00",
+                        "on-surface": "#e4e1e9",
+                        "surface": "#131318",
+                        "on-background": "#e4e1e9",
+                        "on-secondary-container": "#3d2400",
+                        "primary-fixed": "#47ffb8",
+                        "secondary-fixed": "#ffddb6",
+                        "surface-tint": "#00e29e",
+                        "inverse-primary": "#006c49",
+                        "secondary": "#ffb95a",
+                        "on-secondary": "#462a00",
+                        "inverse-surface": "#e4e1e9",
+                        "surface-bright": "#39383e",
+                        "primary-fixed-dim": "#00e29e",
+                        "tertiary": "#ffe1bb",
+                        "surface-variant": "#35343a",
+                        "secondary-container": "#c68315",
+                        "outline": "#84958a",
+                        "on-surface-variant": "#bacbbf",
+                        "on-error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #131318;
+            color: #e4e1e9;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #6effc0 0%, #00e5a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .kinetic-monolith-shadow {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Animation System */
+        :root {
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-micro: 150ms;
+            --duration-component: 300ms;
+            --duration-section: 500ms;
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px) scale(0.97);
+            transition: opacity var(--duration-section) var(--easing),
+                        transform var(--duration-section) var(--easing);
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .hover-card {
+            transition: transform var(--duration-micro) var(--easing),
+                        box-shadow var(--duration-micro) var(--easing),
+                        background-color var(--duration-micro) var(--easing);
+        }
+
+        .hover-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .hover-button {
+            transition: transform var(--duration-micro) var(--easing),
+                        filter var(--duration-micro) var(--easing),
+                        box-shadow var(--duration-micro) var(--easing);
+        }
+
+        .hover-button:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(10px) scale(0.98);
+            transition: opacity var(--duration-component) var(--easing),
+                        transform var(--duration-component) var(--easing);
+        }
+
+        .reveal-on-scroll.active .stagger-item {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .stagger-1 { transition-delay: 80ms; }
+        .stagger-2 { transition-delay: 160ms; }
+        .stagger-3 { transition-delay: 240ms; }
+
+        .header-reveal {
+            animation: headerEntrance var(--duration-section) var(--easing) forwards;
+        }
+
+        @keyframes headerEntrance {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#131318]/60 backdrop-blur-xl kinetic-monolith-shadow header-reveal">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<div class="font-['Inter'] text-2xl font-black text-[#00e5a0] tracking-tighter cursor-pointer hover:opacity-80 transition-opacity">Do.Qix</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Inter'] tracking-tight uppercase text-xs font-bold text-slate-400 hover:text-white transition-colors" href="#">Home</a>
+<a class="font-['Inter'] tracking-tight uppercase text-xs font-bold text-slate-400 hover:text-white transition-colors" href="#">Services</a>
+<a class="font-['Inter'] tracking-tight uppercase text-xs font-bold text-slate-400 hover:text-white transition-colors" href="#">Products</a>
+<a class="font-['Inter'] tracking-tight uppercase text-xs font-bold text-slate-400 hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<div class="flex gap-4 items-center">
+<button class="bg-[#00e5a0] text-[#003824] px-6 py-2 rounded-lg font-['Inter'] tracking-tight uppercase text-xs font-black hover-button">Start Free</button>
+</div>
+</nav>
+</header>
+<main class="pt-32 pb-24 px-6 md:px-8 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-24 reveal-on-scroll">
+<div class="lg:col-span-8">
+<h1 class="font-headline text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] text-on-surface uppercase">
+                    WE GOT YOU. <br/>WE'LL BE IN <br/>
+<span class="text-gradient">TOUCH SOON.</span>
+</h1>
+</div>
+<div class="lg:col-span-4 pb-4">
+<p class="text-on-surface-variant text-lg md:text-xl leading-relaxed max-w-md">
+                    Thanks for reaching out. Here's what happens next:
+                </p>
+</div>
+</section>
+<!-- Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-6 gap-6 reveal-on-scroll">
+<!-- Next Steps Card -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 lg:p-12 relative overflow-hidden group hover-card">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -mr-32 -mt-32"></div>
+<h2 class="font-headline text-3xl font-bold tracking-tight mb-12">What Happens Next</h2>
+<div class="space-y-12 relative z-10">
+<!-- Step 1 -->
+<div class="flex items-start gap-6 group/item stagger-item stagger-1">
+<div class="flex-none w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-headline font-bold border border-outline-variant/20 group-hover/item:border-primary/50 transition-colors">1</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2">A real person reviews your submission</h3>
+<p class="text-on-surface-variant">No autoresponders here. Someone on our team reads what you've sent and figures out the best way to help.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start gap-6 group/item stagger-item stagger-2">
+<div class="flex-none w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-headline font-bold border border-outline-variant/20 group-hover/item:border-primary/50 transition-colors">2</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2">We get back to you within 24 hours</h3>
+<p class="text-on-surface-variant">Usually much faster. You'll hear from us at <span class="text-secondary font-medium">hello@doqix.co.za</span>.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-start gap-6 group/item stagger-item stagger-3">
+<div class="flex-none w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-headline font-bold border border-outline-variant/20 group-hover/item:border-primary/50 transition-colors">3</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2">We'll set up a quick call to learn about your business</h3>
+<p class="text-on-surface-variant">15 minutes. No sales pitch. Just a straight conversation about where your time is going and how to get it back.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- While You Wait Card -->
+<div class="md:col-span-2 flex flex-col gap-6">
+<div class="flex-1 bg-surface-container rounded-xl p-8 flex flex-col justify-between group cursor-pointer hover-card">
+<div>
+<span class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-widest mb-6">While You Wait</span>
+<h3 class="font-headline text-2xl font-bold text-on-surface leading-tight mb-4">Read how a Joburg property group went from losing leads to responding in under a minute.</h3>
+</div>
+<div class="mt-8">
+<a class="inline-flex items-center gap-2 font-headline text-sm font-bold text-primary group-hover:gap-4 transition-all" href="#">
+                            READ THE STORY <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e13] w-full py-12 mt-auto">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col gap-2">
+<div class="font-['Inter'] text-xl font-black text-white">Do.Qix</div>
+<p class="font-['Inter'] text-[10px] tracking-wide text-slate-500 uppercase font-bold">&copy; 2026 Do.Qix. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Home</a>
+<a class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Services</a>
+<a class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Products</a>
+<a class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Contact</a>
+<a class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-[10px] uppercase font-bold tracking-widest text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Terms &amp; Conditions</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for scroll triggers
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Trigger first section immediately
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.reveal-on-scroll')?.classList.add('active');
+            }, 100);
+        });
+    </script>
+</body></html>

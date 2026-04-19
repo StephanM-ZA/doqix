@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Do.Qix | Your workflows, on autopilot.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#00e29e",
+                        "surface-variant": "#35343a",
+                        "outline-variant": "#3b4a41",
+                        "on-primary-fixed": "#002114",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "surface-container": "#1f1f25",
+                        "secondary-container": "#c68315",
+                        "surface-container-highest": "#35343a",
+                        "inverse-surface": "#e4e1e9",
+                        "on-secondary-fixed": "#2a1800",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#bacbbf",
+                        "surface-container-low": "#1b1b20",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a292f",
+                        "secondary-fixed": "#ffddb6",
+                        "on-primary": "#003824",
+                        "inverse-primary": "#006c49",
+                        "surface": "#131318",
+                        "on-tertiary": "#452b00",
+                        "secondary": "#ffb95a",
+                        "on-surface": "#e4e1e9",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "primary-fixed": "#47ffb8",
+                        "on-primary-container": "#006141",
+                        "on-tertiary-container": "#744c00",
+                        "on-background": "#e4e1e9",
+                        "primary-fixed-dim": "#00e29e",
+                        "secondary-fixed-dim": "#ffb95a",
+                        "outline": "#84958a",
+                        "on-secondary": "#462a00",
+                        "background": "#131318",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#fcba59",
+                        "on-secondary-container": "#3d2400",
+                        "surface-bright": "#39383e",
+                        "on-primary-fixed-variant": "#005236",
+                        "tertiary": "#ffe1bb",
+                        "on-tertiary-fixed": "#291800",
+                        "surface-dim": "#131318",
+                        "tertiary-container": "#ffbd5b",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#303036",
+                        "primary": "#6effc0",
+                        "surface-container-lowest": "#0e0e13",
+                        "primary-container": "#00e5a0",
+                        "tertiary-fixed": "#ffddb3"
+                    },
+                    "fontFamily": {
+                        "sans": ["Inter", "sans-serif"],
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0e0e13; color: #e4e1e9; overflow-x: hidden; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Inter', sans-serif; color: #f4f4f5; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .primary-gradient { background: linear-gradient(135deg, #6effc0 0%, #00e5a0 100%); }
+        .glass-panel { background: rgba(53, 52, 58, 0.6); backdrop-filter: blur(24px); }
+        .hero-glow { background: radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.15) 0%, rgba(14, 14, 19, 0) 70%); }
+        .flow-line { background: linear-gradient(to bottom, #00e5a0, transparent); }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-on-primary-container font-sans">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-zinc-950/60 backdrop-blur-lg shadow-2xl shadow-black/40">
+<div class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto">
+<span class="text-2xl font-black text-zinc-100 tracking-tighter">Do.Qix</span>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-[#00e5a0] font-bold border-b-2 border-[#00e5a0] pb-1" href="#">Home</a>
+<a class="text-zinc-400 hover:text-zinc-100 transition-colors font-medium" href="#">Services</a>
+<a class="text-zinc-400 hover:text-zinc-100 transition-colors font-medium" href="#">Products</a>
+<a class="text-zinc-400 hover:text-zinc-100 transition-colors font-medium" href="#">Contact</a>
+</div>
+<button class="bg-[#00e5a0] text-[#003824] px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all duration-200 cubic-bezier(0.4,0,0.2,1) active:scale-95">
+            Start Free
+        </button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex flex-col items-center justify-center px-6 overflow-hidden hero-glow">
+<div class="max-w-4xl text-center z-10">
+<h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 leading-[0.9] text-zinc-50">
+                Your workflows, <br/><span class="text-primary-container">on autopilot.</span>
+</h1>
+<p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+                Connect your tools, eliminate the busywork, and focus on the high-value tasks that actually grow your business.
+            </p>
+<div class="flex flex-col items-center gap-6">
+<button class="primary-gradient text-on-primary px-10 py-5 rounded-xl text-xl font-bold hover:scale-[1.02] transition-transform duration-200 shadow-xl shadow-primary-container/20">
+                    Start Free
+                </button>
+<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold tracking-wide text-zinc-400">
+<span class="flex items-center gap-2"><span class="text-secondary">●</span> 100+ workflows running for SA businesses</span>
+<span class="flex items-center gap-2"><span class="text-secondary">●</span> Response within 24 hours</span>
+<span class="flex items-center gap-2 font-bold text-secondary">Priced in rands</span>
+</div>
+</div>
+</div>
+<!-- Kinetic Node Diagram Visualization -->
+<div class="mt-20 relative w-full max-w-5xl h-64 flex justify-between items-center opacity-40 md:opacity-100 px-4 md:px-0">
+<div class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center border border-outline-variant/20 shadow-xl shadow-black/40">
+<img alt="Xero logo" class="w-10 h-10 grayscale brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3PTQlRcMNsZA3xvzUPmCz0xBpBK49K5_b4iC4y4adwvR6t5OyNPd7NASUnwzg4uMd17hlXTZ01IW-Mp35KgpwfjU4yXP2YT8xKIKnknC3RhNSB9GZT9BOoOS9STMw94sNl2wQ5xdipNu2vE4u_7qyVaQlDU-R-cRXOD5tzDkhOi_R1ZXZO31NL-F09wjustPRNmsN97qUazomvZ5HKIN7F88TjvhGhyPdEg-6Iob1_c204OrUYUBPqXzw7iOg0sArt1YDcfSsITQ"/>
+</div>
+<div class="flex-grow h-px bg-gradient-to-r from-primary-container/50 to-secondary/50 relative mx-4">
+<div class="absolute -top-1 left-1/4 w-2 h-2 rounded-full bg-primary-container shadow-[0_0_10px_#00e5a0]"></div>
+</div>
+<div class="w-20 h-20 glass-panel rounded-full flex items-center justify-center border-2 border-primary-container shadow-[0_0_30px_rgba(0,229,160,0.2)]">
+<span class="material-symbols-outlined text-primary-container text-4xl" data-icon="hub">hub</span>
+</div>
+<div class="flex-grow h-px bg-gradient-to-r from-secondary/50 to-primary-container/50 relative mx-4">
+<div class="absolute -top-1 right-1/4 w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_#ffb347]"></div>
+</div>
+<div class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center border border-outline-variant/20 shadow-xl shadow-black/40">
+<img alt="WhatsApp logo" class="w-10 h-10 grayscale brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH5XcEaV8ZJ0GKOA9VVeiX1uoIhBcWOyn0qNrqM6XKuvARfYZIWK9SfBkmEo6x0eJ_ucCK_15KKC2mALimxJ-YjK--haqN8ola8ggFU4gCEzMI5uUoLsVEw2EotGPIlfAvAnY2fzl8oeENMNrAh-kR33AjUSqFYNUyi1E3k1CXXu2vqo56bculNqqfpdUgVU8TbgQZNnflAiOApFSnTnvaxBlJ1SoqowgW6i8KZOk_SRyt0-_uSkeCHlLwbR9oeL_F9HBqxvImKbI"/>
+</div>
+</div>
+</section>
+<!-- Problem Section -->
+<section class="py-32 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+<div>
+<h2 class="text-4xl md:text-5xl font-extrabold mb-8 leading-tight text-zinc-50">
+                    Your Team Is <span class="text-secondary">Losing a Full Day</span> Every Week
+                </h2>
+<div class="mb-12">
+<span class="text-8xl font-black text-primary tracking-tighter">30%</span>
+<p class="text-zinc-400 mt-2 max-w-xs font-medium">Of administrative time is wasted on repetitive manual data entry and tool switching.</p>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span> 
+                        Copy-pasting data between Xero and Sheets
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span> 
+                        Manually following up on unpaid invoices
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span> 
+                        Lost leads due to slow WhatsApp response
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span> 
+                        Disorganized customer project files
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span> 
+                        Key data buried in email threads
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span> 
+                        Employees burning out on boring work
+                    </li>
+</ul>
+</div>
+<div class="grid gap-6">
+<div class="p-8 rounded-2xl bg-surface border border-outline-variant/10 hover:bg-surface-container transition-colors group">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform" data-icon="payments">payments</span>
+<h3 class="text-xl font-bold mb-2 text-zinc-50">Drains money</h3>
+<p class="text-zinc-400 font-medium">Paying high salaries for tasks that a script could do in milliseconds. It’s an invisible tax on your payroll.</p>
+</div>
+<div class="p-8 rounded-2xl bg-surface border border-outline-variant/10 hover:bg-surface-container transition-colors group">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform" data-icon="group_off">group_off</span>
+<h3 class="text-xl font-bold mb-2 text-zinc-50">Wastes people</h3>
+<p class="text-zinc-400 font-medium">Your best talent is stuck on "The Boring Stuff," leading to stagnation and high turnover rates.</p>
+</div>
+<div class="p-8 rounded-2xl bg-surface border border-outline-variant/10 hover:bg-surface-container transition-colors group">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform" data-icon="trending_down">trending_down</span>
+<h3 class="text-xl font-bold mb-2 text-zinc-50">Kills growth</h3>
+<p class="text-zinc-400 font-medium">You can't scale 10x if your processes require linear manual effort. Break the bottleneck.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Solution Section -->
+<section class="py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto text-center mb-20">
+<h2 class="text-4xl md:text-6xl font-black tracking-tight text-zinc-50">We Take the Boring Stuff <br/><span class="text-primary-container">Off Your Plate</span></h2>
+</div>
+<div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="p-10 rounded-3xl bg-surface-container-low border border-primary-container/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 text-primary/10 group-hover:text-primary/20 transition-colors">
+<span class="material-symbols-outlined text-9xl" data-icon="schedule">schedule</span>
+</div>
+<h3 class="text-2xl font-bold mb-2 text-zinc-50">Your mornings come back</h3>
+<div class="text-5xl font-black text-primary-container mb-4">8-15 hrs</div>
+<p class="text-zinc-400 text-lg font-medium">Weekly time saved per employee. Imagine what they could do with two extra days a month.</p>
+</div>
+<div class="p-10 rounded-3xl bg-surface-container-low border border-primary-container/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 text-secondary/10 group-hover:text-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-9xl" data-icon="savings">savings</span>
+</div>
+<h3 class="text-2xl font-bold mb-2 text-zinc-50">Budgets stretch further</h3>
+<div class="text-5xl font-black text-secondary mb-4">R20k+</div>
+<p class="text-zinc-400 text-lg font-medium">In monthly administrative costs saved through algorithmic workflow distribution.</p>
+</div>
+<div class="p-10 rounded-3xl bg-surface-container-low border border-primary-container/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 text-primary/10 group-hover:text-primary/20 transition-colors">
+<span class="material-symbols-outlined text-9xl" data-icon="data_object">data_object</span>
+</div>
+<h3 class="text-2xl font-bold mb-2 text-zinc-50">Data actually works</h3>
+<div class="text-5xl font-black text-primary-container mb-4">100%</div>
+<p class="text-zinc-400 text-lg font-medium">Accuracy. Eliminate human error in billing, reporting, and lead management forever.</p>
+</div>
+<div class="p-10 rounded-3xl bg-surface-container-low border border-primary-container/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 text-secondary/10 group-hover:text-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-9xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h3 class="text-2xl font-bold mb-2 text-zinc-50">Scale without friction</h3>
+<div class="text-5xl font-black text-secondary mb-4">Real Growth</div>
+<p class="text-zinc-400 text-lg font-medium">Your people focus on strategy and creativity—the things you actually hired them for.</p>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="py-32 px-8 bg-surface-container-lowest">
+<div class="max-w-4xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-black text-center mb-24 text-zinc-50">Three Steps. <span class="text-primary-container">That's It.</span></h2>
+<div class="space-y-0">
+<div class="flex gap-12 group">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl z-10 shrink-0">1</div>
+<div class="w-0.5 h-32 flow-line"></div>
+</div>
+<div class="pb-16 pt-1">
+<h3 class="text-2xl font-bold mb-3 text-zinc-50">Tell us your pain</h3>
+<p class="text-zinc-400 text-lg font-medium">Book a quick discovery call. Show us where the spreadsheets are messy and where the "manual work" lives.</p>
+</div>
+</div>
+<div class="flex gap-12 group">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest border border-primary-container/30 text-primary-container flex items-center justify-center font-bold text-xl z-10 shrink-0">2</div>
+<div class="w-0.5 h-32 flow-line"></div>
+</div>
+<div class="pb-16 pt-1">
+<h3 class="text-2xl font-bold mb-3 text-zinc-50">We build the engine</h3>
+<p class="text-zinc-400 text-lg font-medium">Our experts map out the logic, connect your existing tools (WhatsApp, Xero, etc.), and stress-test the flows.</p>
+</div>
+</div>
+<div class="flex gap-12 group">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest border border-primary-container/30 text-primary-container flex items-center justify-center font-bold text-xl z-10 shrink-0">3</div>
+</div>
+<div class="pt-1">
+<h3 class="text-2xl font-bold mb-3 text-zinc-50">Get your time back</h3>
+<p class="text-zinc-400 text-lg font-medium">The "autopilot" switches on. Monitor your Rands being saved in real-time from a central dashboard.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROI Section -->
+<section class="py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-5xl font-black mb-6 text-zinc-50">See What You Could Save</h2>
+<div class="inline-block p-4 glass-panel rounded-2xl border border-outline-variant/10 text-zinc-300 font-mono text-sm">
+                    (Hours x Rate x Frequency) + Errors Prevented = <span class="text-primary-container">Monthly Benefit</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-8 rounded-3xl bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-all">
+<div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Scenario: Small Team</div>
+<div class="text-4xl font-bold text-primary mb-2">R11,200 <span class="text-lg text-zinc-400 font-normal">/mo</span></div>
+<p class="text-sm text-zinc-400 mb-6 italic font-medium">Saved by automating lead ingestion from WhatsApp to CRM</p>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[40%]"></div>
+</div>
+</div>
+<div class="p-8 rounded-3xl bg-surface-container-high border-2 border-primary-container shadow-2xl shadow-primary-container/5 relative scale-105">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary px-4 py-1 rounded-full text-[10px] font-black uppercase">High Impact</div>
+<div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Scenario: Logistics Hub</div>
+<div class="text-4xl font-bold text-primary mb-2">R30,500 <span class="text-lg text-zinc-400 font-normal">/mo</span></div>
+<p class="text-sm text-zinc-400 mb-6 italic font-medium">Saved by automating dispatch notifications &amp; invoice pairing</p>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[85%]"></div>
+</div>
+</div>
+<div class="p-8 rounded-3xl bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-all">
+<div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Scenario: Prof. Services</div>
+<div class="text-4xl font-bold text-primary mb-2">R20,800 <span class="text-lg text-zinc-400 font-normal">/mo</span></div>
+<p class="text-sm text-zinc-400 mb-6 italic font-medium">Saved by automating time-tracking reports and Xero reconciliation</p>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[65%]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-32 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="bg-primary-container/10 border border-primary-container/20 p-4 rounded-2xl mb-16 flex items-center justify-center gap-4">
+<span class="material-symbols-outlined text-primary-container" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-bold text-primary-container">Launch Special: First month 50% off on all plans.</span>
+</div>
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-5xl font-black mb-4 text-zinc-50">ZAR Pricing. No Lock-in.</h2>
+<p class="text-zinc-400 font-medium">Simple billing for complex problems. Cancel anytime.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Solo -->
+<div class="p-8 rounded-2xl bg-surface border border-outline-variant/10 flex flex-col">
+<h3 class="text-xl font-bold mb-2 text-zinc-50">Solo</h3>
+<div class="text-3xl font-bold mb-8 text-zinc-50">R999 <span class="text-sm text-zinc-400 font-normal">/mo</span></div>
+<ul class="space-y-4 text-sm text-zinc-400 mb-12 flex-grow font-medium">
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> 3 Automated Workflows</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Essential Integrations</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Email Support</li>
+</ul>
+<button class="w-full py-3 border border-outline-variant rounded-lg font-bold hover:bg-surface-variant transition-colors text-zinc-300">Select Plan</button>
+</div>
+<!-- Team -->
+<div class="p-8 rounded-2xl bg-surface-container-highest border-2 border-primary-container flex flex-col relative">
+<div class="absolute -top-3 right-6 bg-secondary text-on-secondary px-3 py-1 rounded-full text-[10px] font-black uppercase">Most Popular</div>
+<h3 class="text-xl font-bold mb-2 text-zinc-50">Team</h3>
+<div class="text-3xl font-bold mb-8 text-zinc-50">R2,500 <span class="text-sm text-zinc-400 font-normal">/mo</span></div>
+<ul class="space-y-4 text-sm text-zinc-300 mb-12 flex-grow font-semibold">
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> 10 Automated Workflows</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Pro Integrations (Xero)</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> WhatsApp Support</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Dashboard Access</li>
+</ul>
+<button class="w-full py-3 bg-primary-container text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity">Select Plan</button>
+</div>
+<!-- Business -->
+<div class="p-8 rounded-2xl bg-surface border border-outline-variant/10 flex flex-col">
+<h3 class="text-xl font-bold mb-2 text-zinc-50">Business</h3>
+<div class="text-3xl font-bold mb-8 text-zinc-50">R5,500 <span class="text-sm text-zinc-400 font-normal">/mo</span></div>
+<ul class="space-y-4 text-sm text-zinc-400 mb-12 flex-grow font-medium">
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Unlimited Workflows</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Custom Logic &amp; Scripts</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Priority Concierge Support</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Training Sessions</li>
+</ul>
+<button class="w-full py-3 border border-outline-variant rounded-lg font-bold hover:bg-surface-variant transition-colors text-zinc-300">Select Plan</button>
+</div>
+<!-- Enterprise -->
+<div class="p-8 rounded-2xl bg-surface border border-outline-variant/10 flex flex-col">
+<h3 class="text-xl font-bold mb-2 text-zinc-50">Enterprise</h3>
+<div class="text-3xl font-bold mb-8 text-zinc-50">Custom</div>
+<ul class="space-y-4 text-sm text-zinc-400 mb-12 flex-grow font-medium">
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Dedicated Automation Lead</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> On-premise Integration</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Compliance &amp; SSO</li>
+</ul>
+<button class="w-full py-3 border border-outline-variant rounded-lg font-bold hover:bg-surface-variant transition-colors text-zinc-300">Contact Sales</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto overflow-hidden">
+<h2 class="text-3xl font-black text-center mb-16 text-zinc-50">Trusted by Forward-Thinking SA Businesses</h2>
+<div class="flex gap-6 overflow-x-auto pb-12 snap-x scrollbar-hide">
+<div class="min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"Do.Qix didn't just save us time; they saved our sanity. Our Xero invoicing is now 100% automated."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Sarah Mentz</div>
+<div class="text-xs text-zinc-500 font-bold">Director, Cape Town Logistics</div>
+</div>
+</div>
+</div>
+<div class="min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"The WhatsApp integration changed how we handle leads. We respond in seconds now, not hours."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">David Zulu</div>
+<div class="text-xs text-zinc-500 font-bold">CEO, Zulu Digital</div>
+</div>
+</div>
+</div>
+<div class="min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"Implementation was seamless. They understood our business context immediately. Worth every rand."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Elena Rossouw</div>
+<div class="text-xs text-zinc-500 font-bold">Operations, AgriScale</div>
+</div>
+</div>
+</div>
+<div class="min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"No more copy-pasting. Our data accuracy went from 80% to 100% overnight."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Mark Thompson</div>
+<div class="text-xs text-zinc-500 font-bold">Founder, Thompson Legal</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom CTA -->
+<section class="py-32 px-8">
+<div class="max-w-5xl mx-auto rounded-[3rem] bg-surface-container-high border border-primary-container/20 p-16 text-center relative overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,229,160,0.15)_0%,transparent_50%)]"></div>
+<div class="relative z-10">
+<h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter text-zinc-50">Ready to Get Your <br/><span class="text-primary-container">Time Back?</span></h2>
+<p class="text-xl text-zinc-400 max-w-xl mx-auto mb-12 font-medium">Join dozens of high-growth South African teams automating their future today.</p>
+<button class="primary-gradient text-on-primary px-12 py-6 rounded-2xl text-2xl font-black shadow-2xl shadow-primary-container/20 hover:scale-105 active:scale-95 transition-all">
+                    Start Free
+                </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e13] w-full mt-auto py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="text-xl font-black text-zinc-100 tracking-tighter mb-4 block">Do.Qix</span>
+<p class="text-zinc-500 font-medium text-sm leading-relaxed mb-6">
+                © 2024 Do.Qix. Built for the kinetic edge. Transforming SA business through precision automation.
+            </p>
+</div>
+<div>
+<h4 class="text-zinc-100 font-bold mb-6">Navigation</h4>
+<ul class="space-y-3 font-medium text-sm">
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">Home</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">Services</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">Products</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-zinc-100 font-bold mb-6">Contact</h4>
+<ul class="space-y-3 font-medium text-sm">
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">Email</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">Phone</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">WhatsApp</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-zinc-100 font-bold mb-6">Legal</h4>
+<ul class="space-y-3 font-medium text-sm">
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">Privacy Policy</a></li>
+<li><a class="text-zinc-500 hover:text-zinc-200 hover:translate-x-1 transition-transform inline-block" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

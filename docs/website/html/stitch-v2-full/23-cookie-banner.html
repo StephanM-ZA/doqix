@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#003824",
+                        "inverse-on-surface": "#303036",
+                        "primary": "#6effc0",
+                        "surface-container": "#1f1f25",
+                        "on-tertiary": "#452b00",
+                        "on-error": "#690005",
+                        "tertiary-container": "#ffbd5b",
+                        "primary-container": "#00e5a0",
+                        "on-primary-fixed-variant": "#005236",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#35343a",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "surface-dim": "#131318",
+                        "secondary-fixed-dim": "#ffb95a",
+                        "on-secondary-fixed": "#2a1800",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2a292f",
+                        "tertiary-fixed-dim": "#fcba59",
+                        "tertiary-fixed": "#ffddb3",
+                        "on-tertiary-fixed": "#291800",
+                        "on-primary-container": "#006141",
+                        "outline-variant": "#3b4a41",
+                        "on-primary-fixed": "#002114",
+                        "surface-container-lowest": "#0e0e13",
+                        "background": "#131318",
+                        "surface-container-low": "#1b1b20",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-tertiary-container": "#744c00",
+                        "on-surface": "#e4e1e9",
+                        "surface": "#131318",
+                        "on-background": "#e4e1e9",
+                        "on-secondary-container": "#3d2400",
+                        "primary-fixed": "#47ffb8",
+                        "secondary-fixed": "#ffddb6",
+                        "surface-tint": "#00e29e",
+                        "inverse-primary": "#006c49",
+                        "secondary": "#ffb95a",
+                        "on-secondary": "#462a00",
+                        "inverse-surface": "#e4e1e9",
+                        "surface-bright": "#39383e",
+                        "primary-fixed-dim": "#00e29e",
+                        "tertiary": "#ffe1bb",
+                        "surface-variant": "#35343a",
+                        "secondary-container": "#c68315",
+                        "outline": "#84958a",
+                        "on-surface-variant": "#bacbbf",
+                        "on-error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131318]/60 backdrop-blur-xl">
+<div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+<div class="font-['Space_Grotesk'] text-2xl font-black text-[#00e5a0] tracking-tighter">Do.Qix</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold text-[#00e5a0] border-b-2 border-[#00e5a0] pb-1" href="#">Product</a>
+<a class="font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Solutions</a>
+<a class="font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Developers</a>
+<a class="font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-medium text-slate-400 hover:text-white transition-colors active:scale-95 transition-transform">Log In</button>
+<button class="bg-[#00e5a0] text-[#003824] px-6 py-2.5 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold hover:bg-[#6effc0] transition-all duration-200 active:scale-95">Get Started</button>
+</div>
+</div>
+</nav>
+<main class="flex-grow pt-32">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 py-20 lg:py-32 flex flex-col items-start">
+<div class="mb-6 px-4 py-1.5 bg-surface-container-low rounded-full border border-outline-variant/10">
+<span class="text-primary font-medium text-xs tracking-widest uppercase">The Kinetic Monolith Architecture</span>
+</div>
+<h1 class="text-6xl md:text-8xl font-black tracking-[-0.04em] leading-[0.9] max-w-4xl mb-10">
+                VELOCITY <br/> WITHOUT <br/> FRICTION.
+            </h1>
+<p class="text-xl md:text-2xl text-slate-400 max-w-2xl font-body leading-relaxed mb-12">
+                Automate complex enterprise workflows with architectural stability. Built for teams that ship faster than the speed of light.
+            </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-lg font-bold text-lg hover:scale-[1.02] transition-all duration-200 shadow-xl shadow-primary/10">
+                    Deploy Production Ready
+                </button>
+<button class="bg-transparent border border-outline-variant/20 px-8 py-4 rounded-lg font-bold text-lg text-on-surface hover:bg-surface-container-low transition-all duration-200">
+                    Read Documentation
+                </button>
+</div>
+</section>
+<!-- Bento Grid Dashboard Preview -->
+<section class="max-w-7xl mx-auto px-8 py-24">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+<div class="md:col-span-8 bg-surface-container-low rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="Dark sophisticated UI dashboard with glowing teal data visualizations, sleek charts, and minimalist terminal interface on obsidian background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeAyy815LUYKuq5R19oSSGnn3aXd5swm3pfmce8Oi1So-n66PpQtUHIG8r_XklcLkfxLWVgSvsHcTT6gE9FBvNpnLtqzS5TkiG0OQ9gU9GRnquz1KeAij_y4BKtRYqKDY6pvjU9AcGtp-3fWvIYqWWRJgrMMXw3Sp-ZTtnOYcEsr_7eDfnq3SK-53qGyzkUhVdMJL3Yg2zg_GsCwYo-zooXwg2G6djMMuoVFi14Pv3OoeIALAVgVIHGVBBMEwqtDTRehNPa48vUKo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent p-12 flex flex-col justify-end">
+<h3 class="text-3xl font-bold mb-2">Real-time Orchestration</h3>
+<p class="text-slate-400 max-w-md">Monitor every node in your kinetic pipeline with millisecond precision.</p>
+</div>
+</div>
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between border-l border-t border-outline-variant/5">
+<div>
+<div class="w-12 h-12 bg-primary-container/20 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="bolt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 tracking-tight">Zero-Config Scaling</h3>
+<p class="text-slate-500 leading-relaxed">Infrastructure that breathes with your load. Automatically. Silently.</p>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs font-bold uppercase tracking-widest text-slate-400">Node Status: Active</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Stats Asymmetric -->
+<section class="bg-surface-container-lowest py-32">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-16">
+<div>
+<div class="text-6xl font-black text-primary tracking-tighter mb-2">99.99%</div>
+<div class="text-sm uppercase tracking-[0.2em] font-bold text-slate-500">Uptime Reliability</div>
+<p class="mt-4 text-slate-400">The monolithic core ensures your processes never falter, even under extreme volatility.</p>
+</div>
+<div class="mt-12 md:mt-0">
+<div class="text-6xl font-black text-white tracking-tighter mb-2">240ms</div>
+<div class="text-sm uppercase tracking-[0.2em] font-bold text-slate-500">Global Latency</div>
+<p class="mt-4 text-slate-400">Edge-native execution routes your data through the shortest possible path.</p>
+</div>
+<div class="mt-12 md:mt-0">
+<div class="text-6xl font-black text-primary tracking-tighter mb-2">12M+</div>
+<div class="text-sm uppercase tracking-[0.2em] font-bold text-slate-500">Flows Daily</div>
+<p class="mt-4 text-slate-400">Trusted by high-velocity enterprise teams across the South African tech corridor.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e13] w-full py-12 border-t border-outline-variant/5 mt-auto">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="font-['Space_Grotesk'] text-xl font-black text-white">Do.Qix</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200 opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200 opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200 opacity-80 hover:opacity-100" href="#">Security</a>
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200 opacity-80 hover:opacity-100" href="#">Status</a>
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200 opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+<div class="font-['Inter'] text-xs tracking-wide text-slate-500">© 2024 Do.Qix. Built for the high-velocity enterprise.</div>
+</div>
+</footer>
+<!-- Cookie Banner -->
+<div class="fixed bottom-0 left-0 w-full z-[100] px-4 pb-4">
+<div class="max-w-5xl mx-auto bg-surface-container/60 backdrop-blur-2xl rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_20px_40px_rgba(0,0,0,0.6)] border border-white/5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="cookie">cookie</span>
+</div>
+<p class="font-body text-sm text-on-surface leading-snug">
+                    We use cookies to improve your experience. Nothing shady.
+                </p>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button class="flex-grow md:flex-none px-6 py-2 rounded-lg bg-primary-container text-on-primary font-bold text-sm hover:brightness-110 active:scale-95 transition-all">
+                    Accept
+                </button>
+<button class="flex-grow md:flex-none px-6 py-2 rounded-lg bg-surface-container-highest text-slate-400 font-medium text-sm hover:text-white transition-colors">
+                    Learn More
+                </button>
+</div>
+</div>
+</div>
+</body></html>

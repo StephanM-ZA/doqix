@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#e4e1e9",
+                        "primary-fixed-dim": "#00e29e",
+                        "inverse-primary": "#006c49",
+                        "surface-container": "#1f1f25",
+                        "secondary": "#ffb787",
+                        "tertiary-fixed": "#ffddb3",
+                        "on-primary-fixed": "#002114",
+                        "tertiary": "#ffe1bb",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#723600",
+                        "tertiary-fixed-dim": "#fcba59",
+                        "secondary-fixed": "#ffdcc7",
+                        "surface-container-lowest": "#0e0e13",
+                        "surface": "#131318",
+                        "primary-container": "#00e5a0",
+                        "on-secondary-container": "#5e2b00",
+                        "on-tertiary": "#452b00",
+                        "on-error": "#690005",
+                        "on-background": "#e4e1e9",
+                        "outline-variant": "#3b4a41",
+                        "on-primary-fixed-variant": "#005236",
+                        "secondary-container": "#ff8000",
+                        "error-container": "#93000a",
+                        "outline": "#84958a",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "surface-variant": "#35343a",
+                        "surface-container-high": "#2a292f",
+                        "on-primary-container": "#006141",
+                        "error": "#ffb4ab",
+                        "background": "#131318",
+                        "on-tertiary-fixed": "#291800",
+                        "primary-fixed": "#47ffb8",
+                        "on-secondary": "#502400",
+                        "secondary-fixed-dim": "#ffb787",
+                        "tertiary-container": "#ffbd5b",
+                        "surface-dim": "#131318",
+                        "surface-tint": "#00e29e",
+                        "primary": "#6effc0",
+                        "on-tertiary-container": "#744c00",
+                        "on-surface": "#e4e1e9",
+                        "on-secondary-fixed": "#311300",
+                        "surface-bright": "#39383e",
+                        "on-surface-variant": "#bacbbf",
+                        "on-primary": "#003824",
+                        "surface-container-low": "#1b1b20",
+                        "inverse-on-surface": "#303036",
+                        "surface-container-highest": "#35343a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0D2028; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .tonal-shift { background: linear-gradient(to bottom, var(--tw-gradient-from), var(--tw-gradient-to)); }
+    </style>
+</head>
+<body class="text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (JSON Execution) -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl shadow-2xl shadow-emerald-950/20">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-black tracking-tighter text-emerald-400">Do.Qix</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-inter tracking-tight uppercase label-sm text-slate-400 hover:text-emerald-300 transition-all duration-400 ease-out" href="#">Product</a>
+<a class="font-inter tracking-tight uppercase label-sm text-slate-400 hover:text-emerald-300 transition-all duration-400 ease-out" href="#">Solutions</a>
+<a class="font-inter tracking-tight uppercase label-sm text-slate-400 hover:text-emerald-300 transition-all duration-400 ease-out" href="#">Engineers</a>
+<a class="font-inter tracking-tight uppercase label-sm text-emerald-400 border-b-2 border-emerald-400 pb-1 hover:text-emerald-300 transition-all duration-400 ease-out" href="#">Legal</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="font-inter tracking-tight uppercase label-sm text-slate-400 hover:text-emerald-300 transition-all duration-400 ease-out">Log In</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold tracking-tight uppercase label-sm scale-105 active:scale-95 transition-transform">Get Started</button>
+</div>
+</div>
+<div class="h-px w-full bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent"></div>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-5xl mx-auto">
+<!-- Hero Header -->
+<header class="mb-20">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
+<div class="w-2 h-2 rounded-full bg-primary-fixed-dim"></div>
+<span class="text-[10px] font-bold tracking-[0.15em] uppercase text-primary">System Compliance V2.4</span>
+</div>
+<h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-8">
+<span class="text-on-background">Privacy</span><br/>
+<span class="text-primary-container">Policy</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                Our Engineered Fluidity architecture is designed with your data integrity at its core. Learn how Do.Qix protects your technical infrastructure and personal information.
+            </p>
+</header>
+<!-- Privacy Content Sections -->
+<div class="space-y-12">
+<!-- Bento-style Card 1 -->
+<section class="p-8 md:p-12 rounded-lg bg-surface-container-low border border-outline-variant/10">
+<div class="flex flex-col md:flex-row gap-12">
+<div class="md:w-1/3">
+<span class="text-label-sm font-bold tracking-widest uppercase text-secondary mb-4 block">01 / Collection</span>
+<h2 class="text-3xl font-bold tracking-tight text-on-surface">Data Gathering</h2>
+</div>
+<div class="md:w-2/3 space-y-6">
+<p class="text-on-surface-variant leading-relaxed">
+                            We collect information essential for high-performance automation. This includes system telemetry, engineer credentials, and deployment metadata required to optimize the Do.Qix engine.
+                        </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<div>
+<strong class="text-on-surface block">Infrastructure Logs</strong>
+<span class="text-sm text-on-surface-variant">Real-time performance metrics and system health data.</span>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<div>
+<strong class="text-on-surface block">Account Identity</strong>
+<span class="text-sm text-on-surface-variant">Authenticated credentials and professional profile information.</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Grid Layout for Smaller Sections -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<section class="p-8 rounded-lg bg-surface-container-highest border border-outline-variant/5">
+<span class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary-fixed-dim mb-4 block">02 / Processing</span>
+<h3 class="text-2xl font-bold mb-4 tracking-tight">Kinetic Processing</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                        Data is processed using localized edge computing to ensure minimal latency. We never sell your architectural blueprints or engineer data to third-party aggregators.
+                    </p>
+</section>
+<section class="p-8 rounded-lg bg-surface-container-highest border border-outline-variant/5">
+<span class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary-fixed-dim mb-4 block">03 / Security</span>
+<h3 class="text-2xl font-bold mb-4 tracking-tight">Obsidian Defense</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                        All data at rest is encrypted using AES-256 standards with rotating cryptographic keys. Our hardware-level security ensures your engine remains impenetrable.
+                    </p>
+</section>
+</div>
+<!-- Detailed Content Section -->
+<section class="py-12 border-t border-outline-variant/20">
+<div class="max-w-3xl">
+<h2 class="text-3xl font-bold tracking-tight mb-8">User Rights &amp; Governance</h2>
+<div class="space-y-8 text-on-surface-variant leading-relaxed">
+<p>
+                            Users under the Do.Qix ecosystem maintain full sovereignty over their generated data. You reserve the right to export, modify, or permanently delete your telemetry records from our primary and backup nodes at any time.
+                        </p>
+<div class="flex items-center p-6 rounded-md bg-secondary-container/10 border border-secondary-container/20 gap-4">
+<span class="material-symbols-outlined text-secondary-container">shield_with_heart</span>
+<p class="text-sm font-medium text-secondary">Note: Deleting system telemetry may affect the predictive accuracy of your automation models.</p>
+</div>
+<p>
+                            We adhere to GDPR, CCPA, and global engineering safety standards. Changes to this policy are communicated via system-level notifications and require re-authentication for continued high-level access.
+                        </p>
+</div>
+</div>
+</section>
+<!-- Decorative Visual Break -->
+<div class="relative h-64 w-full rounded-lg overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Abstract macro shot of high-tech circuit board with glowing emerald data paths and dark obsidian components in cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0O7HufBrA_HQdJCgPEiruCCxa_ixTsMFJGKvJDYQVWcQGxp5UtfgvPBqgK_LqOatLtWEhoWr8z3fWrqFRTQ3VZNdN1UvBcu6-7OJ0kfDXRKx2oFc3I9kp47kI7JZQ4VFeu7x7dZSarvpMvxqHbpwgB7ihA3XpfMk7lSxOQSdqh9TtLhv0_7OKSBsykj_rzQPxtK3lxD2fD55R2MY35k98fS1eqNmYJbnSNUER1toaXapa8epQJ257cypdyP6Ff53RwEbcgWnjcA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<div class="text-xs font-black tracking-widest uppercase text-emerald-400 mb-2">Internal Protocol</div>
+<div class="text-2xl font-bold text-white tracking-tight">Zero-Knowledge Architecture</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (JSON Execution) -->
+<footer class="w-full rounded-t-[32px] bg-slate-950 border-t border-slate-800/30">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="mb-8 md:mb-0">
+<div class="text-lg font-bold text-emerald-400 mb-4">Do.Qix</div>
+<p class="font-inter text-sm tracking-wide text-slate-500 max-w-xs">
+                    Engineering the next generation of fluid digital infrastructure with precision and power.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 mb-8 md:mb-0">
+<a class="font-inter text-sm tracking-wide text-emerald-400 font-bold hover:text-emerald-400 transition-colors duration-300" href="#">Privacy Policy</a>
+<a class="font-inter text-sm tracking-wide text-slate-500 hover:text-emerald-400 transition-colors duration-300" href="#">Terms of Service</a>
+<a class="font-inter text-sm tracking-wide text-slate-500 hover:text-emerald-400 transition-colors duration-300" href="#">Security</a>
+<a class="font-inter text-sm tracking-wide text-slate-500 hover:text-emerald-400 transition-colors duration-300" href="#">Cookie Settings</a>
+</div>
+<div class="text-right">
+<p class="font-inter text-sm tracking-wide text-slate-500">© 2024 Do.Qix Engineered Systems. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Atmosphere Glow -->
+<div class="fixed top-[-10%] left-[-10%] w-[800px] h-[800px] bg-emerald-400/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-emerald-400/5 blur-[100px] rounded-full pointer-events-none -z-10"></div>
+</body></html>

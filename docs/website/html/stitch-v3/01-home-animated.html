@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Do.Qix | Your workflows, on autopilot.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#00e29e",
+                        "surface-variant": "#35343a",
+                        "outline-variant": "#3b4a41",
+                        "on-primary-fixed": "#002114",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "surface-container": "#1f1f25",
+                        "secondary-container": "#c68315",
+                        "surface-container-highest": "#35343a",
+                        "inverse-surface": "#e4e1e9",
+                        "on-secondary-fixed": "#2a1800",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#bacbbf",
+                        "surface-container-low": "#1b1b20",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a292f",
+                        "secondary-fixed": "#ffddb6",
+                        "on-primary": "#003824",
+                        "inverse-primary": "#006c49",
+                        "surface": "#131318",
+                        "on-tertiary": "#452b00",
+                        "secondary": "#ffb95a",
+                        "on-surface": "#e4e1e9",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "primary-fixed": "#47ffb8",
+                        "on-primary-container": "#006141",
+                        "on-tertiary-container": "#744c00",
+                        "on-background": "#e4e1e9",
+                        "primary-fixed-dim": "#00e29e",
+                        "secondary-fixed-dim": "#ffb95a",
+                        "outline": "#84958a",
+                        "on-secondary": "#462a00",
+                        "background": "#131318",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#fcba59",
+                        "on-secondary-container": "#3d2400",
+                        "surface-bright": "#39383e",
+                        "on-primary-fixed-variant": "#005236",
+                        "tertiary": "#ffe1bb",
+                        "on-tertiary-fixed": "#291800",
+                        "surface-dim": "#131318",
+                        "tertiary-container": "#ffbd5b",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#303036",
+                        "primary": "#6effc0",
+                        "surface-container-lowest": "#0e0e13",
+                        "primary-container": "#00e5a0",
+                        "tertiary-fixed": "#ffddb3"
+                    },
+                    "fontFamily": {
+                        "sans": ["Inter", "sans-serif"],
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0e0e13; color: #e4e1e9; overflow-x: hidden; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Inter', sans-serif; color: #f4f4f5; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .primary-gradient { background: linear-gradient(135deg, #6effc0 0%, #00e5a0 100%); }
+        .glass-panel { background: rgba(53, 52, 58, 0.6); backdrop-filter: blur(24px); }
+        .hero-glow { background: radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.15) 0%, rgba(14, 14, 19, 0) 70%); }
+        .flow-line { background: linear-gradient(to bottom, #00e5a0, transparent); }
+
+        /* Animation Philosophy Implementation */
+        :root {
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --micro-interaction: 150ms;
+            --component-transition: 300ms;
+            --section-reveal: 500ms;
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: scale(0.97) translateY(20px);
+            transition: opacity var(--section-reveal) var(--ease-out-expo),
+                        transform var(--section-reveal) var(--ease-out-expo);
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: scale(0.97) translateY(10px);
+            transition: opacity var(--component-transition) var(--ease-out-expo),
+                        transform var(--component-transition) var(--ease-out-expo);
+        }
+
+        .reveal-on-scroll.active .stagger-item {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Generate staggers for up to 10 items */
+        .reveal-on-scroll.active .stagger-item:nth-child(1) { transition-delay: 80ms; }
+        .reveal-on-scroll.active .stagger-item:nth-child(2) { transition-delay: 160ms; }
+        .reveal-on-scroll.active .stagger-item:nth-child(3) { transition-delay: 240ms; }
+        .reveal-on-scroll.active .stagger-item:nth-child(4) { transition-delay: 320ms; }
+        .reveal-on-scroll.active .stagger-item:nth-child(5) { transition-delay: 400ms; }
+        .reveal-on-scroll.active .stagger-item:nth-child(6) { transition-delay: 480ms; }
+        .reveal-on-scroll.active .stagger-item:nth-child(7) { transition-delay: 560ms; }
+        .reveal-on-scroll.active .stagger-item:nth-child(8) { transition-delay: 640ms; }
+
+        .btn-interact, .card-interact {
+            transition: transform var(--micro-interaction) var(--ease-out-expo),
+                        box-shadow var(--micro-interaction) var(--ease-out-expo),
+                        background-color var(--micro-interaction) var(--ease-out-expo),
+                        opacity var(--micro-interaction) var(--ease-out-expo);
+        }
+
+        .btn-interact:hover, .card-interact:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-interact:active {
+            transform: scale(0.98);
+        }
+
+        .nav-link {
+            transition: color var(--micro-interaction) var(--ease-out-expo);
+        }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-on-primary-container font-sans">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-zinc-950/60 backdrop-blur-lg shadow-2xl shadow-black/40">
+<div class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="text-2xl font-black text-zinc-100 tracking-tighter">Do.Qix</span>
+<span class="hidden sm:inline text-xs text-zinc-500 font-medium tracking-wide">Efficiency, Engineered</span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="nav-link text-[#00e5a0] font-bold border-b-2 border-[#00e5a0] pb-1" href="#">Home</a>
+<a class="nav-link text-zinc-400 hover:text-zinc-100 transition-colors font-medium" href="#">Services</a>
+<a class="nav-link text-zinc-400 hover:text-zinc-100 transition-colors font-medium" href="#">Products</a>
+<a class="nav-link text-zinc-400 hover:text-zinc-100 transition-colors font-medium" href="#">Contact</a>
+</div>
+<button class="btn-interact bg-[#00e5a0] text-[#003824] px-6 py-2.5 rounded-full font-bold hover:opacity-90">
+            Start Free
+        </button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="reveal-on-scroll active relative min-h-[921px] flex flex-col items-center justify-center px-6 overflow-hidden hero-glow">
+<div class="max-w-4xl text-center z-10">
+<h1 class="stagger-item text-6xl md:text-8xl font-black tracking-tighter mb-6 leading-[0.9] text-zinc-50">
+                Your workflows, <br/><span class="text-primary-container">on autopilot.</span>
+</h1>
+<p class="stagger-item text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+                Do.Qix connects the tools you use daily, eliminates repetitive busywork, and runs your business processes automatically so you can focus on what matters.
+            </p>
+<div class="stagger-item flex flex-col items-center gap-6">
+<button class="btn-interact primary-gradient text-on-primary px-10 py-5 rounded-xl text-xl font-bold shadow-xl shadow-primary-container/20">
+                    Start Free
+                </button>
+<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold tracking-wide text-zinc-400">
+<span class="flex items-center gap-2"><span class="text-secondary">●</span> 100+ workflows running for SA businesses</span>
+<span class="flex items-center gap-2"><span class="text-secondary">●</span> Response within 24 hours</span>
+<span class="flex items-center gap-2 font-bold text-secondary">Priced in rands</span>
+</div>
+</div>
+</div>
+<!-- Kinetic Node Diagram Visualization -->
+<div class="stagger-item mt-20 relative w-full max-w-5xl h-64 flex justify-between items-center opacity-40 md:opacity-100 px-4 md:px-0">
+<div class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center border border-outline-variant/20 shadow-xl shadow-black/40">
+<img alt="Xero logo" class="w-10 h-10 grayscale brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3PTQlRcMNsZA3xvzUPmCz0xBpBK49K5_b4iC4y4adwvR6t5OyNPd7NASUnwzg4uMd17hlXTZ01IW-Mp35KgpwfjU4yXP2YT8xKIKnknC3RhNSB9GZT9BOoOS9STMw94sNl2wQ5xdipNu2vE4u_7qyVaQlDU-R-cRXOD5tzDkhOi_R1ZXZO31NL-F09wjustPRNmsN97qUazomvZ5HKIN7F88TjvhGhyPdEg-6Iob1_c204OrUYUBPqXzw7iOg0sArt1YDcfSsITQ"/>
+</div>
+<div class="flex-grow h-px bg-gradient-to-r from-primary-container/50 to-secondary/50 relative mx-4">
+<div class="absolute -top-1 left-1/4 w-2 h-2 rounded-full bg-primary-container shadow-[0_0_10px_#00e5a0]"></div>
+</div>
+<div class="w-20 h-20 glass-panel rounded-full flex items-center justify-center border-2 border-primary-container shadow-[0_0_30px_rgba(0,229,160,0.2)]">
+<span class="material-symbols-outlined text-primary-container text-4xl" data-icon="hub">hub</span>
+</div>
+<div class="flex-grow h-px bg-gradient-to-r from-secondary/50 to-primary-container/50 relative mx-4">
+<div class="absolute -top-1 right-1/4 w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_#ffb347]"></div>
+</div>
+<div class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center border border-outline-variant/20 shadow-xl shadow-black/40">
+<img alt="WhatsApp logo" class="w-10 h-10 grayscale brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH5XcEaV8ZJ0GKOA9VVeiX1uoIhBcWOyn0qNrqM6XKuvARfYZIWK9SfBkmEo6x0eJ_ucCK_15KKC2mALimxJ-YjK--haqN8ola8ggFU4gCEzMI5uUoLsVEw2EotGPIlfAvAnY2fzl8oeENMNrAh-kR33AjUSqFYNUyi1E3k1CXXu2vqo56bculNqqfpdUgVU8TbgQZNnflAiOApFSnTnvaxBlJ1SoqowgW6i8KZOk_SRyt0-_uSkeCHlLwbR9oeL_F9HBqxvImKbI"/>
+</div>
+</div>
+</section>
+<!-- Problem Section -->
+<section class="reveal-on-scroll py-32 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+<div>
+<h2 class="stagger-item text-4xl md:text-5xl font-extrabold mb-8 leading-tight text-zinc-50">
+                    Your Team Is <span class="text-secondary">Losing a Full Day</span> Every Week
+                </h2>
+<p class="stagger-item text-zinc-400 mb-8 text-lg font-medium leading-relaxed">Research shows professionals spend nearly 30% of their work week on manual, low-value tasks. That's more than a full day, every single week, lost to work a machine should be doing.</p>
+<div class="stagger-item mb-12">
+<span class="text-8xl font-black text-primary tracking-tighter">30%</span>
+</div>
+<p class="stagger-item text-zinc-300 font-semibold mb-4">You know the feeling:</p>
+<ul class="stagger-item space-y-4">
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span>
+                        Copying the same data between apps — again
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span>
+                        Manually sending invoices and chasing payments
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span>
+                        Updating three systems every time a new customer signs up
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span>
+                        Spending Friday afternoon pulling together the same report
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span>
+                        Forwarding emails because there's no system to route them
+                    </li>
+<li class="flex items-center gap-3 text-zinc-300 font-medium">
+<span class="material-symbols-outlined text-secondary" data-icon="error">error</span>
+                        Fixing mistakes caused by tired eyes and too many spreadsheets
+                    </li>
+</ul>
+</div>
+<div class="grid gap-6">
+<div class="card-interact p-8 rounded-2xl bg-surface border border-outline-variant/10 hover:bg-surface-container group">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform duration-150" data-icon="payments">payments</span>
+<h3 class="text-xl font-bold mb-2 text-zinc-50">It drains your money.</h3>
+<p class="text-zinc-400 font-medium text-sm">One wrong number cascades into wrong invoices, wrong deliveries, and hours of corrections. Reducing errors by just 10-20% can cut processing costs by 20-30%.</p>
+</div>
+<div class="card-interact p-8 rounded-2xl bg-surface border border-outline-variant/10 hover:bg-surface-container group">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform duration-150" data-icon="group_off">group_off</span>
+<h3 class="text-xl font-bold mb-2 text-zinc-50">It wastes your best people.</h3>
+<p class="text-zinc-400 font-medium text-sm">You hired smart, creative problem-solvers. They're spending half their day copying and pasting. That's not just inefficient — it's demoralising.</p>
+</div>
+<div class="card-interact p-8 rounded-2xl bg-surface border border-outline-variant/10 hover:bg-surface-container group">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform duration-150" data-icon="trending_down">trending_down</span>
+<h3 class="text-xl font-bold mb-2 text-zinc-50">It kills your growth.</h3>
+<p class="text-zinc-400 font-medium text-sm">When everyone's buried in admin, innovation stalls. Customer response times slow down. Your competitors who have automated are already moving faster.</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12">
+<p class="stagger-item text-zinc-500 italic text-center text-lg font-medium">We call it the Productivity Trap. You're busy all day — but never getting ahead.</p>
+</div>
+</section>
+<!-- Solution Section -->
+<section class="reveal-on-scroll py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto text-center mb-20">
+<h2 class="stagger-item text-4xl md:text-6xl font-black tracking-tight text-zinc-50">We Take the Boring Stuff <br/><span class="text-primary-container">Off Your Plate</span></h2>
+<p class="stagger-item text-zinc-400 text-lg max-w-3xl mx-auto mt-6 font-medium leading-relaxed">We design and build automations that handle the tasks eating your team's day. The spreadsheet shuffle, the inbox routing, the same 47 steps every Monday morning. All of it runs in the background, 24/7. Think of us as your automation department, without the overhead of hiring one.</p>
+</div>
+<div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="stagger-item card-interact p-10 rounded-3xl bg-surface-container-low border border-primary-container/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 text-primary/10 group-hover:text-primary/20 transition-colors duration-150">
+<span class="material-symbols-outlined text-9xl" data-icon="schedule">schedule</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 text-zinc-50">Your mornings come back.</h3>
+<p class="text-zinc-400 text-lg font-medium">The admin that ate the first two hours of every day? It runs itself now. Most clients reclaim 8-15 hours a week within the first month.</p>
+</div>
+<div class="stagger-item card-interact p-10 rounded-3xl bg-surface-container-low border border-primary-container/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 text-secondary/10 group-hover:text-secondary/20 transition-colors duration-150">
+<span class="material-symbols-outlined text-9xl" data-icon="savings">savings</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 text-zinc-50">Your budgets stretch further.</h3>
+<p class="text-zinc-400 text-lg font-medium">Fewer manual steps means fewer mistakes, less rework, and lower running costs. One client cut R20,000/month in preventable data errors alone.</p>
+</div>
+<div class="stagger-item card-interact p-10 rounded-3xl bg-surface-container-low border border-primary-container/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 text-primary/10 group-hover:text-primary/20 transition-colors duration-150">
+<span class="material-symbols-outlined text-9xl" data-icon="data_object">data_object</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 text-zinc-50">Your data actually works for you.</h3>
+<p class="text-zinc-400 text-lg font-medium">Information flows where it needs to go — accurately, every time, at any volume. No more 'which version is the latest?' moments.</p>
+</div>
+<div class="stagger-item card-interact p-10 rounded-3xl bg-surface-container-low border border-primary-container/10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 text-secondary/10 group-hover:text-secondary/20 transition-colors duration-150">
+<span class="material-symbols-outlined text-9xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h3 class="text-2xl font-bold mb-4 text-zinc-50">Your people do the work you hired them for.</h3>
+<p class="text-zinc-400 text-lg font-medium">When the busywork disappears, your team can finally focus on strategy, clients, and the ideas that actually grow the business.</p>
+</div>
+</div>
+<!-- Callout card -->
+<div class="max-w-5xl mx-auto mt-12">
+<div class="stagger-item p-8 rounded-2xl border-2 border-primary-container/30 bg-surface-container-low">
+<p class="text-zinc-300 text-lg font-medium leading-relaxed">And here's the thing: we're not replacing anyone. Automation takes over the robotic tasks — the admin grind, the data shuffling, the stuff nobody signed up to do forever. Your team keeps their jobs and gets to do more meaningful work. That's the whole point.</p>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="reveal-on-scroll py-32 px-8 bg-surface-container-lowest">
+<div class="max-w-4xl mx-auto">
+<h2 class="stagger-item text-4xl md:text-5xl font-black text-center mb-24 text-zinc-50">Three Steps. <span class="text-primary-container">That's It.</span></h2>
+<div class="space-y-0">
+<div class="stagger-item flex gap-12 group">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl z-10 shrink-0">1</div>
+<div class="w-0.5 h-32 flow-line"></div>
+</div>
+<div class="pb-16 pt-1">
+<h3 class="text-2xl font-bold mb-3 text-zinc-50">Tell us what's wasting your time.</h3>
+<p class="text-zinc-400 text-lg font-medium">A quick call — 15 minutes. We ask things like: What do you do every day that feels like groundhog day? Where do things fall through the cracks? No tech speak. Just a conversation.</p>
+</div>
+</div>
+<div class="stagger-item flex gap-12 group">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest border border-primary-container/30 text-primary-container flex items-center justify-center font-bold text-xl z-10 shrink-0">2</div>
+<div class="w-0.5 h-32 flow-line"></div>
+</div>
+<div class="pb-16 pt-1">
+<h3 class="text-2xl font-bold mb-3 text-zinc-50">We build your automations.</h3>
+<p class="text-zinc-400 text-lg font-medium">We map your process, find the bottlenecks, and build workflows that connect your apps and handle the busywork. You don't touch a line of code. You don't learn new software. We do all of it.</p>
+</div>
+</div>
+<div class="stagger-item flex gap-12 group">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest border border-primary-container/30 text-primary-container flex items-center justify-center font-bold text-xl z-10 shrink-0">3</div>
+</div>
+<div class="pt-1">
+<h3 class="text-2xl font-bold mb-3 text-zinc-50">You get your time back.</h3>
+<p class="text-zinc-400 text-lg font-medium">Your automations go live. Data flows where it needs to go. Emails send themselves. Reports update on their own. We monitor everything and keep it running — you focus on what matters.</p>
+</div>
+</div>
+</div>
+<div class="text-center mt-16">
+<button class="btn-interact primary-gradient text-on-primary px-10 py-5 rounded-xl text-xl font-bold shadow-xl shadow-primary-container/20">
+                    Start Free
+                </button>
+</div>
+</div>
+</section>
+<!-- ROI Section -->
+<section class="reveal-on-scroll py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="stagger-item text-4xl md:text-5xl font-black mb-6 text-zinc-50">See What You Could Save</h2>
+<div class="stagger-item inline-block p-4 glass-panel rounded-2xl border border-outline-variant/10 text-zinc-300 font-mono text-sm">
+                    (Hours Saved x Hourly Rate x Frequency) + Errors Prevented = <span class="text-primary-container">Monthly Benefit</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="stagger-item card-interact p-8 rounded-3xl bg-surface-container border border-outline-variant/10">
+<div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Admin Data Entry</div>
+<div class="text-4xl font-bold text-primary mb-2">R11,000 <span class="text-lg text-zinc-400 font-normal">/mo</span></div>
+<p class="text-sm text-zinc-400 mb-6 font-medium">Your admin spends 2 hours/day on data entry at R250/hr. That's R11,000/month on one task. Automate it — that money goes back into the business.</p>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[40%]"></div>
+</div>
+</div>
+<div class="stagger-item card-interact p-8 rounded-3xl bg-surface-container-high border-2 border-primary-container shadow-2xl shadow-primary-container/5 relative">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary px-4 py-1 rounded-full text-[10px] font-black uppercase">High Impact</div>
+<div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Sales CRM Entry</div>
+<div class="text-4xl font-bold text-primary mb-2">R30,000 <span class="text-lg text-zinc-400 font-normal">/mo</span></div>
+<p class="text-sm text-zinc-400 mb-6 font-medium">Sales team loses 30 min per lead on manual CRM entry. 200 leads/month. That's R30,000/month in selling time recovered.</p>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[85%]"></div>
+</div>
+</div>
+<div class="stagger-item card-interact p-8 rounded-3xl bg-surface-container border border-outline-variant/10">
+<div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Data Errors</div>
+<div class="text-4xl font-bold text-primary mb-2">R20,000 <span class="text-lg text-zinc-400 font-normal">/mo</span></div>
+<p class="text-sm text-zinc-400 mb-6 font-medium">Data errors cost R500 each to fix. Happens 40 times/month. That's R20,000/month in preventable rework.</p>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[65%]"></div>
+</div>
+</div>
+</div>
+<div class="text-center mt-12">
+<p class="stagger-item text-zinc-400 text-lg font-medium max-w-2xl mx-auto mb-8">Now add those up. Across every repetitive task in your company. The ROI is real, it's fast, and it compounds.</p>
+<button class="btn-interact primary-gradient text-on-primary px-10 py-5 rounded-xl text-lg font-bold shadow-xl shadow-primary-container/20">
+                    Want us to calculate yours? Start Free
+                </button>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="reveal-on-scroll py-32 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="stagger-item text-4xl md:text-5xl font-black mb-4 text-zinc-50">Pricing That Makes Sense</h2>
+<p class="stagger-item text-zinc-400 font-medium max-w-3xl mx-auto text-lg leading-relaxed">No hidden fees. No confusing credit systems. No per-task charges that punish you for growing. Everything in South African rands. Month-to-month — we keep clients because we deliver, not because of contracts.</p>
+</div>
+<div class="stagger-item bg-primary-container/10 border border-primary-container/20 p-4 rounded-2xl mb-16 flex items-center justify-center gap-4">
+<span class="material-symbols-outlined text-primary-container" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-bold text-primary-container">Launch offer: First month at 50% on any plan.</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Solo -->
+<div class="stagger-item card-interact p-8 rounded-2xl bg-surface border border-outline-variant/10 flex flex-col">
+<h3 class="text-xl font-bold mb-1 text-zinc-50">Solo</h3>
+<p class="text-xs text-zinc-500 font-medium mb-4">Best for: Solopreneurs &amp; freelancers</p>
+<div class="text-3xl font-bold mb-2 text-zinc-50">R999 <span class="text-sm text-zinc-400 font-normal">/mo</span></div>
+<ul class="space-y-4 text-sm text-zinc-400 mb-12 flex-grow font-medium">
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> 1 Workflow</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Free setup</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Email support (48hr)</li>
+</ul>
+<button class="btn-interact w-full py-3 border border-outline-variant rounded-lg font-bold hover:bg-surface-variant text-zinc-300">Start Free</button>
+</div>
+<!-- Team -->
+<div class="stagger-item card-interact p-8 rounded-2xl bg-surface-container-highest border-2 border-primary-container flex flex-col relative">
+<div class="absolute -top-3 right-6 bg-secondary text-on-secondary px-3 py-1 rounded-full text-[10px] font-black uppercase">Most Popular</div>
+<h3 class="text-xl font-bold mb-1 text-zinc-50">Team</h3>
+<p class="text-xs text-zinc-500 font-medium mb-4">Best for: Small teams (2-15 people)</p>
+<div class="text-3xl font-bold mb-2 text-zinc-50">R2,500 <span class="text-sm text-zinc-400 font-normal">/mo</span></div>
+<ul class="space-y-4 text-sm text-zinc-300 mb-12 flex-grow font-semibold">
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Up to 3 Workflows</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> R1,500 setup</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Priority + WhatsApp (24hr)</li>
+</ul>
+<button class="btn-interact w-full py-3 bg-primary-container text-on-primary rounded-lg font-bold">Start Free</button>
+</div>
+<!-- Business -->
+<div class="stagger-item card-interact p-8 rounded-2xl bg-surface border border-outline-variant/10 flex flex-col">
+<h3 class="text-xl font-bold mb-1 text-zinc-50">Business</h3>
+<p class="text-xs text-zinc-500 font-medium mb-4">Best for: Growing SMEs (15-50 people)</p>
+<div class="text-3xl font-bold mb-2 text-zinc-50">R5,500 <span class="text-sm text-zinc-400 font-normal">/mo</span></div>
+<ul class="space-y-4 text-sm text-zinc-400 mb-12 flex-grow font-medium">
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Up to 6 Workflows</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> R2,500 setup</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Dedicated + monthly strategy call</li>
+</ul>
+<button class="btn-interact w-full py-3 border border-outline-variant rounded-lg font-bold hover:bg-surface-variant text-zinc-300">Start Free</button>
+</div>
+<!-- Enterprise -->
+<div class="stagger-item card-interact p-8 rounded-2xl bg-surface border border-outline-variant/10 flex flex-col">
+<h3 class="text-xl font-bold mb-1 text-zinc-50">Enterprise</h3>
+<p class="text-xs text-zinc-500 font-medium mb-4">Best for: Larger operations (50+)</p>
+<div class="text-3xl font-bold mb-2 text-zinc-50">Custom</div>
+<ul class="space-y-4 text-sm text-zinc-400 mb-12 flex-grow font-medium">
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Unlimited Workflows (scoped)</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Let's talk (setup)</li>
+<li class="flex gap-2"><span class="material-symbols-outlined text-primary-container text-sm" data-icon="check">check</span> Dedicated account manager</li>
+</ul>
+<button class="btn-interact w-full py-3 border border-outline-variant rounded-lg font-bold hover:bg-surface-variant text-zinc-300">Show Me What's Possible</button>
+</div>
+</div>
+<p class="stagger-item text-center text-zinc-500 font-medium text-sm mt-10">Every plan includes: Hosting, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.</p>
+<div class="text-center mt-8">
+<button class="btn-interact primary-gradient text-on-primary px-10 py-5 rounded-xl text-lg font-bold shadow-xl shadow-primary-container/20">
+                    Start Free
+                </button>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="reveal-on-scroll py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto overflow-hidden">
+<h2 class="stagger-item text-3xl font-black text-center mb-16 text-zinc-50">Don't Take Our Word For It</h2>
+<div class="flex gap-6 overflow-x-auto pb-12 snap-x scrollbar-hide">
+<div class="card-interact min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"I used to do my invoicing on Sunday nights. Do.Qix built me one workflow and I haven't sent an invoice manually since. It paid for itself in the first month."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Lerato M.</div>
+<div class="text-xs text-zinc-500 font-bold">Bookkeeping Consultant, Pretoria</div>
+<span class="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest bg-primary-container/10 text-primary-container px-2 py-0.5 rounded-full">Solo plan</span>
+</div>
+</div>
+</div>
+<div class="card-interact min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"We're a team of six and the admin was quietly eating a full day every week. Three Do.Qix workflows later — lead capture, quote-to-invoice, weekly reporting — and Fridays are for actual work again."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Reuben P.</div>
+<div class="text-xs text-zinc-500 font-bold">Managing Director, Cape Town</div>
+<span class="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest bg-primary-container/10 text-primary-container px-2 py-0.5 rounded-full">Team plan</span>
+</div>
+</div>
+</div>
+<div class="card-interact min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"I liked that they didn't try to sell me anything I didn't need. They mapped our processes, showed me where the time was going, and built exactly what we agreed. Refreshingly boring."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Thandi N.</div>
+<div class="text-xs text-zinc-500 font-bold">Founder, Durban</div>
+<span class="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest bg-primary-container/10 text-primary-container px-2 py-0.5 rounded-full">Team plan</span>
+</div>
+</div>
+</div>
+<div class="card-interact min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"We were drowning in WhatsApp orders. Do.Qix built a flow that captures every message, pushes it into our system, and fires off the confirmation automatically. We've handled 30% more volume without hiring."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Imraan S.</div>
+<div class="text-xs text-zinc-500 font-bold">Director, Johannesburg</div>
+<span class="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest bg-primary-container/10 text-primary-container px-2 py-0.5 rounded-full">Business plan</span>
+</div>
+</div>
+</div>
+<div class="card-interact min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"The monthly strategy call is the part nobody advertises but everybody should. We come in with one problem, leave with three automations on the roadmap. Feels like having an ops team we didn't have to hire."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Nadia V.</div>
+<div class="text-xs text-zinc-500 font-bold">COO, Cape Town</div>
+<span class="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest bg-primary-container/10 text-primary-container px-2 py-0.5 rounded-full">Business plan</span>
+</div>
+</div>
+</div>
+<div class="card-interact min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"What sold me was the rand pricing and month-to-month. No dollar exposure, no lock-in, no 'enterprise' sales theatre. They build, they bill, they keep things running."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Johan B.</div>
+<div class="text-xs text-zinc-500 font-bold">Founder, Stellenbosch</div>
+<span class="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest bg-primary-container/10 text-primary-container px-2 py-0.5 rounded-full">Team plan</span>
+</div>
+</div>
+</div>
+<div class="card-interact min-w-[320px] md:min-w-[400px] p-8 rounded-2xl bg-surface-container border-l-4 border-primary-container snap-center">
+<p class="text-lg italic mb-6 text-zinc-200 font-medium">"Our finance team got their month-ends back. What used to be a three-day reporting scramble now runs on its own by Tuesday lunchtime. I don't think they'd let us cancel if we tried."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest"></div>
+<div>
+<div class="font-bold text-zinc-50">Sipho D.</div>
+<div class="text-xs text-zinc-500 font-bold">Finance Manager, Sandton</div>
+<span class="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest bg-primary-container/10 text-primary-container px-2 py-0.5 rounded-full">Business plan</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom CTA -->
+<section class="reveal-on-scroll py-32 px-8">
+<div class="max-w-5xl mx-auto rounded-[3rem] bg-surface-container-high border border-primary-container/20 p-16 text-center relative overflow-hidden card-interact">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,229,160,0.15)_0%,transparent_50%)]"></div>
+<div class="relative z-10">
+<h2 class="stagger-item text-5xl md:text-7xl font-black mb-8 tracking-tighter text-zinc-50">Ready to Get Your <br/><span class="text-primary-container">Time Back?</span></h2>
+<p class="stagger-item text-xl text-zinc-400 max-w-xl mx-auto mb-12 font-medium">Every day your team spends on repetitive tasks is a day they're not spending on work that grows the business.</p>
+<button class="btn-interact primary-gradient text-on-primary px-12 py-6 rounded-2xl text-2xl font-black shadow-2xl shadow-primary-container/20">
+                    Start Free
+                </button>
+<p class="stagger-item text-sm text-zinc-500 mt-6 max-w-lg mx-auto font-medium">15 minutes. No commitment. No sales pitch. Just a clear picture of where you're losing time — and how to get it back.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e13] w-full mt-auto py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="text-xl font-black text-zinc-100 tracking-tighter mb-2 block">Do.Qix</span>
+<p class="text-zinc-500 font-medium text-sm leading-relaxed mb-6">
+                Do.Qix — Efficiency, Engineered<br/>
+                &copy; 2026 Do.Qix. All rights reserved.
+            </p>
+</div>
+<div>
+<h4 class="text-zinc-100 font-bold mb-6">Navigation</h4>
+<ul class="space-y-3 font-medium text-sm">
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="#">Home</a></li>
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="#">Services</a></li>
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="#">Products</a></li>
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-zinc-100 font-bold mb-6">Contact</h4>
+<ul class="space-y-3 font-medium text-sm">
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="mailto:hello@doqix.co.za">hello@doqix.co.za</a></li>
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="#">LinkedIn</a></li>
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="#">X</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-zinc-100 font-bold mb-6">Legal</h4>
+<ul class="space-y-3 font-medium text-sm">
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="#">Privacy Policy</a></li>
+<li><a class="nav-link text-zinc-500 hover:text-zinc-200" href="#">Terms &amp; Conditions</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+    // Intersection Observer for Reveal on Scroll
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        revealObserver.observe(el);
+    });
+</script>
+</body></html>

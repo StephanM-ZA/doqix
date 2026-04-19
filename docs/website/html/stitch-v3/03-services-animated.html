@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Do.Qix | Services</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#fcba59",
+                      "on-tertiary-fixed-variant": "#624000",
+                      "on-surface-variant": "#bacbbf",
+                      "secondary": "#ffb95a",
+                      "on-error-container": "#ffdad6",
+                      "surface-tint": "#00e29e",
+                      "on-tertiary": "#452b00",
+                      "on-primary-fixed": "#002114",
+                      "on-background": "#e4e1e9",
+                      "outline-variant": "#3b4a41",
+                      "on-error": "#690005",
+                      "tertiary-container": "#ffbd5b",
+                      "on-secondary-fixed": "#2a1800",
+                      "on-tertiary-fixed": "#291800",
+                      "error-container": "#93000a",
+                      "on-tertiary-container": "#744c00",
+                      "inverse-surface": "#e4e1e9",
+                      "inverse-on-surface": "#303036",
+                      "secondary-container": "#c68315",
+                      "outline": "#84958a",
+                      "surface-container-lowest": "#0e0e13",
+                      "primary-fixed-dim": "#00e29e",
+                      "surface-container-highest": "#35343a",
+                      "background": "#131318",
+                      "secondary-fixed": "#ffddb6",
+                      "primary": "#6effc0",
+                      "surface-variant": "#35343a",
+                      "surface-container-low": "#1b1b20",
+                      "on-secondary-fixed-variant": "#643f00",
+                      "on-secondary-container": "#3d2400",
+                      "on-secondary": "#462a00",
+                      "tertiary-fixed": "#ffddb3",
+                      "primary-container": "#00e5a0",
+                      "tertiary": "#ffe1bb",
+                      "on-primary-fixed-variant": "#005236",
+                      "on-primary": "#003824",
+                      "surface-container": "#1f1f25",
+                      "primary-fixed": "#47ffb8",
+                      "surface-bright": "#39383e",
+                      "surface": "#131318",
+                      "on-surface": "#e4e1e9",
+                      "on-primary-container": "#006141",
+                      "surface-dim": "#131318",
+                      "secondary-fixed-dim": "#ffb95a",
+                      "error": "#ffb4ab",
+                      "inverse-primary": "#006c49",
+                      "surface-container-high": "#2a292f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Inter", "sans-serif"],
+                      "body": ["Inter", "sans-serif"],
+                      "label": ["Inter", "sans-serif"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #131318; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { background: rgba(19, 19, 24, 0.6); backdrop-filter: blur(24px); transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1); }
+        .hero-gradient { background: linear-gradient(135deg, #6effc0 0%, #00e5a0 100%); }
+        .flow-line { background: linear-gradient(90deg, #00e5a0 0%, transparent 100%); }
+        .vertical-flow-line { background: linear-gradient(180deg, #00e5a0 0%, transparent 100%); }
+        .ghost-border { border: 1px solid rgba(59, 74, 65, 0.15); }
+
+        /* Animation System */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px) scale(0.97);
+            transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .hover-card {
+            transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1), background-color 150ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+        }
+
+        .hover-button {
+            transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), opacity 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 229, 160, 0.2);
+        }
+        .hover-button:active {
+            transform: scale(0.98);
+        }
+
+        .micro-transition {
+            transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Stagger utilities */
+        .stagger-1 { transition-delay: 80ms; }
+        .stagger-2 { transition-delay: 160ms; }
+        .stagger-3 { transition-delay: 240ms; }
+        .stagger-4 { transition-delay: 320ms; }
+        .stagger-5 { transition-delay: 400ms; }
+        .stagger-6 { transition-delay: 480ms; }
+        .stagger-7 { transition-delay: 560ms; }
+    </style>
+</head>
+<body class="text-on-background antialiased overflow-x-hidden font-body">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav border-b border-outline-variant/5">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="flex items-center gap-3">
+<span class="text-2xl font-black tracking-tighter text-white">Do.Qix</span>
+<span class="text-xs text-on-surface-variant font-medium hidden sm:inline">Efficiency, Engineered</span>
+</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-slate-400 hover:text-white micro-transition font-bold uppercase text-sm tracking-tighter" href="#">Home</a>
+<a class="text-[#00e5a0] border-b-2 border-[#00e5a0] pb-1 font-bold uppercase text-sm tracking-tighter" href="#">Services</a>
+<a class="text-slate-400 hover:text-white micro-transition font-bold uppercase text-sm tracking-tighter" href="#">Products</a>
+<a class="text-slate-400 hover:text-white micro-transition font-bold uppercase text-sm tracking-tighter" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hero-gradient hover-button text-on-primary-container text-sm font-bold uppercase px-6 py-2.5 rounded-lg">Start Free</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="pt-48 pb-32 px-8 max-w-7xl mx-auto relative overflow-hidden">
+<div class="relative z-10 reveal">
+<h1 class="text-7xl md:text-8xl font-black tracking-tighter text-white mb-6 leading-[0.9]">
+                What We <br/><span class="text-primary">Automate</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+                If it's rule-based and eating your team's day — we can automate it. Zero jargon. Zero fluff. Here's how we turn 'busy' into 'effective.'
+            </p>
+</div>
+<div class="absolute -right-20 top-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px]"></div>
+</header>
+<!-- How Automation Works (Horizontal Flow) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="text-4xl font-bold mb-4 tracking-tight text-white reveal">The Simple Logic Behind Every Automation</h2>
+<p class="text-on-surface-variant mb-12 max-w-3xl reveal">Every automation — from the simplest reminder to the most complex multi-system workflow — follows four steps:</p>
+<div class="flex flex-col md:flex-row items-center justify-between gap-8 relative">
+<!-- Flow Line Connector (Hidden on mobile) -->
+<div class="hidden md:block absolute top-1/2 left-0 w-full h-[2px] flow-line -translate-y-1/2 -z-0"></div>
+<!-- Trigger -->
+<div class="bg-surface-container w-full md:w-64 p-8 rounded-xl z-10 border-l-4 border-primary reveal hover-card">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="bolt">bolt</span>
+<h3 class="text-xl font-bold mb-2 text-white">Trigger</h3>
+<p class="text-sm text-on-surface-variant mb-2">Something happens.</p>
+<p class="text-xs text-on-surface-variant italic">A new order lands. A form gets submitted. An invoice becomes overdue.</p>
+</div>
+<!-- Rule -->
+<div class="bg-surface-container w-full md:w-64 p-8 rounded-xl z-10 border-l-4 border-primary reveal stagger-1 hover-card">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="account_tree">account_tree</span>
+<h3 class="text-xl font-bold mb-2 text-white">Rule</h3>
+<p class="text-sm text-on-surface-variant mb-2">A decision is made.</p>
+<p class="text-xs text-on-surface-variant italic">IF the order is over R5,000, THEN flag as high-priority.</p>
+</div>
+<!-- Condition -->
+<div class="bg-surface-container w-full md:w-64 p-8 rounded-xl z-10 border-l-4 border-primary reveal stagger-2 hover-card">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="alt_route">alt_route</span>
+<h3 class="text-xl font-bold mb-2 text-white">Condition</h3>
+<p class="text-sm text-on-surface-variant mb-2">A check runs.</p>
+<p class="text-xs text-on-surface-variant italic">Is this a returning customer? Has this been paid already?</p>
+</div>
+<!-- Action -->
+<div class="bg-surface-container w-full md:w-64 p-8 rounded-xl z-10 border-l-4 border-primary reveal stagger-3 hover-card">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="smart_toy">smart_toy</span>
+<h3 class="text-xl font-bold mb-2 text-white">Action</h3>
+<p class="text-sm text-on-surface-variant mb-2">The task gets done.</p>
+<p class="text-xs text-on-surface-variant italic">Tag them in the CRM. Send the email. Alert the manager. Generate the PDF.</p>
+</div>
+</div>
+<p class="text-on-surface-variant mt-8 text-sm reveal">That's it. Once it's set up, it runs every time — perfectly, 24/7, without coffee breaks.</p>
+</div>
+</section>
+<!-- Main Automation Grid -->
+<section class="py-32 px-8 max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold mb-4 tracking-tight text-white reveal">The Workflows We Build Every Day</h2>
+<p class="text-on-surface-variant mb-16 max-w-3xl reveal">We connect the apps you already use — and make them talk to each other. Here's a taste of what that looks like:</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- 1. Finance & Billing -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+<h3 class="text-2xl font-bold text-white">Finance &amp; Billing</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Invoices submitted via Typeform get filed in Google Drive, routed for manager approval, and pushed straight into QuickBooks — with payment confirmations sent automatically. Contract renewals trigger reminders 30 days out, update Salesforce, and alert your team on Slack. Stripe payments flow into Airtable, generate QuickBooks invoices, and notify finance — no human in the loop.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Xero, QuickBooks, Stripe, Google Drive, Typeform, Airtable</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Manual invoicing, chasing approvals, reconciling spreadsheets.</p>
+</div>
+</div>
+</div>
+<!-- 2. Sales & Lead Management -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+<h3 class="text-2xl font-bold text-white">Sales &amp; Lead Management</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Leads from HubSpot get qualified by filters, added to Mailchimp sequences, and — when they open key emails — pushed into Salesforce with a follow-up task assigned. Your sales pipeline in Pipedrive triggers contract generation in Google Docs, sends it for e-signature via DocuSign, and notifies the team on Slack when it's signed.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">HubSpot, Pipedrive, Salesforce, Mailchimp, DocuSign, Google Docs</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Manually qualifying leads, forgetting follow-ups, chasing signatures.</p>
+</div>
+</div>
+</div>
+<!-- 3. E-commerce & Orders -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_cart">shopping_cart</span>
+<h3 class="text-2xl font-bold text-white">E-commerce &amp; Orders</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Order placed? Airtable updates, shipping label generates via API, stock check runs in real time, and the customer gets a confirmation email — all before you've finished your coffee. Low stock triggers a purchase order in Xero and alerts your ops team on Slack.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Shopify, WooCommerce, Airtable, Xero, Slack</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Manually updating stock, emailing tracking numbers, reacting to stockouts.</p>
+</div>
+</div>
+</div>
+<!-- 4. HR & Employee Onboarding -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+<h3 class="text-2xl font-bold text-white">HR &amp; Employee Onboarding</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">New hire added in BambooHR? Their Google Workspace account spins up, an onboarding doc generates in Notion, they get a Slack channel invite, and a welcome email lands in their inbox — all within minutes.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">BambooHR, Google Workspace, Notion, Slack</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">2-day onboarding admin compressed into minutes.</p>
+</div>
+</div>
+</div>
+<!-- 5. Customer Support -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="support_agent">support_agent</span>
+<h3 class="text-2xl font-bold text-white">Customer Support</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Support ticket hits Zendesk? It gets categorised by urgency, logged in Airtable, and routed to the right agent in Intercom — with an auto-reply already sent to the customer. No more ticket ping-pong.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Zendesk, Intercom, Airtable</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Manually sorting tickets, slow first-response times.</p>
+</div>
+</div>
+</div>
+<!-- 6. Marketing & Content -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="campaign">campaign</span>
+<h3 class="text-2xl font-bold text-white">Marketing &amp; Content</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Blog post drafted in Google Sheets? It flows to Trello for review, assets download from Google Drive, and when approved it publishes to WordPress, schedules social via Buffer, and notifies the content team on Slack.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Google Sheets, Trello, WordPress, Buffer, Slack, Google Drive</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Manual publishing, forgetting social posts, chasing approvals.</p>
+</div>
+</div>
+</div>
+<!-- 7. Data Sync & Reporting -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="analytics">analytics</span>
+<h3 class="text-2xl font-bold text-white">Data Sync &amp; Reporting</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Databases out of sync? We schedule nightly syncs between PostgreSQL, MySQL, and Elasticsearch — with a Slack alert when it's done. Reports pull themselves together and land in inboxes on schedule.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">PostgreSQL, MySQL, Elasticsearch, Google Sheets</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Friday afternoon data marathons, "which version is latest?" conversations.</p>
+</div>
+</div>
+</div>
+<!-- 8. Event Management -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+<h3 class="text-2xl font-bold text-white">Event Management</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Eventbrite registration triggers a Google Contact entry, adds them to the right Mailchimp list, sends an SMS reminder before the event, and fires a Typeform feedback survey after.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Eventbrite, Google Contacts, Mailchimp, SMS, Typeform</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Manual attendee management, forgetting post-event follow-up.</p>
+</div>
+</div>
+</div>
+<!-- 9. Compliance & Audits -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+<h3 class="text-2xl font-bold text-white">Compliance &amp; Audits</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Scheduled checks pull files from Box, filter by policy criteria, log results in Google Sheets, and flag non-compliance directly into Jira with an email to the responsible party.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Box, Google Sheets, Jira</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Manual compliance checks, hoping nothing slips through.</p>
+</div>
+</div>
+</div>
+<!-- 10. Social Media & Feedback -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="thumb_up">thumb_up</span>
+<h3 class="text-2xl font-bold text-white">Social Media &amp; Feedback</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Social mentions tracked via Twitter get analysed for sentiment — positive mentions get logged, negative ones trigger alerts. Customer feedback from Typeform gets categorised in Airtable and turns into Trello feature requests automatically.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Twitter/X, Typeform, Airtable, Trello, Buffer</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Manual sentiment tracking, feedback sitting unread in a spreadsheet.</p>
+</div>
+</div>
+</div>
+<!-- 11. Creative Approvals -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="design_services">design_services</span>
+<h3 class="text-2xl font-bold text-white">Creative Approvals</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Design file lands in Google Drive? Slack notification goes to the reviewer, approval flow kicks in, and once approved it moves to 'Done' in Asana with the creator notified. Rejected? Feedback loops back with notes.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Google Drive, Slack, Asana</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">"Did you see my email about the design?" conversations.</p>
+</div>
+</div>
+</div>
+<!-- 12. Facility & IoT -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="sensors">sensors</span>
+<h3 class="text-2xl font-bold text-white">Facility &amp; IoT</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Sensor alert from your building? IFTTT creates an Asana maintenance task, Twilio sends an SMS to the facilities manager, and everything gets logged in Google Sheets for reporting.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">IoT sensors, IFTTT, Asana, Twilio, Google Sheets</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">Reacting to building issues instead of preventing them.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Below grid text -->
+<div class="mt-12 reveal">
+<p class="text-on-surface-variant text-sm mb-2">Not sure if your task qualifies? That's what the free plan call is for. We'll tell you straight — even if the answer is 'don't automate this yet.'</p>
+<p class="text-on-surface-variant text-sm">The apps shown above are just the start. We connect <span class="text-white font-bold">400+ tools</span>. If it has an API, we can plug it in.</p>
+</div>
+</section>
+<!-- Quick Wins -->
+<section class="py-24 bg-surface-container-lowest border-y border-outline-variant/10">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="text-3xl font-bold mb-4 text-white reveal">Where Most Businesses Start</h2>
+<p class="text-on-surface-variant mb-12 reveal">Not sure where to begin? These deliver the fastest results:</p>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="flex flex-col gap-4 reveal">
+<span class="material-symbols-outlined text-secondary" data-icon="trending_up">trending_up</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Sales</h4>
+<p class="text-xs text-on-surface-variant">Leads auto-qualify from HubSpot into Salesforce. Contracts generate and send for DocuSign signature. No more lost leads or unsigned deals.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-1">
+<span class="material-symbols-outlined text-secondary" data-icon="support_agent">support_agent</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Support</h4>
+<p class="text-xs text-on-surface-variant">Zendesk tickets get categorised, routed to the right agent, and auto-replied to — in seconds.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-2">
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Finance</h4>
+<p class="text-xs text-on-surface-variant">Typeform submissions trigger invoice creation in QuickBooks, with approval flows and payment confirmations built in.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-3">
+<span class="material-symbols-outlined text-secondary" data-icon="shopping_cart">shopping_cart</span>
+<div>
+<h4 class="font-bold mb-1 text-white">E-commerce</h4>
+<p class="text-xs text-on-surface-variant">Shopify orders update Airtable inventory, generate shipping labels, and alert your team when stock runs low — before your customers notice.</p>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex flex-col gap-4 reveal">
+<span class="material-symbols-outlined text-secondary" data-icon="groups">groups</span>
+<div>
+<h4 class="font-bold mb-1 text-white">HR</h4>
+<p class="text-xs text-on-surface-variant">BambooHR new hire triggers Google Workspace setup, Notion onboarding docs, and a Slack welcome — all in minutes.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-1">
+<span class="material-symbols-outlined text-secondary" data-icon="campaign">campaign</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Marketing</h4>
+<p class="text-xs text-on-surface-variant">Blog posts flow from Google Sheets through Trello approval to WordPress publishing and Buffer social scheduling — hands-free.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-2">
+<span class="material-symbols-outlined text-secondary" data-icon="event">event</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Events</h4>
+<p class="text-xs text-on-surface-variant">Eventbrite registrations sync to contacts, trigger email sequences, send SMS reminders, and fire post-event surveys automatically.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-3">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Compliance</h4>
+<p class="text-xs text-on-surface-variant">Scheduled audits pull files, check against policy, log results, and flag issues in Jira — no manual checks.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Our 5-Step Process -->
+<section class="py-32 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="text-4xl font-bold mb-4 text-center text-white reveal">Our 5-Step Plan</h2>
+<p class="text-on-surface-variant text-center mb-20 max-w-3xl mx-auto reveal">We don't just throw tech at your problems. We follow a structured approach — because the biggest reason automation fails isn't the technology. It's skipping the prep.</p>
+<div class="flex flex-col gap-12 max-w-2xl mx-auto relative">
+<div class="absolute left-[27px] top-4 w-[2px] h-[calc(100%-32px)] vertical-flow-line opacity-30"></div>
+<div class="flex gap-10 items-start relative reveal">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">01</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Identify</h4>
+<p class="text-on-surface-variant">We find the repetitive, rule-based, high-volume tasks. We talk to the people who actually do the work — they always know where the pain is.</p>
+</div>
+</div>
+<div class="flex gap-10 items-start relative reveal stagger-1">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">02</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Map</h4>
+<p class="text-on-surface-variant">We chart your current process — every step, every handoff, every bottleneck. You can't automate what you can't see. And you shouldn't automate a broken process.</p>
+</div>
+</div>
+<div class="flex gap-10 items-start relative reveal stagger-2">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">03</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Start Small</h4>
+<p class="text-on-surface-variant">We pick one process for a quick win. You see results fast, your team builds confidence, and we build from there.</p>
+</div>
+</div>
+<div class="flex gap-10 items-start relative reveal stagger-3">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">04</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Test &amp; Refine</h4>
+<p class="text-on-surface-variant">We stress-test everything. We deliberately try to break it. We check edge cases and make sure it's rock solid before it goes live.</p>
+</div>
+</div>
+<div class="flex gap-10 items-start relative reveal stagger-4">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">05</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Monitor &amp; Optimise</h4>
+<p class="text-on-surface-variant">Your automations go live but we don't walk away. We track performance, flag issues, and fine-tune as your business evolves.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Caution Blockquote -->
+<section class="py-32 px-8">
+<div class="max-w-4xl mx-auto">
+<h2 class="text-4xl font-bold mb-12 text-white reveal">One Thing We Tell Every Client First</h2>
+<div class="ghost-border p-12 md:p-16 rounded-2xl relative overflow-hidden bg-surface-container-low/30 backdrop-blur-sm reveal hover-card">
+<span class="material-symbols-outlined text-6xl text-primary/20 absolute top-8 left-8" data-icon="format_quote">format_quote</span>
+<blockquote class="relative z-10">
+<p class="text-3xl md:text-4xl font-medium leading-tight text-white mb-6">
+                        "Automation applied to an <span class="text-secondary italic">inefficient</span> operation will magnify the inefficiency."
+                    </p>
+</blockquote>
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
+</div>
+<p class="text-on-surface-variant mt-8 text-sm reveal">This is why we don't skip steps. We streamline your process first — eliminate the waste, simplify the steps, standardise the workflow. Then we automate. It takes a little longer upfront but it means what we build actually works.</p>
+</div>
+</section>
+<!-- Why Do.Qix -->
+<section class="py-32 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold mb-16 text-white reveal">Why SA Businesses Choose Us</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="space-y-4 reveal">
+<h4 class="text-xl font-bold text-primary">We speak plain English.</h4>
+<p class="text-on-surface-variant text-sm">No jargon, no 47-page proposals. If your gran wouldn't understand it, we haven't explained it well enough.</p>
+</div>
+<div class="space-y-4 reveal stagger-1">
+<h4 class="text-xl font-bold text-primary">We fix the process first, then automate it.</h4>
+<p class="text-on-surface-variant text-sm">Most companies skip straight to building. We don't. Automating a mess just gives you a faster mess. We streamline first, then build — so it actually works.</p>
+</div>
+<div class="space-y-4 reveal stagger-2">
+<h4 class="text-xl font-bold text-primary">We price in rands, not dollars.</h4>
+<p class="text-on-surface-variant text-sm">Flat monthly rate. No confusing credit systems. No per-task fees that balloon when you grow. No nasty surprises. You know your number before we start.</p>
+</div>
+<div class="space-y-4 reveal stagger-3">
+<h4 class="text-xl font-bold text-primary">Your data stays in your hands.</h4>
+<p class="text-on-surface-variant text-sm">We build on n8n — a powerful open-source platform we self-host for you. Your data lives where you decide. Not on someone else's cloud. Not behind someone else's paywall. No lock-in, ever.</p>
+</div>
+<div class="space-y-4 reveal stagger-4">
+<h4 class="text-xl font-bold text-primary">We're here. We get it.</h4>
+<p class="text-on-surface-variant text-sm">Load-shedding contingencies, POPIA compliance, the reality of ZAR budgets and dollar-priced tools — we understand because we're building businesses here too. When you need help, you talk to a real person who knows your world.</p>
+</div>
+<div class="space-y-4 reveal stagger-5">
+<h4 class="text-xl font-bold text-primary">We don't disappear after launch.</h4>
+<p class="text-on-surface-variant text-sm">We monitor your automations, keep them running, and evolve them as your business grows. Long-term partner, not hit-and-run.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Real Results -->
+<section class="py-32 px-8 max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold mb-4 text-center text-white reveal">This Is What Automation Actually Looks Like</h2>
+<p class="text-on-surface-variant text-center mb-16 max-w-3xl mx-auto reveal">These are the kinds of results we build for — the same patterns we implement for SA businesses every day.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<!-- Case Study 1 -->
+<div class="bg-surface-container p-12 rounded-xl flex flex-col justify-between hover-card reveal">
+<div>
+<h4 class="text-2xl font-bold mb-4 text-white">The property agency that stopped losing leads.</h4>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        A Joburg-based property group was capturing leads from five different portals — manually. Agents were spending the first hour of every day copying contact details into their CRM. We automated the entire flow: leads from all portals now land in the right agent's pipeline instantly, with a welcome WhatsApp sent within seconds. Lead response time went from hours to under a minute. They haven't lost a lead to a slow reply since.
+                    </p>
+</div>
+<div class="pt-6 border-t border-outline-variant/10">
+<span class="text-xs uppercase font-bold tracking-widest text-slate-500">Lead response: hours to under a minute</span>
+</div>
+</div>
+<!-- Case Study 2 -->
+<div class="bg-surface-container p-12 rounded-xl flex flex-col justify-between hover-card reveal stagger-1">
+<div>
+<h4 class="text-2xl font-bold mb-4 text-white">The accounting firm that got Fridays back.</h4>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        A mid-size firm in Cape Town was spending 6+ hours every Friday pulling data from Xero, formatting reports, and emailing them to clients. We built an automation that pulls the numbers, populates the report template, and delivers it — every Friday at 7am, without anyone lifting a finger. That's 300+ hours a year, back to billable work.
+                    </p>
+</div>
+<div class="pt-6 border-t border-outline-variant/10">
+<span class="text-xs uppercase font-bold tracking-widest text-slate-500">300+ hours/year back to billable work</span>
+</div>
+</div>
+<!-- Case Study 3 -->
+<div class="bg-surface-container p-12 rounded-xl flex flex-col justify-between hover-card reveal">
+<div>
+<h4 class="text-2xl font-bold mb-4 text-white">The e-commerce brand that stopped hiring for admin.</h4>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        An online retailer was about to hire a third admin assistant just to keep up with order processing, stock updates, and shipping notifications. We automated the lot — from order confirmation to tracking updates to restock alerts. They didn't need the hire. They redeployed the budget into marketing and grew 40% that quarter.
+                    </p>
+</div>
+<div class="pt-6 border-t border-outline-variant/10">
+<span class="text-xs uppercase font-bold tracking-widest text-slate-500">40% growth after redeploying admin budget</span>
+</div>
+</div>
+<!-- Case Study 4 -->
+<div class="bg-surface-container p-12 rounded-xl flex flex-col justify-between hover-card reveal stagger-1">
+<div>
+<h4 class="text-2xl font-bold mb-4 text-white">The professional services firm that killed the copy-paste.</h4>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        A Durban consultancy had staff entering the same client data into four different systems for every new engagement. Contracts, onboarding emails, project setup, billing — all manual. We connected the systems. Now they enter client details once, and everything cascades. Errors dropped to near zero. Onboarding time went from 2 days to 20 minutes.
+                    </p>
+</div>
+<div class="pt-6 border-t border-outline-variant/10">
+<span class="text-xs uppercase font-bold tracking-widest text-slate-500">Onboarding: 2 days to 20 minutes</span>
+</div>
+</div>
+</div>
+<!-- Stat Badges -->
+<div class="flex flex-wrap gap-4 mt-12 justify-center reveal">
+<span class="px-5 py-2.5 bg-surface-container rounded-full text-sm font-bold text-secondary">8-15 hours/week reclaimed</span>
+<span class="px-5 py-2.5 bg-surface-container rounded-full text-sm font-bold text-secondary">95%+ reduction in data entry errors</span>
+<span class="px-5 py-2.5 bg-surface-container rounded-full text-sm font-bold text-secondary">R11,000-R30,000/month in recovered time</span>
+<span class="px-5 py-2.5 bg-surface-container rounded-full text-sm font-bold text-secondary">Days-to-minutes onboarding improvements</span>
+</div>
+</section>
+<!-- Data & Control -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="text-4xl font-bold mb-4 text-white reveal">Your Data. Your Rules.</h2>
+<p class="text-on-surface-variant text-lg mb-12 max-w-3xl reveal">We build on n8n — a powerful open-source automation platform we manage and self-host for you. You get the power of a custom-built system without ever touching a server.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="p-6 bg-background rounded-lg border border-outline-variant/10 hover-card reveal">
+<span class="material-symbols-outlined text-primary mb-3 block" data-icon="location_on">location_on</span>
+<p class="text-sm text-on-surface-variant">Your data stays here. On infrastructure you control — not scattered across someone else's cloud in another country</p>
+</div>
+<div class="p-6 bg-background rounded-lg border border-outline-variant/10 hover-card reveal stagger-1">
+<span class="material-symbols-outlined text-primary mb-3 block" data-icon="shield">shield</span>
+<p class="text-sm text-on-surface-variant">POPIA compliant from day one. Not bolted on as an afterthought</p>
+</div>
+<div class="p-6 bg-background rounded-lg border border-outline-variant/10 hover-card reveal stagger-2">
+<span class="material-symbols-outlined text-primary mb-3 block" data-icon="lock_open">lock_open</span>
+<p class="text-sm text-on-surface-variant">No vendor lock-in. If we part ways, your automations still work. You own what we build</p>
+</div>
+<div class="p-6 bg-background rounded-lg border border-outline-variant/10 hover-card reveal stagger-3">
+<span class="material-symbols-outlined text-primary mb-3 block" data-icon="smart_toy">smart_toy</span>
+<p class="text-sm text-on-surface-variant">It just works. Document reading, smart routing, auto-classification — built into your workflows where it genuinely saves time</p>
+</div>
+<div class="p-6 bg-background rounded-lg border border-outline-variant/10 hover-card reveal stagger-4">
+<span class="material-symbols-outlined text-primary mb-3 block" data-icon="savings">savings</span>
+<p class="text-sm text-on-surface-variant">Powerful technology, SME-friendly pricing. The same platform that runs workflows for global companies — managed for you at a fraction of the cost</p>
+</div>
+<div class="p-6 bg-background rounded-lg border border-outline-variant/10 hover-card reveal stagger-5">
+<span class="material-symbols-outlined text-primary mb-3 block" data-icon="currency_exchange">currency_exchange</span>
+<p class="text-sm text-on-surface-variant">No dollar-denominated subscription creeping up every year while the rand moves the wrong way</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom CTA -->
+<section class="py-48 px-8 text-center relative overflow-hidden">
+<div class="relative z-10 reveal">
+<h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-10 text-white">Ready to See <br/><span class="text-primary">What's Possible?</span></h2>
+<p class="text-on-surface-variant text-lg mb-10 max-w-2xl mx-auto">15-minute call. We'll show you where your time is going and how to get it back.</p>
+<button class="hero-gradient hover-button text-on-primary-container text-xl font-bold uppercase px-12 py-6 rounded-xl shadow-2xl shadow-primary/20">
+                Start Free
+            </button>
+</div>
+<!-- Abstract BG Decoration -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] -z-0"></div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest py-20 px-8 border-t border-outline-variant/5">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="space-y-6">
+<div class="text-2xl font-bold text-white">Do.Qix</div>
+<p class="text-on-surface-variant text-sm">Efficiency, Engineered</p>
+<p class="text-slate-600 text-xs">hello@doqix.co.za</p>
+<p class="text-slate-600 text-xs max-w-xs leading-loose">&copy; 2026 Do.Qix. All rights reserved.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+<div class="space-y-4">
+<h5 class="text-white text-[10px] uppercase font-bold tracking-widest">Navigate</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-primary micro-transition" href="#">Home</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Services</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Products</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Contact</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-white text-[10px] uppercase font-bold tracking-widest">Legal</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-primary micro-transition" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Terms &amp; Conditions</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-white text-[10px] uppercase font-bold tracking-widest">Social</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-primary micro-transition" href="#">LinkedIn</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">X</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // Handle immediate active state for top of page elements
+    window.addEventListener('load', () => {
+        document.querySelectorAll('nav, header .reveal').forEach(el => {
+            el.classList.add('active');
+        });
+    });
+</script>
+</body></html>

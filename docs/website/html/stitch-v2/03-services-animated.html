@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Do.Qix | Services &amp; Automation Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#fcba59",
+                      "on-tertiary-fixed-variant": "#624000",
+                      "on-surface-variant": "#bacbbf",
+                      "secondary": "#ffb95a",
+                      "on-error-container": "#ffdad6",
+                      "surface-tint": "#00e29e",
+                      "on-tertiary": "#452b00",
+                      "on-primary-fixed": "#002114",
+                      "on-background": "#e4e1e9",
+                      "outline-variant": "#3b4a41",
+                      "on-error": "#690005",
+                      "tertiary-container": "#ffbd5b",
+                      "on-secondary-fixed": "#2a1800",
+                      "on-tertiary-fixed": "#291800",
+                      "error-container": "#93000a",
+                      "on-tertiary-container": "#744c00",
+                      "inverse-surface": "#e4e1e9",
+                      "inverse-on-surface": "#303036",
+                      "secondary-container": "#c68315",
+                      "outline": "#84958a",
+                      "surface-container-lowest": "#0e0e13",
+                      "primary-fixed-dim": "#00e29e",
+                      "surface-container-highest": "#35343a",
+                      "background": "#131318",
+                      "secondary-fixed": "#ffddb6",
+                      "primary": "#6effc0",
+                      "surface-variant": "#35343a",
+                      "surface-container-low": "#1b1b20",
+                      "on-secondary-fixed-variant": "#643f00",
+                      "on-secondary-container": "#3d2400",
+                      "on-secondary": "#462a00",
+                      "tertiary-fixed": "#ffddb3",
+                      "primary-container": "#00e5a0",
+                      "tertiary": "#ffe1bb",
+                      "on-primary-fixed-variant": "#005236",
+                      "on-primary": "#003824",
+                      "surface-container": "#1f1f25",
+                      "primary-fixed": "#47ffb8",
+                      "surface-bright": "#39383e",
+                      "surface": "#131318",
+                      "on-surface": "#e4e1e9",
+                      "on-primary-container": "#006141",
+                      "surface-dim": "#131318",
+                      "secondary-fixed-dim": "#ffb95a",
+                      "error": "#ffb4ab",
+                      "inverse-primary": "#006c49",
+                      "surface-container-high": "#2a292f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Inter", "sans-serif"],
+                      "body": ["Inter", "sans-serif"],
+                      "label": ["Inter", "sans-serif"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #131318; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { background: rgba(19, 19, 24, 0.6); backdrop-filter: blur(24px); transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1); }
+        .hero-gradient { background: linear-gradient(135deg, #6effc0 0%, #00e5a0 100%); }
+        .flow-line { background: linear-gradient(90deg, #00e5a0 0%, transparent 100%); }
+        .vertical-flow-line { background: linear-gradient(180deg, #00e5a0 0%, transparent 100%); }
+        .ghost-border { border: 1px solid rgba(59, 74, 65, 0.15); }
+
+        /* Animation System */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px) scale(0.97);
+            transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .hover-card {
+            transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1), background-color 150ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+        }
+
+        .hover-button {
+            transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), opacity 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 229, 160, 0.2);
+        }
+        .hover-button:active {
+            transform: scale(0.98);
+        }
+
+        .micro-transition {
+            transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Stagger utilities */
+        .stagger-1 { transition-delay: 80ms; }
+        .stagger-2 { transition-delay: 160ms; }
+        .stagger-3 { transition-delay: 240ms; }
+        .stagger-4 { transition-delay: 320ms; }
+        .stagger-5 { transition-delay: 400ms; }
+    </style>
+</head>
+<body class="text-on-background antialiased overflow-x-hidden font-body">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav border-b border-outline-variant/5">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="text-2xl font-black tracking-tighter text-white">Do.Qix</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-slate-400 hover:text-white micro-transition font-bold uppercase text-sm tracking-tighter" href="#">Solutions</a>
+<a class="text-[#00e5a0] border-b-2 border-[#00e5a0] pb-1 font-bold uppercase text-sm tracking-tighter" href="#">Services</a>
+<a class="text-slate-400 hover:text-white micro-transition font-bold uppercase text-sm tracking-tighter" href="#">Pricing</a>
+<a class="text-slate-400 hover:text-white micro-transition font-bold uppercase text-sm tracking-tighter" href="#">Developers</a>
+<a class="text-slate-400 hover:text-white micro-transition font-bold uppercase text-sm tracking-tighter" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-white text-sm font-bold uppercase px-4 py-2 opacity-80 hover:opacity-100 micro-transition">Login</button>
+<button class="hero-gradient hover-button text-on-primary-container text-sm font-bold uppercase px-6 py-2.5 rounded-lg">Get Started</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="pt-48 pb-32 px-8 max-w-7xl mx-auto relative overflow-hidden">
+<div class="relative z-10 reveal">
+<h1 class="text-7xl md:text-8xl font-black tracking-tighter text-white mb-6 leading-[0.9]">
+                What We <br/><span class="text-primary">Automate</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+                If it's rule-based and eating your team's day — we can automate it. Engineered for the Kinetic Monolith.
+            </p>
+</div>
+<div class="absolute -right-20 top-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px]"></div>
+</header>
+<!-- How Automation Works (Horizontal Flow) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row items-center justify-between gap-8 relative">
+<!-- Flow Line Connector (Hidden on mobile) -->
+<div class="hidden md:block absolute top-1/2 left-0 w-full h-[2px] flow-line -translate-y-1/2 -z-0"></div>
+<!-- Trigger -->
+<div class="bg-surface-container w-full md:w-64 p-8 rounded-xl z-10 border-l-4 border-primary reveal hover-card">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="bolt">bolt</span>
+<h3 class="text-xl font-bold mb-2 text-white">Trigger</h3>
+<p class="text-sm text-on-surface-variant">The event that starts the engine. A new email, form entry, or scheduled time.</p>
+</div>
+<!-- Rule -->
+<div class="bg-surface-container w-full md:w-64 p-8 rounded-xl z-10 border-l-4 border-primary reveal stagger-1 hover-card">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="account_tree">account_tree</span>
+<h3 class="text-xl font-bold mb-2 text-white">Rule</h3>
+<p class="text-sm text-on-surface-variant">The logic foundation. Defining exactly what path the data must travel.</p>
+</div>
+<!-- Condition -->
+<div class="bg-surface-container w-full md:w-64 p-8 rounded-xl z-10 border-l-4 border-primary reveal stagger-2 hover-card">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="alt_route">alt_route</span>
+<h3 class="text-xl font-bold mb-2 text-white">Condition</h3>
+<p class="text-sm text-on-surface-variant">The filter. Only proceed if total &gt; R5000 or status is 'Approved'.</p>
+</div>
+<!-- Action -->
+<div class="bg-surface-container w-full md:w-64 p-8 rounded-xl z-10 border-l-4 border-primary reveal stagger-3 hover-card">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="smart_toy">smart_toy</span>
+<h3 class="text-xl font-bold mb-2 text-white">Action</h3>
+<p class="text-sm text-on-surface-variant">The execution. Send a Slack alert, create an invoice, or sync CRM.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Automation Grid -->
+<section class="py-32 px-8 max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold mb-16 tracking-tight text-white reveal">Ecosystem Coverage</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Finance -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+<h3 class="text-2xl font-bold text-white">Finance</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Automated invoicing, payment reconciliation, and expense tracking cycles.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Xero, Stripe, Sage, Quickbooks</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">"Manually checking bank statements against invoice numbers."</p>
+</div>
+</div>
+</div>
+<!-- Sales -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+<h3 class="text-2xl font-bold text-white">Sales</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Lead enrichment, automated follow-ups, and pipeline management.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Hubspot, Pipedrive, Salesforce</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">"Copy-pasting leads from Facebook forms into your CRM manually."</p>
+</div>
+</div>
+</div>
+<!-- E-commerce -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_cart">shopping_cart</span>
+<h3 class="text-2xl font-bold text-white">E-commerce</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Inventory syncing across platforms and automated order routing.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Shopify, WooCommerce, Takealot</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">"Updating stock levels in three different places after one sale."</p>
+</div>
+</div>
+</div>
+<!-- HR -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+<h3 class="text-2xl font-bold text-white">HR</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Onboarding checklists, leave management, and contract distribution.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">BambooHR, Slack, DocuSign</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">"Sending 15 separate emails every time a new hire joins."</p>
+</div>
+</div>
+</div>
+<!-- Support -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-1">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="support_agent">support_agent</span>
+<h3 class="text-2xl font-bold text-white">Support</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Ticket triaging, automated FAQs, and escalation notifications.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Zendesk, Intercom, Freshdesk</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">"Assigning every single ticket to the same support inbox."</p>
+</div>
+</div>
+</div>
+<!-- Data -->
+<div class="bg-surface-container p-10 rounded-xl hover-card reveal stagger-2">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="analytics">analytics</span>
+<h3 class="text-2xl font-bold text-white">Data</h3>
+</div>
+<p class="text-on-surface-variant mb-8 text-sm">Weekly reporting, dashboard syncing, and data cleaning tasks.</p>
+<div class="space-y-4">
+<div class="flex gap-2 opacity-60">
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Apps:</span>
+<span class="text-[10px] uppercase font-bold text-white">Google Sheets, Airtable, SQL</span>
+</div>
+<div class="p-4 bg-background/50 rounded-lg">
+<span class="text-[10px] uppercase font-bold text-secondary block mb-1">Stop doing:</span>
+<p class="text-sm italic">"Formatting spreadsheets for 3 hours every Monday morning."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Wins -->
+<section class="py-24 bg-surface-container-lowest border-y border-outline-variant/10">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="text-3xl font-bold mb-12 text-white reveal">The Quick Wins</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="flex flex-col gap-4 reveal">
+<span class="material-symbols-outlined text-secondary" data-icon="outgoing_mail">outgoing_mail</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Email Triaging</h4>
+<p class="text-xs text-on-surface-variant">Auto-sort emails by intent and priority.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-1">
+<span class="material-symbols-outlined text-secondary" data-icon="task">task</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Task Creation</h4>
+<p class="text-xs text-on-surface-variant">Turn Slack messages into Asana tasks instantly.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-2">
+<span class="material-symbols-outlined text-secondary" data-icon="description">description</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Invoice Generation</h4>
+<p class="text-xs text-on-surface-variant">Auto-create PDFs from Google Forms data.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-3">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
+<div>
+<h4 class="font-bold mb-1 text-white">KYC Collection</h4>
+<p class="text-xs text-on-surface-variant">Automated ID and address document requests.</p>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex flex-col gap-4 reveal">
+<span class="material-symbols-outlined text-secondary" data-icon="event">event</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Meeting Prep</h4>
+<p class="text-xs text-on-surface-variant">Gather CRM data 10 mins before calls.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-1">
+<span class="material-symbols-outlined text-secondary" data-icon="cloud_sync">cloud_sync</span>
+<div>
+<h4 class="font-bold mb-1 text-white">File Archiving</h4>
+<p class="text-xs text-on-surface-variant">Sync email attachments to Cloud Storage.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-2">
+<span class="material-symbols-outlined text-secondary" data-icon="feedback">feedback</span>
+<div>
+<h4 class="font-bold mb-1 text-white">NPS Surveys</h4>
+<p class="text-xs text-on-surface-variant">Send surveys 24h after delivery automatically.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 reveal stagger-3">
+<span class="material-symbols-outlined text-secondary" data-icon="notifications_active">notifications_active</span>
+<div>
+<h4 class="font-bold mb-1 text-white">Price Alerts</h4>
+<p class="text-xs text-on-surface-variant">Monitor competitor sites for price changes.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Caution Blockquote -->
+<section class="py-32 px-8">
+<div class="max-w-4xl mx-auto">
+<div class="ghost-border p-12 md:p-16 rounded-2xl relative overflow-hidden bg-surface-container-low/30 backdrop-blur-sm reveal hover-card">
+<span class="material-symbols-outlined text-6xl text-primary/20 absolute top-8 left-8" data-icon="format_quote">format_quote</span>
+<blockquote class="relative z-10">
+<p class="text-3xl md:text-4xl font-medium leading-tight text-white mb-6">
+                        "Automation applied to an <span class="text-secondary italic">inefficient</span> operation will magnify the inefficiency."
+                    </p>
+<cite class="text-on-surface-variant not-italic font-bold uppercase tracking-widest text-sm">— Bill Gates / The Do.Qix Axiom</cite>
+</blockquote>
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+<!-- Our 5-Step Process -->
+<section class="py-32 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="text-4xl font-bold mb-20 text-center text-white reveal">Engineered Execution</h2>
+<div class="flex flex-col gap-12 max-w-2xl mx-auto relative">
+<div class="absolute left-[27px] top-4 w-[2px] h-[calc(100%-32px)] vertical-flow-line opacity-30"></div>
+<div class="flex gap-10 items-start relative reveal">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">01</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Identify</h4>
+<p class="text-on-surface-variant">We audit your manual workflows to find high-impact, rule-based candidates for automation.</p>
+</div>
+</div>
+<div class="flex gap-10 items-start relative reveal stagger-1">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">02</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Map</h4>
+<p class="text-on-surface-variant">Every step, edge case, and data transform is documented before a single line of logic is built.</p>
+</div>
+</div>
+<div class="flex gap-10 items-start relative reveal stagger-2">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">03</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Start Small</h4>
+<p class="text-on-surface-variant">We build the 'Minimum Viable Workflow' to prove the logic and ensure data integrity.</p>
+</div>
+</div>
+<div class="flex gap-10 items-start relative reveal stagger-3">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">04</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Test &amp; Refine</h4>
+<p class="text-on-surface-variant">Rigorous stress testing with real-world data to handle errors gracefully.</p>
+</div>
+</div>
+<div class="flex gap-10 items-start relative reveal stagger-4">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest border-2 border-primary flex items-center justify-center shrink-0 z-10 micro-transition">
+<span class="text-primary font-black">05</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold mb-2 text-white">Monitor &amp; Optimise</h4>
+<p class="text-on-surface-variant">Post-launch health checks and continuous tuning for maximum speed and efficiency.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Do.Qix -->
+<section class="py-32 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold mb-16 text-white reveal">The Monolith Advantage</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="space-y-4 reveal">
+<h4 class="text-xl font-bold text-primary">Plain English</h4>
+<p class="text-on-surface-variant text-sm">We don't hide behind jargon. We explain logic in human terms you can actually audit.</p>
+</div>
+<div class="space-y-4 reveal stagger-1">
+<h4 class="text-xl font-bold text-primary">Fix Process First</h4>
+<p class="text-on-surface-variant text-sm">If your process is broken, we fix the process before we automate the mess.</p>
+</div>
+<div class="space-y-4 reveal stagger-2">
+<h4 class="text-xl font-bold text-primary">Rand Pricing</h4>
+<p class="text-on-surface-variant text-sm">South African based. No USD currency fluctuations or offshore billing surprises.</p>
+</div>
+<div class="space-y-4 reveal stagger-3">
+<h4 class="text-xl font-bold text-primary">Security First</h4>
+<p class="text-on-surface-variant text-sm">Bank-grade encryption and POPIA compliance built into every workflow we architect.</p>
+</div>
+<div class="space-y-4 reveal stagger-4">
+<h4 class="text-xl font-bold text-primary">Open Stack</h4>
+<p class="text-on-surface-variant text-sm">No vendor lock-in. We build on open-source foundations that you own forever.</p>
+</div>
+<div class="space-y-4 reveal stagger-5">
+<h4 class="text-xl font-bold text-primary">Hyper-Speed</h4>
+<p class="text-on-surface-variant text-sm">Weeks, not months. Our modular architecture allows for rapid deployment of complex logic.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Real Results -->
+<section class="py-32 px-8 max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold mb-16 text-center text-white reveal">Proven Performance</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<!-- Case Study 1 -->
+<div class="bg-surface-container p-12 rounded-xl flex flex-col justify-between hover-card reveal">
+<div>
+<div class="text-primary font-black text-5xl mb-6">12.5 hrs</div>
+<h4 class="text-2xl font-bold mb-4 text-white">Saved / Week / Manager</h4>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        For a national retail group, we automated the daily sales reporting cycle. Data is now pulled from 42 POS systems, cleaned, and Slack-notified to managers by 07:00 AM daily.
+                    </p>
+</div>
+<div class="pt-6 border-t border-outline-variant/10">
+<span class="text-xs uppercase font-bold tracking-widest text-slate-500">Industry: Retail Logistics</span>
+</div>
+</div>
+<!-- Case Study 2 -->
+<div class="bg-surface-container p-12 rounded-xl flex flex-col justify-between hover-card reveal stagger-1">
+<div>
+<div class="text-primary font-black text-5xl mb-6">99.8%</div>
+<h4 class="text-2xl font-bold mb-4 text-white">Accuracy Increase</h4>
+<p class="text-on-surface-variant leading-relaxed mb-8">
+                        An accounting firm was struggling with manual bank statement categorization. We implemented a neural routing engine that categorizes 10,000+ lines of data monthly.
+                    </p>
+</div>
+<div class="pt-6 border-t border-outline-variant/10">
+<span class="text-xs uppercase font-bold tracking-widest text-slate-500">Industry: FinTech Services</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Data & Control -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row gap-20 items-center">
+<div class="flex-1 reveal">
+<h2 class="text-4xl font-bold mb-8 text-white">Data &amp; Sovereignty</h2>
+<p class="text-on-surface-variant text-lg mb-8">
+                    We specialize in <span class="text-white font-bold">n8n deployment</span>. This allows for self-hosting on your own servers, keeping your data within South African borders and ensuring full POPIA compliance. You keep the keys.
+                </p>
+<div class="flex gap-4">
+<div class="p-4 bg-background rounded-lg border border-outline-variant/10 hover-card">
+<span class="material-symbols-outlined text-primary mb-2 block" data-icon="shield">shield</span>
+<span class="text-xs font-bold text-white">POPIA Ready</span>
+</div>
+<div class="p-4 bg-background rounded-lg border border-outline-variant/10 hover-card">
+<span class="material-symbols-outlined text-primary mb-2 block" data-icon="storage">storage</span>
+<span class="text-xs font-bold text-white">Self-Hosted</span>
+</div>
+<div class="p-4 bg-background rounded-lg border border-outline-variant/10 hover-card">
+<span class="material-symbols-outlined text-primary mb-2 block" data-icon="lock">lock</span>
+<span class="text-xs font-bold text-white">End-to-End</span>
+</div>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-3 gap-4 reveal stagger-2">
+<!-- Decorative Icon Grid -->
+<div class="w-full aspect-square bg-surface-container-highest rounded-lg flex items-center justify-center hover-card"><span class="material-symbols-outlined opacity-20 micro-transition" data-icon="dns">dns</span></div>
+<div class="w-full aspect-square bg-surface-container-highest rounded-lg flex items-center justify-center border border-primary/20 hover-card"><span class="material-symbols-outlined text-primary micro-transition" data-icon="code">code</span></div>
+<div class="w-full aspect-square bg-surface-container-highest rounded-lg flex items-center justify-center hover-card"><span class="material-symbols-outlined opacity-20 micro-transition" data-icon="hub">hub</span></div>
+<div class="w-full aspect-square bg-surface-container-highest rounded-lg flex items-center justify-center border border-primary/20 hover-card"><span class="material-symbols-outlined text-primary micro-transition" data-icon="lan">lan</span></div>
+<div class="w-full aspect-square bg-surface-container-highest rounded-lg flex items-center justify-center hover-card"><span class="material-symbols-outlined opacity-20 micro-transition" data-icon="security">security</span></div>
+<div class="w-full aspect-square bg-surface-container-highest rounded-lg flex items-center justify-center border border-primary/20 hover-card"><span class="material-symbols-outlined text-primary micro-transition" data-icon="terminal">terminal</span></div>
+</div>
+</div>
+</section>
+<!-- Bottom CTA -->
+<section class="py-48 px-8 text-center relative overflow-hidden">
+<div class="relative z-10 reveal">
+<h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-10 text-white">Ready to See <br/><span class="text-primary">What's Possible?</span></h2>
+<button class="hero-gradient hover-button text-on-primary-container text-xl font-bold uppercase px-12 py-6 rounded-xl shadow-2xl shadow-primary/20">
+                Start Free Consultation
+            </button>
+<p class="mt-8 text-on-surface-variant font-medium">Limited slots available for Q4 implementations.</p>
+</div>
+<!-- Abstract BG Decoration -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] -z-0"></div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest py-20 px-8 border-t border-outline-variant/5">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="space-y-6">
+<div class="text-2xl font-bold text-white">Do.Qix</div>
+<p class="text-slate-600 text-xs max-w-xs leading-loose">© 2024 Do.Qix Automation. Engineered for the Kinetic Monolith. All rights reserved. High-velocity systems for modern enterprise.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+<div class="space-y-4">
+<h5 class="text-white text-[10px] uppercase font-bold tracking-widest">Platform</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-primary micro-transition" href="#">Pricing</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Integrations</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Security</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-white text-[10px] uppercase font-bold tracking-widest">Company</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-primary micro-transition" href="#">About</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Blog</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Careers</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-white text-[10px] uppercase font-bold tracking-widest">Legal</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-primary micro-transition" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Security Strategy</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-white text-[10px] uppercase font-bold tracking-widest">Support</h5>
+<ul class="space-y-2 text-xs text-slate-600">
+<li><a class="hover:text-primary micro-transition" href="#">API Status</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Help Center</a></li>
+<li><a class="hover:text-primary micro-transition" href="#">Contact</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // Handle immediate active state for top of page elements
+    window.addEventListener('load', () => {
+        document.querySelectorAll('nav, header .reveal').forEach(el => {
+            el.classList.add('active');
+        });
+    });
+</script>
+</body></html>

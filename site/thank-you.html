@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thank You | Nexus Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#47ffb8",
+                        "secondary-fixed": "#ffdcc7",
+                        "surface-tint": "#00e29e",
+                        "inverse-primary": "#006c49",
+                        "secondary": "#ffb787",
+                        "on-secondary": "#502400",
+                        "inverse-surface": "#e4e1e9",
+                        "surface-bright": "#39383e",
+                        "primary-fixed-dim": "#00e29e",
+                        "tertiary": "#ffe1bb",
+                        "surface-variant": "#35343a",
+                        "secondary-container": "#ff8000",
+                        "outline": "#84958a",
+                        "on-surface-variant": "#bacbbf",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-lowest": "#0e0e13",
+                        "background": "#131318",
+                        "surface-container-low": "#1b1b20",
+                        "on-secondary-fixed-variant": "#723600",
+                        "on-tertiary-container": "#744c00",
+                        "on-surface": "#e4e1e9",
+                        "surface": "#131318",
+                        "on-background": "#e4e1e9",
+                        "on-secondary-container": "#5e2b00",
+                        "surface-container-highest": "#35343a",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "surface-dim": "#131318",
+                        "secondary-fixed-dim": "#ffb787",
+                        "on-secondary-fixed": "#311300",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2a292f",
+                        "tertiary-fixed-dim": "#fcba59",
+                        "tertiary-fixed": "#ffddb3",
+                        "on-tertiary-fixed": "#291800",
+                        "on-primary-container": "#006141",
+                        "outline-variant": "#3b4a41",
+                        "on-primary-fixed": "#002114",
+                        "on-primary": "#003824",
+                        "inverse-on-surface": "#303036",
+                        "primary": "#6effc0",
+                        "surface-container": "#1f1f25",
+                        "on-tertiary": "#452b00",
+                        "on-error": "#690005",
+                        "tertiary-container": "#ffbd5b",
+                        "primary-container": "#00e5a0",
+                        "on-primary-fixed-variant": "#005236",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #131318;
+            color: #e4e1e9;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glow {
+            background: radial-gradient(circle at center, rgba(0, 229, 160, 0.08) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col font-body">
+<!-- Atmospheric Glows -->
+<div class="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] bg-glow pointer-events-none"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-glow pointer-events-none opacity-50"></div>
+<main class="relative z-10 flex-grow flex flex-col items-center justify-center px-6 py-20">
+<div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+<!-- Left Side: Core Message -->
+<div class="lg:col-span-7 flex flex-col space-y-12">
+<!-- Branding Anchor -->
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-lg" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<span class="font-headline font-black tracking-tighter text-2xl text-primary-container uppercase">Nexus Engine</span>
+</div>
+<!-- Hero Section -->
+<h1 class="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] text-on-background">
+                    We Got You. <br/>
+<span class="text-primary-container">We'll Be In Touch</span> <br/>
+                    Soon.
+                </h1>
+<!-- Body Copy -->
+<div class="space-y-6">
+<p class="text-xl md:text-2xl font-normal text-on-surface-variant max-w-xl leading-relaxed">
+                        Thanks for reaching out. Here's what happens next:
+                    </p>
+<!-- Vertical Step Timeline -->
+<div class="space-y-0 relative pl-4">
+<div class="absolute left-[21px] top-4 bottom-4 w-[2px] bg-outline-variant/30"></div>
+<div class="relative flex items-center space-x-6 py-6 group">
+<div class="z-10 w-3 h-3 rounded-full bg-primary ring-8 ring-background"></div>
+<p class="text-lg font-bold text-on-surface tracking-tight group-hover:text-primary transition-colors">A real person reviews your submission</p>
+</div>
+<div class="relative flex items-center space-x-6 py-6 group">
+<div class="z-10 w-3 h-3 rounded-full bg-primary ring-8 ring-background"></div>
+<p class="text-lg font-bold text-on-surface tracking-tight group-hover:text-primary transition-colors">We get back to you within 24 hours (usually faster)</p>
+</div>
+<div class="relative flex items-center space-x-6 py-6 group">
+<div class="z-10 w-3 h-3 rounded-full bg-primary ring-8 ring-background"></div>
+<p class="text-lg font-bold text-on-surface tracking-tight group-hover:text-primary transition-colors">We'll set up a quick call to learn about your business</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Secondary Actions / Case Study -->
+<div class="lg:col-span-5 flex flex-col space-y-8 lg:mt-32">
+<div class="bg-surface-container-low p-8 rounded-lg relative overflow-hidden group">
+<!-- Subtle Gradient Lift -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="relative z-10 space-y-6">
+<div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 border border-outline-variant/20">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">While you wait</span>
+</div>
+<div class="space-y-4">
+<h3 class="text-2xl font-bold tracking-tight text-on-surface leading-snug">
+                                Read how a Joburg property group went from losing leads to responding in under a minute
+                            </h3>
+<div class="w-full aspect-[16/10] rounded-md overflow-hidden relative">
+<img alt="Modern architecture" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="Modern high-rise glass architecture in Johannesburg at dusk with glowing interior lights and sharp angular perspective" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDReuHKURIyctn2y61DbtJVJhAkCxqC1UFPpfuXoQD8p0CtrMJuje5GxmnGeRo_XUWz_NGpicT7A3lkCO9I__m2opiOW8fjyaHXZmoseCdkgBVS3MaGcI_MzlaByUtuWjvasKo1GggLYpHQVK2hDAFIb8mMikojxfCKzAm236EZOjKbAykSX8LCDkBZncRrmAfrVXxvQGnImtfASUnumi5Mbjjdp4CGVMaD6djHpNblVJRu-i4CMxkVHmJaOqI08-w3K6DnWttfWg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+</div>
+<a class="inline-flex items-center space-x-3 text-secondary group/link" href="#">
+<span class="font-bold tracking-tight border-b-2 border-secondary/30 group-hover/link:border-secondary transition-all">Read Case Study</span>
+<span class="material-symbols-outlined text-lg group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Back to Home Link -->
+<a class="flex items-center justify-center space-x-3 py-4 px-8 rounded-full border border-outline-variant/30 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300" href="/">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">home</span>
+<span class="font-bold text-on-surface-variant group-hover:text-on-surface tracking-tight">Return to Dashboard</span>
+</a>
+</div>
+</div>
+</main>
+<!-- Footer from Shared Components JSON -->
+<footer class="w-full py-12 mt-auto bg-zinc-950 flex flex-col md:flex-row justify-between items-center px-12 border-t border-zinc-800/50">
+<div class="flex flex-col items-center md:items-start mb-8 md:mb-0">
+<span class="text-lg font-black text-zinc-100">Nexus Engine</span>
+<p class="font-inter text-zinc-500 text-xs tracking-wide mt-2">© 2024 Kinetic Engine Systems. Engineered Fluidity.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-inter text-zinc-500 text-xs tracking-wide hover:text-amber-500 transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-inter text-zinc-500 text-xs tracking-wide hover:text-amber-500 transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-inter text-zinc-500 text-xs tracking-wide hover:text-amber-500 transition-colors opacity-80 hover:opacity-100" href="#">Security</a>
+<a class="font-inter text-zinc-500 text-xs tracking-wide hover:text-amber-500 transition-colors opacity-80 hover:opacity-100" href="#">System Status</a>
+</div>
+</footer>
+</body></html>

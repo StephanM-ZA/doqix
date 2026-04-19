@@ -68,3 +68,21 @@ wp-content/cache/
 
 # Local dev artifact zips — built by GitHub Actions release workflow, not committed
 assets/*.zip
+
+# WordPress plugins (on plugins branch)
+assets/
+
+# Stitch project files
+.stitch/
+
+# MCP config
+.mcp.json
+
+# Remotion video project
+remotion-video/
+
+# Samples
+samples/
+
+# Planning docs
+planning/

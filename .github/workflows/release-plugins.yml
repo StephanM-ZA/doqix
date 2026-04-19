@@ -1,0 +1,39 @@
+name: Release Do.Qix Plugins
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package plugins
+        run: |
+          mkdir -p dist
+
+          # Package each plugin directory into a ZIP
+          for plugin_dir in assets/doqix-settings assets/doqix-roi-calculator assets/doqix-roi-calculator-v2 assets/doqix-pricing-carousel assets/doqix-workflow-advisor; do
+            if [ -d "$plugin_dir" ]; then
+              plugin_name=$(basename "$plugin_dir")
+              # Create ZIP with the plugin as the top-level directory
+              cd assets
+              zip -r "../dist/${plugin_name}.zip" "$plugin_name/" -x "*/.DS_Store" "*/Thumbs.db"
+              cd ..
+            fi
+          done
+
+          ls -la dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true

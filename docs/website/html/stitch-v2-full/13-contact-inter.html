@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#690005",
+                    "primary": "#6effc0",
+                    "on-secondary": "#462a00",
+                    "on-primary-fixed-variant": "#005236",
+                    "on-tertiary-fixed-variant": "#624000",
+                    "on-primary": "#003824",
+                    "on-surface": "#e4e1e9",
+                    "error": "#ffb4ab",
+                    "background": "#131318",
+                    "secondary-fixed-dim": "#ffb95a",
+                    "on-primary-fixed": "#002114",
+                    "primary-fixed": "#47ffb8",
+                    "on-secondary-container": "#3d2400",
+                    "inverse-primary": "#006c49",
+                    "secondary": "#ffb95a",
+                    "tertiary-container": "#ffbd5b",
+                    "outline-variant": "#3b4a41",
+                    "on-tertiary": "#452b00",
+                    "secondary-fixed": "#ffddb6",
+                    "surface-variant": "#35343a",
+                    "surface-container-low": "#1b1b20",
+                    "surface-container-highest": "#35343a",
+                    "on-tertiary-fixed": "#291800",
+                    "on-background": "#e4e1e9",
+                    "on-secondary-fixed": "#2a1800",
+                    "tertiary-fixed": "#ffddb3",
+                    "inverse-surface": "#e4e1e9",
+                    "on-surface-variant": "#bacbbf",
+                    "secondary-container": "#c68315",
+                    "error-container": "#93000a",
+                    "surface-container": "#1f1f25",
+                    "on-tertiary-container": "#744c00",
+                    "tertiary-fixed-dim": "#fcba59",
+                    "outline": "#84958a",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-lowest": "#0e0e13",
+                    "tertiary": "#ffe1bb",
+                    "on-primary-container": "#006141",
+                    "surface-dim": "#131318",
+                    "surface-container-high": "#2a292f",
+                    "surface": "#131318",
+                    "on-secondary-fixed-variant": "#643f00",
+                    "inverse-on-surface": "#303036",
+                    "primary-container": "#00e5a0",
+                    "surface-bright": "#39383e",
+                    "surface-tint": "#00e29e",
+                    "primary-fixed-dim": "#00e29e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .headline-font { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { background: rgba(19, 19, 24, 0.6); backdrop-filter: blur(24px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+<div class="flex justify-between items-center h-20 px-8 max-w-[1440px] mx-auto">
+<div class="font-['Space_Grotesk'] text-2xl font-bold tracking-tighter text-white">Do.Qix</div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center gap-10">
+<a class="font-['Inter'] text-sm tracking-wide text-zinc-400 hover:text-[#6effc0] transition-colors duration-200" href="#">Solutions</a>
+<a class="font-['Inter'] text-sm tracking-wide text-zinc-400 hover:text-[#6effc0] transition-colors duration-200" href="#">Platform</a>
+<a class="font-['Inter'] text-sm tracking-wide text-zinc-400 hover:text-[#6effc0] transition-colors duration-200" href="#">Company</a>
+<a class="font-['Inter'] text-sm tracking-wide text-[#00e5a0] font-semibold" href="#">Contact</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-lg font-['Inter'] text-sm font-bold scale-95 active:scale-90 transition-transform">
+                Get Started
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 mb-20 text-center md:text-left">
+<h1 class="headline-font text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 leading-tight">
+                Let's Get Your <span class="text-primary-container">Time Back</span>
+</h1>
+<p class="text-on-surface-variant text-xl md:text-2xl max-w-2xl font-light leading-relaxed">
+                We design and deploy kinetic automation layers that handle the mundane, so you can focus on the monumental.
+            </p>
+</section>
+<!-- Main Contact & Info -->
+<section class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<!-- Left: Form -->
+<div class="lg:col-span-7 space-y-12">
+<div class="bg-surface-container-low rounded-xl p-8 md:p-10">
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs uppercase tracking-widest text-zinc-500 font-bold">Full Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary transition-all" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs uppercase tracking-widest text-zinc-500 font-bold">Business Email</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary transition-all" placeholder="john@company.com" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs uppercase tracking-widest text-zinc-500 font-bold">Company (Optional)</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary transition-all" placeholder="Acme Corp" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs uppercase tracking-widest text-zinc-500 font-bold">Company Size</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary transition-all appearance-none">
+<option>1-10 Employees</option>
+<option>11-50 Employees</option>
+<option>51-200 Employees</option>
+<option>200+ Employees</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs uppercase tracking-widest text-zinc-500 font-bold">What's your biggest time-waster?</label>
+<textarea class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary transition-all resize-none" placeholder="The task that drives you crazy..." rows="4"></textarea>
+</div>
+<div class="space-y-2">
+<label class="text-xs uppercase tracking-widest text-zinc-500 font-bold">How did you hear about us? (Optional)</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary transition-all appearance-none">
+<option>Social Media</option>
+<option>Referral</option>
+<option>Search Engine</option>
+<option>Other</option>
+</select>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-5 rounded-lg font-bold text-lg hover:shadow-[0_0_30px_rgba(110,255,192,0.3)] transition-all" type="submit">
+                            Get My Free Plan
+                        </button>
+</form>
+</div>
+<!-- Trust Signals -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">deployed_code</span>
+<span class="text-xs font-medium leading-tight">100+ Workflows</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-xs font-medium leading-tight">POPIA Compliant</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">lock_open</span>
+<span class="text-xs font-medium leading-tight">No Lock-in</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="text-xs font-medium leading-tight">Your Data Only</span>
+</div>
+</div>
+</div>
+<!-- Right: Contact Card -->
+<div class="lg:col-span-5 space-y-8">
+<div class="bg-surface-container p-10 rounded-xl space-y-12 shadow-[0_40px_80px_rgba(0,0,0,0.5)]">
+<div class="space-y-4">
+<h3 class="headline-font text-2xl font-bold text-white tracking-tight">Direct Channels</h3>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="text-xs text-zinc-500 uppercase tracking-widest font-bold mb-1">Email</p>
+<a class="text-lg text-on-surface hover:text-primary transition-colors" href="mailto:hello@doqix.co.za">hello@doqix.co.za</a>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined">phone_android</span>
+</div>
+<div>
+<p class="text-xs text-zinc-500 uppercase tracking-widest font-bold mb-1">WhatsApp &amp; Call</p>
+<a class="text-lg text-on-surface hover:text-primary transition-colors" href="tel:+27000000000">+27 (0) 12 345 6789</a>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<p class="text-xs text-zinc-500 uppercase tracking-widest font-bold mb-1">Location</p>
+<p class="text-lg text-on-surface">Cape Town, South Africa</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<p class="text-xs text-zinc-500 uppercase tracking-widest font-bold mb-1">Hours</p>
+<p class="text-lg text-on-surface">Mon - Fri: 8am - 5pm</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-lg aspect-video">
+<img class="w-full h-full object-cover grayscale opacity-40" data-alt="abstract minimalist background with neon teal geometric lines and dark textured surface representing high-speed data automation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWM9k9VabCqRkVVx2x2VYT1t2BN7P_Xio6YO_GoYxzUW79NUChH7Q7BMUDGJnVNJyWOCRDcwZYDLxHX7nVATC7VWB5H0fOebduPld02mkZS3hlGZvTW2Eg3hkrzTkQAijWk3DCLIzz2W-k9D9UaDYw-Q7emRIEx4ptgEMLv5LIsQBAgQDQsQe54Qx5MmhdJQizQFUvfReJOmwc8vZEuwcbnRlAe7RqNMlgM76-S1ucjExk23pms-2XnqlfFv_L5ks_sbPiw5_6zM0"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="text-center px-6">
+<p class="text-sm font-bold text-primary mb-2">Automate Everything.</p>
+<p class="text-xs text-on-surface-variant">The Kinetic Monolith. Engineered in South Africa.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- What Happens Next -->
+<section class="max-w-7xl mx-auto px-8 py-32">
+<h2 class="headline-font text-3xl md:text-5xl font-bold text-white mb-20 text-center">What Happens Next?</h2>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
+<!-- Connective line for desktop -->
+<div class="hidden md:block absolute top-12 left-0 w-full h-[2px] bg-gradient-to-r from-primary/50 via-primary/10 to-transparent -z-10"></div>
+<div class="space-y-6 group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center text-primary border border-primary/20 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<span class="text-xl font-black">1</span>
+</div>
+<div class="space-y-2">
+<h4 class="font-bold text-white">Respond fast</h4>
+<p class="text-sm text-zinc-400">We'll get back to you within 4 business hours. No waiting games.</p>
+</div>
+</div>
+<div class="space-y-6 group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center text-primary border border-primary/20 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<span class="text-xl font-black">2</span>
+</div>
+<div class="space-y-2">
+<h4 class="font-bold text-white">Listen</h4>
+<p class="text-sm text-zinc-400">We hop on a 15-min call to understand your specific workflow pains.</p>
+</div>
+</div>
+<div class="space-y-6 group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center text-primary border border-primary/20 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<span class="text-xl font-black">3</span>
+</div>
+<div class="space-y-2">
+<h4 class="font-bold text-white">No sales pitch</h4>
+<p class="text-sm text-zinc-400">Pure problem solving. We show you exactly how automation fits in.</p>
+</div>
+</div>
+<div class="space-y-6 group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center text-primary border border-primary/20 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<span class="text-xl font-black">4</span>
+</div>
+<div class="space-y-2">
+<h4 class="font-bold text-white">Clear plan</h4>
+<p class="text-sm text-zinc-400">You receive a scoped plan with transparent ROI and pricing.</p>
+</div>
+</div>
+<div class="space-y-6 group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center text-primary border border-primary/20 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+<span class="text-xl font-black">5</span>
+</div>
+<div class="space-y-2">
+<h4 class="font-bold text-white">You decide</h4>
+<p class="text-sm text-zinc-400">No pressure. Only start when you're ready to reclaim your focus.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="max-w-4xl mx-auto px-8 pb-32">
+<h2 class="headline-font text-3xl font-bold text-white mb-12">Frequently Asked Questions</h2>
+<div class="space-y-4">
+<!-- FAQ Item -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors">
+<span class="font-semibold text-on-surface">What's the typical implementation timeline?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">add</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors">
+<span class="font-semibold text-on-surface">Do I need technical knowledge to manage this?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">add</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors">
+<span class="font-semibold text-on-surface">Which apps are compatible with Do.Qix?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">add</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors">
+<span class="font-semibold text-on-surface">Is my data safe with automation?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">add</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors">
+<span class="font-semibold text-on-surface">How does pricing work?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">add</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors">
+<span class="font-semibold text-on-surface">Can I cancel anytime?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">add</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors">
+<span class="font-semibold text-on-surface">Will this replace my current staff?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">add</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-surface-container-high transition-colors">
+<span class="font-semibold text-on-surface">Do you offer ongoing support?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform">add</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-20 bg-[#1b1b20]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+<div class="space-y-4 text-center md:text-left">
+<div class="font-['Space_Grotesk'] text-xl font-black text-white">Do.Qix</div>
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-zinc-500">© 2024 Do.Qix. The Kinetic Monolith.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-zinc-500 hover:text-white transition-opacity" href="#">Privacy</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-zinc-500 hover:text-white transition-opacity" href="#">Terms</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-zinc-500 hover:text-white transition-opacity" href="#">Documentation</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-zinc-500 hover:text-white transition-opacity" href="#">Status</a>
+</div>
+</div>
+</footer>
+</body></html>

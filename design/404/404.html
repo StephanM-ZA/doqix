@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC ENGINE - System States</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#2a292f",
+                        "on-surface-variant": "#bacbbf",
+                        "error-container": "#93000a",
+                        "outline-variant": "#3b4a41",
+                        "surface-dim": "#131318",
+                        "on-secondary": "#502400",
+                        "surface-container-lowest": "#0e0e13",
+                        "surface-bright": "#39383e",
+                        "surface-container-low": "#1b1b20",
+                        "primary": "#6effc0",
+                        "outline": "#84958a",
+                        "tertiary-fixed": "#ffddb3",
+                        "on-tertiary-fixed": "#291800",
+                        "inverse-primary": "#006c49",
+                        "on-surface": "#e4e1e9",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "secondary-fixed-dim": "#ffb787",
+                        "on-primary-fixed": "#002114",
+                        "secondary-container": "#ff8000",
+                        "tertiary-fixed-dim": "#fcba59",
+                        "inverse-surface": "#e4e1e9",
+                        "surface-container": "#1f1f25",
+                        "on-primary-container": "#006141",
+                        "surface-variant": "#35343a",
+                        "surface-tint": "#00e29e",
+                        "secondary": "#ffb787",
+                        "on-secondary-container": "#5e2b00",
+                        "inverse-on-surface": "#303036",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#ffbd5b",
+                        "on-primary-fixed-variant": "#005236",
+                        "tertiary": "#ffe1bb",
+                        "on-background": "#e4e1e9",
+                        "secondary-fixed": "#ffdcc7",
+                        "primary-fixed": "#47ffb8",
+                        "on-tertiary": "#452b00",
+                        "on-tertiary-container": "#744c00",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#35343a",
+                        "on-primary": "#003824",
+                        "surface": "#131318",
+                        "on-secondary-fixed-variant": "#723600",
+                        "primary-fixed-dim": "#00e29e",
+                        "primary-container": "#00e5a0",
+                        "on-secondary-fixed": "#311300",
+                        "background": "#131318",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            background: rgba(19, 19, 24, 0.6);
+            backdrop-filter: blur(40px);
+        }
+        .ease-spring {
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        /* Global reset for any italics */
+        * {
+            font-style: normal !important;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 left-0 w-full z-50 bg-zinc-950/60 backdrop-blur-2xl shadow-2xl shadow-teal-500/5">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="text-2xl font-black tracking-tighter text-teal-400 font-inter tracking-tight uppercase">KINETIC</div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="text-zinc-400 font-medium hover:text-white hover:scale-105 transition-all duration-300 ease-spring" href="#">Services</a>
+<a class="text-zinc-400 font-medium hover:text-white hover:scale-105 transition-all duration-300 ease-spring" href="#">Products</a>
+<a class="text-zinc-400 font-medium hover:text-white hover:scale-105 transition-all duration-300 ease-spring" href="#">Contact</a>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold hover:scale-105 transition-all duration-300 ease-spring">Ignite Engine</button>
+</div>
+</nav>
+</header>
+<main class="pt-32 pb-16 space-y-32">
+<!-- 404 Section -->
+<section class="relative min-h-[716px] flex flex-col items-center justify-center px-6 overflow-hidden">
+<div class="absolute inset-0 z-0 flex justify-center items-center pointer-events-none">
+<div class="w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl space-y-8">
+<div class="inline-flex items-center gap-2 bg-primary/10 border border-outline/20 px-4 py-1 rounded-full mb-4">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-[0.6875rem] font-semibold uppercase tracking-[0.05em] text-primary">System Deviation Detected</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-black tracking-[-0.04em] leading-tight text-white uppercase">
+                This page got <span class="text-primary">automated</span> out of existence.
+            </h1>
+<p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+                The page you're looking for isn't here... maybe it's living its best life as a cloud-based macro. Let's get you back to high performance.
+            </p>
+<div class="flex flex-col md:flex-row gap-4 justify-center pt-8">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 ease-spring shadow-lg shadow-primary/20">
+                    Take me home
+                </button>
+<button class="bg-surface-container-highest text-primary border border-primary/20 px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 ease-spring">
+                    Get a Free Automation Plan
+                </button>
+</div>
+</div>
+</section>
+<!-- Thank You Section -->
+<section class="max-w-7xl mx-auto px-8">
+<div class="bg-surface-container-low rounded-lg p-12 md:p-24 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-12 opacity-10">
+<span class="material-symbols-outlined text-[160px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<h2 class="text-4xl md:text-6xl font-black tracking-tight text-white uppercase leading-none">
+                        We Got You.<br/><span class="text-secondary">We'll Be In Touch Soon.</span>
+</h2>
+<div class="space-y-6 pt-4">
+<div class="flex gap-6 items-start">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-primary text-sm">bolt</span>
+</div>
+<div class="space-y-1">
+<p class="font-bold text-lg text-white">Engine Warming Up</p>
+<p class="text-on-surface-variant">Our optimization specialists are reviewing your architecture.</p>
+</div>
+</div>
+<div class="flex gap-6 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-sm">schedule</span>
+</div>
+<div class="space-y-1">
+<p class="font-bold text-lg text-white">24-Hour Sync</p>
+<p class="text-on-surface-variant">Expect a calendar invite for a strategic deep-dive within one business day.</p>
+</div>
+</div>
+</div>
+<div class="pt-8">
+<a class="inline-flex items-center gap-2 text-primary font-bold group" href="#">
+                            While you wait, explore our latest manufacturing case study
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="hidden md:block">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container relative">
+<img class="w-full h-full object-cover grayscale opacity-50 contrast-125" data-alt="Modern high-tech control room with teal glowing interfaces and professional engineers working on complex automation systems" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5ISrFPrPMjGY-N9dovjGV4VPjAZcftuUq_BfxoweGHSnkggGJ4GBOmf8v8SvjO8nNHvkK4YvA7DiqekBTi4tiZOhOuMhDezhSaLqgiubzO2-ysjzlxMKUHobdYTSUN4oPIJWwsJYhXvaZCvu-xynEcg1prkfye6_exYB1Y9Wcxsc-GeEUGG_oTwZCJlaIi9XW8Z3pIhZMQOjJ6urWU07POD7Gh1wsw3N25cYDlZ2rw_rhkeci9IxsT7tRnNDCaoWHA4BA1Z7RBw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Components Showcase (Popups/Banners) -->
+<section class="max-w-7xl mx-auto px-8 pb-32">
+<div class="grid md:grid-cols-2 gap-12">
+<!-- Exit Intent Popup Simulation -->
+<div class="space-y-4">
+<p class="text-label-sm text-on-surface-variant uppercase tracking-widest font-semibold">Exit Intent Overlay</p>
+<div class="bg-surface-container-high rounded-lg p-8 shadow-2xl relative border border-outline-variant/10">
+<div class="absolute top-4 right-4">
+<button class="text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="space-y-6">
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<h3 class="text-2xl font-black text-white uppercase tracking-tight">Your team is losing a full day every week to busywork.</h3>
+<p class="text-on-surface-variant leading-relaxed">
+                            Studies show <span class="text-white font-bold">30% of the average work week</span> is spent on tasks that could be fully automated. Don't let your efficiency leak.
+                        </p>
+<div class="flex flex-col gap-3 pt-2">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-full font-bold hover:brightness-110 transition-all">Start Free</button>
+<button class="w-full text-on-surface-variant py-3 text-sm font-medium hover:text-white transition-colors">I'll keep doing it manually</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Cookie Banner Simulation -->
+<div class="space-y-4">
+<p class="text-label-sm text-on-surface-variant uppercase tracking-widest font-semibold">Privacy Cluster</p>
+<div class="mt-auto">
+<div class="bg-surface-container rounded-lg p-6 flex flex-col md:flex-row items-center gap-6 border-l-4 border-primary shadow-xl">
+<div class="flex-1">
+<p class="text-on-surface font-medium">We use cookies to improve your experience. Nothing shady.</p>
+<p class="text-xs text-on-surface-variant mt-1">Just engineered data to make our engine run smoother for you.</p>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-6 py-2 bg-primary-container text-on-primary-container text-sm font-bold rounded-full hover:scale-105 transition-all">Accept</button>
+<button class="flex-1 md:flex-none px-6 py-2 bg-surface-container-highest text-white text-sm font-bold rounded-full hover:bg-surface-bright transition-all">Learn More</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Anchor -->
+<footer class="w-full py-16 bg-[#131318] border-t border-zinc-800/20">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between gap-8 items-center">
+<div class="font-inter text-[10px] uppercase tracking-[0.2em] font-semibold text-zinc-500">
+            © 2024 KINETIC ENGINE. ENGINEERED FLUIDITY.
+        </div>
+<div class="flex gap-8">
+<a class="font-inter text-[10px] uppercase tracking-[0.2em] font-semibold text-zinc-500 hover:text-teal-300 transition-colors opacity-80 hover:opacity-100" href="#">Documentation</a>
+<a class="font-inter text-[10px] uppercase tracking-[0.2em] font-semibold text-zinc-500 hover:text-teal-300 transition-colors opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="font-inter text-[10px] uppercase tracking-[0.2em] font-semibold text-zinc-500 hover:text-teal-300 transition-colors opacity-80 hover:opacity-100" href="#">Changelog</a>
+<a class="font-inter text-[10px] uppercase tracking-[0.2em] font-semibold text-zinc-500 hover:text-teal-300 transition-colors opacity-80 hover:opacity-100" href="#">System Status</a>
+</div>
+</div>
+</footer>
+</body></html>

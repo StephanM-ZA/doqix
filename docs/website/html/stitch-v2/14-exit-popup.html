@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Do.Qix | Kinetic Workflow Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#003824",
+                        "inverse-on-surface": "#303036",
+                        "primary": "#6effc0",
+                        "surface-container": "#1f1f25",
+                        "on-tertiary": "#452b00",
+                        "on-error": "#690005",
+                        "tertiary-container": "#ffbd5b",
+                        "primary-container": "#00e5a0",
+                        "on-primary-fixed-variant": "#005236",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#35343a",
+                        "on-tertiary-fixed-variant": "#624000",
+                        "surface-dim": "#131318",
+                        "secondary-fixed-dim": "#ffb95a",
+                        "on-secondary-fixed": "#2a1800",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2a292f",
+                        "tertiary-fixed-dim": "#fcba59",
+                        "tertiary-fixed": "#ffddb3",
+                        "on-tertiary-fixed": "#291800",
+                        "on-primary-container": "#006141",
+                        "outline-variant": "#3b4a41",
+                        "on-primary-fixed": "#002114",
+                        "surface-container-lowest": "#0e0e13",
+                        "background": "#131318",
+                        "surface-container-low": "#1b1b20",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-tertiary-container": "#744c00",
+                        "on-surface": "#e4e1e9",
+                        "surface": "#131318",
+                        "on-background": "#e4e1e9",
+                        "on-secondary-container": "#3d2400",
+                        "primary-fixed": "#47ffb8",
+                        "secondary-fixed": "#ffddb6",
+                        "surface-tint": "#00e29e",
+                        "inverse-primary": "#006c49",
+                        "secondary": "#ffb95a",
+                        "on-secondary": "#462a00",
+                        "inverse-surface": "#e4e1e9",
+                        "surface-bright": "#39383e",
+                        "primary-fixed-dim": "#00e29e",
+                        "tertiary": "#ffe1bb",
+                        "surface-variant": "#35343a",
+                        "secondary-container": "#c68315",
+                        "outline": "#84958a",
+                        "on-surface-variant": "#bacbbf",
+                        "on-error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #6effc0 0%, #00e5a0 100%);
+        }
+        .glow-pulse {
+            box-shadow: 0 0 0 0 rgba(110, 255, 192, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(110, 255, 192, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(110, 255, 192, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(110, 255, 192, 0); }
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131318]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<div class="font-['Space_Grotesk'] text-2xl font-black text-[#00e5a0] tracking-tighter">Do.Qix</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-slate-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold" href="#">Product</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold" href="#">Solutions</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold" href="#">Developers</a>
+<a class="text-slate-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold active:scale-95 transition-transform">Log In</button>
+<button class="bg-[#00e5a0] text-[#003824] px-5 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase text-sm font-bold active:scale-95 transition-transform">Get Started</button>
+</div>
+</div>
+</nav>
+<!-- Hero Content (Blurred Background Page) -->
+<main class="pt-32 pb-24 px-8 flex-grow">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="text-primary font-mono text-sm tracking-widest uppercase mb-4 block">Engineered for Velocity</span>
+<h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-8">
+                        AUTOMATE <br/> WITHOUT <br/> FRICTION.
+                    </h1>
+<p class="text-lg text-on-surface-variant max-w-md mb-12 leading-relaxed">
+                        The kinetic orchestration platform that turns complex developer workflows into invisible infrastructure. Scale faster, build smarter.
+                    </p>
+<div class="flex gap-4">
+<button class="kinetic-gradient text-on-primary px-8 py-4 rounded-lg font-bold transition-all active:scale-95">Deploy Now</button>
+<button class="border border-outline-variant/20 px-8 py-4 rounded-lg font-bold hover:bg-surface-container transition-all">Documentation</button>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square rounded-2xl bg-surface-container-low overflow-hidden relative group">
+<img class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700" data-alt="Abstract 3D digital visualization of interconnected glass nodes and teal light filaments on a dark charcoal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvkooBU-fsnY78k0KTCiUdcUati2MbgKa23TOFwWt2Vx5cndql4K3NQKpuArjDrHANQ6scLMJi4mZLi-AchnVvdUzsqsHYNNgIuvbd8FozuTkHm2_4R5San1-oMazWD5wP_vHTsN_1Qf_GqMoi46u-h5mbia6j_pfBA9gk7R2VFZcgBA_t0_orfmllzhVcfyKDvKMERJGJevilF-GgUJ4V9LkuzMQpmBnJEONxqExMBeIZmM66jd4qmGZ1-oSkroxdI0r12W2MGl4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+</div>
+<!-- Flow Indicator Graphic -->
+<div class="absolute -left-8 top-1/4 bottom-1/4 w-[2px] bg-gradient-to-b from-primary via-primary-container to-transparent opacity-50"></div>
+</div>
+</div>
+<!-- Bento Grid Section -->
+<div class="mt-32 grid grid-cols-12 gap-6">
+<div class="col-span-12 md:col-span-7 bg-surface-container-low rounded-2xl p-10 flex flex-col justify-end min-h-[400px]">
+<h3 class="text-3xl font-bold mb-4 tracking-tight">Real-time Node Monitoring</h3>
+<p class="text-on-surface-variant max-w-sm">Every action recorded. Every latency spike addressed. Total visibility into your automation stack.</p>
+</div>
+<div class="col-span-12 md:col-span-5 bg-surface-container-high rounded-2xl p-10 border border-outline-variant/10">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="bolt">bolt</span>
+</div>
+<h3 class="text-2xl font-bold mb-2">Zero Latency</h3>
+<p class="text-sm text-on-surface-variant">Global edge deployment ensures your triggers fire within milliseconds, regardless of geographic distance.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- EXIT-INTENT POPUP OVERLAY -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+<!-- Backdrop Blur and Overlay -->
+<div class="absolute inset-0 bg-[#0e0e13]/90 backdrop-blur-sm"></div>
+<!-- Popup Container -->
+<div class="relative bg-surface-container-low rounded-2xl p-12 max-w-xl w-full border border-outline-variant/20 shadow-[0_40px_100px_rgba(0,0,0,0.8)] overflow-hidden">
+<!-- Decorative Glow Background -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="mb-8 p-3 rounded-2xl bg-surface-container-highest">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="timer">timer</span>
+</div>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6 leading-tight">
+                    Your team is losing a full day every week to busywork.
+                </h2>
+<p class="text-on-surface-variant mb-10 leading-relaxed text-lg font-['Inter']">
+                    Join over 4,500 high-velocity teams who automated their repetitive tasks and got their focus back.
+                </p>
+<div class="flex flex-col w-full gap-6">
+<button class="kinetic-gradient glow-pulse text-on-primary py-5 rounded-xl font-bold text-xl active:scale-95 transition-transform flex items-center justify-center gap-3">
+                        Start Free
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="text-slate-500 hover:text-on-surface transition-colors text-sm font-medium tracking-wide underline underline-offset-4 decoration-slate-700">
+                        I'll keep doing it manually.
+                    </button>
+</div>
+</div>
+<!-- Side accent line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-transparent opacity-30"></div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-[#0e0e13] w-full py-12 mt-auto">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col gap-2">
+<div class="font-['Space_Grotesk'] text-xl font-black text-white">Do.Qix</div>
+<p class="font-['Inter'] text-xs tracking-wide text-slate-500 max-w-xs">© 2024 Do.Qix. Built for the high-velocity enterprise.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Security</a>
+<a class="font-['Inter'] text-xs tracking-wide text-slate-500 hover:text-[#00e5a0] transition-colors duration-200" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

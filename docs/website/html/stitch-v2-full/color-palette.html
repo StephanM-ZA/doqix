@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Do.Qix — Color Palette Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #f0f0f5; padding: 40px; }
+  h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+  h2 { font-size: 22px; font-weight: 600; margin: 48px 0 24px; color: #00e5a0; }
+  h3 { font-size: 16px; font-weight: 600; margin: 32px 0 16px; color: #8a8a9a; text-transform: uppercase; letter-spacing: 0.05em; }
+  p.sub { color: #8a8a9a; margin-bottom: 40px; }
+  .palette-section { margin-bottom: 48px; }
+  .row { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+  .swatch {
+    width: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .swatch-color {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .swatch-info {
+    padding: 12px;
+    background: #141419;
+  }
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .swatch-hex {
+    font-size: 12px;
+    color: #8a8a9a;
+    font-family: monospace;
+  }
+  .swatch-role {
+    font-size: 11px;
+    color: #6a6a7a;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+    padding: 32px;
+    background: #141419;
+    border-radius: 16px;
+    border: 1px solid #1e1e2a;
+  }
+  .comparison h3 { margin-top: 0; }
+  .compare-strip {
+    display: flex;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 60px;
+    margin-bottom: 8px;
+  }
+  .compare-strip div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .light-text { color: #f0f0f5; }
+  .dark-text { color: #0a0a0f; }
+</style>
+</head>
+<body>
+
+<h1>Do.Qix — Color Palettes</h1>
+<p class="sub">Stitch Project palette vs Custom Brand palette — open in browser to compare visually</p>
+
+<!-- STITCH PROJECT PALETTE -->
+<h2>Stitch Project Palette ("Kinetic Monolith")</h2>
+
+<h3>Surfaces</h3>
+<div class="row">
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#0e0e13;">#0e0e13</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Container Lowest</div>
+      <div class="swatch-hex">#0e0e13</div>
+      <div class="swatch-role">Deep backgrounds</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#131318;">#131318</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Surface / Background</div>
+      <div class="swatch-hex">#131318</div>
+      <div class="swatch-role">Main canvas</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#1b1b20;">#1b1b20</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Container Low</div>
+      <div class="swatch-hex">#1b1b20</div>
+      <div class="swatch-role">Section backgrounds</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#1f1f25;">#1f1f25</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Container</div>
+      <div class="swatch-hex">#1f1f25</div>
+      <div class="swatch-role">Cards, panels</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#2a292f;">#2a292f</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Container High</div>
+      <div class="swatch-hex">#2a292f</div>
+      <div class="swatch-role">Elevated elements</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#35343a;">#35343a</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Container Highest</div>
+      <div class="swatch-hex">#35343a</div>
+      <div class="swatch-role">Inputs, top layer</div>
+    </div>
+  </div>
+</div>
+
+<h3>Accents</h3>
+<div class="row">
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#6effc0;">#6effc0</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Primary</div>
+      <div class="swatch-hex">#6effc0</div>
+      <div class="swatch-role">Action, energy, lighter teal</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#00e5a0;">#00e5a0</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Primary Container</div>
+      <div class="swatch-hex">#00e5a0</div>
+      <div class="swatch-role">CTA fills, vibrant</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#00e29e;">#00e29e</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Surface Tint</div>
+      <div class="swatch-hex">#00e29e</div>
+      <div class="swatch-role">Tint overlay</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#47ffb8;">#47ffb8</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Primary Fixed</div>
+      <div class="swatch-hex">#47ffb8</div>
+      <div class="swatch-role">Fixed accent</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#ffb95a;">#ffb95a</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Secondary (Amber)</div>
+      <div class="swatch-hex">#ffb95a</div>
+      <div class="swatch-role">Warmth, badges</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#ffe1bb;">#ffe1bb</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Tertiary</div>
+      <div class="swatch-hex">#ffe1bb</div>
+      <div class="swatch-role">High-end highlights</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#ffb4ab;">#ffb4ab</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Error</div>
+      <div class="swatch-hex">#ffb4ab</div>
+      <div class="swatch-role">Error states</div>
+    </div>
+  </div>
+</div>
+
+<h3>Text & Borders</h3>
+<div class="row">
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#e4e1e9;">#e4e1e9</div>
+    <div class="swatch-info">
+      <div class="swatch-name">On Background</div>
+      <div class="swatch-hex">#e4e1e9</div>
+      <div class="swatch-role">Primary text</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#bacbbf;">#bacbbf</div>
+    <div class="swatch-info">
+      <div class="swatch-name">On Surface Variant</div>
+      <div class="swatch-hex">#bacbbf</div>
+      <div class="swatch-role">Secondary text</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#84958a;">#84958a</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Outline</div>
+      <div class="swatch-hex">#84958a</div>
+      <div class="swatch-role">Borders</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#3b4a41;">#3b4a41</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Outline Variant</div>
+      <div class="swatch-hex">#3b4a41</div>
+      <div class="swatch-role">Ghost borders (15% opacity)</div>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOM BRAND PALETTE -->
+<h2>Custom Brand Palette (DESIGN.md)</h2>
+
+<h3>Surfaces</h3>
+<div class="row">
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#0a0a0f;">#0a0a0f</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Void Charcoal</div>
+      <div class="swatch-hex">#0a0a0f</div>
+      <div class="swatch-role">Primary canvas</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#141419;">#141419</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Elevated Onyx</div>
+      <div class="swatch-hex">#141419</div>
+      <div class="swatch-role">Cards, panels</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#1a1a22;">#1a1a22</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Whisper Lift</div>
+      <div class="swatch-hex">#1a1a22</div>
+      <div class="swatch-role">Hover/active state</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#1e1e2a;">#1e1e2a</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Shadow Line</div>
+      <div class="swatch-hex">#1e1e2a</div>
+      <div class="swatch-role">Borders, dividers</div>
+    </div>
+  </div>
+</div>
+
+<h3>Accents</h3>
+<div class="row">
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#00e5a0;">#00e5a0</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Electric Teal</div>
+      <div class="swatch-hex">#00e5a0</div>
+      <div class="swatch-role">Primary CTA, "go" color</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#ffb347;">#ffb347</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Warm Amber</div>
+      <div class="swatch-hex">#ffb347</div>
+      <div class="swatch-role">Badges, highlights</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#ff6b6b;">#ff6b6b</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Coral Alert</div>
+      <div class="swatch-hex">#ff6b6b</div>
+      <div class="swatch-role">Errors, warnings</div>
+    </div>
+  </div>
+</div>
+
+<h3>Text</h3>
+<div class="row">
+  <div class="swatch">
+    <div class="swatch-color dark-text" style="background:#f0f0f5;">#f0f0f5</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Soft Cloud</div>
+      <div class="swatch-hex">#f0f0f5</div>
+      <div class="swatch-role">Primary text</div>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color light-text" style="background:#8a8a9a;">#8a8a9a</div>
+    <div class="swatch-info">
+      <div class="swatch-name">Muted Steel</div>
+      <div class="swatch-hex">#8a8a9a</div>
+      <div class="swatch-role">Secondary text, captions</div>
+    </div>
+  </div>
+</div>
+
+<!-- SIDE BY SIDE COMPARISON -->
+<div class="comparison">
+  <div>
+    <h3>Stitch Project</h3>
+    <div class="compare-strip">
+      <div style="background:#0e0e13;" class="light-text">Lowest</div>
+      <div style="background:#131318;" class="light-text">Surface</div>
+      <div style="background:#1b1b20;" class="light-text">Low</div>
+      <div style="background:#1f1f25;" class="light-text">Container</div>
+      <div style="background:#2a292f;" class="light-text">High</div>
+      <div style="background:#35343a;" class="light-text">Highest</div>
+    </div>
+    <div class="compare-strip">
+      <div style="background:#6effc0;" class="dark-text">Primary</div>
+      <div style="background:#00e5a0;" class="dark-text">Container</div>
+      <div style="background:#ffb95a;" class="dark-text">Secondary</div>
+      <div style="background:#ffb4ab;" class="dark-text">Error</div>
+    </div>
+    <div class="compare-strip">
+      <div style="background:#e4e1e9;" class="dark-text">Text</div>
+      <div style="background:#bacbbf;" class="dark-text">Muted</div>
+      <div style="background:#84958a;" class="dark-text">Outline</div>
+      <div style="background:#3b4a41;" class="light-text">Ghost</div>
+    </div>
+  </div>
+  <div>
+    <h3>Custom Brand</h3>
+    <div class="compare-strip">
+      <div style="background:#0a0a0f;" class="light-text">Void</div>
+      <div style="background:#141419;" class="light-text">Onyx</div>
+      <div style="background:#1a1a22;" class="light-text">Whisper</div>
+      <div style="background:#1e1e2a;" class="light-text">Shadow</div>
+      <div style="background:#1e1e2a;" class="light-text">—</div>
+      <div style="background:#1e1e2a;" class="light-text">—</div>
+    </div>
+    <div class="compare-strip">
+      <div style="background:#00e5a0;" class="dark-text">Teal</div>
+      <div style="background:#00e5a0;" class="dark-text">—</div>
+      <div style="background:#ffb347;" class="dark-text">Amber</div>
+      <div style="background:#ff6b6b;" class="dark-text">Coral</div>
+    </div>
+    <div class="compare-strip">
+      <div style="background:#f0f0f5;" class="dark-text">Cloud</div>
+      <div style="background:#8a8a9a;" class="dark-text">Steel</div>
+      <div style="background:#1e1e2a;" class="light-text">Shadow</div>
+      <div style="background:#1e1e2a;" class="light-text">—</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
