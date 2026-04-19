@@ -86,3 +86,6 @@ samples/
 
 # Planning docs
 planning/
+
+# Large source video files
+*.mov
