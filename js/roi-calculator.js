@@ -257,8 +257,6 @@
     if(calcTouched&&pricingBannerText&&pricingBanner){
       var tierName=tier?tier.name:'Team';
       pricingBannerText.textContent='Based on your numbers, we recommend the '+tierName+' plan. First month at 50%.';
-      pricingBanner.classList.remove('orange');
-      pricingBanner.classList.add('teal');
     }
   }
 
