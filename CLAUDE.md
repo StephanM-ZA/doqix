@@ -82,6 +82,16 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 
 **Never push website changes without creating a version tag.**
 
+### Sync Design to Root (MANDATORY)
+
+GitHub Pages serves from `main:/` (root). The source of truth is in `design/`, but root-level files are what gets deployed. After ANY change to design files:
+
+1. Copy `design/global.css` to root `global.css`
+2. Copy `design/index/js/*.js` to root `js/`
+3. Copy `design/[page]/[page].html` to root `[page].html`, fixing CSS path from `../global.css` to `global.css`
+
+**This sync is part of the push process — commit the root files alongside the design files.**
+
 ### Branch Strategy
 
 - **main** = website files only (design/, docs/, site/, CLAUDE.md, etc.)
