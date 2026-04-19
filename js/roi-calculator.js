@@ -304,11 +304,12 @@
       var monthlySavings=(hoursSavedMonth*rate)+errorCost;
       var annualSavings=monthlySavings*12;
       var shareText=
-        'Ever wondered what repetitive work actually costs? I just found out:\n\n'+
-        'Monthly: '+formatZAR(monthlySavings)+'\n'+
-        'Annual: '+formatZAR(annualSavings)+'\n'+
-        'Hours saved: '+formatHours(hoursSavedMonth)+'/month\n\n'+
-        'Check yours at https://doqix.co.za';
+        '\uD83D\uDE80 I just calculated how much time & money I\'m wasting on repetitive work...\n\n'+
+        '\uD83D\uDCB0 Monthly savings: '+formatZAR(monthlySavings)+'\n'+
+        '\uD83D\uDCC8 Annual savings: '+formatZAR(annualSavings)+'\n'+
+        '\u23F1\uFE0F Hours back: '+formatHours(hoursSavedMonth)+'/month\n\n'+
+        'Mind. Blown. \uD83E\uDD2F\n\n'+
+        'Try the free calculator \uD83D\uDC49 https://doqix.co.za';
       if(navigator.share){navigator.share({title:'My Automation Savings',text:shareText}).catch(function(){});return}
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(shareText).then(showCopied,fallbackCopy)}
       else{fallbackCopy()}
