@@ -1,7 +1,18 @@
 // Force hero video autoplay (some browsers block even muted autoplay)
 var heroVideo = document.querySelector('.hero-video-bg video');
 if (heroVideo) {
-    heroVideo.play().catch(function () {});
+    heroVideo.muted = true;
+    function tryPlay() {
+        heroVideo.play().catch(function () {
+            setTimeout(tryPlay, 500);
+        });
+    }
+    if (heroVideo.readyState >= 2) {
+        tryPlay();
+    } else {
+        heroVideo.addEventListener('canplay', tryPlay);
+        heroVideo.load();
+    }
 }
 
 // Scroll reveal
