@@ -92,6 +92,19 @@ GitHub Pages serves from `main:/` (root). The source of truth is in `design/`, b
 
 **This sync is part of the push process — commit the root files alongside the design files.**
 
+### Cache-Busting on Deploy (MANDATORY)
+
+All CSS and JS file references in HTML must include a `?v=X.Y.Z` query string matching the current `web-vX.Y.Z` version. This forces browsers to fetch fresh files after every deploy instead of serving stale cached versions.
+
+When bumping the version tag, also update the `?v=` strings in all HTML files:
+- `global.css?v=X.Y.Z`
+- `js/main.js?v=X.Y.Z`
+- `js/testimonial-carousel.js?v=X.Y.Z`
+- `js/roi-calculator.js?v=X.Y.Z`
+- Any other linked CSS/JS files
+
+**Never push without bumping the cache-bust version.**
+
 ### Branch Strategy
 
 - **main** = website files only (design/, docs/, site/, CLAUDE.md, etc.)

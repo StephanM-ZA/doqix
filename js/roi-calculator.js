@@ -33,6 +33,9 @@
   var outBenchmark  = document.getElementById('out-benchmark');
   var btnShare      = document.getElementById('btn-share');
   var roiContainer  = document.getElementById('roi-calculator');
+  var pricingBannerText = document.getElementById('pricing-banner-text');
+  var pricingBanner = document.getElementById('pricing-banner');
+  var calcTouched = false;
 
   if (!roiContainer) return;
 
@@ -246,13 +249,37 @@
     updateSliderFill(sliderRate);
     updateSliderFill(sliderEfficiency);
     updateSliderFill(sliderError);
+
+    // Highlight matching pricing card
+    highlightPricingCard(tier?tier.name:'Team');
+
+    // Update pricing banner after calculator interaction
+    if(calcTouched&&pricingBannerText&&pricingBanner){
+      var tierName=tier?tier.name:'Team';
+      pricingBannerText.textContent='Based on your numbers, we recommend the '+tierName+' plan. First month at 50%.';
+      pricingBanner.classList.remove('orange');
+      pricingBanner.classList.add('teal');
+    }
   }
 
-  sliderPeople.addEventListener('input',calculate);
-  sliderHours.addEventListener('input',calculate);
-  sliderRate.addEventListener('input',calculate);
-  sliderEfficiency.addEventListener('input',calculate);
-  sliderError.addEventListener('input',calculate);
+  function highlightPricingCard(tierName){
+    var cards=document.querySelectorAll('.pricing-card');
+    cards.forEach(function(card){
+      var cardTier=card.getAttribute('data-tier');
+      if(cardTier===tierName){
+        card.classList.add('pricing-popular');
+      }else{
+        card.classList.remove('pricing-popular');
+      }
+    });
+  }
+
+  function onSliderInput(){calcTouched=true;calculate();}
+  sliderPeople.addEventListener('input',onSliderInput);
+  sliderHours.addEventListener('input',onSliderInput);
+  sliderRate.addEventListener('input',onSliderInput);
+  sliderEfficiency.addEventListener('input',onSliderInput);
+  sliderError.addEventListener('input',onSliderInput);
 
   // Touch tooltips
   var activeTooltip=null;

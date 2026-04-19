@@ -600,6 +600,47 @@ ul, ol {
 }
 
 /* ============================================
+   PRICING CARDS
+   ============================================ */
+
+.pricing-card {
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.pricing-popular {
+    border: 2px solid #00e5a0;
+    box-shadow: 0 0 20px rgba(0, 229, 160, 0.1);
+}
+
+.pricing-popular .btn-ghost {
+    background: #00e5a0;
+    color: #0C1830;
+    border-color: #00e5a0;
+    font-weight: 800;
+}
+
+.pricing-badge {
+    display: none;
+    position: absolute;
+    top: -0.875rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00e5a0;
+    color: #0C1830;
+    font-size: 0.6875rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+
+.pricing-popular .pricing-badge {
+    display: block;
+}
+
+/* ============================================
    ROI CALCULATOR
    ============================================ */
 .roi-calc {

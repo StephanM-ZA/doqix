@@ -1,61 +1,55 @@
 # CHECKPOINT — Do.Qix Website Design
 
 **Date:** 2026-04-19
-**Branch:** main (website), plugins (WordPress plugins)
-**Version:** web-v0.3.0
+**Branch:** main
+**Version:** web-v0.4.1 (pushed), uncommitted changes pending
 
 ---
 
 ## Completed This Session
 
-1. **Em dash cleanup** — Removed ~200+ em dashes from Website_Copy.md, next-prompt.md, index.html
-2. **ROI Calculator** — Built from V1 plugin, dark-themed, config-driven JS, inserted into index
-3. **Callout component** — `.callout` with `.orange`/`.teal` variants in global.css
-4. **JS extraction** — All JS in external files (js/main.js, js/testimonial-carousel.js, js/roi-calculator.js)
-5. **No-hardcode** — Slider config in JS CONFIG object, HTML bare markup
-6. **Text colour** — All #0a0a0f changed to #0C1830 (text on accent matches background)
-7. **Heading consistency** — Removed trailing periods from all headings
-8. **Background colour** — Royal Navy #0C1830 with full surface colour scheme, gradient at 10%
-9. **GitHub Pages** — Two-repo setup: stephanm-za.github.io (custom domain) + doqix (website)
-10. **Custom domain** — digitaloperations.co.za configured via Cloudflare DNS
+1. **Logo & favicon** — Replaced text "Do.Qix" with logo_new_green.png in header (3rem) and footer (10rem width), added favicon_green.png
+2. **Footer redesign** — Contact info with icons (email, phone, WhatsApp SVG, location), social links (LinkedIn, Instagram, Facebook), footer-top/footer-bottom layout, removed "Efficiency, Engineered"
+3. **Hero video** — AdobeStock .mov converted to .mp4 (8.3MB), runs as background behind hero at 10% opacity with edge fades
+4. **Mobile menu** — Hamburger icon (animated to X), full-width dropdown with nav links + CTA, hides desktop CTA on mobile
+5. **Header feather** — Soft gradient fade at bottom edge of fixed nav (85% opacity, feather at 98%)
+6. **Bullet list component** — Common `.bullet-list` in global.css with double-ring teal bullets (filled inner, thin outer ring)
+7. **Scroll anchor offset** — `scroll-margin-top: 6rem` on all sections with IDs
+8. **Nav hover** — Changed from white to teal (#00e5a0)
+9. **Section spacing** — Reduced all sections from py-32 to py-20
+10. **Cache-busting** — Added `?v=X.Y.Z` to all CSS/JS links, documented as MANDATORY rule
+11. **Dynamic pricing highlight** — Calculator tier moves "Recommended" badge and teal border to matching pricing card
+12. **Pricing banner** — Changes from orange "Launch offer" to teal "Based on your numbers, we recommend [Tier]" after calculator interaction
+13. **Component snippets** — Updated header.html and footer.html in design/components/
+14. **Contact details** — Email: stephan@digitaloperations.co.za, Phone: +27 61 514 8375, WhatsApp: wa.me link, Location: Cape Town
 
-## Rules Established (in CLAUDE.md + memory)
+## Files Modified (uncommitted)
 
-- No inline JS (external files only)
-- No em dashes in copy
-- No hardcoding (values in JS/CSS config)
-- Version tag (web-vX.Y.Z) on every website push
-- Sync design/ to root on every push
-- main = website, plugins = WordPress plugins
-- Text on accent = #0C1830
+- `design/index/index.html` — Pricing cards with data-tier + pricing-badge on all 4 cards
+- `design/index/js/roi-calculator.js` — Dynamic pricing highlight + banner update logic
+- `design/global.css` — Pricing card styles (.pricing-card, .pricing-popular, .pricing-badge)
+- `index.html` — Root sync
+- `js/roi-calculator.js` — Root sync
+- `global.css` — Root sync
+- `.gitignore` — Added *.mov
 
-## Background Colour Scheme (Royal Navy #0C1830)
+## Already Pushed (web-v0.4.1)
 
-| Role | Value |
-|------|-------|
-| Body bg | #0C1830 |
-| Deeper sections | #081024 |
-| Section bg alt | #101C36 |
-| Container | #14203C |
-| Container high | #1A2A48 |
-| Container highest | #1E3050 |
-| Surface bright | #223656 |
-| Card bg | #14203C |
-| Footer bg | #060C1C |
-| Hero gradient | rgba(0, 229, 160, 0.10) |
+- Logo, favicon, hero video, mobile menu, footer redesign
+- Cache-busting version strings
 
-## Deployment Setup
+## Rules Added
 
-- **stephanm-za.github.io** repo — holds CNAME for digitaloperations.co.za
-- **doqix** repo — website files, serves at digitaloperations.co.za/doqix/
-- Cloudflare DNS — 4x A records (185.199.*) DNS only + www CNAME
-- SSL pending GitHub certificate provisioning
+- Cache-busting on deploy (MANDATORY) — bump ?v= strings with every web-vX.Y.Z tag
+- .mov files excluded from git (1.6GB each)
 
 ## Next Steps
 
-1. Confirm SSL and site live at digitaloperations.co.za/doqix/
-2. Start services page design
-3. Update remaining pages with Royal Navy colour scheme
+1. Push uncommitted pricing highlight changes
+2. Confirm live site renders correctly after CDN cache clears
+3. Fix any remaining footer spacing issues
+4. Start services page design
+5. Update remaining pages with Royal Navy colour scheme + common header/footer
 
 ---
 
