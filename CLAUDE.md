@@ -65,3 +65,26 @@ Use instead:
 ### No Hardcoding Unless Necessary (MANDATORY)
 
 Never hardcode values in HTML when they can be defined in JS or CSS config. HTML should contain structure and IDs only. All data, defaults, ranges, labels, and configuration values belong in the JS or CSS files that control the component.
+
+### Git Tag on Every Website Push (MANDATORY)
+
+Every push to `main` that changes website files MUST be tagged for rollback capability.
+
+**Process:**
+1. Commit website changes
+2. Create an annotated git tag: `git tag -a web-vX.Y.Z -m "description"`
+3. Push the commit AND the tag: `git push origin main --tags`
+
+**Versioning:**
+- Use `web-v` prefix to distinguish from plugin tags (`v*`)
+- Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
+- Current version: **web-v0.1.0** (homepage design complete)
+
+**Never push website changes without creating a version tag.**
+
+### Branch Strategy
+
+- **main** = website files only (design/, docs/, site/, CLAUDE.md, etc.)
+- **plugins** = WordPress plugins only (assets/ folder)
+
+Never mix website and plugin commits on the same branch.
