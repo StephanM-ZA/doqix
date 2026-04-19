@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services | KINETIC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#2a292f",
+                    "on-surface-variant": "#bacbbf",
+                    "error-container": "#93000a",
+                    "outline-variant": "#3b4a41",
+                    "surface-dim": "#131318",
+                    "on-secondary": "#502400",
+                    "surface-container-lowest": "#0e0e13",
+                    "surface-bright": "#39383e",
+                    "surface-container-low": "#1b1b20",
+                    "primary": "#6effc0",
+                    "outline": "#84958a",
+                    "tertiary-fixed": "#ffddb3",
+                    "on-tertiary-fixed": "#291800",
+                    "inverse-primary": "#006c49",
+                    "on-surface": "#e4e1e9",
+                    "on-tertiary-fixed-variant": "#624000",
+                    "secondary-fixed-dim": "#ffb787",
+                    "on-primary-fixed": "#002114",
+                    "secondary-container": "#ff8000",
+                    "tertiary-fixed-dim": "#fcba59",
+                    "inverse-surface": "#e4e1e9",
+                    "surface-container": "#1f1f25",
+                    "on-primary-container": "#006141",
+                    "surface-variant": "#35343a",
+                    "surface-tint": "#00e29e",
+                    "secondary": "#ffb787",
+                    "on-secondary-container": "#5e2b00",
+                    "inverse-on-surface": "#303036",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#ffbd5b",
+                    "on-primary-fixed-variant": "#005236",
+                    "tertiary": "#ffe1bb",
+                    "on-background": "#e4e1e9",
+                    "secondary-fixed": "#ffdcc7",
+                    "primary-fixed": "#47ffb8",
+                    "on-tertiary": "#452b00",
+                    "on-tertiary-container": "#744c00",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#35343a",
+                    "on-primary": "#003824",
+                    "surface": "#131318",
+                    "on-secondary-fixed-variant": "#723600",
+                    "primary-fixed-dim": "#00e29e",
+                    "primary-container": "#00e5a0",
+                    "on-secondary-fixed": "#311300",
+                    "background": "#131318",
+                    "error": "#ffb4ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ease-spring { transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 left-0 w-full z-50 bg-zinc-950/60 backdrop-blur-2xl shadow-2xl shadow-teal-500/5">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="text-2xl font-black tracking-tighter text-teal-400 uppercase font-inter">KINETIC</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-teal-400 font-bold border-b-2 border-teal-400 pb-1 font-inter tracking-tight uppercase transition-all duration-300 ease-spring" href="#">Services</a>
+<a class="text-zinc-400 font-medium hover:text-white font-inter tracking-tight uppercase hover:scale-105 transition-all duration-300 ease-spring" href="#">Products</a>
+<a class="text-zinc-400 font-medium hover:text-white font-inter tracking-tight uppercase hover:scale-105 transition-all duration-300 ease-spring" href="#">Contact</a>
+</nav>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold uppercase text-xs tracking-widest hover:scale-105 active:scale-95 transition-all duration-300 ease-spring">
+                Ignite Engine
+            </button>
+</div>
+<div class="h-px w-full bg-gradient-to-r from-transparent via-teal-500/20 to-transparent"></div>
+</header>
+<main class="pt-32 pb-24">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 mb-32 relative">
+<div class="absolute -top-40 -left-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="relative z-10 max-w-4xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-8">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(110,255,192,0.8)]"></div>
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary">System Status: Operational</span>
+</div>
+<h1 class="text-7xl md:text-8xl font-black tracking-tighter text-on-surface leading-[0.9] mb-8 uppercase">
+                    What We <span class="text-primary">Automate</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant font-medium leading-relaxed max-w-2xl">
+                    If it's rule-based and eating your team's day — we can automate it. Zero jargon. Zero fluff. Here's how we turn 'busy' into 'effective.'
+                </p>
+</div>
+</section>
+<!-- Section 2: Simple Logic -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<h2 class="text-sm font-bold uppercase tracking-[0.3em] text-primary mb-16 text-center">The Simple Logic Behind Every Automation</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+<!-- Connectors for Desktop -->
+<div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-outline-variant to-transparent -translate-y-1/2 -z-10"></div>
+<!-- Logic Steps -->
+<div class="bg-surface-container-low p-8 rounded-lg group hover:bg-surface-container transition-colors duration-500 border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">bolt</span>
+<h3 class="text-2xl font-bold mb-2">Trigger</h3>
+<p class="text-on-surface-variant text-sm">The specific event that starts the engine. A new email, a sale, a timestamp.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg group hover:bg-surface-container transition-colors duration-500 border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">rule</span>
+<h3 class="text-2xl font-bold mb-2">Rule</h3>
+<p class="text-on-surface-variant text-sm">The logic gate. If X happens, then look for Y. Clear, binary, absolute.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg group hover:bg-surface-container transition-colors duration-500 border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">account_tree</span>
+<h3 class="text-2xl font-bold mb-2">Condition</h3>
+<p class="text-on-surface-variant text-sm">The filter. Only proceed if value is greater than Z or source is Alpha.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg group hover:bg-surface-container transition-colors duration-500 border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">rocket_launch</span>
+<h3 class="text-2xl font-bold mb-2">Action</h3>
+<p class="text-on-surface-variant text-sm">The result. Data updated, invoice sent, team notified, machine humming.</p>
+</div>
+</div>
+</section>
+<!-- Section 3: 12-Card Grid -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<h2 class="text-4xl font-black tracking-tight mb-12 uppercase">The Workflows We Build Every Day</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Loop-like Cards -->
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">payments</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Finance</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Invoice Reconciliation</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Xero, Stripe, Gmail</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Manual bank statement matching</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Sales</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Lead Qualification</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Hubspot, LinkedIn, Slack</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Chasing cold, unverified leads</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">E-commerce</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Inventory Sync</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Shopify, Takealot, Dear</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Updating stock counts in 3 places</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">HR</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Employee Onboarding</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Google Workspace, BambooHR</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Emailing IT for every new hire</p>
+</div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">support_agent</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Support</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Ticket Escalation</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Zendesk, Jira, Slack</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Manual re-tagging of urgent issues</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">campaign</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Marketing</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Campaign Reporting</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Meta Ads, Looker Studio</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Copy-pasting ROAS into sheets</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">sync</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Data Sync</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Cross-Platform Sync</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">SQL, Airtable, Notion</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Worrying about "Dirty Data"</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">event_available</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Events</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Attendee Management</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Quicket, Mailchimp, WhatsApp</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Exporting CSVs for reminders</p>
+</div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Compliance</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Audit Log Automation</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">AWS, Dropbox, Slack</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Searching for who approved what</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">share</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Social Media</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Auto-Publishing Flow</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Instagram, Buffer, ChatGPT</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Manual cross-posting across 5 apps</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">palette</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Creative</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Approval Workflows</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">Figma, Frame.io, Slack</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Lost feedback in thread burial</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-all duration-300 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Facility/IoT</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Asset Monitoring</h3>
+<div class="mt-auto space-y-4">
+<div>
+<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
+<p class="text-xs text-on-surface-variant">SensorCloud, Telegram, SMS</p>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
+<p class="text-xs text-on-surface-variant">Driving to site to check status</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Where Most Start -->
+<section class="max-w-7xl mx-auto px-8 mb-40 bg-surface-container-low rounded-xl py-20 border border-outline-variant/5">
+<h2 class="text-sm font-bold uppercase tracking-[0.3em] text-primary mb-16 text-center">Where Most Businesses Start</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">sell</span>
+</div>
+<p class="font-bold">Sales</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">headset_mic</span>
+</div>
+<p class="font-bold">Support</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+</div>
+<p class="font-bold">Finance</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</div>
+<p class="font-bold">E-commerce</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">person_add</span>
+</div>
+<p class="font-bold">HR</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">ads_click</span>
+</div>
+<p class="font-bold">Marketing</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">celebration</span>
+</div>
+<p class="font-bold">Events</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary">gavel</span>
+</div>
+<p class="font-bold">Compliance</p>
+</div>
+</div>
+</section>
+<!-- Section 5: 5-Step Plan Timeline -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<h2 class="text-4xl font-black tracking-tight mb-20 uppercase text-center">Our 5-Step Plan</h2>
+<div class="relative max-w-4xl mx-auto">
+<!-- Center Line -->
+<div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary to-transparent -translate-x-1/2 opacity-30"></div>
+<div class="space-y-24">
+<div class="flex items-center justify-between w-full">
+<div class="w-[45%] text-right pr-12">
+<h3 class="text-2xl font-black uppercase">Identify</h3>
+<p class="text-on-surface-variant text-sm">We audit your existing chaos to find the 20% of tasks taking 80% of the time.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-surface-dim border-4 border-primary rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(110,255,192,0.4)]">
+<span class="font-bold text-primary">01</span>
+</div>
+<div class="w-[45%] pl-12"></div>
+</div>
+<div class="flex items-center justify-between w-full">
+<div class="w-[45%] pr-12"></div>
+<div class="relative z-10 w-12 h-12 bg-surface-dim border-4 border-primary rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(110,255,192,0.4)]">
+<span class="font-bold text-primary">02</span>
+</div>
+<div class="w-[45%] text-left pl-12">
+<h3 class="text-2xl font-black uppercase">Map</h3>
+<p class="text-on-surface-variant text-sm">Visual flowcharts of the "Perfect Journey" before any code is touched.</p>
+</div>
+</div>
+<div class="flex items-center justify-between w-full">
+<div class="w-[45%] text-right pr-12">
+<h3 class="text-2xl font-black uppercase">Start Small</h3>
+<p class="text-on-surface-variant text-sm">Deploy the first high-impact "Quick Win" to prove value immediately.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-surface-dim border-4 border-primary rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(110,255,192,0.4)]">
+<span class="font-bold text-primary">03</span>
+</div>
+<div class="w-[45%] pl-12"></div>
+</div>
+<div class="flex items-center justify-between w-full">
+<div class="w-[45%] pr-12"></div>
+<div class="relative z-10 w-12 h-12 bg-surface-dim border-4 border-primary rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(110,255,192,0.4)]">
+<span class="font-bold text-primary">04</span>
+</div>
+<div class="w-[45%] text-left pl-12">
+<h3 class="text-2xl font-black uppercase">Test &amp; Refine</h3>
+<p class="text-on-surface-variant text-sm">Real-world edge case handling to ensure the machine never breaks.</p>
+</div>
+</div>
+<div class="flex items-center justify-between w-full">
+<div class="w-[45%] text-right pr-12">
+<h3 class="text-2xl font-black uppercase">Monitor &amp; Optimise</h3>
+<p class="text-on-surface-variant text-sm">Weekly health checks to ensure your ROI keeps climbing.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-surface-dim border-4 border-primary rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(110,255,192,0.4)]">
+<span class="font-bold text-primary">05</span>
+</div>
+<div class="w-[45%] pl-12"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Quote Card -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<div class="bg-gradient-to-br from-surface-container-high to-surface-container-low p-16 rounded-lg border-l-8 border-primary relative overflow-hidden">
+<div class="absolute right-0 top-0 opacity-5">
+<span class="material-symbols-outlined text-[200px] -translate-y-10 translate-x-10">format_quote</span>
+</div>
+<h2 class="text-sm font-bold uppercase tracking-[0.3em] text-primary mb-8">One Thing We Tell Every Client First</h2>
+<blockquote class="text-3xl md:text-5xl font-black leading-tight max-w-4xl text-on-surface">
+                    "Automation applied to an inefficient operation will <span class="text-primary underline">magnify the inefficiency</span>."
+                </blockquote>
+</div>
+</section>
+<!-- Section 7: Why SA Businesses Choose Us -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<h2 class="text-4xl font-black tracking-tight mb-12 uppercase">Why SA Businesses Choose Us</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-lowest border border-outline-variant/20 rounded-lg hover:translate-y-[-4px] transition-transform">
+<span class="material-symbols-outlined text-primary mb-4">local_shipping</span>
+<h3 class="text-xl font-bold mb-2">Local Support</h3>
+<p class="text-on-surface-variant text-sm">We're in your time zone, speaking your language, understanding SA business hurdles.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest border border-outline-variant/20 rounded-lg hover:translate-y-[-4px] transition-transform">
+<span class="material-symbols-outlined text-primary mb-4">security</span>
+<h3 class="text-xl font-bold mb-2">POPIA Compliant</h3>
+<p class="text-on-surface-variant text-sm">Every workflow is designed with strict South African data privacy laws in mind.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest border border-outline-variant/20 rounded-lg hover:translate-y-[-4px] transition-transform">
+<span class="material-symbols-outlined text-primary mb-4">currency_exchange</span>
+<h3 class="text-xl font-bold mb-2">Rand Pricing</h3>
+<p class="text-on-surface-variant text-sm">Fixed monthly costs in ZAR. No USD fluctuation nightmares for your budget.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest border border-outline-variant/20 rounded-lg hover:translate-y-[-4px] transition-transform">
+<span class="material-symbols-outlined text-primary mb-4">speed</span>
+<h3 class="text-xl font-bold mb-2">Rapid Deployment</h3>
+<p class="text-on-surface-variant text-sm">Go from chaos to automated in weeks, not months. We ship fast and iterate.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest border border-outline-variant/20 rounded-lg hover:translate-y-[-4px] transition-transform">
+<span class="material-symbols-outlined text-primary mb-4">precision_manufacturing</span>
+<h3 class="text-xl font-bold mb-2">Custom Built</h3>
+<p class="text-on-surface-variant text-sm">No "one size fits all" templates. We build for your specific, unique business logic.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest border border-outline-variant/20 rounded-lg hover:translate-y-[-4px] transition-transform">
+<span class="material-symbols-outlined text-primary mb-4">handshake</span>
+<h3 class="text-xl font-bold mb-2">Human Centric</h3>
+<p class="text-on-surface-variant text-sm">We don't replace people. We replace the boring parts of their jobs so they can lead.</p>
+</div>
+</div>
+</section>
+<!-- Section 8: Case Studies -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<h2 class="text-4xl font-black tracking-tight mb-12 uppercase">This Is What Automation Actually Looks Like</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative group overflow-hidden rounded-lg bg-surface-container-low h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" data-alt="professional data analytics dashboard on a screen with teal glowing lines and complex charts in a dark office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH1erNXiPwglx6jWRsFU-3Vi6H9X_1tQfzRE9o2usqGeVazv-cSEPEZcBfFCILBnELf5TZVpM9rYWod8R00k-BJwPvHV1wLuG64HQXPpqv8JI-5Vfk1TPYM9kUQgfo5MOmhe8qm4eT6wGajdVBQZqZ4r26v--57PRehloLuKF6VoDnWG-54VbQcMu58h12q8Xsz0SDB-cZ-84jfAEdI3AIUkzxaXVtVzcgy78OLEj3G6k49vhoT-Xoi8RfiY03K1ECyHjwr4id8g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-surface-dim/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<div class="bg-primary/20 backdrop-blur-md border border-primary/30 inline-block px-3 py-1 rounded-full mb-4">
+<span class="text-xs font-bold text-primary">85% Reduction in Admin</span>
+</div>
+<h3 class="text-2xl font-black uppercase mb-2">Logistics Fleet Sync</h3>
+<p class="text-on-surface-variant text-sm max-w-md">Automated route tracking and driver dispatching for a regional delivery firm.</p>
+</div>
+</div>
+<div class="relative group overflow-hidden rounded-lg bg-surface-container-low h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" data-alt="close up of mobile phone showing e-commerce payment success screen with sleek modern ui design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY9DbYxvXk_kGhn26m8fPMSLG4QThc-LrkU55vLHk3PpaipsF8sAEs5DiDyArdGJzyI920rUe8PYmePtQ7PM1jUb_3UuxZcWomU39xl39I5vBqxYZwzfL5oUFQ7VtIcr6TRePSLLo4PXTj35jD1yov0H8beM7Uw7rUvjehlkThCScyu3IEYs85E3vcboEM398Tf83f_03q-vGIkSqmIRXgFVwPtiomCd7I5GhtdFoOgoCp8wx7MkZTisP6hbBiYtcX2ZpRaDyJPg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-surface-dim/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<div class="bg-primary/20 backdrop-blur-md border border-primary/30 inline-block px-3 py-1 rounded-full mb-4">
+<span class="text-xs font-bold text-primary">Zero Manual Entry</span>
+</div>
+<h3 class="text-2xl font-black uppercase mb-2">Multi-Store Inventory</h3>
+<p class="text-on-surface-variant text-sm max-w-md">Real-time stock syncing between Shopify, Takealot, and physical warehouses.</p>
+</div>
+</div>
+<div class="relative group overflow-hidden rounded-lg bg-surface-container-low h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" data-alt="busy engineering team in a modern open plan office with large windows and high tech equipment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq0nAUT30QYfTFfJOF1k1ZS8iHKyMptLLVkZ21gGZtGudCUxltmawofQtyx3DsM6bl7wT16oYh8J--CDmL892bCEoJIAUR395rCYbx2rCkgBAqLM5e7dwB61JZuFusVIOD3ZzzkIE1sfxXQtEbUtHYrOjuPBnTWbCqg50mP3vF3YHxiTkslQ-uLdhdpTBQHwnm3pRMMESvqyXDd4nEA5deQ23CqYilym-R_OozU3zzgixpe27CejjiY0xVx3Q_Phk5mwgXlRFTgQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-surface-dim/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<div class="bg-primary/20 backdrop-blur-md border border-primary/30 inline-block px-3 py-1 rounded-full mb-4">
+<span class="text-xs font-bold text-primary">12 Hours Saved/Week</span>
+</div>
+<h3 class="text-2xl font-black uppercase mb-2">Lead Scoring Engine</h3>
+<p class="text-on-surface-variant text-sm max-w-md">Proprietary logic to auto-prioritize leads based on LinkedIn profile and budget.</p>
+</div>
+</div>
+<div class="relative group overflow-hidden rounded-lg bg-surface-container-low h-[400px]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" data-alt="clean medical laboratory setting with focus on a high tech digital display and robotic arm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDiYcOakx13t_nIsxScmSEb-LlS-TCKwF0dNWDkQpLjwqPQxfSFd5ac26bkNbs3bW2i73r7W8IwdsCsxckVrynR-He4VrKY-MfQm2m1A7b_sb7v1ugnqnOCn2zpVIzkOhzQvB8GGQefDnl-555sO96Dg6eHvN_mr6T_ugHdL-eISRDgHLtEzTzqMUZtjTKkUQ0VSL-HTG11BUfkjbjvn4Kabzha0ZI3zZ3CtZGmiARpeyuqrUIaFmk8UETAj5mfXAjdcVF-zOsvA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-surface-dim/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<div class="bg-primary/20 backdrop-blur-md border border-primary/30 inline-block px-3 py-1 rounded-full mb-4">
+<span class="text-xs font-bold text-primary">Instant Compliance</span>
+</div>
+<h3 class="text-2xl font-black uppercase mb-2">Automated Audit Trail</h3>
+<p class="text-on-surface-variant text-sm max-w-md">Generating iron-clad compliance reports for a medical equipment provider.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 9: Your Data. Your Rules. -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-black tracking-tight uppercase mb-4">Your Data. Your Rules.</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">We leverage n8n — the most powerful, flexible automation platform. It keeps your data on your servers, not in the cloud of a third party.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">lock</span>
+<h4 class="font-bold mb-2 uppercase text-xs tracking-widest">POPIA First</h4>
+<p class="text-on-surface-variant text-xs">Architected for SA privacy laws.</p>
+</div>
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">cloud_off</span>
+<h4 class="font-bold mb-2 uppercase text-xs tracking-widest">Self-Hosted</h4>
+<p class="text-on-surface-variant text-xs">No data ever leaves your control.</p>
+</div>
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">code</span>
+<h4 class="font-bold mb-2 uppercase text-xs tracking-widest">Custom Nodes</h4>
+<p class="text-on-surface-variant text-xs">Connecting apps that have no APIs.</p>
+</div>
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">history</span>
+<h4 class="font-bold mb-2 uppercase text-xs tracking-widest">Full History</h4>
+<p class="text-on-surface-variant text-xs">Every run logged for perfect audits.</p>
+</div>
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">hub</span>
+<h4 class="font-bold mb-2 uppercase text-xs tracking-widest">Deep Logic</h4>
+<p class="text-on-surface-variant text-xs">Infinite branching and conditions.</p>
+</div>
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">security</span>
+<h4 class="font-bold mb-2 uppercase text-xs tracking-widest">Encrypted</h4>
+<p class="text-on-surface-variant text-xs">Bank-grade security on every flow.</p>
+</div>
+</div>
+</section>
+<!-- Section 10: Bottom CTA -->
+<section class="max-w-7xl mx-auto px-8">
+<div class="bg-primary text-on-primary py-24 px-8 rounded-xl text-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary-fixed to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="relative z-10">
+<h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 leading-[0.85]">Ready to See <br/>What's Possible?</h2>
+<button class="bg-surface-dim text-primary px-12 py-5 rounded-full font-black uppercase text-sm tracking-[0.2em] hover:scale-105 active:scale-95 transition-all duration-300 ease-spring">
+                        Book Your Free Audit
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-[#131318] w-full py-16 border-t border-zinc-800/20">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between gap-8">
+<div class="space-y-4">
+<div class="text-xl font-black text-teal-400 uppercase tracking-tighter">KINETIC</div>
+<p class="font-inter text-[10px] uppercase tracking-[0.2em] font-semibold text-zinc-400">© 2024 KINETIC ENGINE. ENGINEERED FLUIDITY.</p>
+</div>
+<div class="grid grid-cols-2 md:flex gap-12">
+<div class="flex flex-col gap-3">
+<h4 class="text-teal-400 font-inter text-[10px] uppercase tracking-[0.2em] font-semibold mb-2">Platform</h4>
+<a class="text-zinc-500 font-inter text-[10px] uppercase tracking-[0.2em] font-semibold hover:text-teal-300 transition-colors" href="#">Documentation</a>
+<a class="text-zinc-500 font-inter text-[10px] uppercase tracking-[0.2em] font-semibold hover:text-teal-300 transition-colors" href="#">System Status</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-teal-400 font-inter text-[10px] uppercase tracking-[0.2em] font-semibold mb-2">Company</h4>
+<a class="text-zinc-500 font-inter text-[10px] uppercase tracking-[0.2em] font-semibold hover:text-teal-300 transition-colors" href="#">Privacy</a>
+<a class="text-zinc-500 font-inter text-[10px] uppercase tracking-[0.2em] font-semibold hover:text-teal-300 transition-colors" href="#">Changelog</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
