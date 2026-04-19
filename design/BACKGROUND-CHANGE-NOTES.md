@@ -64,5 +64,18 @@ ALL pages share the same Tailwind config colors. When we move to a framework, th
 - exit-popup.html
 - cookie-banner.html
 
+## 8. Current scheme (#0D2028 dark teal)
+| Role | Value |
+|------|-------|
+| Body bg | #0D2028 |
+| Deeper sections | #091a20 |
+| Section bg alt | #112530 |
+| Container | #142a35 |
+| Container high | #18303a |
+| Container highest | #1e3640 |
+| Surface bright | #223c45 |
+| Card bg | #1a3040 |
+| Footer bg | #06141a |
+
 ## Decision Status
-Background color decision is PENDING — user is still considering.
+Background color: **#0D2028** (dark teal-charcoal) — DECIDED 2026-04-19.

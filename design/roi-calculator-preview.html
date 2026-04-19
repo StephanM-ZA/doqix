@@ -9,14 +9,14 @@
 <style>
 /* ── Page shell (preview only — won't be needed when embedded) ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#0e1330;color:#e4e1e9;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;background:#0D2028;color:#e4e1e9;-webkit-font-smoothing:antialiased}
 
 /* ── Calculator Container ── */
 .roi-calc{
   --accent:#00e5a0;
   --accent-dim:rgba(0,229,160,0.15);
   --secondary:#ff8000;
-  --card-bg:#1a2248;
+  --card-bg:#1a3040;
   --card-border:rgba(255,255,255,0.06);
   --text-primary:#f0f0f5;
   --text-secondary:#c0c0d0;
@@ -73,14 +73,14 @@ body{font-family:'Inter',sans-serif;background:#0e1330;color:#e4e1e9;-webkit-fon
 /* ── Tooltips ── */
 .slider-label .tooltip{
   visibility:hidden;opacity:0;position:absolute;bottom:calc(100% + 8px);left:0;
-  background:#1e2550;color:var(--text-primary);font-size:12px;font-weight:400;
+  background:#1e3640;color:var(--text-primary);font-size:12px;font-weight:400;
   line-height:1.4;padding:8px 12px;border-radius:6px;white-space:normal;
   width:220px;z-index:10;pointer-events:none;transition:opacity .15s,visibility .15s;
   border:1px solid var(--card-border);
 }
 .slider-label .tooltip::after{
   content:'';position:absolute;top:100%;left:16px;border:6px solid transparent;
-  border-top-color:#1e2550;
+  border-top-color:#1e3640;
 }
 .slider-label:hover .tooltip{visibility:visible;opacity:1}
 .slider-label .tooltip.tooltip-visible{visibility:visible;opacity:1}

@@ -12,7 +12,7 @@
 
 body {
     font-family: 'Inter', sans-serif !important;
-    background-color: #0e1330 !important;
+    background-color: #0D2028 !important;
     color: #e4e1e9 !important;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -289,7 +289,7 @@ ul, ol {
 }
 
 .btn-ghost:hover {
-    background-color: #1a2248;
+    background-color: #1a3040;
     border-color: #00e5a0;
     color: #00e5a0;
 }
@@ -298,7 +298,7 @@ ul, ol {
    CARDS
    ============================================ */
 :root {
-    --card-bg: #1a2248;
+    --card-bg: #1a3040;
 }
 
 .card {
@@ -465,7 +465,7 @@ ul, ol {
 
 /* Subsequent steps — outline */
 .timeline-circle.outline {
-    background-color: #0e1330;
+    background-color: #0D2028;
     border: 1px solid rgba(0, 229, 160, 0.3);
     color: #00e5a0;
 }
@@ -512,7 +512,7 @@ ul, ol {
 
 /* Input panel */
 .roi-inputs {
-    background: var(--card-bg, #1a2248);
+    background: var(--card-bg, #1a3040);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 12px;
     padding: 32px;
@@ -571,7 +571,7 @@ ul, ol {
     position: absolute;
     bottom: calc(100% + 8px);
     left: 0;
-    background: #1e2550;
+    background: #1e3640;
     color: #f0f0f5;
     font-size: 12px;
     font-weight: 400;
@@ -591,7 +591,7 @@ ul, ol {
     top: 100%;
     left: 16px;
     border: 6px solid transparent;
-    border-top-color: #1e2550;
+    border-top-color: #1e3640;
 }
 .roi-calc .slider-label:hover .tooltip { visibility: visible; opacity: 1; }
 .roi-calc .slider-label .tooltip.tooltip-visible { visibility: visible; opacity: 1; }
@@ -617,7 +617,7 @@ ul, ol {
     height: 22px;
     border-radius: 50%;
     background: #00e5a0;
-    border: 3px solid var(--card-bg, #1a2248);
+    border: 3px solid var(--card-bg, #1a3040);
     box-shadow: 0 0 0 2px rgba(0,229,160,0.3);
     cursor: grab;
 }
@@ -626,7 +626,7 @@ ul, ol {
     height: 22px;
     border-radius: 50%;
     background: #00e5a0;
-    border: 3px solid var(--card-bg, #1a2248);
+    border: 3px solid var(--card-bg, #1a3040);
     box-shadow: 0 0 0 2px rgba(0,229,160,0.3);
     cursor: grab;
 }
@@ -639,7 +639,7 @@ ul, ol {
 
 /* Hero result */
 .roi-calc .hero-result {
-    background: var(--card-bg, #1a2248);
+    background: var(--card-bg, #1a3040);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 12px;
     padding: 32px;
@@ -675,7 +675,7 @@ ul, ol {
     gap: 12px;
 }
 .roi-calc .result-card {
-    background: var(--card-bg, #1a2248);
+    background: var(--card-bg, #1a3040);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 12px;
     padding: 20px;
@@ -854,7 +854,7 @@ ul, ol {
    FOOTER
    ============================================ */
 .site-footer {
-    background: #080c24;
+    background: #06141a;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 4rem 2rem;
 }
@@ -961,7 +961,7 @@ ul, ol {
     width: 3rem;
     height: 3rem;
     border-radius: 9999px;
-    background: var(--card-bg, #1a2248);
+    background: var(--card-bg, #1a3040);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #00e5a0;
     display: flex;
@@ -1033,7 +1033,7 @@ ul, ol {
     gap: 0.5rem;
     padding: 1.25rem;
     border-radius: 1rem;
-    background: var(--card-bg, #1a2248);
+    background: var(--card-bg, #1a3040);
     border: 1px solid rgba(255, 255, 255, 0.08);
     width: 100px;
     opacity: 0.6;
