@@ -1,18 +1,18 @@
-// Force hero video autoplay (some browsers block even muted autoplay)
+// Force hero video autoplay
 var heroVideo = document.querySelector('.hero-video-bg video');
 if (heroVideo) {
     heroVideo.muted = true;
-    function tryPlay() {
-        heroVideo.play().catch(function () {
-            setTimeout(tryPlay, 500);
-        });
-    }
-    if (heroVideo.readyState >= 2) {
-        tryPlay();
-    } else {
-        heroVideo.addEventListener('canplay', tryPlay);
-        heroVideo.load();
-    }
+    heroVideo.playsInline = true;
+    heroVideo.autoplay = true;
+    heroVideo.load();
+    var playInterval = setInterval(function () {
+        if (!heroVideo.paused) {
+            clearInterval(playInterval);
+            return;
+        }
+        heroVideo.play().catch(function () {});
+    }, 300);
+    setTimeout(function () { clearInterval(playInterval); }, 15000);
 }
 
 // Scroll reveal
