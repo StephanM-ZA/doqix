@@ -10,15 +10,15 @@
 **Theme:** Dark with electric accents, premium but not cold. Think Vercel meets Stripe, but warmer and more human.
 
 **Colors:**
-- Background: #0D2028 (deep charcoal, near-black)
-- Surface: #141419 (cards, panels, sections)
-- Surface Hover: #1a1a22
+- Background: #0C1830 (royal navy)
+- Surface: #14203C (cards, panels, sections)
+- Surface Hover: #1A2A48
 - Primary Accent: #00e5a0 (electric teal: CTAs, active states, focus rings)
 - Secondary Accent: #ff8000 (warm amber: badges, highlights, proof points)
 - Tertiary Accent: #e09c58 (soft gold: secondary highlights, accents)
 - Text Primary: #f0f0f5 (off-white)
 - Text Secondary: #c0c0d0 (cool gray: captions, muted info)
-- Text On Accent: #0D2028 (text on teal buttons)
+- Text On Accent: #0C1830 (text on teal buttons)
 - Border: #1e1e2a (card edges, dividers)
 - Danger: #ff6b6b (errors only)
 
@@ -46,7 +46,7 @@ Inter is the ONLY font for this entire website. No Space Grotesk, no DM Sans, no
 - Use this style wherever a banner or announcement strip is needed
 
 **Stat Card Style (for benefit/impact sections):**
-- Dark surface background (#141419) with subtle border, generous rounded corners (16-24px)
+- Dark surface background (#14203C) with subtle border, generous rounded corners (16-24px)
 - Bold title in white (600 weight, ~20px)
 - Large hero stat number below title in accent color (teal for time stats, amber/secondary for money stats). Big, punchy, 40-48px, 700-900 weight
 - Supporting description in muted text below the stat
@@ -86,7 +86,7 @@ Inter is the ONLY font for this entire website. No Space Grotesk, no DM Sans, no
 - Left: "Do.Qix" logo wordmark + "Efficiency, Engineered" tagline
 - Center/Right links: Home | Services | Products | Contact
 - Far right: "Start Free" teal pill button
-- Sticky, transparent on hero, frosted-glass (#141419 + backdrop-blur) on scroll
+- Sticky, transparent on hero, frosted-glass (#14203C + backdrop-blur) on scroll
 
 **Global Footer (all pages):**
 - "Do.Qix. Efficiency, Engineered"

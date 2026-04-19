@@ -64,18 +64,33 @@ ALL pages share the same Tailwind config colors. When we move to a framework, th
 - exit-popup.html
 - cookie-banner.html
 
-## 8. Current scheme (#0D2028 dark teal)
-| Role | Value |
-|------|-------|
-| Body bg | #0D2028 |
-| Deeper sections | #091a20 |
-| Section bg alt | #112530 |
-| Container | #142a35 |
-| Container high | #18303a |
-| Container highest | #1e3640 |
-| Surface bright | #223c45 |
-| Card bg | #1a3040 |
-| Footer bg | #06141a |
+## 8. Current scheme — Royal Navy #0C1830 (FINAL)
+
+| Role | Value | Tailwind Config Key |
+|------|-------|-------------------|
+| Body bg | #0C1830 | surface-dim, surface, background |
+| Deeper sections | #081024 | surface-container-lowest |
+| Section bg alt | #101C36 | surface-container-low |
+| Container | #14203C | surface-container |
+| Container high | #1A2A48 | surface-container-high |
+| Container highest | #1E3050 | surface-container-highest |
+| Surface bright | #223656 | surface-bright |
+| Card bg | #14203C | (--card-bg in global.css) |
+| Footer bg | #060C1C | (.site-footer in global.css) |
+| Hero gradient | rgba(0, 229, 160, 0.10) | (.hero-gradient in global.css) |
+| Text on accent | #0C1830 | (buttons, CTAs on teal bg) |
+
+## 9. Pages updated
+- index.html — DONE (Tailwind config + hardcoded bg colors)
+- services.html — TODO
+- products.html — TODO
+- contact.html — TODO
+- privacy-policy.html — TODO
+- terms-and-conditions.html — TODO
+- thank-you.html — TODO
+- 404.html — TODO
+- exit-popup.html — TODO
+- cookie-banner.html — TODO
 
 ## Decision Status
-Background color: **#0D2028** (dark teal-charcoal) — DECIDED 2026-04-19.
+Background color: **#0C1830** (Royal Navy) — DECIDED 2026-04-19.

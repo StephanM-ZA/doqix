@@ -2,49 +2,47 @@
 
 **Date:** 2026-04-19
 **Branch:** main (website), plugins (WordPress plugins)
-**Task:** Design refinement of Do.Qix homepage
+**Version:** web-v0.1.1
 
 ---
 
+## Completed This Session
+
+1. **Em dash cleanup** — Removed all em dashes (~200+) from Website_Copy.md, next-prompt.md, and index.html
+2. **ROI Calculator** — Built interactive calculator from V1 plugin, dark-themed, config-driven, inserted into index page
+3. **Callout component** — Added `.callout` with `.orange` and `.teal` variants to global.css
+4. **JS extraction** — All inline JS moved to external files (js/main.js, js/testimonial-carousel.js, js/roi-calculator.js)
+5. **No-hardcode rule** — Slider config moved to JS CONFIG object, HTML is bare markup
+6. **Black text fix** — All #0a0a0f changed to #0D2028 across all files
+7. **Heading consistency** — Removed trailing periods from all headings
+8. **GitHub push** — All files committed and pushed, tagged web-v0.1.1
+9. **Root sync** — Design files synced to root for GitHub Pages deployment
+10. **Custom domain** — digitaloperations.co.za configured in GitHub Pages, DNS records updated at Xneelo
+
+## Rules Established
+
+- No inline JS (external files only, HTML stays minimal)
+- No em dashes in copy
+- No hardcoding (values in JS/CSS config)
+- Version tag (web-vX.Y.Z) on every website push
+- Sync design/ to root on every push (GitHub Pages serves from main:/)
+- main = website, plugins = WordPress plugins
+- Black text = #0D2028, never #000 or #0a0a0f
+
 ## Current State
 
-### Completed — Index Page Design
-1. **Global stylesheet** (`design/global.css`) — single source of truth for all styles
-2. **Colors fixed** — secondary #ff8000, all greens #00e5a0, no more teal-400/zinc mismatches
-3. **Navy background testing** — currently #0e1330 on index (decision pending)
-4. **Typography** — all H1/H2/H3/H4/p stripped of inline styles, controlled by global.css
-5. **H2 treatment** — all have teal accent on key phrase + pill label above
-6. **Components built in global.css:**
-   - `.btn` / `.btn-primary` / `.btn-ghost` (sm/md/lg/full, glow variant)
-   - `.card` (single bg via --card-bg, hover lift)
-   - `.label` / `.label.orange` (pill labels)
-   - `.banner` / `.banner.orange` / `.banner.teal`
-   - `.caption` (italic, muted, centered, 14px)
-   - `.stat-number` with .teal/.orange/.xl variants
-   - `.timeline` / `.timeline-line` / `.timeline-circle`
-   - `.site-header` / `.nav-container` / `.nav-link`
-   - `.site-footer` / `.footer-container` / `.footer-col`
-   - `.scroll-reveal` with staggers
-   - `.app-carousel-track` / `.app-carousel-item` (endless auto-scroll, 15 apps)
-   - `.testimonial-carousel` (2 visible, arrows, dots, auto 8s, pause on hover, infinite loop)
-   - `.animated-rocket` (bounce)
-   - `.hero-gradient`
-7. **Copy corrected** — blended spec + Stitch (kept better versions where noted)
-8. **Header/Footer** — common components with correct content
-9. **Section anchors** — all 8 sections have IDs
+- Homepage design complete with ROI calculator
+- DNS propagating for digitaloperations.co.za → GitHub Pages
+- HTTPS pending (GitHub auto-provisions SSL certificate)
+- 9 other pages still need design work
 
-### GitHub Structure
-- **main** — website at root (pushed)
-- **plugins** — WordPress plugins (pushed)
+## Next Steps
 
-### NOT Yet Done
-- Other 9 pages not started
-- Background color decision pending
-- site/ folder needs sync from design/index/
-- GitHub Pages not configured
-- Copy docs need final sync
+1. Confirm DNS propagation and enable HTTPS
+2. Start services page design
+3. Sync site/ folder structure (currently outdated)
 
 ---
 
 ## Resume Command
-Say "resume" to continue. Next: sync site/, configure GitHub Pages, then services page.
+Say "resume" to continue.

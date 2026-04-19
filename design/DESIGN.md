@@ -12,7 +12,7 @@ The overall feel: **kinetic, confident, alive.** Every section responds to the u
 ## 2. Color Palette & Roles
 
 ### Backgrounds
-- **Void Charcoal** (#0D2028) — The primary canvas. A near-black with a cool blue undertone that feels deep without being flat. Used for page background and full-width sections.
+- **Void Charcoal** (#0C1830) — The primary canvas. A near-black with a cool blue undertone that feels deep without being flat. Used for page background and full-width sections.
 - **Elevated Onyx** (#141419) — A subtle step above the canvas. Used for cards, panels, and content containers to create soft depth separation without harsh contrast.
 - **Whisper Lift** (#1a1a22) — The hover/active state for surfaces. A barely perceptible brightening that rewards interaction.
 
@@ -24,7 +24,7 @@ The overall feel: **kinetic, confident, alive.** Every section responds to the u
 ### Text
 - **Soft Cloud** (#f0f0f5) — Primary text color. An off-white that avoids the harshness of pure white on dark backgrounds. Used for headings, body copy, and any text that needs to command attention.
 - **Muted Steel** (#8a8a9a) — Secondary text. A cool gray for captions, placeholders, supporting copy, and anything that should recede behind primary content.
-- **Void Charcoal** (#0D2028) — Text rendered on top of Electric Teal buttons and badges. Dark-on-bright for maximum contrast.
+- **Void Charcoal** (#0C1830) — Text rendered on top of Electric Teal buttons and badges. Dark-on-bright for maximum contrast.
 
 ### Structural
 - **Shadow Line** (#1e1e2a) — Subtle borders for card edges, dividers, and section separators. Visible enough to define boundaries, quiet enough to never dominate.
@@ -51,7 +51,7 @@ Line height is generous: 1.1 for display text (tight for impact), 1.6 for body t
 ## 4. Component Stylings
 
 ### Buttons
-- **Primary CTA:** Pill-shaped with generously rounded ends (24px radius). Solid Electric Teal (#00e5a0) fill with Void Charcoal (#0D2028) text. On hover: a soft teal glow blooms outward (box-shadow pulse animation), subtle scale-up to 1.02. On press: micro scale-down. Font: Inter 600, 14-16px.
+- **Primary CTA:** Pill-shaped with generously rounded ends (24px radius). Solid Electric Teal (#00e5a0) fill with Void Charcoal (#0C1830) text. On hover: a soft teal glow blooms outward (box-shadow pulse animation), subtle scale-up to 1.02. On press: micro scale-down. Font: Inter 600, 14-16px.
 - **Secondary/Ghost:** Transparent fill with Shadow Line (#1e1e2a) border, Soft Cloud (#f0f0f5) text. On hover: border brightens, background fills to Whisper Lift (#1a1a22).
 - **Text Link:** No underline at rest. Electric Teal (#00e5a0) color. Underline slides in on hover from left to right.
 

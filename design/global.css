@@ -12,7 +12,7 @@
 
 body {
     font-family: 'Inter', sans-serif !important;
-    background-color: #0D2028 !important;
+    background-color: #0C1830 !important;
     color: #e4e1e9 !important;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -21,7 +21,7 @@ body {
 
 ::selection {
     background-color: #00e5a0;
-    color: #0D2028;
+    color: #0C1830;
 }
 
 /* ============================================
@@ -143,7 +143,7 @@ ul, ol {
    COLORS (CSS Custom Properties)
    ============================================ */
 :root {
-    --color-bg: #0D2028;
+    --color-bg: #0C1830;
     --color-surface: #141419;
     --color-surface-hover: #1a1a22;
     --color-primary: #00e5a0;
@@ -151,7 +151,7 @@ ul, ol {
     --color-tertiary: #e09c58;
     --color-text-primary: #f0f0f5;
     --color-text-secondary: #c0c0d0;
-    --color-text-on-accent: #0D2028;
+    --color-text-on-accent: #0C1830;
     --color-border: #1e1e2a;
     --color-danger: #ff6b6b;
 }
@@ -260,7 +260,7 @@ ul, ol {
 /* Primary CTA */
 .btn-primary {
     background-color: #00e5a0;
-    color: #0D2028;
+    color: #0C1830;
     transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -289,7 +289,7 @@ ul, ol {
 }
 
 .btn-ghost:hover {
-    background-color: #1a3040;
+    background-color: #14203C;
     border-color: #00e5a0;
     color: #00e5a0;
 }
@@ -298,7 +298,7 @@ ul, ol {
    CARDS
    ============================================ */
 :root {
-    --card-bg: #1a3040;
+    --card-bg: #14203C;
 }
 
 .card {
@@ -459,13 +459,13 @@ ul, ol {
 /* First/active step — solid teal */
 .timeline-circle.active {
     background-color: #00e5a0;
-    color: #0D2028;
+    color: #0C1830;
     box-shadow: 0 0 20px rgba(0, 229, 160, 0.3);
 }
 
 /* Subsequent steps — outline */
 .timeline-circle.outline {
-    background-color: #0D2028;
+    background-color: #0C1830;
     border: 1px solid rgba(0, 229, 160, 0.3);
     color: #00e5a0;
 }
@@ -512,7 +512,7 @@ ul, ol {
 
 /* Input panel */
 .roi-inputs {
-    background: var(--card-bg, #1a3040);
+    background: var(--card-bg, #14203C);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 12px;
     padding: 32px;
@@ -571,7 +571,7 @@ ul, ol {
     position: absolute;
     bottom: calc(100% + 8px);
     left: 0;
-    background: #1e3640;
+    background: #1E3050;
     color: #f0f0f5;
     font-size: 12px;
     font-weight: 400;
@@ -591,7 +591,7 @@ ul, ol {
     top: 100%;
     left: 16px;
     border: 6px solid transparent;
-    border-top-color: #1e3640;
+    border-top-color: #1E3050;
 }
 .roi-calc .slider-label:hover .tooltip { visibility: visible; opacity: 1; }
 .roi-calc .slider-label .tooltip.tooltip-visible { visibility: visible; opacity: 1; }
@@ -617,7 +617,7 @@ ul, ol {
     height: 22px;
     border-radius: 50%;
     background: #00e5a0;
-    border: 3px solid var(--card-bg, #1a3040);
+    border: 3px solid var(--card-bg, #14203C);
     box-shadow: 0 0 0 2px rgba(0,229,160,0.3);
     cursor: grab;
 }
@@ -626,7 +626,7 @@ ul, ol {
     height: 22px;
     border-radius: 50%;
     background: #00e5a0;
-    border: 3px solid var(--card-bg, #1a3040);
+    border: 3px solid var(--card-bg, #14203C);
     box-shadow: 0 0 0 2px rgba(0,229,160,0.3);
     cursor: grab;
 }
@@ -639,7 +639,7 @@ ul, ol {
 
 /* Hero result */
 .roi-calc .hero-result {
-    background: var(--card-bg, #1a3040);
+    background: var(--card-bg, #14203C);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 12px;
     padding: 32px;
@@ -675,7 +675,7 @@ ul, ol {
     gap: 12px;
 }
 .roi-calc .result-card {
-    background: var(--card-bg, #1a3040);
+    background: var(--card-bg, #14203C);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 12px;
     padding: 20px;
@@ -726,7 +726,7 @@ ul, ol {
     padding: 16px 32px;
     font-weight: 700;
     font-size: 16px;
-    color: #0D2028;
+    color: #0C1830;
     background: #00e5a0;
     border: none;
     border-radius: 8px;
@@ -743,7 +743,7 @@ ul, ol {
     font-size: 13px;
     opacity: 0.7;
     margin-top: 2px;
-    color: #0D2028;
+    color: #0C1830;
 }
 
 /* Share button */
@@ -761,8 +761,8 @@ ul, ol {
     cursor: pointer;
     transition: background .2s, color .2s;
 }
-.roi-calc .share-btn:hover { background: #00e5a0; color: #0D2028; }
-.roi-calc .share-btn.copied { background: #00e5a0; border-color: #00e5a0; color: #0D2028; pointer-events: none; }
+.roi-calc .share-btn:hover { background: #00e5a0; color: #0C1830; }
+.roi-calc .share-btn.copied { background: #00e5a0; border-color: #00e5a0; color: #0C1830; pointer-events: none; }
 
 /* Footnote */
 .roi-calc .roi-footnote {
@@ -847,14 +847,14 @@ ul, ol {
    HERO
    ============================================ */
 .hero-gradient {
-    background: radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(0, 229, 160, 0.10) 0%, transparent 70%);
 }
 
 /* ============================================
    FOOTER
    ============================================ */
 .site-footer {
-    background: #06141a;
+    background: #060C1C;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 4rem 2rem;
 }
@@ -961,7 +961,7 @@ ul, ol {
     width: 3rem;
     height: 3rem;
     border-radius: 9999px;
-    background: var(--card-bg, #1a3040);
+    background: var(--card-bg, #14203C);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #00e5a0;
     display: flex;
@@ -973,7 +973,7 @@ ul, ol {
 
 .testimonial-arrow:hover {
     background: #00e5a0;
-    color: #0D2028;
+    color: #0C1830;
     border-color: #00e5a0;
 }
 
@@ -1033,7 +1033,7 @@ ul, ol {
     gap: 0.5rem;
     padding: 1.25rem;
     border-radius: 1rem;
-    background: var(--card-bg, #1a3040);
+    background: var(--card-bg, #14203C);
     border: 1px solid rgba(255, 255, 255, 0.08);
     width: 100px;
     opacity: 0.6;
