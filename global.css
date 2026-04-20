@@ -138,6 +138,15 @@ a:hover {
     color: #00e5a0;
 }
 
+/* Buttons used as links should not inherit link hover color */
+a.btn:hover {
+    color: inherit;
+}
+
+a.btn-primary:hover {
+    color: #0C1830;
+}
+
 /* Lists */
 ul, ol {
     list-style: none;
@@ -1262,6 +1271,209 @@ a.footer-contact-item:hover {
 
 .app-carousel-item:hover {
     opacity: 1;
+}
+
+/* ============================================
+   FORM FIELDS
+   ============================================ */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-field label {
+    display: block;
+    width: auto;
+    padding: 0 0.25rem;
+    border: none;
+    border-radius: 0;
+    background: none;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    background: var(--color-form-input, #1E3050);
+    border: 1px solid rgba(59, 74, 65, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #e4e1e9;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #00e5a0;
+    box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.15);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: #bacbbf;
+    opacity: 0.6;
+}
+
+.form-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23bacbbf' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.form-field textarea {
+    resize: none;
+}
+
+.form-field .field-error {
+    color: var(--color-danger, #ff6b6b);
+    font-size: 0.75rem;
+    display: none;
+}
+
+.form-field.has-error input,
+.form-field.has-error select,
+.form-field.has-error textarea {
+    border-color: var(--color-danger, #ff6b6b);
+}
+
+.form-field.has-error .field-error {
+    display: block;
+}
+
+:root {
+    --color-form-input: #1E3050;
+}
+
+/* ============================================
+   FAQ ACCORDION
+   ============================================ */
+.faq-item {
+    background: var(--card-bg, #14203C);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: background 0.3s;
+}
+
+.faq-item:hover {
+    background: #1A2A48;
+}
+
+.faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #e4e1e9;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary .faq-chevron {
+    transition: transform 0.3s;
+    color: #00e5a0;
+}
+
+.faq-item[open] summary .faq-chevron {
+    transform: rotate(180deg);
+}
+
+.faq-item .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+    color: #c0c0d0;
+    line-height: 1.7;
+}
+
+/* ============================================
+   TRUST BADGES
+   ============================================ */
+.trust-badge {
+    background: #101C36;
+    border: 1px solid rgba(59, 74, 65, 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.trust-badge .trust-stat {
+    font-size: 1.875rem;
+    font-weight: 900;
+    color: #00e5a0;
+    margin-bottom: 0.25rem;
+}
+
+.trust-badge .trust-label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: #bacbbf;
+    line-height: 1.4;
+}
+
+.trust-badge .trust-icon {
+    color: #00e5a0;
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   CONTACT CHANNELS
+   ============================================ */
+.contact-channel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-channel .channel-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: #1E3050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00e5a0;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+}
+
+.contact-channel:hover .channel-icon {
+    transform: scale(1.1);
+}
+
+.contact-channel .channel-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #bacbbf;
+}
+
+.contact-channel .channel-value {
+    font-weight: 500;
+    color: #e4e1e9;
+    transition: color 0.2s;
+}
+
+a.contact-channel:hover .channel-value {
+    color: #00e5a0;
 }
 
 /* ============================================
