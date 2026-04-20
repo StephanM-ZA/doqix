@@ -341,8 +341,8 @@ Never use the word "Free" in any button. Use context-appropriate text:
 
 | Context | Button Text |
 |---------|------------|
-| Header / nav CTA | "Get Started" -> #pricing (on-page if page has pricing, else index.html#pricing) |
-| Mobile menu CTA | "Get Started" -> same as header CTA |
+| Header / nav CTA | "Let's Build" (id="cta-lets-build") -> TBD (currently #pricing or index.html#pricing) |
+| Mobile menu CTA | "Let's Build" (id="cta-lets-build-mobile") -> same as header CTA |
 | Hero CTA | "Get Started" |
 | Mid-page section CTAs | "Get Started" |
 | Pricing cards (Solo, Team, Business) | "Select Plan" |

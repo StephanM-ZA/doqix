@@ -2,7 +2,7 @@
 
 **Effective Date:** February 11, 2026
 **Last Updated:** February 11, 2026
-**Registered Entity:** Do.Qix (Pty) Ltd
+**Registered Entity:** Digital Operations and Technology (Pty) Ltd, trading as Do.Qix
 **Jurisdiction:** Republic of South Africa
 
 ---
