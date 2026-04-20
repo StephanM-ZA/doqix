@@ -21,6 +21,25 @@
         document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
     }
 
+    var planParam = params.get('plan');
+
+    if (planParam) {
+        var planNames = {
+            solo: 'Solo (R999/mo)',
+            team: 'Team (R2,500/mo)',
+            business: 'Business (R5,500/mo)',
+            enterprise: 'Enterprise (Custom)'
+        };
+        var planName = planNames[planParam.toLowerCase()] || planParam;
+        var msgField = document.getElementById('contact-message');
+        if (msgField && !msgField.value) {
+            msgField.value = "I'm interested in the " + planName + ' plan. Please get in touch to discuss next steps.';
+            msgField.style.height = 'auto';
+            msgField.style.height = msgField.scrollHeight + 'px';
+        }
+        document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
     if (productParam) {
         var productNames = {
             nomadiq: 'NomadIQ',

@@ -320,8 +320,8 @@
         '\uD83D\uDCC8 Annual savings: '+formatZAR(annualSavings)+'\n'+
         '\u23F1\uFE0F Hours back: '+formatHours(hoursSavedMonth)+'/month\n\n'+
         'Mind. Blown. \uD83E\uDD2F\n\n'+
-        'Try the calculator \uD83D\uDC49 https://doqix.co.za';
-      if(navigator.share){navigator.share({title:'My Automation Savings',text:shareText}).catch(function(){});return}
+        'Try the calculator \uD83D\uDC49 https://digitaloperations.co.za/doqix/';
+      if(navigator.share){navigator.share({title:'My Automation Savings',text:shareText,url:'https://digitaloperations.co.za/doqix/'}).catch(function(){});return}
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(shareText).then(showCopied,fallbackCopy)}
       else{fallbackCopy()}
       function fallbackCopy(){var ta=document.createElement('textarea');ta.value=shareText;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showCopied()}catch(e){}document.body.removeChild(ta)}
