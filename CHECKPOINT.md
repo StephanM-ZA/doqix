@@ -2,256 +2,138 @@
 
 **Date:** 2026-04-20
 **Branch:** main
-**Version:** web-v0.6.4 (pushed, live)
+**Version:** web-v0.7.5 (pushed, live)
 
 ---
 
-## Homepage (index.html) — COMPLETE
+## All Pages — COMPLETE
 
-### Features Built
-1. **Hero** — Video background (10% opacity), headline, proof points with double-ring bullets, CTA
-2. **Problem section** — Pain points with stats
-3. **Solution section** — Feature cards
-4. **How it works** — Step-by-step timeline
-5. **ROI Calculator** — Config-driven sliders, tier recommendations, contextual nudges, share button with emoji copy, CTA links to contact with pre-filled results
-6. **Pricing** — 4 tiers (Solo R999, Team R2500, Business R5500, Enterprise custom), dynamic highlight from calculator
-7. **Testimonials** — Infinite carousel with autoplay, 7 profile photos in images/ folder
-8. **CTA section** — Final conversion block with "Next Step" pill, "Let's Talk" links to contact
-9. **Header** — Logo image, nav (Home, Services, Contact), mobile hamburger, "Get Started" links to #pricing
-10. **Footer** — Logo, contact info (email, phone, WhatsApp, location), nav/legal/social links, copyright
-11. **Exit-intent popup** — Fires once per session on exit intent
+| Page | Status | Version |
+|------|--------|---------|
+| index.html | DONE | v0.7.0+ |
+| services.html | DONE | v0.7.0+ |
+| products.html | DONE | v0.7.0+ |
+| contact.html | DONE | v0.7.0+ |
+| 404.html | DONE | v0.7.0+ |
+| thank-you.html | DONE | v0.7.0+ |
+| privacy-policy.html | DONE | v0.7.0+ |
+| terms-and-conditions.html | DONE | v0.7.0+ |
+| exit-popup | DONE (overlay) | v0.7.0+ |
+| cookie-banner | DONE (overlay) | v0.7.0+ |
 
-### Updates This Session (web-v0.6.x)
-- Services added to nav across all pages
-- "Next Step" pill added to bottom CTA
-- Enterprise CTA fixed from dead `<button>` to `<a href="contact.html">`
-- Testimonial images moved to images/ subfolder
-- Exit-intent popup loaded on all pages
+**Nav:** Home | Services | Products | Contact
 
 ---
 
-## Services Page (services.html) — COMPLETE
+## SEO — Implemented
 
-### Features Built
-1. **Hero** — Video background (15% opacity), hero-gradient, "What We Automate" with green accent
-2. **How Automation Works** — 4 logic cards (Trigger, Rule, Condition, Action)
-3. **What We Automate** — 12 category cards with apps and "what you stop doing"
-4. **Quick Wins** — 8 department cards showing fastest results
-5. **Our 5-Step Plan** — Vertical timeline (Identify, Map, Start Small, Test & Refine, Monitor & Optimise)
-6. **The Caution** — Blockquote: "Automation applied to an inefficient operation will magnify the inefficiency"
-7. **Why Choose Us** — 6 reason cards (Plain English, Fix First, Rand Pricing, Data Control, Local, Long-term)
-8. **Real Results** — Stat row + 4 SA case study cards
-9. **ROI Calculator** — Reused from homepage
-10. **Pricing** — 4 tiers reused from homepage
-11. **Data & Control** — 6 n8n/POPIA features
-12. **Bottom CTA** — "Next Step" pill, "Ready to See What's Possible?", "Let's Talk" to contact
-13. **Header** — Services set as active nav link, CTA links to #pricing (on-page)
-14. **Exit-intent popup** — Fires once per session
+### Phase 1 (meta + indexing)
+- Meta descriptions on all pages
+- Keyword-forward page titles
+- Canonical URLs
+- Open Graph + Twitter Card tags
+- robots.txt + sitemap.xml
+- noindex on thank-you + 404
+- JSON-LD: LocalBusiness (index), FAQPage (contact), Service (services)
 
-### Hero Video
-- Source: AdobeStock_769539850.mov (924MB 4K ProRes, deleted after conversion)
-- Converted: services-hero-video.mp4 (661KB, 1280px, H.264, CRF 28)
-- Opacity: 15% (page-specific override, homepage is 10%)
+### Phase 3 (performance)
+- Font preconnect hints
+- Hero video preload="metadata"
 
----
-
-## Contact Page (contact.html) — COMPLETE
-
-### Features Built
-1. **Hero** — Radial gradient (hero-gradient class), "Let's Get Your Time Back" with green accent
-2. **Form** — 2-column layout (7/5 grid), fields: name, email, company, size, message, source
-3. **Form validation** — Client-side required fields, email format, honeypot spam protection
-4. **Form submission** — POST to n8n webhook, "Sending..." state, success message
-5. **Contact info card** — "Prefer a chat?" with email, phone, WhatsApp, location, hours
-6. **Trust badges** — 100+ Workflows, POPIA Compliant, No Lock-in, No Hidden Fees
-7. **What Happens Next** — 5-step vertical timeline with pill label "Your Journey"
-8. **FAQ** — 7 accordion items with pill label "Got Questions?", copy from Website_Copy.md
-9. **Bottom CTA** — "Next Step" pill, "Ready to Get Your Time Back?" with "Let's Talk" linking to #contact-form
-10. **Header/Footer** — Global components, Contact set as active nav link
-11. **Exit-intent popup** — Fires once per session
-
-### n8n Webhook (live)
-- Workflow: "DoQix - Website Contact Form" in Do.Qix folder
-- Endpoint: https://hooks.digitaloperations.co.za/webhook/doqix-contact (POST)
-- Sends email to stephan@digitaloperations.co.za with branded HTML template
-- From: stephan@digitaloperations.co.za
-- Email delivery has slight delay (mail server greylisting), arrives within minutes
-- ROI calculator results pre-fill the message field via ?roi= URL parameter
+### Phase 4 (polish)
+- Dead social links removed
+- `<label>` eyebrows changed to `<span class="label">`
+- site.webmanifest created
+- hreflang="en-za" on all indexable pages
+- Google Search Console verified
+- Google Analytics 4 (G-BC57HM6CTG) on all pages
+- OG image (og_image.jpg) linked
 
 ---
 
-## 404 Page (404.html) — COMPLETE
+## This Session (web-v0.7.0 to v0.7.5)
 
-### Features Built
-1. **Hero** — Full viewport, hero-gradient, "404" pill
-2. **Headline** — "This page got automated out of existence"
-3. **CTAs** — "Take Me Home" (index) + "Get In Touch" (contact)
-4. **No scroll-reveal** — Single-section page, content always visible
-5. **Exit-intent popup** — Fires once per session
-
----
-
-## Exit-Intent Popup — COMPLETE (overlay component)
-
-### Implementation
-- **JS:** `design/components/js/exit-popup.js` (synced to `js/exit-popup.js`)
-- **CSS:** In global.css under EXIT-INTENT POPUP section
-- **No HTML file needed** — JS injects the overlay HTML into the DOM
-- **Loaded on:** All 4 pages (index, services, contact, 404)
-
-### Behaviour
-- Fires once per session (sessionStorage)
-- 5-second minimum time on page before trigger
-- Desktop: mouse leaves viewport from the top
-- Mobile: rapid scroll-up near top of page
-- Dismiss: X button, backdrop click, "I'll keep doing it manually" text, Escape key
-- CTA: "Get Started" -> contact.html
-
-### Copy
-- Headline: "Your team is losing a full day every week to busywork"
-- Body: "30% of the average work week goes to tasks a machine could handle. We'll show you exactly where."
-- CTA: "Get Started" (no "Free")
-- Dismiss: "I'll keep doing it manually"
-
----
-
-## Design Folder Cleanup (this session)
-
-### Deleted
-- AdobeStock_1678170583.mov (1.6GB raw homepage stock footage)
-- bg-test.html, color-test.html (test files)
-- BACKGROUND-CHANGE-NOTES.md (old session notes)
-- roi-calculator-preview.html (standalone preview)
-- design-system/ folder (duplicate DESIGN.md)
-- js/components.js (unreferenced)
-
-### Reorganized
-- 7 testimonial images moved from design/ root to design/images/
-- Root copies moved to images/ subfolder
-- Image paths updated in index.html (design + root)
-
----
-
-## Reusable Components in global.css
-- `.form-field` — Form inputs with focus states, validation, error display
-- `.faq-item` — Accordion Q&A with chevron rotation
-- `.trust-badge` — Stat/icon trust signal cards
-- `.contact-channel` — Icon-circle + label + value rows
-- `a.btn:hover` / `a.btn-primary:hover` — Fix for teal-on-teal hover bug on link buttons
-- `#exit-popup-overlay` — Exit-intent popup with backdrop, card, slide-up animation
-
----
-
-## Documentation
-- `docs/build/Page_Build_Playbook.md` — Step-by-step build process, design system reference, button text convention, per-page checklist
-- Updated: Header CTA link rule (on-page #pricing for pages with pricing section)
+### Built and Pushed
+- Privacy policy page (POPIA-compliant, 15 sections)
+- Terms and conditions page
+- Products page (NomadIQ, VendIQ, VoltIQ, LearnIQ with images, badges, overlays)
+- Cookie banner component (3-tier consent)
+- Products added to nav on all pages
+- Header CTA changed to "Let's Build"
+- Consistency audit fixes (nav, cache-bust, scripts, Tailwind config, design tokens, domains, pills)
+- Mobile/responsive audit fixes (typography scaling, hero height, footer grid, tap targets, hamburger, arrows, legal tables)
+- Full SEO implementation (Phases 1, 3, 4)
+- Scroll-reveal made global via main.js
+- Services blockquote card green border fix (inset box-shadow)
+- Services Data & Control section in cards
+- Contact trust badges in cards
+- Product status badges (Live/In Progress)
+- Product images with tinted overlays
+- Contact form pre-fill from product links
+- FAQ v2.0 expanded to 120+ questions (committed, not pushed)
+- Folder cleanup: removed AdobeStock (1.6GB), site/, components/, samples/, remotion-video/, preview files
+- Registered entity updated to Digital Operations and Technology (Pty) Ltd
 
 ---
 
 ## Design System
-- **Background:** Royal Navy #0C1830 with full surface hierarchy
-- **Logo:** logo_new_green.png (header 3rem, footer 10rem width)
-- **Favicon:** favicon_green.png
-- **Font:** Inter only
+- **Background:** Royal Navy #0C1830
 - **Accent:** Teal #00e5a0, Amber #ff8000
-- **Component HTML:** design/components/header.html, design/components/footer.html
-- **Component JS:** design/components/js/exit-popup.js
+- **Font:** Inter only
+- **Logo:** logo_new_green.png
+- **Components:** design/components/ (header, footer, exit-popup, cookie-banner)
+- **Eyebrows:** `<span class="label">` (not `<label>`)
+- **Cards:** `.card` class with hover lift + scroll-reveal (global)
+- **Product badges:** `.product-badge.live` (green), `.product-badge.in-progress` (orange)
 
 ---
 
 ## Button Text Convention
 | Context | Text |
 |---------|------|
-| Header/nav CTA | "Let's Build" (id="cta-lets-build") -> TBD (currently #pricing or index.html#pricing) |
+| Header/nav CTA | "Let's Build" (id="cta-lets-build") |
 | Hero CTA | "Get Started" -> #pricing |
-| Mid-page section CTAs | "Get Started" -> #pricing |
 | Pricing cards | "Select Plan" -> contact.html |
 | Enterprise pricing | "Show Me What's Possible" -> contact.html |
 | Contact form submit | "Get My Plan" |
 | Bottom CTA | "Let's Talk" -> contact.html |
 | ROI calculator CTA | "Get Started" -> contact.html with ?roi= data |
 | Exit popup CTA | "Get Started" -> contact.html |
+| Product "Learn More" | -> contact.html?product=[name] (pre-fills message) |
 
 **Rule:** No button uses the word "Free". Ever.
 
 ---
-
-## Heading Convention
-- Every H2 has a `<label>` pill above it (e.g., "Our Services", "The Logic", "Next Step")
-- Every H1 and H2 has a `<span class="text-primary">` green accent on key words
-- H3s do not end with periods
-
----
-
-## Pages Status
-
-| Page | Stitch Design | Status |
-|------|--------------|--------|
-| index.html | design/index/ | DONE |
-| contact.html | design/contact/ | DONE |
-| services.html | design/services/ | DONE |
-| 404.html | design/404/ | DONE |
-| exit-popup | design/components/js/ | DONE (overlay component) |
-| products.html | design/products/ | TODO |
-| privacy-policy.html | design/privacy-policy/ | TODO |
-| terms-and-conditions.html | design/terms-and-conditions/ | TODO |
-| thank-you.html | design/thank-you/ | TODO |
-| cookie-banner | design/cookie-banner/ | TODO (overlay component) |
-
-**Nav links:** Home | Services | Contact (pages added when complete).
-
----
-
-## Rules (in CLAUDE.md + memory)
-- No inline JS
-- No em dashes
-- No hardcoding
-- No "Free" in buttons
-- Version tag (web-vX.Y.Z) on every push
-- Cache-bust (?v=X.Y.Z) on all CSS/JS links
-- Sync design/ to root on every push
-- All sections use px-8 padding (matches footer)
-- main = website, plugins = WordPress plugins
-- Pages added to nav only when fully built
-- Pills above every H2, green accent on key words
-- Header CTA links to #pricing on pages with pricing, index.html#pricing otherwise
-
----
-
-## Deployment Notes
-- GitHub Pages builds are working correctly (legacy mode, main:/)
-- CDN is GitHub's Fastly (cache-control: max-age=600, 10 min)
-- No Cloudflare proxy layer detected (DNS only)
-- Browser-level caching is the main cause of "not updating" after push
-- Hard refresh (Cmd+Shift+R) or incognito window resolves stale content
-- Root domain (digitaloperations.co.za) redirects to /doqix/ via stephanm-za.github.io repo
 
 ## Contact Details
 - Email: stephan@digitaloperations.co.za
 - Phone: +27 61 514 8375
 - WhatsApp: wa.me/27615148375
 - Location: Cape Town, South Africa
+- Entity: Digital Operations and Technology (Pty) Ltd, trading as Do.Qix
 
 ## Deployment
 - GitHub Pages: digitaloperations.co.za/doqix/
 - Two-repo setup: stephanm-za.github.io (CNAME + redirect) + doqix (content)
 - Cloudflare DNS, SSL active
 - n8n webhook: hooks.digitaloperations.co.za/webhook/doqix-contact
+- Google Search Console: verified (HTML tag)
+- Google Analytics: G-BC57HM6CTG
 
 ---
 
-## Current Version: web-v0.7.3 (pushed, live)
-
-All pages built, audited, and deployed. SEO phases 1-4 complete (except Tailwind CDN).
+## Uncommitted Changes
+- Folder cleanup (deleted AdobeStock, site/, components/, samples/, remotion-video/, preview files)
+- FAQ v2.0 (committed, not pushed)
 
 ---
 
 ## Still To Do
 
 ### Performance
-1. Replace Tailwind CDN with compiled/purged CSS (biggest Core Web Vitals win)
-2. Add poster images to hero videos (prevent blank flash on load)
-3. Add Apple Touch Icon (180x180) for iOS home screen
+1. Replace Tailwind CDN with compiled/purged CSS
+2. Add poster images to hero videos
+3. Add Apple Touch Icon (180x180)
 
 ### External Setup
 4. Create Google Business Profile for Cape Town
@@ -260,9 +142,9 @@ All pages built, audited, and deployed. SEO phases 1-4 complete (except Tailwind
 7. Verify Cloudflare settings (HSTS, Always HTTPS, Full SSL mode)
 
 ### Content
-8. Add real social media links once profiles exist (LinkedIn, Instagram, Facebook)
+8. Add real social media links once profiles exist
 9. Blog/case studies page for long-tail keyword content
-10. Create per-product OG images (currently all share one)
+10. Create per-product OG images
 
 ### Future Website Functionality (roadmap)
 - **AI Builder** — site feature TBD
