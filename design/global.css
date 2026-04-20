@@ -1048,7 +1048,7 @@ ul, ol {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-#exit-popup-overlay.show { opacity: 1; }
+#exit-popup-overlay.show { display: block; opacity: 1; }
 
 .exit-popup-backdrop {
     position: absolute;
@@ -1058,28 +1058,36 @@ ul, ol {
 }
 
 .exit-popup-card {
-    position: relative;
+    position: absolute;
     z-index: 1;
     max-width: 36rem;
-    margin: auto;
-    margin-top: 50vh;
-    transform: translateY(calc(-50% + 2rem));
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, calc(-50% + 2rem));
+    width: calc(100% - 2rem);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
     background: var(--color-surface-container, #14203C);
     border: 1px solid rgba(59, 74, 65, 0.2);
     border-radius: 1rem;
-    padding: 3rem 2.5rem;
+    padding: 3rem 2rem;
     text-align: center;
     box-shadow: 0 40px 80px -20px rgba(0, 229, 160, 0.08);
     transition: transform 0.3s ease;
 }
 #exit-popup-overlay.show .exit-popup-card {
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 480px) {
+    .exit-popup-heading { font-size: 1.25rem; }
+    .exit-popup-card { padding: 2.5rem 1.5rem 2rem; }
 }
 
 .exit-popup-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: 1.5rem;
     background: none;
     border: none;
     color: #bacbbf;
@@ -1093,36 +1101,40 @@ ul, ol {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 0.75rem;
     background: #1A2A48;
     border: 1px solid rgba(59, 74, 65, 0.15);
     color: #00e5a0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .exit-popup-heading {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 900;
-    line-height: 1.2;
+    line-height: 1.25;
     margin-bottom: 1rem;
     color: #e4e1e9;
 }
+.exit-popup-heading .text-primary,
+.exit-popup-heading span[style*="color"] { color: #00e5a0; }
 
 .exit-popup-body {
-    font-size: 1rem;
+    font-size: 0.875rem;
     color: #bacbbf;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     max-width: 28rem;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .exit-popup-cta {
     display: inline-block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem 2rem !important;
+    font-size: 0.875rem !important;
 }
 
 .exit-popup-dismiss {
@@ -1131,9 +1143,11 @@ ul, ol {
     background: none;
     border: none;
     color: #84958a;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     cursor: pointer;
-    padding: 0.5rem 1rem;
+    padding: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
     transition: color 0.2s;
 }
 .exit-popup-dismiss:hover { color: #e4e1e9; }

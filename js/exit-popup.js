@@ -22,13 +22,13 @@
                 '<span class="material-symbols-outlined">close</span>' +
             '</button>' +
             '<div class="exit-popup-icon">' +
-                '<span class="material-symbols-outlined" style="font-size:2.5rem;">timer_off</span>' +
+                '<span class="material-symbols-outlined" style="font-size:1.75rem;">timer_off</span>' +
             '</div>' +
             '<h2 class="exit-popup-heading">' +
-                'Your team is losing a <span class="text-primary">full day</span> every week to busywork' +
+                'Your team is losing a <span class="text-primary">full day every week</span> to busywork' +
             '</h2>' +
             '<p class="exit-popup-body">' +
-                '30% of the average work week goes to tasks a machine could handle. ' +
+                '<span style="color:#e4e1e9;font-weight:700;">30%</span> of the average work week goes to tasks a machine could handle. ' +
                 'We\'ll show you exactly where.' +
             '</p>' +
             '<a href="contact.html" class="btn btn-primary lg glow exit-popup-cta">Get Started</a>' +
