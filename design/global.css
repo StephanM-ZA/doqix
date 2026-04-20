@@ -1038,6 +1038,107 @@ ul, ol {
 }
 
 /* ============================================
+   EXIT-INTENT POPUP
+   ============================================ */
+#exit-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+#exit-popup-overlay.show { opacity: 1; }
+
+.exit-popup-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 24, 48, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.exit-popup-card {
+    position: relative;
+    z-index: 1;
+    max-width: 36rem;
+    margin: auto;
+    margin-top: 50vh;
+    transform: translateY(calc(-50% + 2rem));
+    background: var(--color-surface-container, #14203C);
+    border: 1px solid rgba(59, 74, 65, 0.2);
+    border-radius: 1rem;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 40px 80px -20px rgba(0, 229, 160, 0.08);
+    transition: transform 0.3s ease;
+}
+#exit-popup-overlay.show .exit-popup-card {
+    transform: translateY(-50%);
+}
+
+.exit-popup-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #bacbbf;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s;
+}
+.exit-popup-close:hover { color: #00e5a0; }
+
+.exit-popup-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.75rem;
+    background: #1A2A48;
+    border: 1px solid rgba(59, 74, 65, 0.15);
+    color: #00e5a0;
+    margin-bottom: 1.5rem;
+}
+
+.exit-popup-heading {
+    font-size: 1.75rem;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #e4e1e9;
+}
+
+.exit-popup-body {
+    font-size: 1rem;
+    color: #bacbbf;
+    margin-bottom: 2rem;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.exit-popup-cta {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.exit-popup-dismiss {
+    display: block;
+    margin: 0 auto;
+    background: none;
+    border: none;
+    color: #84958a;
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: color 0.2s;
+}
+.exit-popup-dismiss:hover { color: #e4e1e9; }
+
+/* ============================================
    FOOTER
    ============================================ */
 .site-footer {
