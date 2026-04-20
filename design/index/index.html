@@ -168,7 +168,7 @@ gtag("config", "G-BC57HM6CTG");
 </header>
 <main class="pt-20">
 <!-- Hero Section -->
-<section id="hero" class="relative min-h-[600px] md:min-h-[921px] flex flex-col items-center justify-center text-center px-6 hero-gradient overflow-hidden">
+<section id="hero" class="relative pt-8 pb-2 md:pt-16 md:pb-6 flex flex-col items-center justify-center text-center px-6 hero-gradient overflow-hidden">
 <!-- Hero Background Video -->
 <div class="hero-video-bg">
 <video autoplay muted loop playsinline preload="metadata" src="../hero-video.mp4">
@@ -190,9 +190,16 @@ gtag("config", "G-BC57HM6CTG");
 <li>Priced in <span class="text-secondary-container font-bold">rands</span></li>
 </ul>
 </div>
+<!-- Scroll Indicator -->
+<div class="scroll-indicator">
+<div class="scroll-indicator-inner" id="scrollIndicator">
+<span class="material-symbols-outlined scroll-arrow">keyboard_arrow_down</span>
+<span class="scroll-label">Scroll</span>
+</div>
+</div>
 </div>
 <!-- App Carousel -->
-<div class="mt-20 max-w-3xl mx-auto overflow-hidden relative">
+<div class="mt-4 md:mt-10 max-w-3xl mx-auto overflow-hidden relative">
 <div class="app-carousel-track">
 <div class="app-carousel-item"><span class="material-symbols-outlined text-3xl text-primary">account_balance</span><span class="text-xs font-bold">Xero</span></div>
 <div class="app-carousel-item"><span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">chat_bubble</span><span class="text-xs font-bold">WhatsApp</span></div>
@@ -229,7 +236,7 @@ gtag("config", "G-BC57HM6CTG");
 </div>
 </section>
 <!-- The Problem -->
-<section id="problem" class="py-20 px-8 bg-[#0C1830]">
+<section id="problem" class="pt-6 pb-20 px-8 bg-[#0C1830]">
 <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
 <div class="space-y-12">
 <span class="label">The Problem</span>
@@ -742,6 +749,7 @@ gtag("config", "G-BC57HM6CTG");
 <p class="footer-copyright">&copy; 2026 Do.Qix. All rights reserved.</p>
 </div>
 </footer>
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><span class="material-symbols-outlined">keyboard_arrow_up</span></button>
 <script src="js/main.js?v=0.7.0"></script>
 <script src="js/testimonial-carousel.js?v=0.7.0"></script>
 <script src="js/roi-calculator.js?v=0.7.0"></script>

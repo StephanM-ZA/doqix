@@ -93,4 +93,20 @@ function resetAutoPlay() {
     startAutoPlay();
 }
 
+// Touch swipe support for mobile
+if (track) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    track.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    track.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) { testimonialNext(); } else { testimonialPrev(); }
+        }
+    }, { passive: true });
+}
+
 initTestimonials();

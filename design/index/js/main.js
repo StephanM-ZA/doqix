@@ -22,7 +22,7 @@ var revealObserver = new IntersectionObserver(function (entries) {
             entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.01 });
 
 // Auto-apply scroll-reveal to direct children of every <section> in <main>
 // Skip: hero video backgrounds, elements already marked, first section (hero)
@@ -42,6 +42,35 @@ sections.forEach(function (section, index) {
 document.querySelectorAll('.scroll-reveal').forEach(function (el) {
     revealObserver.observe(el);
 });
+
+// Scroll indicator — visible at top, hidden once scrolled past hero
+var scrollIndicator = document.getElementById('scrollIndicator');
+if (scrollIndicator) {
+    var heroSection = document.getElementById('hero');
+    var indicatorOffset = heroSection ? heroSection.offsetHeight : 400;
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > indicatorOffset * 0.3) {
+            scrollIndicator.classList.add('hidden');
+        } else {
+            scrollIndicator.classList.remove('hidden');
+        }
+    });
+}
+
+// Back to top button
+var backToTop = document.getElementById('backToTop');
+if (backToTop) {
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    backToTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
 
 // Mobile menu toggle
 var hamburger = document.querySelector('.nav-hamburger');
