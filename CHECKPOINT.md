@@ -240,48 +240,35 @@
 
 ---
 
-## Next Steps
+## Current Version: web-v0.7.3 (pushed, live)
 
-1. Fix email deliverability (SPF/DKIM on mail server)
-2. Push all unpushed pages as web-v0.7.0
+All pages built, audited, and deployed. SEO phases 1-4 complete (except Tailwind CDN).
 
-## Future Website Functionality (roadmap)
+---
 
+## Still To Do
+
+### Performance
+1. Replace Tailwind CDN with compiled/purged CSS (biggest Core Web Vitals win)
+2. Add poster images to hero videos (prevent blank flash on load)
+3. Add Apple Touch Icon (180x180) for iOS home screen
+
+### External Setup
+4. Create Google Business Profile for Cape Town
+5. Register on SA directories (Yellow Pages, Brabys, Cylex, Snupit)
+6. Fix email deliverability (SPF/DKIM on mail server)
+7. Verify Cloudflare settings (HSTS, Always HTTPS, Full SSL mode)
+
+### Content
+8. Add real social media links once profiles exist (LinkedIn, Instagram, Facebook)
+9. Blog/case studies page for long-tail keyword content
+10. Create per-product OG images (currently all share one)
+
+### Future Website Functionality (roadmap)
 - **AI Builder** — site feature TBD
 - **AI Chatbot** — site feature TBD
 
 ---
 
-## Unpushed Changes This Session
-
-Everything below is built but NOT yet pushed (pending approval):
-
-### Pages Built
-- **Services page** (web-v0.6.0 to v0.6.5, pushed)
-- **404 page** (web-v0.6.3, pushed)
-- **Exit-intent popup** component (web-v0.6.4/v0.6.5, pushed)
-- **Thank-you page** (web-v0.6.6/v0.6.7, pushed)
-- **Privacy policy page** + MD source (NOT pushed)
-- **Terms and conditions page** (NOT pushed)
-- **Cookie banner** component (NOT pushed)
-- **Products page** with 4 products: NomadIQ, VendIQ, VoltIQ, LearnIQ (NOT pushed)
-- **Products added to nav** on all pages (NOT pushed)
-- **Header CTA** changed to "Let's Build" with anchor IDs (pushed partially)
-- **Bottom CTA teal tint** on services + contact (pushed)
-- **Design folder cleanup** (pushed)
-- **Registered entity** updated to Digital Operations and Technology (Pty) Ltd (NOT pushed)
-
-### Pending Fixes (from consistency audit)
-1. contact.html missing Products nav link (desktop + mobile)
-2. Cache-bust versions inconsistent across all pages (normalize to 0.7.0)
-3. exit-popup.js missing from thank-you, privacy-policy, terms pages
-4. thank-you.html has trimmed Tailwind config (needs full palette)
-5. text-zinc-* classes in pricing/testimonials (replace with design tokens)
-6. terms-and-conditions.html references doqix.co.za (should be digitaloperations.co.za/doqix)
-7. thank-you.html H1 needs label pill
-8. Mobile/responsive audit pending
-
-### Tool Call Count: 50+ (checkpointing now)
-
 ## Resume Command
-Say "resume" to continue. Fix consistency issues, then push all unpushed pages.
+Say "resume" to continue from this checkpoint.
