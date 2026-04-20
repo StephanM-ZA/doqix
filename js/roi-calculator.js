@@ -258,6 +258,17 @@
       var tierName=tier?tier.name:'Team';
       pricingBannerText.textContent='Based on your numbers, we recommend the '+tierName+' plan. First month at 50%.';
     }
+
+    // Update ROI CTA link with results
+    var ctaLink=document.getElementById('roi-cta-link');
+    if(ctaLink){
+      var roiMsg='I used the ROI calculator and here are my results:\n\n'+
+        'Monthly savings: '+formatZAR(monthlySavings)+'\n'+
+        'Annual savings: '+formatZAR(annualSavings)+'\n'+
+        'Hours back: '+formatHours(hoursSavedMonth)+'/month\n'+
+        'Recommended plan: '+(tier?tier.name:'Solo');
+      ctaLink.href='contact.html?roi='+encodeURIComponent(roiMsg);
+    }
   }
 
   function highlightPricingCard(tierName){
@@ -309,7 +320,7 @@
         '\uD83D\uDCC8 Annual savings: '+formatZAR(annualSavings)+'\n'+
         '\u23F1\uFE0F Hours back: '+formatHours(hoursSavedMonth)+'/month\n\n'+
         'Mind. Blown. \uD83E\uDD2F\n\n'+
-        'Try the free calculator \uD83D\uDC49 https://doqix.co.za';
+        'Try the calculator \uD83D\uDC49 https://doqix.co.za';
       if(navigator.share){navigator.share({title:'My Automation Savings',text:shareText}).catch(function(){});return}
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(shareText).then(showCopied,fallbackCopy)}
       else{fallbackCopy()}

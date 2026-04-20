@@ -6,6 +6,19 @@
 
     var REQUIRED = ['contact-name', 'contact-email', 'contact-size', 'contact-message'];
 
+    /* Pre-fill message from ROI calculator */
+    var params = new URLSearchParams(window.location.search);
+    var roiData = params.get('roi');
+    if (roiData) {
+        var msgField = document.getElementById('contact-message');
+        if (msgField) {
+            msgField.value = roiData;
+            msgField.style.height = 'auto';
+            msgField.style.height = msgField.scrollHeight + 'px';
+        }
+        document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
     function validate() {
         var valid = true;
         REQUIRED.forEach(function (id) {
