@@ -4,7 +4,7 @@
     var el = document.getElementById('countdown');
     if (!el) return;
 
-    var seconds = 5;
+    var seconds = 10;
 
     var timer = setInterval(function () {
         seconds--;

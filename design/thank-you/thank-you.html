@@ -7,6 +7,47 @@
 <link rel="icon" type="image/png" href="../favicon_green.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#303036",
+                        "surface-container-low": "#101C36",
+                        "surface-container-highest": "#1E3050",
+                        "on-surface": "#e4e1e9",
+                        "on-surface-variant": "#bacbbf",
+                        "surface-dim": "#0C1830",
+                        "primary": "#00e5a0",
+                        "surface-container-high": "#1A2A48",
+                        "background": "#0C1830",
+                        "primary-container": "#00e5a0",
+                        "surface": "#0C1830",
+                        "surface-container-lowest": "#081024",
+                        "surface-container": "#14203C",
+                        "outline-variant": "#3b4a41",
+                        "outline": "#84958a",
+                        "on-primary": "#003824",
+                        "on-primary-container": "#006141",
+                        "secondary": "#ff8000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
 <link rel="stylesheet" href="../global.css?v=0.6.5"/>
 </head>
 <body class="bg-surface-dim text-on-surface font-body" style="font-family: Inter, sans-serif;">
@@ -46,7 +87,7 @@
 </div>
 
 <h1>
-    We Got You <span class="text-primary">We'll Be In Touch Soon</span>
+    We Got You. <span class="text-primary">We'll Be In Touch Soon</span>
 </h1>
 
 <p class="text-lg text-on-surface-variant max-w-xl mx-auto">
@@ -75,7 +116,7 @@
 </div>
 
 <div class="pt-4">
-<p class="text-on-surface-variant text-sm" id="countdown-text">Redirecting to homepage in <span class="text-primary font-bold" id="countdown">5</span> seconds...</p>
+<p class="text-on-surface-variant text-sm" id="countdown-text">Redirecting to homepage in <span class="text-primary font-bold" id="countdown">10</span> seconds...</p>
 <a href="index.html" class="btn btn-ghost md" style="margin-top:1rem;">Go Home Now</a>
 </div>
 
