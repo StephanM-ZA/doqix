@@ -102,6 +102,8 @@ The `components.js` file (at root `js/components.js`) fetches `components/header
 
 **Current decision:** Homepage uses Option A (hardcoded). For new pages, use whichever approach is chosen. If hardcoding, keep header/footer markup identical to the component files.
 
+**Header CTA link rule:** The header "Get Started" button links to `index.html#pricing` by default (from the component file). However, if the current page has its own `#pricing` section (e.g. services.html), change the header CTA to `#pricing` (on-page scroll) so users stay on the page instead of navigating away.
+
 ### Step 4: Apply Content from Copy Document
 
 All page copy lives in `design/Website_Copy.md` (v7.0). Do NOT invent, rephrase, or rewrite copy. Use exactly what the document specifies for:
@@ -168,6 +170,17 @@ Before considering the page done, verify:
 - [ ] No button uses the word "Free"
 - [ ] If using `<a>` as a button, add `.btn` class (prevents teal-on-teal hover bug)
 - [ ] Contact details match: stephan@digitaloperations.co.za, +27 61 514 8375, wa.me/27615148375
+
+### Step 7b: Add Page to Navigation
+
+Pages are only added to the nav when they are fully built and ready. Do NOT link unfinished pages.
+
+When a page is complete, add it to the nav in all three places:
+1. `design/components/header.html` (desktop `.nav-link` + mobile `.mobile-link`)
+2. The hardcoded header in every existing page's design HTML
+3. Sync all updated files to root
+
+Current nav: **Home | Contact**. Add each page as it ships (e.g. Services, Products).
 
 ### Step 8: Sync Design to Root
 
@@ -328,8 +341,8 @@ Never use the word "Free" in any button. Use context-appropriate text:
 
 | Context | Button Text |
 |---------|------------|
-| Header / nav CTA | "Get Started" |
-| Mobile menu CTA | "Get Started" |
+| Header / nav CTA | "Get Started" -> #pricing (on-page if page has pricing, else index.html#pricing) |
+| Mobile menu CTA | "Get Started" -> same as header CTA |
 | Hero CTA | "Get Started" |
 | Mid-page section CTAs | "Get Started" |
 | Pricing cards (Solo, Team, Business) | "Select Plan" |
