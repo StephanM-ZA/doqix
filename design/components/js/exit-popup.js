@@ -65,11 +65,11 @@
         if (e.clientY <= 0) show();
     });
 
-    /* Mobile: rapid scroll up near top of page */
+    /* Mobile: rapid scroll up near top of page (skip if back-to-top triggered) */
     var lastScroll = 0;
     window.addEventListener('scroll', function () {
         var current = window.scrollY;
-        if (current < 200 && lastScroll - current > 50) {
+        if (current < 200 && lastScroll - current > 50 && !window._scrollingToTop) {
             show();
         }
         lastScroll = current;

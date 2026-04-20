@@ -59,26 +59,32 @@ if (scrollIndicator) {
 
 // Back to top button
 var backToTop = document.getElementById('backToTop');
-var scrollingToTop = false;
+window._scrollingToTop = false;
 if (backToTop) {
     window.addEventListener('scroll', function () {
-        if (scrollingToTop) return;
+        if (window._scrollingToTop) return;
         if (window.scrollY > 600) {
             backToTop.classList.add('visible');
         } else {
             backToTop.classList.remove('visible');
         }
     });
-    backToTop.addEventListener('click', function () {
-        scrollingToTop = true;
+    backToTop.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window._scrollingToTop = true;
         window.scrollTo({ top: 0, behavior: 'smooth' });
         var checkDone = setInterval(function () {
-            if (window.scrollY === 0) {
+            if (window.scrollY <= 1) {
                 clearInterval(checkDone);
-                scrollingToTop = false;
+                window._scrollingToTop = false;
                 backToTop.classList.remove('visible');
             }
-        }, 100);
+        }, 50);
+    });
+    backToTop.addEventListener('touchend', function (e) {
+        e.preventDefault();
+        backToTop.click();
     });
 }
 
