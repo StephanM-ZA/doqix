@@ -80,15 +80,11 @@
             body: JSON.stringify(data)
         })
         .then(function () {
-            form.style.display = 'none';
-            document.getElementById('form-success').classList.add('show');
-            document.getElementById('form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            window.location.href = 'thank-you.html';
         })
         .catch(function () {
-            /* Still show success to user (email may have sent, don't confuse them) */
-            form.style.display = 'none';
-            document.getElementById('form-success').classList.add('show');
-            document.getElementById('form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            /* Still redirect (email may have sent, don't confuse them) */
+            window.location.href = 'thank-you.html';
         });
     });
 })();
