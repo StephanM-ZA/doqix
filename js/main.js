@@ -59,8 +59,10 @@ if (scrollIndicator) {
 
 // Back to top button
 var backToTop = document.getElementById('backToTop');
+var scrollingToTop = false;
 if (backToTop) {
     window.addEventListener('scroll', function () {
+        if (scrollingToTop) return;
         if (window.scrollY > 600) {
             backToTop.classList.add('visible');
         } else {
@@ -68,7 +70,15 @@ if (backToTop) {
         }
     });
     backToTop.addEventListener('click', function () {
+        scrollingToTop = true;
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        var checkDone = setInterval(function () {
+            if (window.scrollY === 0) {
+                clearInterval(checkDone);
+                scrollingToTop = false;
+                backToTop.classList.remove('visible');
+            }
+        }, 100);
     });
 }
 
