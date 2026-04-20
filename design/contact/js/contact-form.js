@@ -6,13 +6,32 @@
 
     var REQUIRED = ['contact-name', 'contact-email', 'contact-size', 'contact-message'];
 
-    /* Pre-fill message from ROI calculator */
+    /* Pre-fill message from URL parameters */
     var params = new URLSearchParams(window.location.search);
     var roiData = params.get('roi');
+    var productParam = params.get('product');
+
     if (roiData) {
         var msgField = document.getElementById('contact-message');
         if (msgField) {
             msgField.value = roiData;
+            msgField.style.height = 'auto';
+            msgField.style.height = msgField.scrollHeight + 'px';
+        }
+        document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    if (productParam) {
+        var productNames = {
+            nomadiq: 'NomadIQ',
+            vendiq: 'VendIQ',
+            voltiq: 'VoltIQ',
+            learniq: 'LearnIQ'
+        };
+        var name = productNames[productParam.toLowerCase()] || productParam;
+        var msgField = document.getElementById('contact-message');
+        if (msgField && !msgField.value) {
+            msgField.value = 'I was looking at your ' + name + ' product and am interested to find out more.';
             msgField.style.height = 'auto';
             msgField.style.height = msgField.scrollHeight + 'px';
         }

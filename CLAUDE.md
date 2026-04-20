@@ -82,6 +82,22 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 
 **Never push website changes without creating a version tag.**
 
+### Verify GitHub Pages Build After Push (MANDATORY)
+
+GitHub Pages legacy builds occasionally fail to trigger automatically. After every push, verify the build started:
+
+```bash
+gh api repos/StephanM-ZA/doqix/pages/builds --jq '.[0] | {status, commit}'
+```
+
+If the commit SHA does not match the push, force a rebuild:
+
+```bash
+gh api -X POST repos/StephanM-ZA/doqix/pages/builds
+```
+
+Then confirm it completes with status `"built"`.
+
 ### Sync Design to Root (MANDATORY)
 
 GitHub Pages serves from `main:/` (root). The source of truth is in `design/`, but root-level files are what gets deployed. After ANY change to design files:

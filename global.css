@@ -98,7 +98,7 @@ p {
 }
 
 /* Labels / eyebrow text — always in a pill */
-label, .label {
+.label {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -116,7 +116,7 @@ label, .label {
 }
 
 /* Orange variant */
-label.orange, .label.orange {
+.label.orange {
     background: rgba(255, 128, 0, 0.1);
     border-color: rgba(255, 128, 0, 0.2);
     color: #ff8000;
@@ -634,6 +634,30 @@ ul, ol {
     color: #0C1830;
     border-color: #00e5a0;
     font-weight: 800;
+}
+
+/* Product status badges */
+.product-badge {
+    position: absolute;
+    top: -0.875rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+    z-index: 5;
+}
+.product-badge.live {
+    background: #00e5a0;
+    color: #0C1830;
+}
+.product-badge.in-progress {
+    background: #ff8000;
+    color: #0C1830;
 }
 
 .pricing-badge {

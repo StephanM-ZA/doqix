@@ -1,0 +1,16 @@
+{
+  "name": "Do.Qix - Business Workflow Automation",
+  "short_name": "Do.Qix",
+  "description": "Workflow automation for South African businesses. Connect your apps, eliminate repetitive tasks.",
+  "start_url": "/doqix/",
+  "display": "standalone",
+  "background_color": "#0C1830",
+  "theme_color": "#00e5a0",
+  "icons": [
+    {
+      "src": "favicon_green.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

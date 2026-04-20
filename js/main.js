@@ -15,15 +15,33 @@ if (heroVideo) {
     setTimeout(function () { clearInterval(playInterval); }, 15000);
 }
 
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+// Scroll reveal — auto-applied globally
+var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
         }
     });
 }, { threshold: 0.1 });
-document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+// Auto-apply scroll-reveal to direct children of every <section> in <main>
+// Skip: hero video backgrounds, elements already marked, first section (hero)
+var sections = document.querySelectorAll('main section');
+sections.forEach(function (section, index) {
+    // Skip the first section (hero) — it should be visible immediately
+    if (index === 0) return;
+
+    var children = section.querySelectorAll(':scope > *');
+    children.forEach(function (el) {
+        if (!el.classList.contains('hero-video-bg') && !el.classList.contains('scroll-reveal')) {
+            el.classList.add('scroll-reveal');
+        }
+    });
+});
+
+document.querySelectorAll('.scroll-reveal').forEach(function (el) {
+    revealObserver.observe(el);
+});
 
 // Mobile menu toggle
 var hamburger = document.querySelector('.nav-hamburger');
