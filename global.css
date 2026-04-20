@@ -553,23 +553,23 @@ ul, ol {
    ============================================ */
 .timeline {
     position: relative;
-    padding-left: 6rem;
+    padding-left: 4rem;
 }
 
-/* Vertical connecting line */
+/* Vertical connecting line — centred with circles */
 .timeline-line {
     position: absolute;
-    left: 19px;
+    left: calc(2rem - 1.5px);
     top: 24px;
     bottom: 24px;
     width: 3px;
     background: linear-gradient(to bottom, #00e5a0, rgba(0, 229, 160, 0.4), transparent);
 }
 
-/* Step circle — base */
+/* Step circle — centred on line */
 .timeline-circle {
     position: absolute;
-    left: -84px;
+    left: calc(-4rem + 2rem - 1.25rem);
     z-index: 10;
     width: 2.5rem;
     height: 2.5rem;
