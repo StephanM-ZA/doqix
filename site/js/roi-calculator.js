@@ -23,7 +23,7 @@
 
         '<div class="slider-group">' +
           '<div class="slider-header">' +
-            '<span class="slider-label">People doing repetitive tasks<span class="tooltip">How many staff spend time on repetitive, rule-based work?</span></span>' +
+            '<span class="slider-label">People doing repetitive tasks<span class="info-icon" data-tip="people">i</span><span class="tooltip">How many staff spend time on repetitive, rule-based work? This multiplies with hours and rate to calculate your total savings.</span></span>' +
             '<span class="slider-value" id="val-people"></span>' +
           '</div>' +
           '<input type="range" id="slider-people"/>' +
@@ -32,7 +32,7 @@
 
         '<div class="slider-group">' +
           '<div class="slider-header">' +
-            '<span class="slider-label">Hours per person per week<span class="tooltip">How many hours does each person spend on repetitive tasks every week? Think data entry, copy-pasting, manual emails, reporting.</span></span>' +
+            '<span class="slider-label">Hours per person per week<span class="info-icon" data-tip="hours">i</span><span class="tooltip">Hours each person spends on repetitive tasks weekly. Think data entry, copy-pasting, manual emails, reporting. Multiplied by people count to get total team hours.</span></span>' +
             '<span class="slider-value" id="val-hours"></span>' +
           '</div>' +
           '<input type="range" id="slider-hours"/>' +
@@ -42,7 +42,7 @@
 
         '<div class="slider-group">' +
           '<div class="slider-header">' +
-            '<span class="slider-label">Average hourly cost<span class="tooltip">What you pay per hour per person. Include salary, benefits, and overheads.</span></span>' +
+            '<span class="slider-label">Average hourly cost<span class="info-icon" data-tip="rate">i</span><span class="tooltip">What you pay per hour per person (salary + benefits + overheads). This converts saved hours into Rand value.</span></span>' +
             '<span class="slider-value" id="val-rate"></span>' +
           '</div>' +
           '<input type="range" id="slider-rate"/>' +
@@ -51,7 +51,7 @@
 
         '<div class="slider-group">' +
           '<div class="slider-header">' +
-            '<span class="slider-label">Automation efficiency<span class="tooltip">What percentage of those manual hours can realistically be automated. 70% is a conservative starting point.</span></span>' +
+            '<span class="slider-label">Automation efficiency<span class="info-icon" data-tip="efficiency">i</span><span class="tooltip">What percentage of manual hours can realistically be automated. 70% is a conservative start. Higher values may require additional workflows and affect the recommended plan tier.</span></span>' +
             '<span class="slider-value" id="val-efficiency"></span>' +
           '</div>' +
           '<input type="range" id="slider-efficiency"/>' +
@@ -61,7 +61,7 @@
 
         '<div class="slider-group">' +
           '<div class="slider-header">' +
-            '<span class="slider-label">Monthly error cost<span class="tooltip">What do manual mistakes cost you each month? Think re-work, wrong invoices, missed follow-ups.</span></span>' +
+            '<span class="slider-label">Monthly error cost<span class="info-icon" data-tip="error">i</span><span class="tooltip">What manual mistakes cost you monthly: re-work, wrong invoices, missed follow-ups. Added directly to your monthly savings total.</span></span>' +
             '<span class="slider-value" id="val-error"></span>' +
           '</div>' +
           '<input type="range" id="slider-error"/>' +
@@ -74,24 +74,24 @@
 
         '<div class="hero-result">' +
           '<div class="hero-amount" id="out-monthly">R0</div>' +
-          '<div class="hero-label">Your Monthly Savings</div>' +
+          '<div class="hero-label">Your Monthly Savings <div class="card-tooltip-wrap" style="display:inline-block;position:relative"><span class="info-icon">i</span><span class="card-tooltip">The total Rand value you could reclaim each month by automating repetitive work.<span class="tip-formula">(people \u00d7 hours \u00d7 4.33 \u00d7 rate \u00d7 efficiency) + error cost</span><span class="tip-affects">Affected by: all five sliders</span></span></div></div>' +
         '</div>' +
 
         '<div class="result-cards">' +
           '<div class="result-card">' +
-            '<div class="card-value" id="out-annual">R0</div>' +
+            '<div class="card-header"><div class="card-value" id="out-annual">R0</div><div class="card-tooltip-wrap"><span class="info-icon">i</span><span class="card-tooltip">Monthly savings multiplied by 12.<span class="tip-formula">(hours saved \u00d7 rate + errors) \u00d7 12</span><span class="tip-affects">Affected by: all sliders</span></span></div></div>' +
             '<div class="card-label">per year</div>' +
           '</div>' +
           '<div class="result-card">' +
-            '<div class="card-value" id="out-roi-pct">0%</div>' +
+            '<div class="card-header"><div class="card-value" id="out-roi-pct">0%</div><div class="card-tooltip-wrap"><span class="info-icon">i</span><span class="card-tooltip">How much you get back above the cost of the recommended plan. Higher = better value.<span class="tip-formula">(savings - plan cost) / plan cost</span><span class="tip-affects">Affected by: all sliders + plan tier</span></span></div></div>' +
             '<div class="card-label">return on investment</div>' +
           '</div>' +
           '<div class="result-card hours">' +
-            '<div class="card-value" id="out-hours-month">0 hrs</div>' +
+            '<div class="card-header"><div class="card-value" id="out-hours-month">0 hrs</div><div class="card-tooltip-wrap"><span class="info-icon">i</span><span class="card-tooltip">Total team hours freed up each month by automating repetitive work.<span class="tip-formula">people \u00d7 hours \u00d7 4.33 weeks \u00d7 efficiency</span><span class="tip-affects">Affected by: people, hours, efficiency</span></span></div></div>' +
             '<div class="card-label">back per month</div>' +
           '</div>' +
           '<div class="result-card hours">' +
-            '<div class="card-value" id="out-hours-year">0 hrs</div>' +
+            '<div class="card-header"><div class="card-value" id="out-hours-year">0 hrs</div><div class="card-tooltip-wrap"><span class="info-icon">i</span><span class="card-tooltip">Total team hours freed up over a full year.<span class="tip-formula">monthly hours \u00d7 12</span><span class="tip-affects">Affected by: people, hours, efficiency</span></span></div></div>' +
             '<div class="card-label">back per year</div>' +
           '</div>' +
           '<div class="result-card tier-suggestion">' +
@@ -400,18 +400,31 @@
   sliderEfficiency.addEventListener('input',onSliderInput);
   sliderError.addEventListener('input',onSliderInput);
 
-  // Touch tooltips
+  // Info icon click/touch handler (works for both slider tooltips and card tooltips)
   var activeTooltip=null;
-  roiContainer.addEventListener('touchstart',function(e){
-    var label=e.target.closest('.slider-label');
-    if(!label){if(activeTooltip){activeTooltip.classList.remove('tooltip-visible');activeTooltip=null}return}
-    var tip=label.querySelector('.tooltip');if(!tip)return;
+  function dismissTooltip(){
+    if(activeTooltip){activeTooltip.classList.remove('tooltip-visible');activeTooltip=null}
+  }
+  function toggleTooltip(icon,e){
     e.preventDefault();
-    if(activeTooltip&&activeTooltip!==tip)activeTooltip.classList.remove('tooltip-visible');
+    e.stopPropagation();
+    var tip=icon.parentElement.querySelector('.tooltip, .card-tooltip');
+    if(!tip)return;
+    if(activeTooltip&&activeTooltip!==tip)dismissTooltip();
     if(tip.classList.contains('tooltip-visible')){tip.classList.remove('tooltip-visible');activeTooltip=null}
     else{tip.classList.add('tooltip-visible');activeTooltip=tip}
+  }
+  roiContainer.addEventListener('click',function(e){
+    var icon=e.target.closest('.info-icon');
+    if(icon){toggleTooltip(icon,e);return}
+    dismissTooltip();
+  });
+  roiContainer.addEventListener('touchstart',function(e){
+    var icon=e.target.closest('.info-icon');
+    if(icon){toggleTooltip(icon,e);return}
+    dismissTooltip();
   },{passive:false});
-  window.addEventListener('scroll',function(){if(activeTooltip){activeTooltip.classList.remove('tooltip-visible');activeTooltip=null}},{passive:true});
+  window.addEventListener('scroll',function(){dismissTooltip()},{passive:true});
 
   // Share
   if(btnShare){
