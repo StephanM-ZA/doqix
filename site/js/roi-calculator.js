@@ -319,7 +319,7 @@
         '\uD83E\uDD2F I\'m losing *'+formatZAR(monthlySavings)+' p/month* to tasks a machine should be doing.\n\n'+
         '\uD83D\uDCC8 That\'s *'+formatZAR(annualSavings)+' p/year*. Gone. Poof. \uD83D\uDCA8\n\n'+
         '\u23F1\uFE0F *'+formatHours(hoursSavedMonth)+' hours* every month on stuff nobody signed up to do.\n\n'+
-        '\uD83D\uDD25 Don\'t waste time. \u23F0 30 seconds to find out yours..\n\uD83D\uDC49 https://digitaloperations.co.za/doqix/#roi-calculator';
+        '\uD83D\uDD25 Don\'t waste time. \u23F0 30 seconds to find out yours..\n\uD83D\uDC49 https://doqix.co.za/#roi-calculator';
       if(navigator.share){navigator.share({title:'My Automation Savings',text:shareText}).catch(function(){});return}
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(shareText).then(showCopied,fallbackCopy)}
       else{fallbackCopy()}
