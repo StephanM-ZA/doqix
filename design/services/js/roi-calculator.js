@@ -9,13 +9,13 @@
 
   /* ── Inject HTML ───────────────────────────────── */
   roiContainer.innerHTML =
-    '<div class="text-center space-y-4 mb-12 scroll-reveal">' +
+    '<div class="text-center space-y-4 mb-12">' +
       '<span class="label">The Mathematics</span>' +
       '<h2>See What <span class="text-primary">You Could Save</span></h2>' +
       '<p class="intro">Every business bleeds time differently. Move the sliders to match your team, and see exactly what you could reclaim each month.</p>' +
     '</div>' +
 
-    '<div class="roi-grid scroll-reveal">' +
+    '<div class="roi-grid">' +
 
       /* Inputs */
       '<div class="roi-inputs">' +
@@ -113,9 +113,6 @@
     '</div>' +
 
     '<p class="roi-footnote">Estimates based on your inputs. Actual savings depend on processes automated. All figures in ZAR.</p>';
-
-  /* ── Register with scroll-reveal ─────────────── */
-  if (window.doqixReveal) window.doqixReveal(roiContainer);
 
   /* ── Slider config (single source of truth) ──── */
   var CONFIG = {
