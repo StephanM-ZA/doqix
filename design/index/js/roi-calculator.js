@@ -1,7 +1,123 @@
+/* Do.Qix ROI Calculator — HTML + logic, single source of truth */
+/* IP-protected: pricing tiers, nudge copy, and ROI logic */
+
 (function(){
   'use strict';
 
-  // Slider config (single source of truth)
+  var roiContainer = document.getElementById('roi-calculator');
+  if (!roiContainer) return;
+
+  /* ── Inject HTML ───────────────────────────────── */
+  roiContainer.innerHTML =
+    '<div class="text-center space-y-4 mb-12 scroll-reveal">' +
+      '<span class="label">The Mathematics</span>' +
+      '<h2>See What <span class="text-primary">You Could Save</span></h2>' +
+      '<p class="intro">Every business bleeds time differently. Move the sliders to match your team, and see exactly what you could reclaim each month.</p>' +
+    '</div>' +
+
+    '<div class="roi-grid scroll-reveal">' +
+
+      /* Inputs */
+      '<div class="roi-inputs">' +
+        '<div class="panel-label">Your Team</div>' +
+
+        '<div class="slider-group">' +
+          '<div class="slider-header">' +
+            '<span class="slider-label">People doing repetitive tasks<span class="tooltip">How many staff spend time on repetitive, rule-based work?</span></span>' +
+            '<span class="slider-value" id="val-people"></span>' +
+          '</div>' +
+          '<input type="range" id="slider-people"/>' +
+          '<div class="slider-range-labels"><span></span><span></span></div>' +
+        '</div>' +
+
+        '<div class="slider-group">' +
+          '<div class="slider-header">' +
+            '<span class="slider-label">Hours per person per week<span class="tooltip">How many hours does each person spend on repetitive tasks every week? Think data entry, copy-pasting, manual emails, reporting.</span></span>' +
+            '<span class="slider-value" id="val-hours"></span>' +
+          '</div>' +
+          '<input type="range" id="slider-hours"/>' +
+          '<div class="slider-range-labels"><span></span><span></span></div>' +
+          '<div class="total-hours" id="out-total-hours"></div>' +
+        '</div>' +
+
+        '<div class="slider-group">' +
+          '<div class="slider-header">' +
+            '<span class="slider-label">Average hourly cost<span class="tooltip">What you pay per hour per person. Include salary, benefits, and overheads.</span></span>' +
+            '<span class="slider-value" id="val-rate"></span>' +
+          '</div>' +
+          '<input type="range" id="slider-rate"/>' +
+          '<div class="slider-range-labels"><span></span><span></span></div>' +
+        '</div>' +
+
+        '<div class="slider-group">' +
+          '<div class="slider-header">' +
+            '<span class="slider-label">Automation efficiency<span class="tooltip">What percentage of those manual hours can realistically be automated. 70% is a conservative starting point.</span></span>' +
+            '<span class="slider-value" id="val-efficiency"></span>' +
+          '</div>' +
+          '<input type="range" id="slider-efficiency"/>' +
+          '<div class="slider-range-labels"><span></span><span></span></div>' +
+          '<div class="efficiency-note" id="out-efficiency-note"></div>' +
+        '</div>' +
+
+        '<div class="slider-group">' +
+          '<div class="slider-header">' +
+            '<span class="slider-label">Monthly error cost<span class="tooltip">What do manual mistakes cost you each month? Think re-work, wrong invoices, missed follow-ups.</span></span>' +
+            '<span class="slider-value" id="val-error"></span>' +
+          '</div>' +
+          '<input type="range" id="slider-error"/>' +
+          '<div class="slider-range-labels"><span></span><span></span></div>' +
+        '</div>' +
+      '</div>' +
+
+      /* Outputs */
+      '<div class="roi-outputs">' +
+
+        '<div class="hero-result">' +
+          '<div class="hero-amount" id="out-monthly">R0</div>' +
+          '<div class="hero-label">Your Monthly Savings</div>' +
+        '</div>' +
+
+        '<div class="result-cards">' +
+          '<div class="result-card">' +
+            '<div class="card-value" id="out-annual">R0</div>' +
+            '<div class="card-label">per year</div>' +
+          '</div>' +
+          '<div class="result-card">' +
+            '<div class="card-value" id="out-roi-pct">0%</div>' +
+            '<div class="card-label">return on investment</div>' +
+          '</div>' +
+          '<div class="result-card hours">' +
+            '<div class="card-value" id="out-hours-month">0 hrs</div>' +
+            '<div class="card-label">back per month</div>' +
+          '</div>' +
+          '<div class="result-card hours">' +
+            '<div class="card-value" id="out-hours-year">0 hrs</div>' +
+            '<div class="card-label">back per year</div>' +
+          '</div>' +
+          '<div class="result-card tier-suggestion">' +
+            '<div class="tier-text" id="out-tier"></div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="benchmark" id="out-benchmark"></div>' +
+
+        '<a href="contact.html" class="roi-cta" id="roi-cta-link">' +
+          'Get Started' +
+          '<span class="cta-sub">15 minutes. No commitment. We\'ll show you where to start.</span>' +
+        '</a>' +
+
+        '<button type="button" class="share-btn" id="btn-share">Share Your Results</button>' +
+
+      '</div>' +
+
+    '</div>' +
+
+    '<p class="roi-footnote">Estimates based on your inputs. Actual savings depend on processes automated. All figures in ZAR.</p>';
+
+  /* ── Register with scroll-reveal ─────────────── */
+  if (window.doqixReveal) window.doqixReveal(roiContainer);
+
+  /* ── Slider config (single source of truth) ──── */
   var CONFIG = {
     people:     { default: 3,    min: 1,  max: 50,    step: 1   },
     hours:      { default: 8,    min: 1,  max: 40,    step: 1   },
@@ -32,12 +148,9 @@
   var outEffNote    = document.getElementById('out-efficiency-note');
   var outBenchmark  = document.getElementById('out-benchmark');
   var btnShare      = document.getElementById('btn-share');
-  var roiContainer  = document.getElementById('roi-calculator');
   var pricingBannerText = document.getElementById('pricing-banner-text');
   var pricingBanner = document.getElementById('pricing-banner');
   var calcTouched = false;
-
-  if (!roiContainer) return;
 
   // Apply config to sliders
   function initSlider(slider, valEl, cfg, format) {
