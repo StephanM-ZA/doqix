@@ -1538,9 +1538,11 @@ ul, ol {
     transition: color 0.2s;
 }
 
-.footer-contact-item .material-symbols-outlined {
-    font-size: 1.125rem;
+.footer-contact-item .hi {
+    width: 1.125rem;
+    height: 1.125rem;
     color: #00e5a0;
+    flex-shrink: 0;
 }
 
 a.footer-contact-item:hover {
@@ -1920,9 +1922,11 @@ a.contact-channel:hover .channel-value {
     scrollbar-width: none;
 }
 
-/* Material Symbols */
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+/* Heroicons base */
+.hi {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
 }
 
 /* ============================================

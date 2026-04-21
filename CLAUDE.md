@@ -84,35 +84,33 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 
 ### Verify GitHub Pages Build After Push (MANDATORY)
 
-GitHub Pages legacy builds occasionally fail to trigger automatically. After every push, verify the build started:
+Deployment uses a GitHub Actions workflow (`.github/workflows/deploy-site.yml`) that publishes from the `site/` folder. After every push that changes `site/` files, verify the workflow ran:
 
 ```bash
-gh api repos/StephanM-ZA/doqix/pages/builds --jq '.[0] | {status, commit}'
+gh run list --workflow=deploy-site.yml --limit=1
 ```
 
-If the commit SHA does not match the push, force a rebuild:
+If the workflow didn't trigger, re-run it:
 
 ```bash
-gh api -X POST repos/StephanM-ZA/doqix/pages/builds
+gh workflow run deploy-site.yml
 ```
 
-Then confirm it completes with status `"built"`.
+### Sync Design to Site (MANDATORY)
 
-### Sync Design to Root (MANDATORY)
+The `site/` folder is what GitHub Pages deploys. The source of truth is in `design/`. After ANY change to design files:
 
-GitHub Pages serves from `main:/` (root). The source of truth is in `design/`, but root-level files are what gets deployed. After ANY change to design files:
+1. Copy `design/global.css` to `site/global.css`
+2. Copy `design/index/js/*.js` to `site/js/`
+3. Copy `design/[page]/[page].html` to `site/[page].html`, fixing CSS path from `../global.css` to `global.css`
 
-1. Copy `design/global.css` to root `global.css`
-2. Copy `design/index/js/*.js` to root `js/`
-3. Copy `design/[page]/[page].html` to root `[page].html`, fixing CSS path from `../global.css` to `global.css`
-
-**This sync is part of the push process — commit the root files alongside the design files.**
+**This sync is part of the push process. Commit the `site/` files alongside the design files.**
 
 ### Cache-Busting on Deploy (MANDATORY)
 
 All CSS and JS file references in HTML must include a `?v=X.Y.Z` query string matching the current `web-vX.Y.Z` version. This forces browsers to fetch fresh files after every deploy instead of serving stale cached versions.
 
-When bumping the version tag, also update the `?v=` strings in all HTML files:
+When bumping the version tag, also update the `?v=` strings in all HTML files (both `design/` and `site/`):
 - `global.css?v=X.Y.Z`
 - `js/main.js?v=X.Y.Z`
 - `js/testimonial-carousel.js?v=X.Y.Z`
@@ -121,9 +119,24 @@ When bumping the version tag, also update the `?v=` strings in all HTML files:
 
 **Never push without bumping the cache-bust version.**
 
+### Repo Structure
+
+```
+/                     Config files (CLAUDE.md, README, CHANGELOG, updates.json)
+/design/              Source of truth for website (edit here)
+/site/                Deployed output (synced from design/, served by GitHub Pages)
+/docs/                Project documentation (architecture, legal, pricing, etc.)
+/assets/              WordPress plugins (plugins branch only)
+/planning/            Project planning files
+```
+
 ### Branch Strategy
 
 - **main** = website files only (design/, docs/, site/, CLAUDE.md, etc.)
 - **plugins** = WordPress plugins only (assets/ folder)
 
 Never mix website and plugin commits on the same branch.
+
+### Icons
+
+The site uses [Heroicons](https://heroicons.com/) (inline SVGs with class `hi`). Source files are in `design/heroicons-master/optimized/24/`. Use outline style by default, solid for emphasis. The `.hi` base class in `global.css` handles `display: inline-block` and `vertical-align: middle`.
