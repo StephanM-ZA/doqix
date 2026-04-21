@@ -1488,7 +1488,7 @@ ul, ol {
 
 @media (min-width: 768px) {
     .footer-top {
-        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
         gap: 4rem;
         text-align: left;
         justify-items: start;
@@ -1550,6 +1550,26 @@ a.footer-contact-item:hover {
 }
 
 .footer-contact-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+}
+
+.footer-social-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #c0c0d0;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-social-item:hover {
+    color: #00e5a0;
+}
+
+.footer-social-item svg {
     width: 1.125rem;
     height: 1.125rem;
     flex-shrink: 0;
