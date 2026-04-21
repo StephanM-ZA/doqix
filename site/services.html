@@ -22,83 +22,15 @@
 <meta name="twitter:title" content="Automation Services for SA Businesses | Do.Qix Cape Town"/>
 <meta name="twitter:description" content="Finance, sales, HR, e-commerce, compliance and more. Workflow automation for South African businesses, priced in rands."/>
 <meta name="twitter:image" content="https://digitaloperations.co.za/doqix/images/og_image.jpg"/>
-<link rel="icon" type="image/png" href="../favicon_green.png"/>
-<link rel="manifest" href="../site.webmanifest"/>
+<link rel="icon" type="image/png" href="favicon_green.png"/>
+<link rel="manifest" href="site.webmanifest"/>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-on-surface": "#303036",
-                        "surface-container-low": "#101C36",
-                        "surface-container-highest": "#1E3050",
-                        "on-tertiary-container": "#744c00",
-                        "on-surface": "#e4e1e9",
-                        "on-surface-variant": "#bacbbf",
-                        "surface-bright": "#223656",
-                        "on-secondary-fixed": "#311300",
-                        "on-primary": "#003824",
-                        "on-secondary": "#502400",
-                        "surface-dim": "#0C1830",
-                        "tertiary-container": "#ffbd5b",
-                        "secondary-fixed-dim": "#ff8000",
-                        "surface-tint": "#00e29e",
-                        "primary": "#00e5a0",
-                        "surface-variant": "#35343a",
-                        "on-primary-container": "#006141",
-                        "surface-container-high": "#1A2A48",
-                        "background": "#0C1830",
-                        "error": "#ffb4ab",
-                        "primary-fixed": "#47ffb8",
-                        "on-tertiary-fixed": "#291800",
-                        "outline-variant": "#3b4a41",
-                        "on-tertiary": "#452b00",
-                        "on-error": "#690005",
-                        "on-background": "#e4e1e9",
-                        "on-primary-fixed-variant": "#005236",
-                        "outline": "#84958a",
-                        "on-tertiary-fixed-variant": "#624000",
-                        "secondary-container": "#ff8000",
-                        "error-container": "#93000a",
-                        "on-secondary-fixed-variant": "#723600",
-                        "secondary-fixed": "#ffdcc7",
-                        "tertiary-fixed-dim": "#fcba59",
-                        "primary-container": "#00e5a0",
-                        "surface": "#0C1830",
-                        "surface-container-lowest": "#081024",
-                        "on-secondary-container": "#5e2b00",
-                        "tertiary": "#ffe1bb",
-                        "on-primary-fixed": "#002114",
-                        "tertiary-fixed": "#ffddb3",
-                        "on-error-container": "#ffdad6",
-                        "inverse-surface": "#e4e1e9",
-                        "inverse-primary": "#006c49",
-                        "primary-fixed-dim": "#00e29e",
-                        "surface-container": "#14203C",
-                        "secondary": "#ff8000"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "1rem",
-                        "lg": "2rem",
-                        "xl": "3rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "headline": ["Inter"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
-                },
-            }
-        }
-    </script>
-<link rel="stylesheet" href="global.css?v=0.7.8"/>
+<script src="js/tailwind-config.js?v=0.9.0"></script>
+<link rel="stylesheet" href="global.css?v=0.9.0"/>
 <style>
         /* Services page-specific styles */
         .hero-video-bg video { opacity: 0.15; }
@@ -153,7 +85,7 @@ gtag("config", "G-BC57HM6CTG");
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="js/header.js?v=0.7.8"></script>
+<script src="js/header.js?v=0.9.0"></script>
 
 <main class="pt-20">
 
@@ -161,7 +93,7 @@ gtag("config", "G-BC57HM6CTG");
 <section id="hero" class="relative min-h-[400px] flex flex-col justify-center px-8 py-24 hero-gradient scroll-reveal overflow-hidden">
 <!-- Hero Background Video -->
 <div class="hero-video-bg">
-<video autoplay muted loop playsinline preload="metadata" src="../services-hero-video.mp4">
+<video autoplay muted loop playsinline preload="metadata" src="services-hero-video.mp4">
 </video>
 </div>
 <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
@@ -185,28 +117,28 @@ gtag("config", "G-BC57HM6CTG");
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 scroll-reveal">
 <div class="card logic-card p-8 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>
 </svg>
 <h3 class="mb-2">Trigger</h3>
 <p class="text-on-surface-variant text-sm">Something happens. A new order lands. A form gets submitted. An invoice becomes overdue.</p>
 </div>
 <div class="card logic-card p-8 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"/>
 </svg>
 <h3 class="mb-2">Rule</h3>
 <p class="text-on-surface-variant text-sm">A decision is made. IF the order is over R5,000, THEN flag as high-priority.</p>
 </div>
 <div class="card logic-card p-8 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z"/>
 </svg>
 <h3 class="mb-2">Condition</h3>
 <p class="text-on-surface-variant text-sm">A check runs. Is this a returning customer? Has this been paid already?</p>
 </div>
 <div class="card logic-card p-8 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
 </svg>
 <h3 class="mb-2">Action</h3>
@@ -217,330 +149,8 @@ gtag("config", "G-BC57HM6CTG");
 </div>
 </section>
 
-<!-- 3. What We Automate (12 categories) -->
-<section id="what-we-automate" class="py-24 px-8 bg-surface-container-low overflow-hidden">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16 scroll-reveal">
-<span class="label">Our Workflows</span>
-<h2 class="mt-6 mb-4">The Workflows We Build <span class="text-primary">Every Day</span></h2>
-<p class="max-w-2xl mx-auto">We connect the apps you already use and make them talk to each other. Here's a taste of what that looks like.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 scroll-reveal">
-<!-- Finance & Billing -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Finance</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Finance &amp; Billing</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">Xero, QuickBooks, Stripe, Google Drive, Typeform, Airtable</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Manual invoicing, chasing approvals, reconciling spreadsheets</p>
-</div>
-</div>
-</div>
-<!-- Sales & Lead Management -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Sales</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Sales &amp; Leads</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">HubSpot, Pipedrive, Salesforce, Mailchimp, DocuSign</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Manually qualifying leads, forgetting follow-ups, chasing signatures</p>
-</div>
-</div>
-</div>
-<!-- E-commerce & Orders -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">E-commerce</span>
-</div>
-<h3 class="text-lg font-bold mb-4">E-commerce &amp; Orders</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">Shopify, WooCommerce, Airtable, Xero, Slack</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Manually updating stock, emailing tracking numbers, reacting to stockouts</p>
-</div>
-</div>
-</div>
-<!-- HR & Employee Onboarding -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">HR</span>
-</div>
-<h3 class="text-lg font-bold mb-4">HR &amp; Onboarding</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">BambooHR, Google Workspace, Notion, Slack</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">2-day onboarding admin compressed into minutes</p>
-</div>
-</div>
-</div>
-<!-- Customer Support -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M16.712 4.33a9.027 9.027 0 0 1 1.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 0 0-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 0 1 0 9.424m-4.138-5.976a3.736 3.736 0 0 0-.88-1.388 3.737 3.737 0 0 0-1.388-.88m2.268 2.268a3.765 3.765 0 0 1 0 2.528m-2.268-4.796a3.765 3.765 0 0 0-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 0 1-1.388.88m2.268-2.268 4.138 3.448m0 0a9.027 9.027 0 0 1-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0-3.448-4.138m3.448 4.138a9.014 9.014 0 0 1-9.424 0m5.976-4.138a3.765 3.765 0 0 1-2.528 0m0 0a3.736 3.736 0 0 1-1.388-.88 3.737 3.737 0 0 1-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 0 1-1.652-1.306 9.027 9.027 0 0 1-1.306-1.652m0 0 4.138-3.448M4.33 16.712a9.014 9.014 0 0 1 0-9.424m4.138 5.976a3.765 3.765 0 0 1 0-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 0 1 1.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 0 0-1.652 1.306A9.025 9.025 0 0 0 4.33 7.288"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Support</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Customer Support</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">Zendesk, Intercom, Airtable</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Manually sorting tickets, slow first-response times</p>
-</div>
-</div>
-</div>
-<!-- Marketing & Content -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Marketing</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Marketing &amp; Content</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">Google Sheets, Trello, WordPress, Buffer, Slack</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Manual publishing, forgetting social posts, chasing approvals</p>
-</div>
-</div>
-</div>
-<!-- Data Sync & Reporting -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Data Sync</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Data Sync &amp; Reporting</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">PostgreSQL, MySQL, Elasticsearch, Google Sheets</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Friday afternoon data marathons, "which version is latest?" conversations</p>
-</div>
-</div>
-</div>
-<!-- Event Management -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Events</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Event Management</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">Eventbrite, Google Contacts, Mailchimp, SMS, Typeform</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Manual attendee management, forgetting post-event follow-up</p>
-</div>
-</div>
-</div>
-<!-- Compliance & Audits -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Compliance</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Compliance &amp; Audits</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">Box, Google Sheets, Jira</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Manual compliance checks, hoping nothing slips through</p>
-</div>
-</div>
-</div>
-<!-- Social Media & Feedback -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Social Media</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Social Media &amp; Feedback</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">Twitter/X, Typeform, Airtable, Trello, Buffer</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Manual sentiment tracking, feedback sitting unread in a spreadsheet</p>
-</div>
-</div>
-</div>
-<!-- Creative Approvals -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Creative</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Creative Approvals</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">Google Drive, Slack, Asana</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">"Did you see my email about the design?" conversations</p>
-</div>
-</div>
-</div>
-<!-- Facility & IoT -->
-<div class="card p-6 flex flex-col h-full">
-<div class="flex justify-between items-start mb-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/>
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-</svg>
-<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Facility/IoT</span>
-</div>
-<h3 class="text-lg font-bold mb-4">Facility &amp; IoT</h3>
-<div class="mt-auto space-y-4">
-<div>
-<p class="text-[10px] uppercase tracking-tighter text-primary font-bold mb-1">Apps we connect</p>
-<p class="text-xs text-on-surface-variant">IoT sensors, IFTTT, Asana, Twilio, Google Sheets</p>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="text-[10px] uppercase tracking-tighter text-secondary font-bold mb-1">What you stop doing</p>
-<p class="text-xs text-on-surface-variant">Reacting to building issues instead of preventing them</p>
-</div>
-</div>
-</div>
-</div>
-<p class="caption text-center scroll-reveal" style="margin-top:1.5rem;">The apps shown above are just the start. We connect 400+ tools. If it has an API, we can plug it in.</p>
-</div>
-</section>
-
-<!-- 4. Quick Wins -->
-<section id="quick-wins" class="py-24 px-8 overflow-hidden">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16 scroll-reveal">
-<span class="label">Start Here</span>
-<h2 class="mt-6 mb-4">Where Most Businesses <span class="text-primary">Start</span></h2>
-<p class="max-w-2xl mx-auto">Not sure where to begin? These deliver the fastest results.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 scroll-reveal">
-<div class="card p-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-2xl mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/>
-  <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">Sales</h3>
-<p class="text-on-surface-variant text-sm">Leads auto-qualify from HubSpot into Salesforce. Contracts generate and send for DocuSign signature. No more lost leads.</p>
-</div>
-<div class="card p-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-2xl mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">Support</h3>
-<p class="text-on-surface-variant text-sm">Zendesk tickets get categorised, routed to the right agent, and auto-replied to, in seconds.</p>
-</div>
-<div class="card p-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-2xl mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">Finance</h3>
-<p class="text-on-surface-variant text-sm">Typeform submissions trigger invoice creation in QuickBooks, with approval flows and payment confirmations built in.</p>
-</div>
-<div class="card p-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-2xl mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">E-commerce</h3>
-<p class="text-on-surface-variant text-sm">Shopify orders update Airtable inventory, generate shipping labels, and alert your team when stock runs low.</p>
-</div>
-<div class="card p-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-2xl mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">HR</h3>
-<p class="text-on-surface-variant text-sm">BambooHR new hire triggers Google Workspace setup, Notion onboarding docs, and a Slack welcome, all in minutes.</p>
-</div>
-<div class="card p-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-2xl mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59"/>
-</svg>
-<h3 class="text-base font-bold mb-2">Marketing</h3>
-<p class="text-on-surface-variant text-sm">Blog posts flow from Google Sheets through Trello approval to WordPress publishing and Buffer social scheduling. Hands-free.</p>
-</div>
-<div class="card p-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-2xl mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">Events</h3>
-<p class="text-on-surface-variant text-sm">Eventbrite registrations sync to contacts, trigger email sequences, send SMS reminders, and fire post-event surveys automatically.</p>
-</div>
-<div class="card p-6">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-2xl mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">Compliance</h3>
-<p class="text-on-surface-variant text-sm">Scheduled audits pull files, check against policy, log results, and flag issues in Jira. No manual checks.</p>
-</div>
-</div>
-</div>
-</section>
+<!-- 3. What We Automate + 4. Quick Wins: Injected by services-content.js (IP protected) -->
+<div id="services-workflows"></div>
 
 <!-- 5. Our 5-Step Plan -->
 <section id="five-step-plan" class="py-24 px-8 bg-surface-dim overflow-hidden">
@@ -593,7 +203,7 @@ gtag("config", "G-BC57HM6CTG");
 </div>
 <div class="card p-12 md:p-16 relative overflow-hidden" style="box-shadow: inset 4px 0 0 #00e5a0;">
 <div class="absolute right-0 top-0 opacity-5">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-[200px] -translate-y-10 translate-x-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-[200px] -translate-y-10 translate-x-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/>
 </svg>
 </div>
@@ -614,35 +224,35 @@ gtag("config", "G-BC57HM6CTG");
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 scroll-reveal">
 <div class="card p-8">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802"/>
 </svg>
 <h3 class="text-lg font-bold mb-2">We Speak Plain English</h3>
 <p class="text-on-surface-variant text-sm">No jargon, no 47-page proposals. If your gran wouldn't understand it, we haven't explained it well enough.</p>
 </div>
 <div class="card p-8">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"/>
 </svg>
 <h3 class="text-lg font-bold mb-2">We Fix the Process First</h3>
 <p class="text-on-surface-variant text-sm">Most companies skip straight to building. We don't. Automating a mess just gives you a faster mess. We streamline first, then build.</p>
 </div>
 <div class="card p-8">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
 </svg>
 <h3 class="text-lg font-bold mb-2">We Price in Rands</h3>
 <p class="text-on-surface-variant text-sm">Flat monthly rate. No confusing credit systems. No per-task fees that balloon when you grow. You know your number before we start.</p>
 </div>
 <div class="card p-8">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>
 </svg>
 <h3 class="text-lg font-bold mb-2">Your Data Stays in Your Hands</h3>
 <p class="text-on-surface-variant text-sm">We build on n8n, a powerful open-source platform we self-host for you. Your data lives where you decide. No lock-in, ever.</p>
 </div>
 <div class="card p-8">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/>
 </svg>
@@ -650,7 +260,7 @@ gtag("config", "G-BC57HM6CTG");
 <p class="text-on-surface-variant text-sm">Load-shedding contingencies, POPIA compliance, the reality of ZAR budgets and dollar-priced tools. We understand because we're building businesses here too.</p>
 </div>
 <div class="card p-8">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z"/>
 </svg>
 <h3 class="text-lg font-bold mb-2">We Don't Disappear After Launch</h3>
@@ -660,290 +270,17 @@ gtag("config", "G-BC57HM6CTG");
 </div>
 </section>
 
-<!-- 8. Real Results -->
-<section id="real-results" class="py-24 px-8 overflow-hidden">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16 scroll-reveal">
-<span class="label">Results</span>
-<h2 class="mt-6 mb-4">This Is What Automation <span class="text-primary">Actually Looks Like</span></h2>
-<p class="max-w-2xl mx-auto">These are the kinds of results we build for, the same patterns we implement for SA businesses every day.</p>
-</div>
-<!-- Stat row -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 scroll-reveal">
-<div class="text-center p-6">
-<p class="stat-number teal">8-15</p>
-<p class="text-on-surface-variant text-sm">hours/week reclaimed</p>
-</div>
-<div class="text-center p-6">
-<p class="stat-number teal">95%+</p>
-<p class="text-on-surface-variant text-sm">reduction in data entry errors</p>
-</div>
-<div class="text-center p-6">
-<p class="stat-number teal">R11-30k</p>
-<p class="text-on-surface-variant text-sm">per month in recovered time</p>
-</div>
-<div class="text-center p-6">
-<p class="stat-number teal">Days</p>
-<p class="text-on-surface-variant text-sm">to minutes onboarding</p>
-</div>
-</div>
-<!-- Case study cards -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-reveal">
-<div class="card p-8">
-<div class="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
-<span class="text-xs font-bold text-primary">Lead response: hours to under a minute</span>
-</div>
-<h3 class="mb-3">The property agency that stopped losing leads</h3>
-<p class="text-on-surface-variant text-sm">A Joburg-based property group was capturing leads from five different portals, manually. We automated the entire flow: leads now land in the right agent's pipeline instantly, with a welcome WhatsApp sent within seconds.</p>
-</div>
-<div class="card p-8">
-<div class="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
-<span class="text-xs font-bold text-primary">300+ hours/year back to billable work</span>
-</div>
-<h3 class="mb-3">The accounting firm that got Fridays back</h3>
-<p class="text-on-surface-variant text-sm">A mid-size firm in Cape Town was spending 6+ hours every Friday pulling data from Xero, formatting reports, and emailing them to clients. We built an automation that pulls the numbers, populates the report template, and delivers it. Every Friday at 7am, without anyone lifting a finger.</p>
-</div>
-<div class="card p-8">
-<div class="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
-<span class="text-xs font-bold text-primary">40% growth after redeploying admin budget</span>
-</div>
-<h3 class="mb-3">The e-commerce brand that stopped hiring for admin</h3>
-<p class="text-on-surface-variant text-sm">An online retailer was about to hire a third admin assistant just to keep up with order processing, stock updates, and shipping notifications. We automated the lot. They redeployed the budget into marketing and grew 40% that quarter.</p>
-</div>
-<div class="card p-8">
-<div class="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
-<span class="text-xs font-bold text-primary">Onboarding: 2 days to 20 minutes</span>
-</div>
-<h3 class="mb-3">The professional services firm that killed the copy-paste</h3>
-<p class="text-on-surface-variant text-sm">A Durban consultancy had staff entering the same client data into four different systems for every new engagement. We connected the systems. Now they enter client details once, and everything cascades. Errors dropped to near zero.</p>
-</div>
-</div>
-<p class="caption text-center scroll-reveal" style="margin-top:1.5rem;">Research shows 60% of all jobs have at least 30% of activities that can be automated. This isn't about replacing people. It's about freeing them to do work that actually needs a human brain.</p>
-</div>
-</section>
+<!-- 8. Real Results: Injected by services-content.js (IP protected) -->
+<div id="services-results"></div>
 
 <!-- 9. ROI Calculator -->
 <section id="roi" class="py-24 px-8">
-<div class="roi-calc" id="roi-calculator">
-
-  <div class="text-center space-y-4 mb-12 scroll-reveal">
-    <span class="label">The Mathematics</span>
-    <h2>See What <span class="text-primary">You Could Save</span></h2>
-    <p class="intro">Every business bleeds time differently. Move the sliders to match your team, and see exactly what you could reclaim each month.</p>
-  </div>
-
-  <div class="roi-grid scroll-reveal">
-
-    <!-- Inputs -->
-    <div class="roi-inputs">
-      <div class="panel-label">Your Team</div>
-
-      <div class="slider-group">
-        <div class="slider-header">
-          <span class="slider-label">People doing repetitive tasks<span class="tooltip">How many staff spend time on repetitive, rule-based work?</span></span>
-          <span class="slider-value" id="val-people"></span>
-        </div>
-        <input type="range" id="slider-people"/>
-        <div class="slider-range-labels"><span></span><span></span></div>
-      </div>
-
-      <div class="slider-group">
-        <div class="slider-header">
-          <span class="slider-label">Hours per person per week<span class="tooltip">How many hours does each person spend on repetitive tasks every week? Think data entry, copy-pasting, manual emails, reporting.</span></span>
-          <span class="slider-value" id="val-hours"></span>
-        </div>
-        <input type="range" id="slider-hours"/>
-        <div class="slider-range-labels"><span></span><span></span></div>
-        <div class="total-hours" id="out-total-hours"></div>
-      </div>
-
-      <div class="slider-group">
-        <div class="slider-header">
-          <span class="slider-label">Average hourly cost<span class="tooltip">What you pay per hour per person. Include salary, benefits, and overheads.</span></span>
-          <span class="slider-value" id="val-rate"></span>
-        </div>
-        <input type="range" id="slider-rate"/>
-        <div class="slider-range-labels"><span></span><span></span></div>
-      </div>
-
-      <div class="slider-group">
-        <div class="slider-header">
-          <span class="slider-label">Automation efficiency<span class="tooltip">What percentage of those manual hours can realistically be automated. 70% is a conservative starting point.</span></span>
-          <span class="slider-value" id="val-efficiency"></span>
-        </div>
-        <input type="range" id="slider-efficiency"/>
-        <div class="slider-range-labels"><span></span><span></span></div>
-        <div class="efficiency-note" id="out-efficiency-note"></div>
-      </div>
-
-      <div class="slider-group">
-        <div class="slider-header">
-          <span class="slider-label">Monthly error cost<span class="tooltip">What do manual mistakes cost you each month? Think re-work, wrong invoices, missed follow-ups.</span></span>
-          <span class="slider-value" id="val-error"></span>
-        </div>
-        <input type="range" id="slider-error"/>
-        <div class="slider-range-labels"><span></span><span></span></div>
-      </div>
-    </div>
-
-    <!-- Outputs -->
-    <div class="roi-outputs">
-
-      <div class="hero-result">
-        <div class="hero-amount" id="out-monthly">R0</div>
-        <div class="hero-label">Your Monthly Savings</div>
-      </div>
-
-      <div class="result-cards">
-        <div class="result-card">
-          <div class="card-value" id="out-annual">R0</div>
-          <div class="card-label">per year</div>
-        </div>
-        <div class="result-card">
-          <div class="card-value" id="out-roi-pct">0%</div>
-          <div class="card-label">return on investment</div>
-        </div>
-        <div class="result-card hours">
-          <div class="card-value" id="out-hours-month">0 hrs</div>
-          <div class="card-label">back per month</div>
-        </div>
-        <div class="result-card hours">
-          <div class="card-value" id="out-hours-year">0 hrs</div>
-          <div class="card-label">back per year</div>
-        </div>
-        <div class="result-card tier-suggestion">
-          <div class="tier-text" id="out-tier"></div>
-        </div>
-      </div>
-
-      <div class="benchmark" id="out-benchmark"></div>
-
-      <a href="contact.html" class="roi-cta" id="roi-cta-link">
-        Get Started
-        <span class="cta-sub">15 minutes. No commitment. We'll show you where to start.</span>
-      </a>
-
-      <button type="button" class="share-btn" id="btn-share">Share Your Results</button>
-
-    </div>
-
-  </div>
-
-  <p class="roi-footnote">Estimates based on your inputs. Actual savings depend on processes automated. All figures in ZAR.</p>
-
-</div>
+<div class="roi-calc" id="roi-calculator"></div>
 </section>
 
 <!-- 10. Pricing -->
 <section id="pricing" class="py-24 px-8 bg-surface-container-low">
-<div class="max-w-7xl mx-auto space-y-20">
-<div class="text-center space-y-4 scroll-reveal">
-<span class="label">Simple &amp; Local</span>
-<h2>Pricing That Makes <span class="text-primary">Sense</span></h2>
-<p class="max-w-3xl mx-auto">No hidden fees. No confusing credit systems. No per-task charges that punish you for growing. Everything in South African rands. Month-to-month. We keep clients because we deliver, not because of contracts.</p>
-</div>
-<div class="banner orange scroll-reveal" id="pricing-banner">
-<svg style="width: 1.25rem; height: 1.25rem" class="hi align-middle animated-rocket" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-</svg> <span id="pricing-banner-text">Launch offer: First month at 50% on any plan.</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 scroll-reveal">
-<!-- Solo -->
-<div class="card pricing-card p-8 space-y-8 relative" data-tier="Solo">
-<div class="pricing-badge">Recommended</div>
-<div class="space-y-2">
-<h3>Solo</h3>
-<div class="text-4xl font-black text-on-surface">R999<span class="text-sm font-medium text-on-surface-variant">/mo</span></div>
-</div>
-<ul class="space-y-4 text-sm text-on-surface-variant">
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> 1 Workflow</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Free Setup</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Email Support (48hr)</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Best for: Solopreneurs &amp; freelancers</li>
-</ul>
-<a href="contact.html" class="btn btn-ghost full">Select Plan</a>
-</div>
-<!-- Team -->
-<div class="card pricing-card pricing-popular p-8 space-y-8 relative" data-tier="Team">
-<div class="pricing-badge">Recommended</div>
-<div class="space-y-2">
-<h3>Team</h3>
-<div class="text-4xl font-black text-on-surface">R2,500<span class="text-sm font-medium text-on-surface-variant">/mo</span></div>
-</div>
-<ul class="space-y-4 text-sm text-on-surface-variant">
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Up to 3 Workflows</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> R1,500 Setup</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Priority + WhatsApp (24hr)</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Best for: Small teams (2-15)</li>
-</ul>
-<a href="contact.html" class="btn btn-primary full">Select Plan</a>
-</div>
-<!-- Business -->
-<div class="card pricing-card p-8 space-y-8 relative" data-tier="Business">
-<div class="pricing-badge">Recommended</div>
-<div class="space-y-2">
-<h3>Business</h3>
-<div class="text-4xl font-black text-on-surface">R5,500<span class="text-sm font-medium text-on-surface-variant">/mo</span></div>
-</div>
-<ul class="space-y-4 text-sm text-on-surface-variant">
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Up to 6 Workflows</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> R2,500 Setup</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Dedicated + Monthly Strategy Call</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Best for: Growing SMEs (15-50)</li>
-</ul>
-<a href="contact.html" class="btn btn-ghost full">Select Plan</a>
-</div>
-<!-- Enterprise -->
-<div class="card pricing-card p-8 space-y-8 relative" data-tier="Enterprise">
-<div class="pricing-badge">Recommended</div>
-<div class="space-y-2">
-<h3>Enterprise</h3>
-<div class="text-4xl font-black text-on-surface">Custom</div>
-</div>
-<ul class="space-y-4 text-sm text-on-surface-variant">
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Unlimited Workflows (scoped)</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Setup: Let's talk</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Dedicated Account Manager</li>
-<li class="flex items-center gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg> Best for: Larger operations (50+)</li>
-</ul>
-<a href="contact.html" class="btn btn-ghost full">Show Me What's Possible</a>
-</div>
-</div>
-<p class="caption scroll-reveal">Every plan includes: Hosting, monitoring, maintenance, POPIA compliance, and no lock-in. You own what we build.</p>
-<div class="text-center mt-6 scroll-reveal"><a href="contact.html" class="btn btn-primary md">Get Started</a></div>
-</div>
+<div id="pricing-section"></div>
 </section>
 
 <!-- 11. Data & Control -->
@@ -956,42 +293,42 @@ gtag("config", "G-BC57HM6CTG");
 </div>
 <div class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 scroll-reveal">
 <div class="card p-6 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/>
 </svg>
 <h3 class="text-sm font-bold uppercase tracking-wider mb-2">Your Data Stays Here</h3>
 <p class="text-on-surface-variant text-xs">On infrastructure you control, not scattered across someone else's cloud.</p>
 </div>
 <div class="card p-6 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>
 </svg>
 <h3 class="text-sm font-bold uppercase tracking-wider mb-2">POPIA From Day One</h3>
 <p class="text-on-surface-variant text-xs">Not bolted on as an afterthought. Architected for SA privacy laws.</p>
 </div>
 <div class="card p-6 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/>
 </svg>
 <h3 class="text-sm font-bold uppercase tracking-wider mb-2">No Vendor Lock-in</h3>
 <p class="text-on-surface-variant text-xs">If we part ways, your automations still work. You own what we build.</p>
 </div>
 <div class="card p-6 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/>
 </svg>
 <h3 class="text-sm font-bold uppercase tracking-wider mb-2">It Just Works</h3>
 <p class="text-on-surface-variant text-xs">Document reading, smart routing, auto-classification. Built into your workflows where it saves time.</p>
 </div>
 <div class="card p-6 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/>
 </svg>
 <h3 class="text-sm font-bold uppercase tracking-wider mb-2">Enterprise Power, SME Pricing</h3>
 <p class="text-on-surface-variant text-xs">The same platform that runs workflows for global companies, managed for you at a fraction of the cost.</p>
 </div>
 <div class="card p-6 text-center">
-<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+<svg style="width: 1.5rem; height: 1.5rem" class="hi text-primary text-4xl mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
 </svg>
 <h3 class="text-sm font-bold uppercase tracking-wider mb-2">No Dollar Surprise</h3>
@@ -1002,25 +339,20 @@ gtag("config", "G-BC57HM6CTG");
 </section>
 
 <!-- 12. Bottom CTA -->
-<section id="cta" class="py-24 px-8 relative scroll-reveal">
-<div class="absolute inset-0 bg-primary/5 -z-10"></div>
-<div class="max-w-3xl mx-auto text-center space-y-6">
-<span class="label">Next Step</span>
-<h2>Ready to See <span class="text-primary">What's Possible?</span></h2>
-<p class="text-lg max-w-xl mx-auto">15-minute call. We'll show you where your time is going and how to get it back.</p>
-<a href="contact.html" class="btn btn-primary lg glow inline-block">Let's Talk</a>
-</div>
+<section id="cta">
+<div id="bottom-cta" data-heading='Ready to See <span class="text-primary">What&#39;s Possible?</span>' data-body="15-minute call. We'll show you where your time is going and how to get it back."></div>
 </section>
 </main>
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script src="js/footer.js?v=0.7.8"></script>
-<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg></button>
-<script src="js/main.js?v=0.7.8"></script>
-<script src="js/roi-calculator.js?v=0.7.8"></script>
-<script src="js/exit-popup.js?v=0.7.8"></script>
-<script src="js/cookie-banner.js?v=0.7.8"></script>
+<script src="js/footer.js?v=0.9.0"></script>
+
+<script src="js/main.js?v=0.9.0"></script>
+<script src="js/services-content.js?v=0.9.0"></script>
+<script src="js/roi-calculator.js?v=0.9.0"></script>
+<script src="js/pricing.js?v=0.9.0"></script>
+<script src="js/bottom-cta.js?v=0.9.0"></script>
+<script src="js/exit-popup.js?v=0.9.0"></script>
+<script src="js/cookie-banner.js?v=0.9.0"></script>
 </body></html>

@@ -29,76 +29,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-on-surface": "#303036",
-                        "surface-container-low": "#101C36",
-                        "surface-container-highest": "#1E3050",
-                        "on-tertiary-container": "#744c00",
-                        "on-surface": "#e4e1e9",
-                        "on-surface-variant": "#bacbbf",
-                        "surface-bright": "#223656",
-                        "on-secondary-fixed": "#311300",
-                        "on-primary": "#003824",
-                        "on-secondary": "#502400",
-                        "surface-dim": "#0C1830",
-                        "tertiary-container": "#ffbd5b",
-                        "secondary-fixed-dim": "#ff8000",
-                        "surface-tint": "#00e29e",
-                        "primary": "#00e5a0",
-                        "surface-variant": "#35343a",
-                        "on-primary-container": "#006141",
-                        "surface-container-high": "#1A2A48",
-                        "background": "#0C1830",
-                        "error": "#ffb4ab",
-                        "primary-fixed": "#47ffb8",
-                        "on-tertiary-fixed": "#291800",
-                        "outline-variant": "#3b4a41",
-                        "on-tertiary": "#452b00",
-                        "on-error": "#690005",
-                        "on-background": "#e4e1e9",
-                        "on-primary-fixed-variant": "#005236",
-                        "outline": "#84958a",
-                        "on-tertiary-fixed-variant": "#624000",
-                        "secondary-container": "#ff8000",
-                        "error-container": "#93000a",
-                        "on-secondary-fixed-variant": "#723600",
-                        "secondary-fixed": "#ffdcc7",
-                        "tertiary-fixed-dim": "#fcba59",
-                        "primary-container": "#00e5a0",
-                        "surface": "#0C1830",
-                        "surface-container-lowest": "#081024",
-                        "on-secondary-container": "#5e2b00",
-                        "tertiary": "#ffe1bb",
-                        "on-primary-fixed": "#002114",
-                        "tertiary-fixed": "#ffddb3",
-                        "on-error-container": "#ffdad6",
-                        "inverse-surface": "#e4e1e9",
-                        "inverse-primary": "#006c49",
-                        "primary-fixed-dim": "#00e29e",
-                        "surface-container": "#14203C",
-                        "secondary": "#ff8000"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "1rem",
-                        "lg": "2rem",
-                        "xl": "3rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "headline": ["Inter"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
-                },
-            }
-        }
-    </script>
-<link rel="stylesheet" href="../global.css?v=0.7.8"/>
+<script src="js/tailwind-config.js?v=0.9.0"></script>
+<link rel="stylesheet" href="../global.css?v=0.9.0"/>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC57HM6CTG"></script>
 <script>
@@ -111,7 +43,7 @@ gtag("config", "G-BC57HM6CTG");
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="js/header.js?v=0.7.8"></script>
+<script src="js/header.js?v=0.9.0"></script>
 
 <main class="pt-20">
 
@@ -128,258 +60,24 @@ gtag("config", "G-BC57HM6CTG");
 </div>
 </section>
 
-<!-- Product Grid -->
+<!-- Product Grid + Why Products + Cross-Sell -->
 <section id="products" class="py-24 px-8">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16">
-<span class="label">The Catalogue</span>
-<h2 class="mt-6 mb-4">Built for <span class="text-primary">South African Business</span></h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-<!-- NomadIQ -->
-<div class="card p-0 flex flex-col h-full relative" id="nomadiq">
-<div class="product-badge live">Live</div>
-<div class="h-48 relative overflow-hidden">
-<img src="../images/nomadiq.png" alt="NomadIQ - Digital Nomad Visa Automation" class="w-full h-full object-cover"/>
-<div class="absolute inset-0 bg-surface-dim/60"></div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-6">
-<div>
-<h3 class="text-2xl font-black mb-1">NomadIQ</h3>
-<p class="text-primary text-sm font-medium">Field operations, managed from anywhere</p>
-</div>
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/>
-</svg>
-</div>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">GPS-verified check-ins, site management, and team tracking for service companies with staff in the field. Offline-first mobile app syncs when connectivity returns. Manage clients, projects, vehicles, and materials across multiple locations from one dashboard.</p>
-<ul class="space-y-3 mb-8">
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Offline-first PWA for field staff</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">GPS-verified check-in/check-out with photo capture</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Customisable dashboard with drag-and-drop widgets</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Multi-tenant with per-company branding</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Role-based access (admin, manager, staff, accountant)</span></li>
-</ul>
-<div class="mt-auto">
-<a href="contact.html?product=nomadiq" class="btn btn-primary full">Learn More</a>
-</div>
-</div>
-</div>
-
-<!-- VendIQ -->
-<div class="card p-0 flex flex-col h-full relative" id="vendiq">
-<div class="product-badge live">Live</div>
-<div class="h-48 relative overflow-hidden">
-<img src="../images/vendiq.png" alt="VendIQ - Retail Intelligence" class="w-full h-full object-cover"/>
-<div class="absolute inset-0 bg-surface-dim/60"></div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-6">
-<div>
-<h3 class="text-2xl font-black mb-1">VendIQ</h3>
-<p class="text-primary text-sm font-medium">Retail intelligence that moves as fast as your stock</p>
-</div>
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/>
-</svg>
-</div>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Real-time sales, inventory, and pricing analytics for FMCG retailers and vending operators. Rate-of-sale tracking, gap analysis, exit stock intelligence, and AI-driven recommendations across stores and categories.</p>
-<ul class="space-y-3 mb-8">
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Rate of Sale analytics with ABC classification</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Distribution gap analysis across locations</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Exit stock intelligence with redistribution detection</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">AI-generated executive summaries</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Interactive report builder (custom reports can be built)</span></li>
-</ul>
-<div class="mt-auto">
-<a href="contact.html?product=vendiq" class="btn btn-primary full">Learn More</a>
-</div>
-</div>
-</div>
-
-<!-- VoltIQ -->
-<div class="card p-0 flex flex-col h-full relative" id="voltiq">
-<div class="product-badge live">Live</div>
-<div class="h-48 relative overflow-hidden">
-<img src="../images/voltiq.png" alt="VoltIQ - Energy and Load Management" class="w-full h-full object-cover"/>
-<div class="absolute inset-0 bg-surface-dim/60"></div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-6">
-<div>
-<h3 class="text-2xl font-black mb-1">VoltIQ</h3>
-<p class="text-primary text-sm font-medium">Every solar system on one screen</p>
-</div>
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
-</svg>
-</div>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Unified monitoring for solar installers managing fleets across multiple inverter brands. Automated issue detection, upsell opportunities, and co-branded WhatsApp morning reports delivered to your phone.</p>
-<ul class="space-y-3 mb-8">
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Multi-brand inverter support (Deye, Sunsynk, more coming)</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Automated issue detection and alerts</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Upsell opportunity identification</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Co-branded WhatsApp morning reports</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">White-label installer dashboard</span></li>
-</ul>
-<div class="mt-auto">
-<a href="contact.html?product=voltiq" class="btn btn-primary full">Learn More</a>
-</div>
-</div>
-</div>
-
-<!-- LearnIQ -->
-<div class="card p-0 flex flex-col h-full relative" id="learniq">
-<div class="product-badge in-progress">In Progress</div>
-<div class="h-48 relative overflow-hidden">
-<img src="../images/learniq.png" alt="LearnIQ - Learning Management System" class="w-full h-full object-cover"/>
-<div class="absolute inset-0 bg-surface-dim/60"></div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-6">
-<div>
-<h3 class="text-2xl font-black mb-1">LearnIQ</h3>
-<p class="text-primary text-sm font-medium">Teaching South Africa to use AI properly</p>
-</div>
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/>
-</svg>
-</div>
-<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Age-appropriate AI literacy curriculum for students (Grade 1 to tertiary), parents, and teachers. Bilingual (English + Afrikaans), aligned to UNESCO AI Competency Framework, built for SA classrooms.</p>
-<ul class="space-y-3 mb-8">
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Four student bands from Grade 1 to tertiary</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Five competency areas (Understanding, Using, Creating, Ethics, Evaluating)</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Bilingual content (English + Afrikaans)</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Modules for parents and teachers</span></li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg><span class="text-sm text-on-surface-variant">Mobile-first, offline-capable platform</span></li>
-</ul>
-<div class="mt-auto">
-<a href="contact.html?product=learniq" class="btn btn-primary full">Learn More</a>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- Why Our Products -->
-<section id="why-products" class="py-24 px-8 bg-surface-container-low overflow-hidden">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16">
-<span class="label">Why Do.Qix Products</span>
-<h2 class="mt-6 mb-4">Built From Real <span class="text-primary">Automation Experience</span></h2>
-<p class="max-w-2xl mx-auto">We don't build tools in a vacuum. Every product comes from patterns we've seen across hundreds of workflows for South African businesses.</p>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-<div class="card p-6 text-center">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">SA-hosted</h3>
-<p class="text-on-surface-variant text-sm">Your data stays local. South African infrastructure, South African laws.</p>
-</div>
-<div class="card p-6 text-center">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">Priced in Rands</h3>
-<p class="text-on-surface-variant text-sm">No dollar surprises. Fixed ZAR pricing that fits your budget.</p>
-</div>
-<div class="card p-6 text-center">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">No Lock-in</h3>
-<p class="text-on-surface-variant text-sm">Cancel anytime, export your data. We keep you because we deliver.</p>
-</div>
-<div class="card p-6 text-center">
-<svg style="width: 1.875rem; height: 1.875rem" class="hi text-primary mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"/>
-</svg>
-<h3 class="text-base font-bold mb-2">Built by Practitioners</h3>
-<p class="text-on-surface-variant text-sm">We know what works because we build automation for a living, every day.</p>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Services Cross-Sell -->
-<section id="custom" class="py-24 px-8 overflow-hidden">
-<div class="max-w-4xl mx-auto">
-<div class="card p-8 md:p-12 flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="max-w-xl text-center md:text-left">
-<span class="label">Custom Solutions</span>
-<h2 class="mt-4 mb-4">Need Something <span class="text-primary">Custom?</span></h2>
-<p class="text-on-surface-variant">Our products handle common patterns. But every business is different. If you need workflows built specifically for your processes, our done-for-you automation service handles the rest, from mapping to building to monitoring.</p>
-</div>
-<a href="services.html" class="btn btn-primary lg flex-shrink-0">See Our Services</a>
-</div>
-</div>
+<div id="products-section"></div>
 </section>
 
 <!-- Bottom CTA -->
-<section id="cta" class="py-24 px-8 relative">
-<div class="absolute inset-0 bg-primary/5 -z-10"></div>
-<div class="max-w-3xl mx-auto text-center space-y-6">
-<span class="label">Next Step</span>
-<h2>Questions About <span class="text-primary">Our Products?</span></h2>
-<p class="text-lg max-w-xl mx-auto">Not sure which product fits? Want to know if it works with your setup? Just ask. We'll tell you straight.</p>
-<a href="contact.html" class="btn btn-primary lg glow inline-block">Get In Touch</a>
-</div>
+<section id="cta">
+<div id="bottom-cta" data-heading='Questions About <span class="text-primary">Our Products?</span>' data-body="Not sure which product fits? Want to know if it works with your setup? Just ask. We'll tell you straight." data-btn="Get In Touch"></div>
 </section>
 </main>
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script src="js/footer.js?v=0.7.8"></script>
-<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg></button>
-<script src="js/main.js?v=0.7.8"></script>
-<script src="js/exit-popup.js?v=0.7.8"></script>
-<script src="js/cookie-banner.js?v=0.7.8"></script>
+<script src="js/footer.js?v=0.9.0"></script>
+
+<script src="js/main.js?v=0.9.0"></script>
+<script src="js/products.js?v=0.9.0"></script>
+<script src="js/bottom-cta.js?v=0.9.0"></script>
+<script src="js/exit-popup.js?v=0.9.0"></script>
+<script src="js/cookie-banner.js?v=0.9.0"></script>
 </body></html>

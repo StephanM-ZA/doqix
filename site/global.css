@@ -849,6 +849,35 @@ ul, ol {
     font-style: italic;
 }
 
+/* Tooltip trigger icon */
+.roi-calc .slider-label {
+    position: relative;
+}
+.roi-calc .slider-label .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    color: #00e5a0;
+    font-size: 10px;
+    font-weight: 700;
+    font-style: italic;
+    font-family: Georgia, serif;
+    cursor: pointer;
+    margin-left: 6px;
+    flex-shrink: 0;
+    vertical-align: middle;
+    border: 1px solid rgba(0,229,160,0.3);
+    transition: background 0.2s, border-color 0.2s;
+}
+.roi-calc .slider-label .info-icon:hover {
+    background: rgba(0,229,160,0.15);
+    border-color: rgba(0,229,160,0.6);
+}
+
 /* Tooltips */
 .roi-calc .slider-label .tooltip {
     visibility: hidden;
@@ -864,11 +893,19 @@ ul, ol {
     padding: 8px 12px;
     border-radius: 6px;
     white-space: normal;
-    width: 220px;
+    width: 240px;
     z-index: 10;
     pointer-events: none;
     transition: opacity .15s, visibility .15s;
     border: 1px solid rgba(255,255,255,0.06);
+}
+.roi-calc .slider-label .tooltip .tooltip-impact {
+    display: block;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: #00e5a0;
+    font-size: 11px;
 }
 .roi-calc .slider-label .tooltip::after {
     content: '';
@@ -878,7 +915,6 @@ ul, ol {
     border: 6px solid transparent;
     border-top-color: #1E3050;
 }
-.roi-calc .slider-label:hover .tooltip { visibility: visible; opacity: 1; }
 .roi-calc .slider-label .tooltip.tooltip-visible { visibility: visible; opacity: 1; }
 
 /* Range slider (dark theme) */
@@ -1081,7 +1117,7 @@ ul, ol {
     .roi-calc .slider-value { font-size: 14px; min-width: 50px; }
     .roi-calc input[type="range"]::-webkit-slider-thumb { width: 32px; height: 32px; }
     .roi-calc input[type="range"]::-moz-range-thumb { width: 32px; height: 32px; }
-    .roi-calc .slider-label .tooltip { width: 180px; left: -8px; }
+    .roi-calc .slider-label .tooltip { width: 200px; left: -8px; }
 }
 
 /* ============================================

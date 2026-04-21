@@ -1,7 +1,151 @@
+/* Do.Qix ROI Calculator — single source of truth, injected via JS */
+/* IP-protected: markup + logic combined in one component */
+
 (function(){
   'use strict';
 
-  // Slider config (single source of truth)
+  var el = document.getElementById('roi-calculator');
+  if (!el) return;
+
+  /* ── Inject HTML ────────────────────────────────── */
+  el.innerHTML =
+    '<div class="text-center space-y-4 mb-12">' +
+    '<span class="label">The Mathematics</span>' +
+    '<h2>See What <span class="text-primary">You Could Save</span></h2>' +
+    '<p class="intro">Every business bleeds time differently. Move the sliders to match your team, and see exactly what you could reclaim each month.</p>' +
+    '</div>' +
+
+    '<div class="roi-grid">' +
+
+    '<!-- Inputs -->' +
+    '<div class="roi-inputs">' +
+    '<div class="panel-label">Your Team</div>' +
+
+    /* Slider: People */
+    '<div class="slider-group">' +
+    '<div class="slider-header">' +
+    '<span class="slider-label">People doing repetitive tasks' +
+    '<span class="info-icon" tabindex="0">i</span>' +
+    '<span class="tooltip">How many staff spend time on repetitive, rule-based work?' +
+    '<span class="tooltip-impact">Multiplied by hours and rate to calculate total labour cost that can be automated.</span>' +
+    '</span>' +
+    '</span>' +
+    '<span class="slider-value" id="val-people"></span>' +
+    '</div>' +
+    '<input type="range" id="slider-people"/>' +
+    '<div class="slider-range-labels"><span></span><span></span></div>' +
+    '</div>' +
+
+    /* Slider: Hours */
+    '<div class="slider-group">' +
+    '<div class="slider-header">' +
+    '<span class="slider-label">Hours per person per week' +
+    '<span class="info-icon" tabindex="0">i</span>' +
+    '<span class="tooltip">How many hours does each person spend on repetitive tasks every week? Think data entry, copy-pasting, manual emails, reporting.' +
+    '<span class="tooltip-impact">Combined with people count and converted to monthly hours. Higher hours = more potential savings.</span>' +
+    '</span>' +
+    '</span>' +
+    '<span class="slider-value" id="val-hours"></span>' +
+    '</div>' +
+    '<input type="range" id="slider-hours"/>' +
+    '<div class="slider-range-labels"><span></span><span></span></div>' +
+    '<div class="total-hours" id="out-total-hours"></div>' +
+    '</div>' +
+
+    /* Slider: Rate */
+    '<div class="slider-group">' +
+    '<div class="slider-header">' +
+    '<span class="slider-label">Average hourly cost' +
+    '<span class="info-icon" tabindex="0">i</span>' +
+    '<span class="tooltip">What you pay per hour per person. Include salary, benefits, and overheads.' +
+    '<span class="tooltip-impact">Multiplied by automatable hours to calculate the rand value of time saved.</span>' +
+    '</span>' +
+    '</span>' +
+    '<span class="slider-value" id="val-rate"></span>' +
+    '</div>' +
+    '<input type="range" id="slider-rate"/>' +
+    '<div class="slider-range-labels"><span></span><span></span></div>' +
+    '</div>' +
+
+    /* Slider: Efficiency */
+    '<div class="slider-group">' +
+    '<div class="slider-header">' +
+    '<span class="slider-label">Automation efficiency' +
+    '<span class="info-icon" tabindex="0">i</span>' +
+    '<span class="tooltip">What percentage of those manual hours can realistically be automated. 70% is a conservative starting point.' +
+    '<span class="tooltip-impact">Determines what portion of total hours actually gets automated. Higher % may require more workflows.</span>' +
+    '</span>' +
+    '</span>' +
+    '<span class="slider-value" id="val-efficiency"></span>' +
+    '</div>' +
+    '<input type="range" id="slider-efficiency"/>' +
+    '<div class="slider-range-labels"><span></span><span></span></div>' +
+    '<div class="efficiency-note" id="out-efficiency-note"></div>' +
+    '</div>' +
+
+    /* Slider: Error cost */
+    '<div class="slider-group">' +
+    '<div class="slider-header">' +
+    '<span class="slider-label">Monthly error cost' +
+    '<span class="info-icon" tabindex="0">i</span>' +
+    '<span class="tooltip">What do manual mistakes cost you each month? Think re-work, wrong invoices, missed follow-ups.' +
+    '<span class="tooltip-impact">Added directly to your monthly savings. Automation eliminates most manual errors.</span>' +
+    '</span>' +
+    '</span>' +
+    '<span class="slider-value" id="val-error"></span>' +
+    '</div>' +
+    '<input type="range" id="slider-error"/>' +
+    '<div class="slider-range-labels"><span></span><span></span></div>' +
+    '</div>' +
+
+    '</div>' +
+
+    '<!-- Outputs -->' +
+    '<div class="roi-outputs">' +
+
+    '<div class="hero-result">' +
+    '<div class="hero-amount" id="out-monthly">R0</div>' +
+    '<div class="hero-label">Your Monthly Savings</div>' +
+    '</div>' +
+
+    '<div class="result-cards">' +
+    '<div class="result-card">' +
+    '<div class="card-value" id="out-annual">R0</div>' +
+    '<div class="card-label">per year</div>' +
+    '</div>' +
+    '<div class="result-card">' +
+    '<div class="card-value" id="out-roi-pct">0%</div>' +
+    '<div class="card-label">return on investment</div>' +
+    '</div>' +
+    '<div class="result-card hours">' +
+    '<div class="card-value" id="out-hours-month">0 hrs</div>' +
+    '<div class="card-label">back per month</div>' +
+    '</div>' +
+    '<div class="result-card hours">' +
+    '<div class="card-value" id="out-hours-year">0 hrs</div>' +
+    '<div class="card-label">back per year</div>' +
+    '</div>' +
+    '<div class="result-card tier-suggestion">' +
+    '<div class="tier-text" id="out-tier"></div>' +
+    '</div>' +
+    '</div>' +
+
+    '<div class="benchmark" id="out-benchmark"></div>' +
+
+    '<a href="contact.html" class="roi-cta" id="roi-cta-link">' +
+    'Get Started' +
+    '<span class="cta-sub">15 minutes. No commitment. We\'ll show you where to start.</span>' +
+    '</a>' +
+
+    '<button type="button" class="share-btn" id="btn-share">Share Your Results</button>' +
+
+    '</div>' +
+
+    '</div>' +
+
+    '<p class="roi-footnote">Estimates based on your inputs. Actual savings depend on processes automated. All figures in ZAR.</p>';
+
+  /* ── Slider config (single source of truth) ──── */
   var CONFIG = {
     people:     { default: 3,    min: 1,  max: 50,    step: 1   },
     hours:      { default: 8,    min: 1,  max: 40,    step: 1   },
@@ -32,14 +176,9 @@
   var outEffNote    = document.getElementById('out-efficiency-note');
   var outBenchmark  = document.getElementById('out-benchmark');
   var btnShare      = document.getElementById('btn-share');
-  var roiContainer  = document.getElementById('roi-calculator');
-  var pricingBannerText = document.getElementById('pricing-banner-text');
-  var pricingBanner = document.getElementById('pricing-banner');
   var calcTouched = false;
 
-  if (!roiContainer) return;
-
-  // Apply config to sliders
+  /* ── Init sliders from config ─────────────────── */
   function initSlider(slider, valEl, cfg, format) {
     slider.min = cfg.min;
     slider.max = cfg.max;
@@ -53,7 +192,6 @@
   initSlider(sliderEfficiency, valEfficiency, CONFIG.efficiency, function(v){ return v+'%'; });
   initSlider(sliderError, valError, CONFIG.error, function(v){ return 'R'+Number(v).toLocaleString('en-ZA'); });
 
-  // Update range labels from config
   function setRangeLabels(slider, minLabel, maxLabel) {
     var labels = slider.parentElement.querySelector('.slider-range-labels');
     if (labels) {
@@ -67,9 +205,9 @@
   setRangeLabels(sliderEfficiency, CONFIG.efficiency.min+'%', CONFIG.efficiency.max+'%');
   setRangeLabels(sliderError, 'R'+CONFIG.error.min.toLocaleString('en-ZA'), 'R'+CONFIG.error.max.toLocaleString('en-ZA'));
 
-  // Set initial total hours
   outTotalHours.textContent = '= '+(CONFIG.people.default * CONFIG.hours.default)+' hrs/week across your team';
 
+  /* ── Formatting helpers ───────────────────────── */
   var WEEKS_PER_MONTH = 4.33;
   var accentColor = '#00e5a0';
   var trackColor  = 'rgba(255,255,255,0.08)';
@@ -93,6 +231,7 @@
     slider.style.background='linear-gradient(to right,'+accentColor+' 0%,'+accentColor+' '+pct+'%,'+trackColor+' '+pct+'%,'+trackColor+' 100%)';
   }
 
+  /* ── Tier system ──────────────────────────────── */
   var TIERS=[
     null,
     {name:'Solo',price:999},
@@ -119,6 +258,7 @@
     return TIERS[tier];
   }
 
+  /* ── Nudge messages ───────────────────────────── */
   var nudges={
     solo:[
       '{hours} hours a month back. Imagine what you\u2019d do with an extra day every week.',
@@ -181,6 +321,7 @@
       .replace(/\{price\}/g,data.price);
   }
 
+  /* ── Core calculation ─────────────────────────── */
   function calculate(){
     var people=parseInt(sliderPeople.value,10);
     var hours=parseInt(sliderHours.value,10);
@@ -207,7 +348,6 @@
     outHoursMonth.textContent=formatHours(hoursSavedMonth)+' hrs';
     outHoursYear.textContent=formatHours(hoursSavedYear)+' hrs';
 
-    // Always calculate ROI against a reference price
     var refPrice=tier&&tier.price>0?tier.price:(tier&&tier.price===0?TIERS[3].price:TIERS[1].price);
     var roiPct=Math.round(((monthlySavings-refPrice)/refPrice)*100);
     if(roiPct<0)roiPct=0;
@@ -250,16 +390,16 @@
     updateSliderFill(sliderEfficiency);
     updateSliderFill(sliderError);
 
-    // Highlight matching pricing card
     highlightPricingCard(tier?tier.name:'Team');
 
-    // Update pricing banner after calculator interaction
-    if(calcTouched&&pricingBannerText&&pricingBanner){
-      var tierName=tier?tier.name:'Team';
-      pricingBannerText.textContent='Based on your numbers, we recommend the '+tierName+' plan. First month at 50%.';
+    if(calcTouched){
+      var pBannerText=document.getElementById('pricing-banner-text');
+      if(pBannerText){
+        var tierName=tier?tier.name:'Team';
+        pBannerText.textContent='Based on your numbers, we recommend the '+tierName+' plan. First month at 50%.';
+      }
     }
 
-    // Update ROI CTA link with results
     var ctaLink=document.getElementById('roi-cta-link');
     if(ctaLink){
       var roiMsg='I used the ROI calculator and here are my results:\n\n'+
@@ -283,6 +423,7 @@
     });
   }
 
+  /* ── Event listeners ──────────────────────────── */
   function onSliderInput(){calcTouched=true;calculate();}
   sliderPeople.addEventListener('input',onSliderInput);
   sliderHours.addEventListener('input',onSliderInput);
@@ -290,12 +431,14 @@
   sliderEfficiency.addEventListener('input',onSliderInput);
   sliderError.addEventListener('input',onSliderInput);
 
-  // Touch tooltips
+  /* ── Touch tooltips (info icons + labels) ─────── */
   var activeTooltip=null;
-  roiContainer.addEventListener('touchstart',function(e){
+  el.addEventListener('touchstart',function(e){
+    var icon=e.target.closest('.info-icon');
     var label=e.target.closest('.slider-label');
-    if(!label){if(activeTooltip){activeTooltip.classList.remove('tooltip-visible');activeTooltip=null}return}
-    var tip=label.querySelector('.tooltip');if(!tip)return;
+    if(!icon&&!label){if(activeTooltip){activeTooltip.classList.remove('tooltip-visible');activeTooltip=null}return}
+    var parent=icon?icon.parentElement:label;
+    var tip=parent.querySelector('.tooltip');if(!tip)return;
     e.preventDefault();
     if(activeTooltip&&activeTooltip!==tip)activeTooltip.classList.remove('tooltip-visible');
     if(tip.classList.contains('tooltip-visible')){tip.classList.remove('tooltip-visible');activeTooltip=null}
@@ -303,7 +446,7 @@
   },{passive:false});
   window.addEventListener('scroll',function(){if(activeTooltip){activeTooltip.classList.remove('tooltip-visible');activeTooltip=null}},{passive:true});
 
-  // Share
+  /* ── Share ─────────────────────────────────────── */
   if(btnShare){
     btnShare.addEventListener('click',function(){
       var people=parseInt(sliderPeople.value,10);
@@ -315,12 +458,11 @@
       var monthlySavings=(hoursSavedMonth*rate)+errorCost;
       var annualSavings=monthlySavings*12;
       var shareText=
-        '\uD83D\uDE80 I just calculated how much time & money I\'m wasting on repetitive work...\n\n'+
-        '\uD83D\uDCB0 Monthly savings: '+formatZAR(monthlySavings)+'\n'+
-        '\uD83D\uDCC8 Annual savings: '+formatZAR(annualSavings)+'\n'+
-        '\u23F1\uFE0F Hours back: '+formatHours(hoursSavedMonth)+'/month\n\n'+
-        'Mind. Blown. \uD83E\uDD2F\n\n'+
-        'Try the calculator \uD83D\uDC49 https://doqix.co.za';
+        '\uD83D\uDEA8 If you run a business in SA, you *NEED* to see this... \uD83D\uDC40\n\n'+
+        '\uD83E\uDD2F I\'m losing *'+formatZAR(monthlySavings)+' p/month* to tasks a machine should be doing.\n\n'+
+        '\uD83D\uDCC8 That\'s *'+formatZAR(annualSavings)+' p/year*. Gone. Poof. \uD83D\uDCA8\n\n'+
+        '\u23F1\uFE0F *'+formatHours(hoursSavedMonth)+' hours* every month on stuff nobody signed up to do.\n\n'+
+        '\uD83D\uDD25 Don\'t waste time. \u23F0 30 seconds to find out yours..\n\uD83D\uDC49 https://doqix.co.za/#roi-calculator';
       if(navigator.share){navigator.share({title:'My Automation Savings',text:shareText}).catch(function(){});return}
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(shareText).then(showCopied,fallbackCopy)}
       else{fallbackCopy()}
@@ -329,5 +471,9 @@
     });
   }
 
+  /* ── Initial calculation ──────────────────────── */
   calculate();
+
+  /* ── Register with scroll-reveal ─────────────── */
+  if (window.doqixReveal) window.doqixReveal(el);
 })();

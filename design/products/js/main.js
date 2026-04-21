@@ -22,7 +22,19 @@ var revealObserver = new IntersectionObserver(function (entries) {
             entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.01 });
+
+// Expose globally so JS-injected components can register themselves
+window.doqixReveal = function(container) {
+    if (!container) return;
+    var els = container.querySelectorAll(':scope > *');
+    els.forEach(function(el) {
+        if (!el.classList.contains('hero-video-bg') && !el.classList.contains('scroll-reveal')) {
+            el.classList.add('scroll-reveal');
+            revealObserver.observe(el);
+        }
+    });
+};
 
 // Auto-apply scroll-reveal to direct children of every <section> in <main>
 // Skip: hero video backgrounds, elements already marked, first section (hero)
@@ -42,6 +54,51 @@ sections.forEach(function (section, index) {
 document.querySelectorAll('.scroll-reveal').forEach(function (el) {
     revealObserver.observe(el);
 });
+
+// Scroll indicator — visible at top, hidden once scrolled past hero
+var scrollIndicator = document.getElementById('scrollIndicator');
+if (scrollIndicator) {
+    var heroSection = document.getElementById('hero');
+    var indicatorOffset = heroSection ? heroSection.offsetHeight : 400;
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > indicatorOffset * 0.3) {
+            scrollIndicator.classList.add('hidden');
+        } else {
+            scrollIndicator.classList.remove('hidden');
+        }
+    });
+}
+
+// Back to top button
+var backToTop = document.getElementById('backToTop');
+window._scrollingToTop = false;
+if (backToTop) {
+    window.addEventListener('scroll', function () {
+        if (window._scrollingToTop) return;
+        if (window.scrollY > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    backToTop.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window._scrollingToTop = true;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        var checkDone = setInterval(function () {
+            if (window.scrollY <= 1) {
+                clearInterval(checkDone);
+                window._scrollingToTop = false;
+                backToTop.classList.remove('visible');
+            }
+        }, 50);
+    });
+    backToTop.addEventListener('touchend', function (e) {
+        e.preventDefault();
+        backToTop.click();
+    });
+}
 
 // Mobile menu toggle
 var hamburger = document.querySelector('.nav-hamburger');

@@ -29,76 +29,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-on-surface": "#303036",
-                        "surface-container-low": "#101C36",
-                        "surface-container-highest": "#1E3050",
-                        "on-tertiary-container": "#744c00",
-                        "on-surface": "#e4e1e9",
-                        "on-surface-variant": "#bacbbf",
-                        "surface-bright": "#223656",
-                        "on-secondary-fixed": "#311300",
-                        "on-primary": "#003824",
-                        "on-secondary": "#502400",
-                        "surface-dim": "#0C1830",
-                        "tertiary-container": "#ffbd5b",
-                        "secondary-fixed-dim": "#ff8000",
-                        "surface-tint": "#00e29e",
-                        "primary": "#00e5a0",
-                        "surface-variant": "#35343a",
-                        "on-primary-container": "#006141",
-                        "surface-container-high": "#1A2A48",
-                        "background": "#0C1830",
-                        "error": "#ffb4ab",
-                        "primary-fixed": "#47ffb8",
-                        "on-tertiary-fixed": "#291800",
-                        "outline-variant": "#3b4a41",
-                        "on-tertiary": "#452b00",
-                        "on-error": "#690005",
-                        "on-background": "#e4e1e9",
-                        "on-primary-fixed-variant": "#005236",
-                        "outline": "#84958a",
-                        "on-tertiary-fixed-variant": "#624000",
-                        "secondary-container": "#ff8000",
-                        "error-container": "#93000a",
-                        "on-secondary-fixed-variant": "#723600",
-                        "secondary-fixed": "#ffdcc7",
-                        "tertiary-fixed-dim": "#fcba59",
-                        "primary-container": "#00e5a0",
-                        "surface": "#0C1830",
-                        "surface-container-lowest": "#081024",
-                        "on-secondary-container": "#5e2b00",
-                        "tertiary": "#ffe1bb",
-                        "on-primary-fixed": "#002114",
-                        "tertiary-fixed": "#ffddb3",
-                        "on-error-container": "#ffdad6",
-                        "inverse-surface": "#e4e1e9",
-                        "inverse-primary": "#006c49",
-                        "primary-fixed-dim": "#00e29e",
-                        "surface-container": "#14203C",
-                        "secondary": "#ff8000"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "1rem",
-                        "lg": "2rem",
-                        "xl": "3rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "headline": ["Inter"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
-                },
-            }
-        }
-    </script>
-<link rel="stylesheet" href="../global.css?v=0.7.8"/>
+<script src="js/tailwind-config.js?v=0.9.0"></script>
+<link rel="stylesheet" href="../global.css?v=0.9.0"/>
 <style>
         /* Contact page-specific styles */
         .form-success {
@@ -114,70 +46,7 @@
         }
         .hp-trap { position: absolute; left: -9999px; }
     </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How long does it take to build an automation?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Simple workflows: a few days. Complex multi-system automations: 2-4 weeks. We'll give you a clear timeline before we start."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need any technical knowledge?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "None. We handle everything: design, building, testing, and ongoing management."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What apps do you work with?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Over 400 and counting. Google Workspace, Microsoft 365, Xero, QuickBooks, Salesforce, HubSpot, Pipedrive, Slack, WhatsApp, Shopify, WooCommerce, Airtable, Notion, and more. If your app has an API, we can connect it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What about my existing systems?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If it has an API (most modern tools do), we can connect it. We'll check compatibility in the initial consultation."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is my data safe?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. We self-host your automations, so your data stays on infrastructure you control. Fully POPIA compliant."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does it cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Four plans: Solo (R999/mo), Team (R2,500/mo), Business (R5,500/mo), and Enterprise (custom quote). Flat monthly retainer, no per-user fees, no credits, no per-task charges. All in ZAR. Month-to-month on every plan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I cancel?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Anytime. No lock-in contracts. We keep your business because we deliver results."
-      }
-    }
-  ]
-}
-</script>
+<!-- FAQ JSON-LD generated dynamically by faq.js -->
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC57HM6CTG"></script>
 <script>
@@ -190,7 +59,7 @@ gtag("config", "G-BC57HM6CTG");
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="js/header.js?v=0.7.8"></script>
+<script src="js/header.js?v=0.9.0"></script>
 
 <main class="pt-20">
 
@@ -410,98 +279,23 @@ gtag("config", "G-BC57HM6CTG");
 
 <!-- FAQ Section -->
 <section id="faq" class="max-w-3xl mx-auto px-8 py-24">
-<div class="text-center mb-16 scroll-reveal">
-<span class="label">Got Questions?</span>
-<h2 class="mt-6 mb-4">Frequently <span class="text-primary">Asked Questions</span></h2>
-<p>Everything you need to know before we get started.</p>
-</div>
-<div class="space-y-4 scroll-reveal">
-<details class="faq-item">
-<summary>
-<span>How long does it take to build an automation?</span>
-<svg style="width: 1.5rem; height: 1.5rem" class="hi faq-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-</summary>
-<div class="faq-answer">Simple workflows: a few days. Complex multi-system automations: 2-4 weeks. We'll give you a clear timeline before we start.</div>
-</details>
-<details class="faq-item">
-<summary>
-<span>Do I need any technical knowledge?</span>
-<svg style="width: 1.5rem; height: 1.5rem" class="hi faq-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-</summary>
-<div class="faq-answer">None. We handle everything: design, building, testing, and ongoing management.</div>
-</details>
-<details class="faq-item">
-<summary>
-<span>What apps do you work with?</span>
-<svg style="width: 1.5rem; height: 1.5rem" class="hi faq-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-</summary>
-<div class="faq-answer">Over 400 and counting. Google Workspace, Microsoft 365, Xero, QuickBooks, Salesforce, HubSpot, Pipedrive, Slack, WhatsApp, Shopify, WooCommerce, Airtable, Notion, BambooHR, Zendesk, Intercom, Eventbrite, DocuSign, Trello, Asana, Jira, WordPress, Mailchimp, Stripe, Typeform, Twilio, Buffer, and more. If your app has an API, we can connect it.</div>
-</details>
-<details class="faq-item">
-<summary>
-<span>What about my existing systems?</span>
-<svg style="width: 1.5rem; height: 1.5rem" class="hi faq-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-</summary>
-<div class="faq-answer">If it has an API (most modern tools do), we can connect it. We'll check compatibility in the initial consultation.</div>
-</details>
-<details class="faq-item">
-<summary>
-<span>Is my data safe?</span>
-<svg style="width: 1.5rem; height: 1.5rem" class="hi faq-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-</summary>
-<div class="faq-answer">Yes. We self-host your automations, so your data stays on infrastructure you control. Fully POPIA compliant.</div>
-</details>
-<details class="faq-item">
-<summary>
-<span>What does it cost?</span>
-<svg style="width: 1.5rem; height: 1.5rem" class="hi faq-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-</summary>
-<div class="faq-answer">Four plans: Solo (R999/mo), Team (R2,500/mo), Business (R5,500/mo), and Enterprise (custom quote). Flat monthly retainer, no per-user fees, no credits, no per-task charges. Solo has zero setup fee. Training included on Business and Enterprise. All in ZAR. Month-to-month on every plan. First month at 50% during launch. See full pricing on the Services page.</div>
-</details>
-<details class="faq-item">
-<summary>
-<span>Can I cancel?</span>
-<svg style="width: 1.5rem; height: 1.5rem" class="hi faq-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-</svg>
-</summary>
-<div class="faq-answer">Anytime. No lock-in contracts. We keep your business because we deliver results.</div>
-</details>
-</div>
+<div id="faq-section"></div>
 </section>
 
 <!-- Bottom CTA -->
-<section id="cta" class="py-24 px-8 relative scroll-reveal">
-<div class="absolute inset-0 bg-primary/5 -z-10"></div>
-<div class="max-w-3xl mx-auto text-center space-y-6">
-<span class="label">Next Step</span>
-<h2>Ready to Get <span class="text-primary">Your Time Back?</span></h2>
-<p class="text-lg max-w-xl mx-auto">15 minutes. No commitment. No sales pitch. Just a clear picture of where you're losing time, and how to get it back.</p>
-<a href="#contact-form" class="btn btn-primary lg glow inline-block">Let's Talk</a>
-</div>
+<section id="cta">
+<div id="bottom-cta" data-body="15 minutes. No commitment. No sales pitch. Just a clear picture of where you're losing time, and how to get it back." data-href="#contact-form"></div>
 </section>
 </main>
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script src="js/footer.js?v=0.7.8"></script>
-<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
-</svg></button>
-<script src="js/main.js?v=0.7.8"></script>
-<script src="js/contact-form.js?v=0.7.8"></script>
-<script src="js/exit-popup.js?v=0.7.8"></script>
-<script src="js/cookie-banner.js?v=0.7.8"></script>
+<script src="js/footer.js?v=0.9.0"></script>
+
+<script src="js/main.js?v=0.9.0"></script>
+<script src="js/contact-form.js?v=0.9.0"></script>
+<script src="js/faq.js?v=0.9.0"></script>
+<script src="js/bottom-cta.js?v=0.9.0"></script>
+<script src="js/exit-popup.js?v=0.9.0"></script>
+<script src="js/cookie-banner.js?v=0.9.0"></script>
 </body></html>

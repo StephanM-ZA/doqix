@@ -24,6 +24,18 @@ var revealObserver = new IntersectionObserver(function (entries) {
     });
 }, { threshold: 0.01 });
 
+// Expose globally so JS-injected components can register themselves
+window.doqixReveal = function(container) {
+    if (!container) return;
+    var els = container.querySelectorAll(':scope > *');
+    els.forEach(function(el) {
+        if (!el.classList.contains('hero-video-bg') && !el.classList.contains('scroll-reveal')) {
+            el.classList.add('scroll-reveal');
+            revealObserver.observe(el);
+        }
+    });
+};
+
 // Auto-apply scroll-reveal to direct children of every <section> in <main>
 // Skip: hero video backgrounds, elements already marked, first section (hero)
 var sections = document.querySelectorAll('main section');

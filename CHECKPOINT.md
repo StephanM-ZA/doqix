@@ -2,43 +2,50 @@
 
 **Date:** 2026-04-21
 **Branch:** main
-**Latest commit:** 73bf05a (pushed, deployed)
+**Latest commit:** 5cd1977 (pushed, deployed, tagged web-v0.8.5)
+**Tool calls this session:** ~25
 
-## Completed This Session
+## Completed This Session (Continuation)
 
-### 1. Heroicons Upload
-- Pushed `design/heroicons-master/` to GitHub (commit 2f73ac4)
+### Services Content Component Completed
+- `services-content.js` built (396 lines) — extracts ALL services page sections into JS
+- Two injection targets: `#services-content` (sections 2-8) and `#services-data-control` (section 11)
+- Services.html reduced from ~738 lines to ~144 lines
 
-### 2. Icon Replacement (Material Symbols -> Heroicons)
-- Wrote a Python script to map 76 unique Material Symbol names to Heroicon equivalents
-- Replaced 477 icon instances across 20 HTML files and 11 JS files
-- Removed Google Fonts Material Symbols `<link>` import from all HTML
-- Updated `global.css`: `.material-symbols-outlined` -> `.hi` base class
-- WhatsApp SVG logo kept as-is (brand logo)
-- Zero material-symbols references remain in any live file
+### Full File Distribution Done
+All component JS files from `design/components/js/` copied to:
+- Every page's `js/` folder (index, services, products, contact, 404, thank-you, privacy-policy, terms-and-conditions)
+- `site/js/` for deployment
+- Old `testimonial-carousel.js` and `components.js` removed
 
-### 3. Repo Restructure (site/ folder)
-- Created `site/` folder as the deploy target
-- Moved all deployed files (HTML, CSS, JS, images, videos, robots.txt, sitemap, manifest) from root into `site/`
-- Root now contains only config: CLAUDE.md, README, CHANGELOG, updates.json, assets/, design/, docs/, planning/
+### Cache-Bust Version Bump
+- All 143 `?v=0.7.8` references updated to `?v=0.9.0` across all HTML files
 
-### 4. GitHub Pages Deployment
-- Created `.github/workflows/deploy-site.yml` (Actions-based deployment from `site/`)
-- Switched GitHub Pages from legacy build (`path: /`) to Actions workflow (`build_type: workflow`)
-- Verified workflow runs successfully (14s deploy time)
-- Site live at digitaloperations.co.za/doqix
+### Site Sync Complete
+- All 8 HTML files synced from `design/` to `site/` with path fixes (`../global.css` → `global.css`, etc.)
+- `global.css` synced to `site/`
+- All JS files in `site/js/`
 
-### 5. Documentation Updates
-- Updated CLAUDE.md: sync instructions (design -> site/), verify instructions (Actions workflow), new repo structure section, icons section (Heroicons with `.hi` class)
+## Still Pending
 
-## Key Files
-- `.github/workflows/deploy-site.yml` — deploys `site/` to GitHub Pages on push to main
-- `design/` — source of truth for all website files
-- `site/` — deployed output (synced from design/)
-- `design/heroicons-master/optimized/24/` — icon SVG source (outline + solid)
-- `design/global.css` — `.hi` base class for heroicon SVGs
+### 1. Commit and Push with New web-v Tag
+- Stage all changes
+- Commit with descriptive message about JS component extraction
+- Tag as `web-v0.9.0` (major feature: all content extracted to JS components)
+- Push commit + tag
+- Verify GitHub Pages build
 
-## Next Steps
-- Visually verify heroicons render correctly at all sizes in browser
-- Check all pages: homepage, services, products, contact, 404, thank-you, legal pages
-- Confirm cookie banner and exit popup icons work (JS-injected)
+## Summary of All Components (source of truth: design/components/js/)
+1. **tailwind-config.js** — Shared Tailwind theme config
+2. **header.js** — Site header/nav
+3. **footer.js** — Site footer + back-to-top button
+4. **main.js** — Scroll-reveal + doqixReveal utility (source: design/index/js/)
+5. **testimonials.js** — 7 client testimonials + carousel
+6. **bottom-cta.js** — Parameterised CTA via data attributes
+7. **faq.js** — 7 FAQ items + JSON-LD structured data
+8. **products.js** — 4 product cards + Why Products + Cross-Sell
+9. **services-content.js** — All services page content (8 sections)
+10. **roi-calculator.js** — ROI calculator widget
+11. **pricing.js** — 4 pricing plan cards
+12. **cookie-banner.js** — Cookie consent banner
+13. **exit-popup.js** — Exit-intent popup

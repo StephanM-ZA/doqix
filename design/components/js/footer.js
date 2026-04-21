@@ -76,4 +76,12 @@
         '<p class="footer-copyright">&copy; 2026 Do.Qix. All rights reserved.</p>' +
         '</div>' +
         '</footer>';
+
+    /* ── Back-to-top button (shared across all pages) ── */
+    var btn = document.createElement('button');
+    btn.className = 'back-to-top';
+    btn.id = 'backToTop';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = '<svg style="width:1.5rem;height:1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/></svg>';
+    el.parentNode.insertBefore(btn, el.nextSibling);
 })();
