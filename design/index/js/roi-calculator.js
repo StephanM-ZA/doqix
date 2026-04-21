@@ -315,12 +315,12 @@
       var monthlySavings=(hoursSavedMonth*rate)+errorCost;
       var annualSavings=monthlySavings*12;
       var shareText=
-        '\uD83D\uDCA1 If you run a business in SA, you NEED to see this...\n\n'+
-        '\uD83E\uDD2F I\'m losing '+formatZAR(monthlySavings)+'/month to tasks a machine should be doing.\n'+
-        '\uD83D\uDCC8 That\'s '+formatZAR(annualSavings)+'/year. Gone. Poof. \uD83D\uDCA8\n'+
-        '\u23F1\uFE0F '+formatHours(hoursSavedMonth)+' hours every month on stuff nobody signed up to do.\n\n'+
-        '\uD83D\uDD25 30 seconds to find out yours \uD83D\uDC49 https://digitaloperations.co.za/doqix/#roi-calculator';
-      if(navigator.share){navigator.share({title:'My Automation Savings',text:shareText,url:'https://digitaloperations.co.za/doqix/#roi-calculator'}).catch(function(){});return}
+        '\uD83D\uDEA8 If you run a business in SA, you *NEED* to see this... \uD83D\uDC40\n\n'+
+        '\uD83E\uDD2F I\'m losing *'+formatZAR(monthlySavings)+' p/month* to tasks a machine should be doing.\n\n'+
+        '\uD83D\uDCC8 That\'s *'+formatZAR(annualSavings)+' p/year*. Gone. Poof. \uD83D\uDCA8\n\n'+
+        '\u23F1\uFE0F *'+formatHours(hoursSavedMonth)+' hours* every month on stuff nobody signed up to do.\n\n'+
+        '\uD83D\uDD25 Don\'t waste time. \u23F0 30 seconds to find out yours..\n\uD83D\uDC49 https://digitaloperations.co.za/doqix/#roi-calculator';
+      if(navigator.share){navigator.share({title:'My Automation Savings',text:shareText}).catch(function(){});return}
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(shareText).then(showCopied,fallbackCopy)}
       else{fallbackCopy()}
       function fallbackCopy(){var ta=document.createElement('textarea');ta.value=shareText;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showCopied()}catch(e){}document.body.removeChild(ta)}
