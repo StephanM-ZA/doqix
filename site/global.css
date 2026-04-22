@@ -1672,6 +1672,11 @@ a.footer-contact-item:hover {
     padding-top: 2rem;
 }
 
+.footer-build {
+    opacity: 0.5;
+    margin-left: 0.5rem;
+}
+
 .footer-col {
     display: flex;
     flex-direction: column;
