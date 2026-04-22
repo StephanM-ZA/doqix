@@ -2,43 +2,46 @@
 
 **Date:** 2026-04-21
 **Branch:** main
-**Latest commit:** 73bf05a (pushed, deployed)
+**Latest commit:** 4aa2838 (pushed, deployed)
+**Tag:** web-v0.9.1
+**Tool calls this session:** ~8
 
 ## Completed This Session
 
-### 1. Heroicons Upload
-- Pushed `design/heroicons-master/` to GitHub (commit 2f73ac4)
+### 1. Audit: Header, Footer, and Social Links
+- Confirmed all 8 pages use JS-based header (`header.js`) and footer (`footer.js`)
+- No page has inline header/footer HTML anymore
+- Footer JS component has all 3 social links: LinkedIn, Facebook, Instagram
+- Static HTML files (`design/components/header.html`, `design/components/footer.html`) are unused/outdated
+- User asked about social links; Instagram was missing from static footer but present in JS footer
 
-### 2. Icon Replacement (Material Symbols -> Heroicons)
-- Wrote a Python script to map 76 unique Material Symbol names to Heroicon equivalents
-- Replaced 477 icon instances across 20 HTML files and 11 JS files
-- Removed Google Fonts Material Symbols `<link>` import from all HTML
-- Updated `global.css`: `.material-symbols-outlined` -> `.hi` base class
-- WhatsApp SVG logo kept as-is (brand logo)
-- Zero material-symbols references remain in any live file
+## Prior Session Work (still in place)
+- ROI calculator with info icons (green 'i' circles, click-to-toggle tooltips)
+- ROI calculator extracted to JS component (both index + services pages)
+- Privacy policy + cookie banner updated with GA disclosure
+- Asset path fix for site/ HTML files
 
-### 3. Repo Restructure (site/ folder)
-- Created `site/` folder as the deploy target
-- Moved all deployed files (HTML, CSS, JS, images, videos, robots.txt, sitemap, manifest) from root into `site/`
-- Root now contains only config: CLAUDE.md, README, CHANGELOG, updates.json, assets/, design/, docs/, planning/
-
-### 4. GitHub Pages Deployment
-- Created `.github/workflows/deploy-site.yml` (Actions-based deployment from `site/`)
-- Switched GitHub Pages from legacy build (`path: /`) to Actions workflow (`build_type: workflow`)
-- Verified workflow runs successfully (14s deploy time)
-- Site live at digitaloperations.co.za/doqix
-
-### 5. Documentation Updates
-- Updated CLAUDE.md: sync instructions (design -> site/), verify instructions (Actions workflow), new repo structure section, icons section (Heroicons with `.hi` class)
+## Current State
+- **Header:** JS component on all 8 pages (`header.js`)
+- **Footer:** JS component on all 8 pages (`footer.js`) with 3 socials (LinkedIn, Facebook, Instagram)
+- **ROI calculator:** JS component with info icons (index + services)
+- **Static component files:** `design/components/header.html` and `footer.html` are unused, can be deleted
+- Cache versions: `0.8.1` for global.css + roi-calculator.js, `0.7.8` for everything else
 
 ## Key Files
-- `.github/workflows/deploy-site.yml` — deploys `site/` to GitHub Pages on push to main
-- `design/` — source of truth for all website files
-- `site/` — deployed output (synced from design/)
-- `design/heroicons-master/optimized/24/` — icon SVG source (outline + solid)
-- `design/global.css` — `.hi` base class for heroicon SVGs
+- `design/components/js/header.js` — header component (source of truth)
+- `design/components/js/footer.js` — footer component (source of truth, has all 3 socials)
+- `design/components/js/roi-calculator.js` — ROI calculator component (source of truth)
+- `design/global.css` — all styling
+- `design/components/header.html` — UNUSED static reference (can delete)
+- `design/components/footer.html` — UNUSED static reference (can delete)
+
+## Important Learnings
+- JS-injected elements with `scroll-reveal` class stay invisible unless registered with IntersectionObserver
+- `main.js` has no `doqixReveal` function — future JS components must NOT use `scroll-reveal` class
+- Design-to-site sync must fix ALL `../` paths, not just `../global.css`
+- Tooltips should only trigger on explicit icon click, not label hover
 
 ## Next Steps
-- Visually verify heroicons render correctly at all sizes in browser
-- Check all pages: homepage, services, products, contact, 404, thank-you, legal pages
-- Confirm cookie banner and exit popup icons work (JS-injected)
+- User to decide: delete unused static `header.html` and `footer.html`?
+- User to verify info icons render and are visible on live site

@@ -1018,12 +1018,13 @@ ul, ol {
     padding: 32px;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 .roi-calc .hero-result::before {
     content: '';
     position: absolute;
     inset: 0;
+    border-radius: inherit;
     background: radial-gradient(circle at 50% 0%, rgba(0,229,160,0.08) 0%, transparent 70%);
     pointer-events: none;
 }
