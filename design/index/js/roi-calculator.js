@@ -148,6 +148,13 @@
   var pricingBannerText = document.getElementById('pricing-banner-text');
   var pricingBanner = document.getElementById('pricing-banner');
   var calcTouched = false;
+  var trackDebounce = null;
+
+  function trackROI(eventName, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, params);
+    }
+  }
 
   // Apply config to sliders
   function initSlider(slider, valEl, cfg, format) {
@@ -393,7 +400,32 @@
     });
   }
 
-  function onSliderInput(){calcTouched=true;calculate();}
+  function onSliderInput(){
+    if (!calcTouched) {
+      trackROI('roi_first_interaction', { event_category: 'ROI Calculator' });
+    }
+    calcTouched = true;
+    calculate();
+    clearTimeout(trackDebounce);
+    trackDebounce = setTimeout(function() {
+      var people = parseInt(sliderPeople.value, 10);
+      var hours = parseInt(sliderHours.value, 10);
+      var rate = parseInt(sliderRate.value, 10);
+      var eff = parseInt(sliderEfficiency.value, 10);
+      var err = parseInt(sliderError.value, 10);
+      var tier = getTier(eff / 100, (people * hours * WEEKS_PER_MONTH * (eff / 100) * rate) + err);
+      trackROI('roi_calculation', {
+        event_category: 'ROI Calculator',
+        roi_people: people,
+        roi_hours: hours,
+        roi_rate: rate,
+        roi_efficiency: eff,
+        roi_error_cost: err,
+        roi_monthly_savings: Math.round((people * hours * WEEKS_PER_MONTH * (eff / 100) * rate) + err),
+        roi_tier: tier ? tier.name : 'None'
+      });
+    }, 1500);
+  }
   sliderPeople.addEventListener('input',onSliderInput);
   sliderHours.addEventListener('input',onSliderInput);
   sliderRate.addEventListener('input',onSliderInput);
@@ -427,8 +459,26 @@
   window.addEventListener('scroll',function(){dismissTooltip()},{passive:true});
 
   // Share
+  // Track CTA clicks
+  var ctaEl = document.getElementById('roi-cta-link');
+  if (ctaEl) {
+    ctaEl.addEventListener('click', function() {
+      var tier = getTier(parseInt(sliderEfficiency.value,10)/100,
+        parseInt(outMonthly.textContent.replace(/[^\d]/g,''),10) || 0);
+      trackROI('roi_cta_click', {
+        event_category: 'ROI Calculator',
+        roi_tier: tier ? tier.name : 'None',
+        roi_monthly_savings: outMonthly.textContent
+      });
+    });
+  }
+
   if(btnShare){
     btnShare.addEventListener('click',function(){
+      trackROI('roi_share_click', {
+        event_category: 'ROI Calculator',
+        roi_monthly_savings: outMonthly.textContent
+      });
       var people=parseInt(sliderPeople.value,10);
       var hours=parseInt(sliderHours.value,10);
       var rate=parseInt(sliderRate.value,10);
