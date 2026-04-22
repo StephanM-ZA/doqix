@@ -73,7 +73,7 @@
         '<a href="terms-and-conditions.html">Terms &amp; Conditions</a>' +
         '</div>' +
         '</div>' +
-        '<p class="footer-copyright">&copy; 2026 Do.Qix. All rights reserved. <span class="footer-build">Build web-v0.9.5</span></p>' +
+        '<p class="footer-copyright">&copy; 2026 Do.Qix. All rights reserved. <span class="footer-build">Build web-v0.9.6</span></p>' +
         '</div>' +
         '</footer>';
 })();
