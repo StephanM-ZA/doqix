@@ -1,121 +1,326 @@
 # Design System: Do.Qix Website
-**Project:** Do.Qix — South African Workflow Automation
 
-## 1. Visual Theme & Atmosphere
+**Project:** Do.Qix  
+**Source of truth:** `design/global.css`  
+**Font:** Inter (Google Fonts, weights 400/500/600/700/900)  
+**Icons:** Heroicons (inline SVG, outline default, solid for emphasis, class `.hi`)
 
-The aesthetic is **premium dark with electric energy** — a near-black canvas punctuated by vivid teal and warm amber sparks. The mood sits between the polished minimalism of Vercel and the confident clarity of Stripe, but with more warmth and human approachability. Nothing feels corporate or cold. The site radiates quiet confidence — like a fast-moving startup that already has its act together.
+---
 
-Density is deliberately low. Generous whitespace gives every element room to breathe. Sections are spacious (80-120px vertical padding) and never feel cramped. The visual hierarchy is earned through contrast, scale, and motion — not decoration or visual noise.
+## 1. Visual Identity
 
-The overall feel: **kinetic, confident, alive.** Every section responds to the user. The page moves forward with momentum — it never feels static.
+Premium dark with electric energy. Near-black canvas, vivid teal accents, warm amber secondary. The mood is confident and alive without being corporate. Density is low: generous whitespace, spacious sections (py-20 to py-24), clean visual hierarchy through contrast and scale.
 
-## 2. Color Palette & Roles
+---
 
-### Backgrounds
-- **Void Charcoal** (#0C1830) — The primary canvas. A near-black with a cool blue undertone that feels deep without being flat. Used for page background and full-width sections.
-- **Elevated Onyx** (#141419) — A subtle step above the canvas. Used for cards, panels, and content containers to create soft depth separation without harsh contrast.
-- **Whisper Lift** (#1a1a22) — The hover/active state for surfaces. A barely perceptible brightening that rewards interaction.
+## 2. Colour Palette
 
-### Accents
-- **Electric Teal** (#00e5a0) — The signature "go" color. Vivid, energetic, impossible to miss. Used for primary CTAs, active states, focus rings, progress indicators, and success feedback. This is the brand's heartbeat.
-- **Warm Amber** (#ffb347) — A human counterpoint to the teal's electric energy. Used for badges ("Most Popular"), proof points, highlights, and secondary emphasis. Adds warmth without competing with teal.
-- **Coral Alert** (#ff6b6b) — Reserved exclusively for errors, warnings, and destructive actions. Rarely seen but instantly understood.
+### CSS Custom Properties (`:root`)
 
-### Text
-- **Soft Cloud** (#f0f0f5) — Primary text color. An off-white that avoids the harshness of pure white on dark backgrounds. Used for headings, body copy, and any text that needs to command attention.
-- **Muted Steel** (#8a8a9a) — Secondary text. A cool gray for captions, placeholders, supporting copy, and anything that should recede behind primary content.
-- **Void Charcoal** (#0C1830) — Text rendered on top of Electric Teal buttons and badges. Dark-on-bright for maximum contrast.
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--color-bg` | `#0C1830` | Page background, body bg |
+| `--color-surface` | `#141419` | Legacy surface reference |
+| `--card-bg` | `#14203C` | All card backgrounds |
+| `--color-surface-hover` | `#1a1a22` | Surface hover states |
+| `--color-primary` | `#00e5a0` | Primary accent (Electric Teal) |
+| `--color-secondary` | `#ff8000` | Secondary accent (Warm Amber) |
+| `--color-tertiary` | `#e09c58` | Tertiary accent |
+| `--color-text-primary` | `#f0f0f5` | Primary text (headings, emphasis) |
+| `--color-text-secondary` | `#c0c0d0` | Body text, paragraphs |
+| `--color-text-on-accent` | `#0C1830` | Text on teal/amber backgrounds |
+| `--color-border` | `#1e1e2a` | Structural borders |
+| `--color-danger` | `#ff6b6b` | Error states |
+| `--color-form-input` | `#1E3050` | Form input backgrounds |
 
-### Structural
-- **Shadow Line** (#1e1e2a) — Subtle borders for card edges, dividers, and section separators. Visible enough to define boundaries, quiet enough to never dominate.
+### Tailwind Colour Map (per-page `<script>`)
 
-## 3. Typography Rules
+| Key | Hex | Notes |
+|-----|-----|-------|
+| `primary` | `#00e5a0` | Electric Teal |
+| `secondary` | `#ff8000` | Warm Amber |
+| `background` / `surface-dim` | `#0C1830` | Page canvas |
+| `surface` | `#0C1830` | Same as background |
+| `surface-container` | `#14203C` | Card-level surfaces |
+| `surface-container-low` | `#101C36` | Alternating section bg |
+| `surface-container-high` | `#1A2A48` | Elevated surfaces |
+| `surface-container-highest` | `#1E3050` | Tooltips, popovers |
+| `surface-container-lowest` | `#081024` | Deepest surface |
+| `surface-bright` | `#223656` | Bright surface state |
+| `on-surface` | `#e4e1e9` | Text on surfaces |
+| `on-surface-variant` | `#bacbbf` | Muted text on surfaces |
+| `on-primary` | `#003824` | Text on primary colour |
+| `outline` | `#84958a` | Border/outline colour |
+| `outline-variant` | `#3b4a41` | Subtle borders |
 
-**Inter is the only typeface.** No secondary fonts. No display alternatives. Inter at varying weights provides all the hierarchy and character this design needs.
+### Hardcoded Colours (in CSS)
 
-| Level | Weight | Size | Spacing | Role |
-|-------|--------|------|---------|------|
-| Display Large | 700 Bold | 72px | -0.02em tight | Hero headlines, major page titles |
-| Display Medium | 700 Bold | 56px | -0.02em tight | Section hero text, key statements |
-| Heading Large | 700 Bold | 40px | -0.01em | Section titles (H2) |
-| Heading Medium | 600 Semibold | 32px | -0.01em | Subsection titles (H3) |
-| Heading Small | 600 Semibold | 24px | Normal | Card titles, feature names |
-| Body Large | 400 Regular | 20px | Normal | Lead paragraphs, hero subtext |
-| Body Medium | 400 Regular | 16px | Normal | Standard body copy |
-| Body Small | 400 Regular | 14px | Normal | Supporting text, descriptions |
-| Label Medium | 500 Medium | 14px | +0.01em | Navigation links, button text, form labels |
-| Label Small | 500 Medium | 12px | +0.02em | Badges, captions, micro-copy |
+| Hex | Where Used |
+|-----|-----------|
+| `#e4e1e9` | Body text, h1/h2 colour, mobile links |
+| `#ffffff` | h3/h4 colour, footer column headings |
+| `#c0c0d0` | Paragraph text, footer contact items, logo tagline |
+| `#9a9aaa` | Captions, slider range labels, muted meta text |
+| `#666` | Footer copyright text |
+| `#060C1C` | Footer background, mobile menu bg |
+| `#1E3050` | Tooltip bg, FAQ hover bg, contact channel icons |
+| `#47ffb8` | Cookie toggle hover, allow button hover |
 
-Line height is generous: 1.1 for display text (tight for impact), 1.6 for body text (open for readability). Headings use negative letter-spacing for a confident, dense feel. Labels use positive letter-spacing for clarity at small sizes.
+### Opacity Patterns
 
-## 4. Component Stylings
+- Card borders: `rgba(255, 255, 255, 0.08)` (rest), `0.15` (hover)
+- Section borders: `rgba(255, 255, 255, 0.05)`
+- Primary tinted bg: `rgba(0, 229, 160, 0.1)` (labels, badges)
+- Primary tinted border: `rgba(0, 229, 160, 0.2)` (labels), `0.3` (back-to-top, badges)
+- Amber tinted bg: `rgba(255, 128, 0, 0.1)` to `0.15`
+- Amber tinted border: `rgba(255, 128, 0, 0.2)` to `0.3`
+- Outline borders: `rgba(59, 74, 65, 0.2)` to `0.3`
 
-### Buttons
-- **Primary CTA:** Pill-shaped with generously rounded ends (24px radius). Solid Electric Teal (#00e5a0) fill with Void Charcoal (#0C1830) text. On hover: a soft teal glow blooms outward (box-shadow pulse animation), subtle scale-up to 1.02. On press: micro scale-down. Font: Inter 600, 14-16px.
-- **Secondary/Ghost:** Transparent fill with Shadow Line (#1e1e2a) border, Soft Cloud (#f0f0f5) text. On hover: border brightens, background fills to Whisper Lift (#1a1a22).
-- **Text Link:** No underline at rest. Electric Teal (#00e5a0) color. Underline slides in on hover from left to right.
+---
 
-### Cards & Containers
-- **Standard Card:** Elevated Onyx (#141419) background with 1px Shadow Line (#1e1e2a) border. Generously rounded corners (12px radius). On hover: card lifts with increased shadow depth and background shifts to Whisper Lift (#1a1a22). Transition: 300ms with spring easing.
-- **Highlighted Card:** Same as standard but with a subtle Electric Teal (#00e5a0) left border accent (3px) or a faint teal top glow. Used for featured items (e.g., "Most Popular" pricing tier).
-- **Callout Card:** Slightly different treatment — dashed or double border, or a subtle gradient background — to distinguish editorial/important notes from data cards.
+## 3. Typography
 
-### Inputs & Forms
-- Elevated Onyx (#141419) background with 1px Shadow Line (#1e1e2a) border. Moderately rounded corners (8px). On focus: border transitions to Electric Teal (#00e5a0) with a soft teal glow ring. Placeholder text in Muted Steel (#8a8a9a). Input text in Soft Cloud (#f0f0f5).
+**Single typeface:** Inter at all levels. No display font, no monospace except formula tooltips.
 
-### Badges & Pills
-- Fully rounded (24px radius), pill-shaped. Small, compact. Background varies by type:
-  - Amber badge: Warm Amber (#ffb347) background with dark text — for "Most Popular", proof points
-  - Teal badge: Electric Teal (#00e5a0) background with dark text — for status, success
-  - Muted badge: Whisper Lift (#1a1a22) with Muted Steel text — for labels, categories
+### Heading Scale
 
-### Navigation
-- Transparent over the hero section. Transitions to a frosted-glass dark surface (Elevated Onyx with backdrop-blur) on scroll. Sticky positioning. Logo left, links center or right, primary CTA pill button right. Transition: 300ms smooth.
+| Element | Mobile | Desktop (768px+) | Weight | Letter-spacing | Line-height |
+|---------|--------|-------------------|--------|----------------|-------------|
+| `h1` | 2.5rem (480px: 4rem) | 6rem | 900 | -0.04em | 0.9 |
+| `h2` | 2rem (480px: 3rem) | 3.75rem | 900 | -0.02em | 1.1 |
+| `h3` | 1.5rem | 2rem | 700 | normal | 1.3 |
+| `h4` | 1.125rem | 1.25rem | 600 | normal | 1.4 |
 
-## 5. Layout Principles
+### Body & Labels
 
-- **Max content width:** 1200px, always centered with auto margins
-- **Grid:** 8px base unit. All spacing values are multiples of 8
-- **Section vertical padding:** 80-120px — sections breathe, never feel stacked
-- **Card gaps:** 24-32px between cards in grids
-- **Content grids:** 2-column and 4-column on desktop, stack to single column on mobile
-- **Desktop-first** design that scales down responsively
-- **Visual hierarchy** earned through size contrast, color weight, and spatial position — not through borders, boxes, or decorative elements
+| Class/Element | Size | Weight | Line-height | Colour |
+|---------------|------|--------|-------------|--------|
+| `p` | 1rem | 400 | 1.6 | `#c0c0d0` |
+| `.lead` / `.text-lg` | 1.125rem | 400 | 1.7 | inherited |
+| `.label` | 0.6875rem | 600 | - | `#00e5a0` |
+| `.caption` | 0.875rem | 400 italic | - | `#9a9aaa` |
+| `.stat-number` | 3rem (md: 3.75rem) | 900 | 1 | varies |
+| `.stat-number.xl` | 7rem (md: 10rem) | 900 | 1 | varies |
 
-## 6. Motion & Animation (Critical)
+### Text Selection
 
-**This site must feel alive. Every section animates. Static pages are failures.**
+Background: `#00e5a0`, Text: `#0C1830`
 
-### Entrance Animations
-- **Section reveal:** Elements fade up (translateY 30px to 0) with slight scale (0.97 to 1.0) as they scroll into view. Duration: 500ms. Easing: cubic-bezier(0.16, 1, 0.3, 1) — a spring-like snap that feels confident.
-- **Staggered siblings:** When multiple cards or items enter together, each staggers by 60-80ms. The effect cascades left-to-right or top-to-bottom.
-- **Hero headline:** Words fade up individually with spring physics, 60ms stagger per word. The first thing users see should feel crafted.
+---
 
-### Interactive Animations
-- **Button hover:** Teal glow pulse (box-shadow bloom), scale to 1.02. Duration: 150ms.
-- **Button press:** Scale down to 0.98. Duration: 100ms.
-- **Card hover:** Lift upward with deeper shadow, background brightens. Duration: 300ms.
-- **Link hover:** Underline slides in from left. Duration: 200ms.
+## 4. Components
 
-### Data Animations
-- **Count-up numbers:** Statistics and monetary values count up from 0 to their final value when scrolled into view. Duration: 1500-2000ms with easing deceleration.
-- **Progress lines:** Vertical connecting lines in step-based sections draw downward as the user scrolls, revealing steps sequentially.
+### `.label` (Eyebrow Pill)
 
-### Ambient Motion
-- **Hero visual:** Node diagram with app icons gently floating/orbiting, data particles flowing along connection lines. Continuous, subtle, never distracting.
-- **Testimonial carousel:** Smooth horizontal slide with momentum physics and snap-to-card behavior.
+Uppercase pill with teal tint. `display: inline-flex`, `border-radius: 9999px`, `padding: 0.375rem 1rem`. Green by default, `.label.orange` for amber variant. Centres on mobile.
 
-### Timing Reference
-| Type | Duration | Easing |
-|------|----------|--------|
-| Micro-interaction | 150ms | ease-out |
-| Component transition | 300ms | cubic-bezier(0.16, 1, 0.3, 1) |
-| Section reveal | 500ms | cubic-bezier(0.16, 1, 0.3, 1) |
-| Count-up numbers | 1500-2000ms | ease-out deceleration |
-| Exit/dismiss | 200ms | ease-in |
+### `.btn` (Button)
 
-### Implementation
-- Scroll triggers: Intersection Observer API, threshold 0.1, trigger once (no re-animate on scroll up)
-- CSS: @keyframes for repeating animations, transitions for interactive states
-- JS: Inline `<script>` for Intersection Observer setup and count-up logic
-- Accessibility: All motion disabled when `prefers-reduced-motion: reduce` is set
+Pill-shaped (`border-radius: 9999px`), `font-weight: 700`, Inter.
+
+| Variant | Background | Text | Hover |
+|---------|-----------|------|-------|
+| `.btn-primary` | `#00e5a0` | `#0C1830` | scale(1.05), brightness(1.1), teal shadow |
+| `.btn-primary.glow` | `#00e5a0` | `#0C1830` | + pulsing teal box-shadow animation |
+| `.btn-ghost` | transparent | `#e4e1e9` | bg `#14203C`, border/text `#00e5a0` |
+
+**Sizes:** `.sm` (0.75/2rem), default (0.75/2rem), `.md` (1.25/2.5rem), `.lg` (1.5/3rem), `.full` (100% width)
+
+**Transition:** `400ms cubic-bezier(0.175, 0.885, 0.32, 1.275)` (spring easing)
+
+### `.card`
+
+Background: `var(--card-bg)` (`#14203C`). Border: `1px solid rgba(255, 255, 255, 0.08)`. Radius: `2rem`. Hover: translateY(-8px), border brightens to 0.15, deep shadow.
+
+**Transition:** `400ms cubic-bezier(0.175, 0.885, 0.32, 1.275)`
+
+### `.banner`
+
+Full-width centred pill. Max-width 42rem. Variants: `.banner.orange`, `.banner.teal`.
+
+### `.callout`
+
+Rounded container (`1rem` radius), max-width 56rem. Contains `.callout-icon` (circle, 4rem). Stacks vertical on mobile, horizontal (768px+). Variants: `.callout.orange`, `.callout.teal`.
+
+### `.pricing-card` / `.pricing-popular`
+
+Standard card with optional popular treatment: `2px solid #00e5a0` border, teal shadow. `.pricing-badge` pill appears only inside `.pricing-popular`.
+
+### `.product-badge`
+
+Absolute positioned pill, centred at top of card (top: -0.875rem). Variants: `.live` (teal bg), `.in-progress` (amber bg). Both with `#0C1830` text.
+
+### `.trust-badge`
+
+Background: `#101C36`. Contains `.trust-stat` (teal, 1.875rem, 900 weight), `.trust-label` (uppercase, 0.6875rem), optional `.trust-icon`.
+
+### `.bullet-list`
+
+Custom styled list with teal dot bullets (0.5rem circles with double-ring box-shadow). Left-aligned, centres on mobile.
+
+### `.faq-item`
+
+`<details>` based accordion. Card bg, 1rem radius. Summary styled as flex row with chevron. Hover: bg shifts to `#1A2A48`. Chevron rotates 180deg on open.
+
+---
+
+## 5. Navigation
+
+### `.site-header`
+
+Fixed, full-width, z-index 50. Background: linear gradient from `rgba(6, 12, 28, 0.85)` with `backdrop-filter: blur(20px)`. Height: 5rem. Max-width: 80rem.
+
+### Desktop (768px+)
+
+Logo left, `.nav-links` centre/right (flex, gap 2.5rem), CTA button right. Nav links: 0.6875rem, uppercase, 500 weight, `#c0c0d0`. Active: `#00e5a0` with 2px bottom border.
+
+### Mobile (<768px)
+
+Logo + hamburger. Three-line hamburger animates to X on open. `.mobile-menu` slides down with 1.5rem gap links. CTA hidden (shown in mobile menu). Menu bg: `#060C1C`.
+
+---
+
+## 6. Footer
+
+Background: `#060C1C`. Border-top: `rgba(255, 255, 255, 0.05)`. Padding: 4rem 2rem.
+
+**Layout:** Single column mobile, `2fr 1fr 1fr 1fr` grid on desktop. Contains brand column (logo, contact items with icons), social links column, navigate column, legal column.
+
+**Copyright:** `#666`, 0.75rem, border-top separator with 2rem padding-top. Build version shown at 50% opacity.
+
+---
+
+## 7. Form Fields
+
+`.form-field` containers with label + input/select/textarea. Input bg: `#1E3050`. Border: `rgba(59, 74, 65, 0.3)`. Radius: 0.5rem. Focus: teal border + teal glow ring. Error state: `.has-error` shows red border and `.field-error` message. Select has custom chevron SVG.
+
+---
+
+## 8. Layout Patterns
+
+### Section Rhythm
+
+- Hero sections: `py-24 px-8 hero-gradient` (radial teal glow, 10% opacity)
+- Content sections: `py-24 px-8` or `py-20 px-8`
+- Alternating sections: add `bg-surface-container-low` (`#101C36`)
+- Max content width: `max-w-7xl` (80rem) for grids, `max-w-4xl` for text-heavy
+- Hero text: `max-w-2xl mx-auto text-center`
+
+### Scroll Sections
+
+`section[id]` gets `scroll-margin-top: 6rem` to clear fixed header.
+
+### Mobile (max 640px)
+
+Sections centre text. Labels auto-margin centre. Section padding reduces to 2-3rem vertical. List items stay left-aligned within centred containers.
+
+### Common Grid Patterns
+
+- 4-column feature grid: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6`
+- 2-column product grid: `grid-cols-1 md:grid-cols-2 gap-8`
+- 3-column overview: `grid-cols-1 md:grid-cols-3 gap-8`
+
+---
+
+## 9. Animation System
+
+### Scroll Reveal (`.scroll-reveal`)
+
+Applied automatically by `main.js` to direct children of all `<section>` elements inside `<main>`, except the first section (hero).
+
+- Start: `opacity: 0; translateY(20px) scale(0.97)`
+- End: `opacity: 1; transform: none`
+- Duration: `500ms`
+- Easing: `cubic-bezier(0.16, 1, 0.3, 1)` (spring snap)
+- Trigger: IntersectionObserver, threshold 0.1, trigger once
+- Stagger: `.stagger-1` through `.stagger-5` (80ms increments)
+
+### Button/Card Spring
+
+Shared easing: `400ms cubic-bezier(0.175, 0.885, 0.32, 1.275)`. Used on `.btn-primary` hover, `.card` hover, `.timeline-circle` hover.
+
+### Teal Glow Pulse (`@keyframes pulse-teal`)
+
+3s infinite. Box-shadow blooms from 0 to `20px 4px rgba(0, 229, 160, 0.2)`. Applied via `.btn-primary.glow` or `.animate-pulse-teal`.
+
+### Scroll Indicator
+
+`.scroll-arrow` bounces vertically (8px) on 2s loop. Fades out on scroll.
+
+### Back-to-Top
+
+Fixed button, bottom-right (`bottom: 2rem; right: 1.25rem`). Hidden by default (opacity 0, translateY 1rem). `.visible` class shows it. Hover: solid teal bg with dark icon.
+
+### Accessibility
+
+All motion disabled under `prefers-reduced-motion: reduce`. Scroll reveals show immediately, pulse animations stop, spring transitions removed.
+
+---
+
+## 10. Specialised Components
+
+### Timeline / Steps
+
+Vertical timeline with connecting line (teal gradient, top to bottom fading). Numbered circles on the line: `.active` (solid teal, glow shadow) and `.outline` (border only). Desktop: wider padding and larger circles.
+
+### Testimonial Carousel
+
+Horizontal slide track with momentum easing (`600ms cubic-bezier(0.16, 1, 0.3, 1)`). Two slides visible on desktop, one on mobile. Arrow buttons (teal outline circles) on sides, hide on mobile. Dot indicators: 0.5rem circles, active dot expands to 1.5rem pill.
+
+### App Carousel
+
+Infinite horizontal scroll (`@keyframes app-scroll`, 60s linear). Pauses on hover. Items at 60% opacity, full on hover.
+
+### ROI Calculator
+
+Two-panel grid (stacks on mobile). Input panel with range sliders (teal thumbs, 22px). Output panel with hero result card (radial teal glow), 2x2 result cards grid, tier suggestion, CTA, and share button. Info icons (serif italic "i" in teal circle) with click-to-toggle tooltips.
+
+### Exit-Intent Popup
+
+Fixed overlay with backdrop blur. Centred card (max 36rem), slides up on show. Contains icon, heading, body, CTA button, dismiss link. Z-index: 9999.
+
+### Cookie Banner
+
+Fixed bottom, slides up. Inner card (max 48rem, `#14203C` bg). Expandable details table. Three actions: Allow (teal), Essentials Only (dark), Decline (text). Z-index: 9998.
+
+### Contact Channels
+
+Horizontal items with circle icon (3rem, `#1E3050` bg, teal icon), label (uppercase micro), and value. Icon scales on hover.
+
+---
+
+## 11. Page Inventory
+
+| Page | Path | Key Sections |
+|------|------|-------------|
+| Home | `index/index.html` | Hero (video bg), trust badges, services preview, ROI calculator, testimonials, app carousel, CTA |
+| Services | `services/services.html` | Hero (video bg), service categories, automation stats, process timeline, ROI calculator, CTA |
+| Products | `products/products.html` | Hero, product grid (4 cards), why-products features, cross-sell CTA |
+| Contact | `contact/contact.html` | Hero, contact form, contact channels, FAQ accordion, trust badges |
+| Privacy Policy | `privacy-policy/privacy-policy.html` | Legal content |
+| Terms | `terms-and-conditions/terms-and-conditions.html` | Legal content |
+| Thank You | `thank-you/thank-you.html` | Confirmation message |
+| 404 | `404/404.html` | Error message with navigation |
+
+### Global Components (JS-injected)
+
+| Component | Source | Injected Into |
+|-----------|--------|---------------|
+| Header | `components/js/header.js` | `#site-header` on all pages |
+| Footer | `components/js/footer.js` | `#site-footer` on all pages |
+| Exit Popup | `components/js/exit-popup.js` | All marketing pages |
+| Cookie Banner | `components/js/cookie-banner.js` | All pages |
+| ROI Calculator | `index/js/roi-calculator.js` | Home + Services |
+| Scroll Reveal | per-page `main.js` | Auto-applied to section children |
+
+---
+
+## 12. Utilities
+
+| Class | Purpose |
+|-------|---------|
+| `.hi` | Heroicon base: `display: inline-block; vertical-align: middle; flex-shrink: 0` |
+| `.text-primary` | Tailwind: sets text to primary teal |
+| `.scrollbar-hide` | Hides scrollbars (webkit + Firefox) |
+| `.spring-transition` | Applies spring easing: `400ms cubic-bezier(0.175, 0.885, 0.32, 1.275)` |
+| `.hero-gradient` | Radial teal glow background for hero sections |

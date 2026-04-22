@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Do.Qix Brand &amp; Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0C1830;
+    color: #e4e1e9;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: #00e5a0; color: #0C1830; }
+
+/* ── Layout ── */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+.cover {
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 60%, rgba(0,229,160,0.10) 0%, transparent 70%);
+    pointer-events: none;
+}
+.cover-logo { height: 4rem; margin-bottom: 1.5rem; position: relative; }
+.cover h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    position: relative;
+}
+.cover h1 span { color: #00e5a0; }
+.cover-sub {
+    font-size: 1rem;
+    color: #c0c0d0;
+    margin-top: 1rem;
+    position: relative;
+}
+.cover-meta {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 2rem;
+    position: relative;
+}
+
+section { margin-top: 4rem; }
+section > h2 {
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+section > h2 span { color: #00e5a0; }
+section > .section-desc {
+    font-size: 0.875rem;
+    color: #c0c0d0;
+    margin-bottom: 2rem;
+    max-width: 48rem;
+}
+
+h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 2.5rem 0 1rem;
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    background: rgba(0,229,160,0.1);
+    border: 1px solid rgba(0,229,160,0.2);
+    color: #00e5a0;
+    margin-bottom: 0.75rem;
+}
+
+/* ── Colour Swatches ── */
+.swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+.swatch {
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+.swatch-color {
+    height: 5rem;
+    position: relative;
+}
+.swatch-color .swatch-ring {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+.swatch-info {
+    background: #14203C;
+    padding: 0.75rem 1rem;
+}
+.swatch-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #fff;
+}
+.swatch-hex {
+    font-size: 0.75rem;
+    color: #9a9aaa;
+    font-family: 'Inter', monospace;
+}
+.swatch-token {
+    font-size: 0.625rem;
+    color: #666;
+    margin-top: 0.125rem;
+}
+
+/* ── Tables ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    margin: 1rem 0;
+}
+th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9a9aaa;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #c0c0d0;
+}
+td:first-child { color: #e4e1e9; font-weight: 600; }
+code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.75rem;
+    background: rgba(0,229,160,0.08);
+    color: #00e5a0;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+}
+
+/* ── Cards ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.card {
+    background: #14203C;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.3); }
+
+/* ── Typography specimens ── */
+.type-specimen {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.type-specimen:last-child { border-bottom: none; }
+.type-sample {
+    font-family: 'Inter', sans-serif;
+    color: #e4e1e9;
+    margin-bottom: 0.5rem;
+}
+.type-meta {
+    font-size: 0.6875rem;
+    color: #9a9aaa;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.type-meta span { white-space: nowrap; }
+
+/* ── Component showcase ── */
+.showcase {
+    background: #14203C;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 1rem 0;
+}
+.showcase-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+.showcase-row:last-child { margin-bottom: 0; }
+
+/* ── Buttons (showcase) ── */
+.btn-demo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.btn-primary-demo {
+    background: #00e5a0;
+    color: #0C1830;
+}
+.btn-primary-demo:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 10px 25px rgba(0,229,160,0.2);
+}
+.btn-glow-demo {
+    background: #00e5a0;
+    color: #0C1830;
+    animation: pulse-teal 3s infinite;
+    box-shadow: 0 10px 30px rgba(0,229,160,0.3);
+}
+.btn-ghost-demo {
+    background: transparent;
+    color: #e4e1e9;
+    border: 1px solid #3b4a41;
+}
+.btn-ghost-demo:hover {
+    background: #14203C;
+    border-color: #00e5a0;
+    color: #00e5a0;
+}
+.btn-lg-demo { padding: 1.5rem 3rem; font-size: 1.25rem; }
+.btn-sm-demo { padding: 0.5rem 1.5rem; font-size: 0.8125rem; }
+
+@keyframes pulse-teal {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,160,0.4); }
+    50% { box-shadow: 0 0 20px 4px rgba(0,229,160,0.2); }
+}
+
+/* ── Label pills ── */
+.label-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+}
+.label-teal { background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.2); color: #00e5a0; }
+.label-orange { background: rgba(255,128,0,0.1); border: 1px solid rgba(255,128,0,0.2); color: #ff8000; }
+
+/* ── Badges ── */
+.badge-demo {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    display: inline-block;
+}
+.badge-live { background: #00e5a0; color: #0C1830; }
+.badge-progress { background: #ff8000; color: #0C1830; }
+
+/* ── Callout ── */
+.callout-demo {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+.callout-demo.teal { background: rgba(0,229,160,0.05); border: 1px solid rgba(0,229,160,0.1); }
+.callout-demo.orange { background: rgba(255,128,0,0.1); border: 1px solid rgba(255,128,0,0.15); }
+.callout-icon-demo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+.callout-demo.teal .callout-icon-demo { background: rgba(0,229,160,0.2); color: #00e5a0; }
+.callout-demo.orange .callout-icon-demo { background: rgba(255,128,0,0.2); color: #ff8000; }
+
+/* ── Opacity reference ── */
+.opacity-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.375rem 0;
+}
+.opacity-swatch {
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 0.375rem;
+    flex-shrink: 0;
+}
+.opacity-label {
+    font-size: 0.75rem;
+    color: #9a9aaa;
+}
+
+/* ── Animation demo ── */
+.anim-demo {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.anim-box {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 1rem;
+    background: #14203C;
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #9a9aaa;
+    text-align: center;
+    line-height: 1.3;
+}
+.anim-box.spring { transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.anim-box.spring:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.15); box-shadow: 0 16px 32px rgba(0,0,0,0.3); }
+.anim-box.glow { animation: pulse-teal 3s infinite; background: #00e5a0; color: #0C1830; }
+.anim-box.reveal {
+    animation: fadeUp 1.5s ease-out infinite;
+}
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(20px) scale(0.97); }
+    40%, 80% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* ── Spacing reference ── */
+.spacing-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+.spacing-block {
+    background: rgba(0,229,160,0.15);
+    border: 1px solid rgba(0,229,160,0.3);
+    border-radius: 0.25rem;
+    height: 1.5rem;
+}
+.spacing-label {
+    font-size: 0.75rem;
+    color: #9a9aaa;
+    min-width: 5rem;
+}
+
+/* ── Divider ── */
+hr {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin: 3rem 0;
+}
+
+/* ── Footer ── */
+.doc-footer {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-top: 4rem;
+}
+.doc-footer p {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .cover h1 { font-size: 2.25rem; }
+    section > h2 { font-size: 1.375rem; }
+    .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+    .card-grid { grid-template-columns: 1fr; }
+    table { font-size: 0.75rem; }
+    th, td { padding: 0.5rem; }
+}
+
+@media print {
+    body { background: #fff; color: #1a1a1a; }
+    .card, .showcase, .swatch-info { background: #f5f5f5; border-color: #ddd; }
+    .swatch-name, h3, td:first-child { color: #1a1a1a; }
+    code { background: #eef; color: #333; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ COVER ═══════════════════════════════════════════ -->
+<div class="cover">
+    <img src="logo_new_green.png" alt="Do.Qix" class="cover-logo"/>
+    <h1>Brand &amp; <span>Design System</span></h1>
+    <p class="cover-sub">Internal reference for building within the Do.Qix visual identity.<br/>Colours, typography, components, animation, and layout patterns.</p>
+    <p class="cover-meta">Source of truth: <code>design/global.css</code> &middot; Last updated: April 2026</p>
+</div>
+
+<div class="page">
+
+<!-- ═══════════════════════════════════════════ IDENTITY ═══════════════════════════════════════════ -->
+<section>
+    <div class="eyebrow">Identity</div>
+    <h2>Visual <span>Identity</span></h2>
+    <p class="section-desc">Premium dark with electric energy. Near-black canvas, vivid teal accents, warm amber secondary. Confident and alive, never corporate or cold. Low density, generous whitespace, clean hierarchy through contrast and scale.</p>
+
+    <div class="card-grid" style="margin-top:1.5rem">
+        <div class="card">
+            <h3 style="margin-top:0">Font</h3>
+            <p style="font-size:0.875rem;color:#c0c0d0">Inter is the only typeface. All weights (400, 500, 600, 700, 900). No secondary fonts. Loaded from Google Fonts.</p>
+        </div>
+        <div class="card">
+            <h3 style="margin-top:0">Icons</h3>
+            <p style="font-size:0.875rem;color:#c0c0d0">Heroicons (inline SVG). Outline style by default, solid for emphasis. Base class: <code>.hi</code>. Source: <code>heroicons-master/optimized/24/</code></p>
+        </div>
+        <div class="card">
+            <h3 style="margin-top:0">Tone</h3>
+            <p style="font-size:0.875rem;color:#c0c0d0">Direct, practical, South African. No em dashes. No fluff. Periods for new thoughts, commas for soft connections, colons for elaboration.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ COLOURS ═══════════════════════════════════════════ -->
+<section>
+    <div class="eyebrow">Colour</div>
+    <h2>Colour <span>Palette</span></h2>
+    <p class="section-desc">The full palette used across the site. Primary teal is the brand heartbeat. Amber is the warm counterpoint. All other colours serve specific structural or semantic roles.</p>
+
+    <h3>Primary &amp; Accent</h3>
+    <div class="swatch-grid">
+        <div class="swatch">
+            <div class="swatch-color" style="background:#00e5a0"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Electric Teal</div>
+                <div class="swatch-hex">#00e5a0</div>
+                <div class="swatch-token">--color-primary</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#ff8000"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Warm Amber</div>
+                <div class="swatch-hex">#ff8000</div>
+                <div class="swatch-token">--color-secondary</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#e09c58"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Tertiary Gold</div>
+                <div class="swatch-hex">#e09c58</div>
+                <div class="swatch-token">--color-tertiary</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#ff6b6b"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Coral Alert</div>
+                <div class="swatch-hex">#ff6b6b</div>
+                <div class="swatch-token">--color-danger</div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Backgrounds &amp; Surfaces</h3>
+    <div class="swatch-grid">
+        <div class="swatch">
+            <div class="swatch-color" style="background:#0C1830"><div class="swatch-ring"></div></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Void Navy</div>
+                <div class="swatch-hex">#0C1830</div>
+                <div class="swatch-token">--color-bg / body background</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#081024"><div class="swatch-ring"></div></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Deep Abyss</div>
+                <div class="swatch-hex">#081024</div>
+                <div class="swatch-token">surface-container-lowest</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#101C36"><div class="swatch-ring"></div></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Section Alternate</div>
+                <div class="swatch-hex">#101C36</div>
+                <div class="swatch-token">surface-container-low</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#14203C"><div class="swatch-ring"></div></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Card Surface</div>
+                <div class="swatch-hex">#14203C</div>
+                <div class="swatch-token">--card-bg / surface-container</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#1A2A48"><div class="swatch-ring"></div></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Elevated Surface</div>
+                <div class="swatch-hex">#1A2A48</div>
+                <div class="swatch-token">surface-container-high</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#1E3050"><div class="swatch-ring"></div></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Tooltip / Popover</div>
+                <div class="swatch-hex">#1E3050</div>
+                <div class="swatch-token">surface-container-highest</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#060C1C"><div class="swatch-ring"></div></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Footer / Menu</div>
+                <div class="swatch-hex">#060C1C</div>
+                <div class="swatch-token">footer bg, mobile menu</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#223656"><div class="swatch-ring"></div></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Bright Surface</div>
+                <div class="swatch-hex">#223656</div>
+                <div class="swatch-token">surface-bright</div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Text</h3>
+    <div class="swatch-grid">
+        <div class="swatch">
+            <div class="swatch-color" style="background:#f0f0f5"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Primary Text</div>
+                <div class="swatch-hex">#f0f0f5</div>
+                <div class="swatch-token">--color-text-primary</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#e4e1e9"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Body Text</div>
+                <div class="swatch-hex">#e4e1e9</div>
+                <div class="swatch-token">on-surface (Tailwind)</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#c0c0d0"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Secondary Text</div>
+                <div class="swatch-hex">#c0c0d0</div>
+                <div class="swatch-token">--color-text-secondary</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#bacbbf"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Muted Text</div>
+                <div class="swatch-hex">#bacbbf</div>
+                <div class="swatch-token">on-surface-variant</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#9a9aaa"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Caption / Meta</div>
+                <div class="swatch-hex">#9a9aaa</div>
+                <div class="swatch-token">captions, range labels</div>
+            </div>
+        </div>
+        <div class="swatch">
+            <div class="swatch-color" style="background:#666"></div>
+            <div class="swatch-info">
+                <div class="swatch-name">Faintest</div>
+                <div class="swatch-hex">#666666</div>
+                <div class="swatch-token">copyright text</div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Opacity Patterns</h3>
+    <p style="font-size:0.8125rem; color:#c0c0d0; margin-bottom:1rem">Tinted backgrounds and borders use alpha values on the accent colours for consistency.</p>
+    <div class="opacity-bar">
+        <div class="opacity-swatch" style="background:rgba(255,255,255,0.08)"></div>
+        <span class="opacity-label"><code>rgba(255,255,255, 0.08)</code> Card border (rest)</span>
+    </div>
+    <div class="opacity-bar">
+        <div class="opacity-swatch" style="background:rgba(255,255,255,0.15)"></div>
+        <span class="opacity-label"><code>rgba(255,255,255, 0.15)</code> Card border (hover)</span>
+    </div>
+    <div class="opacity-bar">
+        <div class="opacity-swatch" style="background:rgba(0,229,160,0.1)"></div>
+        <span class="opacity-label"><code>rgba(0,229,160, 0.10)</code> Teal label/badge bg</span>
+    </div>
+    <div class="opacity-bar">
+        <div class="opacity-swatch" style="background:rgba(0,229,160,0.2)"></div>
+        <span class="opacity-label"><code>rgba(0,229,160, 0.20)</code> Teal label border</span>
+    </div>
+    <div class="opacity-bar">
+        <div class="opacity-swatch" style="background:rgba(0,229,160,0.3)"></div>
+        <span class="opacity-label"><code>rgba(0,229,160, 0.30)</code> Back-to-top border, badge border</span>
+    </div>
+    <div class="opacity-bar">
+        <div class="opacity-swatch" style="background:rgba(255,128,0,0.15)"></div>
+        <span class="opacity-label"><code>rgba(255,128,0, 0.15)</code> Amber banner/callout bg</span>
+    </div>
+    <div class="opacity-bar">
+        <div class="opacity-swatch" style="background:rgba(59,74,65,0.3)"></div>
+        <span class="opacity-label"><code>rgba(59,74,65, 0.30)</code> Form input border, outline-variant</span>
+    </div>
+</section>
+
+<hr/>
+
+<!-- ═══════════════════════════════════════════ TYPOGRAPHY ═══════════════════════════════════════════ -->
+<section>
+    <div class="eyebrow">Typography</div>
+    <h2>Type <span>Scale</span></h2>
+    <p class="section-desc">Inter at every level. Tight letter-spacing on headings for density, normal on body for readability. Responsive scaling at 480px and 768px breakpoints.</p>
+
+    <div class="type-specimen">
+        <div class="type-sample" style="font-size:4rem;font-weight:900;letter-spacing:-0.04em;line-height:0.9">Hero Headline</div>
+        <div class="type-meta">
+            <span>h1</span>
+            <span>Weight: 900</span>
+            <span>Mobile: 2.5rem / 480px: 4rem / 768px: 6rem</span>
+            <span>Tracking: -0.04em</span>
+            <span>Leading: 0.9</span>
+        </div>
+    </div>
+
+    <div class="type-specimen">
+        <div class="type-sample" style="font-size:3rem;font-weight:900;letter-spacing:-0.02em;line-height:1.1">Section Heading</div>
+        <div class="type-meta">
+            <span>h2</span>
+            <span>Weight: 900</span>
+            <span>Mobile: 2rem / 480px: 3rem / 768px: 3.75rem</span>
+            <span>Tracking: -0.02em</span>
+            <span>Leading: 1.1</span>
+        </div>
+    </div>
+
+    <div class="type-specimen">
+        <div class="type-sample" style="font-size:1.5rem;font-weight:700;line-height:1.3;color:#fff">Card Title</div>
+        <div class="type-meta">
+            <span>h3</span>
+            <span>Weight: 700</span>
+            <span>Mobile: 1.5rem / 768px: 2rem</span>
+            <span>Colour: #ffffff</span>
+            <span>Leading: 1.3</span>
+        </div>
+    </div>
+
+    <div class="type-specimen">
+        <div class="type-sample" style="font-size:1.125rem;font-weight:600;line-height:1.4;color:#fff">Minor Heading</div>
+        <div class="type-meta">
+            <span>h4</span>
+            <span>Weight: 600</span>
+            <span>Mobile: 1.125rem / 768px: 1.25rem</span>
+            <span>Colour: #ffffff</span>
+            <span>Leading: 1.4</span>
+        </div>
+    </div>
+
+    <div class="type-specimen">
+        <div class="type-sample" style="font-size:1rem;font-weight:400;line-height:1.6;color:#c0c0d0">Body text. This is the standard paragraph style used across the site for descriptions, explanations, and general content. Optimised for readability on dark backgrounds.</div>
+        <div class="type-meta">
+            <span>p</span>
+            <span>Weight: 400</span>
+            <span>Size: 1rem</span>
+            <span>Colour: #c0c0d0</span>
+            <span>Leading: 1.6</span>
+        </div>
+    </div>
+
+    <div class="type-specimen">
+        <div class="type-sample" style="font-size:1.125rem;font-weight:400;line-height:1.7;color:#c0c0d0">Lead paragraph for intro text and hero subtitles.</div>
+        <div class="type-meta">
+            <span>.lead / .text-lg</span>
+            <span>Weight: 400</span>
+            <span>Size: 1.125rem</span>
+            <span>Leading: 1.7</span>
+        </div>
+    </div>
+
+    <div class="type-specimen">
+        <div class="type-sample">
+            <span class="label-teal label-demo">Eyebrow Label</span>
+        </div>
+        <div class="type-meta">
+            <span>.label</span>
+            <span>Weight: 600</span>
+            <span>Size: 0.6875rem</span>
+            <span>Uppercase</span>
+            <span>Tracking: 0.05em</span>
+            <span>Pill: 9999px radius</span>
+        </div>
+    </div>
+
+    <div class="type-specimen">
+        <div class="type-sample" style="font-size:3.75rem;font-weight:900;color:#00e5a0;letter-spacing:-0.02em;line-height:1">R 47,500</div>
+        <div class="type-meta">
+            <span>.stat-number</span>
+            <span>Weight: 900</span>
+            <span>Mobile: 3rem / 768px: 3.75rem</span>
+            <span>.teal or .orange variants</span>
+        </div>
+    </div>
+
+    <div class="type-specimen">
+        <div class="type-sample" style="font-size:0.875rem;font-style:italic;color:#9a9aaa">Caption text for closing remarks and section quotes.</div>
+        <div class="type-meta">
+            <span>.caption</span>
+            <span>Weight: 400 italic</span>
+            <span>Size: 0.875rem</span>
+            <span>Colour: #9a9aaa</span>
+        </div>
+    </div>
+</section>
+
+<hr/>
+
+<!-- ═══════════════════════════════════════════ COMPONENTS ═══════════════════════════════════════════ -->
+<section>
+    <div class="eyebrow">Components</div>
+    <h2>Component <span>Library</span></h2>
+    <p class="section-desc">Every reusable component in the design system with live examples. All defined in <code>global.css</code>.</p>
+
+    <h3>Buttons</h3>
+    <div class="showcase">
+        <div class="showcase-row">
+            <button class="btn-demo btn-primary-demo">Primary CTA</button>
+            <button class="btn-demo btn-glow-demo">Primary + Glow</button>
+            <button class="btn-demo btn-ghost-demo">Ghost / Outline</button>
+        </div>
+        <div class="showcase-row">
+            <button class="btn-demo btn-primary-demo btn-lg-demo">Large</button>
+            <button class="btn-demo btn-primary-demo">Default</button>
+            <button class="btn-demo btn-primary-demo btn-sm-demo">Small</button>
+        </div>
+        <table>
+            <tr><th>Class</th><th>Background</th><th>Text</th><th>Hover</th></tr>
+            <tr><td><code>.btn-primary</code></td><td>#00e5a0</td><td>#0C1830</td><td>scale(1.05), brightness(1.1), teal shadow</td></tr>
+            <tr><td><code>.btn-primary.glow</code></td><td>#00e5a0</td><td>#0C1830</td><td>+ pulsing box-shadow (3s loop)</td></tr>
+            <tr><td><code>.btn-ghost</code></td><td>transparent</td><td>#e4e1e9</td><td>bg #14203C, border/text #00e5a0</td></tr>
+        </table>
+        <p style="font-size:0.75rem;color:#9a9aaa;margin-top:0.5rem">Sizes: <code>.sm</code> (0.5/1.5rem) &middot; default (0.75/2rem) &middot; <code>.md</code> (1.25/2.5rem) &middot; <code>.lg</code> (1.5/3rem) &middot; <code>.full</code> (100%)</p>
+        <p style="font-size:0.75rem;color:#9a9aaa">Easing: <code>400ms cubic-bezier(0.175, 0.885, 0.32, 1.275)</code> (spring)</p>
+    </div>
+
+    <h3>Labels &amp; Badges</h3>
+    <div class="showcase">
+        <div class="showcase-row">
+            <span class="label-demo label-teal">Teal Label</span>
+            <span class="label-demo label-orange">Orange Label</span>
+            <span class="badge-demo badge-live">Live</span>
+            <span class="badge-demo badge-progress">In Progress</span>
+        </div>
+        <table>
+            <tr><th>Element</th><th>Class</th><th>Usage</th></tr>
+            <tr><td><code>.label</code></td><td>.label / .label.orange</td><td>Section eyebrow pills</td></tr>
+            <tr><td><code>.product-badge</code></td><td>.live / .in-progress</td><td>Absolute-positioned on product cards (top centre)</td></tr>
+            <tr><td><code>.pricing-badge</code></td><td>Inside .pricing-popular</td><td>"Most Popular" badge, auto-hidden unless parent has .pricing-popular</td></tr>
+        </table>
+    </div>
+
+    <h3>Cards</h3>
+    <div class="showcase">
+        <div class="card-grid">
+            <div class="card">
+                <h3 style="margin-top:0;font-size:1rem">Standard Card</h3>
+                <p style="font-size:0.8125rem;color:#c0c0d0;margin-top:0.5rem">Background: <code>#14203C</code>. Border: <code>rgba(255,255,255,0.08)</code>. Radius: <code>2rem</code>. Hover lifts 8px with deeper shadow.</p>
+            </div>
+            <div class="card" style="border:2px solid #00e5a0;box-shadow:0 0 20px rgba(0,229,160,0.1)">
+                <h3 style="margin-top:0;font-size:1rem">Popular / Featured Card</h3>
+                <p style="font-size:0.8125rem;color:#c0c0d0;margin-top:0.5rem">Full teal border (2px) with subtle glow shadow. Used for "Most Popular" pricing tier via <code>.pricing-popular</code>.</p>
+            </div>
+        </div>
+        <p style="font-size:0.75rem;color:#9a9aaa;margin-top:1rem">Transition: <code>400ms cubic-bezier(0.175, 0.885, 0.32, 1.275)</code>. Hover: <code>translateY(-8px)</code>, border brightens to 0.15, shadow deepens.</p>
+    </div>
+
+    <h3>Callouts</h3>
+    <div class="callout-demo teal">
+        <div class="callout-icon-demo">&#x2713;</div>
+        <div>
+            <div style="font-weight:700;color:#00e5a0;font-size:0.875rem">Teal Callout</div>
+            <div style="font-size:0.8125rem;color:#c0c0d0">Used for positive highlights and tips. Max-width 56rem. Stacks on mobile, horizontal on 768px+.</div>
+        </div>
+    </div>
+    <div class="callout-demo orange">
+        <div class="callout-icon-demo">!</div>
+        <div>
+            <div style="font-weight:700;color:#ff8000;font-size:0.875rem">Orange Callout</div>
+            <div style="font-size:0.8125rem;color:#c0c0d0">Used for warnings, important notes, and attention-drawing content.</div>
+        </div>
+    </div>
+
+    <h3>Banners</h3>
+    <div class="showcase">
+        <div style="padding:1rem 2rem;border-radius:9999px;text-align:center;max-width:42rem;margin:0 auto;font-weight:700;background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.2);color:#00e5a0;font-size:0.875rem">Teal Banner: Full-width centred pill</div>
+        <div style="padding:1rem 2rem;border-radius:9999px;text-align:center;max-width:42rem;margin:0.75rem auto 0;font-weight:700;background:rgba(255,128,0,0.15);border:1px solid rgba(255,128,0,0.3);color:#ff8000;font-size:0.875rem">Orange Banner: Warm attention-grabber</div>
+    </div>
+</section>
+
+<hr/>
+
+<!-- ═══════════════════════════════════════════ ANIMATION ═══════════════════════════════════════════ -->
+<section>
+    <div class="eyebrow">Motion</div>
+    <h2>Animation <span>System</span></h2>
+    <p class="section-desc">Every section animates on scroll. Static pages are failures. All motion disabled under <code>prefers-reduced-motion: reduce</code>.</p>
+
+    <div class="anim-demo" style="margin:1.5rem 0">
+        <div class="anim-box spring">Hover<br/>Spring</div>
+        <div class="anim-box glow">Glow<br/>Pulse</div>
+        <div class="anim-box reveal">Scroll<br/>Reveal</div>
+    </div>
+
+    <table>
+        <tr><th>Animation</th><th>Duration</th><th>Easing</th><th>Trigger</th></tr>
+        <tr><td>Scroll Reveal</td><td>500ms</td><td><code>cubic-bezier(0.16, 1, 0.3, 1)</code></td><td>IntersectionObserver, threshold 0.1, once</td></tr>
+        <tr><td>Button/Card Spring</td><td>400ms</td><td><code>cubic-bezier(0.175, 0.885, 0.32, 1.275)</code></td><td>:hover</td></tr>
+        <tr><td>Teal Glow Pulse</td><td>3s infinite</td><td>default</td><td>Applied via <code>.glow</code> or <code>.animate-pulse-teal</code></td></tr>
+        <tr><td>Scroll Bounce</td><td>2s infinite</td><td>ease-in-out</td><td>Continuous on scroll indicator</td></tr>
+        <tr><td>Stagger (1-5)</td><td>+80ms per step</td><td>same as reveal</td><td><code>.stagger-1</code> through <code>.stagger-5</code></td></tr>
+    </table>
+
+    <h3>Scroll Reveal Details</h3>
+    <p style="font-size:0.8125rem;color:#c0c0d0">Applied automatically by <code>main.js</code> to direct children of all <code>&lt;section&gt;</code> elements inside <code>&lt;main&gt;</code>, except the first section (hero). Start state: <code>opacity: 0; translateY(20px) scale(0.97)</code>. End state: <code>opacity: 1; transform: none</code>.</p>
+</section>
+
+<hr/>
+
+<!-- ═══════════════════════════════════════════ LAYOUT ═══════════════════════════════════════════ -->
+<section>
+    <div class="eyebrow">Layout</div>
+    <h2>Layout <span>Patterns</span></h2>
+    <p class="section-desc">Consistent section rhythm across all pages. Alternating backgrounds create visual separation.</p>
+
+    <table>
+        <tr><th>Pattern</th><th>Classes</th><th>Notes</th></tr>
+        <tr><td>Hero section</td><td><code>py-24 px-8 hero-gradient</code></td><td>Radial teal glow at 10% opacity. Text centred, max-w-4xl.</td></tr>
+        <tr><td>Content section</td><td><code>py-24 px-8</code> or <code>py-20 px-8</code></td><td>Default bg (#0C1830)</td></tr>
+        <tr><td>Alternate section</td><td><code>py-24 px-8 bg-surface-container-low</code></td><td>Bg #101C36 for visual separation</td></tr>
+        <tr><td>Content max-width</td><td><code>max-w-7xl mx-auto</code></td><td>80rem for grids</td></tr>
+        <tr><td>Text max-width</td><td><code>max-w-4xl mx-auto</code></td><td>For text-heavy sections</td></tr>
+        <tr><td>Hero text</td><td><code>max-w-2xl mx-auto text-center</code></td><td>Constrains paragraph width under headlines</td></tr>
+        <tr><td>4-col features</td><td><code>grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6</code></td><td>Trust badges, tech specs</td></tr>
+        <tr><td>2-col products</td><td><code>grid-cols-1 md:grid-cols-2 gap-8</code></td><td>Product cards, admin features</td></tr>
+        <tr><td>3-col overview</td><td><code>grid-cols-1 md:grid-cols-3 gap-8</code></td><td>Platform overview cards</td></tr>
+    </table>
+
+    <h3>Spacing Scale</h3>
+    <div style="margin-top:1rem">
+        <div class="spacing-row"><span class="spacing-label">0.5rem (8px)</span><div class="spacing-block" style="width:2rem"></div></div>
+        <div class="spacing-row"><span class="spacing-label">1rem (16px)</span><div class="spacing-block" style="width:4rem"></div></div>
+        <div class="spacing-row"><span class="spacing-label">1.5rem (24px)</span><div class="spacing-block" style="width:6rem"></div></div>
+        <div class="spacing-row"><span class="spacing-label">2rem (32px)</span><div class="spacing-block" style="width:8rem"></div></div>
+        <div class="spacing-row"><span class="spacing-label">3rem (48px)</span><div class="spacing-block" style="width:12rem"></div></div>
+        <div class="spacing-row"><span class="spacing-label">4rem (64px)</span><div class="spacing-block" style="width:16rem"></div></div>
+        <div class="spacing-row"><span class="spacing-label">6rem (96px)</span><div class="spacing-block" style="width:20rem"></div></div>
+    </div>
+
+    <h3>Mobile Behaviour (max 640px)</h3>
+    <p style="font-size:0.8125rem;color:#c0c0d0">Sections centre-align text. Labels auto-centre. Section padding reduces (py-24 becomes 3rem). List items stay left-aligned within centred containers. Hamburger replaces nav links. CTA button hidden from header (shown in mobile menu).</p>
+</section>
+
+<hr/>
+
+<!-- ═══════════════════════════════════════════ GLOBAL COMPONENTS ═══════════════════════════════════════════ -->
+<section>
+    <div class="eyebrow">Architecture</div>
+    <h2>Global <span>Components</span></h2>
+    <p class="section-desc">All pages share JS-injected components for consistency. Source of truth is in <code>design/components/js/</code>.</p>
+
+    <table>
+        <tr><th>Component</th><th>Source File</th><th>Injects Into</th><th>Notes</th></tr>
+        <tr><td>Header</td><td><code>components/js/header.js</code></td><td><code>#site-header</code></td><td>Fixed nav, frosted glass bg, hamburger mobile</td></tr>
+        <tr><td>Footer</td><td><code>components/js/footer.js</code></td><td><code>#site-footer</code></td><td>4-column grid, socials, contact, legal, build version</td></tr>
+        <tr><td>Exit Popup</td><td><code>components/js/exit-popup.js</code></td><td>Body overlay</td><td>Exit-intent trigger, once per session, z-9999</td></tr>
+        <tr><td>Cookie Banner</td><td><code>components/js/cookie-banner.js</code></td><td>Fixed bottom</td><td>Allow/Essentials/Decline, expandable details, z-9998</td></tr>
+        <tr><td>ROI Calculator</td><td><code>index/js/roi-calculator.js</code></td><td><code>#roi-calculator</code></td><td>Two-panel grid, range sliders, output cards, GA4 tracking</td></tr>
+        <tr><td>Main / Reveal</td><td>per-page <code>main.js</code></td><td>All sections</td><td>Auto-applies scroll-reveal, hamburger toggle, back-to-top</td></tr>
+    </table>
+
+    <h3>Page Inventory</h3>
+    <table>
+        <tr><th>Page</th><th>Path</th><th>Key Sections</th></tr>
+        <tr><td>Home</td><td><code>index/index.html</code></td><td>Hero (video), trust badges, services preview, ROI calc, testimonials, app carousel, CTA</td></tr>
+        <tr><td>Services</td><td><code>services/services.html</code></td><td>Hero (video), categories, stats, timeline, ROI calc, CTA</td></tr>
+        <tr><td>Products</td><td><code>products/products.html</code></td><td>Hero, product grid (4 cards), why-products, cross-sell, CTA</td></tr>
+        <tr><td>Contact</td><td><code>contact/contact.html</code></td><td>Hero, form, channels, FAQ accordion, trust badges</td></tr>
+        <tr><td>Privacy Policy</td><td><code>privacy-policy/</code></td><td>Legal content</td></tr>
+        <tr><td>Terms</td><td><code>terms-and-conditions/</code></td><td>Legal content</td></tr>
+        <tr><td>Thank You</td><td><code>thank-you/</code></td><td>Confirmation</td></tr>
+        <tr><td>404</td><td><code>404/</code></td><td>Error + navigation</td></tr>
+    </table>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER ═══════════════════════════════════════════ -->
+<div class="doc-footer">
+    <p>Do.Qix Brand &amp; Design System &middot; Digital Operations (Pty) Ltd &middot; Cape Town, South Africa</p>
+    <p style="margin-top:0.5rem">Source: <code>design/global.css</code> &middot; This document: <code>design/brand-guide.html</code></p>
+</div>
+
+</div>
+</body>
+</html>
