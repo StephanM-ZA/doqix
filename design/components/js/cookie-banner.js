@@ -1,8 +1,31 @@
 /* Do.Qix Cookie Banner — three-tier consent, persists in localStorage */
+/* GA4 is only loaded when the user clicks "Allow All" */
 
 (function () {
     var STORAGE_KEY = 'doqix_cookie_consent';
-    if (localStorage.getItem(STORAGE_KEY)) return;
+    var GA_ID = 'G-BC57HM6CTG';
+
+    /* Load GA4 dynamically — only called when consent is "allow" */
+    function loadGA4() {
+        if (window._doqixGA4Loaded) return;
+        window._doqixGA4Loaded = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', GA_ID);
+    }
+
+    /* Check existing consent on every page load */
+    var consent = localStorage.getItem(STORAGE_KEY);
+    if (consent === 'allow') {
+        loadGA4();
+        return;
+    }
+    if (consent) return; /* declined or essentials — no banner, no GA4 */
 
     var banner = document.createElement('div');
     banner.id = 'cookie-banner';
@@ -58,9 +81,15 @@
                                 '<td>Serves website files. Standard server logs (IP, browser type).</td>' +
                                 '<td><span class="cookie-cat functional">Functional</span></td>' +
                             '</tr>' +
+                            '<tr>' +
+                                '<td>Google Analytics</td>' +
+                                '<td>Analytics cookie</td>' +
+                                '<td>Tracks page views and site usage to help us improve. Only loaded if you click "Allow All".</td>' +
+                                '<td><span class="cookie-cat analytics">Analytics</span></td>' +
+                            '</tr>' +
                         '</tbody>' +
                     '</table>' +
-                    '<p class="cookie-banner-note">We do not use analytics, tracking pixels, or advertising cookies.</p>' +
+                    '<p class="cookie-banner-note">We do not use tracking pixels or advertising cookies. Analytics is only loaded with your explicit consent.</p>' +
                 '</div>' +
             '</div>' +
             '<div class="cookie-banner-actions">' +
@@ -91,7 +120,9 @@
     /* Consent buttons */
     banner.querySelectorAll('.cookie-banner-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
-            localStorage.setItem(STORAGE_KEY, btn.getAttribute('data-consent'));
+            var choice = btn.getAttribute('data-consent');
+            localStorage.setItem(STORAGE_KEY, choice);
+            if (choice === 'allow') loadGA4();
             banner.classList.remove('show');
             setTimeout(function () { banner.remove(); }, 300);
         });

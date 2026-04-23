@@ -29,76 +29,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-on-surface": "#303036",
-                        "surface-container-low": "#101C36",
-                        "surface-container-highest": "#1E3050",
-                        "on-tertiary-container": "#744c00",
-                        "on-surface": "#e4e1e9",
-                        "on-surface-variant": "#bacbbf",
-                        "surface-bright": "#223656",
-                        "on-secondary-fixed": "#311300",
-                        "on-primary": "#003824",
-                        "on-secondary": "#502400",
-                        "surface-dim": "#0C1830",
-                        "tertiary-container": "#ffbd5b",
-                        "secondary-fixed-dim": "#ff8000",
-                        "surface-tint": "#00e29e",
-                        "primary": "#00e5a0",
-                        "surface-variant": "#35343a",
-                        "on-primary-container": "#006141",
-                        "surface-container-high": "#1A2A48",
-                        "background": "#0C1830",
-                        "error": "#ffb4ab",
-                        "primary-fixed": "#47ffb8",
-                        "on-tertiary-fixed": "#291800",
-                        "outline-variant": "#3b4a41",
-                        "on-tertiary": "#452b00",
-                        "on-error": "#690005",
-                        "on-background": "#e4e1e9",
-                        "on-primary-fixed-variant": "#005236",
-                        "outline": "#84958a",
-                        "on-tertiary-fixed-variant": "#624000",
-                        "secondary-container": "#ff8000",
-                        "error-container": "#93000a",
-                        "on-secondary-fixed-variant": "#723600",
-                        "secondary-fixed": "#ffdcc7",
-                        "tertiary-fixed-dim": "#fcba59",
-                        "primary-container": "#00e5a0",
-                        "surface": "#0C1830",
-                        "surface-container-lowest": "#081024",
-                        "on-secondary-container": "#5e2b00",
-                        "tertiary": "#ffe1bb",
-                        "on-primary-fixed": "#002114",
-                        "tertiary-fixed": "#ffddb3",
-                        "on-error-container": "#ffdad6",
-                        "inverse-surface": "#e4e1e9",
-                        "inverse-primary": "#006c49",
-                        "primary-fixed-dim": "#00e29e",
-                        "surface-container": "#14203C",
-                        "secondary": "#ff8000"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "1rem",
-                        "lg": "2rem",
-                        "xl": "3rem",
-                        "full": "9999px"
-                    },
-                    "fontFamily": {
-                        "headline": ["Inter"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
-                },
-            }
-        }
-    </script>
-<link rel="stylesheet" href="../global.css?v=0.9.4"/>
+<script src="../components/js/tailwind-config.js?v=0.9.8"></script>
+<link rel="stylesheet" href="../global.css?v=0.9.8"/>
 <style>
         /* Services page-specific styles */
         .hero-video-bg video { opacity: 0.15; }
@@ -140,20 +72,11 @@
     "offerCount": "4"
   }
 }
-</script>
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BC57HM6CTG"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag("js", new Date());
-gtag("config", "G-BC57HM6CTG");
-</script>
-</head>
+</script></head>
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="../components/js/header.js?v=0.7.8"></script>
+<script src="../components/js/header.js?v=0.9.8"></script>
 
 <main class="pt-20">
 
@@ -908,12 +831,12 @@ gtag("config", "G-BC57HM6CTG");
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script src="../components/js/footer.js?v=0.7.8"></script>
+<script src="../components/js/footer.js?v=0.9.8"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script src="js/main.js?v=0.7.8"></script>
-<script src="js/roi-calculator.js?v=0.9.3"></script>
-<script src="js/exit-popup.js?v=0.7.8"></script>
-<script src="js/cookie-banner.js?v=0.7.8"></script>
+<script src="../components/js/main.js?v=0.9.8"></script>
+<script src="../components/js/roi-calculator.js?v=0.9.8"></script>
+<script src="../components/js/exit-popup.js?v=0.9.8"></script>
+<script src="../components/js/cookie-banner.js?v=0.9.8"></script>
 </body></html>

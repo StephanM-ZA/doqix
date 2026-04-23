@@ -22,7 +22,7 @@ var revealObserver = new IntersectionObserver(function (entries) {
             entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.01 });
+}, { threshold: 0.1 });
 
 // Auto-apply scroll-reveal to direct children of every <section> in <main>
 // Skip: hero video backgrounds, elements already marked, first section (hero)
