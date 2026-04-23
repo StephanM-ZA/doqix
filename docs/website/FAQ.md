@@ -424,7 +424,7 @@ Contact us via your support channel (email for Solo, WhatsApp for Team+) with: t
 ## 2.3 — Billing and Payments
 
 ### When is my next invoice due?
-Invoices are sent monthly on your billing anniversary (the date you signed up). Payment terms are 7 days from invoice date. If you need a copy or have a billing question, email stephan@digitaloperations.co.za.
+Invoices are sent monthly on your billing anniversary (the date you signed up). Payment terms are 7 days from invoice date. If you need a copy or have a billing question, email hello@digitaloperations.co.za.
 
 ### What payment methods do you accept?
 EFT (bank transfer), debit order, and card payment. Invoiced monthly. Enterprise clients can arrange purchase orders and 30-day payment terms if needed.
@@ -442,7 +442,7 @@ Contact your support channel. If you have capacity on your current plan (e.g., T
 We don't offer formal pause periods on standard plans. You can cancel and re-subscribe later (no re-setup fee if within 3 months). For seasonal businesses, talk to us about structuring your plan around your active periods.
 
 ### How do I terminate?
-Email stephan@digitaloperations.co.za with notice. Month-to-month tiers end at the end of the current month. Enterprise is 90 days' notice on the 12-month term.
+Email hello@digitaloperations.co.za with notice. Month-to-month tiers end at the end of the current month. Enterprise is 90 days' notice on the 12-month term.
 
 ---
 

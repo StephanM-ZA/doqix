@@ -12,7 +12,7 @@
 Digital Operations and Technology (Pty) Ltd, trading as Do.Qix ("Do.Qix," "we," "us," "our") is a workflow automation company based in Cape Town, South Africa. We design, build, and manage automations for businesses, and offer standalone software products via subscription.
 
 - **Website:** digitaloperations.co.za/doqix
-- **Email:** stephan@digitaloperations.co.za
+- **Email:** hello@digitaloperations.co.za
 - **Phone:** +27 61 514 8375
 - **Information Officer:** Stephan Marais
 
@@ -149,7 +149,7 @@ As a data subject, you have the right to:
 
 Contact us at:
 
-- **Email:** stephan@digitaloperations.co.za
+- **Email:** hello@digitaloperations.co.za
 - **Subject line:** "POPIA Data Request"
 
 We will verify your identity and respond within **30 days**. If we need more time, we will let you know and explain why.
@@ -167,7 +167,7 @@ We take the security of your personal information seriously. Our measures includ
 - **Access control:** Only authorised team members can access client data.
 - **Regular updates:** We keep our software and systems up to date with security patches.
 
-No system is completely secure. If you become aware of any security concerns, please contact us immediately at stephan@digitaloperations.co.za.
+No system is completely secure. If you become aware of any security concerns, please contact us immediately at hello@digitaloperations.co.za.
 
 ---
 
@@ -217,7 +217,7 @@ For questions about this Privacy Policy or how we handle your personal informati
 
 **Digital Operations and Technology (Pty) Ltd, trading as Do.Qix**
 Information Officer: Stephan Marais
-Email: stephan@digitaloperations.co.za
+Email: hello@digitaloperations.co.za
 Phone: +27 61 514 8375
 Location: Cape Town, South Africa
 

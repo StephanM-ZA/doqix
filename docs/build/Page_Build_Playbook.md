@@ -169,7 +169,7 @@ Before considering the page done, verify:
 - [ ] Button text follows convention (see Button Text below)
 - [ ] No button uses the word "Free"
 - [ ] If using `<a>` as a button, add `.btn` class (prevents teal-on-teal hover bug)
-- [ ] Contact details match: stephan@digitaloperations.co.za, +27 61 514 8375, wa.me/27615148375
+- [ ] Contact details match: hello@digitaloperations.co.za, +27 61 514 8375, wa.me/27615148375
 
 ### Step 7b: Add Page to Navigation
 
