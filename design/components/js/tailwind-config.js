@@ -1,4 +1,5 @@
 /* Do.Qix Tailwind CDN configuration — shared across all pages */
+if (typeof tailwind === 'undefined') { console.warn('Tailwind CDN not loaded before tailwind-config.js'); }
 tailwind.config = {
     darkMode: "class",
     theme: {

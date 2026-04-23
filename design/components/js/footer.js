@@ -1,6 +1,14 @@
 /* Do.Qix Global Footer — single source of truth, injected via JS */
 
 (function () {
+    /* Read build version from this script's own ?v= cache-bust parameter */
+    var scriptTag = document.querySelector('script[src*="footer.js"]');
+    var buildVersion = 'dev';
+    if (scriptTag) {
+        var match = scriptTag.src.match(/[?&]v=([^&]+)/);
+        if (match) buildVersion = match[1];
+    }
+
     var base = '';
     if (window.location.pathname.indexOf('/doqix/') !== -1) {
         base = '';
@@ -73,7 +81,7 @@
         '<a href="terms-and-conditions.html">Terms &amp; Conditions</a>' +
         '</div>' +
         '</div>' +
-        '<p class="footer-copyright">&copy; 2026 Digital Operations and Technology (Pty) Ltd T/A <strong>Do.Qix</strong>. All rights reserved. <span class="footer-build">Build web-v0.9.7</span></p>' +
+        '<p class="footer-copyright">&copy; 2026 Digital Operations and Technology (Pty) Ltd T/A <strong>Do.Qix</strong>. All rights reserved. <span class="footer-build">Build web-v' + buildVersion + '</span></p>' +
         '</div>' +
         '</footer>';
 })();
