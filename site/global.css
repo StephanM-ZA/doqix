@@ -1687,7 +1687,7 @@ a.footer-contact-item:hover {
     gap: 0.5rem;
 }
 
-.footer-col h4 {
+.footer-col-heading, .footer-col h4 {
     color: #ffffff !important;
     font-size: 0.875rem !important;
     font-weight: 700 !important;
