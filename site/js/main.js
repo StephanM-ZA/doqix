@@ -46,15 +46,18 @@ document.querySelectorAll('.scroll-reveal').forEach(function (el) {
 // Scroll indicator — visible at top, hidden once scrolled past hero
 var scrollIndicator = document.getElementById('scrollIndicator');
 if (scrollIndicator) {
-    var heroSection = document.getElementById('hero');
-    var indicatorOffset = heroSection ? heroSection.offsetHeight : 400;
+    var indicatorOffset = 400;
+    requestAnimationFrame(function () {
+        var heroSection = document.getElementById('hero');
+        if (heroSection) indicatorOffset = heroSection.offsetHeight;
+    });
     window.addEventListener('scroll', function () {
         if (window.scrollY > indicatorOffset * 0.3) {
             scrollIndicator.classList.add('hidden');
         } else {
             scrollIndicator.classList.remove('hidden');
         }
-    });
+    }, { passive: true });
 }
 
 // Back to top button
@@ -68,7 +71,7 @@ if (backToTop) {
         } else {
             backToTop.classList.remove('visible');
         }
-    });
+    }, { passive: true });
     backToTop.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();

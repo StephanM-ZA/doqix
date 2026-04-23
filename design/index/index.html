@@ -29,8 +29,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script src="../components/js/tailwind-config.js?v=0.9.9"></script>
-<link rel="stylesheet" href="../global.css?v=0.9.9"/>
+<script src="../components/js/tailwind-config.js?v=0.9.11"></script>
+<link rel="stylesheet" href="../global.css?v=0.9.11"/>
 <style>
         /* Page-specific styles only */
     </style>
@@ -66,13 +66,13 @@
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="../components/js/header.js?v=0.9.9"></script>
+<script src="../components/js/header.js?v=0.9.11"></script>
 <main class="pt-20">
 <!-- Hero Section -->
 <section id="hero" class="relative pt-8 pb-2 md:pt-16 md:pb-6 flex flex-col items-center justify-center text-center px-6 hero-gradient overflow-hidden">
 <!-- Hero Background Video -->
 <div class="hero-video-bg">
-<video autoplay muted loop playsinline preload="metadata" src="../hero-video.mp4">
+<video autoplay muted loop playsinline preload="none" poster="../hero-poster.jpg" src="../hero-video.mp4">
 </video>
 </div>
 <div class="max-w-4xl space-y-8 relative z-10">
@@ -103,7 +103,7 @@
 </div>
 <!-- App Carousel -->
 <div id="app-carousel"></div>
-<script src="../components/js/app-carousel.js?v=0.9.9"></script>
+<script defer src="../components/js/app-carousel.js?v=0.9.11"></script>
 </section>
 <!-- The Problem -->
 <section id="problem" class="pt-6 pb-20 px-8 bg-[#0C1830]">
@@ -441,7 +441,7 @@
 <div class="card p-8 space-y-6">
 <p class="italic">"I used to do my invoicing on Sunday nights. Do.Qix built me one workflow and I haven't sent an invoice manually since. It paid for itself in the first month."</p>
 <div class="flex items-center gap-4">
-<img src="../images/lerato-m.jpg" alt="Lerato M." class="w-12 h-12 rounded-full object-cover"/>
+<picture><source srcset="../images/lerato-m.webp" type="image/webp"/><img src="../images/lerato-m.jpg" alt="Lerato M." class="w-12 h-12 rounded-full object-cover" width="48" height="48" loading="lazy"/></picture>
 <div>
 <div class="font-bold">Lerato M.</div>
 <div class="text-xs text-on-surface-variant uppercase">Bookkeeping Consultant, Pretoria</div>
@@ -454,7 +454,7 @@
 <div class="card p-8 space-y-6">
 <p class="italic">"We're a team of six and the admin was quietly eating a full day every week. Three Do.Qix workflows later (lead capture, quote-to-invoice, weekly reporting) and Fridays are for actual work again."</p>
 <div class="flex items-center gap-4">
-<img src="../images/reuben-p.jpg" alt="Reuben P." class="w-12 h-12 rounded-full object-cover"/>
+<picture><source srcset="../images/reuben-p.webp" type="image/webp"/><img src="../images/reuben-p.jpg" alt="Reuben P." class="w-12 h-12 rounded-full object-cover" width="48" height="48" loading="lazy"/></picture>
 <div>
 <div class="font-bold">Reuben P.</div>
 <div class="text-xs text-on-surface-variant uppercase">Managing Director, Cape Town</div>
@@ -467,7 +467,7 @@
 <div class="card p-8 space-y-6">
 <p class="italic">"I liked that they didn't try to sell me anything I didn't need. They mapped our processes, showed me where the time was going, and built exactly what we agreed. Refreshingly boring."</p>
 <div class="flex items-center gap-4">
-<img src="../images/thandi-n.jpg" alt="Thandi N." class="w-12 h-12 rounded-full object-cover"/>
+<picture><source srcset="../images/thandi-n.webp" type="image/webp"/><img src="../images/thandi-n.jpg" alt="Thandi N." class="w-12 h-12 rounded-full object-cover" width="48" height="48" loading="lazy"/></picture>
 <div>
 <div class="font-bold">Thandi N.</div>
 <div class="text-xs text-on-surface-variant uppercase">Founder, Durban</div>
@@ -480,7 +480,7 @@
 <div class="card p-8 space-y-6">
 <p class="italic">"We were drowning in WhatsApp orders. Do.Qix built a flow that captures every message, pushes it into our system, and fires off the confirmation automatically. We've handled 30% more volume without hiring."</p>
 <div class="flex items-center gap-4">
-<img src="../images/imraan-s.jpg" alt="Imraan S." class="w-12 h-12 rounded-full object-cover"/>
+<picture><source srcset="../images/imraan-s.webp" type="image/webp"/><img src="../images/imraan-s.jpg" alt="Imraan S." class="w-12 h-12 rounded-full object-cover" width="48" height="48" loading="lazy"/></picture>
 <div>
 <div class="font-bold">Imraan S.</div>
 <div class="text-xs text-on-surface-variant uppercase">Director, Johannesburg</div>
@@ -493,7 +493,7 @@
 <div class="card p-8 space-y-6">
 <p class="italic">"The monthly strategy call is the part nobody advertises but everybody should. We come in with one problem, leave with three automations on the roadmap. Feels like having an ops team we didn't have to hire."</p>
 <div class="flex items-center gap-4">
-<img src="../images/nadia-v.jpg" alt="Nadia V." class="w-12 h-12 rounded-full object-cover"/>
+<picture><source srcset="../images/nadia-v.webp" type="image/webp"/><img src="../images/nadia-v.jpg" alt="Nadia V." class="w-12 h-12 rounded-full object-cover" width="48" height="48" loading="lazy"/></picture>
 <div>
 <div class="font-bold">Nadia V.</div>
 <div class="text-xs text-on-surface-variant uppercase">COO, Cape Town</div>
@@ -506,7 +506,7 @@
 <div class="card p-8 space-y-6">
 <p class="italic">"What sold me was the rand pricing and month-to-month. No dollar exposure, no lock-in, no 'enterprise' sales theatre. They build, they bill, they keep things running."</p>
 <div class="flex items-center gap-4">
-<img src="../images/johan.b.jpg" alt="Johan B." class="w-12 h-12 rounded-full object-cover"/>
+<picture><source srcset="../images/johan.b.webp" type="image/webp"/><img src="../images/johan.b.jpg" alt="Johan B." class="w-12 h-12 rounded-full object-cover" width="48" height="48" loading="lazy"/></picture>
 <div>
 <div class="font-bold">Johan B.</div>
 <div class="text-xs text-on-surface-variant uppercase">Founder, Stellenbosch</div>
@@ -519,7 +519,7 @@
 <div class="card p-8 space-y-6">
 <p class="italic">"Our finance team got their month-ends back. What used to be a three-day reporting scramble now runs on its own by Tuesday lunchtime. I don't think they'd let us cancel if we tried."</p>
 <div class="flex items-center gap-4">
-<img src="../images/sipho-d.jpg" alt="Sipho D." class="w-12 h-12 rounded-full object-cover"/>
+<picture><source srcset="../images/sipho-d.webp" type="image/webp"/><img src="../images/sipho-d.jpg" alt="Sipho D." class="w-12 h-12 rounded-full object-cover" width="48" height="48" loading="lazy"/></picture>
 <div>
 <div class="font-bold">Sipho D.</div>
 <div class="text-xs text-on-surface-variant uppercase">Finance Manager, Sandton</div>
@@ -552,13 +552,13 @@
 </main>
 <!-- Footer -->
 <div id="site-footer"></div>
-<script src="../components/js/footer.js?v=0.9.9"></script>
+<script defer src="../components/js/footer.js?v=0.9.11"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script src="../components/js/main.js?v=0.9.9"></script>
-<script src="js/testimonial-carousel.js?v=0.9.9"></script>
-<script src="../components/js/roi-calculator.js?v=0.9.9"></script>
-<script src="../components/js/exit-popup.js?v=0.9.9"></script>
-<script src="../components/js/cookie-banner.js?v=0.9.9"></script>
+<script defer src="../components/js/main.js?v=0.9.11"></script>
+<script defer src="js/testimonial-carousel.js?v=0.9.11"></script>
+<script defer src="../components/js/roi-calculator.js?v=0.9.11"></script>
+<script defer src="../components/js/exit-popup.js?v=0.9.11"></script>
+<script defer src="../components/js/cookie-banner.js?v=0.9.11"></script>
 </body></html>
