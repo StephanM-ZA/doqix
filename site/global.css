@@ -132,8 +132,15 @@ p {
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
-    margin-top: 0.5rem;
-    height: 3rem;
+    margin-top: 0.25rem;
+    height: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    .scroll-indicator {
+        margin-top: 0.5rem;
+        height: 3rem;
+    }
 }
 
 .scroll-indicator-inner {
