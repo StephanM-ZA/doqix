@@ -1,6 +1,7 @@
 # Do.Qix Website — Project Instructions
 
 > Basic rules and standards: [[/Volumes/External/development_projects/master_commands/basic-rules.md]]
+> Web standards (performance, accessibility, SEO): [[docs/web-standards.md]]
 
 ---
 
@@ -41,6 +42,16 @@ doqix-roi-calculator.zip
 ---
 
 ## Website Development Rules
+
+### Update "Last Updated" on Legal Pages (MANDATORY)
+
+When editing `privacy-policy.html` or `terms-and-conditions.html`, you MUST update the "Last Updated" date in the `legal-meta` section to today's date. Both pages have the format:
+
+```html
+<p><strong>Effective Date:</strong> ... | <strong>Last Updated:</strong> Month DD, YYYY</p>
+```
+
+Change only the "Last Updated" value. Do not change "Effective Date" unless the user explicitly asks.
 
 ### No Inline JavaScript (MANDATORY)
 
