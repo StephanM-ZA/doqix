@@ -7,9 +7,15 @@
     var REQUIRED = ['contact-name', 'contact-email', 'contact-size', 'contact-message'];
 
     /* Pre-fill message from URL parameters */
-    var params = new URLSearchParams(window.location.search);
-    var roiData = params.get('roi');
-    var productParam = params.get('product');
+    function getParam(name) {
+        if (typeof URLSearchParams !== 'undefined') {
+            return new URLSearchParams(window.location.search).get(name);
+        }
+        var match = window.location.search.match(new RegExp('[?&]' + name + '=([^&]*)'));
+        return match ? decodeURIComponent(match[1]) : null;
+    }
+    var roiData = getParam('roi');
+    var productParam = getParam('product');
 
     if (roiData) {
         var msgField = document.getElementById('contact-message');
@@ -21,7 +27,7 @@
         document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
     }
 
-    var planParam = params.get('plan');
+    var planParam = getParam('plan');
 
     if (planParam) {
         var planNames = {

@@ -1291,6 +1291,7 @@ ul, ol {
     transform: translate(-50%, calc(-50% + 2rem));
     width: calc(100% - 2rem);
     max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
     overflow-y: auto;
     background: var(--color-surface-container, #14203C);
     border: 1px solid rgba(59, 74, 65, 0.2);

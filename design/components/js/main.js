@@ -1,3 +1,15 @@
+// Polyfills for older browsers
+if (!Element.prototype.closest) {
+    Element.prototype.closest = function (s) {
+        var el = this;
+        do {
+            if (el.matches(s)) return el;
+            el = el.parentElement || el.parentNode;
+        } while (el !== null && el.nodeType === 1);
+        return null;
+    };
+}
+
 // Force hero video autoplay
 var heroVideo = document.querySelector('.hero-video-bg video');
 if (heroVideo) {
