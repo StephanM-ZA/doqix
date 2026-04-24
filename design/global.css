@@ -195,7 +195,14 @@ p {
     pointer-events: auto;
 }
 
-.back-to-top:hover {
+@media (hover: hover) {
+    .back-to-top:hover {
+        background: #00e5a0;
+        color: #0C1830;
+    }
+}
+
+.back-to-top:active {
     background: #00e5a0;
     color: #0C1830;
 }
