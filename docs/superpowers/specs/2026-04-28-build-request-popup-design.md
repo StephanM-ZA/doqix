@@ -120,6 +120,13 @@ Pure function. Takes the wizard answers plus config, returns the build cost and 
 }
 ```
 
+### Rounding
+
+All money values are rounded to the nearest R500 unless stated otherwise:
+
+- `roundUp(x, 500)` = `Math.ceil(x / 500) * 500` — used for `buildCost` only.
+- `roundNearest(x, 500)` = `Math.round(x / 500) * 500` — used for `managedSetup`, `amortized`, and discounted prices.
+
 ### Build cost formula
 
 ```
@@ -143,8 +150,8 @@ minMonths = buildCost <  15000 ? 6
           : buildCost <= 50000 ? 12
           : 18
 
-managedSetup   = round(buildCost * config.managed.setup_pct, 500)
-amortized      = round((buildCost - managedSetup) / minMonths, 500)
+managedSetup   = roundNearest(buildCost * config.managed.setup_pct, 500)
+amortized      = roundNearest((buildCost - managedSetup) / minMonths, 500)
 hostingBase    = config.managed.hosting_base
 managedMonthly = amortized + hostingBase
 ```
@@ -153,8 +160,8 @@ managedMonthly = amortized + hostingBase
 
 ```
 discountPct           = config.launch_offer.discount_pct
-handoverAfter         = round(handoverPrice * (1 - discountPct), 500)
-managedSetupAfter     = round(managedSetup   * (1 - discountPct), 500)
+handoverAfter         = roundNearest(handoverPrice * (1 - discountPct), 500)
+managedSetupAfter     = roundNearest(managedSetup  * (1 - discountPct), 500)
 ```
 
 The estimate UI shows the original price as strikethrough alongside the discounted price.
@@ -250,7 +257,7 @@ Single-select option list:
 
 ### 6.5 Q4 — Connect to other tools?
 
-- ✅ Yes — followed by an optional one-line free text "Which ones? (optional, e.g. Xero, Gmail)"
+- ✅ Yes — selecting this reveals a single-line free-text input below the option list with placeholder "Which ones? (optional, e.g. Xero, Gmail)". The input is optional. Field appears only after Yes is selected; it is hidden if the user changes to No or Not sure.
 - ❌ No
 - 🤔 Not sure
 
