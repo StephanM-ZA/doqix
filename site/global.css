@@ -1698,14 +1698,14 @@ a.footer-contact-item:hover {
 }
 
 .footer-copyright {
-    color: #666 !important;
+    color: #a0a6b3 !important;
     font-size: 0.75rem !important;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 2rem;
 }
 
 .footer-build {
-    opacity: 0.5;
+    color: #8a92a3;
     margin-left: 0.5rem;
 }
 
