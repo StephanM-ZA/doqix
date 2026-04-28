@@ -5,7 +5,10 @@
   "scripts": {
     "build:css": "tailwindcss -i ./scripts/tailwind-input.css -o ./design/tailwind.css --minify",
     "sync:css": "cp design/tailwind.css site/tailwind.css",
-    "build": "npm run build:css && npm run sync:css",
+    "build:sitemap": "node ./scripts/build-sitemap.js",
+    "check:sitemap": "node ./scripts/check-sitemap.js",
+    "indexnow": "node ./scripts/indexnow-ping.js",
+    "build": "npm run build:css && npm run sync:css && npm run build:sitemap",
     "watch": "tailwindcss -i ./scripts/tailwind-input.css -o ./design/tailwind.css --watch"
   },
   "devDependencies": {

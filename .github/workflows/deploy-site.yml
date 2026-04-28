@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'site/**'
+      - 'scripts/**'
+      - '.github/workflows/deploy-site.yml'
 
 permissions:
   contents: read
@@ -24,6 +26,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0      # full history so build-sitemap.js can read git lastmod
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate sitemap from current site/
+        run: node ./scripts/build-sitemap.js
+
+      - name: Verify sitemap covers every indexable page
+        run: node ./scripts/check-sitemap.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -36,3 +51,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Notify IndexNow (Bing / Yandex / Seznam / Naver / Yep)
+        if: success()
+        run: node ./scripts/indexnow-ping.js
+        continue-on-error: true

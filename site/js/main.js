@@ -27,33 +27,37 @@ if (heroVideo) {
     setTimeout(function () { clearInterval(playInterval); }, 15000);
 }
 
-// Scroll reveal — auto-applied globally
-var revealObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
+// Scroll reveal — auto-applied globally, except on pages that opt out
+// (legal pages should appear immediately for serious reading).
+// Opt out by adding `data-disable-scroll-reveal` to <body>.
+if (!document.body.hasAttribute('data-disable-scroll-reveal')) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Auto-apply scroll-reveal to direct children of every <section> in <main>
+    // Skip: hero video backgrounds, elements already marked, first section (hero)
+    var sections = document.querySelectorAll('main section');
+    sections.forEach(function (section, index) {
+        // Skip the first section (hero) — it should be visible immediately
+        if (index === 0) return;
+
+        var children = section.querySelectorAll(':scope > *');
+        children.forEach(function (el) {
+            if (!el.classList.contains('hero-video-bg') && !el.classList.contains('scroll-reveal')) {
+                el.classList.add('scroll-reveal');
+            }
+        });
     });
-}, { threshold: 0.1 });
 
-// Auto-apply scroll-reveal to direct children of every <section> in <main>
-// Skip: hero video backgrounds, elements already marked, first section (hero)
-var sections = document.querySelectorAll('main section');
-sections.forEach(function (section, index) {
-    // Skip the first section (hero) — it should be visible immediately
-    if (index === 0) return;
-
-    var children = section.querySelectorAll(':scope > *');
-    children.forEach(function (el) {
-        if (!el.classList.contains('hero-video-bg') && !el.classList.contains('scroll-reveal')) {
-            el.classList.add('scroll-reveal');
-        }
+    document.querySelectorAll('.scroll-reveal').forEach(function (el) {
+        revealObserver.observe(el);
     });
-});
-
-document.querySelectorAll('.scroll-reveal').forEach(function (el) {
-    revealObserver.observe(el);
-});
+}
 
 // Scroll indicator — visible at top, hidden once scrolled past hero
 var scrollIndicator = document.getElementById('scrollIndicator');

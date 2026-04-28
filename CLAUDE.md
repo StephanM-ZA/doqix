@@ -89,7 +89,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.10.7** (fix: tighten exit-popup triggers — engagement gate, 15s min, re-entry grace, mobile disabled, form-field skip)
+- Current version: **web-v0.10.8** (chore: SEO pipeline — auto-sitemap with git lastmod, CI integrity check, IndexNow ping; UX: legal pages opt out of scroll-reveal animation)
 
 **Never push website changes without creating a version tag.**
 
@@ -140,6 +140,35 @@ Tailwind is built locally with the Tailwind CLI, not loaded from a CDN.
 If you add new Tailwind utility classes to any HTML or JS file in `design/`, you MUST run `npm run build` before pushing — otherwise those classes won't appear in the production CSS.
 
 **Never re-introduce `cdn.tailwindcss.com`.** It's a development-only CDN that ships ~127 KiB and rebuilds CSS in the browser, blocking render.
+
+### SEO Pipeline — sitemap, robots, IndexNow (MANDATORY)
+
+The deployed site lives at a subpath (`digitaloperations.co.za/doqix/`), which means SEO crawlers do not auto-discover the sitemap. The pipeline below compensates for that.
+
+**Automated (every deploy):**
+
+1. **Sitemap regeneration.** `npm run build` runs `scripts/build-sitemap.js`, which scans `site/*.html`, derives `<lastmod>` from each file's git history, and writes `site/sitemap.xml`. Excluded pages: `404.html`, `thank-you.html`. Per-page `priority` and `changefreq` defined in the script's `PAGE_META` table — edit there to add/change a page.
+2. **Sitemap CI check.** `.github/workflows/deploy-site.yml` runs `scripts/check-sitemap.js` before each deploy. The build fails if any indexable HTML in `site/` is missing from `sitemap.xml`, or if the sitemap lists files that do not exist. Catches drift before it ships.
+3. **IndexNow ping.** After a successful deploy the workflow calls `scripts/indexnow-ping.js`, which POSTs the sitemap URLs to `api.indexnow.org`. This notifies Bing, Yandex, Seznam, Naver, and Yep that pages have changed. Failure is non-fatal — the deploy still succeeds. Google does NOT participate in IndexNow (see manual step below). The IndexNow key is `535193b33cb18a785693767808453d51`, served at `site/535193b33cb18a785693767808453d51.txt`. Do not delete that file or change the key without also updating the script.
+
+**Manual (one-time, per provider):**
+
+4. **Google Search Console.** Crawler does not honour IndexNow. Submit the sitemap once at https://search.google.com/search-console — verify domain ownership for `digitaloperations.co.za`, then Sitemaps → submit `https://digitaloperations.co.za/doqix/sitemap.xml`. After this, Google re-fetches the sitemap automatically when it changes; no per-deploy action needed.
+5. **Bing Webmaster Tools.** Optional — the IndexNow ping covers Bing already, but submitting through https://www.bing.com/webmasters provides analytics and indexing reports. Use the same sitemap URL.
+
+**Local commands:**
+
+```bash
+npm run build:sitemap    # regenerate sitemap manually
+npm run check:sitemap    # verify sitemap matches site/ contents
+npm run indexnow         # send a manual IndexNow ping (rarely needed)
+```
+
+**When you add a new HTML page to `site/`:**
+
+- Add an entry to `PAGE_META` in `scripts/build-sitemap.js` if you want non-default priority/changefreq
+- If the page should not be indexed (thank-you, internal-only), add the filename to the `EXCLUDE` set in both `build-sitemap.js` AND `check-sitemap.js`
+- Run `npm run build` locally to regenerate the sitemap, or just push and let CI do it
 
 ### Cache-Busting on Deploy (MANDATORY)
 
