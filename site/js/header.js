@@ -24,7 +24,7 @@
         '<a class="nav-link" href="products.html">Products</a>' +
         '<a class="nav-link" href="contact.html">Contact</a>' +
         '</div>' +
-        '<a href="index.html#pricing" class="btn btn-primary sm glow nav-cta" id="cta-lets-build">Got An Idea</a>' +
+        '<a href="?idea=1" class="btn btn-primary sm glow nav-cta" id="cta-lets-build">Got An Idea</a>' +
         '<button class="nav-hamburger" aria-label="Menu">' +
         '<span></span><span></span><span></span>' +
         '</button>' +
@@ -34,7 +34,7 @@
         '<a class="mobile-link" href="services.html">Services</a>' +
         '<a class="mobile-link" href="products.html">Products</a>' +
         '<a class="mobile-link" href="contact.html">Contact</a>' +
-        '<a href="index.html#pricing" class="btn btn-primary md glow" id="cta-lets-build-mobile" style="width:100%;margin-top:1rem;">Got An Idea</a>' +
+        '<a href="?idea=1" class="btn btn-primary md glow" id="cta-lets-build-mobile" style="width:100%;margin-top:1rem;">Got An Idea</a>' +
         '</div>' +
         '</header>';
 
