@@ -4,6 +4,8 @@
     'use strict';
 
     var ROUND_STEP = 500;
+    var FADE_OUT_MS = 300;       /* must match CSS #build-popup-overlay transition: opacity 0.3s */
+    var STEP_FADE_MS = 100;      /* must match half of CSS .build-popup-body transition: 0.15s ease */
 
     /* ──────────── Hardcoded config fallback (mirrors build-request-config.json) ──────────── */
     var FALLBACK_CONFIG = {
@@ -33,6 +35,7 @@
 
     var overlay = null;
     var bodyEl = null;
+    var closeTimer = null;
 
     /* ──────────── Rounding helpers ──────────── */
     function roundUp(x, step) { return Math.ceil(x / step) * step; }
@@ -155,6 +158,7 @@
 
     function openPopup(opts) {
         opts = opts || {};
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
         state.trigger = opts.trigger || 'unknown';
         state.previousFocus = document.activeElement;
         ensureOverlay();
@@ -173,10 +177,10 @@
     }
 
     function closePopup() {
-        if (!overlay) return;
+        if (!overlay || !overlay.classList.contains('show')) return;
         overlay.classList.remove('show');
         document.body.classList.remove('build-popup-open');
-        setTimeout(function () { overlay.style.display = 'none'; }, 300);
+        closeTimer = setTimeout(function () { overlay.style.display = 'none'; closeTimer = null; }, FADE_OUT_MS);
         if (state.previousFocus && state.previousFocus.focus) state.previousFocus.focus();
     }
 
@@ -187,7 +191,7 @@
             bodyEl.innerHTML = htmlForStep();
             wireStepHandlers();
             bodyEl.classList.remove('fading');
-        }, 100);
+        }, STEP_FADE_MS);
     }
 
     function htmlForStep() {
