@@ -244,6 +244,10 @@
     function htmlForStep() {
         if (state.currentStep === 0) return renderWelcome();
         if (state.currentStep >= 1 && state.currentStep <= 4) return renderQuestion(state.currentStep);
+        if (state.currentStep === 5) {
+            state.route = routeFor(state.answers);
+            return state.route === 'estimate' ? renderEstimate() : renderConsultation();
+        }
         return '<p style="color:#bacbbf;">Step ' + state.currentStep + ' not yet implemented.</p>';
     }
 
@@ -328,6 +332,79 @@
             + '<div class="build-popup-actions">'
                 + '<button type="button" class="btn-back" data-action="back">← Back</button>'
                 + '<button type="button" class="btn btn-primary glow btn-next" data-action="next" ' + (canContinue ? '' : 'disabled') + '>Continue →</button>'
+            + '</div>';
+    }
+
+    function formatRand(n) {
+        return 'R' + n.toLocaleString('en-ZA', { maximumFractionDigits: 0 });
+    }
+
+    function renderEstimate() {
+        var r = calculate(state.answers, state.config);
+        var lo = state.config.launch_offer;
+        var discountActive = lo && lo.enabled && lo.spots_remaining > 0;
+        var pct = discountActive ? lo.discount_pct : 0;
+
+        var handover = r.handover_price;
+        var handoverDiscounted = discountActive ? applyDiscount(handover, pct) : handover;
+        var managedSetup = r.managed_setup;
+        var managedSetupDiscounted = discountActive ? applyDiscount(managedSetup, pct) : managedSetup;
+
+        /* Stash full estimate object for submission */
+        state.estimate = {
+            build_cost: r.build_cost,
+            handover_price: handover,
+            managed_setup: managedSetup,
+            managed_monthly: r.managed_monthly,
+            min_months: r.min_months,
+            launch_offer_applied: discountActive,
+            handover_price_after_discount: handoverDiscounted,
+            managed_setup_after_discount: managedSetupDiscounted
+        };
+
+        var handoverPriceHtml = discountActive
+            ? '<span class="strike">' + formatRand(handover) + '</span>' + formatRand(handoverDiscounted)
+            : formatRand(handover);
+        var managedSetupHtml = discountActive
+            ? '<span class="strike">' + formatRand(managedSetup) + '</span>' + formatRand(managedSetupDiscounted)
+            : formatRand(managedSetup);
+
+        return ''
+            + renderProgress(5, 5)
+            + '<p class="build-popup-step-counter">Your starting estimate</p>'
+            + '<h2 class="build-popup-title" id="build-popup-title">Two ways to make<br/>it happen.</h2>'
+            + '<p class="build-popup-helper">Here\'s where projects like yours typically begin. We\'ll firm up the final numbers on a quick call.</p>'
+            + '<div class="build-popup-est-grid">'
+                + '<div class="build-popup-est-card">'
+                    + '<div class="icon-name"><span class="icon">🏗️</span><span class="name">We build it, you run it</span></div>'
+                    + '<div class="price">' + handoverPriceHtml + '</div>'
+                    + '<div class="meta">Once-off, yours forever</div>'
+                    + '<div class="desc">We hand over the code and setup. You arrange your own hosting (~R200/mo on your side).</div>'
+                + '</div>'
+                + '<div class="build-popup-est-card recommended">'
+                    + '<div class="badge">RECOMMENDED</div>'
+                    + '<div class="icon-name"><span class="icon">🤝</span><span class="name">We build &amp; manage</span></div>'
+                    + '<div class="price">' + managedSetupHtml + ' + ' + formatRand(r.managed_monthly) + '/mo</div>'
+                    + '<div class="meta">' + r.min_months + '-month minimum, then month-to-month</div>'
+                    + '<div class="desc">We host, monitor, fix, and improve. You focus on running your business.</div>'
+                + '</div>'
+            + '</div>'
+            + '<p class="build-popup-est-disclaimer">Both options include the same build.' + (discountActive ? ' Prices reflect your launch offer.' : '') + '</p>'
+            + '<div class="build-popup-actions">'
+                + '<button type="button" class="btn-back" data-action="back">← Back</button>'
+                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next">Continue →</button>'
+            + '</div>';
+    }
+
+    function renderConsultation() {
+        state.estimate = null;
+        return ''
+            + renderProgress(5, 5)
+            + '<h2 class="build-popup-title" id="build-popup-title">Sounds like we should<br/><span class="accent">talk first.</span></h2>'
+            + '<p class="build-popup-body-text">Some ideas are easier to scope on a quick call than through a form. We\'ll listen, ask the right questions, and send you a clear plan with real numbers within 24 hours.</p>'
+            + '<div class="build-popup-actions">'
+                + '<button type="button" class="btn-back" data-action="back">← Back</button>'
+                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next">Continue →</button>'
             + '</div>';
     }
 
