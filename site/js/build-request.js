@@ -5,7 +5,7 @@
 
     var ROUND_STEP = 500;
     var FADE_OUT_MS = 300;       /* must match CSS #build-popup-overlay transition: opacity 0.3s */
-    var STEP_FADE_MS = 100;      /* must match half of CSS .build-popup-body transition: 0.15s ease */
+    var STEP_FADE_MS = 100;      /* roughly 2/3 of CSS .build-popup-body transition: 0.15s ease */
 
     /* ──────────── Hardcoded config fallback (mirrors build-request-config.json) ──────────── */
     var FALLBACK_CONFIG = {
