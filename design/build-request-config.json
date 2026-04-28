@@ -23,5 +23,10 @@
   "managed": {
     "setup_pct":    0.20,
     "hosting_base": 1500
-  }
+  },
+  "min_months_tiers": [
+    { "max_build": 14999, "months": 6  },
+    { "max_build": 50000, "months": 12 },
+    { "max_build": null,  "months": 18 }
+  ]
 }

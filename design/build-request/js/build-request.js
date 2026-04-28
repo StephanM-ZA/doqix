@@ -3,6 +3,8 @@
 (function () {
     'use strict';
 
+    var ROUND_STEP = 500;
+
     /* ──────────── Rounding helpers ──────────── */
     function roundUp(x, step) { return Math.ceil(x / step) * step; }
     function roundNearest(x, step) { return Math.round(x / step) * step; }
@@ -29,22 +31,33 @@
         return unsures >= 2 ? 'consultation' : 'estimate';
     }
 
+    /* ──────────── Min-months tier lookup ──────────── */
+    function pickMinMonths(buildCost, cfg) {
+        var tiers = cfg.min_months_tiers;
+        for (var i = 0; i < tiers.length; i++) {
+            var t = tiers[i];
+            if (t.max_build === null || buildCost <= t.max_build) return t.months;
+        }
+        /* Defensive fallback if config is empty or malformed */
+        return 12;
+    }
+
     /* ──────────── Calculator ──────────── */
     function calculate(answers, cfg) {
         var a = applyUnsureDefaults(answers);
+        /* Defensive fallback for direct callers: production always routes
+           type==='unsure' to consultation, but tests may invoke calculate() directly. */
         var basePrice = cfg.base[a.type] != null ? cfg.base[a.type] : cfg.base.unsure;
         var sizeMult = cfg.size_multiplier[a.size];
         var loginAdd = a.login === 'yes' ? cfg.login_addon : 0;
         var integAdd = a.integrations === 'yes' ? cfg.integ_addon : 0;
 
-        var buildCost = roundUp((basePrice * sizeMult) + loginAdd + integAdd, 500);
+        var buildCost = roundUp((basePrice * sizeMult) + loginAdd + integAdd, ROUND_STEP);
 
-        var minMonths = buildCost < 15000 ? 6
-                      : buildCost <= 50000 ? 12
-                      : 18;
+        var minMonths = pickMinMonths(buildCost, cfg);
 
-        var managedSetup = roundNearest(buildCost * cfg.managed.setup_pct, 500);
-        var amortized = roundNearest((buildCost - managedSetup) / minMonths, 500);
+        var managedSetup = roundNearest(buildCost * cfg.managed.setup_pct, ROUND_STEP);
+        var amortized = roundNearest((buildCost - managedSetup) / minMonths, ROUND_STEP);
         var managedMonthly = amortized + cfg.managed.hosting_base;
 
         return {
@@ -57,7 +70,7 @@
     }
 
     function applyDiscount(price, pct) {
-        return roundNearest(price * (1 - pct), 500);
+        return roundNearest(price * (1 - pct), ROUND_STEP);
     }
 
     /* ──────────── Public surface ──────────── */

@@ -30,11 +30,22 @@
       if (ok) passed++; else failed++;
     }
 
+    /* ────────────────────────────────────────────────────────────
+       The cfg below MUST stay in sync with design/build-request-config.json.
+       If you change one, change the other.
+       Required keys: base, size_multiplier, login_addon, integ_addon,
+                      managed (setup_pct, hosting_base), min_months_tiers.
+       ──────────────────────────────────────────────────────────── */
     var cfg = {
       base: { automation: 3000, dashboard: 8000, app: 15000, unsure: 8000 },
       size_multiplier: { small: 1, medium: 2, big: 4, unsure: 2 },
       login_addon: 5000, integ_addon: 3000,
       managed: { setup_pct: 0.20, hosting_base: 1500 },
+      min_months_tiers: [
+        { max_build: 14999, months: 6  },
+        { max_build: 50000, months: 12 },
+        { max_build: null,  months: 18 }
+      ],
       launch_offer: { enabled: true, spots_remaining: 5, discount_pct: 0.20 }
     };
 
