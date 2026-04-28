@@ -1,7 +1,7 @@
 {
   "launch_offer": {
     "enabled": true,
-    "spots_remaining": 7,
+    "spots_remaining": 10,
     "total_spots": 10,
     "discount_pct": 0.20,
     "label": "20% off setup"
