@@ -89,7 +89,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.9.16** (auto build version in footer, tailwind CDN guard)
+- Current version: **web-v0.9.17** (Tailwind CDN replaced with built CSS)
 
 **Never push website changes without creating a version tag.**
 
@@ -111,17 +111,33 @@ gh workflow run deploy-site.yml
 
 The `site/` folder is what GitHub Pages deploys. The source of truth is in `design/`. After ANY change to design files:
 
-1. Copy `design/global.css` to `site/global.css`
-2. Copy `design/index/js/*.js` to `site/js/`
-3. Copy `design/[page]/[page].html` to `site/[page].html`, fixing CSS path from `../global.css` to `global.css`
+1. Run `npm run build` — rebuilds `design/tailwind.css` and copies it to `site/tailwind.css`
+2. Copy `design/global.css` to `site/global.css`
+3. Copy `design/index/js/*.js` to `site/js/`
+4. Copy `design/[page]/[page].html` to `site/[page].html`, fixing CSS paths from `../global.css` to `global.css` and `../tailwind.css` to `tailwind.css`
 
 **This sync is part of the push process. Commit the `site/` files alongside the design files.**
+
+### Tailwind CSS Build (MANDATORY)
+
+Tailwind is built locally with the Tailwind CLI, not loaded from a CDN.
+
+- Config: `tailwind.config.js` (root)
+- Input: `scripts/tailwind-input.css`
+- Output: `design/tailwind.css` (then synced to `site/tailwind.css`)
+- Build command: `npm run build` (rebuilds and syncs in one step)
+- Watch during dev: `npm run watch`
+
+If you add new Tailwind utility classes to any HTML or JS file in `design/`, you MUST run `npm run build` before pushing — otherwise those classes won't appear in the production CSS.
+
+**Never re-introduce `cdn.tailwindcss.com`.** It's a development-only CDN that ships ~127 KiB and rebuilds CSS in the browser, blocking render.
 
 ### Cache-Busting on Deploy (MANDATORY)
 
 All CSS and JS file references in HTML must include a `?v=X.Y.Z` query string matching the current `web-vX.Y.Z` version. This forces browsers to fetch fresh files after every deploy instead of serving stale cached versions.
 
 When bumping the version tag, also update the `?v=` strings in all HTML files (both `design/` and `site/`):
+- `tailwind.css?v=X.Y.Z`
 - `global.css?v=X.Y.Z`
 - `js/main.js?v=X.Y.Z`
 - `js/testimonial-carousel.js?v=X.Y.Z`

@@ -1,0 +1,16 @@
+{
+  "name": "doqix-website",
+  "private": true,
+  "description": "Build tooling for the Do.Qix marketing site (Tailwind CSS).",
+  "scripts": {
+    "build:css": "tailwindcss -i ./scripts/tailwind-input.css -o ./design/tailwind.css --minify",
+    "sync:css": "cp design/tailwind.css site/tailwind.css",
+    "build": "npm run build:css && npm run sync:css",
+    "watch": "tailwindcss -i ./scripts/tailwind-input.css -o ./design/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.10",
+    "tailwindcss": "^3.4.17"
+  }
+}
