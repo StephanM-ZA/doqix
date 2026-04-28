@@ -26,7 +26,7 @@
             '<span class="slider-label">People doing repetitive tasks<span class="info-icon" data-tip="people">i</span><span class="tooltip">How many staff spend time on repetitive, rule-based work? This multiplies with hours and rate to calculate your total savings.</span></span>' +
             '<span class="slider-value" id="val-people"></span>' +
           '</div>' +
-          '<input type="range" id="slider-people"/>' +
+          '<input type="range" id="slider-people" aria-label="People doing repetitive tasks"/>' +
           '<div class="slider-range-labels"><span></span><span></span></div>' +
         '</div>' +
 
@@ -35,7 +35,7 @@
             '<span class="slider-label">Hours per person per week<span class="info-icon" data-tip="hours">i</span><span class="tooltip">Hours each person spends on repetitive tasks weekly. Think data entry, copy-pasting, manual emails, reporting. Multiplied by people count to get total team hours.</span></span>' +
             '<span class="slider-value" id="val-hours"></span>' +
           '</div>' +
-          '<input type="range" id="slider-hours"/>' +
+          '<input type="range" id="slider-hours" aria-label="Hours per person per week"/>' +
           '<div class="slider-range-labels"><span></span><span></span></div>' +
           '<div class="total-hours" id="out-total-hours"></div>' +
         '</div>' +
@@ -45,7 +45,7 @@
             '<span class="slider-label">Average hourly cost<span class="info-icon" data-tip="rate">i</span><span class="tooltip">What you pay per hour per person (salary + benefits + overheads). This converts saved hours into Rand value.</span></span>' +
             '<span class="slider-value" id="val-rate"></span>' +
           '</div>' +
-          '<input type="range" id="slider-rate"/>' +
+          '<input type="range" id="slider-rate" aria-label="Average hourly cost in rand"/>' +
           '<div class="slider-range-labels"><span></span><span></span></div>' +
         '</div>' +
 
@@ -54,7 +54,7 @@
             '<span class="slider-label">Automation efficiency<span class="info-icon" data-tip="efficiency">i</span><span class="tooltip">What percentage of manual hours can realistically be automated. 70% is a conservative start. Higher values may require additional workflows and affect the recommended plan tier.</span></span>' +
             '<span class="slider-value" id="val-efficiency"></span>' +
           '</div>' +
-          '<input type="range" id="slider-efficiency"/>' +
+          '<input type="range" id="slider-efficiency" aria-label="Automation efficiency percent"/>' +
           '<div class="slider-range-labels"><span></span><span></span></div>' +
           '<div class="efficiency-note" id="out-efficiency-note"></div>' +
         '</div>' +
@@ -64,7 +64,7 @@
             '<span class="slider-label">Monthly error cost<span class="info-icon" data-tip="error">i</span><span class="tooltip">What manual mistakes cost you monthly: re-work, wrong invoices, missed follow-ups. Added directly to your monthly savings total.</span></span>' +
             '<span class="slider-value" id="val-error"></span>' +
           '</div>' +
-          '<input type="range" id="slider-error"/>' +
+          '<input type="range" id="slider-error" aria-label="Monthly error cost in rand"/>' +
           '<div class="slider-range-labels"><span></span><span></span></div>' +
         '</div>' +
       '</div>' +
