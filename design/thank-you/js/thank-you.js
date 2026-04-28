@@ -38,9 +38,20 @@
     }
 })();
 
-/* 10-second countdown redirect to homepage. Runs for all visitors. */
+/* 10-second countdown redirect to homepage.
+   Suppressed for build-popup visitors so they can act on the Calendly CTA. */
 (function () {
     'use strict';
+
+    /* Skip the auto-redirect for build-popup visitors so they can act on the Calendly CTA. */
+    try {
+        var p = new URLSearchParams(window.location.search);
+        if (p.get('from') === 'build') {
+            var countdownText = document.getElementById('countdown-text');
+            if (countdownText) countdownText.style.display = 'none';
+            return;
+        }
+    } catch (e) { /* old browser, fall through to default countdown */ }
 
     var el = document.getElementById('countdown');
     if (!el) return;
