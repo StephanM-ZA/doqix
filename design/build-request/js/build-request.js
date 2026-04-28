@@ -511,6 +511,57 @@
         };
     }
 
+    /* ──────────── Submission ──────────── */
+    var WEBHOOK_URL = 'https://hooks.digitaloperations.co.za/webhook/doqix-build-request';
+    var DEDUPE_WINDOW_MS = 30000;
+    var lastSubmission = { hash: null, at: 0 };
+
+    function payloadHash(p) {
+        return [p.route, p.answers.type, p.answers.size, p.answers.login, p.answers.integrations, p.contact.email].join('|');
+    }
+
+    function submitForm(form) {
+        var payload = buildPayload();
+        var h = payloadHash(payload);
+        var now = Date.now();
+        if (lastSubmission.hash === h && (now - lastSubmission.at) < DEDUPE_WINDOW_MS) {
+            /* Same payload submitted within the dedupe window. Go straight to thank-you. */
+            redirectToThankYou();
+            return;
+        }
+        lastSubmission = { hash: h, at: now };
+
+        var btn = form.querySelector('[data-action="submit"]');
+        var btnText = btn.textContent;
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+            .then(function () { redirectToThankYou(); })
+            .catch(function () { redirectToThankYou(); });
+    }
+
+    function redirectToThankYou() {
+        var params = ['from=build', 'route=' + encodeURIComponent(state.route || 'consultation')];
+        if (state.estimate) {
+            params.push('type=' + encodeURIComponent(state.answers.type));
+            params.push('size=' + encodeURIComponent(state.answers.size));
+            params.push('build=' + encodeURIComponent(state.estimate.build_cost));
+        }
+        var base = thankYouPath();
+        window.location.href = base + '?' + params.join('&');
+    }
+
+    function thankYouPath() {
+        if (window.location.pathname.indexOf('/doqix/') !== -1) return 'thank-you.html';
+        var depth = window.location.pathname.split('/').filter(Boolean).length;
+        return depth > 1 ? '../thank-you/thank-you.html' : 'thank-you.html';
+    }
+
     function wireStepHandlers() {
         var startBtn = bodyEl.querySelector('[data-action="start"]');
         if (startBtn) startBtn.addEventListener('click', function () { state.currentStep = 1; renderStep(); });
@@ -570,9 +621,7 @@
                 if (c.website) return;     /* Honeypot tripped: silently drop */
                 state.contact = { name: c.name, email: c.email, phone: c.phone, company: c.company, notes: c.notes };
                 if (!validateContact()) return;
-                /* Submission wiring is added in Task 8. For now, log payload for verification. */
-                console.log('[build-popup] would submit', buildPayload());
-                window.alert('Submission wiring up next. Payload logged to console.');
+                submitForm(form);
             });
         }
     }
