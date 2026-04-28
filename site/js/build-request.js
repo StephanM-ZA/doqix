@@ -159,6 +159,9 @@
     function openPopup(opts) {
         opts = opts || {};
         if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+        /* Mark this session as build-popup-engaged so the exit-intent popup
+           knows to stand down. */
+        try { sessionStorage.setItem('doqix_build_opened', '1'); } catch (e) {}
         state.trigger = opts.trigger || 'unknown';
         state.previousFocus = document.activeElement;
         ensureOverlay();

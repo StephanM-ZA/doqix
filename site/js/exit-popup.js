@@ -4,6 +4,14 @@
     var STORAGE_KEY = 'doqix_exit_shown';
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 
+    /* Suppress when the user has already engaged with the build-request popup
+       in this session — they've seen our primary CTA, no need to nag with a
+       second one. Also suppress when arriving via the ?idea=1 deep link. */
+    if (sessionStorage.getItem('doqix_build_opened')) return;
+    try {
+        if (new URLSearchParams(window.location.search).get('idea') === '1') return;
+    } catch (e) { /* old browser, fall through */ }
+
     /* Minimum time on page before popup can trigger (ms) */
     var MIN_TIME = 5000;
     var loaded = Date.now();
