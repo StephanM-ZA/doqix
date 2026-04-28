@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    var CALENDLY_URL = 'https://calendly.com/digitaloperations/15-min';
+    var BOOKING_URL = 'https://calendar.app.google/vuvvB5soQex9QdQL8';
 
     var p;
     try { p = new URLSearchParams(window.location.search); } catch (e) { return; }
@@ -21,7 +21,7 @@
     var eyebrow = document.querySelector('[data-thank-eyebrow]');
     if (!heading || !body || !steps) return;
 
-    var bookCta = '<a href="' + CALENDLY_URL + '" target="_blank" rel="noopener" class="btn btn-primary lg glow inline-block" style="margin-top:1.5rem;">Book a 15-min call \u2192</a>';
+    var bookCta = '<a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-primary lg glow inline-block" style="margin-top:1.5rem;">Book a 15-min call \u2192</a>';
 
     if (route === 'estimate') {
         if (eyebrow) eyebrow.textContent = 'Estimate Sent';
