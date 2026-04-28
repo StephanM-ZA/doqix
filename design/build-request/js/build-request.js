@@ -567,7 +567,7 @@
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 var c = readContact();
-                if (c.website) return;     /* Honeypot tripped — silently drop */
+                if (c.website) return;     /* Honeypot tripped: silently drop */
                 state.contact = { name: c.name, email: c.email, phone: c.phone, company: c.company, notes: c.notes };
                 if (!validateContact()) return;
                 /* Submission wiring is added in Task 8. For now, log payload for verification. */
