@@ -151,8 +151,8 @@
             '</div>';
         document.body.appendChild(overlay);
         bodyEl = overlay.querySelector('#build-popup-body');
-        overlay.querySelector('.build-popup-close').addEventListener('click', closePopup);
-        overlay.querySelector('.build-popup-backdrop').addEventListener('click', closePopup);
+        overlay.querySelector('.build-popup-close').addEventListener('click', attemptClose);
+        overlay.querySelector('.build-popup-backdrop').addEventListener('click', attemptClose);
         return overlay;
     }
 
@@ -171,6 +171,7 @@
             overlay.style.display = 'block';
             void overlay.offsetHeight;  /* force reflow before transition */
             overlay.classList.add('show');
+            document.addEventListener('keydown', handleKeydown);
             var first = overlay.querySelector('button, [tabindex]:not([tabindex="-1"])');
             if (first) first.focus();
         });
@@ -179,6 +180,7 @@
     function closePopup() {
         if (!overlay || !overlay.classList.contains('show')) return;
         overlay.classList.remove('show');
+        document.removeEventListener('keydown', handleKeydown);
         document.body.classList.remove('build-popup-open');
         closeTimer = setTimeout(function () { overlay.style.display = 'none'; closeTimer = null; }, FADE_OUT_MS);
         if (state.previousFocus && state.previousFocus.focus) state.previousFocus.focus();
@@ -624,6 +626,48 @@
                 submitForm(form);
             });
         }
+    }
+
+    /* ──────────── Accessibility: focus trap + Escape + dirty-close ──────────── */
+    function focusableEls() {
+        if (!overlay) return [];
+        return overlay.querySelectorAll(
+            'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+    }
+
+    function handleKeydown(e) {
+        if (!overlay || !overlay.classList.contains('show')) return;
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            attemptClose();
+            return;
+        }
+        if (e.key === 'Tab') {
+            var els = focusableEls();
+            if (els.length === 0) return;
+            var first = els[0];
+            var last = els[els.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+    }
+
+    function isDirty() {
+        return state.currentStep > 0 && (
+            !!state.answers.type || !!state.answers.size || !!state.answers.login || !!state.answers.integrations ||
+            !!state.contact.name || !!state.contact.email || !!state.contact.phone
+        );
+    }
+
+    function attemptClose() {
+        if (isDirty() && !window.confirm('Close and discard your answers?')) return;
+        closePopup();
     }
 
     /* ──────────── Public surface ──────────── */
