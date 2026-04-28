@@ -5,6 +5,35 @@
 
     var ROUND_STEP = 500;
 
+    /* ──────────── Hardcoded config fallback (mirrors build-request-config.json) ──────────── */
+    var FALLBACK_CONFIG = {
+        launch_offer: { enabled: true, spots_remaining: 7, total_spots: 10, discount_pct: 0.20, label: '20% off setup' },
+        base: { automation: 3000, dashboard: 8000, app: 15000, unsure: 8000 },
+        size_multiplier: { small: 1, medium: 2, big: 4, unsure: 2 },
+        login_addon: 5000,
+        integ_addon: 3000,
+        managed: { setup_pct: 0.20, hosting_base: 1500 },
+        min_months_tiers: [
+            { max_build: 14999, months: 6  },
+            { max_build: 50000, months: 12 },
+            { max_build: null,  months: 18 }
+        ]
+    };
+
+    /* ──────────── Module state ──────────── */
+    var state = {
+        config: FALLBACK_CONFIG,
+        configLoaded: false,
+        currentStep: 0,    /* 0=welcome, 1-4=questions, 5=result, 6=contact */
+        answers: { type: null, size: null, login: null, integrations: null, integrations_text: '' },
+        contact: { name: '', email: '', phone: '', company: '', notes: '' },
+        trigger: null,
+        previousFocus: null
+    };
+
+    var overlay = null;
+    var bodyEl = null;
+
     /* ──────────── Rounding helpers ──────────── */
     function roundUp(x, step) { return Math.ceil(x / step) * step; }
     function roundNearest(x, step) { return Math.round(x / step) * step; }
@@ -12,12 +41,12 @@
     /* ──────────── Defaults applied when an answer is "unsure" ──────────── */
     var UNSURE_DEFAULTS = { size: 'medium', login: 'no', integrations: 'no' };
 
-    function applyUnsureDefaults(answers) {
+    function applyUnsureDefaults(a) {
         return {
-            type:         answers.type,
-            size:         answers.size === 'unsure' ? UNSURE_DEFAULTS.size : answers.size,
-            login:        answers.login === 'unsure' ? UNSURE_DEFAULTS.login : answers.login,
-            integrations: answers.integrations === 'unsure' ? UNSURE_DEFAULTS.integrations : answers.integrations
+            type:         a.type,
+            size:         a.size === 'unsure' ? UNSURE_DEFAULTS.size : a.size,
+            login:        a.login === 'unsure' ? UNSURE_DEFAULTS.login : a.login,
+            integrations: a.integrations === 'unsure' ? UNSURE_DEFAULTS.integrations : a.integrations
         };
     }
 
@@ -38,8 +67,7 @@
             var t = tiers[i];
             if (t.max_build === null || buildCost <= t.max_build) return t.months;
         }
-        /* Defensive fallback if config is empty or malformed */
-        return 12;
+        return 12;  /* defensive fallback if config is empty/malformed */
     }
 
     /* ──────────── Calculator ──────────── */
@@ -53,9 +81,7 @@
         var integAdd = a.integrations === 'yes' ? cfg.integ_addon : 0;
 
         var buildCost = roundUp((basePrice * sizeMult) + loginAdd + integAdd, ROUND_STEP);
-
         var minMonths = pickMinMonths(buildCost, cfg);
-
         var managedSetup = roundNearest(buildCost * cfg.managed.setup_pct, ROUND_STEP);
         var amortized = roundNearest((buildCost - managedSetup) / minMonths, ROUND_STEP);
         var managedMonthly = amortized + cfg.managed.hosting_base;
@@ -73,9 +99,154 @@
         return roundNearest(price * (1 - pct), ROUND_STEP);
     }
 
+    /* ──────────── Config loader ──────────── */
+    function loadConfig() {
+        if (state.configLoaded) return Promise.resolve(state.config);
+        var path = pathToConfig();
+        return fetch(path, { cache: 'no-cache' })
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (json) {
+                if (json) state.config = mergeConfig(FALLBACK_CONFIG, json);
+                state.configLoaded = true;
+                return state.config;
+            })
+            .catch(function () { state.configLoaded = true; return state.config; });
+    }
+    function pathToConfig() {
+        /* Same base detection pattern used in header.js. */
+        if (window.location.pathname.indexOf('/doqix/') !== -1) return 'build-request-config.json';
+        var depth = window.location.pathname.split('/').filter(Boolean).length;
+        return depth > 1 ? '../build-request-config.json' : 'build-request-config.json';
+    }
+    function mergeConfig(base, override) {
+        var out = {};
+        for (var k in base) out[k] = base[k];
+        for (var k2 in override) {
+            out[k2] = (typeof base[k2] === 'object' && typeof override[k2] === 'object' && !Array.isArray(override[k2]))
+                ? mergeConfig(base[k2], override[k2]) : override[k2];
+        }
+        return out;
+    }
+
+    /* ──────────── Overlay scaffolding ──────────── */
+    function ensureOverlay() {
+        if (overlay) return overlay;
+        overlay = document.createElement('div');
+        overlay.id = 'build-popup-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-labelledby', 'build-popup-title');
+        overlay.innerHTML =
+            '<div class="build-popup-backdrop"></div>' +
+            '<div class="build-popup-card" role="document">' +
+                '<button class="build-popup-close" aria-label="Close">' +
+                    '<svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">' +
+                        '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>' +
+                    '</svg>' +
+                '</button>' +
+                '<div class="build-popup-body" id="build-popup-body"></div>' +
+            '</div>';
+        document.body.appendChild(overlay);
+        bodyEl = overlay.querySelector('#build-popup-body');
+        overlay.querySelector('.build-popup-close').addEventListener('click', closePopup);
+        overlay.querySelector('.build-popup-backdrop').addEventListener('click', closePopup);
+        return overlay;
+    }
+
+    function openPopup(opts) {
+        opts = opts || {};
+        state.trigger = opts.trigger || 'unknown';
+        state.previousFocus = document.activeElement;
+        ensureOverlay();
+        loadConfig().then(function () {
+            state.currentStep = 0;
+            state.answers = { type: null, size: null, login: null, integrations: null, integrations_text: '' };
+            state.contact = { name: '', email: '', phone: '', company: '', notes: '' };
+            renderStep();
+            document.body.classList.add('build-popup-open');
+            overlay.style.display = 'block';
+            void overlay.offsetHeight;  /* force reflow before transition */
+            overlay.classList.add('show');
+            var first = overlay.querySelector('button, [tabindex]:not([tabindex="-1"])');
+            if (first) first.focus();
+        });
+    }
+
+    function closePopup() {
+        if (!overlay) return;
+        overlay.classList.remove('show');
+        document.body.classList.remove('build-popup-open');
+        setTimeout(function () { overlay.style.display = 'none'; }, 300);
+        if (state.previousFocus && state.previousFocus.focus) state.previousFocus.focus();
+    }
+
+    /* ──────────── Rendering ──────────── */
+    function renderStep() {
+        bodyEl.classList.add('fading');
+        setTimeout(function () {
+            bodyEl.innerHTML = htmlForStep();
+            wireStepHandlers();
+            bodyEl.classList.remove('fading');
+        }, 100);
+    }
+
+    function htmlForStep() {
+        switch (state.currentStep) {
+            case 0: return renderWelcome();
+            default: return '<p style="color:#bacbbf;">Step ' + state.currentStep + ' not yet implemented.</p>';
+        }
+    }
+
+    function renderWelcome() {
+        var lo = state.config.launch_offer;
+        var showOffer = lo && lo.enabled && lo.spots_remaining > 0;
+        var squares = '';
+        if (showOffer) {
+            var taken = lo.total_spots - lo.spots_remaining;
+            for (var i = 0; i < lo.total_spots; i++) {
+                squares += '<span class="square ' + (i < taken ? 'taken' : 'available') + '"></span>';
+            }
+        }
+        return ''
+            + '<span class="build-popup-eyebrow">In about 60 seconds</span>'
+            + '<h2 class="build-popup-title" id="build-popup-title">Find out what your idea would <span class="accent">cost.</span></h2>'
+            + '<p class="build-popup-body-text">Answer 4 simple questions and we\'ll show you a real starting price. No "contact us for a quote". Actual numbers.</p>'
+            + '<div class="build-popup-preview-card">'
+                + '<p class="lbl">↓ YOU\'LL GET SOMETHING LIKE THIS ↓</p>'
+                + '<p class="name">🤝 We build &amp; manage</p>'
+                + '<p class="price">R5,000 + R3,500/mo</p>'
+                + '<p class="foot">12-month minimum, then month-to-month</p>'
+            + '</div>'
+            + '<div class="build-popup-stat-strip">'
+                + '<div class="stat"><div class="num">60s</div><div class="lbl">to fill in</div></div>'
+                + '<div class="stat"><div class="num">4</div><div class="lbl">questions</div></div>'
+                + '<div class="stat"><div class="num">R0</div><div class="lbl">to ask</div></div>'
+            + '</div>'
+            + (showOffer
+                ? '<div class="build-popup-launch-card">'
+                    + '<div class="top">'
+                        + '<div><div class="lbl">Launch offer</div><div class="txt">First ' + lo.total_spots + ' builds get ' + lo.label + '</div></div>'
+                        + '<div class="pill">−' + Math.round(lo.discount_pct * 100) + '%</div>'
+                    + '</div>'
+                    + '<div class="meter">'
+                        + '<div class="meter-label"><div class="small">Spots remaining</div><div class="big"><span class="accent">' + lo.spots_remaining + '</span> of ' + lo.total_spots + '</div></div>'
+                        + '<div class="squares">' + squares + '</div>'
+                    + '</div>'
+                + '</div>'
+                : '')
+            + '<button class="btn btn-primary glow" data-action="start" style="width:100%;">Start →</button>'
+            + '<p class="build-popup-footnote">No spam. No follow-up calls unless you want them.</p>';
+    }
+
+    function wireStepHandlers() {
+        var startBtn = bodyEl.querySelector('[data-action="start"]');
+        if (startBtn) startBtn.addEventListener('click', function () { state.currentStep = 1; renderStep(); });
+    }
+
     /* ──────────── Public surface ──────────── */
     window.DoqixBuildPopup = {
-        /* Test exports — used by build-request-tests.html. Do not call from production code. */
+        open: openPopup,
+        close: closePopup,
         _test: { roundUp: roundUp, roundNearest: roundNearest, routeFor: routeFor, calculate: calculate, applyDiscount: applyDiscount }
     };
 })();
