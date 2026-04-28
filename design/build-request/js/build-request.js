@@ -167,6 +167,7 @@
             state.answers = { type: null, size: null, login: null, integrations: null, integrations_text: '' };
             state.contact = { name: '', email: '', phone: '', company: '', notes: '' };
             renderStep();
+            emit('build_popup_opened', { trigger: state.trigger });
             document.body.classList.add('build-popup-open');
             overlay.style.display = 'block';
             void overlay.offsetHeight;  /* force reflow before transition */
@@ -533,6 +534,11 @@
         }
         lastSubmission = { hash: h, at: now };
 
+        emit('build_popup_submitted', {
+            route: state.route,
+            build_cost: state.estimate ? state.estimate.build_cost : 0
+        });
+
         var btn = form.querySelector('[data-action="submit"]');
         var btnText = btn.textContent;
         btn.textContent = 'Sending…';
@@ -602,7 +608,17 @@
 
         var nextBtn = bodyEl.querySelector('[data-action="next"]');
         if (nextBtn) nextBtn.addEventListener('click', function () {
+            var fromStep = state.currentStep;
             state.currentStep++;
+            emit('build_popup_step_advanced', { from_step: fromStep, to_step: state.currentStep });
+            if (state.currentStep === 5) {
+                var route = routeFor(state.answers);
+                var props = { route: route };
+                if (route === 'estimate') {
+                    props.build_cost = calculate(state.answers, state.config).build_cost;
+                }
+                emit('build_popup_estimate_shown', props);
+            }
             renderStep();
         });
 
@@ -667,7 +683,30 @@
 
     function attemptClose() {
         if (isDirty() && !window.confirm('Close and discard your answers?')) return;
+        if (isDirty()) emit('build_popup_abandoned', { last_step: state.currentStep });
         closePopup();
+    }
+
+    /* ──────────── Analytics (consent-gated) ──────────── */
+    function consentGranted() {
+        try {
+            return localStorage.getItem('doqix_cookie_consent') === 'allow';
+        } catch (e) { return false; }
+    }
+
+    function emit(name, props) {
+        if (!consentGranted()) return;
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', name, props || {});
+        } else if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+            var payload = { event: name };
+            if (props) {
+                for (var k in props) {
+                    if (Object.prototype.hasOwnProperty.call(props, k)) payload[k] = props[k];
+                }
+            }
+            window.dataLayer.push(payload);
+        }
     }
 
     /* ──────────── Public surface ──────────── */
