@@ -89,7 +89,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.9.20** (a11y: footer text contrast bumped to WCAG AA)
+- Current version: **web-v0.10.0** (feat: Let's Build popup with guided wizard, estimate calculator, and launch offer)
 
 **Never push website changes without creating a version tag.**
 

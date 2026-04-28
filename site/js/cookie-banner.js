@@ -84,6 +84,12 @@
                                 '<td>Tracks page views and site usage to help us improve. Only loaded if you click "Allow All".</td>' +
                                 '<td><span class="cookie-cat analytics">Analytics</span></td>' +
                             '</tr>' +
+                            '<tr>' +
+                                '<td>Build Request popup</td>' +
+                                '<td>Analytics events</td>' +
+                                '<td>Tracks when you open the build request popup, advance steps, or submit, so we can improve the form. Only sent if you click "Allow All". No personal information is sent until you submit the contact step.</td>' +
+                                '<td><span class="cookie-cat analytics">Analytics</span></td>' +
+                            '</tr>' +
                         '</tbody>' +
                     '</table>' +
                     '<p class="cookie-banner-note">We do not use tracking pixels or advertising cookies. Analytics is only loaded with your explicit consent.</p>' +
