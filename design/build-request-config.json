@@ -1,0 +1,27 @@
+{
+  "launch_offer": {
+    "enabled": true,
+    "spots_remaining": 7,
+    "total_spots": 10,
+    "discount_pct": 0.20,
+    "label": "20% off setup"
+  },
+  "base": {
+    "automation": 3000,
+    "dashboard":  8000,
+    "app":       15000,
+    "unsure":     8000
+  },
+  "size_multiplier": {
+    "small":   1,
+    "medium":  2,
+    "big":     4,
+    "unsure":  2
+  },
+  "login_addon": 5000,
+  "integ_addon": 3000,
+  "managed": {
+    "setup_pct":    0.20,
+    "hosting_base": 1500
+  }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Build Request — Calculator Tests</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; padding: 2rem; max-width: 900px; margin: 0 auto; background: #0C1830; color: #e4e1e9; }
+    h1 { color: #00e5a0; }
+    .pass { color: #00e5a0; }
+    .fail { color: #ff6b6b; font-weight: 700; }
+    .case { padding: 0.5rem 0; border-bottom: 1px solid #14203C; font-family: monospace; font-size: 0.85rem; }
+    .summary { margin-top: 2rem; padding: 1rem; background: #14203C; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Build Request — Calculator Tests</h1>
+  <div id="results"></div>
+  <div id="summary" class="summary"></div>
+  <script src="js/build-request.js?v=0.10.0"></script>
+  <script>
+    var T = window.DoqixBuildPopup._test;
+    var passed = 0, failed = 0, lines = [];
+    function expect(name, actual, expected) {
+      var ok = JSON.stringify(actual) === JSON.stringify(expected);
+      var cls = ok ? 'pass' : 'fail';
+      var icon = ok ? '✓' : '✗';
+      lines.push('<div class="case ' + cls + '">' + icon + ' ' + name +
+                 (ok ? '' : '<br>  expected: ' + JSON.stringify(expected) + '<br>  actual:   ' + JSON.stringify(actual)) +
+                 '</div>');
+      if (ok) passed++; else failed++;
+    }
+
+    var cfg = {
+      base: { automation: 3000, dashboard: 8000, app: 15000, unsure: 8000 },
+      size_multiplier: { small: 1, medium: 2, big: 4, unsure: 2 },
+      login_addon: 5000, integ_addon: 3000,
+      managed: { setup_pct: 0.20, hosting_base: 1500 },
+      launch_offer: { enabled: true, spots_remaining: 5, discount_pct: 0.20 }
+    };
+
+    /* Rounding helpers */
+    expect('roundUp(7600, 500)', T.roundUp(7600, 500), 8000);
+    expect('roundUp(7500, 500)', T.roundUp(7500, 500), 7500);
+    expect('roundUp(7501, 500)', T.roundUp(7501, 500), 8000);
+    expect('roundNearest(7600, 500)', T.roundNearest(7600, 500), 7500);
+    expect('roundNearest(7750, 500)', T.roundNearest(7750, 500), 8000);
+    expect('roundNearest(2541.67, 500)', T.roundNearest(2541.67, 500), 2500);
+
+    /* Threshold rule */
+    expect('type=unsure → consultation',
+      T.routeFor({ type: 'unsure', size: 'small', login: 'no', integrations: 'no' }), 'consultation');
+    expect('two unsures → consultation',
+      T.routeFor({ type: 'app', size: 'unsure', login: 'unsure', integrations: 'no' }), 'consultation');
+    expect('one unsure → estimate',
+      T.routeFor({ type: 'app', size: 'medium', login: 'unsure', integrations: 'no' }), 'estimate');
+    expect('zero unsures → estimate',
+      T.routeFor({ type: 'app', size: 'medium', login: 'yes', integrations: 'yes' }), 'estimate');
+
+    /* Worked examples from spec */
+    var r1 = T.calculate({ type: 'automation', size: 'small', login: 'no', integrations: 'no' }, cfg);
+    expect('small auto build_cost', r1.build_cost, 3000);
+    expect('small auto handover', r1.handover_price, 3000);
+    expect('small auto min_months', r1.min_months, 6);
+    expect('small auto managed_setup', r1.managed_setup, 500);
+    expect('small auto managed_monthly', r1.managed_monthly, 2000);
+
+    var r2 = T.calculate({ type: 'app', size: 'medium', login: 'yes', integrations: 'yes' }, cfg);
+    expect('medium app build_cost', r2.build_cost, 38000);
+    expect('medium app handover', r2.handover_price, 38000);
+    expect('medium app min_months', r2.min_months, 12);
+    expect('medium app managed_setup', r2.managed_setup, 7500);
+    expect('medium app managed_monthly', r2.managed_monthly, 4000);
+
+    var r3 = T.calculate({ type: 'app', size: 'big', login: 'yes', integrations: 'yes' }, cfg);
+    expect('big app build_cost', r3.build_cost, 68000);
+    expect('big app min_months', r3.min_months, 18);
+    expect('big app managed_setup', r3.managed_setup, 13500);
+    expect('big app managed_monthly', r3.managed_monthly, 4500);
+
+    var r4 = T.calculate({ type: 'dashboard', size: 'small', login: 'no', integrations: 'no' }, cfg);
+    expect('small dash build_cost', r4.build_cost, 8000);
+    expect('small dash min_months', r4.min_months, 6);
+    expect('small dash managed_setup', r4.managed_setup, 1500);
+    expect('small dash managed_monthly', r4.managed_monthly, 2500);
+
+    /* Defaulting unsure */
+    var r5 = T.calculate({ type: 'app', size: 'unsure', login: 'no', integrations: 'no' }, cfg);
+    expect('unsure size defaults to medium', r5.build_cost, 30000);
+
+    /* Discount */
+    expect('handover after 20% discount',
+      T.applyDiscount(38000, 0.20), 30500);
+    expect('managed setup after 20% discount',
+      T.applyDiscount(7500, 0.20), 6000);
+
+    /* Render results */
+    document.getElementById('results').innerHTML = lines.join('');
+    document.getElementById('summary').innerHTML =
+      '<strong>' + passed + ' passed</strong>' +
+      (failed > 0 ? ', <span class="fail">' + failed + ' failed</span>' : '');
+  </script>
+</body>
+</html>
