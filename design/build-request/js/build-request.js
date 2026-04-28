@@ -248,7 +248,8 @@
             state.route = routeFor(state.answers);
             return state.route === 'estimate' ? renderEstimate() : renderConsultation();
         }
-        return '<p style="color:#bacbbf;">Step ' + state.currentStep + ' not yet implemented.</p>';
+        if (state.currentStep === 6) return renderContact();
+        return '<p style="color:#bacbbf;">Unknown step.</p>';
     }
 
     function renderWelcome() {
@@ -408,6 +409,108 @@
             + '</div>';
     }
 
+    function escapeAttr(s) { return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+    function escapeText(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+    function renderContact() {
+        var submitLabel = state.route === 'estimate' ? 'Send My Estimate' : 'Get a Call';
+        var c = state.contact;
+        var helperText = state.route === 'estimate'
+            ? 'We\'ll email you a copy of your estimate and follow up within 24 hours.'
+            : 'A real person will reach out within 24 hours.';
+        return ''
+            + '<p class="build-popup-step-counter">Last step</p>'
+            + '<h2 class="build-popup-title" id="build-popup-title">Where do we send it?</h2>'
+            + '<p class="build-popup-helper">' + helperText + '</p>'
+            + '<form id="build-popup-form" novalidate>'
+                + '<div class="build-popup-form-row">'
+                    + '<label for="bp-name">Your name <span class="req">*</span></label>'
+                    + '<input id="bp-name" name="name" type="text" required value="' + escapeAttr(c.name) + '"/>'
+                    + '<p class="field-error">Please enter your name.</p>'
+                + '</div>'
+                + '<div class="build-popup-form-row">'
+                    + '<label for="bp-email">Email <span class="req">*</span></label>'
+                    + '<input id="bp-email" name="email" type="email" required value="' + escapeAttr(c.email) + '"/>'
+                    + '<p class="field-error">Please enter a valid email.</p>'
+                + '</div>'
+                + '<div class="build-popup-form-row">'
+                    + '<label for="bp-phone">Phone <span class="req">*</span></label>'
+                    + '<input id="bp-phone" name="phone" type="tel" required value="' + escapeAttr(c.phone) + '"/>'
+                    + '<p class="field-error">Please enter your phone number.</p>'
+                + '</div>'
+                + '<div class="build-popup-form-row">'
+                    + '<label for="bp-company">Company <span style="color:#84958a;font-weight:400;">(optional)</span></label>'
+                    + '<input id="bp-company" name="company" type="text" value="' + escapeAttr(c.company) + '"/>'
+                + '</div>'
+                + '<div class="build-popup-form-row">'
+                    + '<label for="bp-notes">Anything else we should know? <span style="color:#84958a;font-weight:400;">(optional)</span></label>'
+                    + '<textarea id="bp-notes" name="notes" rows="3" placeholder="Deadlines, special considerations, anything that helps us scope it right.">' + escapeText(c.notes) + '</textarea>'
+                + '</div>'
+                + '<div class="build-popup-honeypot" aria-hidden="true">'
+                    + '<label for="bp-website">Website</label>'
+                    + '<input id="bp-website" name="website" type="text" tabindex="-1" autocomplete="off"/>'
+                + '</div>'
+                + '<div class="build-popup-actions">'
+                    + '<button type="button" class="btn-back" data-action="back">← Back</button>'
+                    + '<button type="submit" class="btn btn-primary glow btn-next" data-action="submit">' + submitLabel + '</button>'
+                + '</div>'
+                + '<p class="build-popup-footnote">By submitting, you agree to our <a href="privacy-policy.html" style="color:#00e5a0;text-decoration:underline;">Privacy Policy</a>.</p>'
+            + '</form>';
+    }
+
+    function validateContact() {
+        var valid = true;
+        ['name', 'email', 'phone'].forEach(function (key) {
+            var el = bodyEl.querySelector('[name="' + key + '"]');
+            if (!el) return;
+            var row = el.closest('.build-popup-form-row');
+            var v = (el.value || '').trim();
+            var bad = !v;
+            if (key === 'email' && v) bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+            row.classList.toggle('has-error', bad);
+            if (bad) valid = false;
+        });
+        return valid;
+    }
+
+    function readContact() {
+        return {
+            name:    (bodyEl.querySelector('[name="name"]')    || {}).value || '',
+            email:   (bodyEl.querySelector('[name="email"]')   || {}).value || '',
+            phone:   (bodyEl.querySelector('[name="phone"]')   || {}).value || '',
+            company: (bodyEl.querySelector('[name="company"]') || {}).value || '',
+            notes:   (bodyEl.querySelector('[name="notes"]')   || {}).value || '',
+            website: (bodyEl.querySelector('[name="website"]') || {}).value || ''
+        };
+    }
+
+    function buildPayload() {
+        return {
+            route: state.route,
+            answers: {
+                type:               state.answers.type,
+                size:               state.answers.size,
+                login:              state.answers.login,
+                integrations:       state.answers.integrations,
+                integrations_text:  state.answers.integrations_text || ''
+            },
+            estimate: state.estimate || null,
+            contact: {
+                name:    state.contact.name,
+                email:   state.contact.email,
+                phone:   state.contact.phone,
+                company: state.contact.company,
+                notes:   state.contact.notes
+            },
+            meta: {
+                page:         window.location.pathname,
+                referrer:     document.referrer || '',
+                submitted_at: new Date().toISOString(),
+                user_agent:   navigator.userAgent
+            }
+        };
+    }
+
     function wireStepHandlers() {
         var startBtn = bodyEl.querySelector('[data-action="start"]');
         if (startBtn) startBtn.addEventListener('click', function () { state.currentStep = 1; renderStep(); });
@@ -449,6 +552,29 @@
             state.currentStep++;
             renderStep();
         });
+
+        var form = bodyEl.querySelector('#build-popup-form');
+        if (form) {
+            ['name', 'email', 'phone', 'company', 'notes'].forEach(function (k) {
+                var el = form.querySelector('[name="' + k + '"]');
+                if (!el) return;
+                el.addEventListener('input', function () {
+                    state.contact[k] = el.value;
+                    var row = el.closest('.build-popup-form-row');
+                    if (row) row.classList.remove('has-error');
+                });
+            });
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var c = readContact();
+                if (c.website) return;     /* Honeypot tripped — silently drop */
+                state.contact = { name: c.name, email: c.email, phone: c.phone, company: c.company, notes: c.notes };
+                if (!validateContact()) return;
+                /* Submission wiring is added in Task 8. For now, log payload for verification. */
+                console.log('[build-popup] would submit', buildPayload());
+                window.alert('Submission wiring up next. Payload logged to console.');
+            });
+        }
     }
 
     /* ──────────── Public surface ──────────── */
