@@ -10,13 +10,13 @@
 <link rel="manifest" href="site.webmanifest"/>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/inter-var.woff2"/>
 
-<link rel="stylesheet" href="tailwind.css?v=0.9.20"/>
-<link rel="stylesheet" href="global.css?v=0.9.20"/></head>
+<link rel="stylesheet" href="tailwind.css?v=0.10.0"/>
+<link rel="stylesheet" href="global.css?v=0.10.0"/></head>
 <body class="bg-surface-dim text-on-surface font-body" style="font-family: Inter, sans-serif;">
 
 <!-- Header -->
 <div id="site-header"></div>
-<script src="js/header.js?v=0.9.20"></script>
+<script src="js/header.js?v=0.10.0"></script>
 
 <main class="pt-20">
 
@@ -30,16 +30,16 @@
 </svg>
 </div>
 
-<span class="label inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20 mb-4">Thank You</span>
-<h1>
+<span class="label inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20 mb-4" data-thank-eyebrow>Thank You</span>
+<h1 data-thank-heading>
     We Got You. <span class="text-primary">We'll Be In Touch Soon</span>
 </h1>
 
-<p class="text-lg text-on-surface-variant max-w-xl mx-auto">
+<p class="text-lg text-on-surface-variant max-w-xl mx-auto" data-thank-body>
     Thanks for reaching out. Here's what happens next:
 </p>
 
-<div class="max-w-md mx-auto text-left space-y-4">
+<div class="max-w-md mx-auto text-left space-y-4" data-thank-steps>
 <div class="flex items-start gap-4">
 <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
 <svg style="width: 1rem; height: 1rem" class="hi text-on-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
@@ -78,12 +78,12 @@
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script defer src="js/footer.js?v=0.9.20"></script>
+<script defer src="js/footer.js?v=0.10.0"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script defer src="js/main.js?v=0.9.20"></script>
-<script defer src="js/thank-you.js?v=0.9.20"></script>
-<script defer src="js/exit-popup.js?v=0.9.20"></script>
-<script defer src="js/cookie-banner.js?v=0.9.20"></script>
+<script defer src="js/main.js?v=0.10.0"></script>
+<script src="js/thank-you.js?v=0.10.0"></script>
+<script defer src="js/exit-popup.js?v=0.10.0"></script>
+<script defer src="js/cookie-banner.js?v=0.10.0"></script>
 </body></html>

@@ -49,3 +49,40 @@
         }
     });
 })();
+
+/* Do.Qix Build Popup — header CTA bindings + ?build=1 auto-open */
+(function () {
+    function bind() {
+        var ids = ['cta-lets-build', 'cta-lets-build-mobile'];
+        ids.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (!el || el._doqixBuildBound) return;
+            el._doqixBuildBound = true;
+            el.addEventListener('click', function (e) {
+                if (!window.DoqixBuildPopup) return;
+                e.preventDefault();
+                window.DoqixBuildPopup.open({ trigger: 'header_cta' });
+            });
+        });
+    }
+
+    /* The header is injected synchronously by the IIFE above; bind once the DOM has it. */
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bind);
+    } else {
+        bind();
+    }
+    /* Defensive retry in case build-request.js loads after this file. */
+    setTimeout(bind, 100);
+
+    /* ?build=1 deep link auto-open. */
+    function autoOpen() {
+        try {
+            var p = new URLSearchParams(window.location.search);
+            if (p.get('build') === '1' && window.DoqixBuildPopup) {
+                window.DoqixBuildPopup.open({ trigger: 'url_param' });
+            }
+        } catch (err) { /* old browser, swallow */ }
+    }
+    window.addEventListener('load', function () { setTimeout(autoOpen, 500); });
+})();
