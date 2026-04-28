@@ -184,6 +184,53 @@
         if (state.previousFocus && state.previousFocus.focus) state.previousFocus.focus();
     }
 
+    /* ──────────── Question definitions ──────────── */
+    var QUESTIONS = [
+        {
+            key: 'type',
+            title: 'What kind of thing are you trying to build?',
+            helper: 'Pick the closest. Don\'t worry about getting this exactly right.',
+            options: [
+                { value: 'automation', title: '🔄 An automation', desc: 'Something that runs in the background' },
+                { value: 'dashboard',  title: '📊 A dashboard',   desc: 'A place to see your data at a glance' },
+                { value: 'app',        title: '📱 An app',        desc: 'Something people open and use' },
+                { value: 'unsure',     title: '🤔 Not sure yet',  desc: 'We\'ll figure it out together' }
+            ]
+        },
+        {
+            key: 'size',
+            title: 'How big does the idea feel?',
+            helper: 'Rough is fine. Pick the closest match. We\'ll firm it up on the call.',
+            options: [
+                { value: 'small',  title: '🌱 Small',     desc: 'A calculator, or a form that emails you when filled in.' },
+                { value: 'medium', title: '🏗️ Medium',   desc: 'A booking system with admin, or an app with a few screens.' },
+                { value: 'big',    title: '🏢 Big',       desc: 'A platform with users, payments, dashboards, lots of features.' },
+                { value: 'unsure', title: '🤔 Not sure',  desc: 'That\'s fine. We\'ll figure it out together on a call.' }
+            ]
+        },
+        {
+            key: 'login',
+            title: 'Will people need to log in?',
+            helper: '',
+            options: [
+                { value: 'yes',    title: '✅ Yes',       desc: 'Different people see different things' },
+                { value: 'no',     title: '❌ No',         desc: 'Anyone with the link can use it' },
+                { value: 'unsure', title: '🤔 Not sure',   desc: '' }
+            ]
+        },
+        {
+            key: 'integrations',
+            title: 'Does it need to connect to other tools you already use?',
+            helper: 'Things like Xero, Gmail, WhatsApp, Shopify, etc.',
+            options: [
+                { value: 'yes',    title: '✅ Yes',       desc: '' },
+                { value: 'no',     title: '❌ No',         desc: '' },
+                { value: 'unsure', title: '🤔 Not sure',   desc: '' }
+            ],
+            withFreeText: true
+        }
+    ];
+
     /* ──────────── Rendering ──────────── */
     function renderStep() {
         bodyEl.classList.add('fading');
@@ -195,10 +242,9 @@
     }
 
     function htmlForStep() {
-        switch (state.currentStep) {
-            case 0: return renderWelcome();
-            default: return '<p style="color:#bacbbf;">Step ' + state.currentStep + ' not yet implemented.</p>';
-        }
+        if (state.currentStep === 0) return renderWelcome();
+        if (state.currentStep >= 1 && state.currentStep <= 4) return renderQuestion(state.currentStep);
+        return '<p style="color:#bacbbf;">Step ' + state.currentStep + ' not yet implemented.</p>';
     }
 
     function renderWelcome() {
@@ -242,9 +288,90 @@
             + '<p class="build-popup-footnote">No spam. No follow-up calls unless you want them.</p>';
     }
 
+    function renderProgress(stepIdx, totalSteps) {
+        var segs = '';
+        for (var i = 1; i <= totalSteps; i++) {
+            segs += '<div class="seg ' + (i <= stepIdx ? 'done' : '') + '"></div>';
+        }
+        return '<div class="build-popup-progress">' + segs + '</div>'
+             + '<p class="build-popup-step-counter">Step ' + stepIdx + ' of ' + totalSteps + '</p>';
+    }
+
+    function renderQuestion(stepIdx) {
+        /* stepIdx is 1..4 (welcome=0). Question index is stepIdx - 1. */
+        var q = QUESTIONS[stepIdx - 1];
+        var current = state.answers[q.key];
+        var optionsHtml = q.options.map(function (o) {
+            var pressed = current === o.value ? 'true' : 'false';
+            return '<button type="button" class="build-popup-option" aria-pressed="' + pressed + '" data-value="' + o.value + '">'
+                + '<div class="opt-title">' + o.title + '</div>'
+                + (o.desc ? '<div class="opt-desc">' + o.desc + '</div>' : '')
+                + '</button>';
+        }).join('');
+
+        var freeText = '';
+        if (q.withFreeText) {
+            var visible = state.answers[q.key] === 'yes';
+            freeText = '<div class="build-popup-integ-text ' + (visible ? 'show' : '') + '">'
+                + '<input type="text" data-integ-text placeholder="Which ones? (optional, e.g. Xero, Gmail)" value="' + (state.answers.integrations_text || '').replace(/"/g, '&quot;') + '"/>'
+                + '</div>';
+        }
+
+        var canContinue = !!current;
+
+        return ''
+            + renderProgress(stepIdx, 5)
+            + '<h2 class="build-popup-title" id="build-popup-title">' + q.title + '</h2>'
+            + (q.helper ? '<p class="build-popup-helper">' + q.helper + '</p>' : '')
+            + '<div class="build-popup-options">' + optionsHtml + '</div>'
+            + freeText
+            + '<div class="build-popup-actions">'
+                + '<button type="button" class="btn-back" data-action="back">← Back</button>'
+                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next" ' + (canContinue ? '' : 'disabled') + '>Continue →</button>'
+            + '</div>';
+    }
+
     function wireStepHandlers() {
         var startBtn = bodyEl.querySelector('[data-action="start"]');
         if (startBtn) startBtn.addEventListener('click', function () { state.currentStep = 1; renderStep(); });
+
+        bodyEl.querySelectorAll('.build-popup-option').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var q = QUESTIONS[state.currentStep - 1];
+                state.answers[q.key] = btn.getAttribute('data-value');
+                /* Show/hide free text field for integrations question */
+                if (q.withFreeText) {
+                    var ft = bodyEl.querySelector('.build-popup-integ-text');
+                    if (ft) ft.classList.toggle('show', state.answers[q.key] === 'yes');
+                    if (state.answers[q.key] !== 'yes') state.answers.integrations_text = '';
+                }
+                /* Update aria-pressed for all options + enable continue */
+                bodyEl.querySelectorAll('.build-popup-option').forEach(function (b) {
+                    b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+                });
+                var nextBtn = bodyEl.querySelector('[data-action="next"]');
+                if (nextBtn) nextBtn.disabled = false;
+            });
+        });
+
+        var integTextInput = bodyEl.querySelector('[data-integ-text]');
+        if (integTextInput) {
+            integTextInput.addEventListener('input', function () {
+                state.answers.integrations_text = integTextInput.value;
+            });
+        }
+
+        var backBtn = bodyEl.querySelector('[data-action="back"]');
+        if (backBtn) backBtn.addEventListener('click', function () {
+            state.currentStep = Math.max(0, state.currentStep - 1);
+            renderStep();
+        });
+
+        var nextBtn = bodyEl.querySelector('[data-action="next"]');
+        if (nextBtn) nextBtn.addEventListener('click', function () {
+            state.currentStep++;
+            renderStep();
+        });
     }
 
     /* ──────────── Public surface ──────────── */
