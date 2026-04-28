@@ -2493,3 +2493,67 @@ a.contact-channel:hover .channel-value {
 .build-popup-body.fading { opacity: 0; }
 
 body.build-popup-open { overflow: hidden; }
+
+.build-popup-est-disclaimer p {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    font-size: 0.7rem;
+    color: #84958a;
+    font-style: italic;
+}
+.build-popup-est-disclaimer p:last-child { margin-bottom: 0; }
+.build-popup-est-disclaimer a {
+    color: #00e5a0;
+    text-decoration: underline;
+    font-style: normal;
+}
+
+.build-popup-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin: 0.5rem 0;
+    padding: 0.7rem 0.9rem;
+    background: rgba(0, 229, 160, 0.04);
+    border: 1px solid rgba(59, 74, 65, 0.4);
+    border-radius: 8px;
+    transition: border-color 0.15s, background 0.15s;
+}
+.build-popup-consent input[type="checkbox"] {
+    margin-top: 0.15rem;
+    width: 18px;
+    height: 18px;
+    accent-color: #00e5a0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.build-popup-consent label {
+    font-size: 0.78rem;
+    color: #bacbbf;
+    line-height: 1.5;
+    cursor: pointer;
+}
+.build-popup-consent label a {
+    color: #00e5a0;
+    text-decoration: underline;
+}
+.build-popup-consent.has-error {
+    border-color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.05);
+}
+.build-popup-consent-error {
+    display: none;
+    color: #ff6b6b;
+    font-size: 0.7rem;
+    margin: -0.2rem 0 0.5rem 0.4rem;
+}
+.build-popup-consent.has-error + .build-popup-consent-error { display: block; }
+
+.build-popup-form-row label .opt-label {
+    color: #84958a;
+    font-weight: 400;
+}
+
+.build-popup-start-btn { width: 100%; }
+
+.build-popup-fallback { color: #bacbbf; }

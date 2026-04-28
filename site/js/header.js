@@ -75,11 +75,11 @@
     /* Defensive retry in case build-request.js loads after this file. */
     setTimeout(bind, 100);
 
-    /* ?build=1 deep link auto-open. */
+    /* ?idea=1 deep link auto-open. */
     function autoOpen() {
         try {
             var p = new URLSearchParams(window.location.search);
-            if (p.get('build') === '1' && window.DoqixBuildPopup) {
+            if (p.get('idea') === '1' && window.DoqixBuildPopup) {
                 window.DoqixBuildPopup.open({ trigger: 'url_param' });
             }
         } catch (err) { /* old browser, swallow */ }

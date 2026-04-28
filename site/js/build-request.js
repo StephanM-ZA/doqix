@@ -252,7 +252,7 @@
             return state.route === 'estimate' ? renderEstimate() : renderConsultation();
         }
         if (state.currentStep === 6) return renderContact();
-        return '<p style="color:#bacbbf;">Unknown step.</p>';
+        return '<p class="build-popup-fallback">Unknown step.</p>';
     }
 
     function renderWelcome() {
@@ -292,7 +292,7 @@
                     + '</div>'
                 + '</div>'
                 : '')
-            + '<button class="btn btn-primary glow" data-action="start" style="width:100%;">Start →</button>'
+            + '<button class="btn btn-primary glow build-popup-start-btn" data-action="start">Start →</button>'
             + '<p class="build-popup-footnote">No spam. No follow-up calls unless you want them.</p>';
     }
 
@@ -393,7 +393,10 @@
                     + '<div class="desc">We host, monitor, fix, and improve. You focus on running your business.</div>'
                 + '</div>'
             + '</div>'
-            + '<p class="build-popup-est-disclaimer">Both options include the same build.' + (discountActive ? ' Prices reflect your launch offer.' : '') + '</p>'
+            + '<div class="build-popup-est-disclaimer">'
+                + '<p>Both options include the same build.' + (discountActive ? ' Prices reflect your launch offer.' : '') + '</p>'
+                + '<p>This is a starting estimate based on the four answers above, not a binding quote. Real numbers come from a 15-min scoping call. Projects with extra complexity (regulated industries, banking-grade security, large user bases) take additional discovery. <a href="' + buildTermsPath() + '" target="_blank" rel="noopener">Read our fair-build terms →</a></p>'
+            + '</div>'
             + '<div class="build-popup-actions">'
                 + '<button type="button" class="btn-back" data-action="back">← Back</button>'
                 + '<button type="button" class="btn btn-primary glow btn-next" data-action="next">Continue →</button>'
@@ -442,22 +445,27 @@
                     + '<p class="field-error">Please enter your phone number.</p>'
                 + '</div>'
                 + '<div class="build-popup-form-row">'
-                    + '<label for="bp-company">Company <span style="color:#84958a;font-weight:400;">(optional)</span></label>'
+                    + '<label for="bp-company">Company <span class="opt-label">(optional)</span></label>'
                     + '<input id="bp-company" name="company" type="text" value="' + escapeAttr(c.company) + '"/>'
                 + '</div>'
                 + '<div class="build-popup-form-row">'
-                    + '<label for="bp-notes">Anything else we should know? <span style="color:#84958a;font-weight:400;">(optional)</span></label>'
+                    + '<label for="bp-notes">Anything else we should know? <span class="opt-label">(optional)</span></label>'
                     + '<textarea id="bp-notes" name="notes" rows="3" placeholder="Deadlines, special considerations, anything that helps us scope it right.">' + escapeText(c.notes) + '</textarea>'
                 + '</div>'
                 + '<div class="build-popup-honeypot" aria-hidden="true">'
                     + '<label for="bp-website">Website</label>'
                     + '<input id="bp-website" name="website" type="text" tabindex="-1" autocomplete="off"/>'
                 + '</div>'
+                + '<div class="build-popup-consent">'
+                    + '<input id="bp-consent" name="consent" type="checkbox"/>'
+                    + '<label for="bp-consent">I understand this is a starting estimate, not a binding quote. Final pricing follows a scoping call and our <a href="' + buildTermsPath() + '" target="_blank" rel="noopener">fair-build terms</a>.</label>'
+                + '</div>'
+                + '<p class="build-popup-consent-error">Please tick the box to continue.</p>'
                 + '<div class="build-popup-actions">'
                     + '<button type="button" class="btn-back" data-action="back">← Back</button>'
                     + '<button type="submit" class="btn btn-primary glow btn-next" data-action="submit">' + submitLabel + '</button>'
                 + '</div>'
-                + '<p class="build-popup-footnote">By submitting, you agree to our <a href="privacy-policy.html" style="color:#00e5a0;text-decoration:underline;">Privacy Policy</a>.</p>'
+                + '<p class="build-popup-footnote">By submitting, you agree to our <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>'
             + '</form>';
     }
 
@@ -473,6 +481,14 @@
             row.classList.toggle('has-error', bad);
             if (bad) valid = false;
         });
+        var consent = bodyEl.querySelector('[name="consent"]');
+        var consentWrap = bodyEl.querySelector('.build-popup-consent');
+        if (consent && !consent.checked) {
+            if (consentWrap) consentWrap.classList.add('has-error');
+            valid = false;
+        } else if (consentWrap) {
+            consentWrap.classList.remove('has-error');
+        }
         return valid;
     }
 
@@ -570,6 +586,12 @@
         return depth > 1 ? '../thank-you/thank-you.html' : 'thank-you.html';
     }
 
+    function buildTermsPath() {
+        if (window.location.pathname.indexOf('/doqix/') !== -1) return 'build-terms.html';
+        var depth = window.location.pathname.split('/').filter(Boolean).length;
+        return depth > 1 ? '../build-terms/build-terms.html' : 'build-terms.html';
+    }
+
     function wireStepHandlers() {
         var startBtn = bodyEl.querySelector('[data-action="start"]');
         if (startBtn) startBtn.addEventListener('click', function () { state.currentStep = 1; renderStep(); });
@@ -633,6 +655,13 @@
                     if (row) row.classList.remove('has-error');
                 });
             });
+            var consentEl = form.querySelector('[name="consent"]');
+            if (consentEl) {
+                consentEl.addEventListener('change', function () {
+                    var wrap = consentEl.closest('.build-popup-consent');
+                    if (wrap && consentEl.checked) wrap.classList.remove('has-error');
+                });
+            }
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 var c = readContact();
