@@ -6,10 +6,15 @@ const dotsContainer = document.getElementById('testimonialDots');
 let autoPlayInterval;
 const totalOriginal = originalSlides.length;
 
-function getVisibleCount() {
-    if (window.innerWidth <= 640) return 1;
-    return 2;
+// Cache viewport-derived value so animation-loop reads don't trigger forced reflow.
+let cachedVisibleCount = 2;
+function updateVisibleCount() {
+    cachedVisibleCount = window.innerWidth <= 640 ? 1 : 2;
 }
+function getVisibleCount() {
+    return cachedVisibleCount;
+}
+updateVisibleCount();
 
 function initTestimonials() {
     if (!originalSlides.length) return;
@@ -20,7 +25,7 @@ function initTestimonials() {
     }
     buildDots();
     startAutoPlay();
-    window.addEventListener('resize', buildDots);
+    window.addEventListener('resize', () => { updateVisibleCount(); buildDots(); }, { passive: true });
 
     track.parentElement.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
     track.parentElement.addEventListener('mouseleave', () => startAutoPlay());

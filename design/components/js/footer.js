@@ -25,7 +25,7 @@
         '<div class="footer-container">' +
         '<div class="footer-top">' +
         '<div class="footer-brand">' +
-        '<img src="' + base + 'logo_new_green.png" alt="Do.Qix" class="footer-logo-img"/>' +
+        '<img src="' + base + 'logo_new_green.png" alt="Do.Qix" width="568" height="168" class="footer-logo-img"/>' +
         '<div class="footer-contact">' +
 
         '<a href="mailto:hello@digitaloperations.co.za" class="footer-contact-item">' +

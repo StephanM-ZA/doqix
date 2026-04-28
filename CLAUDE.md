@@ -89,7 +89,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.9.17** (Tailwind CDN replaced with built CSS)
+- Current version: **web-v0.9.18** (self-hosted Inter font, logo resized, testimonial reflow fixed)
 
 **Never push website changes without creating a version tag.**
 
@@ -113,10 +113,19 @@ The `site/` folder is what GitHub Pages deploys. The source of truth is in `desi
 
 1. Run `npm run build` — rebuilds `design/tailwind.css` and copies it to `site/tailwind.css`
 2. Copy `design/global.css` to `site/global.css`
-3. Copy `design/index/js/*.js` to `site/js/`
-4. Copy `design/[page]/[page].html` to `site/[page].html`, fixing CSS paths from `../global.css` to `global.css` and `../tailwind.css` to `tailwind.css`
+3. Copy `design/components/js/*.js` and `design/index/js/*.js` to `site/js/`
+4. Copy `design/fonts/*` to `site/fonts/`
+5. Copy `design/[page]/[page].html` to `site/[page].html`, fixing CSS paths from `../global.css` to `global.css` and `../tailwind.css` to `tailwind.css`, and font preload from `../fonts/...` to `fonts/...`
 
 **This sync is part of the push process. Commit the `site/` files alongside the design files.**
+
+### Self-Hosted Fonts (MANDATORY)
+
+Inter is self-hosted as a variable font (`design/fonts/inter-var.woff2`, latin subset, ~48 KiB) covering weights 100–900.
+
+- Loaded via `@font-face` in `global.css`
+- Preloaded in every HTML file via `<link rel="preload" as="font" type="font/woff2" crossorigin href="<path>fonts/inter-var.woff2"/>`
+- Never re-introduce `fonts.googleapis.com` or `fonts.gstatic.com` — those add an extra 750 ms render-blocking chain on mobile
 
 ### Tailwind CSS Build (MANDATORY)
 

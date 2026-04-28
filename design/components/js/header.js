@@ -16,7 +16,7 @@
         '<header class="site-header">' +
         '<nav class="nav-container">' +
         '<a href="index.html" class="nav-logo">' +
-        '<img src="' + base + 'logo_new_green.png" alt="Do.Qix" class="logo-img"/>' +
+        '<img src="' + base + 'logo_new_green.png" alt="Do.Qix" width="568" height="168" class="logo-img"/>' +
         '</a>' +
         '<div class="nav-links">' +
         '<a class="nav-link" href="index.html">Home</a>' +
