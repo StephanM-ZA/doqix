@@ -89,7 +89,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.10.2** (legal: fair-build terms page, expanded estimate disclaimer, required consent checkbox, deep link rename to ?idea=1)
+- Current version: **web-v0.10.3** (seo: switch all canonical/OG URLs to https://doqix.co.za, fix robots.txt and sitemap.xml for clean-root domain)
 
 **Never push website changes without creating a version tag.**
 

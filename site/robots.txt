@@ -1,6 +1,5 @@
 User-agent: *
-Allow: /doqix/
-Disallow: /doqix/thank-you.html
+Allow: /
+Disallow: /thank-you.html
 
-Sitemap: https://digitaloperations.co.za/doqix/sitemap.xml
-
+Sitemap: https://doqix.co.za/sitemap.xml
