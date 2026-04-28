@@ -12,10 +12,31 @@
         if (new URLSearchParams(window.location.search).get('idea') === '1') return;
     } catch (e) { /* old browser, fall through */ }
 
-    /* Minimum time on page before popup can trigger (ms) */
-    var MIN_TIME = 5000;
+    /* Tightened triggers — see CLAUDE.md exit-popup notes
+       1. Engagement gate: must scroll OR click before exit-popup is allowed
+       2. Min time on page: 15s (was 5s)
+       3. Desktop re-entry cancellation: 300ms grace window
+       4. Mobile trigger disabled entirely
+       5. Form-field focus suppresses fire */
+    var MIN_TIME = 15000;
+    var REENTRY_GRACE_MS = 300;
     var loaded = Date.now();
     var triggered = false;
+    var engaged = false;
+    var pendingTimer = null;
+
+    function isMobile() {
+        return window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    }
+    function isFormFocused() {
+        var a = document.activeElement;
+        if (!a) return false;
+        var tag = (a.tagName || '').toLowerCase();
+        return tag === 'input' || tag === 'textarea' || tag === 'select' || a.isContentEditable === true;
+    }
+    function markEngaged() { engaged = true; }
+    window.addEventListener('scroll', markEngaged, { passive: true, once: true });
+    document.addEventListener('click', markEngaged, { once: true });
 
     /* Build overlay HTML */
     var overlay = document.createElement('div');
@@ -56,10 +77,12 @@
     overlay.querySelector('.exit-popup-dismiss').addEventListener('click', close);
     overlay.querySelector('.exit-popup-backdrop').addEventListener('click', close);
 
-    /* Show logic */
+    /* Show logic. All gates checked here so triggers stay simple. */
     function show() {
         if (triggered) return;
         if (Date.now() - loaded < MIN_TIME) return;
+        if (!engaged) return;
+        if (isFormFocused()) return;
         triggered = true;
         overlay.style.display = '';
         /* Force reflow before adding class for transition */
@@ -68,20 +91,24 @@
         sessionStorage.setItem(STORAGE_KEY, '1');
     }
 
-    /* Desktop: mouse leaves viewport from top */
-    document.addEventListener('mouseout', function (e) {
-        if (e.clientY <= 0) show();
-    });
-
-    /* Mobile: rapid scroll up near top of page (skip if back-to-top triggered) */
-    var lastScroll = 0;
-    window.addEventListener('scroll', function () {
-        var current = window.scrollY;
-        if (current < 200 && lastScroll - current > 50 && !window._scrollingToTop) {
-            show();
-        }
-        lastScroll = current;
-    }, { passive: true });
+    /* Desktop: mouse leaves viewport from top — with re-entry cancellation.
+       Skipped on mobile / touch devices (pointer: coarse). */
+    if (!isMobile()) {
+        document.addEventListener('mouseout', function (e) {
+            if (e.clientY > 0) return;
+            if (pendingTimer) return;     /* already waiting */
+            pendingTimer = setTimeout(function () {
+                pendingTimer = null;
+                show();
+            }, REENTRY_GRACE_MS);
+        });
+        document.addEventListener('mouseover', function () {
+            if (pendingTimer) {
+                clearTimeout(pendingTimer);
+                pendingTimer = null;
+            }
+        });
+    }
 
     /* Escape key */
     document.addEventListener('keydown', function (e) {

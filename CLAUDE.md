@@ -89,7 +89,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.10.6** (fix: exit-popup suppressed once build-popup is opened in same session, also when arriving via ?idea=1)
+- Current version: **web-v0.10.7** (fix: tighten exit-popup triggers — engagement gate, 15s min, re-entry grace, mobile disabled, form-field skip)
 
 **Never push website changes without creating a version tag.**
 
