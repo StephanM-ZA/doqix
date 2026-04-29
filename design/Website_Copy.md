@@ -602,7 +602,7 @@ If it has an API (most modern tools do), we can connect it. We'll check compatib
 Yes. We self-host your automations, so your data stays on infrastructure you control. Fully POPIA compliant.
 
 **What does it cost?**
-Four plans: Solo (R999/mo), Team (R2,500/mo), Business (R5,500/mo), and Enterprise (custom quote). Flat monthly retainer, no per-user fees, no credits, no per-task charges. Solo has zero setup fee. Training included on Business and Enterprise. All in ZAR. Month-to-month on every plan. First month at 50% during launch. See full pricing on the Services page.
+Four plans: Solo (R999/mo), Team (R2,500/mo), Business (R5,500/mo), and Enterprise (custom quote). Flat monthly retainer, no per-user fees, no credits, no per-task charges. Solo has zero setup fee. Training included on Business and Enterprise. All in ZAR. Month-to-month on every plan. See full pricing on the Services page. [Terms apply](terms-and-conditions.html#pricing-terms).
 
 **Can I cancel?**
 Anytime. No lock-in contracts. We keep your business because we deliver results.

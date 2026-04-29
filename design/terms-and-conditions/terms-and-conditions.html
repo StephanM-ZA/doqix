@@ -20,8 +20,8 @@
 <link rel="manifest" href="../site.webmanifest"/>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/inter-var.woff2"/>
 
-<link rel="stylesheet" href="../tailwind.css?v=0.10.8"/>
-<link rel="stylesheet" href="../global.css?v=0.10.8"/>
+<link rel="stylesheet" href="../tailwind.css?v=0.10.9"/>
+<link rel="stylesheet" href="../global.css?v=0.10.9"/>
 <style>
         /* Legal page prose styles */
         .legal-prose h4 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.125rem; font-weight: 800; color: #e4e1e9; text-transform: uppercase; letter-spacing: 0.02em; }
@@ -38,11 +38,14 @@
         .legal-prose a { color: #00e5a0; text-decoration: underline; }
         .legal-prose a:hover { color: #47ffb8; }
         .legal-meta { color: #84958a; font-size: 0.875rem; margin-bottom: 2rem; }
+        .callout { background: rgba(0, 229, 160, 0.05); border-left: 3px solid #00e5a0; padding: 1rem 1.25rem; border-radius: 4px; margin: 1.25rem 0; color: #e4e1e9; scroll-margin-top: 6rem; }
+        .callout p { margin-bottom: 0; color: #e4e1e9; }
+        .legal-prose h5 { scroll-margin-top: 6rem; }
     </style></head>
 <body data-disable-scroll-reveal>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="../components/js/header.js?v=0.10.8"></script>
+<script src="../components/js/header.js?v=0.10.9"></script>
 
 <main class="pt-20">
 
@@ -60,7 +63,7 @@
 <div class="max-w-3xl mx-auto legal-prose">
 
 <div class="legal-meta">
-<p><strong>Effective Date:</strong> February 11, 2026 | <strong>Last Updated:</strong> February 11, 2026</p>
+<p><strong>Effective Date:</strong> February 11, 2026 | <strong>Last Updated:</strong> April 29, 2026</p>
 <p><strong>Registered Entity:</strong> Digital Operations and Technology (Pty) Ltd, trading as Do.Qix | <strong>Jurisdiction:</strong> Republic of South Africa</p>
 </div>
 
@@ -89,7 +92,11 @@
 
 <h4>3. Pricing and Payment</h4>
 
-<h5>3.1 Currency</h5>
+<div class="callout" id="pricing-terms">
+<p><strong>Pricing terms (summary).</strong> All prices are quoted in ZAR. Automation services and SaaS products are <strong>month-to-month</strong> with no long-term contracts unless explicitly agreed in writing. We may adjust pricing with <strong>30 days' written notice</strong>. Price changes apply from the next billing cycle, and you may cancel before the new price takes effect. Full detail in <a href="#currency">§3.1 Currency</a>, <a href="#price-changes">§3.4 Price Changes</a>, and <a href="#month-to-month">§4.1 Month-to-Month</a> below.</p>
+</div>
+
+<h5 id="currency">3.1 Currency</h5>
 <p>All prices are quoted and payable in <strong>South African rands (ZAR)</strong>.</p>
 
 <h5>3.2 Billing</h5>
@@ -101,7 +108,7 @@
 <h5>3.3 Payment Terms</h5>
 <p>Invoices are due within <strong>7 days</strong> of issue. We accept EFT, credit card, and debit order. Late payments may result in service suspension after 14 days' written notice.</p>
 
-<h5>3.4 Price Changes</h5>
+<h5 id="price-changes">3.4 Price Changes</h5>
 <p>We may adjust pricing with <strong>30 days' written notice</strong>. Price changes apply from the next billing cycle after the notice period. You may cancel before the new price takes effect.</p>
 
 <h5>3.5 Promotions</h5>
@@ -109,7 +116,7 @@
 
 <h4>4. Subscription and Cancellation</h4>
 
-<h5>4.1 Month-to-Month</h5>
+<h5 id="month-to-month">4.1 Month-to-Month</h5>
 <p>All automation service tiers and SaaS product subscriptions are <strong>month-to-month</strong>. There are no long-term contracts unless explicitly agreed in writing.</p>
 
 <h5>4.2 Cancellation</h5>
@@ -275,11 +282,11 @@ Website: digitaloperations.co.za/doqix
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script defer src="../components/js/footer.js?v=0.10.8"></script>
+<script defer src="../components/js/footer.js?v=0.10.9"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script defer src="../components/js/main.js?v=0.10.8"></script>
-<script defer src="../components/js/exit-popup.js?v=0.10.8"></script>
-<script defer src="../components/js/cookie-banner.js?v=0.10.8"></script>
+<script defer src="../components/js/main.js?v=0.10.9"></script>
+<script defer src="../components/js/exit-popup.js?v=0.10.9"></script>
+<script defer src="../components/js/cookie-banner.js?v=0.10.9"></script>
 </body></html>

@@ -112,7 +112,7 @@
 
     '</div>' +
 
-    '<p class="roi-footnote">Estimates based on your inputs. Actual savings depend on processes automated. All figures in ZAR.</p>';
+    '<p class="roi-footnote">Estimates based on your inputs. Actual savings depend on processes automated. Prices in ZAR, month-to-month. <a href="terms-and-conditions.html#pricing-terms">Terms apply</a>.</p>';
 
   /* ── Slider config (single source of truth) ──── */
   var CONFIG = {
@@ -373,7 +373,7 @@
     // Update pricing banner after calculator interaction
     if(calcTouched&&pricingBannerText&&pricingBanner){
       var tierName=tier?tier.name:'Team';
-      pricingBannerText.textContent='Based on your numbers, we recommend the '+tierName+' plan. First month at 50%.';
+      pricingBannerText.textContent='Based on your numbers, we recommend the '+tierName+' plan.';
     }
 
     // Update ROI CTA link with results
