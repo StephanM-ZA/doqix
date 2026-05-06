@@ -28,6 +28,7 @@ const PAGE_META = {
     'contact.html':               { priority: '0.8', changefreq: 'monthly' },
     'privacy-policy.html':        { priority: '0.3', changefreq: 'yearly'  },
     'terms-and-conditions.html':  { priority: '0.3', changefreq: 'yearly'  },
+    'products-terms.html':        { priority: '0.4', changefreq: 'monthly' },
     'build-terms.html':           { priority: '0.3', changefreq: 'yearly'  }
 };
 const DEFAULT_META = { priority: '0.5', changefreq: 'monthly' };

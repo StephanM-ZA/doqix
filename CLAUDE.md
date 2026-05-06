@@ -89,7 +89,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.10.10** (UI: buttons never wrap — `white-space: nowrap` on `.btn` base class)
+- Current version: **web-v0.11.0** (Products: Get-in-Touch CTAs + per-product deep links; new tabbed `products-terms.html` with VoltIQ R99/mo promo; main T&Cs §17 trimmed to a single Products reference)
 
 **Never push website changes without creating a version tag.**
 
