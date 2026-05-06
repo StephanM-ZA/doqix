@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.12.2** (Docs: `Social_Promo_Copy.md` URLs swapped from `digitaloperations.co.za/doqix` to `doqix.co.za` for cleaner brand-facing links in promo posts (16 references). All em dashes removed from the doc for visual consistency. Cache-bust bumped to ?v=0.12.2.)
+- Current version: **web-v0.12.3** (Marketing fix: VoltIQ WhatsApp morning brief recipient clarified as the **installer** (not customer) across `Social_Promo_Copy.md` (4 posts), `info-popup.js` WHAT row, `products.html` feature bullet, and `Product_Deep_Links.md` long promo. Customer-retention angle reframed as first-mover advantage. Asterisks + Terms-apply footers stripped from all social posts (terms link now lives only on the product element). Cache-bust ?v=0.12.3.)
 
 **Never push website changes without creating a version tag.**
 

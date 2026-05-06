@@ -69,7 +69,7 @@ VoltIQ is the first SaaS product going on active promotion.
 
 ### Suggested promo copy (long)
 
-> Managing a fleet of solar installs across Deye and Sunsynk shouldn't mean juggling four monitoring portals. VoltIQ pulls every system onto one screen, alerts you when something breaks before the customer notices, flags upsell opportunities, and ships a co-branded WhatsApp morning report you can send straight to your clients.
+> Managing a fleet of solar installs across Deye and Sunsynk shouldn't mean juggling four monitoring portals. VoltIQ pulls every system onto one screen, alerts you when something breaks before the customer notices, flags upsell opportunities, and lands a co-branded WhatsApp morning brief on your phone every morning.
 >
 > R99 per month, flat.\* Launching with Deye and Sunsynk. Luxpower support is in progress; more inverters to follow.
 >

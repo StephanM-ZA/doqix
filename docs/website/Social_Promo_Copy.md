@@ -19,19 +19,22 @@
 You don't have time to write social posts. ⏰
 We do. 🚀
 
-Tell SocialIQ your topics 📚
-The sources you trust 🔍
-We do the rest. ✨
+Topics? You pick. 🎯
+Sources? You name. 📚
+Tone? You set. 🎙️
+Off-limits words? We never use them. 🚫
+Cadence? You dial it. 📅
 
-🧠 Research from your sources
-✍️ Drafts in YOUR voice
-👀 You approve every post
-🌱 Gets better the more you use it
+We research, draft in your voice, queue everything for your nod. 👀
+Nothing goes live without you saying yes.
 
-From R499/month.* 🇿🇦
+🧠 Posting history baked in. No reruns.
+🌱 Every edit sharpens the next batch.
 
-Built for businesses who know they should be
-posting more, but the week always wins. 😅
+From R499/month. 🇿🇦
+
+Built for businesses who should be posting more,
+but the week always wins. 😅
 
 🔗 Link in bio. Let's go.
 
@@ -48,25 +51,33 @@ Final price locked at onboarding. Terms apply.
 ## Facebook 💬
 
 ```
-Quick question 👇
+Quick gut check 👇
 
-When did you last post on socials? Like, actually showed up consistently? 🤔
+Are you posting on socials consistently? 🤔
 
-If your answer is "we keep meaning to," 🫣 SocialIQ is built for you.
+If "we keep meaning to" is the honest answer 🫣, SocialIQ is built for you.
 
-Here's the deal:
-🔍 You give us your topics + the sources you trust
-✍️ We draft posts in your voice (not generic AI mush 🙅)
-👀 You approve everything before it publishes
-🌱 The system learns from every edit you make
+Most "AI content tools" hand you a black box. We don't. You stay in the driver's seat: 🎛️
 
-From R499/month.* No fixed package. No lock-in. Pricing scales with your platforms and cadence; final price agreed at onboarding.
+🎯 Topics? You decide.
+📚 Sources? Pull from your industry blogs, partner newsletters, anything with a feed.
+🎙️ Tone? Punchy, authoritative, plain. You set it.
+🚫 Words to ban? Brand-safe, legal-safe, PR-safe. You list them.
+📅 Cadence? Heavy during launches, light in quiet months. You dial it.
+👥 Audience? Specific. You define it.
+👀 Approval? Every single post. Edit, approve, or kill before it publishes.
+
+We do the slow parts: research from your sources, drafts in your brand voice. The fast parts (read, edit, publish) stay with you.
+
+🧠 Posting history baked in. We remember what you've already published, so each new batch covers new ground.
+🌱 Every approval and edit sharpens the next round. Drafts sound more like you over time, not less.
+
+From R499/month. No fixed package. No lock-in. Pricing scales with your platforms and cadence; final price agreed at onboarding.
 
 You don't lose control. You lose the part you don't have time for. ⏰
 
 See it 👉 https://doqix.co.za/products.html#socialiq
 
-*Terms apply: https://doqix.co.za/products-terms.html#socialiq
 
 #SocialMediaSA #SmallBusinessSA #MarketingAutomation
 ```
@@ -74,29 +85,36 @@ See it 👉 https://doqix.co.za/products.html#socialiq
 ## LinkedIn 💼
 
 ```
+A question for founders, marketers, and anyone juggling "we should post more on socials" 🤔
+
 Most "social media tools" just schedule. 📅
-Most "AI content tools" write generic mush. 🥱
+Most "AI content tools" produce generic mush you'd be embarrassed to post. 🥱
 
 So which one is doing the actual writing? ✋ Neither.
 
-That's the gap SocialIQ fills.
+That's the gap SocialIQ fills. But here's the part most people miss:
 
-Here's how it works:
-🔍 You tell us your topics + the sources you trust
-✍️ We research them, draft in your brand voice, queue for review
-👀 You approve, edit, or kill anything before it publishes
-🌱 Every decision sharpens the next batch
+It's not a black box. Every dial is yours. 🎛️
 
-The slow parts (research, drafting) live with us.
-The fast parts (read, edit, publish) stay with you. 💪
+🎯 Topics? You set the pillars. Change anytime the market shifts.
+📚 Sources? You name the feeds, blogs, and newsletters worth reading.
+🎙️ Tone? Punchy, authoritative, technical, plain. Configured once, applied everywhere.
+🚫 Off-limits words? Legal-flagged terms, competitor names, words your industry has weaponised. We avoid them.
+📅 Cadence? You dial the rhythm.
+👥 Audience? Specific. You define it.
+👀 Approval? Every single post. Edit, approve, or kill.
 
-From R499/month.* Pricing scales with the channels and cadence you choose. Month-to-month, no long-term contract.
+We do the slow parts (research from your sources, drafts in your brand voice). The fast parts (read, edit, publish) stay with you. 💪
 
-Built for businesses who know they should be posting more but never have time to research and write. 🇿🇦
+🧠 Posting history is part of the brief. We remember what you've already published; the next batch builds on it instead of repeating it.
+🌱 Every decision sharpens the next round. Drafts sound more like you over time, not less.
+
+From R499/month. Pricing scales with the channels and cadence you choose. Month-to-month, no long-term contract. Less than a copywriter retainer; more visible than agency silence.
+
+Built for founders and small teams who know they should be posting more but never have time. The marketing trap is real. Step out of it. 🇿🇦
 
 👉 https://doqix.co.za/products.html#socialiq
 
-*Terms apply: https://doqix.co.za/products-terms.html#socialiq
 
 #SocialMediaMarketing #B2BMarketing #ContentStrategy #MarketingAutomation #SouthAfricanBusiness
 ```
@@ -108,12 +126,19 @@ Hey 👋
 
 Quick one. Is "we should post more on social" living rent-free on your to-do list? 😅
 
-Take a look at SocialIQ ⬇️
+SocialIQ ⬇️
 
-🔍 We research from YOUR topics
-✍️ Draft in YOUR voice
-👀 You approve before anything goes live
-🌱 Gets better the more you use it
+🎯 You pick the topics
+📚 You name the sources
+🎙️ You set the voice
+🚫 You list what's off-limits
+👀 You approve every post
+
+We do the research and writing.
+You stay in control.
+
+🧠 Knows what you've already posted, so next batch goes further.
+🌱 Sharper every cycle.
 
 From R499/mo.
 
@@ -130,24 +155,30 @@ https://doqix.co.za/products.html#socialiq
 ## Instagram 📱
 
 ```
-Every solar system you've installed.
-On one screen. ☀️
+Solar installer juggling Deye + Sunsynk? ☀️
 
-🔧 Deye + Sunsynk supported
+Two portals every morning?
+Customer phoning about a fault you didn't see?
+Missing the upsell because you forgot to check the data?
+
+VoltIQ ends all three. 📊
+
+🔧 Deye + Sunsynk supported (Luxpower in progress 🛠️)
 🚨 Auto issue detection
 💡 Upsell opportunity flags
-💬 Co-branded WhatsApp morning reports
-🎨 White-label installer dashboard
-🌱 Learns from your feedback
+💬 Co-branded WhatsApp morning brief on YOUR phone, every morning ☕
+🎨 White-label dashboard (your brand, not ours)
+🌱 Sharper after every alert you confirm
+📚 Upsell theme library grows. New flag types added as patterns emerge.
 
-R99/month.* Flat. ⚡
-Luxpower integration in progress 🛠️
+R99/month. Flat. ⚡
+No per-system charge. Add 100 systems, bill stays R99. 📈
+Bill stays the same. The value compounds. 🚀
 
-Less morning juggling, more coffee. ☕
+One upsell pays for years of VoltIQ. ☕
 
 🔗 Link in bio.
 
-*Terms apply.
 
 #SolarSouthAfrica #SolarInstaller #Deye #Sunsynk
 #SolarMonitoring #SolarSA #PVInstallerSA #LoadsheddingSA
@@ -161,23 +192,35 @@ Less morning juggling, more coffee. ☕
 ```
 Solar installers, this one's for you 👇
 
-If you're running fleets across Deye + Sunsynk inverters, you're juggling at least two monitoring portals every morning. ☕☕
+If you run fleets across Deye + Sunsynk, you're juggling at least two monitoring portals every morning. ☕☕
 
 VoltIQ pulls them onto one screen. 📊
 
 What you get:
-✅ Automated issue detection (spot faults before the customer does 🚨)
+✅ Automated issue detection 🚨
 ✅ Upsell opportunity flags 💡
-✅ Co-branded WhatsApp morning reports for your clients 💬
-✅ White-label installer dashboard 🎨
-✅ Gets sharper the more you use it 🌱
+✅ Co-branded WhatsApp morning brief on YOUR phone, every morning ☕
+✅ White-label installer dashboard (your brand, your colours, your logo) 🎨
+✅ Sharper after every alert you confirm 🌱
+✅ Upsell theme library grows. New flag types added as patterns emerge in the market 📚
 
-R99/month.* Flat rate. No per-system charge.
+Why it matters for your business:
+
+🤝 First-mover on every customer issue. The morning brief lands before the first customer call of the day. By the time the phone rings, you've already seen it. Faster response = customers who don't churn.
+
+💰 Upsell revenue, today and tomorrow. One battery upsell or panel extension covers VoltIQ for years. And the upsell themes aren't fixed. As patterns emerge across the market, we add new flag categories. Your bill stays R99; the library compounds.
+
+🛡️ White-label = your brand, not ours. Customers see YOU monitoring their system.
+
+📈 No per-system charge. Add 100 systems, the bill stays R99.
+
+⏰ Stop opening portals before coffee. The brief comes to you.
+
+R99/month. Flat. No tiers, no surprises.
 Luxpower integration is in progress. 🛠️
 
 👉 https://doqix.co.za/products.html#voltiq
 
-*Terms apply: https://doqix.co.za/products-terms.html#voltiq
 
 #SolarSouthAfrica #SolarInstaller #Deye #Sunsynk
 ```
@@ -189,23 +232,35 @@ A question for solar installers 🤔
 
 How many monitoring portals did you log into this morning? ☕
 
-If you run mixed-brand fleets across Deye + Sunsynk, the answer is "at least two." 
+If you run mixed-brand fleets across Deye + Sunsynk, the answer is "at least two."
 
 VoltIQ ends that. ☀️
 
-One screen for every solar system you've installed:
+But the bigger story is what happens AFTER the unified dashboard.
 
-🚨 Automated issue detection
-💡 Upsell flags when a system is undersized for real-world consumption
-💬 Co-branded WhatsApp morning reports for your clients
-🎨 White-label installer dashboard
-🌱 Detection improves the more you confirm, edit, or dismiss alerts
+🚨 Catch faults before the customer does. First-fault advantage on every system in your fleet.
+💡 See when a system is undersized for actual usage. That's an upsell flag, every time.
+💬 A co-branded WhatsApp morning brief lands on your phone every morning. Fleet status, alerts, upsell flags, all summarised before the first customer call.
+🎨 White-labelled installer dashboard. Your logo, your colours. Customers think you built the monitoring system.
+🌱 Detection sharpens with every alert you confirm or dismiss.
+📚 Upsell themes grow. New flag categories get added as patterns emerge across the market. Your bill stays the same; the library compounds.
 
-R99/month.* Flat. No per-system charge. Luxpower integration is in active development. 🛠️
+Why this matters for your business:
+
+🤝 First-mover advantage on every customer call. By the time a customer phones about a fault, you've already seen it on your phone, already started the response. That's the speed customers don't churn from.
+
+💰 Upsell revenue, now and later. R99/month flat. One battery upsell, one panel extension, one re-financing referral covers VoltIQ for years. And as we add new upsell categories, your earnings ceiling rises while your bill doesn't.
+
+🛡️ Sales-cycle accelerator. When a prospect asks "do you monitor what you install?" you don't say "yes, when there's an issue." You open VoltIQ and show them their future dashboard.
+
+📈 Scale free. Add 100 systems, the bill stays R99. No per-system charge.
+
+⏰ Out of the morning portal scramble. Your brief is on WhatsApp by the time you're at your desk.
+
+R99/month. Flat. Luxpower integration is in active development. 🛠️
 
 👉 https://doqix.co.za/products.html#voltiq
 
-*Terms apply: https://doqix.co.za/products-terms.html#voltiq
 
 #SolarSouthAfrica #SolarInstaller #Deye #Sunsynk #PVMonitoring #SouthAfricanBusiness
 ```
@@ -215,15 +270,20 @@ R99/month.* Flat. No per-system charge. Luxpower integration is in active develo
 ```
 ☀️ Solar installer running Deye or Sunsynk?
 
+Two portals every morning?
+Customer phoning about a fault you missed?
+
 VoltIQ ⬇️
 
 📊 Every system on one screen
-🚨 Auto fault alerts
-💡 Upsell opportunity flags
-💬 Co-branded WhatsApp morning reports for your clients
+🚨 Auto fault alerts (catch them first)
+💡 Upsell flags = revenue you'd otherwise miss
+📚 New upsell themes added as the market evolves
+💬 Morning brief on YOUR WhatsApp, every morning ☕
 🎨 White-label dashboard
 
-R99/mo. Flat.
+R99/mo. Flat. No per-system charge.
+Bill stays the same. Value compounds. 🚀
 
 https://doqix.co.za/products.html#voltiq
 ```
