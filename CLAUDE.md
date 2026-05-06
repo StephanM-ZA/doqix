@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.12.0** (Products: pulsating ⓘ on every card opens a 5W info popup with build-popup-style design; new SocialIQ product card + tab + image with "From R499/mo" scaling pricing; right-chevron common component on every `.btn` (CSS-drawn, hover nudges); product cards forced to equal height/width on md+; scroll-reveal animation removed site-wide; `.btn-ghost` strengthened; Golden Rules + 5W Product Marketing Strategy locked into `docs/build/Session_Checklist.md` + `docs/website/Product_5W_Strategy.md` + project memory)
+- Current version: **web-v0.12.1** (Docs: new `docs/website/Social_Promo_Copy.md` — copy-paste-ready Instagram, Facebook, LinkedIn, and WhatsApp posts for SocialIQ + VoltIQ. Cache-bust bumped to ?v=0.12.1.)
 
 **Never push website changes without creating a version tag.**
 
