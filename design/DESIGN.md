@@ -224,16 +224,9 @@ Sections centre text. Labels auto-margin centre. Section padding reduces to 2-3r
 
 ## 9. Animation System
 
-### Scroll Reveal (`.scroll-reveal`)
+### Scroll Reveal — REMOVED
 
-Applied automatically by `main.js` to direct children of all `<section>` elements inside `<main>`, except the first section (hero).
-
-- Start: `opacity: 0; translateY(20px) scale(0.97)`
-- End: `opacity: 1; transform: none`
-- Duration: `500ms`
-- Easing: `cubic-bezier(0.16, 1, 0.3, 1)` (spring snap)
-- Trigger: IntersectionObserver, threshold 0.1, trigger once
-- Stagger: `.stagger-1` through `.stagger-5` (80ms increments)
+The previous on-scroll fade/translate reveal was removed site-wide. Content appears immediately. Only hover/transition animations remain (button spring, card hover, glow pulse).
 
 ### Button/Card Spring
 

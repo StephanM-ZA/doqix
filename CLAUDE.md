@@ -2,6 +2,31 @@
 
 > Basic rules and standards: [[/Volumes/External/development_projects/master_commands/basic-rules.md]]
 > Web standards (performance, accessibility, SEO): [[docs/web-standards.md]]
+> Session workflow (HARD rule, where → update → commit → push → bump): [[docs/build/Session_Checklist.md]]
+> Product marketing strategy (5W rule for every product): [[docs/website/Product_5W_Strategy.md]]
+
+---
+
+## Product Marketing Strategy (RULE — applies to every product surface)
+
+Every Do.Qix product is described using the 5W template defined in [[docs/website/Product_5W_Strategy.md]]. The template applies to:
+
+- The product card on `products.html`
+- The info popup (data lives in `design/components/js/info-popup.js`)
+- The per-product tab on `products-terms.html`
+- Promo copy snippets in `docs/website/Product_Deep_Links.md`
+- Any future blog post, landing page, email pitch, or social asset that describes a product
+
+**Template order:** status pill → title-with-green-accent → hook line → feature pills → 5W rows (Who/What/Why/When/Where) → CTAs → footnote.
+
+**Capability beats every product must carry:**
+1. **Learns from your feedback** — last pill on every product, plus one sentence in the WHAT row
+2. **In your voice / your sources / your topics** — adapt to the customer
+3. **Human approval / human review** — automation does the slow work, you make the call
+
+**Anti-hallucination + anti-AI-tells:** see the strategy doc. No invented numbers, no em dashes, no "leverage / unlock / delve," no rhyming three-item triads. Verify before claiming any integration, certification, or metric.
+
+**Adding a new product:** must carry all 7 template blocks AND be added in the same order across the four canonical surfaces (products page, popup, terms tab, deep-link doc). The strategy doc has the full checklist.
 
 ---
 
@@ -89,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.11.0** (Products: Get-in-Touch CTAs + per-product deep links; new tabbed `products-terms.html` with VoltIQ R99/mo promo; main T&Cs §17 trimmed to a single Products reference)
+- Current version: **web-v0.12.0** (Products: pulsating ⓘ on every card opens a 5W info popup with build-popup-style design; new SocialIQ product card + tab + image with "From R499/mo" scaling pricing; right-chevron common component on every `.btn` (CSS-drawn, hover nudges); product cards forced to equal height/width on md+; scroll-reveal animation removed site-wide; `.btn-ghost` strengthened; Golden Rules + 5W Product Marketing Strategy locked into `docs/build/Session_Checklist.md` + `docs/website/Product_5W_Strategy.md` + project memory)
 
 **Never push website changes without creating a version tag.**
 

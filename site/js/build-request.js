@@ -295,7 +295,7 @@
                     + '</div>'
                 + '</div>'
                 : '')
-            + '<button class="btn btn-primary glow build-popup-start-btn" data-action="start">Start →</button>'
+            + '<button class="btn btn-primary glow build-popup-start-btn" data-action="start">Start</button>'
             + '<p class="build-popup-footnote">No spam. No follow-up calls unless you want them.</p>';
     }
 
@@ -338,7 +338,7 @@
             + freeText
             + '<div class="build-popup-actions">'
                 + '<button type="button" class="btn-back" data-action="back">← Back</button>'
-                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next" ' + (canContinue ? '' : 'disabled') + '>Continue →</button>'
+                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next" ' + (canContinue ? '' : 'disabled') + '>Continue</button>'
             + '</div>';
     }
 
@@ -402,7 +402,7 @@
             + '</div>'
             + '<div class="build-popup-actions">'
                 + '<button type="button" class="btn-back" data-action="back">← Back</button>'
-                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next">Continue →</button>'
+                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next">Continue</button>'
             + '</div>';
     }
 
@@ -414,7 +414,7 @@
             + '<p class="build-popup-body-text">Some ideas are easier to scope on a quick call than through a form. We\'ll listen, ask the right questions, and send you a clear plan with real numbers within 24 hours.</p>'
             + '<div class="build-popup-actions">'
                 + '<button type="button" class="btn-back" data-action="back">← Back</button>'
-                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next">Continue →</button>'
+                + '<button type="button" class="btn btn-primary glow btn-next" data-action="next">Continue</button>'
             + '</div>';
     }
 

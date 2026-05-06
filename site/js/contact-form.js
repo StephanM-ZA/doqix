@@ -51,6 +51,7 @@
             nomadiq: 'NomadIQ',
             vendiq: 'VendIQ',
             voltiq: 'VoltIQ',
+            socialiq: 'SocialIQ',
             learniq: 'LearnIQ'
         };
         var name = productNames[productParam.toLowerCase()] || productParam;

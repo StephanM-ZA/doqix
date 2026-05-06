@@ -20,8 +20,8 @@
 <link rel="manifest" href="../site.webmanifest"/>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/inter-var.woff2"/>
 
-<link rel="stylesheet" href="../tailwind.css?v=0.11.0"/>
-<link rel="stylesheet" href="../global.css?v=0.11.0"/>
+<link rel="stylesheet" href="../tailwind.css?v=0.12.0"/>
+<link rel="stylesheet" href="../global.css?v=0.12.0"/>
 <style>
         .legal-prose h4 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.125rem; font-weight: 800; color: #e4e1e9; text-transform: uppercase; letter-spacing: 0.02em; }
         .legal-prose h5 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1rem; font-weight: 700; color: #e4e1e9; scroll-margin-top: 6rem; }
@@ -49,10 +49,10 @@
         .product-status.live { background: rgba(0,229,160,0.12); color: #00e5a0; }
         .product-status.dev { background: rgba(255,128,0,0.12); color: #ff8000; }
     </style></head>
-<body data-disable-scroll-reveal>
+<body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="../components/js/header.js?v=0.11.0"></script>
+<script src="../components/js/header.js?v=0.12.0"></script>
 
 <main class="pt-20">
 
@@ -83,6 +83,7 @@
 <button class="product-tab" role="tab" id="tab-nomadiq" aria-controls="panel-nomadiq" aria-selected="false" data-product="nomadiq">NomadIQ</button>
 <button class="product-tab" role="tab" id="tab-vendiq" aria-controls="panel-vendiq" aria-selected="false" data-product="vendiq">VendIQ</button>
 <button class="product-tab" role="tab" id="tab-voltiq" aria-controls="panel-voltiq" aria-selected="true" data-product="voltiq">VoltIQ</button>
+<button class="product-tab" role="tab" id="tab-socialiq" aria-controls="panel-socialiq" aria-selected="false" data-product="socialiq">SocialIQ</button>
 <button class="product-tab" role="tab" id="tab-learniq" aria-controls="panel-learniq" aria-selected="false" data-product="learniq">LearnIQ</button>
 </div>
 
@@ -172,6 +173,56 @@
 <p>The general cancellation terms in our <a href="terms-and-conditions.html">Terms and Conditions</a> apply alongside the above.</p>
 </div>
 
+<!-- SocialIQ Panel -->
+<div class="product-panel" id="panel-socialiq" role="tabpanel" aria-labelledby="tab-socialiq" tabindex="0">
+<span class="product-status live">Live, public pricing</span>
+<h4 style="margin-top:0.5rem;">SocialIQ</h4>
+<p>SocialIQ is an automated social media writer for SA businesses. It scrapes your industry sources, drafts 15 posts a week in your brand voice, and queues everything in a dashboard for you to approve before publishing.</p>
+
+<div class="callout">
+<p><strong>SocialIQ pricing starts at R499 per month, in ZAR, billed monthly in advance.</strong> Final price scales with two dimensions: the social channels you choose and the posting cadence agreed at onboarding. Month-to-month, no long-term contract.</p>
+</div>
+
+<h5>How pricing scales</h5>
+<p>The R499 floor reflects a baseline scope. Final monthly price depends on:</p>
+<ul>
+<li><strong>Number of social channels</strong>: each channel adds drafting and platform-appropriate formatting work. WhatsApp teaser and promo overlays attached to other channels are included, not counted as a separate channel.</li>
+<li><strong>Posting cadence</strong>: how many drafts per channel per week.</li>
+</ul>
+<p>Scope, channels, cadence, and final price are confirmed in your engagement letter at onboarding before the first billing cycle. We don't lock you into a tier you didn't agree to.</p>
+
+<h5>What's included at every tier</h5>
+<ul>
+<li><strong>Research engine</strong>: scrapes RSS feeds and other industry sources you configure, scores items for relevance, and surfaces the best material for the writer.</li>
+<li><strong>Brand-voice configuration</strong>: tone, vocabulary, do-not-say lists, and target audiences are configured once in your dashboard and apply to every draft.</li>
+<li><strong>Weekly preview</strong>: the next cycle's content lands in the dashboard for you to edit, approve, or kill before anything publishes.</li>
+<li><strong>Image generation</strong>: visuals are generated alongside each post; you can swap them in the dashboard.</li>
+<li><strong>Feedback loop</strong>: every approval, edit, and rejection sharpens the next round. Drafts sound more like you over time, not less.</li>
+</ul>
+
+<h5>What's not included</h5>
+<ul>
+<li><strong>Publishing to platforms</strong>: SocialIQ produces ready-to-post drafts. You connect your own LinkedIn, Instagram, and Facebook accounts (or copy-paste into your scheduler). We do not store credentials for the destination platforms.</li>
+<li><strong>Paid media management</strong>: SocialIQ writes the organic content; ad spend, targeting, and campaign management are not part of this product.</li>
+<li><strong>Strategic consulting</strong>: SocialIQ executes a content cadence; messaging strategy and brand positioning are out of scope (we offer that separately under Automation Services).</li>
+</ul>
+
+<h5>AI-generated drafts are advisory</h5>
+<p>Every post is AI-generated and queued for human review. We expect you to read each draft before approving. SocialIQ's role is to remove the blank-page problem; final content responsibility (accuracy, claims, regulatory compliance for your industry) rests with the approver.</p>
+
+<h5>Data sources</h5>
+<p>You configure the research sources (RSS feeds, blogs, public APIs). SocialIQ does not scrape closed platforms or anything that requires logged-in access without your explicit setup. Continuity depends on those upstream sources remaining available; outages on the source side are excluded from our uptime target.</p>
+
+<h5>Cancellation</h5>
+<p>You may cancel at any time. On cancellation:</p>
+<ul>
+<li>Drafting stops at the end of the current billing cycle.</li>
+<li>Your dashboard remains read-only for a 30-day data export window. After that, your SocialIQ data is permanently deleted.</li>
+<li>Cancellation does not affect your social accounts or anything you have already published.</li>
+</ul>
+<p>The general cancellation terms in our <a href="terms-and-conditions.html">Terms and Conditions</a> apply alongside the above.</p>
+</div>
+
 <!-- LearnIQ Panel -->
 <div class="product-panel" id="panel-learniq" role="tabpanel" aria-labelledby="tab-learniq" tabindex="0">
 <span class="product-status dev">In development</span>
@@ -209,12 +260,12 @@ Website: doqix.co.za
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script defer src="../components/js/footer.js?v=0.11.0"></script>
+<script defer src="../components/js/footer.js?v=0.12.0"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script defer src="../components/js/main.js?v=0.11.0"></script>
-<script defer src="js/products-terms.js?v=0.11.0"></script>
-<script defer src="../components/js/exit-popup.js?v=0.11.0"></script>
-<script defer src="../components/js/cookie-banner.js?v=0.11.0"></script>
+<script defer src="../components/js/main.js?v=0.12.0"></script>
+<script defer src="js/products-terms.js?v=0.12.0"></script>
+<script defer src="../components/js/exit-popup.js?v=0.12.0"></script>
+<script defer src="../components/js/cookie-banner.js?v=0.12.0"></script>
 </body></html>

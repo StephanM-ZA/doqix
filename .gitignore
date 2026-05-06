@@ -41,9 +41,9 @@ node_modules/
 bower_components/
 jspm_packages/
 
-# Build outputs
-dist/
-build/
+# Build outputs (root-anchored — don't accidentally exclude docs/build/)
+/dist/
+/build/
 .cache/
 *.min.js
 *.min.css

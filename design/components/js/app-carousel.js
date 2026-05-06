@@ -45,9 +45,6 @@
         duplicates += buildItem(apps[j]);
     }
 
-    /* Mark as scroll-reveal visible so main.js doesn't hide it */
-    el.classList.add('scroll-reveal', 'visible');
-
     el.innerHTML =
         '<div class="mt-4 md:mt-10 max-w-3xl mx-auto overflow-hidden relative">' +
         '<div class="app-carousel-track">' +

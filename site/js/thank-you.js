@@ -21,7 +21,7 @@
     var eyebrow = document.querySelector('[data-thank-eyebrow]');
     if (!heading || !body || !steps) return;
 
-    var bookCta = '<a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-primary lg glow inline-block" style="margin-top:1.5rem;">Book a 15-min call \u2192</a>';
+    var bookCta = '<a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-primary lg glow inline-block" style="margin-top:1.5rem;">Book a 15-min call</a>';
 
     if (route === 'estimate') {
         if (eyebrow) eyebrow.textContent = 'Estimate Sent';
