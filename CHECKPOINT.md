@@ -2,13 +2,13 @@
 
 **Date:** 2026-05-06
 **Branch:** main
-**Tag (current):** web-v0.12.4 — shipped, deployed
+**Tag (current):** web-v0.12.5 — shipped, deployed
 **Working tree:** clean
 **Local preview server:** still running at http://localhost:8080 (PID 7460; check with `lsof -ti:8080`, kill when done)
 
 ---
 
-## Session's release ladder (6 ships in one session)
+## Session's release ladder (7 ships in one session)
 
 | Tag | Commit | Deploy | Theme |
 |---|---|---|---|
@@ -16,20 +16,25 @@
 | web-v0.12.1 | `18ad7d3` | ✅ | New `Social_Promo_Copy.md` (SocialIQ + VoltIQ posts) |
 | web-v0.12.2 | `5193240` | ✅ | Social copy URLs swapped to `doqix.co.za` + em dashes removed |
 | web-v0.12.3 | `8766e27` | ✅ 30s | VoltIQ WhatsApp recipient corrected to installer + asterisks/terms-footers stripped |
-| web-v0.12.4 | `1666d3a` | ✅ 47s | **Luxpower flipped from "in progress" to live** across 14 references in 7 files |
+| web-v0.12.4 | `1666d3a` | ✅ 47s | Luxpower flipped from "in progress" → live across 14 references in 7 files |
+| web-v0.12.5 | `19c847b` | ✅ 37s | **Products dropdown/submenu in global header (per-product anchors)** |
+
+Plus chore: `61c6ff0` — CHECKPOINT refresh between v0.12.4 and v0.12.5.
 
 ---
 
-## What landed in `web-v0.12.4` (latest)
+## What landed in `web-v0.12.5` (latest)
 
-1. **Luxpower is now live for VoltIQ** alongside Deye + Sunsynk. Marketing flipped from "in progress" / "in active development" / "coming soon" to live status across:
-   - `design/products/products.html` — VoltIQ footnote: "Live with Deye, Sunsynk, and Luxpower. More inverters coming soon."
-   - `design/products-terms/products-terms.html` — "In progress" section removed; Luxpower added to "Supported inverters" list. Heading renamed from "Supported inverters at launch" → "Supported inverters."
-   - `design/components/js/info-popup.js` — VoltIQ pill changed from `Luxpower (in progress)` to `Luxpower ✓`. WHERE row updated to "Live with Deye, Sunsynk, and Luxpower; more brands to follow."
-   - `docs/website/Social_Promo_Copy.md` — 3 VoltIQ social posts updated (IG bullet, FB closing, LinkedIn closing) + compliance note rewritten.
-   - `docs/website/Product_5W_Strategy.md` — pill example + anti-hallucination rule updated.
-   - `docs/website/Product_Deep_Links.md` — VoltIQ snapshot bullets, short promo, long promo opener (now mentions juggling THREE portals not four), and don't-promise list (Luxpower removed; SunGrow/Growatt/Huawei retained).
-2. **Cache-bust bumped** `?v=0.12.3` → `?v=0.12.4` across 23 HTML files.
+1. **Products dropdown in the global header**
+   - `design/components/js/header.js` (and `site/js/header.js`): the Products nav item now has a child dropdown listing all 5 products. Sub-items anchor to `products.html#<slug>`.
+   - Single source of truth: a `PRODUCTS` array at the top of `header.js`. Adding/renaming a product = edit one array.
+   - Generic `.has-submenu` / `.nav-submenu` / `.mobile-submenu` CSS classes — reusable common-component pattern for any future nav item that needs children.
+2. **Behavior:**
+   - **Desktop:** hover or keyboard focus reveals the dropdown. Click on the parent still navigates to `products.html`. Hover-bridge keeps the panel open between parent and child.
+   - **Mobile:** tap a caret next to "Products" inside the hamburger menu to expand an inline submenu.
+   - **Keyboard a11y:** focus-within reveals the panel; `Escape` closes it.
+3. **CSS:** ~180 new lines for the dropdown panel, hover/focus transitions, mobile inline submenu, and animated caret rotation.
+4. **Cache-bust:** `?v=0.12.4` → `?v=0.12.5` across 23 HTML files.
 
 ---
 
@@ -43,6 +48,7 @@
 - Product cards forced equal height/width on md+
 - `.btn-ghost` strengthened to read as a real secondary CTA
 - Scroll-reveal animation removed site-wide
+- **NEW: Products dropdown in the header** with per-product anchors
 
 ### Marketing surfaces
 - VoltIQ pricing: R99/mo flat
@@ -60,6 +66,7 @@
 - **5W Product Marketing Strategy** — new SSOT at `docs/website/Product_5W_Strategy.md` + project memory at `feedback_5w-product-strategy.md`
 - **Design source-only** rule in memory (`feedback_design-source-only.md`)
 - `.gitignore` anchored `/build/` and `/dist/` to root so `docs/build/Session_Checklist.md` is trackable
+- Don't market integrations until they're live (reinforced by Luxpower flip)
 
 ### Docs created/updated
 - `docs/website/Product_5W_Strategy.md` (new SSOT)
@@ -73,7 +80,7 @@
 
 ## Open items for next session
 
-1. **Domain swap on `products-terms.html`** — only the visible "Website:" line says `doqix.co.za`. The technical refs (canonical, og:url, mailto) still point at `digitaloperations.co.za`. User confirmed htaccess + DNS redirect is in place, so flipping the rest is now safe. ~2 minutes.
+1. **Domain swap on `products-terms.html`** — only the visible "Website:" line says `doqix.co.za`. Technical refs (canonical, og:url, mailto) still on `digitaloperations.co.za`. User confirmed htaccess + DNS redirect is in place, so flipping is safe. ~2 minutes.
 
 2. **Apply the domain swap site-wide** — other pages (`terms-and-conditions.html`, `privacy-policy.html`, `index.html`, footer, header) still reference `digitaloperations.co.za`. Separate sweep when ready.
 
@@ -96,7 +103,7 @@
 - **5W Product Marketing Strategy**: every product gets the 7-block template + 3 capability beats (Learns-from-feedback, In-your-voice, Human-approval). Pricing language: Flat / From / Custom.
 - **No inline JS, no em dashes, no hardcoded HTML values, "Last Updated" on legal pages, sitemap entry for new HTML pages.**
 - **No fabricated numbers, no AI-tell phrases.**
-- **Don't market integrations until they're live.** (Reinforced this session by Luxpower flip.)
+- **Don't market integrations until they're live.**
 
 ---
 
@@ -109,9 +116,12 @@ gh run list --workflow=deploy-site.yml --limit=2
 # Confirm tag exists upstream
 git fetch --tags && git tag -l 'web-v0.12.*'
 
-# Cache-bust sanity (should all be at 0.12.4)
-grep -r '?v=0.12' site/ | grep -v '0.12.4'   # should return nothing
+# Cache-bust sanity (should all be at 0.12.5)
+grep -r '?v=0.12' site/ | grep -v '0.12.5'   # should return nothing
 
 # Confirm Luxpower is live (no in-progress phrasing left)
 grep -rinE 'luxpower.*(in progress|coming|in active)' design/ docs/ site/   # should return nothing
+
+# Confirm Products dropdown is wired
+grep -c 'has-submenu' site/js/header.js   # should be > 0
 ```

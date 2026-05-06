@@ -70,7 +70,7 @@
                 'White-label',
                 'Learns from your feedback'
             ],
-            who: "Solar installers and EPCs running fleets across Deye and Sunsynk inverters. If you're managing more systems than you can manually check each morning, you're our customer.",
+            who: "Solar installers and EPCs running Deye, Sunsynk, or Luxpower inverters. If you're managing more systems than you can manually check each morning, you're our customer.",
             what: "One screen for every solar system you've installed. Automated issue detection, upsell opportunity flags, and a co-branded WhatsApp morning brief that lands on your phone every morning. R99 a month, flat. Detection logic improves as your team confirms, edits, or dismisses each alert: the more you use VoltIQ, the fewer false positives you see.",
             why: 'Customers notice broken systems before you do. Every call you take about a fault you should have caught is a churn risk. VoltIQ turns silent faults into morning alerts.',
             when: 'Now. The longer you wait, the more silent faults you carry on your books — and the more competitor installers add proactive monitoring to their pitch.',

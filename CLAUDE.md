@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.12.5** (Header: Products dropdown/submenu added. Desktop hover/focus reveals 5-item dropdown anchored to product cards on products.html. Mobile tap-to-expand submenu. Generic `.has-submenu` common-component pattern reusable for future nav children. PRODUCTS array in header.js is the single source of truth. Cache-bust ?v=0.12.5.)
+- Current version: **web-v0.12.6** (Marketing: Luxpower elevated into VoltIQ social-post openers + info-popup WHO row (was Deye+Sunsynk only in hooks). `#LuxPower` hashtag (standardised capital P) added to all 6 VoltIQ post hashtag blocks. New "VoltIQ Luxpower launch announcement" section added to `Social_Promo_Copy.md` with 4 platform variants for the moment-of-launch news beat. Cache-bust ?v=0.12.6.)
 
 **Never push website changes without creating a version tag.**
 

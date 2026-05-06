@@ -155,7 +155,7 @@ https://doqix.co.za/products.html#socialiq
 ## Instagram 📱
 
 ```
-Solar installer juggling Deye + Sunsynk? ☀️
+Solar installer running Deye, Sunsynk, or Luxpower? ☀️
 
 Two portals every morning?
 Customer phoning about a fault you didn't see?
@@ -180,7 +180,7 @@ One upsell pays for years of VoltIQ. ☕
 🔗 Link in bio.
 
 
-#SolarSouthAfrica #SolarInstaller #Deye #Sunsynk
+#SolarSouthAfrica #SolarInstaller #Deye #Sunsynk #LuxPower
 #SolarMonitoring #SolarSA #PVInstallerSA #LoadsheddingSA
 #SolarBusiness #RenewableEnergySA
 ```
@@ -192,7 +192,7 @@ One upsell pays for years of VoltIQ. ☕
 ```
 Solar installers, this one's for you 👇
 
-If you run fleets across Deye + Sunsynk, you're juggling at least two monitoring portals every morning. ☕☕
+If you run fleets across Deye, Sunsynk, or Luxpower, you're juggling multiple monitoring portals every morning. ☕☕☕
 
 VoltIQ pulls them onto one screen. 📊
 
@@ -222,7 +222,7 @@ Now live with Deye, Sunsynk, and Luxpower. ✅
 👉 https://doqix.co.za/products.html#voltiq
 
 
-#SolarSouthAfrica #SolarInstaller #Deye #Sunsynk
+#SolarSouthAfrica #SolarInstaller #Deye #Sunsynk #LuxPower
 ```
 
 ## LinkedIn 💼
@@ -232,7 +232,7 @@ A question for solar installers 🤔
 
 How many monitoring portals did you log into this morning? ☕
 
-If you run mixed-brand fleets across Deye + Sunsynk, the answer is "at least two."
+If you run mixed-brand fleets across Deye, Sunsynk, or Luxpower, the answer is "at least two, often three."
 
 VoltIQ ends that. ☀️
 
@@ -262,13 +262,13 @@ R99/month. Flat. Now live with Deye, Sunsynk, and Luxpower. ✅
 👉 https://doqix.co.za/products.html#voltiq
 
 
-#SolarSouthAfrica #SolarInstaller #Deye #Sunsynk #PVMonitoring #SouthAfricanBusiness
+#SolarSouthAfrica #SolarInstaller #Deye #Sunsynk #LuxPower #PVMonitoring #SouthAfricanBusiness
 ```
 
 ## WhatsApp teaser 📲
 
 ```
-☀️ Solar installer running Deye or Sunsynk?
+☀️ Solar installer running Deye, Sunsynk, or Luxpower?
 
 Two portals every morning?
 Customer phoning about a fault you missed?
@@ -284,6 +284,106 @@ VoltIQ ⬇️
 
 R99/mo. Flat. No per-system charge.
 Bill stays the same. Value compounds. 🚀
+
+https://doqix.co.za/products.html#voltiq
+```
+
+---
+
+# VoltIQ: Luxpower launch announcement
+
+> Use these for the moment-of-launch marketing push. They lead with "Luxpower is now live" as the news beat, then route to the standard VoltIQ message. After the launch window passes, fall back to the standard posts above.
+
+**Promo URL:** `https://doqix.co.za/products.html#voltiq`
+**Terms link:** `https://doqix.co.za/products-terms.html#voltiq`
+
+## Instagram (launch) 📱
+
+```
+🆕 Luxpower is live on VoltIQ. ⚡
+
+Got Luxpower in the fleet? You're in. ✅
+Got Deye? Sunsynk? Mixed bag? You've been in. ✅
+Three brands, one screen, R99/month. 📊
+
+We said the supported list would grow.
+This is the proof. 🌱
+
+🚨 Auto fault detection
+💡 Upsell flags
+💬 Morning brief on YOUR phone, every morning ☕
+🎨 White-label dashboard
+
+🔗 Link in bio.
+
+#SolarSouthAfrica #SolarInstaller #LuxPower #Deye #Sunsynk
+#SolarMonitoring #SolarSA #PVInstallerSA #LoadsheddingSA
+```
+
+## Facebook (launch) 💬
+
+```
+Big one for solar installers 👇
+
+Luxpower is now live on VoltIQ. 🆕⚡
+
+Three brands, one screen.
+🔧 Deye ✅
+🔧 Sunsynk ✅
+🔧 Luxpower ✅
+
+Same R99/month flat. Same one dashboard. Same morning brief on your phone before coffee.
+
+If you've been waiting for VoltIQ to support Luxpower before signing up: wait's over.
+
+When we launched VoltIQ we said the supported list would grow as patterns emerged across the market. Luxpower is the first proof. More brands to follow. Bill stays R99 either way.
+
+👉 https://doqix.co.za/products.html#voltiq
+
+#SolarSouthAfrica #SolarInstaller #LuxPower #Deye #Sunsynk
+```
+
+## LinkedIn (launch) 💼
+
+```
+🆕 Luxpower is live on VoltIQ. ⚡
+
+When we launched VoltIQ, the supported inverter list was Deye and Sunsynk. We promised the list would grow as patterns emerged across the market.
+
+Today: Luxpower joins the supported list. Same dashboard, same morning brief, same R99/month flat.
+
+If you run a mixed-brand fleet across Deye, Sunsynk, and Luxpower, you can finally stop juggling three monitoring portals every morning. One screen. One brief on your phone. Done.
+
+What "supported" means in practice:
+🚨 Automated issue detection across all three brands
+💡 Upsell flags on every system, regardless of inverter
+💬 Co-branded WhatsApp morning brief that lands on YOUR phone every morning
+🎨 White-label installer dashboard
+🌱 Detection logic sharpens with every alert you confirm or dismiss
+📚 Upsell theme library grows. New flag categories added as patterns emerge.
+
+R99/month. Flat. No per-system charge. The bill stays the same as the supported library grows.
+
+If you were holding off VoltIQ because Luxpower wasn't supported, this one's for you.
+
+👉 https://doqix.co.za/products.html#voltiq
+
+#SolarSouthAfrica #SolarInstaller #LuxPower #Deye #Sunsynk #PVMonitoring #SouthAfricanBusiness
+```
+
+## WhatsApp teaser (launch) 📲
+
+```
+🆕 Luxpower is live on VoltIQ. ⚡
+
+Three brands, one screen, one morning brief.
+🔧 Deye ✅
+🔧 Sunsynk ✅
+🔧 Luxpower ✅
+
+R99/mo. Flat. The bill stays the same as the library grows.
+
+If you've been waiting for Luxpower support before signing up, this is your sign. ☀️
 
 https://doqix.co.za/products.html#voltiq
 ```
