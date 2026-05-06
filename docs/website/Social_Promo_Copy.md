@@ -1,17 +1,17 @@
-# Social Promo Copy — SocialIQ + VoltIQ
+# Social Promo Copy: SocialIQ + VoltIQ
 
 > Copy-paste ready posts for Instagram, Facebook, LinkedIn, and WhatsApp. Voice: fun, fresh, lighthearted, professional but captivating. Every pricing claim carries the asterisk + terms link required by `docs/website/Product_Deep_Links.md`.
 
 **Companion docs:**
-- [Product_Deep_Links.md](Product_Deep_Links.md) — promo URL conventions, tracking notes
-- [Product_5W_Strategy.md](Product_5W_Strategy.md) — voice rules, anti-AI-tells, anti-hallucination
+- [Product_Deep_Links.md](Product_Deep_Links.md): promo URL conventions, tracking notes
+- [Product_5W_Strategy.md](Product_5W_Strategy.md): voice rules, anti-AI-tells, anti-hallucination
 
 ---
 
 # SocialIQ
 
-**Promo URL:** `https://digitaloperations.co.za/doqix/products.html#socialiq`
-**Terms link:** `https://digitaloperations.co.za/doqix/products-terms.html#socialiq`
+**Promo URL:** `https://doqix.co.za/products.html#socialiq`
+**Terms link:** `https://doqix.co.za/products-terms.html#socialiq`
 
 ## Instagram 📱
 
@@ -43,7 +43,7 @@ Final price locked at onboarding. Terms apply.
 #B2BMarketing #SAStartups #DigitalMarketingSA #MzansiBusiness
 ```
 
-> **Bio link to use:** `https://digitaloperations.co.za/doqix/products.html#socialiq`
+> **Bio link to use:** `https://doqix.co.za/products.html#socialiq`
 
 ## Facebook 💬
 
@@ -64,9 +64,9 @@ From R499/month.* No fixed package. No lock-in. Pricing scales with your platfor
 
 You don't lose control. You lose the part you don't have time for. ⏰
 
-See it 👉 https://digitaloperations.co.za/doqix/products.html#socialiq
+See it 👉 https://doqix.co.za/products.html#socialiq
 
-*Terms apply: https://digitaloperations.co.za/doqix/products-terms.html#socialiq
+*Terms apply: https://doqix.co.za/products-terms.html#socialiq
 
 #SocialMediaSA #SmallBusinessSA #MarketingAutomation
 ```
@@ -94,9 +94,9 @@ From R499/month.* Pricing scales with the channels and cadence you choose. Month
 
 Built for businesses who know they should be posting more but never have time to research and write. 🇿🇦
 
-👉 https://digitaloperations.co.za/doqix/products.html#socialiq
+👉 https://doqix.co.za/products.html#socialiq
 
-*Terms apply: https://digitaloperations.co.za/doqix/products-terms.html#socialiq
+*Terms apply: https://doqix.co.za/products-terms.html#socialiq
 
 #SocialMediaMarketing #B2BMarketing #ContentStrategy #MarketingAutomation #SouthAfricanBusiness
 ```
@@ -117,15 +117,15 @@ Take a look at SocialIQ ⬇️
 
 From R499/mo.
 
-https://digitaloperations.co.za/doqix/products.html#socialiq
+https://doqix.co.za/products.html#socialiq
 ```
 
 ---
 
 # VoltIQ
 
-**Promo URL:** `https://digitaloperations.co.za/doqix/products.html#voltiq`
-**Terms link:** `https://digitaloperations.co.za/doqix/products-terms.html#voltiq`
+**Promo URL:** `https://doqix.co.za/products.html#voltiq`
+**Terms link:** `https://doqix.co.za/products-terms.html#voltiq`
 
 ## Instagram 📱
 
@@ -154,7 +154,7 @@ Less morning juggling, more coffee. ☕
 #SolarBusiness #RenewableEnergySA
 ```
 
-> **Bio link to use:** `https://digitaloperations.co.za/doqix/products.html#voltiq`
+> **Bio link to use:** `https://doqix.co.za/products.html#voltiq`
 
 ## Facebook 💬
 
@@ -175,9 +175,9 @@ What you get:
 R99/month.* Flat rate. No per-system charge.
 Luxpower integration is in progress. 🛠️
 
-👉 https://digitaloperations.co.za/doqix/products.html#voltiq
+👉 https://doqix.co.za/products.html#voltiq
 
-*Terms apply: https://digitaloperations.co.za/doqix/products-terms.html#voltiq
+*Terms apply: https://doqix.co.za/products-terms.html#voltiq
 
 #SolarSouthAfrica #SolarInstaller #Deye #Sunsynk
 ```
@@ -203,9 +203,9 @@ One screen for every solar system you've installed:
 
 R99/month.* Flat. No per-system charge. Luxpower integration is in active development. 🛠️
 
-👉 https://digitaloperations.co.za/doqix/products.html#voltiq
+👉 https://doqix.co.za/products.html#voltiq
 
-*Terms apply: https://digitaloperations.co.za/doqix/products-terms.html#voltiq
+*Terms apply: https://doqix.co.za/products-terms.html#voltiq
 
 #SolarSouthAfrica #SolarInstaller #Deye #Sunsynk #PVMonitoring #SouthAfricanBusiness
 ```
@@ -225,7 +225,7 @@ VoltIQ ⬇️
 
 R99/mo. Flat.
 
-https://digitaloperations.co.za/doqix/products.html#voltiq
+https://doqix.co.za/products.html#voltiq
 ```
 
 ---
@@ -235,14 +235,14 @@ https://digitaloperations.co.za/doqix/products.html#voltiq
 - **Asterisk + terms link is mandatory** on every pricing claim. Already baked into each variant above.
 - **No fabricated quantities** in SocialIQ copy (no "X posts/week", no platform list). Pricing scales with channels × cadence; T&Cs explain the dimensions.
 - **No Luxpower compatibility promise** for VoltIQ; only "in progress" or "in active development."
-- **No em dashes** anywhere — periods, colons, commas only.
+- **No em dashes** anywhere. Periods, colons, commas only.
 - **Bio links** for Instagram: paste the promo URL into your IG bio. The caption can't carry a clickable link.
 - **WhatsApp** doesn't render hashtags, so they're omitted there.
 - **LinkedIn emoji discipline:** lighter than IG/FB. The 🤔 / ☕ / 🚨 / 💡 / 💬 / 🎨 / 🌱 do the visual work without tipping casual.
 
 ## Tracking (optional, not yet wired)
 
-If you want per-channel attribution at the n8n webhook end, append `?src=ig` / `?src=fb` / `?src=li` / `?src=wa` to the promo URL. The webhook handler isn't wired for it yet — flagged as a small follow-up in `Product_Deep_Links.md`. The URL convention is ready when you want to pull the trigger.
+If you want per-channel attribution at the n8n webhook end, append `?src=ig` / `?src=fb` / `?src=li` / `?src=wa` to the promo URL. The webhook handler isn't wired for it yet; it's flagged as a small follow-up in `Product_Deep_Links.md`. The URL convention is ready when you want to pull the trigger.
 
 ## How to refresh this doc
 

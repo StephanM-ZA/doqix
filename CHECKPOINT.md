@@ -2,10 +2,24 @@
 
 **Date:** 2026-05-06
 **Branch:** main
-**Tag (current):** web-v0.12.0 — shipped
-**Previous tag:** web-v0.11.0
+**Tag (current):** web-v0.12.1 — shipped
+**Previous tag:** web-v0.12.0
 **Working tree:** clean
 **Local preview server:** still running at http://localhost:8080 (PID was 7460; check with `lsof -ti:8080` and `kill` when done)
+
+---
+
+## Release shipped: `web-v0.12.1`
+
+**Commit:** `18ad7d3`
+**Tag:** `web-v0.12.1` (annotated, pushed)
+**Deploy run:** `25456489905` — queued (auto-triggered on push)
+
+### What landed in this release
+
+1. **New: `docs/website/Social_Promo_Copy.md`** — copy-paste-ready Instagram, Facebook, LinkedIn, and WhatsApp posts for SocialIQ and VoltIQ. Compliance-checked: no hallucinated numbers, no AI-tell phrases, no em dashes. Companion to `Product_Deep_Links.md` and `Product_5W_Strategy.md`.
+2. **Cache-bust bumped** `?v=0.12.0` → `?v=0.12.1` across 23 HTML files (design/ + site/).
+3. **CLAUDE.md** "Current version" line updated to `web-v0.12.1`.
 
 ---
 
@@ -70,6 +84,9 @@ gh run list --workflow=deploy-site.yml --limit=2
 
 # Confirm tag exists upstream
 git fetch --tags && git tag -l 'web-v0.12.*'
+
+# Check cache-bust version strings are all at 0.12.1
+grep -r '?v=0.12' site/ | grep -v '0.12.1'   # should return nothing
 
 # Local preview after pulling fresh
 cd site && python3 -m http.server 8080
