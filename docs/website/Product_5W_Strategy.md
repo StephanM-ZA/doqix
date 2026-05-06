@@ -68,7 +68,7 @@ When you use **From** pricing, the T&Cs page MUST also explain the scaling dimen
 - Mix categories: technical capability, business outcome, integration, channel, and one cultural/voice pill.
 - **Always end with `Learns from your feedback`** — see "Capability beats every product must carry" below.
 - Examples (do):
-    - VoltIQ: `Deye ✓` `Sunsynk ✓` `Luxpower (in progress)` `WhatsApp-first` `White-label` `Learns from your feedback`
+    - VoltIQ: `Deye ✓` `Sunsynk ✓` `Luxpower ✓` `WhatsApp-first` `White-label` `Learns from your feedback`
     - SocialIQ: `Research from your sources` `Drafted in your voice` `You approve every post` `Multi-channel` `Learns from your feedback`
 - Examples (don't):
     - `Best in class`, `Award-winning`, `Industry-leading` — empty marketing claims
@@ -128,7 +128,7 @@ When writing 5W copy for any product:
 - **Verify before claiming.** Don't invent integrations, capabilities, customer counts, or compliance certifications. Source claims from existing product docs, codebases, or direct user input.
 - **No fabricated numbers.** Don't write "10+ stores", "1000+ posts", "47% faster" unless you have it documented somewhere I can point to. Round, made-up numbers are an AI tell.
 - **No fixed quantity promises** unless the product literally guarantees it. SocialIQ deliberately does NOT name a posting cadence in marketing because the cadence flexes per customer. VoltIQ says R99/mo flat because that IS the rate.
-- **No platforms not yet supported.** VoltIQ markets Deye + Sunsynk only; Luxpower is "in progress" and gets that label every time. Don't list inverters / integrations / platforms as supported until they actually are.
+- **No platforms not yet supported.** VoltIQ markets Deye, Sunsynk, and Luxpower (all live). Don't list any other brand (SunGrow, Growatt, Huawei, etc.) as supported until it's confirmed live. The same principle applies to any product: never market integrations / platforms before they actually ship.
 
 ---
 

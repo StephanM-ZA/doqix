@@ -163,7 +163,7 @@ Missing the upsell because you forgot to check the data?
 
 VoltIQ ends all three. 📊
 
-🔧 Deye + Sunsynk supported (Luxpower in progress 🛠️)
+🔧 Deye + Sunsynk + Luxpower supported ✅
 🚨 Auto issue detection
 💡 Upsell opportunity flags
 💬 Co-branded WhatsApp morning brief on YOUR phone, every morning ☕
@@ -217,7 +217,7 @@ Why it matters for your business:
 ⏰ Stop opening portals before coffee. The brief comes to you.
 
 R99/month. Flat. No tiers, no surprises.
-Luxpower integration is in progress. 🛠️
+Now live with Deye, Sunsynk, and Luxpower. ✅
 
 👉 https://doqix.co.za/products.html#voltiq
 
@@ -257,7 +257,7 @@ Why this matters for your business:
 
 ⏰ Out of the morning portal scramble. Your brief is on WhatsApp by the time you're at your desk.
 
-R99/month. Flat. Luxpower integration is in active development. 🛠️
+R99/month. Flat. Now live with Deye, Sunsynk, and Luxpower. ✅
 
 👉 https://doqix.co.za/products.html#voltiq
 
@@ -294,7 +294,7 @@ https://doqix.co.za/products.html#voltiq
 
 - **Asterisk + terms link is mandatory** on every pricing claim. Already baked into each variant above.
 - **No fabricated quantities** in SocialIQ copy (no "X posts/week", no platform list). Pricing scales with channels × cadence; T&Cs explain the dimensions.
-- **No Luxpower compatibility promise** for VoltIQ; only "in progress" or "in active development."
+- **VoltIQ supported inverters:** Deye, Sunsynk, Luxpower (all live). Don't list any other brand as supported until it's confirmed.
 - **No em dashes** anywhere. Periods, colons, commas only.
 - **Bio links** for Instagram: paste the promo URL into your IG bio. The caption can't carry a clickable link.
 - **WhatsApp** doesn't render hashtags, so they're omitted there.

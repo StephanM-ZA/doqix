@@ -53,15 +53,14 @@ If you add a new product, rename one, or change the slug, edit:
 VoltIQ is the first SaaS product going on active promotion.
 
 - **Price:** R99 per month, flat. Billed monthly in advance, ZAR. Month-to-month, no long-term contract.
-- **Currently supported inverters at launch:** **Deye**, **Sunsynk**.
-- **In progress:** **Luxpower**. Additional brands will follow.
+- **Currently supported inverters:** **Deye**, **Sunsynk**, **Luxpower**. Additional brands will follow.
 - **What it does:** unified fleet monitoring for solar installers, automated issue detection, upsell flagging, co-branded WhatsApp morning reports, white-label dashboard.
 - **Compliance footnote required in every promo asset:** include an asterisk after the price linking to `products-terms.html#voltiq`. The product card on the site already does this.
-- **Don't promise:** Luxpower compatibility (still in progress), SunGrow/Growatt/Huawei or any other brand not listed above.
+- **Don't promise:** SunGrow, Growatt, Huawei, or any other brand not listed above as supported.
 
 ### Suggested promo copy (short)
 
-> VoltIQ — every solar system on one screen. R99/mo.\* Launching with Deye and Sunsynk, Luxpower coming soon.
+> VoltIQ — every solar system on one screen. R99/mo.\* Live with Deye, Sunsynk, and Luxpower.
 >
 > See it: digitaloperations.co.za/doqix/products.html#voltiq
 >
@@ -69,9 +68,9 @@ VoltIQ is the first SaaS product going on active promotion.
 
 ### Suggested promo copy (long)
 
-> Managing a fleet of solar installs across Deye and Sunsynk shouldn't mean juggling four monitoring portals. VoltIQ pulls every system onto one screen, alerts you when something breaks before the customer notices, flags upsell opportunities, and lands a co-branded WhatsApp morning brief on your phone every morning.
+> Managing a fleet of solar installs across Deye, Sunsynk, and Luxpower shouldn't mean juggling three monitoring portals. VoltIQ pulls every system onto one screen, alerts you when something breaks before the customer notices, flags upsell opportunities, and lands a co-branded WhatsApp morning brief on your phone every morning.
 >
-> R99 per month, flat.\* Launching with Deye and Sunsynk. Luxpower support is in progress; more inverters to follow.
+> R99 per month, flat.\* Live with Deye, Sunsynk, and Luxpower; more inverters to follow.
 >
 > See it: digitaloperations.co.za/doqix/products.html#voltiq
 >

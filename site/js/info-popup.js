@@ -65,7 +65,7 @@
             pills: [
                 { label: 'Deye', check: true },
                 { label: 'Sunsynk', check: true },
-                { label: 'Luxpower (in progress)' },
+                { label: 'Luxpower', check: true },
                 'WhatsApp-first',
                 'White-label',
                 'Learns from your feedback'
@@ -74,7 +74,7 @@
             what: "One screen for every solar system you've installed. Automated issue detection, upsell opportunity flags, and a co-branded WhatsApp morning brief that lands on your phone every morning. R99 a month, flat. Detection logic improves as your team confirms, edits, or dismisses each alert: the more you use VoltIQ, the fewer false positives you see.",
             why: 'Customers notice broken systems before you do. Every call you take about a fault you should have caught is a churn risk. VoltIQ turns silent faults into morning alerts.',
             when: 'Now. The longer you wait, the more silent faults you carry on your books — and the more competitor installers add proactive monitoring to their pitch.',
-            where: 'South African installers, ZAR pricing, SA-hosted infrastructure. Live with Deye and Sunsynk; Luxpower integration in progress; more brands to follow.',
+            where: 'South African installers, ZAR pricing, SA-hosted infrastructure. Live with Deye, Sunsynk, and Luxpower; more brands to follow.',
             primaryHref: 'contact.html?product=voltiq',
             secondaryHref: 'products-terms.html#voltiq',
             secondaryLabel: 'Read VoltIQ terms',
