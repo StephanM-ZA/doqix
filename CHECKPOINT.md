@@ -2,13 +2,13 @@
 
 **Date:** 2026-05-06
 **Branch:** main
-**Tag (current):** web-v0.12.3 — shipped, deployed
+**Tag (current):** web-v0.12.4 — shipped, deployed
 **Working tree:** clean
 **Local preview server:** still running at http://localhost:8080 (PID 7460; check with `lsof -ti:8080`, kill when done)
 
 ---
 
-## Sessions's release ladder (5 ships in one session)
+## Session's release ladder (6 ships in one session)
 
 | Tag | Commit | Deploy | Theme |
 |---|---|---|---|
@@ -16,21 +16,20 @@
 | web-v0.12.1 | `18ad7d3` | ✅ | New `Social_Promo_Copy.md` (SocialIQ + VoltIQ posts) |
 | web-v0.12.2 | `5193240` | ✅ | Social copy URLs swapped to `doqix.co.za` + em dashes removed |
 | web-v0.12.3 | `8766e27` | ✅ 30s | VoltIQ WhatsApp recipient corrected to installer + asterisks/terms-footers stripped |
+| web-v0.12.4 | `1666d3a` | ✅ 47s | **Luxpower flipped from "in progress" to live** across 14 references in 7 files |
 
 ---
 
-## What landed in `web-v0.12.3` (latest)
+## What landed in `web-v0.12.4` (latest)
 
-1. **VoltIQ WhatsApp morning report — recipient corrected to the installer** (was misleadingly framed as "to your customers" in some places).
-   - Updated 4 VoltIQ social posts in `Social_Promo_Copy.md` (IG, FB, LinkedIn, WhatsApp)
-   - Customer-retention angle reframed from "send customers daily messages" (wrong) to **first-mover advantage** (you've already seen the issue before the customer calls)
-   - `info-popup.js` WHAT row was "send straight to your clients" → now "lands on your phone every morning"
-   - `products.html` feature bullet tightened to "Co-branded WhatsApp morning brief on your phone"
-   - `Product_Deep_Links.md` long VoltIQ promo aligned
-2. **Asterisks + Terms-apply footers stripped** from all 8 social posts. Terms link lives on the product element only.
-3. **Cache-bust** `?v=0.12.2` → `?v=0.12.3` across 23 HTML files.
-4. **Cadence confirmed:** "once every morning."
-5. **Recipient confirmed:** the installer (their WhatsApp inbox).
+1. **Luxpower is now live for VoltIQ** alongside Deye + Sunsynk. Marketing flipped from "in progress" / "in active development" / "coming soon" to live status across:
+   - `design/products/products.html` — VoltIQ footnote: "Live with Deye, Sunsynk, and Luxpower. More inverters coming soon."
+   - `design/products-terms/products-terms.html` — "In progress" section removed; Luxpower added to "Supported inverters" list. Heading renamed from "Supported inverters at launch" → "Supported inverters."
+   - `design/components/js/info-popup.js` — VoltIQ pill changed from `Luxpower (in progress)` to `Luxpower ✓`. WHERE row updated to "Live with Deye, Sunsynk, and Luxpower; more brands to follow."
+   - `docs/website/Social_Promo_Copy.md` — 3 VoltIQ social posts updated (IG bullet, FB closing, LinkedIn closing) + compliance note rewritten.
+   - `docs/website/Product_5W_Strategy.md` — pill example + anti-hallucination rule updated.
+   - `docs/website/Product_Deep_Links.md` — VoltIQ snapshot bullets, short promo, long promo opener (now mentions juggling THREE portals not four), and don't-promise list (Luxpower removed; SunGrow/Growatt/Huawei retained).
+2. **Cache-bust bumped** `?v=0.12.3` → `?v=0.12.4` across 23 HTML files.
 
 ---
 
@@ -47,10 +46,12 @@
 
 ### Marketing surfaces
 - VoltIQ pricing: R99/mo flat
+- VoltIQ inverters: Deye, Sunsynk, **Luxpower** (all live)
 - SocialIQ pricing: From R499/mo (scaling with channels × cadence)
 - "Learns from your feedback" capability beat on every product
 - "Posting memory" beat added to SocialIQ
 - "Growing upsell library" beat added to VoltIQ
+- VoltIQ WhatsApp morning brief recipient = installer (clarified across all surfaces)
 - Social copy: 8 posts (IG / FB / LinkedIn / WhatsApp × 2 products) with question-led configurability framing
 - All promo URLs use `doqix.co.za`
 
@@ -72,16 +73,16 @@
 
 ## Open items for next session
 
-1. **Domain swap on `products-terms.html`** — only the visible "Website:" line says `doqix.co.za`. The technical refs (canonical, og:url, mailto) still point at `digitaloperations.co.za`. User confirmed the htaccess + DNS redirect is in place, so flipping the rest is now safe. ~2 minutes to do.
+1. **Domain swap on `products-terms.html`** — only the visible "Website:" line says `doqix.co.za`. The technical refs (canonical, og:url, mailto) still point at `digitaloperations.co.za`. User confirmed htaccess + DNS redirect is in place, so flipping the rest is now safe. ~2 minutes.
 
-2. **Apply the domain swap site-wide** — other pages (`terms-and-conditions.html`, `privacy-policy.html`, `index.html`, footer, header) still reference `digitaloperations.co.za`. If full rebrand, that's a separate sweep.
+2. **Apply the domain swap site-wide** — other pages (`terms-and-conditions.html`, `privacy-policy.html`, `index.html`, footer, header) still reference `digitaloperations.co.za`. Separate sweep when ready.
 
-3. **"Product cards same size" rule — where to save it?** Options carried forward from earlier:
+3. **"Product cards same size" rule — where to save it?** Options:
    - `global` (`master_commands/basic-rules.md`) — applies to every project
    - `project` (`doqix_website/CLAUDE.md`) — recommended
    - `session` — don't save, follow it this session only
 
-4. **Existing product images are 5–9 MB each** (NomadIQ, VendIQ, VoltIQ, LearnIQ — 2816×1536 PNGs). They violate `docs/web-standards.md` (target <100KB). The new SocialIQ image was crunched to 64K WebP + 57K JPG with proper `<picture>` fallback. Migrating the other four to the same pattern is a meaningful page-speed win — separate cleanup pass.
+4. **Existing product images are 5–9 MB each** (NomadIQ, VendIQ, VoltIQ, LearnIQ — 2816×1536 PNGs). They violate `docs/web-standards.md` (target <100KB). The new SocialIQ image was crunched to 64K WebP + 57K JPG with proper `<picture>` fallback. Migrating the other four to the same pattern is a meaningful page-speed win.
 
 5. **WhatsApp morning report cadence — formalise in T&Cs?** The marketing now commits to "once every morning." The `products-terms.html` VoltIQ tab doesn't yet specify cadence. Worth tightening if/when you formalise the SLA.
 
@@ -95,6 +96,7 @@
 - **5W Product Marketing Strategy**: every product gets the 7-block template + 3 capability beats (Learns-from-feedback, In-your-voice, Human-approval). Pricing language: Flat / From / Custom.
 - **No inline JS, no em dashes, no hardcoded HTML values, "Last Updated" on legal pages, sitemap entry for new HTML pages.**
 - **No fabricated numbers, no AI-tell phrases.**
+- **Don't market integrations until they're live.** (Reinforced this session by Luxpower flip.)
 
 ---
 
@@ -107,10 +109,9 @@ gh run list --workflow=deploy-site.yml --limit=2
 # Confirm tag exists upstream
 git fetch --tags && git tag -l 'web-v0.12.*'
 
-# Cache-bust sanity (should all be at 0.12.3)
-grep -r '?v=0.12' site/ | grep -v '0.12.3'   # should return nothing
+# Cache-bust sanity (should all be at 0.12.4)
+grep -r '?v=0.12' site/ | grep -v '0.12.4'   # should return nothing
 
-# Local preview after pulling fresh
-cd site && python3 -m http.server 8080
-# then http://localhost:8080/products.html
+# Confirm Luxpower is live (no in-progress phrasing left)
+grep -rinE 'luxpower.*(in progress|coming|in active)' design/ docs/ site/   # should return nothing
 ```
