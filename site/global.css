@@ -366,6 +366,208 @@ ul, ol {
     padding-bottom: 4px;
 }
 
+/* ============================================
+   NAV SUBMENU — common component
+   Generic .has-submenu wrapper. Reusable on any
+   nav item that needs children (Products today,
+   anything else later).
+   ============================================ */
+
+/* Desktop wrapper */
+.nav-link-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-link-parent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.nav-link-caret {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    margin-bottom: 2px;
+}
+
+.has-submenu:hover .nav-link-caret,
+.has-submenu:focus-within .nav-link-caret,
+.has-submenu.is-open .nav-link-caret {
+    transform: rotate(225deg);
+    margin-bottom: -2px;
+}
+
+/* Desktop dropdown panel */
+.nav-submenu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0.5rem);
+    min-width: 18rem;
+    background: #14203C;
+    border: 1px solid rgba(0, 229, 160, 0.2);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    z-index: 100;
+    margin-top: 0.5rem;
+}
+
+.nav-submenu::before {
+    /* invisible bridge so hover stays connected from parent to dropdown */
+    content: '';
+    position: absolute;
+    top: -0.75rem;
+    left: 0;
+    right: 0;
+    height: 0.75rem;
+}
+
+.has-submenu:hover .nav-submenu,
+.has-submenu:focus-within .nav-submenu,
+.has-submenu.is-open .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+}
+
+.nav-submenu-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.nav-submenu-link:hover,
+.nav-submenu-link:focus-visible {
+    background: rgba(0, 229, 160, 0.1);
+    outline: none;
+}
+
+.nav-submenu-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #e4e1e9;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.nav-submenu-link:hover .nav-submenu-name,
+.nav-submenu-link:focus-visible .nav-submenu-name {
+    color: #00e5a0;
+}
+
+.nav-submenu-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #84958a;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.3;
+}
+
+@media (max-width: 767px) {
+    /* Hide desktop dropdown on mobile — mobile menu has its own version */
+    .nav-link-wrapper .nav-submenu { display: none; }
+}
+
+/* Mobile inline submenu */
+.mobile-link-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.mobile-link-wrapper .mobile-link {
+    display: inline-flex;
+}
+
+.mobile-submenu-toggle {
+    position: absolute;
+    top: 0;
+    right: -2.5rem;
+    background: none;
+    border: none;
+    color: #c0c0d0;
+    cursor: pointer;
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-submenu-toggle .nav-link-caret {
+    border-color: currentColor;
+}
+
+.mobile-link-wrapper.is-open .mobile-submenu-toggle .nav-link-caret {
+    transform: rotate(225deg);
+    margin-bottom: -2px;
+}
+
+.mobile-submenu {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    width: 100%;
+    max-width: 24rem;
+    background: rgba(0, 229, 160, 0.05);
+    border: 1px solid rgba(0, 229, 160, 0.15);
+    border-radius: 0.75rem;
+}
+
+.mobile-link-wrapper.is-open .mobile-submenu {
+    display: flex;
+}
+
+.mobile-submenu-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.mobile-submenu-link:hover,
+.mobile-submenu-link:focus-visible {
+    background: rgba(0, 229, 160, 0.1);
+    outline: none;
+}
+
+.mobile-submenu-link .nav-submenu-name {
+    font-size: 1rem;
+    color: #e4e1e9;
+}
+
+.mobile-submenu-link:hover .nav-submenu-name,
+.mobile-submenu-link:focus-visible .nav-submenu-name {
+    color: #00e5a0;
+}
+
 /* Hamburger (mobile only) */
 .nav-hamburger {
     display: flex;
