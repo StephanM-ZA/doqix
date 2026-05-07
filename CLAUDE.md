@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.12.7** (SEO/branding: favicon now Google-spec compliant. PNG resized 298x296 -> 192x192 (square multiple of 48 per Google's favicon spec, fixing why Google search results showed old/default icon). New SVG favicon added for crisp rendering in browser tabs at any DPI. `<link rel="icon">` tags in 14 design HTML files updated to declare both formats with explicit `sizes` attributes (`type="image/svg+xml" sizes="any"` + `type="image/png" sizes="192x192"`). `site.webmanifest` updated to list both icon entries. Filename kept stable per Google guidance. Cache-bust ?v=0.12.7.)
+- Current version: **web-v0.12.8** (Bug fix + CI: hero video 404 on homepage + services page caused by stale `../hero-video.mp4` / `../hero-poster.jpg` / `../services-hero-video.mp4` paths in synced HTML (resolved to `/hero-video.mp4` outside the `/doqix/` subpath). Sync sed pipeline in `Session_Checklist.md` extended to strip `../` from these media paths so future syncs cannot regress. CI: GitHub Actions bumped to Node 24 compatible versions (`actions/checkout@v6`, `actions/setup-node@v6`, `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5`, `actions/deploy-pages@v5`); workflow Node runtime moved 20 → 22 (Node 20 reached EOL April 2026). Cache-bust ?v=0.12.8.)
 
 **Never push website changes without creating a version tag.**
 

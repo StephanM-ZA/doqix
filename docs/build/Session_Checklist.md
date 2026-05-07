@@ -91,12 +91,17 @@ After ANY edit in `design/`, the work is **not testable** until `site/` is rebui
   | `../components/js/` | `js/` |
   | `../build-request/js/` | `js/` |
   | `../images/` | `images/` |
+  | `../favicon_green.svg` | `favicon_green.svg` |
+  | `../hero-video.mp4` | `hero-video.mp4` |
+  | `../hero-poster.jpg` | `hero-poster.jpg` |
+  | `../services-hero-video.mp4` | `services-hero-video.mp4` |
 
   Sed pipeline that handles all of the above in one pass:
 
   ```bash
   sed \
     -e 's|"../favicon_green.png"|"favicon_green.png"|g' \
+    -e 's|"../favicon_green.svg"|"favicon_green.svg"|g' \
     -e 's|"../site.webmanifest"|"site.webmanifest"|g' \
     -e 's|"../fonts/|"fonts/|g' \
     -e 's|"../tailwind.css|"tailwind.css|g' \
@@ -104,6 +109,9 @@ After ANY edit in `design/`, the work is **not testable** until `site/` is rebui
     -e 's|"../components/js/|"js/|g' \
     -e 's|"../build-request/js/|"js/|g' \
     -e 's|"../images/|"images/|g' \
+    -e 's|"../hero-video.mp4"|"hero-video.mp4"|g' \
+    -e 's|"../hero-poster.jpg"|"hero-poster.jpg"|g' \
+    -e 's|"../services-hero-video.mp4"|"services-hero-video.mp4"|g' \
     design/<page>/<page>.html > site/<page>.html
   ```
 
