@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.12.8** (Bug fix + CI: hero video 404 on homepage + services page caused by stale `../hero-video.mp4` / `../hero-poster.jpg` / `../services-hero-video.mp4` paths in synced HTML (resolved to `/hero-video.mp4` outside the `/doqix/` subpath). Sync sed pipeline in `Session_Checklist.md` extended to strip `../` from these media paths so future syncs cannot regress. CI: GitHub Actions bumped to Node 24 compatible versions (`actions/checkout@v6`, `actions/setup-node@v6`, `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5`, `actions/deploy-pages@v5`); workflow Node runtime moved 20 → 22 (Node 20 reached EOL April 2026). Cache-bust ?v=0.12.8.)
+- Current version: **web-v0.12.9** (Polish: Productivity Trap cards spacing tightened from `space-y-8` (32px) to `space-y-6` (24px) so the vertical gap matches the `gap-6` already used by the outcome cards (`grid grid-cols-1 md:grid-cols-2 gap-6`) further down the homepage. v0.12.8 introduced the spacing fix but landed at 32px which was too generous; this brings it in line with the rest of the page. Cache-bust ?v=0.12.9.)
 
 **Never push website changes without creating a version tag.**
 
