@@ -230,3 +230,26 @@ Never mix website and plugin commits on the same branch.
 ### Icons
 
 The site uses [Heroicons](https://heroicons.com/) (inline SVGs with class `hi`). Source files are in `design/heroicons-master/optimized/24/`. Use outline style by default, solid for emphasis. The `.hi` base class in `global.css` handles `display: inline-block` and `vertical-align: middle`.
+
+---
+
+## iMac change-control
+
+This project deploys to the iMac at `192.168.0.19`. Any change to iMac state
+(deploys, restarts, plist edits, file writes, kill/pkill, launchctl bootstrap/bootout/kickstart,
+package installs, env edits, `git pull` into a deploy path) MUST route through the `serverMonitor`
+project at `/Volumes/External/development_projects/build/serverMonitor`.
+
+See the global rule in `~/.claude/CLAUDE.md` (section "iMac change-control rule").
+
+This project's services in the CMDB:
+- `doqix-website` — `serverMonitor/cmdb/services/doqix-website.toml`
+
+Workflow:
+- Deploy: `cd /Volumes/External/development_projects/build/serverMonitor && ./bin/deploy <service-name>`
+- Edit catalog: edit `serverMonitor/cmdb/services/<service-name>.toml`, then run `bin/preflight cmdb-add <service-name>` before commit.
+- Reads (curl, ssh ps/lsof/launchctl list/log show, sqlite SELECT) — free from this project.
+
+If the gate is unreachable, the user may bypass with the literal phrase
+`break-glass: <reason>`. The bypassing session must back-fill an entry to
+`serverMonitor/change-log.jsonl` once the gate is restored.
