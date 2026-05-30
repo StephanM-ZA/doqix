@@ -1,6 +1,6 @@
 # Do.Qix Website — Project Instructions
 
-> Basic rules and standards: [[/Volumes/External/development_projects/master_commands/basic-rules.md]]
+> Basic rules and standards: [[/Users/stephanmarais/Projects/development_projects/master_commands/basic-rules.md]]
 > Web standards (performance, accessibility, SEO): [[docs/web-standards.md]]
 > Session workflow (HARD rule, where → update → commit → push → bump): [[docs/build/Session_Checklist.md]]
 > Product marketing strategy (5W rule for every product): [[docs/website/Product_5W_Strategy.md]]
@@ -238,7 +238,7 @@ The site uses [Heroicons](https://heroicons.com/) (inline SVGs with class `hi`).
 This project deploys to the iMac at `192.168.0.19`. Any change to iMac state
 (deploys, restarts, plist edits, file writes, kill/pkill, launchctl bootstrap/bootout/kickstart,
 package installs, env edits, `git pull` into a deploy path) MUST route through the `serverMonitor`
-project at `/Volumes/External/development_projects/build/serverMonitor`.
+project at `/Users/stephanmarais/Projects/development_projects/build/serverMonitor`.
 
 See the global rule in `~/.claude/CLAUDE.md` (section "iMac change-control rule").
 
@@ -246,7 +246,7 @@ This project's services in the CMDB:
 - `doqix-website` — `serverMonitor/cmdb/services/doqix-website.toml`
 
 Workflow:
-- Deploy: `cd /Volumes/External/development_projects/build/serverMonitor && ./bin/deploy <service-name>`
+- Deploy: `cd /Users/stephanmarais/Projects/development_projects/build/serverMonitor && ./bin/deploy <service-name>`
 - Edit catalog: edit `serverMonitor/cmdb/services/<service-name>.toml`, then run `bin/preflight cmdb-add <service-name>` before commit.
 - Reads (curl, ssh ps/lsof/launchctl list/log show, sqlite SELECT) — free from this project.
 
