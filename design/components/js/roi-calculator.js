@@ -120,7 +120,7 @@
     hours:      { default: 8,    min: 1,  max: 40,    step: 1   },
     rate:       { default: 150,  min: 50, max: 1000,  step: 50  },
     efficiency: { default: 70,   min: 50, max: 90,    step: 5   },
-    error:      { default: 2000, min: 0,  max: 50000, step: 500 }
+    error:      { default: 2000, min: 0,  max: 1000000, step: 500 }
   };
 
   var sliderPeople     = document.getElementById('slider-people');

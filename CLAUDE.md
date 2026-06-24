@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.12.9** (Polish: Productivity Trap cards spacing tightened from `space-y-8` (32px) to `space-y-6` (24px) so the vertical gap matches the `gap-6` already used by the outcome cards (`grid grid-cols-1 md:grid-cols-2 gap-6`) further down the homepage. v0.12.8 introduced the spacing fix but landed at 32px which was too generous; this brings it in line with the rest of the page. Cache-bust ?v=0.12.9.)
+- Current version: **web-v0.12.10** (Fix: ROI calculator "Monthly error cost" slider max raised from R50,000 to R1,000,000 in `CONFIG.error.max` (both `design/` and `site/` copies of `roi-calculator.js`). Error cost remains a flat monthly total, not per-user. Range label and `formatZAR` already handle the R1M ceiling, so no other code changes were needed. Cache-bust ?v=0.12.10.)
 
 **Never push website changes without creating a version tag.**
 
