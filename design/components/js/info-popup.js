@@ -51,10 +51,11 @@
             why: 'Most social media tools just schedule what you already wrote. Most "AI content" tools produce generic mush you would be embarrassed to post. SocialIQ does the slow parts (research and writing) so you only do the fast parts (approve, edit, publish).',
             when: "The week social posting goes from \"we should\" to \"competitors are eating our lunch.\" When you've tried hiring a social media manager and it didn't stick. When your team is great at the work but not at the marketing that brings the work in.",
             where: 'Your voice, your topics, your sources. ZAR pricing, SA-hosted infrastructure. Drafts target your major social channels with platform-appropriate teaser overlays. Multi-tenant ready: agencies can run SocialIQ for several clients from one dashboard.',
-            primaryHref: 'contact.html?product=socialiq',
+            primaryHref: 'socialiq.html',
+            primaryLabel: 'See SocialIQ',
             secondaryHref: 'products-terms.html#socialiq',
             secondaryLabel: 'Read SocialIQ terms',
-            footnote: 'From R499 per month. Pricing scales with the social channels you choose and the agreed posting cadence; final price is locked at onboarding. Month-to-month, no long-term contract.'
+            footnote: 'From R499 per month. Basic, Pro, and Enterprise tiers scale by the number of pipelines and users on your account. Month-to-month, no long-term contract.'
         },
         voltiq: {
             name: 'VoltIQ',

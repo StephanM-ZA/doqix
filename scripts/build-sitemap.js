@@ -25,6 +25,7 @@ const PAGE_META = {
     'index.html':                 { priority: '1.0', changefreq: 'weekly'  },
     'services.html':              { priority: '0.9', changefreq: 'monthly' },
     'products.html':              { priority: '0.8', changefreq: 'monthly' },
+    'socialiq.html':               { priority: '0.8', changefreq: 'monthly' },
     'contact.html':               { priority: '0.8', changefreq: 'monthly' },
     'privacy-policy.html':        { priority: '0.3', changefreq: 'yearly'  },
     'terms-and-conditions.html':  { priority: '0.3', changefreq: 'yearly'  },

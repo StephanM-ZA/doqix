@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.12.10** (Fix: ROI calculator "Monthly error cost" slider max raised from R50,000 to R1,000,000 in `CONFIG.error.max` (both `design/` and `site/` copies of `roi-calculator.js`). Error cost remains a flat monthly total, not per-user. Range label and `formatZAR` already handle the R1M ceiling, so no other code changes were needed. Cache-bust ?v=0.12.10.)
+- Current version: **web-v0.13.0** (New: dedicated SocialIQ landing page at `socialiq.html` with a real 3-tier pricing table (Basic/Pro/Enterprise) and self-serve sign up/sign in CTAs to `marketing.digitaloperations.co.za`. Product card and info popup CTA now link to `socialiq.html` instead of straight to `contact.html`. Pricing scaling language corrected on the card, popup, terms tab, and `Product_Deep_Links.md` to describe pipelines/users instead of channels/cadence. Cache-bust ?v=0.13.0 on `products.html`, `products-terms.html`, and `socialiq.html`.)
 
 **Never push website changes without creating a version tag.**
 

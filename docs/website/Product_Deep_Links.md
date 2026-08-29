@@ -80,7 +80,7 @@ VoltIQ is the first SaaS product going on active promotion.
 
 SocialIQ is the second SaaS product going on active promotion.
 
-- **Price:** From R499 per month. Pricing scales with the social channels you choose and the agreed posting cadence; final price is locked at onboarding. Billed monthly in advance, ZAR. Month-to-month, no long-term contract.
+- **Price:** From R499 per month. Three published tiers: Basic R499/mo (1 pipeline, 1 user), Pro R899/mo (5 pipelines, 5 users), Enterprise custom-quoted. Billed monthly in advance, ZAR. Month-to-month, no long-term contract.
 - **Positioning:** "You don't have time to write. We do." Lead with the time problem, the research-from-your-sources promise, and the human-approval safety net. Do NOT lead with quantity, platform list, or a fixed posting cadence.
 - **What it does:** Tell SocialIQ the topics that matter and the sources you trust. It pulls fresh material, drafts posts in your brand voice, and queues everything in a dashboard for you to approve before publishing.
 - **What's NOT included:** Publishing to platforms (you connect your own accounts), paid media management, strategic consulting.
@@ -91,7 +91,7 @@ SocialIQ is the second SaaS product going on active promotion.
 
 > SocialIQ — you don't have time to write social posts. We do. From R499/mo.\* Tell us your topics and sources; we research, draft in your voice, and queue everything for your approval.
 >
-> See it: digitaloperations.co.za/doqix/products.html#socialiq
+> See it: digitaloperations.co.za/doqix/socialiq.html
 >
 > \*Terms apply: digitaloperations.co.za/doqix/products-terms.html#socialiq
 
@@ -99,9 +99,9 @@ SocialIQ is the second SaaS product going on active promotion.
 
 > Most "social media tools" just schedule what you already wrote. Most "AI content tools" produce generic mush you would be embarrassed to post. SocialIQ does the slow parts: it researches the topics that matter to your business from the sources you trust, drafts posts in your brand voice, and queues everything for you to approve before anything goes live. The fast parts (read, edit, publish) stay with you.
 >
-> From R499 per month.\* Pricing scales with the channels you choose and the agreed posting cadence; final price is locked at onboarding. Month-to-month, no long-term contract.
+> From R499 per month.\* Basic, Pro, and Enterprise tiers scale by the number of pipelines and users on your account. Month-to-month, no long-term contract.
 >
-> See it: digitaloperations.co.za/doqix/products.html#socialiq
+> See it: digitaloperations.co.za/doqix/socialiq.html
 >
 > \*Terms apply: digitaloperations.co.za/doqix/products-terms.html#socialiq
 
