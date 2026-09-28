@@ -20,7 +20,7 @@ the only capabilities the website may state as fact.
 
 | Capability | Evidence in the repo |
 |---|---|
-| Multi-brand cloud polling: Deye, Sunsynk, Luxpower, FoxESS | `voltiq/const.py` Provider enum; `voltiq/clients/{deye,sunsynk,luxpower,foxess}.py`; `api/services/poller.py` |
+| Multi-brand cloud polling: Deye, Sunsynk, Luxpower, FoxESS | `voltiq/const.py` Provider enum; `voltiq/clients/{deye,sunsynk,luxpower,foxess}.py`; `api/services/poller.py`. **FoxESS confirmed production-live by the product owner on 28 September 2026**, not merely code-complete. |
 | Normalised units and one sign convention across brands | `voltiq/models/` frozen Pydantic v2 models (W, kWh, V, A, C); sign convention documented in `CLAUDE.md` |
 | Polling every 15 min 06:00-19:45 SAST, hourly 20:00-22:00 | `n8n/voltiq-morning-poll.json`; `docs/n8n-workflows.md` |
 | Automated issue detection | `api/services/issue_detector.py`, `api/services/analyzer.py` |
@@ -119,7 +119,9 @@ These are the most valuable near-term wins because the hard part is done.
 4. **Early fault warnings carry the same advisory framing as issue alerts.** See
    the VoltIQ tab in `products-terms.html`.
 5. **The four supported brands are Deye, Sunsynk, Luxpower and FoxESS.** Nothing
-   else may be named as supported.
+   else may be named as supported. All four are production-live; FoxESS was
+   confirmed by the product owner on 28 September 2026, so the claim on
+   `products-terms.html` is sound.
 6. **No live figures on the page.** A working live-fleet endpoint exists and was
    trialled on the landing page, then removed by decision. If it is ever put back,
    it reports one customer fleet, not the whole VoltIQ install base, and must be

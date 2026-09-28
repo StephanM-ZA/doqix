@@ -63,8 +63,8 @@ reporting all systems operational. `gh run rerun <run-id>` cleared it in 49s.
 If a deploy stalls again, that is the fallback.
 
 ## Still open for the user (content, not code)
-1. FoxESS is now a legal supported-brand claim on the live terms page. Confirm
-   it is production-live, not just code-complete.
+1. ~~FoxESS supported-brand claim~~ CLOSED 28 Sep 2026: product owner confirmed
+   FoxESS is live in production. The claim on the live terms page is sound.
 2. Two renders show sample figures (48.6 MWp / 1 284 sites / R4.82m). Captioned
    as illustrative on the page.
 3. alerts-phone.jpg has garbled AI sub-text under clean alert headings.
