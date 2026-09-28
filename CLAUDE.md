@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.14.0** (New: dedicated VoltIQ landing page at `voltiq.html`, built from the real VoltIQ project: full VoltIQ amber brand (#FF8000, teal #00E5A0 as the signal accent), logo lockup, and seven marketing renders from `build/VoltIQ/docs/marketing/renders/`. VoltIQ pricing moved from R99 flat to three tiers: Home R99, Installer R199, Fleet R499, rolled across the product card, info popup, terms tab, and `Product_Deep_Links.md`. FoxESS added as the fourth supported inverter brand. New capability audit at `docs/market/VoltIQ_Competitive_Gaps.md`. Cache-bust ?v=0.14.0 sitewide.)
+- Current version: **web-v0.14.1** (Fix: the Products dropdown in the global header now links VoltIQ to `voltiq.html` and SocialIQ to `socialiq.html` instead of deep-linking to their cards on `products.html`. `header.js` gained an optional per-product `href` so any product with its own landing page routes straight there. Cache-bust ?v=0.14.1 sitewide.)
 
 **Never push website changes without creating a version tag.**
 

@@ -17,14 +17,20 @@
     var PRODUCTS = [
         { slug: 'nomadiq',  name: 'NomadIQ',  tagline: 'Field operations, managed from anywhere' },
         { slug: 'vendiq',   name: 'VendIQ',   tagline: 'Retail intelligence' },
-        { slug: 'voltiq',   name: 'VoltIQ',   tagline: 'Solar fleet monitoring' },
-        { slug: 'socialiq', name: 'SocialIQ', tagline: 'Your social media writer' },
+        { slug: 'voltiq',   name: 'VoltIQ',   tagline: 'Solar fleet monitoring', href: 'voltiq.html' },
+        { slug: 'socialiq', name: 'SocialIQ', tagline: 'Your social media writer', href: 'socialiq.html' },
         { slug: 'learniq',  name: 'LearnIQ',  tagline: 'AI literacy for SA classrooms' }
     ];
 
+    /* A product with its own landing page links straight to it; the rest deep-link
+       to their card on the products page. */
+    function productHref(p) {
+        return p.href || ('products.html#' + p.slug);
+    }
+
     function buildSubmenuItems(linkClass) {
         return PRODUCTS.map(function (p) {
-            return '<a class="' + linkClass + '" href="products.html#' + p.slug + '" data-product="' + p.slug + '">' +
+            return '<a class="' + linkClass + '" href="' + productHref(p) + '" data-product="' + p.slug + '">' +
                        '<span class="nav-submenu-name">' + p.name + '</span>' +
                        '<span class="nav-submenu-tagline">' + p.tagline + '</span>' +
                    '</a>';
