@@ -171,8 +171,8 @@ VoltIQ ends all three. 📊
 🌱 Sharper after every alert you confirm
 📚 Upsell theme library grows. New flag types added as patterns emerge.
 
-R99/month. Flat. ⚡
-No per-system charge. Add 100 systems, bill stays R99. 📈
+From R99/month. ⚡
+No per-system charge. Add 100 systems, your tier price stays the same. 📈
 Bill stays the same. The value compounds. 🚀
 
 One upsell pays for years of VoltIQ. ☕
@@ -208,15 +208,15 @@ Why it matters for your business:
 
 🤝 First-mover on every customer issue. The morning brief lands before the first customer call of the day. By the time the phone rings, you've already seen it. Faster response = customers who don't churn.
 
-💰 Upsell revenue, today and tomorrow. One battery upsell or panel extension covers VoltIQ for years. And the upsell themes aren't fixed. As patterns emerge across the market, we add new flag categories. Your bill stays R99; the library compounds.
+💰 Upsell revenue, today and tomorrow. One battery upsell or panel extension covers VoltIQ for years. And the upsell themes aren't fixed. As patterns emerge across the market, we add new flag categories. Your tier price stays the same; the library compounds.
 
 🛡️ White-label = your brand, not ours. Customers see YOU monitoring their system.
 
-📈 No per-system charge. Add 100 systems, the bill stays R99.
+📈 No per-system charge. Add 100 systems, your tier price stays the same.
 
 ⏰ Stop opening portals before coffee. The brief comes to you.
 
-R99/month. Flat. No tiers, no surprises.
+From R99/month. Three tiers, no surprises.
 Now live with Deye, Sunsynk, and Luxpower. ✅
 
 👉 https://doqix.co.za/products.html#voltiq
@@ -249,15 +249,15 @@ Why this matters for your business:
 
 🤝 First-mover advantage on every customer call. By the time a customer phones about a fault, you've already seen it on your phone, already started the response. That's the speed customers don't churn from.
 
-💰 Upsell revenue, now and later. R99/month flat. One battery upsell, one panel extension, one re-financing referral covers VoltIQ for years. And as we add new upsell categories, your earnings ceiling rises while your bill doesn't.
+💰 Upsell revenue, now and later. From R99/month. One battery upsell, one panel extension, one re-financing referral covers VoltIQ for years. And as we add new upsell categories, your earnings ceiling rises while your bill doesn't.
 
 🛡️ Sales-cycle accelerator. When a prospect asks "do you monitor what you install?" you don't say "yes, when there's an issue." You open VoltIQ and show them their future dashboard.
 
-📈 Scale free. Add 100 systems, the bill stays R99. No per-system charge.
+📈 Scale free. Add 100 systems, your tier price stays the same. No per-system charge.
 
 ⏰ Out of the morning portal scramble. Your brief is on WhatsApp by the time you're at your desk.
 
-R99/month. Flat. Now live with Deye, Sunsynk, and Luxpower. ✅
+From R99/month. Now live with Deye, Sunsynk, Luxpower, and FoxESS. ✅
 
 👉 https://doqix.co.za/products.html#voltiq
 
@@ -282,7 +282,7 @@ VoltIQ ⬇️
 💬 Morning brief on YOUR WhatsApp, every morning ☕
 🎨 White-label dashboard
 
-R99/mo. Flat. No per-system charge.
+From R99/mo. No per-system charge.
 Bill stays the same. Value compounds. 🚀
 
 https://doqix.co.za/products.html#voltiq
@@ -304,7 +304,7 @@ https://doqix.co.za/products.html#voltiq
 
 Got Luxpower in the fleet? You're in. ✅
 Got Deye? Sunsynk? Mixed bag? You've been in. ✅
-Three brands, one screen, R99/month. 📊
+Four brands, one screen, from R99/month. 📊
 
 We said the supported list would grow.
 This is the proof. 🌱
@@ -332,11 +332,11 @@ Three brands, one screen.
 🔧 Sunsynk ✅
 🔧 Luxpower ✅
 
-Same R99/month flat. Same one dashboard. Same morning brief on your phone before coffee.
+Same three tiers. Same one dashboard. Same morning brief on your phone before coffee.
 
 If you've been waiting for VoltIQ to support Luxpower before signing up: wait's over.
 
-When we launched VoltIQ we said the supported list would grow as patterns emerged across the market. Luxpower is the first proof. More brands to follow. Bill stays R99 either way.
+When we launched VoltIQ we said the supported list would grow as patterns emerged across the market. Luxpower is the first proof. More brands to follow. Pricing stays the same either way.
 
 👉 https://doqix.co.za/products.html#voltiq
 
@@ -350,7 +350,7 @@ When we launched VoltIQ we said the supported list would grow as patterns emerge
 
 When we launched VoltIQ, the supported inverter list was Deye and Sunsynk. We promised the list would grow as patterns emerged across the market.
 
-Today: Luxpower joins the supported list. Same dashboard, same morning brief, same R99/month flat.
+Today: Luxpower joins the supported list. Same dashboard, same morning brief, same three tiers.
 
 If you run a mixed-brand fleet across Deye, Sunsynk, and Luxpower, you can finally stop juggling three monitoring portals every morning. One screen. One brief on your phone. Done.
 
@@ -362,7 +362,7 @@ What "supported" means in practice:
 🌱 Detection logic sharpens with every alert you confirm or dismiss
 📚 Upsell theme library grows. New flag categories added as patterns emerge.
 
-R99/month. Flat. No per-system charge. The bill stays the same as the supported library grows.
+From R99/month. No per-system charge. Your tier price stays the same as the supported library grows.
 
 If you were holding off VoltIQ because Luxpower wasn't supported, this one's for you.
 
@@ -381,7 +381,7 @@ Three brands, one screen, one morning brief.
 🔧 Sunsynk ✅
 🔧 Luxpower ✅
 
-R99/mo. Flat. The bill stays the same as the library grows.
+From R99/mo. Your tier price stays the same as the library grows.
 
 If you've been waiting for Luxpower support before signing up, this is your sign. ☀️
 

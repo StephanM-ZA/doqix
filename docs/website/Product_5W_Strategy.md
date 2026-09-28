@@ -10,13 +10,13 @@ This doc is the single source of truth for "how do we talk about a Do.Qix produc
 
 Every product description, popup, or pitch follows these blocks **in this exact order**:
 
-1. **Status pill** — eyebrow chip, 6 chars or fewer where possible. Examples: `Live`, `Live · R99/mo`, `In Development`. Tone is `live` (green) or `dev` (orange).
+1. **Status pill** — eyebrow chip, 6 chars or fewer where possible. Examples: `Live`, `Live · From R99/mo`, `In Development`. Tone is `live` (green) or `dev` (orange).
 2. **Title with green accent** — short, sharp, in-voice. The headline hook *plus* one phrase wrapped in `<span class="accent">…</span>`. Examples:
     - `Every solar system on <accent>one screen</accent>`
     - `You don't have time to write. <accent>We do.</accent>`
     - `Field operations, managed from <accent>anywhere</accent>`
 3. **Hook line** — one to two sentences directly under the title. Names the customer's pain or the differentiator. No fluff, no hedge.
-4. **Feature pills** — 3–6 short capability tags. Pillify: `GPS-verified`, `Real-time`, `R99/mo flat`, `Multi-channel`. **Always include `Learns from your feedback` as the last pill** — every Do.Qix product has a feedback pipeline.
+4. **Feature pills** — 3–6 short capability tags. Pillify: `GPS-verified`, `Real-time`, `From R99/mo`, `Multi-channel`. **Always include `Learns from your feedback` as the last pill** — every Do.Qix product has a feedback pipeline.
 5. **5W rows** — five labelled rows, one paragraph each, in this order:
     - **Who** — the customer profile + their pain
     - **What** — what the product mechanically does (and one sentence on the feedback loop — *every product*)
@@ -24,7 +24,7 @@ Every product description, popup, or pitch follows these blocks **in this exact 
     - **When** — the trigger moment, the cost of waiting
     - **Where** — the operational context (geography, integrations, hosting, channels)
 6. **CTAs** — primary glow button (`Get in Touch`) + secondary text link (`See product` or `Read terms`). Buttons get the standard chevron via `.btn::after`.
-7. **Footnote** — small print on pricing or status (e.g., "R99/mo flat. Month-to-month, no long-term contract.").
+7. **Footnote** — small print on pricing or status (e.g., "From R99 per month. Month-to-month, no long-term contract.").
 
 ---
 
@@ -32,7 +32,7 @@ Every product description, popup, or pitch follows these blocks **in this exact 
 
 ### Status pill
 
-- **Live with flat public pricing**: `Live · R<X>/mo flat` (e.g., `Live · R99/mo flat`). Use **flat** when every customer pays the same rate regardless of scope.
+- **Live with flat public pricing**: `Live · R<X>/mo flat`. Use **flat** when every customer pays the same rate regardless of scope.
 - **Live with scaling public pricing**: `Live · From R<X>/mo` (e.g., `Live · From R499/mo`). Use **From** when the deliverable scales with customer scope (channels, cadence, system count, seats). The R<X> is the floor; final price is locked in the engagement letter at onboarding.
 - **Live with custom pricing**: `Live · Custom pricing`. Use when no public floor exists.
 - **In development**: `In Development`. Use the `dev` tone (orange). Every other status uses `live` (green).
@@ -127,7 +127,7 @@ When writing 5W copy for any product:
 
 - **Verify before claiming.** Don't invent integrations, capabilities, customer counts, or compliance certifications. Source claims from existing product docs, codebases, or direct user input.
 - **No fabricated numbers.** Don't write "10+ stores", "1000+ posts", "47% faster" unless you have it documented somewhere I can point to. Round, made-up numbers are an AI tell.
-- **No fixed quantity promises** unless the product literally guarantees it. SocialIQ deliberately does NOT name a posting cadence in marketing because the cadence flexes per customer. VoltIQ says R99/mo flat because that IS the rate.
+- **No fixed quantity promises** unless the product literally guarantees it. SocialIQ deliberately does NOT name a posting cadence in marketing because the cadence flexes per customer. VoltIQ says R199/mo flat because that IS the rate.
 - **No platforms not yet supported.** VoltIQ markets Deye, Sunsynk, and Luxpower (all live). Don't list any other brand (SunGrow, Growatt, Huawei, etc.) as supported until it's confirmed live. The same principle applies to any product: never market integrations / platforms before they actually ship.
 
 ---

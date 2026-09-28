@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.13.0** (New: dedicated SocialIQ landing page at `socialiq.html` with a real 3-tier pricing table (Basic/Pro/Enterprise) and self-serve sign up/sign in CTAs to `marketing.digitaloperations.co.za`. Product card and info popup CTA now link to `socialiq.html` instead of straight to `contact.html`. Pricing scaling language corrected on the card, popup, terms tab, and `Product_Deep_Links.md` to describe pipelines/users instead of channels/cadence. Cache-bust ?v=0.13.0 on `products.html`, `products-terms.html`, and `socialiq.html`.)
+- Current version: **web-v0.14.0** (New: dedicated VoltIQ landing page at `voltiq.html`, built from the real VoltIQ project: full VoltIQ amber brand (#FF8000, teal #00E5A0 as the signal accent), logo lockup, and seven marketing renders from `build/VoltIQ/docs/marketing/renders/`. VoltIQ pricing moved from R99 flat to three tiers: Home R99, Installer R199, Fleet R499, rolled across the product card, info popup, terms tab, and `Product_Deep_Links.md`. FoxESS added as the fourth supported inverter brand. New capability audit at `docs/market/VoltIQ_Competitive_Gaps.md`. Cache-bust ?v=0.14.0 sitewide.)
 
 **Never push website changes without creating a version tag.**
 
@@ -253,3 +253,13 @@ Workflow:
 If the gate is unreachable, the user may bypass with the literal phrase
 `break-glass: <reason>`. The bypassing session must back-fill an entry to
 `serverMonitor/change-log.jsonl` once the gate is restored.
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+Rules:
+- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).

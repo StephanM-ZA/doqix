@@ -21,8 +21,8 @@
 <link rel="manifest" href="site.webmanifest"/>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/inter-var.woff2"/>
 
-<link rel="stylesheet" href="tailwind.css?v=0.13.0"/>
-<link rel="stylesheet" href="global.css?v=0.13.0"/>
+<link rel="stylesheet" href="tailwind.css?v=0.14.0"/>
+<link rel="stylesheet" href="global.css?v=0.14.0"/>
 <style>
         .legal-prose h4 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.125rem; font-weight: 800; color: #e4e1e9; text-transform: uppercase; letter-spacing: 0.02em; }
         .legal-prose h5 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1rem; font-weight: 700; color: #e4e1e9; scroll-margin-top: 6rem; }
@@ -53,7 +53,7 @@
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="js/header.js?v=0.13.0"></script>
+<script src="js/header.js?v=0.14.0"></script>
 
 <main class="pt-20">
 
@@ -71,7 +71,7 @@
 <div class="max-w-3xl mx-auto legal-prose">
 
 <div class="legal-meta">
-<p><strong>Effective Date:</strong> May 6, 2026 | <strong>Last Updated:</strong> May 6, 2026</p>
+<p><strong>Effective Date:</strong> May 6, 2026 | <strong>Last Updated:</strong> September 28, 2026</p>
 <p><strong>Provider:</strong> Digital Operations and Technology (Pty) Ltd, trading as Do.Qix | <strong>Jurisdiction:</strong> Republic of South Africa</p>
 </div>
 
@@ -124,22 +124,33 @@
 <div class="product-panel is-active" id="panel-voltiq" role="tabpanel" aria-labelledby="tab-voltiq" tabindex="0">
 <span class="product-status live">Live, public pricing</span>
 <h4 style="margin-top:0.5rem;">VoltIQ</h4>
-<p>VoltIQ is a multi-brand solar fleet monitoring platform for installers. It pulls telemetry from supported manufacturer portals, presents it on a unified dashboard, generates automated issue alerts, identifies upsell opportunities, and delivers co-branded WhatsApp morning reports.</p>
+<p>VoltIQ is a multi-brand solar fleet monitoring platform for installers. It pulls telemetry from supported manufacturer portals, presents it on a unified dashboard, and generates automated issue alerts. On the Fleet tier it also identifies upsell opportunities, applies your branding to the dashboard, and delivers co-branded WhatsApp morning reports.</p>
 
 <div class="callout">
-<p><strong>VoltIQ is R99 per month, in ZAR, billed monthly in advance.</strong> Month-to-month, no long-term contract.</p>
+<p><strong>VoltIQ Home is R99 per month. VoltIQ Installer is R199 per month. VoltIQ Fleet is R499 per month.</strong> All in ZAR, billed monthly in advance. Month-to-month, no long-term contract.</p>
 </div>
 
-<h5>Launch period</h5>
-<p>R99 per month is our launch price. Any change to pricing requires <strong>30 days' written notice</strong> and applies from the next billing cycle. You may cancel before the new price takes effect.</p>
+<h5>What each tier includes</h5>
+<p><strong>VoltIQ Home (R99 per month)</strong> is a WhatsApp report covering a single solar installation. It does not include dashboard access.</p>
+<p><strong>VoltIQ Installer (R199 per month)</strong> includes everything in Home across every system on the account, and adds the unified multi-brand dashboard, the WhatsApp morning brief, automated issue detection and alerts, and encrypted storage of the portal credentials you supply.</p>
+<p><strong>VoltIQ Fleet (R499 per month)</strong> includes everything in Installer and adds fleet-level analytics, suggestions generated from your fleet's own baselines and history, early fault warnings, upsell opportunity flagging, the white-label dashboard in your own branding, and multi-user access for your team.</p>
+<p>Where a clause below refers to white-label branding, upsell flagging, analytics, or early fault warnings, it applies to the Fleet tier. Where a clause refers to dashboard access, it applies to the Installer and Fleet tiers.</p>
+
+<h5>Analytics, suggestions and early warnings (Fleet)</h5>
+<p>Fleet analytics, suggestions and early fault warnings are produced automatically from the telemetry VoltIQ has collected for your account and from baselines derived from it. They are <strong>advisory information</strong> on exactly the same basis as issue alerts: they are not a prediction you should rely on in place of inspection, and they carry no warranty of accuracy or completeness. A suggestion is a prompt to investigate, not an instruction to act.</p>
+<p>Early fault warnings are best-effort. A warning may not be raised before a failure, and a warning may be raised for a system that does not subsequently fail.</p>
+
+<h5>Price changes</h5>
+<p>Any change to a published price requires <strong>30 days' written notice</strong> and applies from the next billing cycle. You may cancel before the new price takes effect.</p>
 
 <h5>Supported inverters</h5>
 <ul>
 <li><strong>Deye</strong></li>
 <li><strong>Sunsynk</strong></li>
 <li><strong>Luxpower</strong></li>
+<li><strong>FoxESS</strong></li>
 </ul>
-<p>"Supported" means VoltIQ ingests telemetry from the manufacturer's portal or API and applies the full feature set: dashboard, issue detection, upsell flagging, and morning reports.</p>
+<p>"Supported" means VoltIQ ingests telemetry from the manufacturer's portal or API and applies the feature set available on your tier, as set out above.</p>
 
 <h5>Other brands</h5>
 <p>We will add additional inverter brands over time. We make no guarantee of compatibility with any specific brand, model, firmware version, or third-party portal until that brand is listed as supported above. Subscribing to VoltIQ for a brand not yet listed is at your own risk and not eligible for a refund if integration is not feasible.</p>
@@ -164,7 +175,7 @@
 <ul>
 <li>VoltIQ stops pulling telemetry at the end of the current billing cycle.</li>
 <li>Co-branded WhatsApp reports stop at the same time.</li>
-<li>Your installer dashboard remains read-only for a 30-day data export window. After that, your VoltIQ data is permanently deleted.</li>
+<li>On Installer and Fleet, your dashboard remains read-only for a 30-day data export window. After that, your VoltIQ data is permanently deleted. Home has no dashboard, so nothing is retained beyond that period either.</li>
 <li>Cancellation does not affect the inverter installations themselves or your relationship with the manufacturer's portal. Those continue to operate independently of VoltIQ.</li>
 </ul>
 <p>The general cancellation terms in our <a href="terms-and-conditions.html">Terms and Conditions</a> apply alongside the above.</p>
@@ -257,12 +268,12 @@ Website: doqix.co.za
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script defer src="js/footer.js?v=0.13.0"></script>
+<script defer src="js/footer.js?v=0.14.0"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script defer src="js/main.js?v=0.13.0"></script>
-<script defer src="js/products-terms.js?v=0.13.0"></script>
-<script defer src="js/exit-popup.js?v=0.13.0"></script>
-<script defer src="js/cookie-banner.js?v=0.13.0"></script>
+<script defer src="js/main.js?v=0.14.0"></script>
+<script defer src="js/products-terms.js?v=0.14.0"></script>
+<script defer src="js/exit-popup.js?v=0.14.0"></script>
+<script defer src="js/cookie-banner.js?v=0.14.0"></script>
 </body></html>

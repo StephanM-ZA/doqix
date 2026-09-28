@@ -12,7 +12,7 @@ Base URL: `https://digitaloperations.co.za/doqix/`
 |---|---|---|---|
 | **NomadIQ** | `https://digitaloperations.co.za/doqix/products.html#nomadiq` | `contact.html?product=nomadiq` | `products-terms.html#nomadiq` (placeholder; full terms issued on engagement) |
 | **VendIQ** | `https://digitaloperations.co.za/doqix/products.html#vendiq` | `contact.html?product=vendiq` | `products-terms.html#vendiq` (placeholder; full terms issued on engagement) |
-| **VoltIQ** | `https://digitaloperations.co.za/doqix/products.html#voltiq` | `contact.html?product=voltiq` | `https://digitaloperations.co.za/doqix/products-terms.html#voltiq` |
+| **VoltIQ** | `https://digitaloperations.co.za/doqix/voltiq.html` | `contact.html?product=voltiq` | `https://digitaloperations.co.za/doqix/products-terms.html#voltiq` |
 | **SocialIQ** | `https://digitaloperations.co.za/doqix/products.html#socialiq` | `contact.html?product=socialiq` | `https://digitaloperations.co.za/doqix/products-terms.html#socialiq` |
 | **LearnIQ** | `https://digitaloperations.co.za/doqix/products.html#learniq` | `contact.html?product=learniq` | `products-terms.html#learniq` (placeholder; full terms at GA) |
 
@@ -22,7 +22,7 @@ All product terms live on a single tabbed page (`products-terms.html`). Deep-lin
 
 When a prospect clicks a promo link they need *context first, action second*. Landing on the contact form with no preamble is a bounce risk. Landing on the product card lets them:
 
-1. See the price chip (where applicable, e.g. VoltIQ R99/mo).
+1. See the price chip (where applicable, e.g. VoltIQ from R99/mo).
 2. Tap the pulsating ⓘ for the Who/What/Why/When/Where rundown.
 3. Read the feature list and inverter / integration support.
 4. Click "Get in Touch" themselves — at which point the `?product=…` prefill kicks in and they arrive at a contact form with the message already drafted.
@@ -48,31 +48,46 @@ If you add a new product, rename one, or change the slug, edit:
 - `scripts/build-sitemap.js` (`PAGE_META` if URLs change)
 - This document
 
-## VoltIQ — promotional snapshot (release status)
+## VoltIQ - promotional snapshot (release status)
 
-VoltIQ is the first SaaS product going on active promotion.
+VoltIQ is the first SaaS product going on active promotion, and has its own landing page at `voltiq.html`.
 
-- **Price:** R99 per month, flat. Billed monthly in advance, ZAR. Month-to-month, no long-term contract.
-- **Currently supported inverters:** **Deye**, **Sunsynk**, **Luxpower**. Additional brands will follow.
-- **What it does:** unified fleet monitoring for solar installers, automated issue detection, upsell flagging, co-branded WhatsApp morning reports, white-label dashboard.
-- **Compliance footnote required in every promo asset:** include an asterisk after the price linking to `products-terms.html#voltiq`. The product card on the site already does this.
-- **Don't promise:** SunGrow, Growatt, Huawei, or any other brand not listed above as supported.
+- **Price:** Three tiers, one per audience.
+  - **VoltIQ Home R99/mo** - a WhatsApp report on a single solar installation. No dashboard.
+  - **VoltIQ Installer R199/mo** - everything in Home across the whole book, plus the unified multi-brand dashboard, the WhatsApp morning brief, issue detection and alerts, encrypted portal credentials.
+  - **VoltIQ Fleet R499/mo** - everything in Installer, plus fleet analytics, suggestions drawn from your own baselines, early fault warnings, upsell opportunity flagging, white-label branding, multi-user access.
+  - Billed monthly in advance, ZAR. Month-to-month, no long-term contract.
+- **Currently supported inverters:** **Deye**, **Sunsynk**, **Luxpower**, **FoxESS**. Additional brands will follow.
+- **Polling cadence:** every 15 minutes from 06:00 to 19:45 SAST, hourly from 20:00 to 22:00.
+- **Three audiences, and they map to the three tiers.** The homeowner wants to know the system is working (Home). The installer wants the fault before the phone call (Installer). The fleet operator wants the pattern across the book, not the single incident (Fleet). Pick one per asset and speak to it; do not blur all three.
+- **Compliance footnote required in every promo asset:** include an asterisk after the price linking to `products-terms.html#voltiq`.
+- **Say "from R99"** when quoting a single entry price, never "R99" alone, because R99 buys the Home tier only.
+- **Don't promise:** SolarEdge, Growatt, Huawei, SunGrow, or any other brand not listed above as supported.
+- **Careful with "AI".** Fleet suggestions and early warnings are generated from the fleet's own telemetry, baselines and history. Describe what they are built on, not the technology behind them, and always carry the advisory framing from the terms.
+- **The `voltiq.html` landing page carries no 5W block, on purpose.** Its "Three people read the same 
+  data" section is the 5W in another form: one card per audience, each mapped to its tier. The 5W 
+  template still governs the four canonical surfaces (product card, info popup, terms tab, this doc). 
+  Do not re-add a 5W grid to the landing page; it duplicated the audience section and added roughly 
+  1,400px of scroll on mobile.
+- **Brand assets:** the VoltIQ logo kit, brand rules and marketing renders live in the VoltIQ project at `build/VoltIQ/logo/` and `build/VoltIQ/docs/marketing/renders/`. VoltIQ is amber `#FF8000` with teal `#00E5A0` as the signal colour, tagline **SOLAR FLEET INTELLIGENCE**. Rules: `build/VoltIQ/docs/brand.md`.
 
 ### Suggested promo copy (short)
 
-> VoltIQ — every solar system on one screen. R99/mo.\* Live with Deye, Sunsynk, and Luxpower.
+> VoltIQ. Every solar system on one screen. From R99/mo.\* Live with Deye, Sunsynk, Luxpower, and FoxESS.
 >
-> See it: digitaloperations.co.za/doqix/products.html#voltiq
+> See it: digitaloperations.co.za/doqix/voltiq.html
 >
 > \*Terms apply: digitaloperations.co.za/doqix/products-terms.html#voltiq
 
 ### Suggested promo copy (long)
 
-> Managing a fleet of solar installs across Deye, Sunsynk, and Luxpower shouldn't mean juggling three monitoring portals. VoltIQ pulls every system onto one screen, alerts you when something breaks before the customer notices, flags upsell opportunities, and lands a co-branded WhatsApp morning brief on your phone every morning.
+> Managing a fleet of solar installs across four inverter brands shouldn't mean juggling four monitoring portals. VoltIQ pulls every system onto one screen and alerts you when something breaks, before the customer notices.
 >
-> R99 per month, flat.\* Live with Deye, Sunsynk, and Luxpower; more inverters to follow.
+> Your customer can have their own R99 report on WhatsApp. You get the dashboard and the morning brief at R199. And at Fleet, VoltIQ reads the whole book: analytics across every install, suggestions built from your own baselines, early warnings before a system stops, and your branding instead of ours.
 >
-> See it: digitaloperations.co.za/doqix/products.html#voltiq
+> From R99 per month.\* Live with Deye, Sunsynk, Luxpower, and FoxESS; more inverters to follow.
+>
+> See it: digitaloperations.co.za/doqix/voltiq.html
 >
 > \*Terms apply: digitaloperations.co.za/doqix/products-terms.html#voltiq
 

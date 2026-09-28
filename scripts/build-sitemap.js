@@ -26,6 +26,7 @@ const PAGE_META = {
     'services.html':              { priority: '0.9', changefreq: 'monthly' },
     'products.html':              { priority: '0.8', changefreq: 'monthly' },
     'socialiq.html':               { priority: '0.8', changefreq: 'monthly' },
+    'voltiq.html':                { priority: '0.8', changefreq: 'monthly' },
     'contact.html':               { priority: '0.8', changefreq: 'monthly' },
     'privacy-policy.html':        { priority: '0.3', changefreq: 'yearly'  },
     'terms-and-conditions.html':  { priority: '0.3', changefreq: 'yearly'  },

@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://digitaloperations.co.za/doqix/</loc>
-    <lastmod>2026-06-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -26,13 +26,13 @@
   </url>
   <url>
     <loc>https://digitaloperations.co.za/doqix/products-terms.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://digitaloperations.co.za/doqix/products.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -53,5 +53,11 @@
     <lastmod>2026-06-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://digitaloperations.co.za/doqix/voltiq.html</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
