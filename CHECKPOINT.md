@@ -47,14 +47,20 @@ Tablet fix: audiences, pricing and straight-talk grids were 3 x 218px at 768;
 now md:grid-cols-3 -> lg:grid-cols-3. Desktop page height 9,424px at 1440.
 Pre-trim backup: scratchpad/voltiq-before-trim.html
 
-## KNOWN ISSUE found during deploy (worth fixing)
-`.github/workflows/deploy-site.yml` has NO `workflow_dispatch` trigger, so the
+## Deploy tooling: issue found and FIXED this session
+`.github/workflows/deploy-site.yml` had NO `workflow_dispatch` trigger, so the
 remedy documented in CLAUDE.md ("re-run it: gh workflow run deploy-site.yml")
-CANNOT work. It fails with HTTP 422. The working remedy is
-`gh run rerun <run-id>`. Either add workflow_dispatch to the workflow or correct
-the CLAUDE.md instruction. The first deploy attempt also stalled ~9 min in
-"waiting" on the github-pages environment with no reviewers and nothing holding
-the concurrency lock; cancel + rerun cleared it in 49s.
+returned HTTP 422 and could never have worked. Fixed in commit 5140825; the
+CLAUDE.md instruction is now correct as written and there is a Run button in
+the Actions tab. Verified by actually dispatching: run 36444176860, event
+workflow_dispatch, success. Note GitHub took roughly a minute to re-index the
+workflow before dispatch was accepted.
+
+Also seen: the first web-v0.14.0 deploy stalled ~9 minutes in "waiting" on the
+github-pages environment with no reviewers configured, main in the allowed
+deployment branches, nothing holding the `pages` concurrency lock and GitHub
+reporting all systems operational. `gh run rerun <run-id>` cleared it in 49s.
+If a deploy stalls again, that is the fallback.
 
 ## Still open for the user (content, not code)
 1. FoxESS is now a legal supported-brand claim on the live terms page. Confirm
