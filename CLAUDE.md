@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.14.1** (Fix: the Products dropdown in the global header now links VoltIQ to `voltiq.html` and SocialIQ to `socialiq.html` instead of deep-linking to their cards on `products.html`. `header.js` gained an optional per-product `href` so any product with its own landing page routes straight there. Cache-bust ?v=0.14.1 sitewide.)
+- Current version: **web-v0.14.2** (Fix: VoltIQ pricing cards now line up exactly. The cards are flex columns with the CTA pinned by `margin-top:auto`, the "Most installers" highlight ring moved from a 2px border to a box-shadow so all three cards share identical box metrics, `.btn-primary` gained a 1.5px transparent border to match `.btn-ghost` height, and the absolutely-positioned badge no longer inherits a 32px `space-y-8` margin onto the element after it. Card heights, button tops, bottoms and heights all measure a 0px delta. Cache-bust ?v=0.14.2 sitewide.)
 
 **Never push website changes without creating a version tag.**
 

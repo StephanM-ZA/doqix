@@ -27,8 +27,8 @@
 <link rel="manifest" href="../site.webmanifest"/>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/inter-var.woff2"/>
 
-<link rel="stylesheet" href="../tailwind.css?v=0.14.1"/>
-<link rel="stylesheet" href="../global.css?v=0.14.1"/>
+<link rel="stylesheet" href="../tailwind.css?v=0.14.2"/>
+<link rel="stylesheet" href="../global.css?v=0.14.2"/>
 <style>
 /* VoltIQ brand theme. VoltIQ inverts the Do.Qix palette: amber #FF8000 tile,
    teal #00E5A0 reserved for "the signal worth acting on". See the VoltIQ
@@ -91,11 +91,35 @@
 }
 .voltiq-theme .info-popup-secondary:hover { color: #FF8000; }
 .voltiq-theme .info-popup-footnote a { color: #FF8000; }
+/* Draw the highlight ring with box-shadow rather than a thicker border, so all
+   three cards keep identical box metrics and their buttons align exactly. */
 .voltiq-theme .pricing-popular {
-    border-color: #FF8000;
-    box-shadow: 0 0 20px rgba(255, 128, 0, 0.12);
+    border-width: 1px;
+    border-color: rgba(255, 128, 0, 0.35);
+    box-shadow: 0 0 0 2px #FF8000, 0 0 24px rgba(255, 128, 0, 0.14);
 }
 .voltiq-theme .pricing-badge { background: #FF8000; color: #0C1830; }
+
+/* Pricing cards: equal height with the CTA pinned to the bottom edge, so the
+   buttons line up regardless of how many bullets a tier has. */
+.voltiq-theme .pricing-card {
+    display: flex;
+    flex-direction: column;
+}
+.voltiq-theme .pricing-card > .btn {
+    margin-top: auto;
+}
+/* .btn-ghost carries a 1.5px border and .btn-primary does not, which made the
+   primary CTA 3px shorter than its neighbours. Match them. */
+.voltiq-theme .pricing-card > .btn-primary {
+    border: 1.5px solid transparent;
+}
+/* The "Most installers" badge is absolutely positioned, but Tailwind's
+   space-y-8 still applies a 32px top margin to the element after it, which
+   pushed that card's content lower than its neighbours. */
+.voltiq-theme .pricing-card > .pricing-badge + * {
+    margin-top: 0;
+}
 
 /* Teal is VoltIQ's signal colour: the one system worth acting on today. */
 .voltiq-theme .signal { color: #00E5A0; }
@@ -234,7 +258,7 @@
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="../components/js/header.js?v=0.14.1"></script>
+<script src="../components/js/header.js?v=0.14.2"></script>
 
 <main class="pt-20 voltiq-theme">
 
@@ -550,11 +574,11 @@
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script defer src="../components/js/footer.js?v=0.14.1"></script>
+<script defer src="../components/js/footer.js?v=0.14.2"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script defer src="../components/js/main.js?v=0.14.1"></script>
-<script defer src="../components/js/exit-popup.js?v=0.14.1"></script>
-<script defer src="../components/js/cookie-banner.js?v=0.14.1"></script>
+<script defer src="../components/js/main.js?v=0.14.2"></script>
+<script defer src="../components/js/exit-popup.js?v=0.14.2"></script>
+<script defer src="../components/js/cookie-banner.js?v=0.14.2"></script>
 </body></html>
