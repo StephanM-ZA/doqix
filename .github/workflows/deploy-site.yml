@@ -7,6 +7,10 @@ on:
       - 'site/**'
       - 'scripts/**'
       - '.github/workflows/deploy-site.yml'
+  # Manual re-run from the Actions tab or `gh workflow run deploy-site.yml`.
+  # Without this, that command fails with HTTP 422 and the only recovery for a
+  # stalled deploy is `gh run rerun <run-id>`.
+  workflow_dispatch:
 
 permissions:
   contents: read
