@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.14.2** (Fix: VoltIQ pricing cards now line up exactly. The cards are flex columns with the CTA pinned by `margin-top:auto`, the "Most installers" highlight ring moved from a 2px border to a box-shadow so all three cards share identical box metrics, `.btn-primary` gained a 1.5px transparent border to match `.btn-ghost` height, and the absolutely-positioned badge no longer inherits a 32px `space-y-8` margin onto the element after it. Card heights, button tops, bottoms and heights all measure a 0px delta. Cache-bust ?v=0.14.2 sitewide.)
+- Current version: **web-v0.14.3** (Fix: restore the gap above the VoltIQ pricing CTAs on mobile. `margin-top:auto` on the button resolves to 0 when a card has no spare height, which is every card once the grid stacks to one column, so the button jammed against the last bullet. The feature list now grows instead (`flex:1 1 auto`), keeping space-y-8's 32px margin at every width while preserving the equal-height, aligned-CTA behaviour on desktop. Cache-bust ?v=0.14.3.)
 
 **Never push website changes without creating a version tag.**
 
