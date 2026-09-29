@@ -52,16 +52,17 @@ If you add a new product, rename one, or change the slug, edit:
 
 VoltIQ is the first SaaS product going on active promotion, and has its own landing page at `voltiq.html`.
 
-- **Price:** Three tiers, one per audience. Every tier is priced *from* the figure shown and scales with the number of systems monitored on the account.
-  - **VoltIQ Home from R99/mo** - WhatsApp reports on the installations on the account. No dashboard.
-  - **VoltIQ Installer from R299/mo** - everything in Home across the whole book, plus the unified multi-brand dashboard, the WhatsApp morning brief, issue detection and alerts, encrypted portal credentials.
-  - **VoltIQ Fleet from R999/mo** - everything in Installer, plus fleet analytics, suggestions drawn from your own baselines, early fault warnings, upsell opportunity flagging, white-label branding, multi-user access.
+- **Price:** Three tiers, each a base plus add-ons. Do not describe them as one scale; they work differently.
+  - **VoltIQ Home R99/mo per home** - covers one home, WhatsApp alert when that installation needs attention. No dashboard. Add-ons: regular scheduled reporting, each additional home.
+  - **VoltIQ Installer from R299/mo** - covers every system the installer has fitted, whatever the number, so adding installations does not move the price. Includes the unified multi-brand dashboard, the WhatsApp message, and issue alerts they can confirm, assign or dismiss. Add-on: scheduled reporting beyond the standard message.
+  - **VoltIQ Fleet R999/mo per large site** - priced per large site and multiplies, so five sites is five times R999. Includes a dashboard and weekly report per site, fleet analytics across the account, and multi-user access regardless of headcount. Add-ons: additional reports, early fault warnings, upsell opportunity flagging, white-label branding, baseline suggestions.
   - Billed monthly in advance, ZAR. Month-to-month, no long-term contract.
 - **Currently supported inverters:** **Deye**, **Sunsynk**, **Luxpower**, **FoxESS**. Additional brands will follow.
 - **Polling cadence:** every 15 minutes from 06:00 to 19:45 SAST, hourly from 20:00 to 22:00.
 - **Three audiences, and they map to the three tiers.** The homeowner wants to know the system is working (Home). The installer wants the fault before the phone call (Installer). The fleet operator wants the pattern across the book, not the single incident (Fleet). Pick one per asset and speak to it; do not blur all three.
 - **Compliance footnote required in every promo asset:** include an asterisk after the price linking to `products-terms.html#voltiq`.
-- **Always say "from"** when quoting any VoltIQ price. Never "R99", "R299" or "R999" bare: all three are entry prices that scale with the number of systems monitored. Quoting a flat figure is a pricing claim we cannot stand behind.
+- **Quote each tier with its unit, never a bare number.** Home is "R99 per home", Installer is "from R299", Fleet is "R999 per large site". Fleet especially: it multiplies per site, so "from R999" understates a multi-site operator. Never imply a single scale across the three tiers.
+- **Never present an add-on as included.** Early fault warnings, upsell flagging, white-label branding, baseline suggestions and extra reports are Fleet add-ons, not Fleet features. Scheduled reporting is an add-on on every tier.
 - **Don't promise:** SolarEdge, Growatt, Huawei, SunGrow, or any other brand not listed above as supported.
 - **Careful with "AI".** Fleet suggestions and early warnings are generated from the fleet's own telemetry, baselines and history. Describe what they are built on, not the technology behind them, and always carry the advisory framing from the terms.
 - **The `voltiq.html` landing page carries no 5W block, on purpose.** Its "Three people read the same 
@@ -83,7 +84,7 @@ VoltIQ is the first SaaS product going on active promotion, and has its own land
 
 > Managing a fleet of solar installs across four inverter brands shouldn't mean juggling four monitoring portals. VoltIQ pulls every system onto one screen and alerts you when something breaks, before the customer notices.
 >
-> Your customer can have WhatsApp reports from R99. You get the dashboard and the morning brief from R299. And at Fleet, from R999, VoltIQ reads the whole book: analytics across every install, suggestions built from your own baselines, early warnings before a system stops, and your branding instead of ours. Every tier scales with how many systems you monitor.
+> Your customer can have a WhatsApp alert on their own home from R99. You get every system you have fitted on one dashboard from R299, however many that is. And Fleet, at R999 per large site, adds a per-site dashboard, a weekly report, analytics across the account and your whole team on one login. Early warnings, upsell flags and your own branding are there when you want them, priced as add-ons.
 >
 > From R99 per month.\* Live with Deye, Sunsynk, Luxpower, and FoxESS; more inverters to follow.
 >

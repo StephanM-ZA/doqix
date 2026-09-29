@@ -172,7 +172,7 @@ VoltIQ ends all three. 📊
 📚 Upsell theme library grows. New flag types added as patterns emerge.
 
 From R99/month. ⚡
-Your tier scales with the fleet, so you only pay for what you actually monitor. 📈
+Every system you have fitted, one price. Adding installs does not move it. 📈
 Bill stays the same. The value compounds. 🚀
 
 One upsell pays for years of VoltIQ. ☕
@@ -212,11 +212,11 @@ Why it matters for your business:
 
 🛡️ White-label = your brand, not ours. Customers see YOU monitoring their system.
 
-📈 Pricing scales with the systems you monitor, so a small book pays small.
+📈 Installer covers every system you have fitted for one price, however many that is.
 
 ⏰ Stop opening portals before coffee. The brief comes to you.
 
-From R99, R299 or R999 a month. Three tiers, no surprises.
+R99 per home, from R299 for every system you fitted, R999 per large site. No surprises.
 Now live with Deye, Sunsynk, and Luxpower. ✅
 
 👉 https://doqix.co.za/products.html#voltiq
@@ -253,7 +253,7 @@ Why this matters for your business:
 
 🛡️ Sales-cycle accelerator. When a prospect asks "do you monitor what you install?" you don't say "yes, when there's an issue." You open VoltIQ and show them their future dashboard.
 
-📈 Pricing scales with the systems you monitor, so a small book pays small.
+📈 Installer covers every system you have fitted for one price, however many that is.
 
 ⏰ Out of the morning portal scramble. Your brief is on WhatsApp by the time you're at your desk.
 
@@ -282,7 +282,7 @@ VoltIQ ⬇️
 💬 Morning brief on YOUR WhatsApp, every morning ☕
 🎨 White-label dashboard
 
-From R99/mo. Three tiers, scaling with the systems you monitor.
+From R99/mo. Three tiers: one home, your whole book, or per large site.
 Bill stays the same. Value compounds. 🚀
 
 https://doqix.co.za/products.html#voltiq

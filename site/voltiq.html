@@ -5,13 +5,13 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="google-site-verification" content="wq9bJWV4LMWcA2N8TIqyBaI8ct_fW5S7NjdS-puxDRQ"/>
 <title>VoltIQ: Solar Fleet Intelligence for SA Installers | Do.Qix</title>
-<meta name="description" content="VoltIQ puts every Deye, Sunsynk, Luxpower, and FoxESS system you have installed on one screen. A WhatsApp report for the homeowner, a dashboard for the installer, fleet analytics and early fault warnings for the operator. From R99 per month."/>
+<meta name="description" content="VoltIQ puts every Deye, Sunsynk, Luxpower, and FoxESS system you have installed on one screen. A WhatsApp report for the homeowner, a dashboard for the installer, fleet analytics for the operator. From R99 per month."/>
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://digitaloperations.co.za/doqix/voltiq.html"/>
 <link rel="alternate" hreflang="en-za" href="https://digitaloperations.co.za/doqix/voltiq.html"/>
 <!-- Open Graph -->
 <meta property="og:title" content="VoltIQ: Solar Fleet Intelligence for SA Installers | Do.Qix"/>
-<meta property="og:description" content="Every solar system on one screen. A WhatsApp report for the homeowner, a dashboard for the installer, fleet analytics and early fault warnings for the operator. From R99 per month."/>
+<meta property="og:description" content="Every solar system on one screen. A WhatsApp report for the homeowner, a dashboard for the installer, fleet analytics for the operator. From R99 per month."/>
 <meta property="og:image" content="https://digitaloperations.co.za/doqix/images/voltiq/voltiq-og.png"/>
 <meta property="og:url" content="https://digitaloperations.co.za/doqix/voltiq.html"/>
 <meta property="og:type" content="website"/>
@@ -20,15 +20,15 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="VoltIQ: Solar Fleet Intelligence for SA Installers | Do.Qix"/>
-<meta name="twitter:description" content="Every solar system on one screen. A WhatsApp report for the homeowner, a dashboard for the installer, fleet analytics and early fault warnings for the operator. From R99 per month."/>
+<meta name="twitter:description" content="Every solar system on one screen. A WhatsApp report for the homeowner, a dashboard for the installer, fleet analytics for the operator. From R99 per month."/>
 <meta name="twitter:image" content="https://digitaloperations.co.za/doqix/images/voltiq/voltiq-og.png"/>
 <link rel="icon" type="image/svg+xml" sizes="any" href="favicon_green.svg"/>
 <link rel="icon" type="image/png" sizes="192x192" href="favicon_green.png"/>
 <link rel="manifest" href="site.webmanifest"/>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/inter-var.woff2"/>
 
-<link rel="stylesheet" href="tailwind.css?v=0.15.1"/>
-<link rel="stylesheet" href="global.css?v=0.15.1"/>
+<link rel="stylesheet" href="tailwind.css?v=0.16.0"/>
+<link rel="stylesheet" href="global.css?v=0.16.0"/>
 <style>
 /* VoltIQ brand theme. VoltIQ inverts the Do.Qix palette: amber #FF8000 tile,
    teal #00E5A0 reserved for "the signal worth acting on". See the VoltIQ
@@ -99,6 +99,26 @@
     box-shadow: 0 0 0 2px #FF8000, 0 0 24px rgba(255, 128, 0, 0.14);
 }
 .voltiq-theme .pricing-badge { background: #FF8000; color: #0C1830; }
+
+/* Add-ons sit under the included list, visually quieter and clearly separate,
+   so nothing in the base list can be mistaken for something that costs extra. */
+.voltiq-theme .voltiq-addons {
+    border-top: 1px dashed rgba(255, 128, 0, 0.28);
+    padding-top: 1.25rem;
+}
+.voltiq-theme .voltiq-addons-label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #FF8000;
+    margin-bottom: 0.75rem;
+}
+.voltiq-theme .voltiq-addons .hi { color: #FF8000; }
+/* Only the first list grows: the add-on block must stay put above the CTA. */
+.voltiq-theme .pricing-card > ul { flex: 1 1 auto; }
+.voltiq-theme .voltiq-addons ul { flex: 0 0 auto; }
 
 /* Asterisk on each price, linking to the note that explains what moves it. */
 .voltiq-theme .voltiq-star {
@@ -274,7 +294,7 @@
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="js/header.js?v=0.15.1"></script>
+<script src="js/header.js?v=0.16.0"></script>
 
 <main class="pt-20 voltiq-theme">
 
@@ -289,7 +309,7 @@
 <img src="images/voltiq/voltiq-logo.svg" alt="VoltIQ" class="voltiq-lockup" width="322" height="96"/>
 <span class="info-popup-eyebrow"><span class="dot" aria-hidden="true"></span>Live &middot; From R99/mo</span>
 <h1>Every solar system on <span class="text-primary">one screen</span></h1>
-<p class="text-lg">Multi-brand fleets mean multi-portal mornings, and customers notice broken systems before you do. VoltIQ ends both of those problems on day one: a WhatsApp report for the homeowner, a dashboard for the installer, fleet analytics and early warnings for the operator.</p>
+<p class="text-lg">Multi-brand fleets mean multi-portal mornings, and customers notice broken systems before you do. VoltIQ ends both of those problems on day one: a WhatsApp report for the homeowner, a dashboard for the installer, fleet analytics for the operator.</p>
 <div class="flex gap-4 flex-wrap pt-2">
 <a href="contact.html?product=voltiq" class="btn btn-primary lg glow inline-block">Get in Touch</a>
 <a href="#pricing" class="btn btn-outline lg inline-block">See Pricing</a>
@@ -330,7 +350,7 @@
 <li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">One sign convention, so exports never read backwards</span></li>
 <li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Built for fleets, not for one homeowner&rsquo;s system</span></li>
 </ul>
-<p class="text-sm text-on-surface-variant">The dashboard starts at <a href="#pricing" class="text-primary hover:underline">VoltIQ Installer</a>.</p>
+<p class="text-sm text-on-surface-variant">The dashboard starts at <a href="#pricing" class="text-primary hover:underline">VoltIQ Installer</a>, which covers every system you have fitted for one price.</p>
 </div>
 </div>
 </section>
@@ -352,7 +372,7 @@
 <li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Every confirm or dismiss teaches the detection logic</span></li>
 <li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Best-effort by design: we tell you where it can miss</span></li>
 </ul>
-<p class="text-sm text-on-surface-variant">Issue alerts come with <a href="#pricing" class="text-primary hover:underline">Installer</a>. Early warnings, before a system stops, are part of <a href="#pricing" class="text-primary hover:underline">Fleet</a>.</p>
+<p class="text-sm text-on-surface-variant">Issue alerts are included with <a href="#pricing" class="text-primary hover:underline">Installer</a>. Early fault warnings, which flag drift before a system stops, are a <a href="#pricing" class="text-primary hover:underline">Fleet</a> add-on.</p>
 </div>
 </div>
 </section>
@@ -373,7 +393,7 @@
 <li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Read it in the cab, act on it before the first job</span></li>
 <li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Recipient opt-in stays your call as the installer</span></li>
 </ul>
-<p class="text-sm text-on-surface-variant">A WhatsApp report comes with every tier: one system on <a href="#pricing" class="text-primary hover:underline">Home</a>, the whole book on <a href="#pricing" class="text-primary hover:underline">Installer</a> and <a href="#pricing" class="text-primary hover:underline">Fleet</a>.</p>
+<p class="text-sm text-on-surface-variant">A WhatsApp message is included on <a href="#pricing" class="text-primary hover:underline">Home</a> and <a href="#pricing" class="text-primary hover:underline">Installer</a>, and <a href="#pricing" class="text-primary hover:underline">Fleet</a> includes a weekly report per site. Scheduled reporting beyond that is an add-on.</p>
 </div>
 </div>
 </section>
@@ -394,7 +414,7 @@
 <li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">A prompt to phone the client, not an automatic quote</span></li>
 <li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">You decide which flags are worth acting on</span></li>
 </ul>
-<p class="text-sm text-on-surface-variant">Upsell flagging is part of <a href="#pricing" class="text-primary hover:underline">VoltIQ Fleet</a>.</p>
+<p class="text-sm text-on-surface-variant">Upsell flagging is a <a href="#pricing" class="text-primary hover:underline">VoltIQ Fleet</a> add-on.</p>
 </div>
 </div>
 </section>
@@ -430,9 +450,9 @@
 <div class="card p-0 overflow-hidden flex flex-col">
 <img src="images/voltiq/fleet-map-wall.jpg" alt="An operator working a wall-mounted VoltIQ fleet map of South Africa" class="voltiq-card-img" width="1120" height="392" loading="lazy" decoding="async"/>
 <div class="p-6 space-y-3 flex-grow flex flex-col">
-<span class="info-popup-fivew-marker">The fleet operator &middot; from R999</span>
+<span class="info-popup-fivew-marker">The fleet operator &middot; R999 per site</span>
 <h3 class="text-lg font-bold">Wants the pattern, not the incident</h3>
-<p class="text-sm text-on-surface-variant leading-relaxed">Once you are past a few dozen sites, a single system matters less than the shape of the whole book: which brands give trouble, which installs drift, where next month&rsquo;s callouts are building up.</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">Once you are past a few dozen sites, a single system matters less than the shape of the whole book: which brands give trouble, which installs drift, where next month&rsquo;s callouts are building up. Fleet is priced per large site, with the deeper warnings and flags available as add-ons.</p>
 </div>
 </div>
 
@@ -464,7 +484,7 @@
 <div class="text-center space-y-4">
 <span class="label">Pricing</span>
 <h2>Three tiers, <span class="text-primary">one for each person in the story</span></h2>
-<p class="max-w-2xl mx-auto">ZAR, billed monthly in advance. Month-to-month, no long-term contract. Each tier starts at the price shown and scales with the number of systems you monitor, so your figure depends on the size of your fleet.</p>
+<p class="max-w-2xl mx-auto">ZAR, billed monthly in advance. Month-to-month, no long-term contract. Each tier has a base that covers a defined scope, and a short list of add-ons priced on top.</p>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
@@ -474,15 +494,21 @@
 <span class="info-popup-fivew-marker">Homeowner</span>
 <h3 class="pt-2">VoltIQ Home</h3>
 <div class="text-5xl font-black text-on-surface leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R99<span class="text-sm font-medium text-on-surface-variant">/mo</span><a href="#pricing-note" class="voltiq-star" aria-label="What changes this price">*</a></div>
-<p class="text-sm text-on-surface-variant">Answers on WhatsApp. No dashboard.</p>
+<p class="text-sm text-on-surface-variant">One home. Answers on WhatsApp.</p>
 </div>
 <ul class="space-y-4 text-sm text-on-surface-variant">
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> WhatsApp reports on the systems on your account</li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Sent when there is something worth telling you</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Covers one home&rsquo;s solar system</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> A WhatsApp alert when something needs attention</li>
 <li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> In your installer&rsquo;s branding, not ours</li>
 <li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> No app to install, no dashboard to learn</li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Best for: households that want to know the system is doing its job</li>
 </ul>
+<div class="voltiq-addons">
+<span class="voltiq-addons-label">Add-ons</span>
+<ul class="space-y-3 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg> Regular scheduled reporting</li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg> Additional homes</li>
+</ul>
+</div>
 <a href="contact.html?product=voltiq" class="btn btn-ghost full">Get in Touch</a>
 </div>
 
@@ -496,12 +522,18 @@
 <p class="text-sm text-on-surface-variant">Every system you fitted, on one screen.</p>
 </div>
 <ul class="space-y-4 text-sm text-on-surface-variant">
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Everything in Home, across your whole book</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Every system you have fitted, however many that is</li>
 <li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Unified dashboard for Deye, Sunsynk, Luxpower, and FoxESS</li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> The WhatsApp morning brief on your phone</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> The WhatsApp message on your phone</li>
 <li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Issue alerts you can confirm, assign, or dismiss</li>
 <li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Encrypted storage of the portal credentials you supply</li>
 </ul>
+<div class="voltiq-addons">
+<span class="voltiq-addons-label">Add-ons</span>
+<ul class="space-y-3 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg> Scheduled reporting beyond the standard message</li>
+</ul>
+</div>
 <a href="contact.html?product=voltiq" class="btn btn-primary full glow">Get in Touch</a>
 </div>
 
@@ -510,32 +542,44 @@
 <div class="space-y-2">
 <span class="info-popup-fivew-marker">Fleet operator</span>
 <h3 class="pt-2">VoltIQ Fleet</h3>
-<div class="text-5xl font-black text-on-surface leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R999<span class="text-sm font-medium text-on-surface-variant">/mo</span><a href="#pricing-note" class="voltiq-star" aria-label="What changes this price">*</a></div>
-<p class="text-sm text-on-surface-variant">The pattern under the whole book.</p>
+<div class="text-5xl font-black text-on-surface leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R999<span class="text-sm font-medium text-on-surface-variant">/site/mo</span><a href="#pricing-note" class="voltiq-star" aria-label="What changes this price">*</a></div>
+<p class="text-sm text-on-surface-variant">Priced per large site.</p>
 </div>
 <ul class="space-y-4 text-sm text-on-surface-variant">
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Everything in Installer, plus:</li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Analytics across the fleet, not one site at a time</li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Suggestions drawn from your fleet&rsquo;s own baselines</li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Early fault warnings, before the system stops</li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Upsell opportunity flags and white-label branding</li>
-<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Multi-user access for your team</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> A dashboard and a weekly report for the site</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Fleet analytics across the sites on your account</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Multi-user access, whatever the size of your team</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Priced per large site, so you only pay for the sites you run</li>
 </ul>
+<div class="voltiq-addons">
+<span class="voltiq-addons-label">Add-ons</span>
+<ul class="space-y-3 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg> Additional reports</li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg> Early fault warnings</li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg> Upsell opportunity flags</li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg> White-label branding</li>
+</ul>
+</div>
 <a href="contact.html?product=voltiq" class="btn btn-ghost full">Talk to Us</a>
 </div>
 
 </div>
 
-<div id="pricing-note" class="card p-6 max-w-3xl mx-auto space-y-3">
+<div id="pricing-note" class="card p-6 md:p-8 max-w-3xl mx-auto space-y-4">
 <h3 class="text-base font-bold"><span class="text-primary">*</span> What changes your price</h3>
-<p class="text-sm text-on-surface-variant leading-relaxed"><strong>The number of systems you monitor.</strong> Every tier starts at the figure on its card and rises as you add installations to the account. A handful of systems pays the starting price; a few hundred does not.</p>
-<p class="text-sm text-on-surface-variant leading-relaxed">Nothing else moves it. Your team size does not: multi-user access on Fleet is included whatever the headcount. Moving between tiers changes which features you get, not the way the price scales.</p>
-<p class="text-sm text-on-surface-variant leading-relaxed">Tell us how many systems you carry and which brands, and we will give you the actual monthly figure before you commit to anything.</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">Each tier works differently, so here is exactly what moves each one.</p>
+<ul class="space-y-3 text-sm text-on-surface-variant">
+<li><strong class="text-on-surface">Home</strong> covers one home at R99. A second home is charged again, and regular scheduled reporting is an add-on. Alerts themselves are included.</li>
+<li><strong class="text-on-surface">Installer</strong> covers every system you have fitted for one price. Adding installations does not move it. Scheduled reporting on top of the standard WhatsApp message is the add-on.</li>
+<li><strong class="text-on-surface">Fleet</strong> is priced per large site, so five sites is five times R999. Additional reports, early fault warnings, upsell flagging and white-label branding are each priced on top.</li>
+</ul>
+<p class="text-sm text-on-surface-variant leading-relaxed">Your team size never moves any of them. Multi-user access on Fleet is included whatever the headcount.</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">Tell us how many homes or sites you carry and which add-ons you want, and we will give you the actual monthly figure before you commit to anything.</p>
 </div>
 
 <p class="text-sm text-on-surface-variant max-w-3xl mx-auto text-center">Any change to a published price needs 30 days&rsquo; written notice and only applies from the next billing cycle. Cancel any time: telemetry pulls and WhatsApp reports stop at the end of the cycle, and dashboard tiers stay read-only for a 30-day export window before the data is deleted. VoltIQ sits alongside the manufacturer portals, so cancelling never touches the installations themselves. ZAR pricing on SA-hosted infrastructure, portal credentials encrypted at rest, and data handled under our <a href="privacy-policy.html" class="text-primary hover:underline">Privacy Policy</a> and POPIA.</p>
 
-<p class="text-xs text-on-surface-variant text-center max-w-2xl mx-auto">From R99 per month, billed monthly in advance in ZAR. Every tier scales with the number of systems monitored. <a href="products-terms.html#voltiq" class="text-primary hover:underline">Full VoltIQ terms apply</a>.</p>
+<p class="text-xs text-on-surface-variant text-center max-w-2xl mx-auto">Home from R99 a month, Installer from R299 a month, Fleet from R999 per large site per month, billed monthly in advance in ZAR. <a href="products-terms.html#voltiq" class="text-primary hover:underline">Full VoltIQ terms apply</a>.</p>
 </div>
 </section>
 
@@ -597,11 +641,11 @@
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script defer src="js/footer.js?v=0.15.1"></script>
+<script defer src="js/footer.js?v=0.16.0"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script defer src="js/main.js?v=0.15.1"></script>
-<script defer src="js/exit-popup.js?v=0.15.1"></script>
-<script defer src="js/cookie-banner.js?v=0.15.1"></script>
+<script defer src="js/main.js?v=0.16.0"></script>
+<script defer src="js/exit-popup.js?v=0.16.0"></script>
+<script defer src="js/cookie-banner.js?v=0.16.0"></script>
 </body></html>

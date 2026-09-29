@@ -73,7 +73,7 @@
                 'Learns from your feedback'
             ],
             who: "Homeowners who want to know their system is working, and the installers and EPCs who fitted it. If you're managing more systems than you can manually check each morning, you're our customer.",
-            what: "Three tiers on one platform, each scaling with the number of systems you monitor. Home (from R99) sends WhatsApp reports with no dashboard. Installer (from R299) puts every system you fitted on one multi-brand dashboard with the morning brief and issue alerts. Fleet (from R999) adds fleet analytics, suggestions drawn from your own baselines, early fault warnings, upsell flags, white-label branding, and multi-user access. Detection improves as your team confirms, edits, or dismisses each alert.",
+            what: "Three tiers, each with its own base and a short list of add-ons. Home (R99 per home) sends a WhatsApp alert when that installation needs attention. Installer (from R299) covers every system you have fitted for one price, with the multi-brand dashboard, the WhatsApp message and issue alerts you can confirm, assign or dismiss. Fleet (R999 per large site) adds a per-site dashboard and weekly report, fleet analytics and multi-user access. Extra reports, early fault warnings, upsell flagging and white-label branding are add-ons.",
             why: "The homeowner finds out their system is down when the lights go out. The installer finds out when the homeowner phones, and every one of those calls is a churn risk. The fleet operator finds out at month-end, once the pattern has already cost a season of callouts. VoltIQ moves all three of those discoveries earlier.",
             when: "Home: the day you stop trusting that no news is good news. Installer: when you are managing more systems than you can check by hand each morning. Fleet: when you need to know which brands and installs keep giving trouble, not just which one broke today.",
             where: 'South African homeowners, installers, and EPCs. ZAR pricing, SA-hosted infrastructure. Live with Deye, Sunsynk, Luxpower, and FoxESS; more brands to follow.',
@@ -81,7 +81,7 @@
             primaryLabel: 'See VoltIQ',
             secondaryHref: 'products-terms.html#voltiq',
             secondaryLabel: 'Read VoltIQ terms',
-            footnote: 'Home from R99 per month (WhatsApp reports, no dashboard), Installer from R299 per month (adds the multi-brand dashboard), Fleet from R999 per month (adds fleet analytics, early fault warnings, upsell flags, white-label branding, and multi-user access). Every tier scales with the number of systems monitored. Month-to-month, no long-term contract.',
+            footnote: 'Home R99 per month per home. Installer from R299 per month, covering every system you have fitted. Fleet R999 per month per large site. Add-ons, including extra reports, early fault warnings, upsell flagging and white-label branding, are quoted separately. Month-to-month, no long-term contract.',
         },
         learniq: {
             name: 'LearnIQ',
