@@ -1,77 +1,79 @@
 # CHECKPOINT
 
-## Status: COMPLETE and SHIPPED. Session closed 28 September 2026.
+## Status: COMPLETE. VoltIQ launched, priced, and SEO/GEO hardened.
 
-VoltIQ landing page is live at https://digitaloperations.co.za/doqix/voltiq.html
-Repo clean, local and origin both at d079325.
+Live: https://digitaloperations.co.za/doqix/voltiq.html at web-v0.17.2
+Repo clean, local and origin in sync. Sitemap submitted to Google Search Console
+by the owner on 29 Sep 2026.
 
-## Releases this session
-| Tag | Commit | What |
-|---|---|---|
-| web-v0.14.0 | eae1561 | VoltIQ landing page, three-tier pricing, FoxESS support |
-| web-v0.14.1 | ef7f56f | Products menu links VoltIQ and SocialIQ to their own pages |
-| web-v0.14.2 | 0c8bd37 | Pricing cards equal height, CTAs aligned |
-| web-v0.14.3 | 6381716 | Restored the gap above pricing CTAs when cards stack |
-Plus docs commits 5ea447b, 84224c3, d079325 and CI fix 5140825.
+## Releases
+| Tag | What |
+|---|---|
+| web-v0.14.0 | VoltIQ landing page, FoxESS as 4th brand |
+| web-v0.14.1 | Products menu links to VoltIQ and SocialIQ pages |
+| web-v0.14.2/.3 | Pricing card alignment, then the mobile spacing regression it caused |
+| web-v0.15.0/.1 | Pricing to From R99/R299/R999, asterisk + explainer note |
+| web-v0.16.0 | Pricing model corrected to base-plus-add-ons per tier |
+| web-v0.17.0 | Static nav baking, tier-accurate meta copy, structured data |
+| web-v0.17.1 | site/robots.txt made self-explanatory |
+| web-v0.17.2 | Garbled sub-text removed from alerts-phone render |
 
-## What shipped
-Dedicated VoltIQ page built from the real VoltIQ project at
-`/Users/stephanmarais/Projects/development_projects/build/VoltIQ`.
+Plus, in a DIFFERENT repo: `StephanM-ZA/stephanm-za.github.io` commit 71f9a3e
+added the root robots.txt. See below.
 
-- 11 sections: hero plate, problem band, 4 alternating spotlights, three
-  audiences, supported inverters, 3-tier pricing, straight talk, CTA.
-- Full VoltIQ amber brand (#FF8000) in a scoped `.voltiq-theme` block so the
-  shared header and footer stay Do.Qix teal. 8 marketing renders plus the
-  logo lockup, copied into `design|site/images/voltiq/`.
-- Pricing: Home R99 (WhatsApp report, one system) / Installer R199 (adds the
-  multi-brand dashboard, morning brief, issue alerts) / Fleet R499 (adds fleet
-  analytics, suggestions from own baselines, early fault warnings, upsell
-  flags, white-label, multi-user). Quoted as "from R99" everywhere.
-- FoxESS added as the fourth supported brand. CONFIRMED production-live by the
-  product owner on 28 Sep 2026, so the terms-page claim is sound.
-- Products card CTA, info popup and the global header dropdown all route to
-  voltiq.html. `header.js` gained an optional per-product `href`.
-- Terms tab: per-tier breakdown, new Fleet analytics/warnings advisory clause,
-  Last Updated 28 September 2026.
-- NEW `docs/market/VoltIQ_Competitive_Gaps.md`: capability audit verified
-  against the VoltIQ codebase, competitor baseline, and the rules for what the
-  website may and may not claim.
+## Pricing model (current, verified live)
+Each tier is a base plus separately priced add-ons. NOT one shared scale.
+- **Home R99/mo per home.** One home, WhatsApp alert when it needs attention,
+  no dashboard. Add-ons: scheduled reporting, each additional home.
+- **Installer from R299/mo.** Every system fitted, whatever the number, so
+  adding installs does not move the price. Dashboard, WhatsApp message, issue
+  alerts. Add-on: scheduled reporting beyond the standard message.
+- **Fleet R999/mo PER LARGE SITE and it multiplies.** Per-site dashboard and
+  weekly report, fleet analytics, multi-user. Add-ons: extra reports, early
+  fault warnings, upsell flagging, white-label, baseline suggestions.
+Brands: Deye, Sunsynk, Luxpower, FoxESS. FoxESS confirmed production-live by
+the owner 28 Sep 2026.
 
-## Page length and responsive
-Mobile audit at 390px drove a 39% trim: 21,391px (25 screens) -> 13,010px (15.4).
-Cut as duplication, not content loss: the Features section, How It Works, and
-the 5W grid (the audiences section is the 5W in another form; recorded in
-Product_Deep_Links.md so nobody re-adds it).
-Measured at 320/375/390/768/900/1024/1440/1920: no horizontal overflow anywhere.
-Pricing and audience grids stack until `lg` so tablet is not 3 x 218px.
-Pre-trim backup: scratchpad/voltiq-before-trim.html (session scratch, not durable).
+## Two things that live OUTSIDE this repo
+1. **Root robots.txt** is in `StephanM-ZA/stephanm-za.github.io` (the apex Pages
+   repo). This project is a GitHub Pages *project* site under /doqix/ and
+   cannot serve one. It carries the crawler rules, deliberate AI-crawler
+   allowances and the Sitemap directive. `site/robots.txt` is a comment-only
+   placeholder explaining this.
+2. **thank-you.html** is kept out of the index by its own noindex meta tag,
+   never by a Disallow. A Disallow would stop crawlers seeing the tag.
 
-## Deploy tooling fixed
-`.github/workflows/deploy-site.yml` had no `workflow_dispatch` trigger, so the
-CLAUDE.md remedy "gh workflow run deploy-site.yml" returned HTTP 422 and could
-never have worked. Added in 5140825 and verified by dispatching (run
-36444176860). NOTE: GitHub takes about a minute to re-index a workflow after a
-trigger change; a 422 immediately after the push is expected, not a failure.
-If a Pages deploy stalls in "waiting", `gh run rerun <run-id>` clears it. The
-first 0.14.0 deploy stalled ~9 minutes with nothing blocking it.
+## Build: nav baking (READ THIS BEFORE SYNCING)
+`scripts/build-nav.js` bakes header/footer into every site/*.html by executing
+the real header.js/footer.js against a DOM stub, so those files stay the single
+source of truth. Before this, the nav was injected at runtime and the served
+HTML had 9 anchor tags with ZERO links to inner pages; voltiq.html had no static
+inbound link anywhere. Now 43 anchors.
 
-## Still open (content, not code)
-1. Sample figures on two renders (48.6 MWp / 1 284 sites / R4.82m). Captioned
-   as illustrative on the page. Crop or swap if not acceptable.
-2. `alerts-phone.jpg` has garbled AI sub-text under clean alert headings,
-   visible at full zoom in the detection spotlight.
-3. The tier feature split is my reading of the brief and is written into the
-   live terms page. Worth a read-through of the VoltIQ tab.
-4. ACTION NEEDED FROM THE USER: submit
-   https://digitaloperations.co.za/doqix/sitemap.xml to Google Search Console.
-   Google ignores IndexNow, so it does not yet know voltiq.html exists. Every
-   deploy already pinged Bing, Yandex, Seznam, Naver and Yep.
-5. Do NOT claim Performance Ratio, string-level monitoring, O&M ticketing, a
-   public API, or consumption forensics. See the gap doc for why.
+**ORDER MATTERS: sync design->site FIRST, then `npm run build`.** Copying a page
+from design/ overwrites the baked nav with the empty placeholder. The build
+fails if the homepage loses its static links.
 
-## Environment notes
-- Local preview server was stopped at end of session. `.claude/launch.json`
-  (gitignored) still holds the `site` config on port 8791 for `preview_start`.
-- Port 8765 is held by an unrelated pre-existing Python process. Untouched.
-- Pre-existing untracked, deliberately never committed: `graphify-out/`,
-  `.gitattributes`, `.graphifyignore`.
+## Indexing chain, verified live 29 Sep 2026
+root robots 200 and allows | Sitemap directive readable | sitemap valid, 10 URLs
+| voltiq listed | index,follow | self-canonical | internal links present |
+JSON-LD present | page 200.
+
+## Still open
+1. **Sample figures on two renders** (48.6 MWp / 1 284 sites / R4.82m on
+   hero-fleet-console and three-devices). Captioned "illustrative, sample data".
+   Cosmetic. Crop the screen detail if the invented numbers are unwanted.
+2. **YouTube walkthrough.** The GEO audit's strongest remaining recommendation:
+   YouTube presence correlates with AI citation far more than backlinks. Link it
+   from voltiq.html and add to `sameAs` in design/index/index.html. Production
+   work, not code.
+3. **llms.txt deliberately NOT added.** No major AI vendor has confirmed they
+   read it. Revisit only if that changes; it would go in the apex repo.
+4. Read-through of the VoltIQ tab on products-terms.html: it now encodes the
+   full tier and add-on structure including per-site multiplication, and it is
+   the binding version.
+
+## Environment
+- Local preview: `.claude/launch.json` (gitignored), port 8791. Running.
+- Port 8765 held by an unrelated pre-existing process.
+- Never committed, intentionally: graphify-out/, .gitattributes, .graphifyignore.
