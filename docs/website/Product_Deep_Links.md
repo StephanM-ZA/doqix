@@ -52,16 +52,16 @@ If you add a new product, rename one, or change the slug, edit:
 
 VoltIQ is the first SaaS product going on active promotion, and has its own landing page at `voltiq.html`.
 
-- **Price:** Three tiers, one per audience.
-  - **VoltIQ Home R99/mo** - a WhatsApp report on a single solar installation. No dashboard.
-  - **VoltIQ Installer R199/mo** - everything in Home across the whole book, plus the unified multi-brand dashboard, the WhatsApp morning brief, issue detection and alerts, encrypted portal credentials.
-  - **VoltIQ Fleet R499/mo** - everything in Installer, plus fleet analytics, suggestions drawn from your own baselines, early fault warnings, upsell opportunity flagging, white-label branding, multi-user access.
+- **Price:** Three tiers, one per audience. Every tier is priced *from* the figure shown and scales with the number of systems monitored on the account.
+  - **VoltIQ Home from R99/mo** - WhatsApp reports on the installations on the account. No dashboard.
+  - **VoltIQ Installer from R299/mo** - everything in Home across the whole book, plus the unified multi-brand dashboard, the WhatsApp morning brief, issue detection and alerts, encrypted portal credentials.
+  - **VoltIQ Fleet from R999/mo** - everything in Installer, plus fleet analytics, suggestions drawn from your own baselines, early fault warnings, upsell opportunity flagging, white-label branding, multi-user access.
   - Billed monthly in advance, ZAR. Month-to-month, no long-term contract.
 - **Currently supported inverters:** **Deye**, **Sunsynk**, **Luxpower**, **FoxESS**. Additional brands will follow.
 - **Polling cadence:** every 15 minutes from 06:00 to 19:45 SAST, hourly from 20:00 to 22:00.
 - **Three audiences, and they map to the three tiers.** The homeowner wants to know the system is working (Home). The installer wants the fault before the phone call (Installer). The fleet operator wants the pattern across the book, not the single incident (Fleet). Pick one per asset and speak to it; do not blur all three.
 - **Compliance footnote required in every promo asset:** include an asterisk after the price linking to `products-terms.html#voltiq`.
-- **Say "from R99"** when quoting a single entry price, never "R99" alone, because R99 buys the Home tier only.
+- **Always say "from"** when quoting any VoltIQ price. Never "R99", "R299" or "R999" bare: all three are entry prices that scale with the number of systems monitored. Quoting a flat figure is a pricing claim we cannot stand behind.
 - **Don't promise:** SolarEdge, Growatt, Huawei, SunGrow, or any other brand not listed above as supported.
 - **Careful with "AI".** Fleet suggestions and early warnings are generated from the fleet's own telemetry, baselines and history. Describe what they are built on, not the technology behind them, and always carry the advisory framing from the terms.
 - **The `voltiq.html` landing page carries no 5W block, on purpose.** Its "Three people read the same 
@@ -83,7 +83,7 @@ VoltIQ is the first SaaS product going on active promotion, and has its own land
 
 > Managing a fleet of solar installs across four inverter brands shouldn't mean juggling four monitoring portals. VoltIQ pulls every system onto one screen and alerts you when something breaks, before the customer notices.
 >
-> Your customer can have their own R99 report on WhatsApp. You get the dashboard and the morning brief at R199. And at Fleet, VoltIQ reads the whole book: analytics across every install, suggestions built from your own baselines, early warnings before a system stops, and your branding instead of ours.
+> Your customer can have WhatsApp reports from R99. You get the dashboard and the morning brief from R299. And at Fleet, from R999, VoltIQ reads the whole book: analytics across every install, suggestions built from your own baselines, early warnings before a system stops, and your branding instead of ours. Every tier scales with how many systems you monitor.
 >
 > From R99 per month.\* Live with Deye, Sunsynk, Luxpower, and FoxESS; more inverters to follow.
 >
