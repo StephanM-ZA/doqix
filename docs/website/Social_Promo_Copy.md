@@ -149,7 +149,7 @@ https://doqix.co.za/products.html#socialiq
 
 # VoltIQ
 
-**Promo URL:** `https://doqix.co.za/products.html#voltiq`
+**Promo URL:** `https://doqix.co.za/voltiq.html`
 **Terms link:** `https://doqix.co.za/products-terms.html#voltiq`
 
 ## Instagram 📱
@@ -163,13 +163,11 @@ Missing the upsell because you forgot to check the data?
 
 VoltIQ ends all three. 📊
 
-🔧 Deye + Sunsynk + Luxpower supported ✅
+🔧 Deye + Sunsynk + Luxpower + FoxESS supported ✅
 🚨 Auto issue detection
-💡 Upsell opportunity flags
-💬 Co-branded WhatsApp morning brief on YOUR phone, every morning ☕
-🎨 White-label dashboard (your brand, not ours)
+💬 WhatsApp message on YOUR phone ☕
 🌱 Sharper after every alert you confirm
-📚 Upsell theme library grows. New flag types added as patterns emerge.
+💡 Upsell flags and 🎨 white-label dashboard: Fleet add-ons
 
 From R99/month. ⚡
 Every system you have fitted, one price. Adding installs does not move it. 📈
@@ -185,7 +183,7 @@ One upsell pays for years of VoltIQ. ☕
 #SolarBusiness #RenewableEnergySA
 ```
 
-> **Bio link to use:** `https://doqix.co.za/products.html#voltiq`
+> **Bio link to use:** `https://doqix.co.za/voltiq.html`
 
 ## Facebook 💬
 
@@ -217,9 +215,9 @@ Why it matters for your business:
 ⏰ Stop opening portals before coffee. The brief comes to you.
 
 R99 per home, from R299 for every system you fitted, R999 per large site. No surprises.
-Now live with Deye, Sunsynk, and Luxpower. ✅
+Now live with Deye, Sunsynk, Luxpower, and FoxESS. ✅
 
-👉 https://doqix.co.za/products.html#voltiq
+👉 https://doqix.co.za/voltiq.html
 
 
 #SolarSouthAfrica #SolarInstaller #Deye #Sunsynk #LuxPower
@@ -259,7 +257,7 @@ Why this matters for your business:
 
 From R99/month. Now live with Deye, Sunsynk, Luxpower, and FoxESS. ✅
 
-👉 https://doqix.co.za/products.html#voltiq
+👉 https://doqix.co.za/voltiq.html
 
 
 #SolarSouthAfrica #SolarInstaller #Deye #Sunsynk #LuxPower #PVMonitoring #SouthAfricanBusiness
@@ -275,17 +273,14 @@ Customer phoning about a fault you missed?
 
 VoltIQ ⬇️
 
-📊 Every system on one screen
+📊 Every system you fitted, on one screen
 🚨 Auto fault alerts (catch them first)
-💡 Upsell flags = revenue you'd otherwise miss
-📚 New upsell themes added as the market evolves
-💬 Morning brief on YOUR WhatsApp, every morning ☕
-🎨 White-label dashboard
+💬 Morning message on YOUR WhatsApp ☕
+💡 Upsell flags and 🎨 white-label: Fleet add-ons when you want them
 
-From R99/mo. Three tiers: one home, your whole book, or per large site.
-Bill stays the same. Value compounds. 🚀
+R99 per home, from R299 for every system you fitted, R999 per large site. 🚀
 
-https://doqix.co.za/products.html#voltiq
+https://doqix.co.za/voltiq.html
 ```
 
 ---
@@ -294,7 +289,7 @@ https://doqix.co.za/products.html#voltiq
 
 > Use these for the moment-of-launch marketing push. They lead with "Luxpower is now live" as the news beat, then route to the standard VoltIQ message. After the launch window passes, fall back to the standard posts above.
 
-**Promo URL:** `https://doqix.co.za/products.html#voltiq`
+**Promo URL:** `https://doqix.co.za/voltiq.html`
 **Terms link:** `https://doqix.co.za/products-terms.html#voltiq`
 
 ## Instagram (launch) 📱
@@ -310,9 +305,8 @@ We said the supported list would grow.
 This is the proof. 🌱
 
 🚨 Auto fault detection
-💡 Upsell flags
-💬 Morning brief on YOUR phone, every morning ☕
-🎨 White-label dashboard
+💬 Morning message on YOUR phone ☕
+💡 Upsell flags and 🎨 white-label: Fleet add-ons
 
 🔗 Link in bio.
 
@@ -338,7 +332,7 @@ If you've been waiting for VoltIQ to support Luxpower before signing up: wait's 
 
 When we launched VoltIQ we said the supported list would grow as patterns emerged across the market. Luxpower is the first proof. More brands to follow. Pricing stays the same either way.
 
-👉 https://doqix.co.za/products.html#voltiq
+👉 https://doqix.co.za/voltiq.html
 
 #SolarSouthAfrica #SolarInstaller #LuxPower #Deye #Sunsynk
 ```
@@ -366,7 +360,7 @@ From R99/month. Adding a newly supported inverter brand never moves your price.
 
 If you were holding off VoltIQ because Luxpower wasn't supported, this one's for you.
 
-👉 https://doqix.co.za/products.html#voltiq
+👉 https://doqix.co.za/voltiq.html
 
 #SolarSouthAfrica #SolarInstaller #LuxPower #Deye #Sunsynk #PVMonitoring #SouthAfricanBusiness
 ```
@@ -385,7 +379,7 @@ From R99/mo. Adding a newly supported brand never moves your price.
 
 If you've been waiting for Luxpower support before signing up, this is your sign. ☀️
 
-https://doqix.co.za/products.html#voltiq
+https://doqix.co.za/voltiq.html
 ```
 
 ---
