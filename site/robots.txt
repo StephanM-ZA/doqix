@@ -1,6 +1,19 @@
-User-agent: *
-Allow: /doqix/
-Disallow: /doqix/thank-you.html
-
-Sitemap: https://digitaloperations.co.za/doqix/sitemap.xml
-
+# This file does nothing. It is kept only to explain why.
+#
+# robots.txt is read by crawlers ONLY at the domain root. Do.Qix is a GitHub
+# Pages project site published under /doqix/, so a robots.txt here at
+# /doqix/robots.txt is never fetched by any crawler and cannot carry rules.
+#
+# The real, working file is:
+#   https://digitaloperations.co.za/robots.txt
+# maintained in the apex repo: StephanM-ZA/stephanm-za.github.io
+#
+# DO NOT copy rules into this file expecting them to apply, and DO NOT copy an
+# old "Disallow: /doqix/thank-you.html" line up to the root file. thank-you.html
+# is kept out of the index by its own <meta name="robots" content="noindex,
+# nofollow"> tag, which is the correct mechanism. A Disallow would stop crawlers
+# fetching the page at all, so they would never see that tag, and the bare URL
+# could still be indexed with no information attached.
+#
+# Sitemap (declared in the root file, repeated here for humans only):
+#   https://digitaloperations.co.za/doqix/sitemap.xml

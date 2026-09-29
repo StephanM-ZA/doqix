@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.17.0** (SEO and AI-search pass. Static nav baking: header/footer are now baked into every site/ page by scripts/build-nav.js, so crawlers see real internal links instead of a JS-injected nav (the homepage went from 9 anchor tags to 43, and voltiq.html gained its first static inbound link). VoltIQ meta/og/twitter descriptions no longer pair the Installer promise with the Home price, which was factually wrong and would have been misquoted by AI summaries. Added Service + 3 Offers + BreadcrumbList JSON-LD to voltiq.html with honest per-unit price modelling, BreadcrumbList to products.html, @id to the homepage entity, canonical to thank-you.html. Cache-bust ?v=0.17.0.)
+- Current version: **web-v0.17.1** (`site/robots.txt` replaced with a comment-only file that explains why it does nothing. robots.txt is only read at the domain root, which this project site cannot serve; the working file now lives in the apex repo StephanM-ZA/stephanm-za.github.io and is live. The old file carried rules that looked functional but were never read, including a Disallow that would have broken thank-you.html indexing protection if copied to the root.)
 
 **Never push website changes without creating a version tag.**
 
@@ -198,6 +198,18 @@ The deployed site lives at a subpath (`digitaloperations.co.za/doqix/`), which m
 
 1. **Sitemap regeneration.** `npm run build` runs `scripts/build-sitemap.js`, which scans `site/*.html`, derives `<lastmod>` from each file's git history, and writes `site/sitemap.xml`. Excluded pages: `404.html`, `thank-you.html`. Per-page `priority` and `changefreq` defined in the script's `PAGE_META` table — edit there to add/change a page.
 2. **Sitemap CI check.** `.github/workflows/deploy-site.yml` runs `scripts/check-sitemap.js` before each deploy. The build fails if any indexable HTML in `site/` is missing from `sitemap.xml`, or if the sitemap lists files that do not exist. Catches drift before it ships.
+**Root robots.txt lives in a DIFFERENT repo.** `robots.txt` is only read at the
+domain root, and this project is a GitHub Pages *project* site under `/doqix/`,
+so it cannot serve one. The working file is
+`https://digitaloperations.co.za/robots.txt`, maintained in
+`StephanM-ZA/stephanm-za.github.io`. It carries the crawler rules, the
+deliberate AI-crawler allowances (GPTBot, OAI-SearchBot, ChatGPT-User,
+ClaudeBot, Claude-User, PerplexityBot, Google-Extended) and the `Sitemap:`
+directive. `site/robots.txt` is a comment-only placeholder that explains this;
+it has no effect and must not be given rules. `thank-you.html` is kept out of
+the index by its own `noindex` meta tag, never by a `Disallow`, because a
+Disallow would stop crawlers seeing the tag.
+
 3. **IndexNow ping.** After a successful deploy the workflow calls `scripts/indexnow-ping.js`, which POSTs the sitemap URLs to `api.indexnow.org`. This notifies Bing, Yandex, Seznam, Naver, and Yep that pages have changed. Failure is non-fatal — the deploy still succeeds. Google does NOT participate in IndexNow (see manual step below). The IndexNow key is `535193b33cb18a785693767808453d51`, served at `site/535193b33cb18a785693767808453d51.txt`. Do not delete that file or change the key without also updating the script.
 
 **Manual (one-time, per provider):**
