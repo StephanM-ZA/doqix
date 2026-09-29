@@ -8,8 +8,9 @@
     "build:sitemap": "node ./scripts/build-sitemap.js",
     "check:sitemap": "node ./scripts/check-sitemap.js",
     "indexnow": "node ./scripts/indexnow-ping.js",
-    "build": "npm run build:css && npm run sync:css && npm run build:sitemap",
-    "watch": "tailwindcss -i ./scripts/tailwind-input.css -o ./design/tailwind.css --watch"
+    "build": "npm run build:css && npm run sync:css && npm run build:nav && npm run build:sitemap",
+    "watch": "tailwindcss -i ./scripts/tailwind-input.css -o ./design/tailwind.css --watch",
+    "build:nav": "node ./scripts/build-nav.js"
   },
   "devDependencies": {
     "@tailwindcss/container-queries": "^0.1.1",

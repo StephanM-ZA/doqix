@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.16.0** (VoltIQ pricing corrected to the real model: each tier is a base plus add-ons, not one shared scale. Home R99 per home (alert only; scheduled reporting and extra homes are add-ons). Installer from R299 covering every system fitted, so adding installs does not move the price (scheduled reporting is the add-on). Fleet R999 PER LARGE SITE, multiplying, including a per-site dashboard and weekly report, fleet analytics and multi-user; extra reports, early fault warnings, upsell flagging, white-label and baseline suggestions are add-ons. Pricing cards now show Included and Add-ons separately. Fixes live copy that promised fault warnings, upsell flags and white-label as included Fleet features. Cache-bust ?v=0.16.0.)
+- Current version: **web-v0.17.0** (SEO and AI-search pass. Static nav baking: header/footer are now baked into every site/ page by scripts/build-nav.js, so crawlers see real internal links instead of a JS-injected nav (the homepage went from 9 anchor tags to 43, and voltiq.html gained its first static inbound link). VoltIQ meta/og/twitter descriptions no longer pair the Installer promise with the Home price, which was factually wrong and would have been misquoted by AI summaries. Added Service + 3 Offers + BreadcrumbList JSON-LD to voltiq.html with honest per-unit price modelling, BreadcrumbList to products.html, @id to the homepage entity, canonical to thank-you.html. Cache-bust ?v=0.17.0.)
 
 **Never push website changes without creating a version tag.**
 
@@ -131,6 +131,30 @@ If the workflow didn't trigger, re-run it:
 ```bash
 gh workflow run deploy-site.yml
 ```
+
+### Static Nav Baking (MANDATORY, runs in `npm run build`)
+
+`header.js` and `footer.js` used to inject the entire nav with `innerHTML` at
+runtime, which meant the HTML GitHub Pages served contained **zero** internal
+links. Crawlers that do not execute JavaScript saw a four-page site with no
+navigation, and `voltiq.html` had no static inbound link from anywhere.
+
+`scripts/build-nav.js` now bakes the header and footer into every `site/*.html`
+as static HTML. It does this by executing the real `header.js` / `footer.js`
+against a DOM stub and capturing their output, so those two files remain the
+single source of truth for the nav. Nothing is copy-pasted.
+
+The scripts still ship and still run in the browser: they detect pre-rendered
+markup and only attach behaviour (dropdown, hamburger, active state) instead of
+rebuilding. `design/` keeps the empty placeholders, so previewing from `design/`
+still works.
+
+The script fails the build if `site/index.html` ends up without static links to
+services, products, voltiq and contact.
+
+**ORDER MATTERS.** Copying a page from `design/` to `site/` overwrites the baked
+nav with the empty placeholder. Always sync first, then run `npm run build`.
+Never run the sync after the build.
 
 ### Sync Design to Site (MANDATORY)
 

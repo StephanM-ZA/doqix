@@ -20,7 +20,7 @@
     var el = document.getElementById('site-footer');
     if (!el) return;
 
-    el.innerHTML =
+    var markup =
         '<footer class="site-footer">' +
         '<div class="footer-container">' +
         '<div class="footer-top">' +
@@ -85,4 +85,11 @@
         '<p class="footer-copyright">&copy; 2026 Digital Operations and Technology (Pty) Ltd T/A <strong>Do.Qix</strong>. All rights reserved. <span class="footer-build">Build web-v' + buildVersion + '</span></p>' +
         '</div>' +
         '</footer>';
+
+    /* Pre-rendered by scripts/build-nav.js so crawlers see real links.
+       Only build the markup when it is not already in the document. */
+    if (!el.innerHTML.trim()) {
+        el.innerHTML = markup;
+    }
+
 })();

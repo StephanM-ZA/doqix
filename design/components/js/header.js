@@ -37,7 +37,7 @@
         }).join('');
     }
 
-    el.innerHTML =
+    var markup =
         '<header class="site-header">' +
         '<nav class="nav-container">' +
         '<a href="index.html" class="nav-logo">' +
@@ -76,6 +76,13 @@
         '<a href="?idea=1" class="btn btn-primary md glow" id="cta-lets-build-mobile" style="width:100%;margin-top:1rem;">Got An Idea</a>' +
         '</div>' +
         '</header>';
+
+    /* Pre-rendered by scripts/build-nav.js so crawlers see real links.
+       Only build the markup when it is not already in the document. */
+    if (!el.innerHTML.trim()) {
+        el.innerHTML = markup;
+    }
+
 
     /* Mark active page */
     var path = window.location.pathname;
