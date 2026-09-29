@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.17.1** (`site/robots.txt` replaced with a comment-only file that explains why it does nothing. robots.txt is only read at the domain root, which this project site cannot serve; the working file now lives in the apex repo StephanM-ZA/stephanm-za.github.io and is live. The old file carried rules that looked functional but were never read, including a Disallow that would have broken thank-you.html indexing protection if copied to the root.)
+- Current version: **web-v0.17.2** (Fixed `images/voltiq/alerts-phone.jpg`: the render carried garbled AI-generated sub-text under each alert card. The four headings were correct and legible (Inverter offline - Centurion, PV underperformance - Paarl, Battery low SOC - Kathu, Grid import spike - Upington) so only the grey gibberish lines were repainted out, targeting mid-grey pixels by luminance so the near-black headings survived untouched. Cache-bust ?v=0.17.2.)
 
 **Never push website changes without creating a version tag.**
 
