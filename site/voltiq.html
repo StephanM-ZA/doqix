@@ -27,8 +27,8 @@
 <link rel="manifest" href="site.webmanifest"/>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/inter-var.woff2"/>
 
-<link rel="stylesheet" href="tailwind.css?v=0.15.0"/>
-<link rel="stylesheet" href="global.css?v=0.15.0"/>
+<link rel="stylesheet" href="tailwind.css?v=0.15.1"/>
+<link rel="stylesheet" href="global.css?v=0.15.1"/>
 <style>
 /* VoltIQ brand theme. VoltIQ inverts the Do.Qix palette: amber #FF8000 tile,
    teal #00E5A0 reserved for "the signal worth acting on". See the VoltIQ
@@ -99,6 +99,18 @@
     box-shadow: 0 0 0 2px #FF8000, 0 0 24px rgba(255, 128, 0, 0.14);
 }
 .voltiq-theme .pricing-badge { background: #FF8000; color: #0C1830; }
+
+/* Asterisk on each price, linking to the note that explains what moves it. */
+.voltiq-theme .voltiq-star {
+    color: #FF8000;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1;
+    text-decoration: none;
+    vertical-align: super;
+    margin-left: 0.15rem;
+}
+.voltiq-theme .voltiq-star:hover { text-decoration: underline; }
 
 /* Pricing cards: equal height with the CTA pinned to the bottom edge, so the
    buttons line up regardless of how many bullets a tier has. */
@@ -262,7 +274,7 @@
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="js/header.js?v=0.15.0"></script>
+<script src="js/header.js?v=0.15.1"></script>
 
 <main class="pt-20 voltiq-theme">
 
@@ -461,7 +473,7 @@
 <div class="space-y-2">
 <span class="info-popup-fivew-marker">Homeowner</span>
 <h3 class="pt-2">VoltIQ Home</h3>
-<div class="text-5xl font-black text-on-surface leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R99<span class="text-sm font-medium text-on-surface-variant">/mo</span></div>
+<div class="text-5xl font-black text-on-surface leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R99<span class="text-sm font-medium text-on-surface-variant">/mo</span><a href="#pricing-note" class="voltiq-star" aria-label="What changes this price">*</a></div>
 <p class="text-sm text-on-surface-variant">Answers on WhatsApp. No dashboard.</p>
 </div>
 <ul class="space-y-4 text-sm text-on-surface-variant">
@@ -480,7 +492,7 @@
 <div class="space-y-2">
 <span class="info-popup-fivew-marker">Installer</span>
 <h3 class="pt-2">VoltIQ Installer</h3>
-<div class="text-5xl font-black text-primary leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R299<span class="text-sm font-medium text-on-surface-variant">/mo</span></div>
+<div class="text-5xl font-black text-primary leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R299<span class="text-sm font-medium text-on-surface-variant">/mo</span><a href="#pricing-note" class="voltiq-star" aria-label="What changes this price">*</a></div>
 <p class="text-sm text-on-surface-variant">Every system you fitted, on one screen.</p>
 </div>
 <ul class="space-y-4 text-sm text-on-surface-variant">
@@ -498,7 +510,7 @@
 <div class="space-y-2">
 <span class="info-popup-fivew-marker">Fleet operator</span>
 <h3 class="pt-2">VoltIQ Fleet</h3>
-<div class="text-5xl font-black text-on-surface leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R999<span class="text-sm font-medium text-on-surface-variant">/mo</span></div>
+<div class="text-5xl font-black text-on-surface leading-none"><span class="text-sm font-semibold text-on-surface-variant align-middle" style="margin-right:.35rem;">From</span>R999<span class="text-sm font-medium text-on-surface-variant">/mo</span><a href="#pricing-note" class="voltiq-star" aria-label="What changes this price">*</a></div>
 <p class="text-sm text-on-surface-variant">The pattern under the whole book.</p>
 </div>
 <ul class="space-y-4 text-sm text-on-surface-variant">
@@ -512,6 +524,13 @@
 <a href="contact.html?product=voltiq" class="btn btn-ghost full">Talk to Us</a>
 </div>
 
+</div>
+
+<div id="pricing-note" class="card p-6 max-w-3xl mx-auto space-y-3">
+<h3 class="text-base font-bold"><span class="text-primary">*</span> What changes your price</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed"><strong>The number of systems you monitor.</strong> Every tier starts at the figure on its card and rises as you add installations to the account. A handful of systems pays the starting price; a few hundred does not.</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">Nothing else moves it. Your team size does not: multi-user access on Fleet is included whatever the headcount. Moving between tiers changes which features you get, not the way the price scales.</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">Tell us how many systems you carry and which brands, and we will give you the actual monthly figure before you commit to anything.</p>
 </div>
 
 <p class="text-sm text-on-surface-variant max-w-3xl mx-auto text-center">Any change to a published price needs 30 days&rsquo; written notice and only applies from the next billing cycle. Cancel any time: telemetry pulls and WhatsApp reports stop at the end of the cycle, and dashboard tiers stay read-only for a 30-day export window before the data is deleted. VoltIQ sits alongside the manufacturer portals, so cancelling never touches the installations themselves. ZAR pricing on SA-hosted infrastructure, portal credentials encrypted at rest, and data handled under our <a href="privacy-policy.html" class="text-primary hover:underline">Privacy Policy</a> and POPIA.</p>
@@ -578,11 +597,11 @@
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script defer src="js/footer.js?v=0.15.0"></script>
+<script defer src="js/footer.js?v=0.15.1"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script defer src="js/main.js?v=0.15.0"></script>
-<script defer src="js/exit-popup.js?v=0.15.0"></script>
-<script defer src="js/cookie-banner.js?v=0.15.0"></script>
+<script defer src="js/main.js?v=0.15.1"></script>
+<script defer src="js/exit-popup.js?v=0.15.1"></script>
+<script defer src="js/cookie-banner.js?v=0.15.1"></script>
 </body></html>

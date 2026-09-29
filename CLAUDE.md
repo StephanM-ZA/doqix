@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.15.0** (VoltIQ pricing restructured: all three tiers are now entry prices that scale with the number of systems monitored. Home from R99, Installer from R299, Fleet from R999, replacing the previous flat R99/R199/R499. Home is no longer a single-installation tier, so its "one system, one answer" framing is gone from the page, popup and terms. Promo copy that claimed "no per-system charge" was removed because it now contradicts the model. Terms tab states the scaling basis and Last Updated moves to September 29, 2026. Cache-bust ?v=0.15.0.)
+- Current version: **web-v0.15.1** (VoltIQ pricing cards now carry an asterisk on each figure, linking to a new "What changes your price" note under the pricing grid. The note states the one thing that moves the price (the number of systems monitored), the one thing that does not (team size, since multi-user on Fleet is included), and invites the reader to ask for their actual figure. Cache-bust ?v=0.15.1.)
 
 **Never push website changes without creating a version tag.**
 
