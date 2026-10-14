@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="CricketIQ">
+  <rect width="96" height="96" rx="20" fill="#17171a"/>
+  <rect x="0.5" y="0.5" width="95" height="95" rx="19.5" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+  <g fill="#00e5a0">
+    <rect x="20" y="23" width="12" height="64" rx="4"/>
+    <rect x="42" y="23" width="12" height="64" rx="4"/>
+    <rect x="64" y="23" width="12" height="64" rx="4"/>
+  </g>
+  <g fill="#ff6b6b">
+    <rect x="20" y="9" width="26" height="8" rx="4"/>
+    <rect x="50" y="9" width="26" height="8" rx="4"/>
+  </g>
+</svg>

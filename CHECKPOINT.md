@@ -1,5 +1,37 @@
 # CHECKPOINT
 
+## Status: CricketIQ approved by user (pricing on request), releasing as web-v0.19.0 (14 Oct 2026)
+
+## Current task
+CricketIQ product card + landing page modelled on vendiq.html. Copy sourced ONLY from
+CricketIQ repo docs/pitch/ (deck PDF Oct 2026, one-pagers, intro-emails.md) + docs/brand.md.
+Only deck-roadmap "Now" items marketed as Live. Pricing: none exists in the CricketIQ repo, so
+"Pricing on request" / contact.html?product=cricketiq. App link: https://cricketiq.digitaloperations.co.za
+
+## Files changed (uncommitted)
+- NEW design/cricketiq/cricketiq.html, site/cricketiq.html
+- NEW design/images/cricketiq/ + site/images/cricketiq/: logo + mark SVG (CricketIQ/logo/svg),
+  og png (CricketIQ/logo/icon/og-image.png), phone-{live,pad,dash}.{webp,png}, iq-{win,mvp,matchups,shotmap}.jpg,
+  four-looks.jpg, cricketiq-card.jpg. ALL from REAL app screens in CricketIQ/docs/pitch/source/app-images
+  (Daylight look, name-swapped data per apps/web/e2e/zz-pitch-shots.spec.ts), framed as phones with PIL.
+  User asked (14 Oct) for Daylight + real images instead of the first Cockpit renders.
+- header.js (nav entry), contact-form.js (productNames), info-popup.js (5W entry),
+  products.html (card after SocialIQ, before LearnIQ; meta description), products-terms.html (new tab+panel),
+  products-terms.js (comment), terms-and-conditions.html (tab list), build-sitemap.js (PAGE_META),
+  docs/website/Product_Deep_Links.md
+- site/* synced + npm run build (nav baked, sitemap 12 URLs, check:sitemap OK)
+
+## Verified
+320/390/768/1024/1440 no overflow on cricketiq, products, products-terms#cricketiq. All images load on scroll.
+Card row aligned with LearnIQ (0 delta). Popup links -> cricketiq.html, products-terms.html#cricketiq.
+
+## Next steps
+1. User review in browser pane (localhost:8791/cricketiq.html).
+2. User to confirm pricing approach and the binding CricketIQ terms panel text.
+3. On approval: bump to web-v0.19.0 (cache-bust ?v= everywhere, CLAUDE.md current version), commit, tag, push, verify deploy.
+
+---
+
 ## Status: COMPLETE. VendIQ live at web-v0.18.0 (commit c1cdf98, deploy run 38517940831 success); em-dash cleanup released as web-v0.18.1.
 
 Live: https://digitaloperations.co.za/doqix/vendiq.html

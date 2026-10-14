@@ -19,6 +19,7 @@
         { slug: 'vendiq',   name: 'VendIQ',   tagline: 'Inventory decisions, graded', href: 'vendiq.html' },
         { slug: 'voltiq',   name: 'VoltIQ',   tagline: 'Solar fleet monitoring', href: 'voltiq.html' },
         { slug: 'socialiq', name: 'SocialIQ', tagline: 'Your social media writer', href: 'socialiq.html' },
+        { slug: 'cricketiq', name: 'CricketIQ', tagline: 'Cricket scoring and match intelligence', href: 'cricketiq.html' },
         { slug: 'learniq',  name: 'LearnIQ',  tagline: 'AI literacy for SA classrooms' }
     ];
 

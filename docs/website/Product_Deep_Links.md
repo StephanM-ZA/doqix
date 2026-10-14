@@ -14,9 +14,10 @@ Base URL: `https://digitaloperations.co.za/doqix/`
 | **VendIQ** | `https://digitaloperations.co.za/doqix/vendiq.html` | `contact.html?product=vendiq` | `products-terms.html#vendiq` (summary; full terms in the service agreement) |
 | **VoltIQ** | `https://digitaloperations.co.za/doqix/voltiq.html` | `contact.html?product=voltiq` | `https://digitaloperations.co.za/doqix/products-terms.html#voltiq` |
 | **SocialIQ** | `https://digitaloperations.co.za/doqix/products.html#socialiq` | `contact.html?product=socialiq` | `https://digitaloperations.co.za/doqix/products-terms.html#socialiq` |
+| **CricketIQ** | `https://digitaloperations.co.za/doqix/cricketiq.html` | `contact.html?product=cricketiq` | `products-terms.html#cricketiq` (summary; full terms in the written agreement) |
 | **LearnIQ** | `https://digitaloperations.co.za/doqix/products.html#learniq` | `contact.html?product=learniq` | `products-terms.html#learniq` (placeholder; full terms at GA) |
 
-All product terms live on a single tabbed page (`products-terms.html`). Deep-link to a specific product's tab via the URL fragment (`#nomadiq`, `#vendiq`, `#voltiq`, `#learniq`). The page defaults to the VoltIQ tab when no fragment is supplied.
+All product terms live on a single tabbed page (`products-terms.html`). Deep-link to a specific product's tab via the URL fragment (`#nomadiq`, `#vendiq`, `#voltiq`, `#socialiq`, `#cricketiq`, `#learniq`). The page defaults to the VoltIQ tab when no fragment is supplied.
 
 ## Why share the card URL, not the form URL
 
@@ -125,6 +126,7 @@ SocialIQ is the second SaaS product going on active promotion.
 
 - **NomadIQ:** Live, custom pricing per organisation. Share `products.html#nomadiq` to lead with the card.
 - **VendIQ:** Live, pricing on request: a set-up fee, then a monthly fee by the number of product groups. Sector neutral (manufacturing, wholesale, retail). Share `vendiq.html` to lead with the landing page. Client sign-in: `https://vendiq.digitaloperations.co.za`.
+- **CricketIQ:** Live, pricing on request per club, school or tournament. Share `cricketiq.html` to lead with the landing page. App: `https://cricketiq.digitaloperations.co.za`. Copy is sourced only from the CricketIQ repo's `docs/pitch/` (deck, one-pagers, intro emails). Only market what the deck's roadmap marks Now as live; rankings, club colours and crests, fixtures, net run rate, the field planner and sponsorship are not built yet.
 - **LearnIQ:** In progress. Pricing not finalised. Share `products.html#learniq` only to register early interest.
 
 ## Tracking note

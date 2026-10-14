@@ -1,5 +1,5 @@
 /* Do.Qix product-terms tabs.
-   Tabs deep-link via URL hash (#nomadiq | #vendiq | #voltiq | #learniq).
+   Tabs deep-link via URL hash (#nomadiq | #vendiq | #voltiq | #socialiq | #cricketiq | #learniq).
    Default tab when no hash: VoltIQ. */
 
 (function () {

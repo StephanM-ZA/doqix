@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="google-site-verification" content="wq9bJWV4LMWcA2N8TIqyBaI8ct_fW5S7NjdS-puxDRQ"/>
+<title>CricketIQ: Cricket Scoring, Live Scores and Match Insights | Do.Qix</title>
+<meta name="description" content="For clubs, schools, coaches and scorers. CricketIQ is the scoring app, the live scoreboard and the match insights in one. Every ball is kept safe with no signal, and parents follow live from anywhere."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://digitaloperations.co.za/doqix/cricketiq.html"/>
+<link rel="alternate" hreflang="en-za" href="https://digitaloperations.co.za/doqix/cricketiq.html"/>
+<!-- Open Graph -->
+<meta property="og:title" content="CricketIQ: Score It Once. Everyone Sees It. | Do.Qix"/>
+<meta property="og:description" content="The scoring app, the live scoreboard and the match insights in one. Every ball is kept safe with no signal, both teams agree every ball, and parents follow live from anywhere."/>
+<meta property="og:image" content="https://digitaloperations.co.za/doqix/images/cricketiq/cricketiq-og.png"/>
+<meta property="og:url" content="https://digitaloperations.co.za/doqix/cricketiq.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Do.Qix"/>
+<meta property="og:locale" content="en_ZA"/>
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="CricketIQ: Score It Once. Everyone Sees It. | Do.Qix"/>
+<meta name="twitter:description" content="The scoring app, the live scoreboard and the match insights in one. Every ball is kept safe with no signal, both teams agree every ball, and parents follow live from anywhere."/>
+<meta name="twitter:image" content="https://digitaloperations.co.za/doqix/images/cricketiq/cricketiq-og.png"/>
+<link rel="icon" type="image/svg+xml" sizes="any" href="favicon_green.svg"/>
+<link rel="icon" type="image/png" sizes="192x192" href="favicon_green.png"/>
+<link rel="manifest" href="site.webmanifest"/>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/inter-var.woff2"/>
+
+<link rel="stylesheet" href="tailwind.css?v=0.19.0"/>
+<link rel="stylesheet" href="global.css?v=0.19.0"/>
+<style>
+/* CricketIQ brand theme. The CricketIQ accent (#00e5a0, the stumps) is the
+   Do.Qix teal, so primary needs no override. Red #ff6b6b is the wicket and
+   the bails in the mark: CricketIQ's one signal colour, used sparingly.
+   Blue #6a9bcc (four) and gold #c9a327 (extra) appear only where a ball is
+   shown. See CricketIQ/docs/brand.md. */
+.cricketiq-theme .signal { color: #ff6b6b; }
+.cricketiq-theme .info-popup-eyebrow .dot { background: #00e5a0; animation: ciq-dot 1.8s ease-out infinite; }
+@keyframes ciq-dot {
+    0%   { box-shadow: 0 0 0 0 rgba(0, 229, 160, 0.5); }
+    70%  { box-shadow: 0 0 0 6px rgba(0, 229, 160, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 229, 160, 0); }
+}
+
+.ciq-lockup { width: 300px; max-width: 72vw; height: auto; display: block; }
+.ciq-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #96918a;
+}
+.ciq-caption { font-size: 0.7rem; color: #84958a; margin-top: 0.75rem; }
+
+/* ---- Hero ---- */
+.ciq-hero { position: relative; isolation: isolate; overflow: hidden; }
+.ciq-hero::before {
+    content: "";
+    position: absolute; inset: 0; z-index: -1;
+    background: radial-gradient(circle at 76% 45%, rgba(0, 229, 160, 0.13) 0%, transparent 60%);
+}
+.ciq-audience {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #bacbbf;
+}
+.ciq-audience .sep { color: rgba(255, 107, 107, 0.7); }
+.ciq-open {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.875rem; font-weight: 600; color: #bacbbf; text-decoration: none;
+}
+.ciq-open:hover { color: #00e5a0; }
+.ciq-open .hi { width: 1rem; height: 1rem; }
+
+/* Two phones, the scoring pad behind the live score. */
+.ciq-phones { position: relative; width: 100%; max-width: 30rem; margin: 0 auto; aspect-ratio: 30 / 39; }
+.ciq-phones picture { position: absolute; display: block; width: 56%; }
+.ciq-phones img { width: 100%; height: auto; display: block; }
+.ciq-phones .back  { left: 0; top: 7%; opacity: 0.92; }
+.ciq-phones .front { right: 0; top: 0; filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.55)); }
+
+.ciq-phone { width: 100%; max-width: 19rem; height: auto; display: block; margin: 0 auto; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.5)); }
+
+/* ---- Alternating spotlight sections ---- */
+.ciq-split { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
+@media (min-width: 900px) {
+    .ciq-split { grid-template-columns: 1fr 1fr; gap: 4.5rem; }
+    .ciq-split.reverse .ciq-split-media { order: 2; }
+    .ciq-hero { padding-top: 3rem; padding-bottom: 3.5rem; }
+    .ciq-hero .ciq-split { grid-template-columns: 6fr 5fr; gap: 3rem; }
+    .ciq-hero .ciq-split-copy { max-width: 38rem; }
+    .ciq-hero .ciq-split-copy.space-y-6 > * + * { margin-top: 1.25rem; }
+}
+.ciq-split-copy { max-width: 32rem; min-width: 0; }
+.ciq-split-media { min-width: 0; }
+.ciq-step {
+    font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #00e5a0;
+}
+.ciq-split ul { margin-top: 1.5rem; }
+
+/* App-surface cards in the Daylight theme, matching the app screens. */
+.ciq-app {
+    background: #ffffff;
+    color: #17171a;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    border-radius: 20px;
+    padding: 1.25rem;
+}
+.ciq-app + .ciq-app { margin-top: 1rem; }
+.cricketiq-theme .ciq-app .text-on-surface { color: #17171a; }
+.cricketiq-theme .ciq-app .text-on-surface-variant { color: #4a4844; }
+.ciq-app .ciq-mono { color: #6b665e; }
+/* Real app screens: the Daylight canvas behind each card crop. */
+.ciq-shot { width: 100%; height: auto; display: block; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.12); background: #f4f3ef; }
+.ciq-iq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+.ciq-iq-grid > div { display: grid; gap: 1rem; }
+@media (max-width: 640px) { .ciq-iq-grid { grid-template-columns: 1fr; } }
+.ciq-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.ciq-balls { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+.ciq-ball {
+    min-width: 2.25rem; height: 2.25rem; padding: 0 0.4rem; border-radius: 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.875rem; color: #17171a;
+    background: #eceae5; border: 1px solid rgba(0, 0, 0, 0.20);
+}
+.ciq-ball.six { color: #077d5a; background: #e6f7f0; border-color: rgba(7, 125, 90, 0.5); }
+.ciq-ball.four { color: #4078b0; background: #fff; border-color: rgba(64, 120, 176, 0.5); }
+.ciq-ball.wkt { color: #c62828; background: #fff; border-color: rgba(198, 40, 40, 0.5); }
+.ciq-ball.ext { color: #8c721f; background: #fff; border-color: rgba(140, 114, 31, 0.5); }
+.ciq-chip {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 2.25rem; padding: 0.4rem 0.75rem; border-radius: 10px;
+    font-size: 0.8125rem; font-weight: 600; color: #17171a;
+    background: #eceae5; border: 1px solid rgba(0, 0, 0, 0.20);
+}
+.ciq-chip.go { color: #077d5a; background: #e6f7f0; border-color: rgba(7, 125, 90, 0.5); }
+.ciq-alert { border-color: rgba(198, 40, 40, 0.45); }
+.ciq-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 2rem; font-weight: 800; letter-spacing: 0.12em; color: #17171a;
+}
+.ciq-num { font-variant-numeric: tabular-nums; }
+.ciq-rules td { padding: 0.6rem 0; border-top: 1px solid rgba(0, 0, 0, 0.08); font-size: 0.875rem; color: #4a4844; }
+.ciq-rules tr:first-child td { border-top: 0; }
+.ciq-rules td:last-child { text-align: right; color: #17171a; font-weight: 700; }
+
+/* Three-step "never lose a ball" list */
+.ciq-steps { counter-reset: cstep; }
+.ciq-steps li { counter-increment: cstep; position: relative; padding-left: 3rem; }
+.ciq-steps li::before {
+    content: counter(cstep);
+    position: absolute; left: 0; top: 0;
+    width: 2rem; height: 2rem; border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.875rem;
+    color: #0C1830; background: #00e5a0;
+}
+
+/* A quiet typographic band between the hero and the spotlights. */
+.ciq-band {
+    border-top: 1px solid rgba(0, 229, 160, 0.15);
+    border-bottom: 1px solid rgba(0, 229, 160, 0.15);
+    background: rgba(0, 229, 160, 0.03);
+}
+
+/* Match-day stat tiles */
+.ciq-stat { font-size: 2.75rem; font-weight: 900; line-height: 1; color: #00e5a0; letter-spacing: -0.03em; }
+
+/* Live / next / later status list */
+.ciq-status { width: 100%; border-collapse: collapse; }
+.ciq-status td {
+    padding: 0.875rem 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    vertical-align: top; font-size: 0.875rem;
+}
+.ciq-status tr:first-child td { border-top: 0; }
+.ciq-status td:last-child { text-align: right; white-space: nowrap; }
+.ciq-pill {
+    display: inline-block;
+    font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.25rem 0.6rem; border-radius: 999px; border: 1px solid;
+}
+.ciq-pill.live    { color: #00e5a0; background: rgba(0, 229, 160, 0.08); border-color: rgba(0, 229, 160, 0.3); }
+.ciq-pill.build   { color: #FF8000; background: rgba(255, 128, 0, 0.08); border-color: rgba(255, 128, 0, 0.3); }
+.ciq-pill.planned { color: #bacbbf; background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.15); }
+
+/* Getting started steps */
+.ciq-start { counter-reset: cstart; }
+.ciq-start li { counter-increment: cstart; position: relative; padding-left: 3rem; }
+.ciq-start li::before {
+    content: counter(cstart);
+    position: absolute; left: 0; top: 0;
+    width: 2rem; height: 2rem; border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.875rem;
+    color: #0C1830; background: #00e5a0;
+}
+
+.ciq-price-card {
+    border-color: rgba(0, 229, 160, 0.35);
+    box-shadow: 0 0 0 2px #00e5a0, 0 0 24px rgba(0, 229, 160, 0.14);
+}
+
+/* global.css sets h1 at 6rem from 768px up, sized for a full-width hero.
+   This hero shares its row with the phones, so cap it to the column. */
+@media (min-width: 768px) {
+    .ciq-hero h1 { font-size: 4rem !important; line-height: 0.95 !important; }
+}
+@media (min-width: 900px) {
+    .ciq-hero h1 { font-size: 3.5rem !important; }
+}
+@media (min-width: 1280px) {
+    .ciq-hero h1 { font-size: 4rem !important; }
+}
+
+/* global.css forces every h3 to 2rem from 768px up. On these small cards
+   that makes the heading heavier than the body it introduces. */
+.cricketiq-theme .card h3.text-base { font-size: 1.25rem !important; line-height: 1.25 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+    .cricketiq-theme .info-popup-eyebrow .dot { animation: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 899px) {
+    .ciq-hero .ciq-split-copy { max-width: none; text-align: center; }
+    .ciq-hero .ciq-lockup { margin: 0 auto; }
+    .ciq-hero .ciq-audience,
+    .ciq-hero .ciq-cta-row { justify-content: center; }
+    .ciq-phones { max-width: 24rem; }
+}
+@media (max-width: 640px) {
+    /* global.css centres section copy on mobile. Long-form spotlight copy
+       reads badly ragged on both sides, so set it left. */
+    .cricketiq-theme .ciq-split-copy > p { text-align: left; }
+    /* Cards read left on mobile. The pricing card header keeps its centring. */
+    .cricketiq-theme .card,
+    .cricketiq-theme .ciq-app { text-align: left; }
+    .cricketiq-theme .card .text-center { text-align: center; }
+    .ciq-status td { padding: 0.875rem 0.25rem; }
+    .ciq-status td:last-child { white-space: normal; }
+    .ciq-code { font-size: 1.6rem; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://digitaloperations.co.za/doqix/cricketiq.html#app",
+      "name": "CricketIQ",
+      "applicationCategory": "SportsApplication",
+      "operatingSystem": "Web browser (installable on iPhone, Android, iPad and desktop)",
+      "url": "https://digitaloperations.co.za/doqix/cricketiq.html",
+      "installUrl": "https://cricketiq.digitaloperations.co.za",
+      "image": "https://digitaloperations.co.za/doqix/images/cricketiq/cricketiq-og.png",
+      "description": "CricketIQ is a cricket scoring app, live scoreboard and match insights platform for clubs, schools, coaches, scorers and tournament organisers. The scorer taps each ball once; every ball is saved on the phone with no signal and sent when the signal returns; both teams can score the same match and agree every ball; the Laws of Cricket and a competition's own match rules are built in; and parents follow live with no account.",
+      "provider": {
+        "@id": "https://digitaloperations.co.za/doqix/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Africa"
+      },
+      "dateModified": "2026-10-14"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://digitaloperations.co.za/doqix/cricketiq.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://digitaloperations.co.za/doqix/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Products",
+          "item": "https://digitaloperations.co.za/doqix/products.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CricketIQ",
+          "item": "https://digitaloperations.co.za/doqix/cricketiq.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Header -->
+<div id="site-header"><header class="site-header"><nav class="nav-container"><a href="index.html" class="nav-logo"><img src="logo_new_green.png" alt="Do.Qix" width="568" height="168" class="logo-img"/></a><div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="services.html">Services</a><div class="nav-link-wrapper has-submenu"><a class="nav-link nav-link-parent" href="products.html" aria-haspopup="true" aria-expanded="false">Products<span class="nav-link-caret" aria-hidden="true"></span></a><div class="nav-submenu" role="menu"><a class="nav-submenu-link" href="products.html#nomadiq" data-product="nomadiq"><span class="nav-submenu-name">NomadIQ</span><span class="nav-submenu-tagline">Field operations, managed from anywhere</span></a><a class="nav-submenu-link" href="vendiq.html" data-product="vendiq"><span class="nav-submenu-name">VendIQ</span><span class="nav-submenu-tagline">Inventory decisions, graded</span></a><a class="nav-submenu-link" href="voltiq.html" data-product="voltiq"><span class="nav-submenu-name">VoltIQ</span><span class="nav-submenu-tagline">Solar fleet monitoring</span></a><a class="nav-submenu-link" href="socialiq.html" data-product="socialiq"><span class="nav-submenu-name">SocialIQ</span><span class="nav-submenu-tagline">Your social media writer</span></a><a class="nav-submenu-link" href="cricketiq.html" data-product="cricketiq"><span class="nav-submenu-name">CricketIQ</span><span class="nav-submenu-tagline">Cricket scoring and match intelligence</span></a><a class="nav-submenu-link" href="products.html#learniq" data-product="learniq"><span class="nav-submenu-name">LearnIQ</span><span class="nav-submenu-tagline">AI literacy for SA classrooms</span></a></div></div><a class="nav-link" href="contact.html">Contact</a></div><a href="?idea=1" class="btn btn-primary sm glow nav-cta" id="cta-lets-build">Got An Idea</a><button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav><div class="mobile-menu"><a class="mobile-link" href="index.html">Home</a><a class="mobile-link" href="services.html">Services</a><div class="mobile-link-wrapper has-submenu"><a class="mobile-link mobile-link-parent" href="products.html">Products</a><button class="mobile-submenu-toggle" aria-expanded="false" aria-label="Expand Products"><span class="nav-link-caret" aria-hidden="true"></span></button><div class="mobile-submenu"><a class="mobile-submenu-link" href="products.html#nomadiq" data-product="nomadiq"><span class="nav-submenu-name">NomadIQ</span><span class="nav-submenu-tagline">Field operations, managed from anywhere</span></a><a class="mobile-submenu-link" href="vendiq.html" data-product="vendiq"><span class="nav-submenu-name">VendIQ</span><span class="nav-submenu-tagline">Inventory decisions, graded</span></a><a class="mobile-submenu-link" href="voltiq.html" data-product="voltiq"><span class="nav-submenu-name">VoltIQ</span><span class="nav-submenu-tagline">Solar fleet monitoring</span></a><a class="mobile-submenu-link" href="socialiq.html" data-product="socialiq"><span class="nav-submenu-name">SocialIQ</span><span class="nav-submenu-tagline">Your social media writer</span></a><a class="mobile-submenu-link" href="cricketiq.html" data-product="cricketiq"><span class="nav-submenu-name">CricketIQ</span><span class="nav-submenu-tagline">Cricket scoring and match intelligence</span></a><a class="mobile-submenu-link" href="products.html#learniq" data-product="learniq"><span class="nav-submenu-name">LearnIQ</span><span class="nav-submenu-tagline">AI literacy for SA classrooms</span></a></div></div><a class="mobile-link" href="contact.html">Contact</a><a href="?idea=1" class="btn btn-primary md glow" id="cta-lets-build-mobile" style="width:100%;margin-top:1rem;">Got An Idea</a></div></header></div>
+<script src="js/header.js?v=0.19.0"></script>
+
+<main class="pt-20 cricketiq-theme">
+
+<!-- ===================== SECTION 1: HERO ===================== -->
+<section class="ciq-hero py-20 px-8">
+<div class="max-w-7xl mx-auto ciq-split">
+<div class="ciq-split-copy space-y-6">
+<img src="images/cricketiq/cricketiq-logo.svg" alt="CricketIQ, Scoring and Match Intelligence" class="ciq-lockup" width="381" height="96"/>
+<span class="info-popup-eyebrow"><span class="dot" aria-hidden="true"></span>Live &middot; Pricing on request</span>
+<h1>Score it once. <span class="text-primary">Everyone sees it.</span></h1>
+<p class="text-lg">The scoring app, the live scoreboard and the match insights, all in one. The scorer taps each ball once. Coaches, parents and the club see it live, and every ball is kept safe on the scorer&rsquo;s phone, even with no signal.</p>
+<div class="ciq-cta-row flex gap-4 flex-wrap pt-2">
+<a href="contact.html?product=cricketiq" class="btn btn-primary lg glow inline-block">Get in Touch</a>
+<a href="#scorers" class="btn btn-outline lg inline-block">How It Works</a>
+</div>
+<div class="ciq-audience pt-4">
+<span>Clubs</span><span class="sep" aria-hidden="true">&middot;</span>
+<span>Schools</span><span class="sep" aria-hidden="true">&middot;</span>
+<span>Tournaments</span><span class="sep" aria-hidden="true">&middot;</span>
+<span>Coaches</span><span class="sep" aria-hidden="true">&middot;</span>
+<span>Scorers</span>
+</div>
+<a href="https://cricketiq.digitaloperations.co.za" class="ciq-open" target="_blank" rel="noopener">Open CricketIQ in your browser<svg class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></a>
+</div>
+<div class="ciq-split-media">
+<div class="ciq-phones">
+<picture class="back"><source srcset="images/cricketiq/phone-pad.webp" type="image/webp"/><img src="images/cricketiq/phone-pad.png" alt="The CricketIQ scoring pad in the Daylight look, with large keys for runs, wides, no-balls, byes, wickets and undo" width="640" height="1315" decoding="async"/></picture>
+<picture class="front"><source srcset="images/cricketiq/phone-live.webp" type="image/webp"/><img src="images/cricketiq/phone-live.png" alt="A live CricketIQ match: Riverside U14A 106 for 4 chasing Kensington U14A&rsquo;s 164, needing 59 off 120 balls, with the win predictor at 85 percent" width="640" height="1315" fetchpriority="high" decoding="async"/></picture>
+</div>
+<p class="ciq-caption text-center">Real CricketIQ screens in the Daylight look. Player names changed.</p>
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 2: THE PROBLEM BAND ===================== -->
+<section class="ciq-band py-14 px-8">
+<div class="max-w-4xl mx-auto text-center space-y-4">
+<p class="text-2xl md:text-3xl font-black leading-snug">The signal drops and the score stops. A wrong ball from three overs back never gets fixed, so the book and the app tell different stories. Parents in the car park keep refreshing. And at the end, the scorecard says what happened but <span class="text-primary">not who really won the game.</span></p>
+<p class="text-sm text-on-surface-variant">That is match day at most school and club grounds. CricketIQ is built for it.</p>
+</div>
+</section>
+
+<!-- ===================== SECTION 3: SPOTLIGHT 1, THE SCORER ===================== -->
+<section id="scorers" class="py-24 px-8 overflow-hidden">
+<div class="max-w-7xl mx-auto ciq-split">
+<div class="ciq-split-media">
+<picture><source srcset="images/cricketiq/phone-pad.webp" type="image/webp"/><img src="images/cricketiq/phone-pad.png" alt="The CricketIQ scoring pad: the score, the over so far, the batters at the crease and the scoring keys" class="ciq-phone" width="640" height="1315" loading="lazy" decoding="async"/></picture>
+</div>
+<div class="ciq-split-copy space-y-5">
+<p class="ciq-step">01 &middot; For scorers</p>
+<h2>One tap a ball, <span class="text-primary">keys you can&rsquo;t miss</span></h2>
+<p>Built for the person at the boundary. The keys are thumb-sized and read clearly in direct sunlight, and the app does the remembering so the scorer can watch the game.</p>
+<ul class="space-y-2">
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Tap where the ball went and the shot map draws itself</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">The next bowler is already picked from the rotation</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">You choose who bats next. The app never guesses</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Set the game up the night before and start once the toss is done</span></li>
+</ul>
+<p class="text-sm text-on-surface-variant"><strong class="text-on-surface">Made a mistake?</strong> Change any ball, even one bowled ten overs ago. Swap a batter or bowler after the fact, or correct a total to match the book. Every change asks for a reason and is kept on record, and a corrected score is marked Altered, so everyone can still trust the result.</p>
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 4: SPOTLIGHT 2, NO SIGNAL ===================== -->
+<section id="offline" class="py-24 px-8 bg-surface-container-low overflow-hidden">
+<div class="max-w-7xl mx-auto ciq-split reverse">
+<div class="ciq-split-media">
+<div class="card p-8">
+<ol class="ciq-steps space-y-6">
+<li><p class="font-bold text-on-surface">Saved on the phone first</p><p class="text-sm text-on-surface-variant mt-1">Every ball is kept on the scorer&rsquo;s phone the moment it is tapped.</p></li>
+<li><p class="font-bold text-on-surface">Sent when the signal returns</p><p class="text-sm text-on-surface-variant mt-1">Nothing waiting to send is ever thrown away.</p></li>
+<li><p class="font-bold text-on-surface">Checks itself every over</p><p class="text-sm text-on-surface-variant mt-1">If the phone and our system ever disagree, it puts it right on its own.</p></li>
+</ol>
+</div>
+</div>
+<div class="ciq-split-copy space-y-5">
+<p class="ciq-step">02 &middot; No signal</p>
+<h2>Never lose a ball, <span class="text-primary">even with no signal</span></h2>
+<p>Many scoring apps need a steady connection, and school fields often have one bar or none. CricketIQ keeps scoring regardless. Score a whole festival offline, and the moment the phone connects, every game goes up, ball by ball.</p>
+<p class="text-sm text-on-surface-variant">The score parents see is checked against the scorer&rsquo;s phone every over, so it always matches the book. First used in a live school match in October 2026.</p>
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 5: SPOTLIGHT 3, SCORING TOGETHER ===================== -->
+<section id="together" class="py-24 px-8 overflow-hidden">
+<div class="max-w-7xl mx-auto ciq-split">
+<div class="ciq-split-media" aria-label="Example: two scorers disagree on a ball and settle it">
+<div class="ciq-app ciq-alert">
+<div class="ciq-row"><span class="ciq-mono" style="color:#c62828">Ball 15.6 &middot; books differ</span></div>
+<p class="text-on-surface font-bold mt-3 mb-4">Home says 6 &middot; Away says 4</p>
+<div class="flex flex-wrap gap-2">
+<span class="ciq-chip go">Agree 6</span><span class="ciq-chip">Agree 4</span><span class="ciq-chip">Check with umpire</span>
+</div>
+</div>
+<div class="ciq-app">
+<div class="ciq-row"><span class="ciq-mono">Wicket 16.2 &middot; who took the catch?</span></div>
+<p class="text-on-surface font-bold mt-3">Away scorer: R. Naidoo</p>
+<p class="text-sm text-on-surface-variant mt-1">Added to the scorecard for both teams</p>
+</div>
+<div class="ciq-app">
+<div class="ciq-row"><span class="ciq-mono">Handover code</span><span class="ciq-mono" style="color:#077d5a">Or scan the QR</span></div>
+<p class="ciq-code ciq-num mt-2">482 913</p>
+</div>
+<p class="ciq-caption">Sample match. Names are examples.</p>
+</div>
+<div class="ciq-split-copy space-y-5">
+<p class="ciq-step">03 &middot; Scoring together</p>
+<h2>Both teams score. <span class="text-primary">Every ball is agreed.</span></h2>
+<p>Each side usually keeps its own book, and the two are compared at the end of the day, if at all. One scorer can&rsquo;t know everyone on the other team, so the visiting names are a guess. When the books end up four runs apart, nobody knows since which ball.</p>
+<p>Switch on collaborative scoring and the other team scores the same game on their own phone. The two books are compared ball by ball, live. A difference shows at once, not at the end, and each side names its own bowlers and fielders.</p>
+<ul class="space-y-2">
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">One agreed score, and no end-of-day disputes</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Hand over at the break with a six-digit code or a QR, and every ball moves to the next phone</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Add extra scorers to any match</span></li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 6: SPOTLIGHT 4, THE LAWS ===================== -->
+<section id="laws" class="py-24 px-8 bg-surface-container-low overflow-hidden">
+<div class="max-w-7xl mx-auto ciq-split reverse">
+<div class="ciq-split-media">
+<div class="ciq-app">
+<p class="ciq-mono mb-3">Match rules</p>
+<table class="ciq-rules w-full">
+<tbody>
+<tr><td>Balls per over</td><td class="ciq-num">8</td></tr>
+<tr><td>Runs for a wide</td><td class="ciq-num">2</td></tr>
+<tr><td>Free hit on a no-ball</td><td>On</td></tr>
+<tr><td>Max overs a bowler</td><td class="ciq-num">4</td></tr>
+<tr><td>Powerplay overs</td><td class="ciq-num">6</td></tr>
+</tbody>
+</table>
+</div>
+<p class="ciq-caption">An example set of junior match rules.</p>
+</div>
+<div class="ciq-split-copy space-y-5">
+<p class="ciq-step">04 &middot; The rulebook inside</p>
+<h2>The Laws of Cricket built in, <span class="text-primary">plus your own rules</span></h2>
+<p>The app knows a wide from a no-ball, runs a free hit, handles every form of dismissal, and will not accept a ball that cannot happen. Penalty runs, dead balls and conduct warnings are all logged.</p>
+<p>Junior and club cricket rarely plays to the standard rules alone. Set 8-ball overs, two runs a wide, bowler limits or powerplays once on a tournament, and every game in it follows them.</p>
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 7: SPOTLIGHT 5, IQ ===================== -->
+<section id="iq" class="py-24 px-8 overflow-hidden">
+<div class="max-w-7xl mx-auto ciq-split">
+<div class="ciq-split-media">
+<div class="ciq-iq-grid">
+<div>
+<img src="images/cricketiq/iq-win.jpg" alt="The CricketIQ win predictor: Riverside's chance of winning over 30 overs, rising to 85 percent" class="ciq-shot" width="900" height="598" loading="lazy" decoding="async"/>
+<img src="images/cricketiq/iq-mvp.jpg" alt="The CricketIQ most valuable player table, ranking five players by points from batting, bowling and fielding" class="ciq-shot" width="900" height="1192" loading="lazy" decoding="async"/>
+</div>
+<div>
+<img src="images/cricketiq/iq-matchups.jpg" alt="A CricketIQ match-up: one batter against one bowler, with balls, runs, strike rate, boundaries and dismissals" class="ciq-shot" width="900" height="855" loading="lazy" decoding="async"/>
+<img src="images/cricketiq/iq-shotmap.jpg" alt="A CricketIQ shot map: every scoring shot of an innings drawn from the batter's crease, coloured by runs" class="ciq-shot" width="900" height="1280" loading="lazy" decoding="async"/>
+</div>
+</div>
+<p class="ciq-caption">From the CricketIQ app. Player names changed.</p>
+</div>
+<div class="ciq-split-copy space-y-5">
+<p class="ciq-step">05 &middot; IQ: match insights</p>
+<h2>Numbers that tell you <span class="text-primary">why</span></h2>
+<p>A scorecard says what happened. It rarely says why, or who really won the game. The scorer&rsquo;s taps already hold the answer, and IQ turns them into something a coach can use, during the game and after it.</p>
+<ul class="space-y-2">
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant"><strong class="text-on-surface">Win chance, ball by ball.</strong> Both innings on one chart with the target pace drawn in, built on the Duckworth-Lewis tables and tested against 44 real games</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant"><strong class="text-on-surface">Match-ups.</strong> Any batter against any bowler, live, at full time and across the season</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant"><strong class="text-on-surface">Shot maps and phases.</strong> Where each batter scores, and whether the game was won in the powerplay, the middle overs or at the death</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant"><strong class="text-on-surface">A fair player of the match.</strong> Worked out from every ball, with batting, bowling and fielding all counted, and every point explained in the app</span></li>
+</ul>
+<p class="text-sm text-on-surface-variant">Better feedback after every game: sit down with a player, open their page, and talk through their shot map, the bowlers who troubled them, and how they helped win the game. No extra work for anyone.</p>
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 8: SPOTLIGHT 6, FAMILIES ===================== -->
+<section id="follow" class="py-24 px-8 bg-surface-container-low overflow-hidden">
+<div class="max-w-7xl mx-auto ciq-split reverse">
+<div class="ciq-split-media">
+<picture><source srcset="images/cricketiq/phone-dash.webp" type="image/webp"/><img src="images/cricketiq/phone-dash.png" alt="The CricketIQ Dash: live games from a schools app and a club app on one board, with filters for CricketIQ, school league and schools app games" class="ciq-phone" width="640" height="1315" loading="lazy" decoding="async"/></picture>
+<p class="ciq-caption text-center">From the CricketIQ app. Team and platform names changed.</p>
+</div>
+<div class="ciq-split-copy space-y-5">
+<p class="ciq-step">06 &middot; Parents and supporters</p>
+<h2>Follow every ball <span class="text-primary">from anywhere</span></h2>
+<p>From the car park, the office or overseas. The score updates in seconds with no refreshing, and commentary is written for every ball, with fifties and hat-tricks called.</p>
+<p>A Saturday usually means four tabs: the school league site, another scoring app, the club&rsquo;s own app and the team chat. The Dash puts every game you care about on one board, including games scored on other platforms.</p>
+<ul class="space-y-2">
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Follow a team, a player or a tournament, and its games appear on their own</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Games near you, found from your location or your town</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">No account needed to watch a game</span></li>
+<li class="flex items-start gap-2"><svg style="width: 1rem; height: 1rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg><span class="text-sm text-on-surface-variant">Share links name the game in any chat</span></li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 9: CLUBS, SCHOOLS, TOURNAMENTS ===================== -->
+<section id="clubs" class="py-24 px-8 overflow-hidden">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<span class="label">For Clubs, Schools And Tournaments</span>
+<h2 class="mt-6 mb-4">Run your cricket <span class="text-primary">without the paperwork</span></h2>
+<p class="max-w-2xl mx-auto">From the 1st XI to the juniors, every game scored the same way, and the admin around it done for you.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+<div class="card p-6 space-y-3">
+<svg style="width: 1.75rem; height: 1.75rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0"/></svg>
+<h3 class="text-base font-bold">Tournaments and club champs</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Set the rules once and the points table keeps itself after every result. Top run scorers, wicket takers and player of the match are worked out for you.</p>
+</div>
+
+<div class="card p-6 space-y-3">
+<svg style="width: 1.75rem; height: 1.75rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+<h3 class="text-base font-bold">Results page and PDF</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">A full scorecard anyone can open with no app needed, ready to share the moment a game ends.</p>
+</div>
+
+<div class="card p-6 space-y-3">
+<svg style="width: 1.75rem; height: 1.75rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z"/></svg>
+<h3 class="text-base font-bold">A record players keep</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Every match, player and team gets its own CricketIQ ID. Change clubs or schools and the history goes with you.</p>
+</div>
+
+<div class="card p-6 space-y-3">
+<svg style="width: 1.75rem; height: 1.75rem" class="hi text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+<h3 class="text-base font-bold">Safe for juniors</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Guardians can be linked to junior players. Coaches see U14 and U15 season by season, so age groups never mix.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 10: BUILT FOR MATCH DAY ===================== -->
+<section id="matchday" class="py-24 px-8 bg-surface-container-low overflow-hidden">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<span class="label">Built For Match Day</span>
+<h2 class="mt-6 mb-4">Light enough for <span class="text-primary">one bar of signal</span></h2>
+<p class="max-w-2xl mx-auto">Small, careful with your battery, and it looks after itself when things go wrong.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+<div class="card p-6 space-y-3">
+<p class="ciq-stat">&frac14; MB</p>
+<h3 class="text-base font-bold">To follow a whole match</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Less data than a single phone photo. Only the new ball travels, never the whole page again.</p>
+</div>
+
+<div class="card p-6 space-y-3">
+<p class="ciq-stat ciq-num">15,000</p>
+<h3 class="text-base font-bold">Fans watching at once</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Tested with 15,000 people following at the same time, with room to spare for a busy Saturday.</p>
+</div>
+
+<div class="card p-6 space-y-3">
+<p class="ciq-stat ciq-num">3,500+</p>
+<h3 class="text-base font-bold">Checks before every update</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Every update is tried on a test version first. If one ever stumbles on a phone, the app repairs itself.</p>
+</div>
+
+<div class="card p-6 space-y-3">
+<p class="ciq-stat">0</p>
+<h3 class="text-base font-bold">App store downloads</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Open a link and add it to your home screen. It works offline from then on, on iPhone, Android, iPad and desktop.</p>
+</div>
+
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+
+<div class="card p-6 space-y-3">
+<h3 class="text-base font-bold">Ads will never get in the way of the score</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Scoring apps are filling up with banners, pop-ups and videos between overs. They slow the phone, use data and cover the keys a scorer needs. Nothing ever goes over the scoring pad or the live score on CricketIQ. That is a design rule we build to, now and as we grow.</p>
+</div>
+
+<div class="card p-6 space-y-3">
+<img src="images/cricketiq/four-looks.jpg" alt="The same live score in the four CricketIQ looks: Daylight, Cockpit, Mission and Calm" class="ciq-shot" style="border-radius:12px" width="1600" height="467" loading="lazy" decoding="async"/>
+<h3 class="text-base font-bold">Four looks, one for every light</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Daylight for direct sun, Cockpit for evening games, Mission and Calm for easier reading. Colour means one thing only: <span class="text-primary font-semibold">green is a six</span>, <span style="color:#6a9bcc" class="font-semibold">blue a four</span>, <span class="signal font-semibold">red a wicket</span>, <span style="color:#c9a327" class="font-semibold">gold an extra</span>. Each is also written out, so nobody relies on colour alone.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 11: PRICING ===================== -->
+<section id="pricing" class="py-24 px-8 overflow-hidden">
+<div class="max-w-7xl mx-auto space-y-12">
+<div class="text-center space-y-4">
+<span class="label">Pricing</span>
+<h2>Priced for <span class="text-primary">your club, school or tournament</span></h2>
+<p class="max-w-2xl mx-auto">A school with twelve sides and a weekend tournament need different things. Tell us how many teams you run and what you want to start with, and we will come back with a figure before you commit to anything.</p>
+</div>
+<div class="card ciq-price-card p-8 space-y-8 max-w-xl mx-auto">
+<div class="space-y-2 text-center">
+<span class="info-popup-fivew-marker">Clubs, schools and tournaments</span>
+<h3 class="pt-2 pb-4"><img src="images/cricketiq/cricketiq-logo.svg" alt="CricketIQ" class="ciq-lockup" style="width:240px;margin:0 auto;" width="381" height="96" loading="lazy"/></h3>
+<div class="text-4xl sm:text-5xl font-black text-primary leading-none">Contact us</div>
+<p class="text-sm text-on-surface-variant">A quote built on your teams and your season.</p>
+</div>
+<ul class="space-y-4 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Scoring, live scores and IQ insights for every team you register</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Tournaments, tables and results pages with your own match rules</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Nothing to install from an app store</li>
+<li class="flex items-start gap-2"><svg style="width: 1.125rem; height: 1.125rem" class="hi text-primary mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Parents and supporters watch with no account</li>
+</ul>
+<a href="contact.html?product=cricketiq" class="btn btn-primary full glow">Get in Touch</a>
+</div>
+<p class="text-sm text-on-surface-variant max-w-3xl mx-auto text-center">Pricing and terms for your club, school or tournament are set out in writing when we quote. Player and match data is handled under our <a href="privacy-policy.html" class="text-primary hover:underline">Privacy Policy</a> and POPIA. <a href="products-terms.html#cricketiq" class="text-primary hover:underline">CricketIQ terms apply</a>.</p>
+</div>
+</section>
+
+<!-- ===================== SECTION 12: STRAIGHT TALK ===================== -->
+<section id="roadmap" class="py-24 px-8 bg-surface-container-low overflow-hidden">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<span class="label">Straight Talk</span>
+<h2 class="mt-6 mb-4">Live today, <span class="text-primary">and what comes next</span></h2>
+<p class="max-w-2xl mx-auto">Here is what you can use on Saturday, and what we are still building. Early clubs and schools help decide the order.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+
+<div class="card p-6 lg:col-span-3">
+<table class="ciq-status">
+<tbody>
+<tr><td class="text-on-surface">Scoring with no signal, checked every over</td><td><span class="ciq-pill live">Live</span></td></tr>
+<tr><td class="text-on-surface">Fix any ball, with a record of every change</td><td><span class="ciq-pill live">Live</span></td></tr>
+<tr><td class="text-on-surface">Handover and collaborative scoring</td><td><span class="ciq-pill live">Live</span></td></tr>
+<tr><td class="text-on-surface">The Laws of Cricket and your own match rules</td><td><span class="ciq-pill live">Live</span></td></tr>
+<tr><td class="text-on-surface">Win chance, match-ups, shot maps, phases and player of the match</td><td><span class="ciq-pill live">Live</span></td></tr>
+<tr><td class="text-on-surface">Tournaments, tables, results page and PDF</td><td><span class="ciq-pill live">Live</span></td></tr>
+<tr><td class="text-on-surface">The Dash, follows and four looks</td><td><span class="ciq-pill live">Live</span></td></tr>
+<tr><td class="text-on-surface">Weekly school rankings, with the formula published<br/><span class="text-xs text-on-surface-variant">1st XI, U15A and U14A first. The engine is largely built and being finished.</span></td><td><span class="ciq-pill build">This season</span></td></tr>
+<tr><td class="text-on-surface">Fixtures and competition pages, net run rate on tables</td><td><span class="ciq-pill build">This season</span></td></tr>
+<tr><td class="text-on-surface">Club and school pages in your colours, with your crest</td><td><span class="ciq-pill build">This season</span></td></tr>
+<tr><td class="text-on-surface">IQ search for any player, team or competition</td><td><span class="ciq-pill build">This season</span></td></tr>
+<tr><td class="text-on-surface">Field planner, set against a batter&rsquo;s real shot map</td><td><span class="ciq-pill planned">Later</span></td></tr>
+<tr><td class="text-on-surface">A win predictor that learns from every game played</td><td><span class="ciq-pill planned">Later</span></td></tr>
+<tr><td class="text-on-surface">Club sponsorship that never covers the score<br/><span class="text-xs text-on-surface-variant">A concept for discussion with clubs and sponsors.</span></td><td><span class="ciq-pill planned">Later</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="lg:col-span-2 space-y-6">
+<div class="card p-6 space-y-3">
+<h3 class="text-base font-bold">What you are used to, and what you get</h3>
+<ul class="space-y-3 text-sm text-on-surface-variant leading-relaxed">
+<li><strong class="text-on-surface">No signal.</strong> Most apps stall and balls can go missing. CricketIQ scores offline and sends every ball later.</li>
+<li><strong class="text-on-surface">A mistake.</strong> Usually hard to fix once the over is done. Here, fix any ball, any time, with a reason.</li>
+<li><strong class="text-on-surface">Player of the match.</strong> Usually a guess, or the top scorer. Here, worked out from every ball and explained.</li>
+<li><strong class="text-on-surface">Handing over.</strong> Usually start again on a new phone. Here, a code or QR moves every ball.</li>
+</ul>
+<p class="text-xs text-on-surface-variant">A general picture of the market, not any one product.</p>
+</div>
+<div class="card p-6 space-y-3">
+<h3 class="text-base font-bold">Who it is for</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Clubs, schools and tournament organisers who score their own games, and the scorers, coaches and families around them. If your scorer battles with signal at the boundary, or parents are still asking for the score in the team chat, start here.</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ===================== SECTION 13: FINAL CTA ===================== -->
+<section id="cta" class="py-24 px-8 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 -z-10"></div>
+<div class="max-w-5xl mx-auto ciq-split">
+<div class="ciq-split-copy space-y-6">
+<span class="label">Next Step</span>
+<h2>Talk to us about your <span class="text-primary">club, school or tournament</span></h2>
+<p class="text-lg">We will come to a practice match and show you how it works on your own teams. You score, your parents follow, and you tell us what to build next.</p>
+<div class="flex gap-4 flex-wrap">
+<a href="contact.html?product=cricketiq" class="btn btn-primary lg glow inline-block">Get in Touch</a>
+<a href="products.html" class="btn btn-outline lg inline-block">Back to Products</a>
+</div>
+</div>
+<div class="card p-8">
+<ol class="ciq-start space-y-6">
+<li><p class="font-bold text-on-surface">Set up your club</p><p class="text-sm text-on-surface-variant mt-1">Register your club, teams and players. Each gets its own CricketIQ ID.</p></li>
+<li><p class="font-bold text-on-surface">Score your games</p><p class="text-sm text-on-surface-variant mt-1">From the 1st XI to the juniors, and parents follow live.</p></li>
+<li><p class="font-bold text-on-surface">Shape what comes next</p><p class="text-sm text-on-surface-variant mt-1">Early clubs and schools help decide what we build.</p></li>
+</ol>
+<p class="info-popup-footnote mt-8 pt-6" style="border-top:1px dashed rgba(0,229,160,.28);">Pricing on request for each club, school or tournament. Want to look first? <a href="https://cricketiq.digitaloperations.co.za" target="_blank" rel="noopener">Open CricketIQ</a>. <a href="products-terms.html#cricketiq">Terms apply</a>.</p>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<div id="site-footer"><footer class="site-footer"><div class="footer-container"><div class="footer-top"><div class="footer-brand"><img src="logo_new_green.png" alt="Do.Qix" width="568" height="168" class="footer-logo-img"/><div class="footer-contact"><a href="mailto:hello@digitaloperations.co.za" class="footer-contact-item"><svg class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>hello@digitaloperations.co.za</a><a href="tel:+27615148375" class="footer-contact-item"><svg class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>+27 61 514 8375</a><a href="https://wa.me/27615148375" target="_blank" rel="noopener" class="footer-contact-item"><svg class="footer-contact-icon" viewBox="0 0 24 24" fill="#00e5a0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a><span class="footer-contact-item"><svg class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>Cape Town, South Africa</span></div></div><div class="footer-col"><p class="footer-col-heading">Socials</p><a href="https://www.facebook.com/profile.php?id=61587403635002" target="_blank" rel="noopener" class="footer-social-item"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a><a href="https://www.instagram.com/do.qix/" target="_blank" rel="noopener" class="footer-social-item"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</a><a href="https://www.linkedin.com/company/do-qix/" target="_blank" rel="noopener" class="footer-social-item"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a></div><div class="footer-col"><p class="footer-col-heading">Navigate</p><a href="index.html">Home</a><a href="services.html">Services</a><a href="products.html">Products</a><a href="contact.html">Contact</a></div><div class="footer-col"><p class="footer-col-heading">Legal</p><a href="privacy-policy.html">Privacy Policy</a><a href="terms-and-conditions.html">Terms &amp; Conditions</a><a href="build-terms.html">Fair Build Terms</a></div></div><p class="footer-copyright">&copy; 2026 Digital Operations and Technology (Pty) Ltd T/A <strong>Do.Qix</strong>. All rights reserved. <span class="footer-build">Build web-vdev</span></p></div></footer></div>
+<script defer src="js/footer.js?v=0.19.0"></script>
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
+</svg></button>
+<script defer src="js/main.js?v=0.19.0"></script>
+<script defer src="js/exit-popup.js?v=0.19.0"></script>
+<script defer src="js/cookie-banner.js?v=0.19.0"></script>
+</body></html>

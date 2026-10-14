@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.18.1** (Removed the last customer-facing em dashes: NomadIQ and LearnIQ popup hooks, the SocialIQ tier list on products-terms.html, and the product-terms line in terms-and-conditions.html (Last Updated bumped to October 14, 2026). Previous: web-v0.18.0 added the VendIQ landing page. Cache-bust ?v=0.18.1.)
+- Current version: **web-v0.19.0** (Added the CricketIQ landing page (cricketiq.html) with real Daylight app screens, a CricketIQ products card, info popup, products-terms tab and nav entry. Pricing on request. Previous: web-v0.18.1 removed the last customer-facing em dashes. Cache-bust ?v=0.19.0.)
 
 **Never push website changes without creating a version tag.**
 
