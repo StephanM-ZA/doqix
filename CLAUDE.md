@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.17.2** (Fixed `images/voltiq/alerts-phone.jpg`: the render carried garbled AI-generated sub-text under each alert card. The four headings were correct and legible (Inverter offline - Centurion, PV underperformance - Paarl, Battery low SOC - Kathu, Grid import spike - Upington) so only the grey gibberish lines were repainted out, targeting mid-grey pixels by luminance so the near-black headings survived untouched. Cache-bust ?v=0.17.2.)
+- Current version: **web-v0.18.0** (VendIQ landing page `vendiq.html`: sector-neutral copy (manufacturing, wholesale, retail) sourced from the VendIQ positioning doc, brief and pitch copy, VendIQ brand kit logo, console screenshots with client name, money, client division and client threshold removed, Contact-us pricing via `contact.html?product=vendiq`, client sign-in link to vendiq.digitaloperations.co.za. Products card, info popup, nav entry and VendIQ terms tab rewritten to match. Cache-bust ?v=0.18.0.)
 
 **Never push website changes without creating a version tag.**
 

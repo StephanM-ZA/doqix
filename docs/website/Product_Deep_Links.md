@@ -11,7 +11,7 @@ Base URL: `https://digitaloperations.co.za/doqix/`
 | Product | Promo URL (share this) | Contact form prefill (in-page only) | Product T&Cs Tab |
 |---|---|---|---|
 | **NomadIQ** | `https://digitaloperations.co.za/doqix/products.html#nomadiq` | `contact.html?product=nomadiq` | `products-terms.html#nomadiq` (placeholder; full terms issued on engagement) |
-| **VendIQ** | `https://digitaloperations.co.za/doqix/products.html#vendiq` | `contact.html?product=vendiq` | `products-terms.html#vendiq` (placeholder; full terms issued on engagement) |
+| **VendIQ** | `https://digitaloperations.co.za/doqix/vendiq.html` | `contact.html?product=vendiq` | `products-terms.html#vendiq` (summary; full terms in the service agreement) |
 | **VoltIQ** | `https://digitaloperations.co.za/doqix/voltiq.html` | `contact.html?product=voltiq` | `https://digitaloperations.co.za/doqix/products-terms.html#voltiq` |
 | **SocialIQ** | `https://digitaloperations.co.za/doqix/products.html#socialiq` | `contact.html?product=socialiq` | `https://digitaloperations.co.za/doqix/products-terms.html#socialiq` |
 | **LearnIQ** | `https://digitaloperations.co.za/doqix/products.html#learniq` | `contact.html?product=learniq` | `products-terms.html#learniq` (placeholder; full terms at GA) |
@@ -124,7 +124,7 @@ SocialIQ is the second SaaS product going on active promotion.
 ## Other products — promotion status
 
 - **NomadIQ:** Live, custom pricing per organisation. Share `products.html#nomadiq` to lead with the card.
-- **VendIQ:** Live, tiered pricing by stores/SKUs. Share `products.html#vendiq` to lead with the card.
+- **VendIQ:** Live, pricing on request: a set-up fee, then a monthly fee by the number of product groups. Sector neutral (manufacturing, wholesale, retail). Share `vendiq.html` to lead with the landing page. Client sign-in: `https://vendiq.digitaloperations.co.za`.
 - **LearnIQ:** In progress. Pricing not finalised. Share `products.html#learniq` only to register early interest.
 
 ## Tracking note

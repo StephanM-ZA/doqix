@@ -1,5 +1,54 @@
 # CHECKPOINT
 
+## Status: RELEASING web-v0.18.0. VendIQ page, card, popup, nav and terms tab done and verified locally.
+
+Previous state (VoltIQ launch, web-v0.17.2) is complete; its notes are kept below.
+
+## Current task
+Dedicated VendIQ page modelled on voltiq.html. Pricing "Contact us" via
+contact.html?product=vendiq. Client sign-in links to https://vendiq.digitaloperations.co.za.
+Copy sourced ONLY from VendIQ repo: docs/client-facing/positioning.md, vendiq-brief.md,
+pitch-copy.md, podcast-script.md. Sector neutral (manufacturing, wholesale, retail).
+
+## Files changed (uncommitted)
+- NEW design/vendiq/vendiq.html, site/vendiq.html
+- NEW design/images/vendiq/ + site/images/vendiq/: vendiq-logo.svg, vendiq-mark.svg,
+  vendiq-og.png (from VendIQ/logo kit), vendiq-card.jpg (generated card image),
+  report-slow.jpg, guardrails.jpg (cropped console shots: client name, money,
+  "Liquor & Tobacco" rows and "180 idle days" caption removed)
+- design/components/js/header.js: VendIQ nav entry -> vendiq.html, tagline "Inventory decisions, graded"
+- design/components/js/info-popup.js: VendIQ popup rewritten (5W, sector neutral, no SA-hosted claim)
+- design/products/products.html: VendIQ card rewritten, image -> vendiq-card.jpg, button "See VendIQ"
+- scripts/build-sitemap.js: vendiq.html in PAGE_META
+- site/* synced + npm run build (nav baked, sitemap includes vendiq.html)
+
+## Key decisions
+- No client name/figures anywhere (verified text, metadata, pixels).
+- Exit-report screenshot dropped (retail-only labels).
+- Unbuilt items labelled: email delivery + re-grading read-out "Being built"; bounded automation, supplier return doc "Planned".
+- Old card render images/vendiq.png left on disk, no longer referenced.
+
+## Verified
+375 / 768 / 1024 / 1440: no horizontal overflow, nothing escaping cards, CTA above fold
+at 1024x768 and 1440x900. Popup links: See VendIQ -> vendiq.html, Read VendIQ terms.
+
+## Next steps
+1. User review of the page in the browser pane.
+2. DONE: products-terms.html VendIQ tab no longer says "FMCG retailers and vending operators" and
+   "tiered by stores, SKUs, report volume" (binding text, not touched).
+3. DONE: docs/website/Product_Deep_Links.md no longer says "tiered pricing by stores/SKUs".
+4. Pre-existing em dashes in NomadIQ + LearnIQ popup hooks (info-popup.js lines ~15, ~93).
+5. Release web-v0.18.0: cache-bust done; commit, tag, push, verify deploy-site.yml run.
+
+Done since: products-terms VendIQ tab rewritten (Last Updated Oct 14, 2026); Product_Deep_Links.md updated.
+
+## Environment
+- Preview: .claude/launch.json "site", port 8791 (running).
+
+---
+
+## Previous checkpoint (VoltIQ)
+
 ## Status: COMPLETE. VoltIQ launched, priced, and SEO/GEO hardened.
 
 Live: https://digitaloperations.co.za/doqix/voltiq.html at web-v0.17.2

@@ -16,7 +16,7 @@
        Update this array if a product is added/renamed/removed. */
     var PRODUCTS = [
         { slug: 'nomadiq',  name: 'NomadIQ',  tagline: 'Field operations, managed from anywhere' },
-        { slug: 'vendiq',   name: 'VendIQ',   tagline: 'Retail intelligence' },
+        { slug: 'vendiq',   name: 'VendIQ',   tagline: 'Inventory decisions, graded', href: 'vendiq.html' },
         { slug: 'voltiq',   name: 'VoltIQ',   tagline: 'Solar fleet monitoring', href: 'voltiq.html' },
         { slug: 'socialiq', name: 'SocialIQ', tagline: 'Your social media writer', href: 'socialiq.html' },
         { slug: 'learniq',  name: 'LearnIQ',  tagline: 'AI literacy for SA classrooms' }

@@ -21,8 +21,8 @@
 <link rel="manifest" href="../site.webmanifest"/>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/inter-var.woff2"/>
 
-<link rel="stylesheet" href="../tailwind.css?v=0.17.2"/>
-<link rel="stylesheet" href="../global.css?v=0.17.2"/>
+<link rel="stylesheet" href="../tailwind.css?v=0.18.0"/>
+<link rel="stylesheet" href="../global.css?v=0.18.0"/>
 <style>
         .legal-prose h4 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.125rem; font-weight: 800; color: #e4e1e9; text-transform: uppercase; letter-spacing: 0.02em; }
         .legal-prose h5 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1rem; font-weight: 700; color: #e4e1e9; scroll-margin-top: 6rem; }
@@ -53,7 +53,7 @@
 <body>
 <!-- Header -->
 <div id="site-header"></div>
-<script src="../components/js/header.js?v=0.17.2"></script>
+<script src="../components/js/header.js?v=0.18.0"></script>
 
 <main class="pt-20">
 
@@ -71,7 +71,7 @@
 <div class="max-w-3xl mx-auto legal-prose">
 
 <div class="legal-meta">
-<p><strong>Effective Date:</strong> May 6, 2026 | <strong>Last Updated:</strong> September 29, 2026</p>
+<p><strong>Effective Date:</strong> May 6, 2026 | <strong>Last Updated:</strong> October 14, 2026</p>
 <p><strong>Provider:</strong> Digital Operations and Technology (Pty) Ltd, trading as Do.Qix | <strong>Jurisdiction:</strong> Republic of South Africa</p>
 </div>
 
@@ -106,18 +106,36 @@
 
 <!-- VendIQ Panel -->
 <div class="product-panel" id="panel-vendiq" role="tabpanel" aria-labelledby="tab-vendiq" tabindex="0">
-<span class="product-status live">Live, custom pricing</span>
+<span class="product-status live">Live, pricing on request</span>
 <h4 style="margin-top:0.5rem;">VendIQ</h4>
-<p>VendIQ is a retail intelligence platform for FMCG retailers and vending operators, providing rate-of-sale, distribution gap, and exit-stock analytics.</p>
+<p>VendIQ is an inventory decision service for manufacturers, wholesalers, retailers and independent traders. It takes the data you export about what you hold and what moved, checks it, grades the decisions your team made against rules you set, and shows where a different decision would have been better, with the money at stake. On each new data drop it grades past decisions again against what actually happened.</p>
 
 <h5>Pricing</h5>
-<p>Tiered by number of stores, SKUs, and report volume. <a href="contact.html?product=vendiq">Contact us for a quote</a>. Detailed pricing and operational terms specific to your engagement will be issued in your service agreement at the time of quotation.</p>
+<p>Pricing is quoted per engagement. It is made up of a set-up fee, covering the work to get VendIQ running on the product groups you choose, and a monthly fee based on the number of product groups you run. <a href="contact.html?product=vendiq">Contact us for a quote</a>. The fees, billing terms and operational terms for your engagement are set out in your service agreement at the time of quotation, and the service agreement takes precedence over this summary.</p>
 
-<h5>Data sources</h5>
-<p>VendIQ ingests POS and stock data you provide or grant access to. Accuracy of analytics depends entirely on the quality and completeness of your inputs.</p>
+<h5>Your data</h5>
+<p>VendIQ works from the data you provide or grant access to. The accuracy of its output depends on the quality and completeness of that data. You own your data and the outcomes derived from it.</p>
+<p>Each client's data is held in its own separate database and is not stored alongside, or made available to, any other client. Nothing derived from your data or your decisions is used for another client. VendIQ does not write back to your systems and does not require a login to your systems.</p>
 
-<h5>AI-generated summaries</h5>
-<p>Executive summaries, ABC classifications, and gap analyses are produced by automated systems. They are advisory and should be reviewed by a human before being used to make commercial decisions.</p>
+<h5>Your rules</h5>
+<p>The thresholds VendIQ grades against are set and owned by you. You are responsible for reviewing and approving them. Changes to a rule are recorded. VendIQ does not change your rules without your instruction.</p>
+
+<h5>Grades and recommendations are advisory</h5>
+<p>Grades, recommendations, figures at risk and reports are <strong>advisory information</strong>. They are produced automatically from your data and your rules, and they do not replace the judgement of the people in your business. You remain solely responsible for any stock, purchasing, pricing, production or commercial decision you make on the basis of VendIQ output.</p>
+<p>VendIQ does not take decisions or actions on your behalf. If an automated action is offered in future, it will only operate once you have switched it on in writing, within limits you have set, and every action will be logged.</p>
+
+<h5>Written summaries</h5>
+<p>Some reports include plain-language summaries written by a language model from figures that have already been checked. The model does not calculate figures, and a separate check rejects a summary that contains a number which cannot be traced to source. Summaries should still be read alongside the figures they describe before being used for a commercial decision.</p>
+
+<h5>What is not included</h5>
+<ul>
+<li>Market, consumer or competitor data.</li>
+<li>Modelling of bills of materials or work in progress.</li>
+<li>Running your planning process.</li>
+</ul>
+
+<h5>Cancellation</h5>
+<p>Notice periods, and the export and deletion of your data on cancellation, are set out in your service agreement. The general cancellation terms in our <a href="terms-and-conditions.html">Terms and Conditions</a> apply alongside it.</p>
 </div>
 
 <!-- VoltIQ Panel (default visible) -->
@@ -268,12 +286,12 @@ Website: doqix.co.za
 
 <!-- Footer -->
 <div id="site-footer"></div>
-<script defer src="../components/js/footer.js?v=0.17.2"></script>
+<script defer src="../components/js/footer.js?v=0.18.0"></script>
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg style="width: 1.5rem; height: 1.5rem" class="hi" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>
 </svg></button>
-<script defer src="../components/js/main.js?v=0.17.2"></script>
-<script defer src="js/products-terms.js?v=0.17.2"></script>
-<script defer src="../components/js/exit-popup.js?v=0.17.2"></script>
-<script defer src="../components/js/cookie-banner.js?v=0.17.2"></script>
+<script defer src="../components/js/main.js?v=0.18.0"></script>
+<script defer src="js/products-terms.js?v=0.18.0"></script>
+<script defer src="../components/js/exit-popup.js?v=0.18.0"></script>
+<script defer src="../components/js/cookie-banner.js?v=0.18.0"></script>
 </body></html>
