@@ -1,6 +1,8 @@
 # CHECKPOINT
 
-## Status: RELEASING web-v0.18.0. VendIQ page, card, popup, nav and terms tab done and verified locally.
+## Status: COMPLETE. VendIQ live at web-v0.18.0 (commit c1cdf98, deploy run 38517940831 success); em-dash cleanup released as web-v0.18.1.
+
+Live: https://digitaloperations.co.za/doqix/vendiq.html
 
 Previous state (VoltIQ launch, web-v0.17.2) is complete; its notes are kept below.
 
@@ -37,8 +39,9 @@ at 1024x768 and 1440x900. Popup links: See VendIQ -> vendiq.html, Read VendIQ te
 2. DONE: products-terms.html VendIQ tab no longer says "FMCG retailers and vending operators" and
    "tiered by stores, SKUs, report volume" (binding text, not touched).
 3. DONE: docs/website/Product_Deep_Links.md no longer says "tiered pricing by stores/SKUs".
-4. Pre-existing em dashes in NomadIQ + LearnIQ popup hooks (info-popup.js lines ~15, ~93).
-5. Release web-v0.18.0: cache-bust done; commit, tag, push, verify deploy-site.yml run.
+4. DONE (web-v0.18.1): em dashes removed from NomadIQ + LearnIQ hooks, SocialIQ tier list, T&C product-terms line.
+5. DONE: web-v0.18.0 released and verified live.
+6. Note: commit c1cdf98 trailer reads "Claude Sonnet 5.5" (subagent attribution); left as is, already pushed.
 
 Done since: products-terms VendIQ tab rewritten (Last Updated Oct 14, 2026); Product_Deep_Links.md updated.
 

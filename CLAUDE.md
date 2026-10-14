@@ -114,7 +114,7 @@ Every push to `main` that changes website files MUST be tagged for rollback capa
 **Versioning:**
 - Use `web-v` prefix to distinguish from plugin tags (`v*`)
 - Semantic versioning: patch (x.x.1) for fixes, minor (x.1.0) for features/new pages, major (1.0.0) for redesigns
-- Current version: **web-v0.18.0** (VendIQ landing page `vendiq.html`: sector-neutral copy (manufacturing, wholesale, retail) sourced from the VendIQ positioning doc, brief and pitch copy, VendIQ brand kit logo, console screenshots with client name, money, client division and client threshold removed, Contact-us pricing via `contact.html?product=vendiq`, client sign-in link to vendiq.digitaloperations.co.za. Products card, info popup, nav entry and VendIQ terms tab rewritten to match. Cache-bust ?v=0.18.0.)
+- Current version: **web-v0.18.1** (Removed the last customer-facing em dashes: NomadIQ and LearnIQ popup hooks, the SocialIQ tier list on products-terms.html, and the product-terms line in terms-and-conditions.html (Last Updated bumped to October 14, 2026). Previous: web-v0.18.0 added the VendIQ landing page. Cache-bust ?v=0.18.1.)
 
 **Never push website changes without creating a version tag.**
 
